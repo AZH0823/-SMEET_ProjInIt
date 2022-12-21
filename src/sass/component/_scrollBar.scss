@@ -1,0 +1,69 @@
+.scrollBar{
+    ul{
+        list-style: none;
+        width: auto;
+        position: fixed;
+        top: 100px;
+        right: 0px;
+        li{
+            font-family: $font_family_c;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            font-size: map-get($font_size, secondary);
+            padding: 10px;
+            text-align: center;
+            border: 0px solid #333;
+            font-weight: bold;
+            transition: color .2s ease;
+    
+            position: relative;
+            & :hover{
+                color: #2b8e8f;
+            }
+            a{
+                width: 100%;
+                text-decoration: none;
+                color: #0F3D3E;
+            }   
+    
+            // 測試source
+            &::after{
+                content: "";
+                display: block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                border: 1px solid #0F3D3E;
+                cursor: pointer;
+    
+                position: absolute;
+                right: 15px;
+                top: 32px;
+            }
+            &::before{
+                content: "";
+                display: block;
+                width: .5px;
+                height: 33px;
+                background-color: #0F3D3E;
+                cursor: pointer;
+    
+                position: absolute;
+                right: 18px;
+                top: -8px;
+            }
+            &:first-child::before{
+                display: none;
+            }
+            &:nth-child(2)::after{
+                background-color: $Camel-2;
+                border: 0px;
+                width: 7px;
+                height: 7px;
+                right: 15px;
+                top: 30px;
+            }
+        }
+    }
+}

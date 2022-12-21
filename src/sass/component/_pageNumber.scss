@@ -1,0 +1,24 @@
+.news_page.wrapper {
+
+    .news_page_ul {
+      position: unset;
+      display: flex;
+      justify-content: center;
+      & li{
+          line-height: 12.5px;
+          width: 33px;
+          height: 33px;
+          border-radius: 100%;    
+          background-color: #0F3D3E;
+          margin-left: 21px;
+      }
+      
+      & li a {
+        text-decoration: none;
+      }
+      & li a:hover{
+        background-color: #0F3D3E;
+      }
+    }
+  }
+  

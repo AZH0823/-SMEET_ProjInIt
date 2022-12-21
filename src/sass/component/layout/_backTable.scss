@@ -1,0 +1,54 @@
+.back_from{
+    .grid_container {
+        border:solid 1px darkgray;
+        display:grid;
+        width: 975px;
+        height:390px;
+        text-align: center;
+        align-items: center;
+        position: relative;
+
+        grid-template-columns:[line_1] 1fr [line2] 1fr [column-3] 1fr [line4] 1fr [column-5] 1fr [column-6] 1fr [column-7];
+        grid-template-rows:[row-1] 1fr [row-2] 1fr [row-3] 1fr [row-4] 1fr [row-5] 1fr [row-6] 1fr [row-7];
+        
+        
+            .header_row-1 {
+                grid-column-start:1;
+                grid-column-end:7;
+                grid-row-start:1;
+                grid-row-end:2;
+                display: flex;
+            }
+            .date {
+                grid-column-start:2;
+                grid-column-end:3;
+                grid-row-start:1;
+                grid-row-end:2;
+            }
+            .membership_number {
+                grid-column-start:3;
+                grid-column-end:4;
+                grid-row-start:1;
+                grid-row-end:2;
+            }
+            .price {
+                grid-column-start:4;
+                grid-column-end:5;
+                grid-row-start:1;
+                grid-row-end:2;
+            }
+            .reservations {
+                grid-column-start:5;
+                grid-column-end:6;
+                grid-row-start:1;
+                grid-row-end:2;
+            }
+            .oder_status{
+                grid-column-start:6;
+                grid-column-end:7;
+                grid-row-start:1;
+                grid-row-end:2;
+            }
+        }
+        
+}

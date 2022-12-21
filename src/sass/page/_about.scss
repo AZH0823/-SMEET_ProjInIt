@@ -1,0 +1,229 @@
+.banner{
+        
+    h1{
+        margin-left: 80px;
+        color: #0f3d3e;
+    }
+    
+    img{
+        width: 100%;
+    }
+}
+
+.about {
+    height: 1870px;
+    .about_title{
+        margin: 50px 0;
+        h2{
+            text-align: center;
+            color: #0f3d3e;
+            font-weight: bold;
+        }
+        .border{
+            margin: 0 auto;
+            width: 72px;
+            height: 1px;
+            background-color: #0f3d3e;
+        }            
+    }
+    .part1_img{
+        height: 425px; /*can be anything*/
+        width: 740px; /*can be anything*/
+        position: relative;
+        img{
+            max-height: 100%;  
+            max-width: 100%; 
+            width: auto;
+            height: auto;
+            position: absolute;  
+            top: 0;  
+            bottom: 0;  
+            left: 120px;  
+            right: 0;  
+            margin: auto;
+        }
+    }
+    .part1_content{
+        padding-right: 100px;
+        text-align:right;
+        position: absolute;  
+        top: 750px;  
+        bottom: 0;  
+        left: 420px;  
+        right: 0;  
+        margin: auto;
+    }
+    .part2_img{
+        height: 425px; /*can be anything*/
+        width: 740px; /*can be anything*/
+        position: relative;
+        img{
+            max-height: 100%;  
+            max-width: 100%; 
+            width: auto;
+            height: auto;
+            position: absolute;  
+            top: 150px;  
+            bottom: 0;  
+            left: 420px;  
+            right: 0;  
+            margin: auto;
+        }
+    }
+    .part2_content{
+        width:757px;
+        position: absolute;  
+        top: 1200px;  
+        bottom: 0;  
+        left: 120px;  
+        right: 0;  
+        
+    }
+    .part3_img{
+        height: 425px; /*can be anything*/
+        width: 740px; /*can be anything*/
+        position: relative;
+        img{
+            max-height: 100%;  
+            max-width: 100%; 
+            width: auto;
+            height: auto;
+            position: absolute;  
+            top: 400px;  
+            bottom: 0;  
+            left: 120px;  
+            right: 0;  
+            margin: auto;
+        }
+    }
+    .part3_content{
+        
+        padding-right: 100px;
+        text-align:right;
+        position: absolute;  
+        top: 1800px;  
+        bottom: 0;  
+        left: 420px;  
+        right: 0;  
+        margin: auto;
+    }
+}
+.serve{
+    height: 1163px;
+    background-color: #E2DCC8,;
+    .serve_title{
+        margin: 50px 0;
+        padding-top: 50px;
+        h2{
+            text-align: center;
+            color: #0f3d3e;
+        }
+        .border{
+            margin: 0 auto;
+            width: 72px;
+            height: 1px;
+            background-color: #0f3d3e;
+        }
+            
+    }
+    .serve_grid{
+        width: 1023px;
+        height: 773px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        .reserve{
+            background-image: url(../img/about_img/about_box_reserve.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 3;
+            
+        }
+        .shopmall{
+            background-image: url(../img/about_img/about_box_shopmall.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 3;
+            grid-row-end: 6;
+        }
+        .menu{
+            background-image: url(../img/about_img/about_box_menu.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            grid-column-start: 2;
+            grid-column-end: 3;                grid-row-start: 3;
+            grid-row-end: 6;
+        }
+        .team{
+            background-image: url(../img/about_img/about_box_team.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            grid-column-start: 3;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 6;
+        }
+    }
+}
+.contact{
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    .contact_title{
+        margin: 50px 0;
+        h2{
+            text-align: center;
+            color: #0f3d3e;
+        }
+        .border{
+            margin: 0 auto;
+            width: 72px;
+            height: 1px;
+            background-color: #0f3d3e;
+        }   
+    }
+    .name_email_wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        input{
+            width: 450px;
+            margin-top: 15px;
+            line-height: 30px;
+        }
+    }
+    .subject_message_submit_wrapper{
+        display: flex;
+        flex-direction: column;
+        textarea{
+            width: 900px;
+            height: 164px;
+        }
+    }
+
+}
+.qanda{
+    width: 80%;
+    margin: 0 auto;
+    .qa_title{
+        margin: 50px 0;
+        padding-top: 50px;
+        h2{
+            text-align: center;
+            color: #0f3d3e;
+        }
+        .border{
+            margin: 0 auto;
+            width: 72px;
+            height: 1px;
+            background-color: #0f3d3e;
+        }
+            
+    }
+    
+}

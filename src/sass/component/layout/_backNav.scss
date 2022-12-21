@@ -1,0 +1,122 @@
+.article {
+    height: 1145px;
+
+    .side_nav {
+        outline: 1px solid black;
+        height: 100%;
+        width: 190px;
+        box-sizing: border-box;
+
+        .side_nav_wrap {
+            height: 100%;
+            border: 1px solid #000;
+            background-color: #0F3D3E;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            
+            & a {
+                text-decoration: none;
+                color: #fff;
+                margin-bottom: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 24px;
+            }
+
+            .side_nav_wrap_logo {
+                /* loog設定 */
+                position: relative;
+
+                &::after {
+                    /* logo下面的分隔線 */
+                    display: block;
+                    content: "";
+                    height: 1px;
+                    width: 177px;
+                    background-color: #ccc;
+
+                    position: absolute;
+                    left: 5px;
+                    bottom: 15px;
+                }
+
+                & a {
+                    display: flex;
+                    align-items: center;
+                    margin: 20px 0px 30px;
+                    gap: 0px;
+                    justify-content: flex-start;
+                }
+
+                & p {
+                    order: 2;
+                }
+
+                & img {
+                    order: 1;
+                }
+            }
+
+            .side_nav_wrap_select {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 5px;
+
+                .side_nav_wrap_item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    
+                    .side_nav_wrap_text {
+                        display: flex;
+                        align-items: center;
+                        // position: relative;
+                        
+                        ion-icon{
+                            display: inline-block;
+                            font-size: 15px;
+                            color: #fff;
+                        }
+
+                        ion-icon.chevron_down {
+                            display: inline-block;
+                        }
+                        .chevron_down.-on{
+                            display: none;
+                        }
+
+                        ion-icon.chevron_up {
+                            display: none;
+                        }
+                        ion-icon.chevron_up.-on{
+                            display: inline-block;
+                        }
+
+                    }
+
+                }
+                .side_subNav_wrap {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    display: none;
+
+                    position: relative;
+                    &::after{
+                        display: block;
+                        content: "";
+                        width: 0.5px;
+                        height: 71px;
+                        background-color: #fff;
+
+                        position: absolute;
+                        left: 8px;
+                        top: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+

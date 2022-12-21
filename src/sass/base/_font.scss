@@ -1,0 +1,27 @@
+// 字型
+$font_family_e: "Didot";
+$font_family_c:"Noto Serif TC";
+$font_family_c2:"Noto Sans TC";
+
+// 字級
+$font_size : (
+    "h1": 48px ,
+    "h2": 40px ,
+    "h3": 32px ,
+    "h4": 24px ,
+    "h5": 22px ,
+    "h6": 20px ,
+    ".font18": 18px ,
+    ".font16": 16px ,
+    ".font14": 14px ,
+    ".font12": 12px 
+);
+
+$font_size_rwd : (
+    "h1": 36px ,
+    "h2": 30px ,
+    "h3": 20px ,
+    "h4": 20px ,
+    "h5": 16px ,
+    "h6": 16px 
+);

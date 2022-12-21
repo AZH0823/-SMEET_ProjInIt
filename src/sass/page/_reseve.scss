@@ -1,0 +1,59 @@
+.reseve.fulid_wrapper{
+    .wrapper{
+       outline: 2px solid red;
+   }
+   .reseve_list{
+       border: 2px solid yellow;
+       margin: 0px 8.6%;
+       .reseve_title{
+          margin-left: -10px;
+          margin-bottom: 65px;
+       }
+       .reseve_notice{
+           border: 2px solid green;
+           .notice_title{
+               font-weight: 900;
+               text-align: center;
+               position: relative;
+               margin-bottom: 65px;
+               &:after{
+                   content:'';
+                   height: 2px;
+                   width: 72px;
+                   background-color: $green-1 ;
+                   
+                   border-radius: 2px;
+                   position: absolute;
+                   bottom: 0;
+                   left: 50%;
+                   transform: translateX(-50%);
+               }
+           }
+           .text-area{
+               overflow-y: auto;
+               height: 1100px;
+               margin: 0 7.5%;
+               padding: 5% 6.5%;
+               border:2px solid $Camel-2;
+               .noticeTxt,.cancelTxt{
+                   font-weight: 400;
+                   font-size: 20px;
+                   line-height: 140%;
+                   letter-spacing: 0.27em;
+                   &>*{
+                       margin-bottom: 20px;
+                   }
+                   &>li{
+                       text-justify: auto;
+                       list-style: disc;
+                   }
+               }
+           }
+           // .reseve_agree{
+           //     width: 250px;
+           //     margin: 0 auto;
+           // }
+       }
+   }
+   
+}

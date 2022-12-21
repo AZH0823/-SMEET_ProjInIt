@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>會員中心</title>
+</head>
+<body>
+    <div class="fulid_wrapper member">
+        <header></header>
+        <main>
+            <h1 class="green-1 font_family_eng">MEMBER</h1>
+            <div class="title">
+                <h2 class="green-1 font_bold font_family_tc">會員中心</h2>
+            </div>
+            <nav class="member_tab">
+                <ul class="font16 Camel-1">
+                    <li class="member_tab_1"><a  href="">會員中心</a></li>
+                    <li class="member_tab_2"><a  href="">訂單查詢</a></li>
+                    <li class="member_tab_3"><a  href="">收藏菜品</a></li>
+                    <li class="member_tab_4"><a href="">訊息中心<span id="member_msg">3</span></a></li>
+                    <li class="member_tab_5"><a href="">常見問題</a></li>
+                </ul>
+            </nav>
+            <section>
+                <div class="member_info">
+                    <h6 class="member_title">個人資訊</h6>
+                    <form id="info" action="">
+                        <input type="text" id="member_name" placeholder="請輸入姓名">
+                        <div class="date_sex">
+                            <input type="date" id="member_date" placeholder="請輸入生日">
+                        <select name="member_sex" id="member_sex" value="請選擇性別">
+                            <option value="none" selected disabled hidden>請選擇性別</option> 
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                        </div>
+                        <input type="text" id="member_phone" placeholder="請輸入手機號碼">
+                        <div class="city_area">
+                            <select name="member_city" id="member_city">
+                                <option value="none" selected disabled hidden>請選擇縣市</option> 
+                            </select>
+                        <select name="member_area" id="member_area">
+                            <option value="none" selected disabled hidden>請選擇區域</option> 
+                        </select>
+                        </div>
+                        <input type="text" id="member_addr" placeholder="請輸入地址">
+                        <div class="bonus">
+                            <p class="font16">目前累計會員紅利點數<span class="bonus_member">0</span>點</p>
+                        </div>
+                        <div class="member_news">
+                            <input type="checkbox" name="member_news" id="member_news_yes">
+                            <label for="member_news_yes">
+                                <p class="font16">我願意收到最新優惠消息</p>
+                            </label>
+                        </div>
+
+                        <button type="submit" id="btn_info" class="inCart_btn2" >確認修改</button>
+                    </form>
+                </div>
+                <div class="member_pwd">
+                    <h6 class="member_title">修改密碼</h6>
+                    <form id="pwd" action="">
+                        <div class="content">
+                            <label for="member_account">帳號</label>
+                        <input type="text" id="member_account">
+                        </div>
+                        <div class="content">
+                            <label for="member_pwd_old">請輸入舊密碼</label>
+                            <input type="password">
+                            <i class="fa-regular fa-eye-slash"></i>
+                        </div>
+                        <div class="content">
+                            <label for="member_pwd_new">請輸入新密碼</label>
+                            <input type="password" placeholder="請使用 8 個字元以上的字母、數字">
+                            <i class="fa-regular fa-eye-slash"></i>
+                        </div>
+                        <div class="content">
+                            <label for="member_pwd_confirm">請確認新密碼</label>
+                            <input type="password">
+                            <i class="fa-regular fa-eye-slash"></i>
+                        </div>
+
+                        <button  type="submit" id="btn_pwd" class="inCart_btn2">確認修改</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <footer></footer>
+    </div>
+</body>
+</html>

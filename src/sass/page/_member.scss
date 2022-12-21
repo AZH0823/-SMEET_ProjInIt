@@ -1,0 +1,232 @@
+.member{
+    main{
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 85px 0;
+        @include pad(){
+            padding: 0 40px 0;           
+        }
+        @include mobile(){
+            padding: 0 27px 0;
+        }
+        //MEMBER
+        h1{
+            margin-top: 90px;
+            margin-bottom: 30px;
+        }
+        // 會員中心
+        .title{
+            margin: 0 auto 62px;
+            text-align: center;
+            @include mobile(){
+                margin-bottom: 35px;
+            }
+            h2{
+                position: relative;
+                &::after{
+                    content: "";
+                    width: 72px;
+                    height: 2px;
+                    background-color: $green-1;
+                    position: absolute;
+                    top: 73px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    @include mobile(){
+                        top:50px;
+                    }
+
+                }
+            }
+        }
+        // tab
+        .member_tab{
+            ul{
+                display: flex;
+                justify-content: center;
+                margin-bottom: 40px;
+                flex-wrap: wrap;
+                @include pad(){
+                    margin-bottom: 25px;   
+                }
+                li{
+                    margin-bottom: 10px;
+                    @include pad(){
+                        margin-bottom: 20px;
+                    }
+                    a{
+                        text-decoration: none;
+                        color: $Camel-1;
+                        width: 160px;
+                        line-height: 36px;
+                        border-left: 1px solid $Camel-1;
+                        border-right: 1px solid $Camel-1;
+                        display: block;
+                        text-align: center;
+                        @include pad(){
+                            font-size: 14px;
+                            letter-spacing: 1px;
+                            width: 100px;
+                            line-height: 21px;
+                        }
+                        &:hover{
+                            color:$green-1;
+                            border-left: 1px solid $Camel-1;
+                            border-right: 1px solid $green-1;
+                            border-left: 1px solid $green-1;
+                        }
+                        
+                    }
+                }
+                .member_tab_4{
+                    position: relative;
+                }
+                #member_msg{
+                    font-size: 14px;
+                    position: absolute;
+                    top: -5px;
+                    right: 30px;
+                    background-color: $red;
+                    display: block;
+                    line-height: 18px;
+                    width: 18px;
+                    border-radius: 50%;
+                    color: #fff;
+                    &:hover{
+                        color: #fff;
+                    }
+                    @include pad(){
+                        top: -12px;
+                        right: 10px;
+                    }
+                }
+            }
+            
+        }
+        // 表單
+        section{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            @include pad(){
+                flex-direction: column;
+            }
+            .member_title{
+                width: 100%;
+                line-height: 55px;
+                background-color: $Camel-3;
+                padding-left: 20px;
+                margin-bottom: 25px;
+            }
+            form#info, form#pwd{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            // 左邊個人資訊
+            .member_info{
+                width: 49%;
+                @include pad(){
+                    width: 100%;
+                }
+                .date_sex{
+                    input{
+                        width: 49%;
+                        padding-bottom: 9px;
+                    }
+                }
+                .bonus{
+                    border-bottom: 1px solid #000;
+                    padding: 0px 15px 10px;
+                    .bonus_member{
+                        margin: 0px 25px;
+                    }
+
+                    
+                }
+                .member_news{
+                    display: flex;
+                    margin-top: 15px;
+                    
+                    input{
+                        width: 20px;
+                        margin-top: 8px;
+                        background-color: #000;
+                        color: #fff;
+                    }
+                    label{
+                        // position: relative;
+                        // &::before{
+                        //     content: '';
+                        //     position: absolute;
+                        //     top: 8px;
+                        //     left: -21px;
+                        //     height: 16px;
+                        //     width: 16px;
+                        //     color: #fff;
+                        //     background: #000;
+                        //     border-radius: 2px;
+                        // }
+                    }
+                }
+            }
+            // 右邊修該密碼
+            .member_pwd{
+                width: 49%;
+                @include pad(){
+                    width: 100%;
+                }
+                form{
+
+                }
+                .content{
+                    display: flex;
+                    position: relative;
+                    i{
+                        font-size: 12px;
+                        position: absolute;
+                        top: 10px;
+                        right: 0px;
+                        color: #898989;
+                    }
+                }
+                label{
+                    width: 103px;
+                    padding-top: 3px;
+                    margin-right: 10px;
+                }
+                input{
+                    width: calc(100% - 110px);
+                    position: relative;
+                }
+            }
+            // input select共同樣式
+            input, select{
+                outline: 0;
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                border-bottom: 1px solid #000;
+                padding: 10px 15px;
+                letter-spacing: 1px;
+                margin-bottom: 25px;
+            }
+            select{
+                width: 49%;
+            }
+            // 按鈕btn
+            #btn_info, #btn_pwd{
+                align-self: end;
+                font-size: 16px;
+                width: 180px;
+                line-height:  50px;
+                padding: 0;
+                @include pad(){
+                    margin-bottom: 40px;
+                }
+            }
+        }
+        
+    }
+}

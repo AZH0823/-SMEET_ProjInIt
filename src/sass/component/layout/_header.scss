@@ -1,0 +1,189 @@
+.wrap_header {
+    // display: none;
+    background-image: url("../../../img/index_img/index_head_banner.jpg");
+    // background-image: url("src/img/index_img/index_head_banner.jpg");
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+
+    background-repeat: no-repeat;
+
+    .header_scope {
+
+        header {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            position: fixed;
+            position: relative;
+
+            .header_bar {
+                display: flex;
+
+                margin-top: 45px;
+
+                // margin-bottom: 90px;
+                li {
+                    margin-left: 40px;
+                    margin-right: 40px;
+                }
+
+                a {
+                    text-decoration: none;
+
+                    &:hover {
+                        border-bottom: 1px solid $Camel-3;
+                    }
+                }
+            }
+
+            .header_user {
+                position: absolute;
+                top: 45px;
+                right: 20px;
+                padding-right: 20px;
+
+                a {
+                    text-decoration: none;
+                    padding-right: 20px;
+                }
+            }
+        }
+
+        .head_logo {
+            margin: auto;
+            width: 218px;
+            height: 218px;
+            // margin-top: 150px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            vertical-align: middle;
+            // outline: 1px solid #000;
+// img {
+//     height: 218px;
+// }
+        }
+
+        nav {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: 200px;
+            margin: 0 auto 20px;
+            list-style: none;
+            text-align: center;
+            // margin-top: 180px;
+            position: absolute;
+            bottom: 0;
+
+            a {
+                text-decoration: none;
+
+                &:hover {
+                    letter-spacing: 5px;
+                }
+            }
+
+            .guide_line {
+                display: block;
+                background-color: #fff;
+                width: 1px;
+                height: 120px;
+                margin: 0 auto;
+                margin-top: 20px;
+            }
+        }
+
+    }
+}
+
+/*------------------- 下滑 header -------------------*/
+.slide_header {
+    // display: none;
+    justify-content: space-around;
+
+
+
+    .head_logo {
+        width: 115px;
+        position: relative;
+        position: absolute;
+        top: 0;
+        left: 30px;
+
+        img {
+            height: 115px;
+        }
+    }
+
+    header {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        position: fixed;
+        position: relative;
+
+        .header_bar {
+            display: flex;
+
+            li {
+                margin-left: 40px;
+                margin-right: 40px;
+                margin-top: 45px;
+                margin-bottom: 45px;
+            }
+
+            a {
+                text-decoration: none;
+
+                &:hover {
+                    border-bottom: 1px solid #000;
+                }
+            }
+        }
+
+        .header_user {
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+
+    nav {
+        display: flex;
+        position: relative;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        .header_user {
+            margin-top: 35px;
+            padding-right: 20px;
+
+            a {
+                text-decoration: none;
+                padding-right: 20px;
+            }
+        }
+
+        a {
+            img {
+                border-radius: 10px 0 0 0;
+                height: 170px;
+            }
+        }
+    }
+
+    .guide_line {
+        display: block;
+        background-color: #fff;
+        width: 1px;
+        height: 120px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+}

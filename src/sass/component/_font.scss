@@ -1,0 +1,41 @@
+//==========================字重
+.font_bold{
+    @include font(bold);
+  }
+  .font_med{
+    @include font(medium);
+  }
+  .font_light{
+    @include font(light);
+  }
+  
+  //========================== 字型
+  //  英文字
+  .font_family_eng{
+    font-family: $font_family_e;
+  }
+  // 中文明體(標題字用到)
+  .font_family_tc{
+    font-family: $font_family_c;
+  }
+  
+  // 中文黑體(內文)
+  .font_family_tc2{
+    font-family: $font_family_c2;
+  }
+  
+  //========================== 字級
+  @each $k, $v in $font_size{
+    #{$k}{
+        font-size: $v;
+        letter-spacing: $v * 0.07;
+    }
+  }
+  @include mobile(){
+    @each $k, $v in $font_size_rwd{
+        #{$k}{
+            font-size: $v;
+            letter-spacing: $v * 0.07;
+        }
+    }
+  }
