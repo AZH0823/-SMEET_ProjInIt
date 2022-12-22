@@ -111,7 +111,12 @@ function img(){
 function otherPng(){
   return src(['src/img/*.png','src/img/**/*.png']).pipe(dest('dist/img'))
 }
+function otherSvg(){
+  return src(['src/img/*.svg','src/img/**/*.svg']).pipe(dest('dist/img'))
+}
 exports.img = img;
+exports.png = otherPng;
+exports.svg = otherSvg;
 //圖片壓縮
 function imgmini(){
   return src(['src/img/**/**/*.*' ,'src/img/*.*','src/img/**/*.*'])
@@ -151,11 +156,13 @@ function browser(done) {
     watch(['src/sass/*.style' , 'src/sass/**/*.scss'] ,sassStyle).on('change' , reload)
     watch('src/js/*.js' , jsmini).on('change' , reload)
     watch(['src/img/*.*', 'src/img/**/*.*'] , img).on('change' , reload)
+    watch(['src/img/*.png','src/img/**/*.png'] , otherPng).on('change' , reload)
+    watch(['src/img/*.svg','src/img/**/*.svg'] , otherSvg).on('change' , reload)
     done();
 }
 
 //開發用
-exports.default = series(parallel(html , sassStyle ,jsmini , img) , browser);
+exports.default = series(parallel(html , sassStyle ,jsmini ,img, otherSvg, otherPng) , browser);
 
 
 // 打包上線用
