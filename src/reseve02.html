@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @@include('layout/meta.html', {
+    "title": "私覓SMEET-預約流程",
+    })
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    @@include('layout/header_01.html')
+
+    <div class="fulid_wrapper reseve_flow">
+        <div class="wrapper">
+            <main class="content">
+                <div class="work_flow_lists">
+                    <ul class="flow_container">
+                        <!-- finsh 完成填寫 checked 目前進度 -->
+                        <li class="flowList checked" flowName="選擇套餐">1</li>
+                        <li class="flowList" flowName="加購服務">2</li>
+                        <li class="flowList" flowName="確認訂單">3</li>
+                        <li class="flowList" flowName="填寫資料">4</li>
+                    </ul>
+                    <form class="form_workFlow_contanier">
+                         <!-- 結帳顯示專區 -->
+                         <section class="oder_view">
+                            <ul class="checkout_contanier">
+                                <!-- 人員資訊 -->
+                                <li id="order_Info" class="order_detailInfo">
+
+                                    <div class="setName"> <img src="./img/reserve_img/reserve_icon01.svg" alt="">名物-套餐名稱
+                                    </div>
+                                    <div class="count_person">
+                                        <img src="./img/reserve_img/reserve_icon02.svg" alt="">
+                                        <select>
+                                            <i class="fa-solid fa-user"></i>
+                                            <option selected disabled>--人數--</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="datespan">
+                                        <img src="./img/reserve_img/reserve_icon04.svg" alt="">
+                                        <span>2022/12/12 18:00</span>
+                                    </div>
+                                    <div class="cheifTeam">
+                                        <img src="./img/reserve_img/reserve_icon05.svg" alt="">
+                                        <span>預約廚師 - 立雁山廚師長</span>
+                                    </div>
+                                    <div class="order_set_pic">
+                                        <img src="img/reserve_img/reserve_set01.jpg" alt="" class="order_set_img">
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                            <!-- 套餐資訊 -->
+                            <!-- 加購資訊 -->
+                            <!-- 結帳按鈕 -->
+                            <button class="next_btn btn">下一步</button>
+                            <button class="prev_btn btn">返回上一步</button>
+
+                        </section>
+                        <!-- 選擇套餐 -->
+                        <section class="step_flow step1 now" id="set">
+                            <h6 class="blockTitle">1-1.選擇套餐</h6>
+                            <ul class="sets">
+                                <li class="setCard checked">
+                                    <img src="img/reserve_img/reserve_set01.jpg" alt="">
+                                    <div class="setName">名物 私套餐</div>
+                                </li>
+                                <li class="setCard">
+                                    <img src="img/reserve_img/reserve_set02.jpg" alt="">
+                                    <div class="setName">極上 會席套餐</div>
+                                </li>
+                                <li class="setCard">
+                                    <img src="img/reserve_img/reserve_set03.jpg" alt="">
+                                    <div class="setName">苑 春堂套餐</div>
+                                </li>
+                            </ul>
+                            <h6 class="blockTitle">1-2.選擇套餐內容</h6>
+                            <ul class="setdetail">
+                                <p class="setkind">湯物</p>
+
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                </li>
+                                <p class="setkind">前菜</p>
+
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                </li>
+                                <p class="setkind">刺身</p>
+
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                </li>
+                                <p class="setkind">主食</p>
+
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                </li>
+                                <p class="setkind">甜點</p>
+
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                </li>
+                                <p class="setkind">飲品</p>
+
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </section>
+                       
+                        <!-- 加購服務 -->
+                        <section class="step_flow step2" id="addOther">
+
+                            <h6 class="blockTitle">2-1.選擇單點加購</h6>
+                            <ul class="addOther_detail">
+
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                    <div class="price">
+                                        $ 500
+                                    </div>
+                                </li>
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                    <div class="price">
+                                        $ 500
+                                    </div>
+                                </li>
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                    <div class="price">
+                                        $ 500
+                                    </div>
+                                </li>
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                    <div class="price">
+                                        $ 500
+                                    </div>
+                                </li>
+                                <li class="stepper_input">
+                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
+                                    <div class=amoumt>
+                                        <button class="button sub">-</button>
+                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
+                                        <button class="button add">+</button>
+                                    </div>
+                                    <div class="price">
+                                        $ 500
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <h6 class="blockTitle ">2-2.選擇租借服務</h6>
+                            <ul class="addOther_rent">
+                                <li class="rent_service">
+                                    <div class="tableware">
+                                        <p class="serive-title">廚具</p>
+                                        <span class="aux-title">盤子、餐具、餐巾</span>
+                                    </div>
+                                    <div class="checkboxInner">
+
+                                        <input type="checkbox" name="cb" id="table_cb" checked disabled >
+                                        <label for="table_cb" id="cb_table">
+                                            <svg viewBox="0 0 100 100">
+                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
+                                            </svg>
+                                            <span class="info">每人 300NT$</span>
+                                        </label>
+                                    </div>
+
+
+                                </li>
+                                <li class="rent_service">
+                                    <div class="utensils">
+                                        <p class="serive-title">炊具</p>
+                                        <span class="aux-title">鍋碗瓢盆</span>
+                                    </div>
+                                    <div class="checkboxInner">
+
+                                        <input type="checkbox" name="cb" id="utensils_cb" checked disabled>
+                                        <label for="utensils_cb" id="utensils_cb">
+                                            <svg viewBox="0 0 100 100">
+                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
+                                            </svg>
+                                            <span class="info">每人 300NT$</span>
+                                        </label>
+                                    </div>
+
+
+
+                                </li>
+                                <li class="rent_service">
+
+                                    <div class="plate">
+                                        <p class="serive-title">餐盤</p>
+                                        <span class="aux-title">餐盤&拼盤</span>
+                                    </div>
+                                    <div class="checkboxInner">
+
+                                        <input type="checkbox" name="cb" id="plate_cb">
+                                        <label for="plate_cb" id="plate_cb">
+                                            <svg viewBox="0 0 100 100">
+                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
+                                            </svg>
+                                            <span class="info">每人 300NT$</span>
+                                        </label>
+                                    </div>
+
+
+
+                                </li>
+                                <li class="rent_service">
+                                    <div class="waiter">
+                                        <p class="serive-title">餐盤</p>
+                                        <span class="aux-title">全程服務及售後清潔</span>
+                                    </div>
+                                    <div class="checkboxInner">
+
+                                        <input type="checkbox" name="cb" id="waiter_cb">
+                                        <label for="waiter_cb" id="waiter_cb">
+                                            <svg viewBox="0 0 100 100">
+                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
+                                            </svg>
+                                            <span class="info">每人 300NT$</span>
+                                        </label>
+                                    </div>
+
+
+                                </li>
+                            </ul>
+                        </section>
+                        <!-- 確認訂單 -->
+                        <section class="step_flow step3" id="checkDetail">
+                            <!-- inculde 詳細訂單 -->
+                        </section>
+                        <!-- 填寫資料 -->
+                        <section class="step_flow step4" id="comfrim"></section>
+                    </form>
+
+
+                </div>
+            </main>
+        </div>
+    </div>
+    @@include('layout/footer.html')
+</body>
+
+</html>
