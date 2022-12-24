@@ -116,6 +116,130 @@
  }
 
 
+
+
+
+//  ============= Eric 新增 view、more按鈕 12/20 ============= //
+
+.btn_more {
+    margin-left: 20px;
+    display: flex;
+    @extend .font14;
+    font-weight: 1000;
+    position: relative;
+    text-decoration: none;
+    color: #000;
+
+    p {
+        position: relative;
+        margin-right: 50px;
+        position: relative;
+
+        &::after {
+            display: block;
+            content: "";
+            width: 85px;
+            height: .5px;
+            background-color: #000;
+
+            position: absolute;
+            top: 23px;
+            left: 0px;
+
+            z-index: 1;
+        }
+    }
+
+    span {
+        border-radius: 50%;
+        height: 30px;
+        @include btnGetor(30px, 0px, 10px,
+            black, $Camel-3, null, transparent, null, .5px);
+        border: .5px solid #000;
+        position: absolute;
+        top: 0px;
+        left: 76px;
+
+        i.fa-arrow-right {
+            font-size: 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    }
+}
+
+.btn_view {
+    margin-left: 20px;
+    display: flex;
+    @extend .font14;
+    font-weight: 1000;
+    position: relative;
+    text-decoration: none;
+    color: #000;
+
+    &::after {
+        display: block;
+        content: "";
+        width: 180px;
+        height: .5px;
+        background-color: #000;
+
+        position: absolute;
+        top: 30px;
+        left: 0px;
+
+        z-index: 1;
+    }
+
+    p {
+        position: relative;
+        margin-right: 50px;
+        position: relative;
+
+
+    }
+
+
+    span {
+        border-radius: 50%;
+        height: 70px;
+        @include btnGetor(70px, 0px, 10px,
+            black, $Camel-3, null, transparent, null, .5px);
+        border: .5px solid #000;
+        position: absolute;
+        top: -16px;
+        left: 165px;
+
+        p {
+            position: absolute;
+            top: 25px;
+            left: 20px;
+        }
+    }
+}
+
+//  ============= Eric 新增 view、more按鈕 12/20 ============= //
+
+
+
+
+
+//  ============= Eric 新增 insert按鈕  12/21 ============= //
+.insert_btn {
+    @extend .font12;
+    font-weight: 1000;
+    @include btnGetor(85px, 4.5px, 10px,
+    black, $Camel-3, black, white,
+    #8B8B8B, .5px);
+}
+//  ============= Eric 新增 insert按鈕  12/21 ============= //
+
+
+
+
+
+
 //  後台
 .save_btn{
    @extend .font12;
