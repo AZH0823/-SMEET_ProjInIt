@@ -1,3 +1,350 @@
-.menu{
+.banner{
+        
+    h1{
+        margin-left: 80px;
+        color: #0f3d3e;
+    }
     
+    img{
+        width: 100%;
+    }
+}
+
+.menu {
+    color: #0f3d3e;
+    height: 1470px;
+    .about_title{
+        margin: 50px 0;
+        h2{
+            text-align: center;
+            font-weight: bold;
+        }
+        .border{
+            margin: 0 auto;
+            width: 72px;
+            height: 1px;
+            background-color: #0f3d3e;
+        }            
+    }
+    .part1_img{
+        height: 425px; /*can be anything*/
+        width: 740px; /*can be anything*/
+        position: relative;
+        img{
+            max-height: 100%;  
+            max-width: 100%; 
+            width: auto;
+            height: auto;
+            position: absolute;  
+            top: 0;  
+            bottom: 0;  
+            left: 120px;  
+            right: 0;  
+            margin: auto;
+        }
+    }
+    .part1_content{
+        height: 100px;
+        position: absolute;  
+        top: 550px;  
+        bottom: 0;  
+        left: 420px;  
+        right: 0;  
+        margin: auto;
+        /* ---------------- 底下文字 ---------------- */
+        div:nth-of-type(1) {
+            /*(一)減短左邊文字長度*/
+            position: absolute;
+            left:250px;     /*(四)兩邊文字對齊*/
+            top:150px;
+            width: 500px;   /*(二)增加右邊文字長度*/
+        }
+
+        div {
+            overflow: hidden;
+        }
+
+        div h5 {
+            width: 900px;   /*調整全文字長度*/
+            
+            
+        }
+        
+
+
+        /* ---------------- 上面文字 ---------------- */
+
+        div:nth-of-type(2) {
+            color: #fff;
+            position: absolute;
+            left: 250px;     /*(四)兩邊文字對齊*/
+            top: 150px;
+            width: 190px;   /*(二)增加右邊文字長度*/
+        }
+
+        div {
+            overflow: hidden;
+        }
+
+        div:nth-of-type(2) p {
+            left: -550px;  /*(三)對齊文字*/
+            position: relative;
+        }
+
+        div h5 {
+            width: 900px;
+        }
+        h2{
+            margin-right: 100px;
+            text-align: right;
+            
+        }
+        h4{
+            text-align: right;
+            margin-right: 100px;
+        }
+        p{
+            width: 400px;
+            border-bottom: solid 2px #0f3d3e;
+            position: absolute;
+            left:340px;
+            top:100px;
+        }
+    }
+
+    .part2_img{
+        height: 425px; /*can be anything*/
+        width: 740px; /*can be anything*/
+        position: relative;
+        img{
+            max-height: 100%;  
+            max-width: 100%; 
+            width: auto;
+            height: auto;
+            position: absolute;  
+            top: 150px;  
+            bottom: 0;  
+            left: 420px;  
+            right: 0;  
+            margin: auto;
+        }
+    }
+    .part2_content{
+        height: 100px;
+        position: absolute;  
+        top: 1050px;  
+        bottom: 0;  
+        left: 420px;  
+        right: 0;  
+        margin: auto;
+        /* ---------------- 底下文字 ---------------- */
+        div:nth-of-type(1) {
+            color: #fff;
+            /*(一)減短左邊文字長度*/
+            position: absolute;
+            left:-300px;     /*(四)兩邊文字對齊*/
+            top:120px;
+            width: 800px;   /*(二)增加右邊文字長度*/
+        }
+    
+        div {
+            overflow: hidden;
+        }
+    
+        div h5 {
+            width: 900px;   /*調整全文字長度*/
+            
+            
+        }
+        
+    
+    
+        /* ---------------- 上面文字 ---------------- */
+    
+        div:nth-of-type(2) {
+            color: #0f3d3e;
+            position: absolute;
+            left: -300px;     /*(四)兩邊文字對齊*/
+            top: 120px;
+            width: 300px;   /*(二)增加右邊文字長度*/
+        }
+    
+        div {
+            overflow: hidden;
+        }
+    
+        div:nth-of-type(2) p {
+            left: -550px;  /*(三)對齊文字*/
+            position: relative;
+        }
+    
+        div h5 {
+            width: 900px;
+        }
+        h2{
+            margin-left: -300px;
+        }
+        h4{
+            margin-left: -300px;
+        }
+        p{
+            width: 400px;
+            border-bottom: solid 2px #0f3d3e;
+            position: absolute;
+            left:-300px;
+            top:100px;
+        }
+    }
+    .part3_img{
+        height: 425px; /*can be anything*/
+        width: 740px; /*can be anything*/
+        position: relative;
+        img{
+            max-height: 100%;  
+            max-width: 100%; 
+            width: auto;
+            height: auto;
+            position: absolute;  
+            top: 400px;  
+            bottom: 0;  
+            left: 120px;  
+            right: 0;  
+            margin: auto;
+        }
+    }
+    .part3_content{
+        height: 100px;
+        position: absolute;  
+        top: 1600px;  
+        bottom: 0;  
+        left: 420px;  
+        right: 0;  
+        margin: auto;
+        /* ---------------- 底下文字 ---------------- */
+        div:nth-of-type(1) {
+            /*(一)減短左邊文字長度*/
+            position: absolute;
+            left:250px;     /*(四)兩邊文字對齊*/
+            top:150px;
+            width: 500px;   /*(二)增加右邊文字長度*/
+        }
+    
+        div {
+            overflow: hidden;
+        }
+    
+        div h5 {
+            width: 900px;   /*調整全文字長度*/
+            
+            
+        }
+        
+    
+    
+        /* ---------------- 上面文字 ---------------- */
+    
+        div:nth-of-type(2) {
+            color: #fff;
+            position: absolute;
+            left: 250px;     /*(四)兩邊文字對齊*/
+            top: 150px;
+            width: 190px;   /*(二)增加右邊文字長度*/
+        }
+    
+        div {
+            overflow: hidden;
+        }
+    
+        div:nth-of-type(2) p {
+            left: -550px;  /*(三)對齊文字*/
+            position: relative;
+        }
+    
+        div h5 {
+            width: 900px;
+        }
+        h2{
+            margin-right: 100px;
+            text-align: right;
+            
+        }
+        h4{
+            text-align: right;
+            margin-right: 100px;
+        }
+        p{
+            width: 400px;
+            border-bottom: solid 2px #0f3d3e;
+            position: absolute;
+            left:340px;
+            top:100px;
+        }
+    }
+}
+
+.add{
+
+    .add_title{
+        margin: 50px 0;
+        padding-top: 50px;
+        h2{
+            text-align: center;
+            color: #0f3d3e;
+            font-weight: bold;
+        }
+        .border{
+            margin: 0 auto;
+            width: 200px;
+            height: 1px;
+            background-color: #0f3d3e;
+        }
+            
+    }
+    .add_menu{
+        margin: 0 auto;
+        position: relative;
+        ul{
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+            
+            
+            
+            li{
+                width: 227px;
+                height: 376px;
+                box-sizing: border-box;
+                margin-right: 30px;
+                flex-shrink: 0;
+                img{
+                    max-width: 227px;
+                    max-height: 376px;
+                }
+            }
+            li:last-child{
+                margin-right: 0;
+            }
+        }
+    }
+    .add_btn{
+        position: relative;
+        .fa{
+            width: 50px;
+            height: 50px;
+            color: #fff;
+            text-align: center;
+            line-height: 48px;
+            font-size: 50px;
+            position: absolute;
+            top: -250px;
+            
+            margin: auto;
+        }
+        .fa-angle-left{
+            left: 10px;
+        }
+        .fa-angle-right{
+            right: 10px;
+        }
+    }
 }
