@@ -4,20 +4,25 @@
     display: flex;
     justify-content: center;
     li {
+      display: flex;
+      align-items: center;
+      justify-items: center;
       line-height: 30.5px;
-      width: 33px;
-      height: 33px;
-      border-radius: 100%;
-      background-color: $green-1;
-      margin: 39px 0 25px 21px;
+      border-radius: 50%;
+      @extend .bgc_green-1;
+      margin-right: 25px;
+      text-align: center;
     }
 
     li a {
+      width: 33px;
+      height: 33px;
+      border-radius: 50%;
+      display: block;
       text-decoration: none;
-      margin-left: 12px;
     }
     li a:hover {
-      background-color: $green-1;
+      background-color: $green-2;
     }
   }
 }
