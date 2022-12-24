@@ -1,18 +1,21 @@
 /*banner component*/
 .banner {
   .fulid_wrapper {
-    & h1 {
+    h1 {
       margin: 161px 0 37px 88px;
 
       @include mobile {
         margin: 80px 0px 29px 11px;
       }
     }
+    .banner_container {
+      height: 330px;
+      overflow: hidden;
+      img {
+        width: 100%;
 
-    & img {
-      min-width: 1920px;
-      height: 365px;
-      object-fit: cover;
+        object-fit: cover;
+      }
     }
   }
 }
