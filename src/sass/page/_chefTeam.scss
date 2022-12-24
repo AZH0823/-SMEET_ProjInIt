@@ -1,5 +1,8 @@
 .chef{
-
+    .wrapper h1{
+        margin-left: 70px;
+        color: $green1;
+    }
 
     ._banner img{
         height: 100%;
@@ -11,8 +14,18 @@
         display:flex;
         flex-wrap:wrap;
         margin: 50px;
+
         input{
             display:none
+        }
+
+        input:checked + label{
+            opacity: 1; 
+            font-weight:bold;
+        }
+        
+        input:checked + label + ._chef_content{
+            display: initial;
         }
         
         label{
@@ -21,6 +34,12 @@
             color: rgb(6, 6, 6); 
             opacity: 0.5;
         }
+        
+        label:hover{
+            opacity: 1; 
+            font-weight:bold;
+        }
+     
         ._chef_content{
             order:1;
             display: none;
@@ -31,39 +50,100 @@
             ._chef_line{
                 width: 1125px;
                 height: 1px;
-                background-color: #8E8E8E;
-                margin-bottom: 20px;
+                background-color: $green1;
+                margin-bottom: 50px;
             }
             ._chef_top{
                 display: flex;
+
                 img{
                     width: 60%;
                 }
-                ._chef_infor{
+                ._chef_infor, ._chef_infor2, ._chef_infor3{
+                    min-width: 1125px;
                     display: flex;
                     flex-direction: column;
                     z-index: 1;
                     flex-wrap: wrap-reverse;
                     text-align: right;
-                    ._chef_infor_line{
-                        // float: right;
-                        width: 300px;
-                        height: 1px;
-                        background-color: #0F3D3E;
+                    background-image: url(../../img/chefteam_img/chef.png);
+                    background-position: left;
+                    background-repeat: no-repeat;
+                    ._chef_infor h2, ._chef_infor2 h2, ._chef_infor3 h2{
+                        color: $green1;
                     }
+
+                   
+                    ._chef_infor_line{
+                        width: 340px;
+                        height: 2px;
+                        background-color: $green1;
+                    }
+                    .word_box {
+                        line-height: 2;
+                        margin: 20px 0 100px 660px ;
+                        position: relative;
+                        text-align: right;
+                        letter-spacing: 1px;
+                        
+                       
+                    }
+                    .word_box > div:nth-of-type(1) {
+                        width: 445px;
+                       
+                    }
+            
+                    .words_box > div {
+                        overflow: hidden;
+                    }
+            
+                    .word_box > div p {
+                        font-size: 20px;
+                        width: 445px;
+                    }
+            
+            
+                    /* ---------------- 左邊文字 ---------------- */
+            
+                    .word_box > div:nth-of-type(2) {
+                        color: rgb(255, 255, 255);
+                        position: absolute;
+                        left:0px;
+                        top: 0;
+                        width: 110px;
+                    }
+            
+                    .word_box > div {
+                        overflow: hidden;
+                    }
+            
+                    .words_box > div:nth-of-type(2) p {
+                        left: 0px;
+                        position: relative;
+                    }
+            
+                    .word_box > div p {
+                        width: 445px;
+                    }                        
+                }
+                ._chef_infor2{
+                    background-image: url(../../img/chefteam_img/chef2.png);
+                   
+                }
+                ._chef_infor3{
+                    background-image: url(../../img/chefteam_img/chef3.png);               
                 }
             }
         }
     }
+}
+   
+
+        
 
    
-        .input:checked + label, label:hover{
-            opacity: 1; 
-            font-weight:bold;
-        }
-        input:checked + label + ._chef_content{
-            display: initial;
-        }
+        
+        
 
 
     
@@ -71,7 +151,3 @@
     
 
     
-
-    
-
-}
