@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @@include('layout/meta.html', {
+        "title":"會員中心"
+    })
     <link rel="stylesheet" href="css/style.css">
+    <!-- fontawesome cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <title>會員中心</title>
+    
 </head>
 <body>
+    <!-- @@include('layout/header_01.html') -->
     <div class="fulid_wrapper member">
-        <header></header>
+        
         <main>
+            <!-- MEMBER標題 -->
             <h1 class="green-1 font_family_eng">MEMBER</h1>
-            <div class="title">
+            <!-- 會員中心標題 -->
+            <div class="member_title">
                 <h2 class="green-1 font_bold font_family_tc">會員中心</h2>
             </div>
+            <!-- tabbbbbbbbbb -->
             <nav class="member_tab">
                 <ul class="font16 Camel-1">
-                    <li class="member_tab_1"><a  href="">會員中心</a></li>
+                    <li class="member_tab_1"><a  class="now" href="">會員中心</a></li>
                     <li class="member_tab_2"><a  href="">訂單查詢</a></li>
                     <li class="member_tab_3"><a  href="">收藏菜品</a></li>
-                    <li class="member_tab_4"><a href="">訊息中心<span id="member_msg">3</span></a></li>
-                    <li class="member_tab_5"><a href="">常見問題</a></li>
+                    <li class="member_tab_4"><a  href="">訊息中心<span id="member_msg">3</span></a></li>
+                    <li class="member_tab_5"><a  href="">常見問題</a></li>
                 </ul>
             </nav>
-            <section>
+            <!-- ======會員中心內容===== -->
+            <section class="member_section ">
                 <div class="member_info">
-                    <h6 class="member_title">個人資訊</h6>
+                    <h6 class="member_section_title">個人資訊</h6>
                     <form id="info" action="">
                         <input type="text" id="member_name" placeholder="請輸入姓名">
                         <div class="date_sex">
@@ -62,7 +68,7 @@
                     </form>
                 </div>
                 <div class="member_pwd">
-                    <h6 class="member_title">修改密碼</h6>
+                    <h6 class="member_section_title">修改密碼</h6>
                     <form id="pwd" action="">
                         <div class="content">
                             <label for="member_account">帳號</label>
@@ -88,8 +94,172 @@
                     </form>
                 </div>
             </section>
+            <!-- ======會員中心內容END===== -->
+            <!-- ======訂單查詢===== -->
+            <section class="order_list_section member_product_section none">
+                <div class="order_list_title font14 gray">
+                    <p class="list1">類別</p>
+                    <p class="list2">訂單日期</p>
+                    <p class="list3">訂單編號</p>
+                    <p class="list4">訂單金額</p>
+                    <p class="list5">訂單狀態</p>
+                    <div class="list6"></div>
+                </div>
+                <div class="order_list_content font16 ">
+                    <p class="list1">商城</p>
+                    <p class="list2">2022/08/31</p>
+                    <p class="list3">2022123456789</p>
+                    <p class="list4">NT$<span class="list4_money">5,000</span></p>
+                    <p class="list5">訂單成立已付款</p>
+                    <div class="list6">
+                        <button class="inCart_btn1">查看詳情</button>
+                    </div>
+                </div>
+                <div class="order_list_content font16">
+                    <p class="list1">商城</p>
+                    <p class="list2">2022/08/31</p>
+                    <p class="list3">2022123456789</p>
+                    <p class="list4">NT$<span class="list4_money">5,000</span></p>
+                    <p class="list5">訂單成立已付款</p>
+                    <div class="list6">
+                        <button class="inCart_btn1">查看詳情</button>
+                    </div>
+                </div>
+                <div class="order_list_content font16">
+                    <p class="list1">商城</p>
+                    <p class="list2">2022/08/31</p>
+                    <p class="list3">2022123456789</p>
+                    <p class="list4">NT$<span class="list4_money">5,000</span></p>
+                    <p class="list5">訂單成立已付款</p>
+                    <div class="list6">
+                        <button class="inCart_btn1">查看詳情</button>
+                    </div>
+                </div>
+            </section>
+            <!-- ======訂單查詢結束===== -->
+            <!-- ======收藏菜品====== -->
+            <section class="collect_section member_product_section ">
+                <ul>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- ======收藏菜品結束====== -->
+            <!-- ======訊息中心====== -->
+            <section class="message_section member_product_section none">
+                <ul>
+                    <li class="message_content">
+
+                    </li>
+                </ul>
+                <div class="message_import">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <div class="upload">
+                        <i class="fa-regular fa-plus"></i>
+                        <p>加入圖片</p>
+                    </div>
+                    <button class="inCart_btn1">傳送</button>
+
+                </div>
+            </section>
+            <!-- ======訊息中心結束====== -->
+            <!-- ======常見問題====== -->
+            <section class="question_section member_product_section none">
+
+            </section>
+            <!-- ======常見問題結束====== -->
         </main>
-        <footer></footer>
+        <!-- @@include('layout/footer.html') -->
+
     </div>
+
 </body>
 </html>

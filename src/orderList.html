@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('layout/meta.html', {
+        "title":"訂單查詢"
+    })
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+</head>
+<body>
+    <!-- @@include('layout/header_01.html') -->
+    <div class="fulid_wrapper order_list">
+        <main>
+            <!-- MEMBER標題 -->
+            <h1 class="green-1 font_family_eng">MEMBER</h1>
+            <!-- 會員中心標題 -->
+            <div class="member_title">
+                <h2 class="green-1 font_bold font_family_tc">訂單查詢</h2>
+            </div>
+            <!-- 回到列表 -->
+            <a class="back font16 gray">
+                <i class="fa-solid fa-chevron-left"></i>
+                <span >回到列表</span>
+            </a>
+            <!-- 訂單編號 -->
+            <div class="list_number">
+                <div class="list_title">
+                    <h6 class="green-1">訂單編號</h6>
+                    <h6 id="order_ID">2022123456789</h6>
+                </div>
+                <button class="inCart_btn1">再次購買</button>
+            </div>
+            <!-- 上方訂單日期金額進度 -->
+            <div class="list_top">
+                <div class="top_content gray">
+                    <div class="item">訂購日期</div>
+                    <div class="item">訂單金額</div>
+                    <div class="item">支付方式</div>
+                    <div class="item">處理進度</div>
+                </div>
+                <div class="top_content">
+                    <div class="item">2022-12-24</div>
+                    <div class="item">NT$<span class="money">24,000</span></div>
+                    <div class="item">信用卡</div>
+                    <div class="item">訂單成立已付款</div>
+                </div>
+            </div>
+            <!-- 訂單內容明細 -->
+            <!-- 私廚套餐 -->
+            <div class="list_r">
+                <h4 class="detail_title green-1">私廚預約</h4>
+                <div class="meal_container">
+                    <h6 class="meal_title">名物 私套餐</h6>
+                    <div class="meal_cate font16 gray">
+                        <p class="item">湯物</p>
+                        <p class="item">前菜</p>
+                        <p class="item">刺身</p>
+                        <p class="item">主食</p>
+                        <p class="item">甜點</p>
+                        <p class="item">飲品</p>
+                    </div>
+                    <div class="meal_content font16">
+                        <!-- 湯物 -->
+                        <p class="item">奶香牛肝菌野菇濃湯</p>
+                        <p class="item">石斑海鮮清湯</p>
+                        <!-- 前菜 -->
+                        <p class="item">燻鮭魚番茄佐優格醬</p>
+                        <p class="item">深海魚皮野蔬沙拉佐醋醬</p>
+                        <!-- 刺身 -->
+                        <p class="item">大間本鮪中腹、秋鮭、貝類、牡丹蝦</p>
+                        <!-- 主食 -->
+                        <p class="item">嫩煎干貝佐松露菲力</p>
+                        <p class="item">日本小田和牛壽喜燒</p>
+                        <p class="item">龍蝦佐鮑魚海鮮拼盤</p>
+                        <!-- 甜點 -->
+                        <p class="item">抹茶布丁搭配綿密金時紅豆</p>
+                        <p class="item">栗子羊羹</p>
+                        <p class="item">春手毬和菓子</p>
+                        <!-- 飲品 -->
+                        <p class="item">抹茶海鹽奶蓋</p>
+                        <p class="item">烘焙曼巴咖啡</p>
+                        <p class="item">高山金萱茶</p>
+                        <p class="item">檸檬海鹽氣泡飲</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 單點加購 -->
+            <div class="list_one">
+                <h4 class="detail_title green-1">單點加購</h4>
+                <div class="meal_container font16">
+                    <ul class="one_container">
+                        <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div></li>
+                        <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 商城訂購 -->
+            <div class="shop_list">
+                <h4 class="detail_title green-1">商城訂購</h4>
+                <div class="meal_container font16">
+                    <div class="item">主食</div>
+                    <ul class="one_container">
+                        <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div></li>
+                        <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li>
+                    </ul>
+                </div>
+                <div class="meal_container font16">
+                    <div class="item">主食</div>
+                    <ul class="one_container">
+                        <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div></li>
+                        <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 訂單資料 -->
+            <div class="list_info">
+                <h4 class="detail_title green-1">訂單資料</h4>
+                
+                    <ul class="detail_info">
+                        
+                        <li class="item">訂購人</li>
+                        <li class="item" >
+                            <div class="detail_list_name" id="detail_name">楊一一 </div>
+                            <div class="detail_list_name" id="detail_phone">0912-345-678</div>
+                            <div class="detail_list_name" id="detail_phone">d4070707@gmail.com</div>
+                        </li>
+                        <li class="item">地址</li>
+                        <li class="item" id="detail_addr">台北市中山區南京東路三段219號4樓</li>
+                        <li class="item">餐點明細</li>
+                        <li class="item gray">
+                            <div class="cate">餐別<span id="detail_cate">晚餐</span></div>
+                            <div class="people">人數<span id="detail_people">12人</span></div>
+                        </li>
+                    </ul>
+            </div>
+             
+            <!-- 總計 -->
+            <div class="total_container font16">
+                <div class="item">小計</div>
+                <div class="item">NT$<span id="detail_total">25,000</span></div>
+                <div class="item">加購價</div>
+                <div class="item">NT$<span id="detail_total">25,000</span></div>
+                <div class="item">紅利點數</div>
+                <div class="item">NT$<span id="detail_total">25,000</span></div>
+                <div class="item">總金額 </div>
+                <div class="item">NT$<span id="detail_total">25,000</span></div>
+            </div>
+        </main>
+    </div>
+    <!-- @@include('layout/footer.html') -->
+
+</body>
+</html>
