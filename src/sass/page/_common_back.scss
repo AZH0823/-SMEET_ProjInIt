@@ -1,3 +1,85 @@
-.common_back{
-    
+div.common_back {
+    div.wrapper {
+        display: flex;
+        position: relative;
+        gap: 7%;
+
+        header {
+            display: flex;
+        }
+
+        div.container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            main.right_content {
+                margin-bottom: 50px;
+                width: 100%;
+
+                section.section1 {
+                    margin-top: 100px;
+
+                    div.back_from {
+                        width: 100%;
+
+                        h4 {
+                            margin-bottom: 30px;
+                        }
+
+                        div.back_from_wrapper {
+                            div.grid_container {
+                                margin: 0 auto;
+                                border: 1px solid #ccc;
+                                display: grid;
+                                width: 100%;
+                                text-align: center;
+                                align-items: center;
+                                grid-template: repeat(1, 1fr) / repeat(5, 1fr) 155.5px;
+
+                                &:first-child {
+                                    background-color: #ccc;
+                                }
+                                // ======================== 以上為導覽列 + 表格點的版型 ======================== //
+
+                                div.grid_item {
+                                    padding: 20px;
+                                }
+                            }
+                        }
+
+                    }
+                
+
+                    // 頁簽
+                    .page {
+                        .page_ul {
+                            position: unset; // 取消原本的属性
+                            display: flex;
+                            justify-content: center;
+
+                            li {
+                                line-height: 30.5px;
+                                margin-left: 12px;
+                                width: 33px;
+                                height: 33px;
+                                border-radius: 50%;
+                                background-color: #F9F4EC;
+                                margin: 39px 0 25px 21px;
+                                border: 1px solid #000;
+
+                                a {
+                                    display: block;
+                                    text-decoration: none;
+                                    text-align: center;
+                                    color: #000;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
