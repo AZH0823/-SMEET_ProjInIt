@@ -1,59 +1,583 @@
-.reseve.fulid_wrapper{
-    .wrapper{
-       outline: 2px solid red;
-   }
-   .reseve_list{
-       border: 2px solid yellow;
-       margin: 0px 8.6%;
-       .reseve_title{
-          margin-left: -10px;
-          margin-bottom: 65px;
-       }
-       .reseve_notice{
-           border: 2px solid green;
-           .notice_title{
-               font-weight: 900;
-               text-align: center;
-               position: relative;
-               margin-bottom: 65px;
-               &:after{
-                   content:'';
-                   height: 2px;
-                   width: 72px;
-                   background-color: $green-1 ;
-                   
-                   border-radius: 2px;
-                   position: absolute;
-                   bottom: 0;
-                   left: 50%;
-                   transform: translateX(-50%);
-               }
-           }
-           .text-area{
-               overflow-y: auto;
-               height: 1100px;
-               margin: 0 7.5%;
-               padding: 5% 6.5%;
-               border:2px solid $Camel-2;
-               .noticeTxt,.cancelTxt{
-                   font-weight: 400;
-                   font-size: 20px;
-                   line-height: 140%;
-                   letter-spacing: 0.27em;
-                   &>*{
-                       margin-bottom: 20px;
-                   }
-                   &>li{
-                       text-justify: auto;
-                       list-style: disc;
-                   }
-               }
-           }
-           // .reseve_agree{
-           //     width: 250px;
-           //     margin: 0 auto;
-           // }
-       }
-   }
-   
+// resever page01 
+.reseve.fulid_wrapper {
+    // .wrapper {
+    //     // outline: 2px solid red;
+    // }
+
+    .reseve_list {
+        // border: 2px solid yellow;
+        margin: 0px 8.6%;
+
+        @include pad() {
+            margin: 0px 5%;
+        }
+
+        .reseve_title {
+            margin-left: -10px;
+            margin-bottom: 65px;
+
+            @include mobile() {
+                margin-left: 0;
+            }
+        }
+
+        .reseve_notice {
+            // border: 2px solid green;
+
+            .notice_title {
+                font-weight: 900;
+                text-align: center;
+                position: relative;
+                margin-bottom: 65px;
+
+                &:after {
+                    content: '';
+                    height: 2px;
+                    width: 72px;
+                    background-color: $green-1;
+
+                    border-radius: 2px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+
+            .text-area {
+                overflow-y: auto;
+                height: 1100px;
+                margin: 0 7.5%;
+                padding: 5% 6.5%;
+                border: 2px solid $Camel-2;
+
+                @include pad() {
+                    margin: 0 3.5%;
+                    height: 550px;
+                }
+
+                @include pad() {
+                    margin: 0 2%;
+                    height: 550px;
+                }
+
+                .noticeTxt,
+                .cancelTxt {
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 140%;
+                    letter-spacing: 0.27em;
+
+                    &>* {
+                        margin-bottom: 20px;
+                    }
+
+                    &>li {
+                        margin-left: 5px;
+                        list-style: disc;
+                    }
+
+                    @include mobile() {
+                        font-size: 16px;
+                    }
+
+                }
+
+                @include mobile() {
+                    margin: 0%;
+                }
+            }
+
+        }
+
+        .reseve-form {
+            // outline:2px purple solid;
+            max-width: 500px;
+            margin: 50px auto;
+
+            #agreement {
+                font-weight: 800;
+            }
+
+            .form-input {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                margin-bottom: 20px;
+
+                img {
+                    width: 35px;
+                    margin-right: 30px;
+
+                    @include mobile() {
+                        width: 30px;
+                        margin-right: 10px;
+                    }
+                }
+
+                select,
+                input[type="date"] {
+                    padding-left: 5%;
+                    color: $red;
+                    background-color: $Camel-3;
+                    flex-basis: calc(100% - 50px);
+                    height: 50px;
+                }
+            }
+
+            .next_btn {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+
+}
+
+// resever page02
+
+.reseve_flow.fulid_wrapper {
+
+
+    .flow_container {
+        margin: 0 auto 70px auto;
+        padding: 0 5%;
+        max-width: 930px;
+        // outline: 2px solid red;
+        display: flex;
+        gap: 25%;
+        justify-content: center;
+        height: 85px;
+
+        @include pad() {
+            gap: 15%;
+        }
+
+        @include mobile() {
+            gap: 10%;
+        }
+
+        &>li.flowList {
+
+            display: flex;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+            font-weight: 400;
+            color: white;
+            @extend .bgc_Camel-2;
+            border-radius: 50%;
+            position: relative;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        li.flowList.checked {
+            @extend .bgc_green-1;
+        }
+
+        &>li.flowList.checked::after {
+            @extend .green-1;
+        }
+
+        &>li.flowList::after {
+            position: absolute;
+            overflow: hidden;
+            font-size: 20px;
+            width: 100px;
+            bottom: -100%;
+            content: attr(flowName);
+            @extend .Camel-1;
+
+            @include mobile() {
+                font-size: 14px;
+            }
+        }
+
+        &>li+li::before {
+    
+            position: absolute;
+            content: '';
+            z-index: -3;
+            left: -550%;
+            top: 50%;
+            width: 500%;
+            // min-width: 125px;
+            max-width: 250px;
+            height: 2px;
+            @extend .bgc_Camel-2;
+
+            @include pad() {
+                min-width: 50px;
+                width: 300%;
+                left: -300%;
+            }
+
+            @include mobile {
+                width: 100%;
+                min-width: 25px;
+                left: -100%;
+            }
+        }
+
+        &>li+li.checked::before {
+
+            @extend .bgc_green-1;
+        }
+    }
+
+    .blockTitle {
+        @extend .green-1;
+        border-bottom: 1px solid black;
+        padding: 15px;
+        padding-left: 0;
+
+    }
+
+    .form_workFlow_contanier {
+        // outline: 2px solid yellowgreen;
+        margin: 0px 6.25% 100px 6.25%;
+
+        justify-content: center;
+        display: grid;
+        gap: 1% 1.5%;
+        grid-template-columns: 1fr 30%;
+        .step_flow{
+            display: none;
+        }
+        .step_flow.now{
+            display: block;
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+        @include pad {
+            grid-template-columns: 1fr 0%;
+            margin: 0px 5% 100px 5%;
+            .step_flow.now{
+                display: block;
+                // grid-column: 1;
+                // grid-row: 1;
+            }
+            
+        }
+
+        // 標題公用
+        .blockTitle {
+            border-bottom: 1px solid black;
+        }
+
+        // 右邊結算畫面
+        .oder_view {
+            grid-column: 2 / 3;
+            padding-left: 4.25%;
+            border-left: 1px black solid;
+            font-size: 14px;
+            @extend .gray;
+
+            @include pad() {
+                border: none;
+                padding-left: 0%;
+                grid-column: 1
+            }
+
+            // 
+            .checkout_contanier {
+                // padding:0 30px;
+                margin: 0 auto;
+
+                li>div {
+                    margin-bottom: 20px;
+                }
+
+                #order_Info {
+                    .setName {
+                        margin-top: 20px;
+                        font-size: 20px;
+                        color: $green-1;
+                    }
+
+                    .setName,
+                    .datespan,
+                    .count_person,
+                    .cheifTeam {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    img {
+                        @extend .gray;
+                        margin-right: 15px;
+                        width: 20px;
+                    }
+
+
+                    & .order_set_img {
+                        display: block;
+                        width: 100%;
+                        margin: 0 auto;
+                        max-width: 305px;
+
+                        @include pad() {
+                            max-width: 800px;
+                        }
+
+                        @include mobile() {
+                            max-width: 375px;
+                        }
+                    }
+
+                }
+
+
+            }
+
+            .next_btn.btn,
+            .prev_btn.btn {
+                display: block;
+                width: 100%;
+                font-size: 16px;
+                max-width: 305px;
+                margin: 0 auto;
+                margin-bottom: 12px;
+
+                @include pad() {
+                    max-width: 500px;
+                }
+
+            }
+        }
+
+        // 選擇套餐
+        .sets {
+            display: flex;
+            gap: 25px;
+            padding: 35px 0px 0px 0px;
+            justify-content: center;
+
+            @include mobile() {
+                gap: 10px;
+            }
+
+            .setCard {
+                flex-basis: 33.3%;
+                border: 1px solid #C7C7C7;
+                text-align: center;
+                transition: all .35s ease-in;
+                filter: grayscale(100%);
+
+                @include mobile() {
+                    .setName {
+                        font-size: 14px;
+                    }
+                }
+
+                &.checked {
+                    transform: scale(1.05);
+                    filter: grayscale(0%);
+
+                    .setName {
+                        color: $green-1;
+                    }
+                }
+
+                img {
+                    display: block;
+                    width: 100%;
+                    // max-width: 230px;
+                    object-fit: cover
+                }
+
+                &>div {
+                    @extend .Camel-2;
+                    @extend .font16;
+                    padding: 15px 0;
+                }
+
+                &:hover {
+                    border: 1px solid black;
+                }
+            }
+        }
+
+        
+        // 選擇套餐內容
+        .setdetail{
+            
+            p.setkind {
+                color: black;
+                text-align: center;
+                padding: 5px 0;
+                line-height: 20px;
+                letter-spacing: 0.615em;
+                @extend .bgc_Camel-3;
+            }
+
+            .stepper_input {
+                margin-bottom: 20px;
+                border-bottom: 1px solid #c8c8c8;
+                display: flex;
+                align-items: center;
+                color: #454343;
+                .dish-title {
+                    margin-right: auto;
+                    @include mobile(){
+                        font-size: 14px;
+                    }
+                }
+
+                .stepper_valueInput {
+                    text-align: center;
+                    width: 85px;
+                    height: 35px;
+                    border: 0px;
+
+                    padding: 0 10px;
+                    border-radius: 0;
+                    box-shadow: none;
+
+                    @include pad() {
+                        width: 60px;
+                    }
+
+                    @include mobile() {
+
+                        width: 40px;
+
+                    }
+                }
+
+                .button {
+                    cursor: pointer;
+                    font-size: 18px;
+                    font-weight: 800;
+                    width: 40px;
+                    padding: 5px 15px;
+                    border: 0px;
+                    border-radius: 4px;
+                    color: black;
+                    background-color: transparent;
+
+                    &:hover {
+                        background-color: $Camel-1;
+                        color: white;
+                    }
+
+                    &:active {
+                        background-color: $red;
+                        color: white;
+                    }
+
+                    &:focus {
+                        border: 0px;
+                        outline: 0px;
+                    }
+                }
+            }
+        }
+        // 單點加購
+        .addOther_detail{
+            @extend .setdetail;
+            .price{
+                margin-left: 15px;
+            }
+
+
+        }
+
+
+        // 租借服務
+        .addOther_rent{
+            
+            // 打勾選單
+            .rent_service{
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid #c8c8c8;
+                height: 80px;
+                .serive-title{
+                    
+                }
+                .aux-title{
+                    @extend .font14;
+                    // color: #9F9F9F;
+                    @extend .gray
+                }
+            }
+            // .rent_service,.utensils
+            .checkboxInner {
+                font-size: 14px;
+                padding: 0.5em;
+                border-radius: 0.3em;
+                width: 100px;
+                margin-left: auto;
+                input[type="checkbox"] {
+                  display: none;
+                  pointer-events: none;
+                  & + label:hover > * {
+                    color: black;
+                  }
+                  & + label:hover {
+                    svg {
+                      border: 2px solid black;
+                    }
+                  }
+                  & + label {
+                    cursor: pointer;
+                    font-size: 0.8em;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 3px;
+              
+                    svg {
+                      width: 35px;
+                      stroke: green;
+                      stroke-width: 18;
+                      fill: black;
+                      border: 2px solid #ccc;
+                      border-radius: 50%;
+                      .check {
+                        stroke-dasharray: 70;
+                        stroke-dashoffset: 70;
+                        fill: none;
+                      }
+                      
+                    }
+              
+                    span {
+                      padding-top: 0.5em;
+                      color: #ccc;
+                    }
+                  }
+                  & + label {
+                    .checked {
+                      transition: stroke-dashoffset 0.1s linear;
+                      
+                    }
+                  }
+              
+                  &:checked + label {
+                    svg {
+                      border: 0px;
+                      &:hover{
+                        width: 50px;
+                        height: 50px;
+                        transition: .35s ease-out ;
+                      }
+                    }
+                    .check {
+                      stroke-dashoffset: 0;
+                      transition: stroke-dashoffset 0.3s linear;
+                    }
+                    .info {
+                      display: none;
+                    }
+                  }
+                }
+              }
+        }
+        
+    }
 }

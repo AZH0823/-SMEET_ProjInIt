@@ -6,3 +6,9 @@
     }
   }
   
+//==========================背景顏色
+@each $k, $v in $bgc{
+  .bgc_#{$k}{
+      background-color: $v;
+  }
+}
