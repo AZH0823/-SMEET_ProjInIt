@@ -45,7 +45,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 30px 40px;
-    margin: 51px 83px 71px 83px;
+    margin: 51px 105px 71px 105px;
     
     @include pad() {
       grid-template-columns: 1fr;
