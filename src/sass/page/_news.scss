@@ -63,7 +63,7 @@
         cursor: pointer;
       }
       .content_hidden {
-        height: 267px;
+        height: 53%;
         overflow: hidden;
 
         .item_mark {
@@ -84,9 +84,10 @@
         }
       }
       & img {
-        height: 267px;
+        display: block;
+        height: 100%;
         object-fit: cover;
-        max-width: 100%;
+        width: 100%;
 
         @include mobile {
           height: 290px;
@@ -101,15 +102,17 @@
         transform: scale(1.1);
         transition: 0.8s;
       }
-
+      .text{
+        height: 47%;
+      }
       p,
       h6 {
-        padding-top: 23px;
-        padding-left: 35px;
+        padding-top: 5%;
+        padding-left: 5%;
       }
 
       .news_item {
-        padding: 18px 36px 83px 35px;
+        padding: 5% 5% 5% 5%;
       }
     }
 
