@@ -1,7 +1,7 @@
 .chef{
+
     .wrapper h1{
         margin-left: 70px;
-        color: $green1;
     }
 
     ._banner img{
@@ -50,7 +50,7 @@
             ._chef_line{
                 width: 1125px;
                 height: 1px;
-                background-color: $green1;
+                background-color: $green-1;
                 margin-bottom: 50px;
             }
             ._chef_top{
@@ -70,14 +70,14 @@
                     background-position: left;
                     background-repeat: no-repeat;
                     ._chef_infor h2, ._chef_infor2 h2, ._chef_infor3 h2{
-                        color: $green1;
+                        color: $green-1;
                     }
 
                    
                     ._chef_infor_line{
                         width: 340px;
                         height: 2px;
-                        background-color: $green1;
+                        background-color: $green-1;
                     }
                     .word_box {
                         line-height: 2;
