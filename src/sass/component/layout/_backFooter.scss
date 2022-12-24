@@ -1,0 +1,10 @@
+footer.back_footer {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    text-align: center;
+
+    & p:last-child {
+        padding-bottom: 20px;
+    }
+}
