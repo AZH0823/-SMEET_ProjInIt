@@ -1,260 +1,256 @@
-*{
-    box-sizing: border-box;
-}
+.index{
 
 
-//-----------------------------------------預約流程-----------------------------------------//
 
-        ._index_reserve{
-            background-image: url(../../img/index_img/index_reserve.png);
-            background-size: cover;
-            height: 600px;
-            h2{
-                text-align: center;
-                padding-top: 45px;
-                margin-bottom: 10px;
+    //-----------------------------------------預約流程-----------------------------------------//
+
+            ._index_reserve{
+                background-image: url(../../img/index_img/index_reserve.png);
+                background-position: bottom;
+                background-size: cover;
+                padding-bottom: 600px;
+                h2{
+                    text-align: center;
+                    padding-top: 45px;
+                    margin-bottom: 10px;
+                }
+                ._index_line{
+                    margin: 0 400px;
+                    background-color: $green-1;
+                    padding: 1px;
+                }
             }
-            ._index_line{
+            //-----------------------------------------招牌菜單-----------------------------------------//
+
+
+            ._index_menu{
                 margin: 0 auto;
-                background-color: $green-1;
-                width: 414px;
-                height: 2px;
+                background-image: url(../../img/index_img/index_hotmenu_bg.jpg);
+                display: flex;
+                background-position: center;
+                .index_menu_left{
+                    width: 45%;
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 100px;
+                    padding-top: 100px;
+                    }
+                    ._index_line{
+                        margin: 0;
+                        padding: 1px;
+                        margin-right: 80px;
+                        margin-bottom: 30px;
+                        background-color: $green-1;
+                        
+                    }
+                    h3{
+                        margin-bottom: 30px;
+                    }
+                    p{
+                        margin-bottom: 40px;
+                        line-height: 2;
+                    }
+                .index_menu_right{
+                    width: 55%;
+                    padding-top: 135px;
+                    padding-bottom: 110px;
+                    img{
+                        width: 79%;
+                        box-shadow: 16px -16px $green-1;
+                    }
+                }
+        
             }
-        }
-        //-----------------------------------------招牌菜單-----------------------------------------//
 
+            //-----------------------------------------預約日程-----------------------------------------//
 
-        ._index_menu{
-            background-image: url(../../img/index_img/index_hotmenu_bg.jpg);
-            display: flex;
-            background-position: center;
-            .index_menu_left{
-                width: 45%;
+            ._reserve_date{
+                margin-top: 75px;
+                padding: 0 110px;
                 display: flex;
                 flex-direction: column;
-                padding-left: 100px;
-                padding-top: 100px;
+                h2{
+                    text-align: right;
                 }
-                ._index_line{
-                    margin: 0;
+                ._line_box  {
+                    display: flex;
+                    flex-direction: row-reverse;
                     margin-bottom: 30px;
-                    background-color: $green-1;
-                    width: 414px;
-                    height: 2px;
+                    ._index_line{
+                        margin: 0;
+                        background-color: $green-1;
+                        padding: 1px 225px;
+                    }
                 }
-                h3{
-                    margin-bottom: 30px;
-                }
-                p{
-                    margin-bottom: 40px;
-                    line-height: 2;
-                }
-            .index_menu_right{
-                width: 55%;
-                padding-top: 135px;
-                padding-bottom: 110px;
-                img{
-                    width: 79%;
-                    box-shadow: 16px -16px $green-1;
+                #calendar {
+                    margin: 0 auto;
+                    width: 100%;
+                    height: 500px
                 }
             }
-      
-        }
+            //-----------------------------------------最新動態-----------------------------------------//
 
-        //-----------------------------------------預約日程-----------------------------------------//
-
-        ._reserve_date{
-            margin-top: 75px;
-            padding: 0 110px;
-            display: flex;
-            flex-direction: column;
-            h2{
-                text-align: right;
-            }
-            ._line_box  {
+            ._index_news{
+                background-image: url(../../img/index_img/index_news_bg.png);
+                background-position: center;
                 display: flex;
-                flex-direction: row-reverse;
-                margin-bottom: 30px;
+                flex-direction: column;
+                padding-top: 100px;
+                padding-right: 50px;
+                padding-bottom: 50px;
+                align-content: center;
+                h2 {
+                    margin-left: 110px;
+                }
                 ._index_line{
-                    margin: 0;
+                    margin: 0 auto;
+                    margin-left: 110px;
+                    margin-bottom: 40px;
                     background-color: $green-1;
-                    width: 414px;
-                    height: 2px;
+                    padding: 1px 225px;
                 }
             }
-            #calendar {
-                margin: 0 auto;
-                width: 900px;
-                height: 500px;
-            }
-        }
-        //-----------------------------------------最新動態-----------------------------------------//
-
-        ._index_news{
-            height: 742px;
-            background-image: url(../../img/index_img/index_news_bg.png);
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            padding-top: 100px;
-            h2 {
-                margin-left: 110px;
-            }
-            ._index_line{
-                margin: 0;
-                margin-left: 110px;
-                margin-bottom: 40px;
-                background-color: -1;
-                width: 414px;
-                height: 2px;
-            }
-
-
-
-        }
-        
-        
-        .div_index_newsbox{
-            display: flex;
-            ._index_news_left {
-                order: 2;
-                width: 25%;
-                img{
-                    width: 90%;
+            
+            .div_index_newsbox{
+                display: flex;
+                ._index_news_left {
+                    order: 2;
+                    width: 25%;
+                    img{
+                        width: 90%;
+                    }
                 }
-            }
-            ._index_news_right{
-                order:1;
-                width: 75%;
-                padding-left: 90px;
-                margin-top: 30px;
-                li{
-                    border-top: 1px #1d0101;
-                    ._news_table{
-                        width: 100%;
-                        display: flex;
-                        text-decoration: none;
-                        color: #1d0101;
-                        h7 {
-                            margin-left: 30px;
-                            margin-right: 60px;
-                            font-size: 18px;
-                            line-height: 3;
+                ._index_news_right{
+                    order:1;
+                    width: 75%;
+                    padding-left: 90px;
+                    margin-top: 30px;
+                    li{
+                        border-top: 1px #1d0101;
+                        ._news_table{
+                            width: 100%;
+                            display: flex;
+                            text-decoration: none;
+                            color: #1d0101;
+                            h7 {
+                                margin-left: 30px;
+                                margin-right: 60px;
+                                font-size: 18px;
+                                line-height: 3;
+                            }
                         }
                     }
-
-                }
-                ._news_line{
-                    width: 750px;
-                    height: 0.5px;
-                    background-color: #1d0101;
-                }
-                li:hover{
-                    width: 755px;
-                    background-color: #f2f1ecae;
+                    ._news_line{
+                        width: 85%;
+                        padding: 0.3px 0;
+                        background-color: #1d0101;
+                    }
+                    li:hover{
+                        width: 85%;
+                        background-color: #f2f1ecae;
+                    }
                 }
             }
-        }
 
-//-----------------------------------------顧客評價-----------------------------------------//
-._index_evaluation{
-    display: flex;
-    flex-direction: column;
-}
+    //-----------------------------------------顧客評價-----------------------------------------//
+    ._index_evaluation{
+        display: flex;
+        flex-direction: column;
+    }
 
-._index_evaluation h2{
-    text-align: right;
-    margin-top: 80px;
-    margin-right: 100px;
-}
+    ._index_evaluation h2{
+        text-align: right;
+        margin-top: 80px;
+        margin-right: 100px;
+    }
 
-._index_evaluation ._line_box  {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-bottom: 30px;
-}
+    ._index_evaluation ._line_box  {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-bottom: 30px;
+    }
 
-._index_evaluation ._line_box ._index_line{
-    margin: 0;     
-    margin-right: 100px;
-}
+    ._index_evaluation ._line_box ._index_line{
+        margin: 0;     
+        margin-right: 100px;
+    }
 
-._index_feeback{
-    display: flex;
-    justify-content:space-between;
-    margin: 50px 0;
-}
+    ._index_feeback{
+        display: flex;
+        justify-content:space-between;
+        margin: 50px 0;
+    }
 
-._if1, ._if2, ._if3{
-    width: 256px;
-    height: 327px;
-    background-image: url(../../img/index_img/index_evaluation.png);
-    background-size: cover;
-}
+    ._if1, ._if2, ._if3{
+        width: 256px;
+        height: 327px;
+        background-image: url(../../img/index_img/index_evaluation.png);
+        background-size: cover;
+    }
 
-._if1 img, ._if2 img, ._if3 img{
-    width: 231px;
-}
-._if_body{
+    ._if1 img, ._if2 img, ._if3 img{
+        width: 231px;
+    }
+    ._if_body{
 
-    padding-left: 20px;
-    padding-right: 20px;
-}
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
-._p16{
-    font-size: 16px;
-}
-._p14{
-    margin-top: 5px;
-    font-size: 14px;
-}
+    ._p16{
+        font-size: 16px;
+    }
+    ._p14{
+        margin-top: 5px;
+        font-size: 14px;
+    }
 
-._p12{
-    font-size: 12px;
-}
+    ._p12{
+        font-size: 12px;
+    }
 
-._star{
-    display: flex;
-}
-._star_line{
-    width:15px;
-    height: 1px;
-    background-color: #E2DCC8;
-    margin: auto 0;
-    margin-left: 50px;
-    margin-right: 5px; 
-}
-._star_line + ._p12{
-    color: #E2DCC8;
-}
+    ._star{
+        display: flex;
+    }
+    ._star_line{
+        width:15px;
+        height: 1px;
+        background-color: #E2DCC8;
+        margin: auto 0;
+        margin-left: 50px;
+        margin-right: 5px; 
+    }
+    ._star_line + ._p12{
+        color: #E2DCC8;
+    }
 
-._if_bottom{
-    margin-top: 5px;
-}
+    ._if_bottom{
+        margin-top: 5px;
+    }
 
-._ratings {
-    position: relative;
-    vertical-align: middle;
-    display: inline-block;
-    color: #ddd; 
-    overflow: hidden;
-    font-size: 15px;
-}
+    ._ratings {
+        position: relative;
+        vertical-align: middle;
+        display: inline-block;
+        color: #ddd; 
+        overflow: hidden;
+        font-size: 15px;
+    }
 
-._full_star, ._full_star2 {
-    width: 90%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    color: #F5CB35;
-}
- 
-._full_star2{
-    width: 100%;
-}
-
+    ._full_star, ._full_star2 {
+        width: 90%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #F5CB35;
+    }
+    
+    ._full_star2{
+        width: 100%;
+    }
 
 
+}
 
