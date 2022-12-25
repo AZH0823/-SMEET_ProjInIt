@@ -1,6 +1,6 @@
 .chef{
 
-    .wrapper h1{
+    h1{
         margin-left: 70px;
         color: $green-1;
         margin-right: 15px;
@@ -62,7 +62,7 @@
             padding: 15px;
 
             ._chef_line{
-                width: 1125px;
+                width: 99%;
                 height: 1px;
                 background-color: $green-1;
                 margin-bottom: 50px;
@@ -70,12 +70,13 @@
 
             ._chef_top{
                 display: flex;
+                justify-content: center;
 
                 img{
                     width: 60%;
                 }
                 ._chef_infor, ._chef_infor2, ._chef_infor3{
-                    min-width: 1125px;
+                    // min-width: 1125px;
                     display: flex;
                     flex-direction: column;
                     z-index: 1;
@@ -87,7 +88,8 @@
                     background-repeat: no-repeat;
                                       
                     ._chef_infor_line{
-                        width: 300px;
+                        margin-left: 800px;
+                        padding: 0 20px;
                         height: 2px;
                         background-color: $green-1;
                         margin-right: 20px;
@@ -120,7 +122,7 @@
                     .word_box > div:nth-of-type(2) {
                         color: rgb(255, 255, 255);
                         position: absolute;
-                        left:0px;
+                        left:0;
                         top: 0;
                         width: 110px;
                     }
@@ -130,8 +132,7 @@
                     }
             
                     .words_box > div:nth-of-type(2) p {
-                        left: 0px;
-                        position: relative;
+                        left: 0;
                     }
             
                     .word_box > div p {
@@ -153,16 +154,24 @@
                 ._chef_grid{
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
+                    grid-template-rows: auto;
                     gap: 50px 50px;
                     margin: 70px auto;
                     margin-left: 5px;
-                    ._chef_grid_1{
+                    ._chef_grid_1, ._chef_grid_2,._chef_grid_3,._chef_grid_4,
+                    ._chef_grid_5,._chef_grid_6,._chef_grid_7,._chef_grid_8{
+                        width: 100%;
                         overflow: hidden;
                         position: relative;
                         border: 1px solid #787878;
-                        &:hover {
+                        img{
+                            width: 100%;
+                        }
+                        img:hover {
+                            width: 100%;
                             transform: scale(1.1);
                             transition: 0.8s;
+                           
                         }
                         p{
                             padding: 20px 20px 20px 20px;
