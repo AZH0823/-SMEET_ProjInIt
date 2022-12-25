@@ -1,10 +1,14 @@
 .fuild_wrapper {
     .news_detail {
       h1 {
-        margin: 158px 0 134px 80px;
+        margin: 15% 0 6% 7%;
+
+        @include pad{
+          margin:15% 0 6% 4%;
+        }
   
         @include mobile {
-          margin: 80px 0px 29px 11px;
+          margin: 8% 0px 5% 8%;
         }
       }
     }
@@ -13,9 +17,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 0px 0 40px 150px;
+      margin: 0px 0 6% 10%;
       width: 80%;
       position: relative;
+
+      @include pad {
+        margin: 0px 0 10% 10%;
+      }
   
       @include mobile {
         flex-direction: column;
@@ -30,7 +38,12 @@
         width: 1104px;
         height: 1px;
         top: 90px;
-        right: -22px;
+        right: -46px;
+
+        @include pad{
+          width: 666px;
+          right: -45px;
+        }
   
         @include mobile {
           background-color: #bababa;
@@ -39,19 +52,26 @@
         }
   
         @media screen and (max-width:375px) {
-           width: 315px;  
+          width: 331px; 
+          right: 23px;
         }
       }
     }
     .news_detail_tiem {
       text-align: center;
+      height: 331px;
+      @include pad{
+        height: 200px;
+      }
+      @include mobile{
+        height: 110px;
+      }
+      
+
       img {
-        height: 331px;
-        margin-top: 43px;
-        margin-bottom: 58px;
+        height: 100%;
   
         @include mobile {
-          height: 110px;
           margin: 50px 0 20px 0;
         }
   
@@ -66,16 +86,23 @@
       margin: 0 auto;
   
       h4 {
-        padding: 5% 15% 10% 15%;
+        padding: 5% 15% 10% 14%;
         letter-spacing: 0.2em;
         text-indent:2em;
+
+        @include pad{
+          padding: 5% 6% 10% 6%;
+        }
         @include mobile {
-          padding: 20px 27px 8px 29px;
+          padding: 18% 8% 15% 8%;
           font-size: 16px;
         }
         &::first-letter {
           font-size: 72px;
-  
+          @include pad{
+            font-size: 64px;
+          }
+
           @include mobile {
             font-size: unset;
           }
@@ -90,6 +117,15 @@
       position: relative;
       text-decoration: none;
       color: #000;
+
+      @include pad{
+        margin-left: 60%;
+      }
+
+      @include mobile{
+        margin-left: 20%;
+        margin-top: 10%;
+      }
   
       &::after {
           display: block;
