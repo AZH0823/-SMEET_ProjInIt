@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    @@include('layout/meta.html', {
-      "title": "私覓SMEET-最新動態",
-    }) 
+    @@include('layout/meta.html', { "title": "私覓SMEET-最新動態", })
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -11,141 +9,175 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./css/style.css" />
-    <title>最新動態</title>
-  </head>
-  <body>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      />
+      <link rel="stylesheet" href="./css/style.css" />
+      <title>最新動態</title>
+    </head>
+    <body>
+      <!-- @@include('layout/header_01.html') -->
 
-    <!-- @@include('layout/header_01.html') -->
+      <!-- Navigation-->
 
-    <!-- Navigation-->
-
-    <!-- banner component  -->
-    <div class="banner">
+      <!-- banner component  -->
       <div class="fulid_wrapper">
-        <h1 class="green-1 font_family_eng">NEWS</h1>
-      </div>
-      <div class="banner_container">
-        <img src="./img/news_img/news_headbanner.jpg" alt="" />
-      </div>
-    </div>
-
-    <!-- tab -->
-
-    <!-- search-->
-    <div class="wrapper search_container">
-      <div class="search">
-        <div class="search_container_item right">
-          <input type="text" placeholder="Search..." />
+        <div class="banner">
+          <h1 class="green-1 font_family_eng">NEWS</h1>
         </div>
-        <div class="search_container_item">
-          <i class="fa-solid fa-magnifying-glass"></i>
+        <div class="banner_container">
+          <img src="./img/news_img/news_headbanner.jpg" alt="" />
         </div>
       </div>
-    </div>
 
-    <!-- content-->
-    <div class="content wrapper">
-      <div class="content_grid">
-        <div class="content_grid_item one">
-          <a href="#"></a>
-          <div class="content_hidden">
-            <span class="item_mark font12 Camel-3">最新動態</span>
-            <img src="./img/news_img/news_post1.jpg" alt="" />
+      <!-- tab -->
+
+      <!-- search-->
+      <div class="wrapper search_container">
+        <div class="search">
+          <div class="search_container_item right">
+            <input type="text" placeholder="Search..." />
           </div>
-          <div class="text">
-            <p class="font12">2022/11/25</p>
-            <h6 class="green-1">冬季暖心</h6>
-            <p class="news_item">
-              鮟鱇魚富含膠原蛋白且低脂肪熱量，味道
-              鮮甜淡雅，是健康又美味的海水魚.......
-            </p>
+          <div class="search_container_item">
+            <i class="fa-solid fa-magnifying-glass"></i>
           </div>
-        </div>
-        <div class="content_grid_item two">
-          <a href="#"></a>
-          <div class="content_hidden">
-            <span class="item_mark font12 Camel-3 diff">聯名限定</span>
-            <img src="./img/news_img/news_post2.jpg" alt="" />
-          </div>
-          <p class="font12 green-1">2022/08/10</p>
-          <h6 class="green-1">秋季限定料理</h6>
-          <p class="font16 news_item">
-            私覓主理人與多位摯友於１９８９年
-            參加一場私廚派對，於派對中享用的鮮美食材仍深刻於心....
-          </p>
-        </div>
-        <div class="content_grid_item three">
-          <a href="#"></a>
-          <div class="content_hidden">
-            <span class="item_mark font12 Camel-3 diff">限時優惠</span>
-            <img src="./img/news_img/news_post3.jpg" alt="" />
-          </div>
-          <p class="font12 green-1">2022/07/31</p>
-          <h6 class="green-1">精選獺祭-精碾二割三分</h6>
-          <p class="font16 news_item">
-            獺祭精碾二割三分之名來自釀造用米精碾至23%，
-            是私覓主廚們心中的不可取代的日料搭配......
-          </p>
-        </div>
-        <div class="content_grid_item four">
-          <a href="#"></a>
-          <div class="content_hidden">
-            <span class="item_mark font12 Camel-3 diff">最新動態</span>
-            <img src="./img/news_img/news_post4.jpg" alt="" />
-          </div>
-          <p class="font12 green-1">2022/07/07</p>
-          <h6 class="green-1">夏季限定料理</h6>
-          <p class="font16 news_item">
-            夏季7月到8月之間的「土用丑日」是食用鰻魚的最佳時節，為了避免中暑而食用營養價值高的鰻魚......
-          </p>
-        </div>
-        <div class="content_grid_item five">
-          <a href="#"></a>
-          <div class="content_hidden">
-            <span class="item_mark font12 Camel-3 diff">最新動態</span>
-            <img src="./img/news_img/news_post5.jpg" alt="" />
-          </div>
-          <p class="font12 green-1">2022/02/28</p>
-          <h6 class="green-1">2022年度優惠</h6>
-          <p class="font16 news_item">
-            私覓致力提供優質溫潤的私人料理，提供主顧暖心的服務，目前推出壽星優惠.....
-          </p>
-        </div>
-        <div class="content_grid_item six">
-          <a href="#"></a>
-          <div class="content_hidden">
-            <span class="item_mark font12 Camel-3 diff">最新動態</span>
-            <img src="./img/news_img/news_post6.jpg" alt="" />
-          </div>
-          <p class="font12 green-1">2022/02/05</p>
-          <h6 class="green-1">開幕消息</h6>
-          <p class="font16 news_item">
-            私覓為您提供到府私廚的服務，讓您體驗最美好的響食體驗，在家也能享受到頂級的餐廳美味....
-          </p>
         </div>
       </div>
-    </div>
 
-    <!-- 頁碼-->
-    <div class="news_page wrapper">
-      <ul class="news_page_ul">
-        <li><a href="#" class="Camel-3 font_light">1</a></li>
-        <li><a href="#" class="Camel-3 font_light">2</a></li>
-        <li><a href="#" class="Camel-3 font_light">3</a></li>
-        <li><a href="#" class="Camel-3 font_light">4</a></li>
-      </ul>
-    </div>
+      <!-- content-->
+      <div class="content wrapper">
+        <div class="content_grid">
+          <div class="content_grid_item">
+            <a href="#"></a>
+            <div class="content_hidden">
+              <span class="item_mark font12 Camel-3">最新動態</span>
+              <img src="./img/news_img/news_post1.jpg" alt="" />
+            </div>
+            <div class="text">
+              <p class="font12">2022/11/25</p>
+              <h6 class="green-1">冬季暖心</h6>
+              <p class="news_item">
+                鮟鱇魚富含膠原蛋白且低脂肪熱量，味道
+                鮮甜淡雅，是健康又美味的海水魚.......
+              </p>
+            </div>
+            <div class="btn_more">
+              <p>more</p>
+              <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="content_grid_item">
+            <a href="#"></a>
+            <div class="content_hidden">
+              <span class="item_mark font12 Camel-3 diff">聯名限定</span>
+              <img src="./img/news_img/news_post2.jpg" alt="" />
+            </div>
+            <div class="text">
+              <p class="font12 green-1">2022/08/10</p>
+              <h6 class="green-1">秋季限定料理</h6>
+              <p class="font16 news_item">
+                私覓主理人與多位摯友於１９８９年
+                參加一場私廚派對，於派對中享用的鮮美食材仍深刻於心....
+              </p>
+            </div>
+            <div class="btn_more">
+              <p>more</p>
+              <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="content_grid_item">
+            <a href="#"></a>
+            <div class="content_hidden">
+              <span class="item_mark font12 Camel-3 diff">限時優惠</span>
+              <img src="./img/news_img/news_post3.jpg" alt="" />
+            </div>
+            <div class="text">
+              <p class="font12 green-1">2022/07/31</p>
+              <h6 class="green-1">精選獺祭-精碾二割三分</h6>
+              <p class="font16 news_item">
+                獺祭精碾二割三分之名來自釀造用米精碾至23%，
+                是私覓主廚們心中的不可取代的日料搭配......
+              </p>
+            </div>
+            <div class="btn_more">
+              <p>more</p>
+              <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="content_grid_item">
+            <a href="#"></a>
+            <div class="content_hidden">
+              <span class="item_mark font12 Camel-3 diff">最新動態</span>
+              <img src="./img/news_img/news_post4.jpg" alt="" />
+            </div>
+            <div class="text">
+              <p class="font12 green-1">2022/07/07</p>
+              <h6 class="green-1">夏季限定料理</h6>
+              <p class="font16 news_item">
+                夏季7月到8月之間的「土用丑日」是食用鰻魚的最佳時節，為了避免中暑而食用營養價值高的鰻魚......
+              </p>
+            </div>
+            <div class="btn_more">
+              <p>more</p>
+              <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="content_grid_item">
+            <a href="#"></a>
+            <div class="content_hidden">
+              <span class="item_mark font12 Camel-3 diff">最新動態</span>
+              <img src="./img/news_img/news_post5.jpg" alt="" />
+            </div>
+            <div class="text">
+              <p class="font12 green-1">2022/02/28</p>
+              <h6 class="green-1">2022年度優惠</h6>
+              <p class="font16 news_item">
+                私覓致力提供優質溫潤的私人料理，提供主顧暖心的服務，目前推出壽星優惠.....
+              </p>
+            </div>
+            <div class="btn_more">
+              <p>more</p>
+              <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+          <div class="content_grid_item">
+            <a href="#"></a>
+            <div class="content_hidden">
+              <span class="item_mark font12 Camel-3 diff">最新動態</span>
+              <img src="./img/news_img/news_post6.jpg" alt="" />
+            </div>
+            <div class="text">
+              <p class="font12 green-1">2022/02/05</p>
+              <h6 class="green-1">開幕消息</h6>
+              <p class="font16 news_item">
+                私覓為您提供到府私廚的服務，讓您體驗最美好的響食體驗，在家也能享受到頂級的餐廳美味....
+              </p>
+            </div>
+            <div class="btn_more">
+              <p>more</p>
+              <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- @@include('layout/footer.html') -->
-  </body>
+      <!-- 頁碼-->
+      <div class="news_page wrapper">
+        <ul class="news_page_ul">
+          <li><a href="#" class="Camel-3 font_light">1</a></li>
+          <li><a href="#" class="Camel-3 font_light">2</a></li>
+          <li><a href="#" class="Camel-3 font_light">3</a></li>
+          <li><a href="#" class="Camel-3 font_light">4</a></li>
+        </ul>
+      </div>
+
+      <!-- @@include('layout/footer.html') -->
+    </body>
+  </html>
 </html>
