@@ -1,10 +1,12 @@
 /*banner component*/
 .banner {
-  .fulid_wrapper {
+  .wrapper {
     h1 {
-      margin: 161px 0 37px 88px;
+      margin: 0 105px;
+      // margin: 161px 0 37px 88px;
       @include mobile {
-        margin: 80px 0px 29px 11px;
+        // margin: 80px 0px 29px 11px;
+        margin: 0 27px;
       }
     }
   }

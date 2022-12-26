@@ -1,111 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    @@include('layout/meta.html', {
-    "title": "私覓SMEET-購物車",
-    })
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-</head>
-<body>
-    <!-- @@include('layout/header_01.html') -->
-    <main class="wrapper cart_detail">
-        <!-- 上方123 -->
-        <ul class="flow_container">
-            <!-- finsh 完成填寫 checked 目前進度 -->
-            <li class="flowList checked" flowName="購物車">1</li>
-            <li class="flowList " flowName="填寫資料">2</li>
-            <li class="flowList " flowName="訂單完成">3</li>
-        </ul>
-        <!-- 步驟1中間區塊主要內容=========== -->
-        <section class="cart_1_content">
-            <!-- 購物車商品 -->
-            <div class="cart_product">
-                <!-- 商品標題 -->
-                <div class="title">
-                    <p class="item1">商品資訊</p>
-                    <p class="item2">單價</p>
-                    <p class="item3">數量</p>
-                    <p class="item4">小計</p>
-                    <p class="item5"></p>
-                </div>
-                <!-- 商品list -->
-                <div class="product_detail">
-                    <div class="item1 green-1">
+    <head>
+        @@include('layout/meta.html', { "title": "私覓SMEET-購物車", })
+        <link rel="stylesheet" href="./css/style.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    </head>
+    <body>
+        <!-- @@include('layout/header_01.html') -->
+        <main class="wrapper cart_detail">
+            <!-- 上方123 -->
+            <ul class="flow_container">
+                <!-- finsh 完成填寫 checked 目前進度 -->
+                <li class="flowList checked" flowname="購物車">1</li>
+                <li class="flowList " flowname="填寫資料">2</li>
+                <li class="flowList " flowname="訂單完成">3</li>
+            </ul>
+            <!-- 步驟1中間區塊主要內容=========== -->
+            <section class="cart_1_content">
+                <!-- 購物車商品 -->
+                <div class="cart_product">
+                    <!-- 商品標題 -->
+                    <div class="title">
+                        <p class="item1">商品資訊</p>
+                        <p class="item2">單價</p>
+                        <p class="item3">數量</p>
+                        <p class="item4">小計</p>
+                        <p class="item5"></p>
+                    </div>
+                    <!-- 商品list -->
+                    <div class="product_detail">
+                        <div class="item1 green-1">
                             <div class="item1_img">
                                 <img src="img/atcart_img/atcart_addp.jpg" alt="">
                             </div>
                             <h6 class="product_name">北海道海膽壽司北海道海膽壽司北海道海膽壽</h6>
-                    </div>
-                    <div class="item2">
-                        <h6>NT$<span class="product_money">700</span></h6>
-                    </div>
-                    <div class="item3">
-                        <div class="cart_minus_plus">
-                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                            <div class="count">2</div>
-                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <div class="item2">
+                            <h6>NT$<span class="product_money">700</span></h6>
+                        </div>
+                        <div class="item3">
+                            <div class="cart_minus_plus">
+                                <div class="minus">
+                                    <i class="fa-solid fa-minus"></i>
+                                </div>
+                                <div class="count">2</div>
+                                <div class="plus">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item4">
+                            <h6>NT$<span class="product_money_2">1400</span></h6>
+
+                        </div>
+                        <div class="item5">
+                            <i class="fa-regular fa-trash-can"></i>
                         </div>
                     </div>
-                    <div class="item4">
-                        <h6>NT$<span class="product_money_2">1400</span></h6>
 
+                </div>
+                <!-- 會員紅利 -->
+                <div class="cart_bonus">
+                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"></input>元</h6>
+                    <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1">32</span>點(<span class="bonus_2">32</span>元)</p>
+                </div>
+                <!-- 付款&寄送方式 -->
+                <div class="cart_pay">
+                    <div class="pay">
+                        <label for="">付款方式</label>
+                        <select name="" id="">
+                            <option value="">信用卡(支援國內外VISA、Master、JCB)</option>
+                        </select>
                     </div>
-                    <div class="item5">
-                        <i class="fa-regular fa-trash-can"></i>
+                    <div class="send">
+                        <label for="">寄送方式</label>
+                        <select name="" id="">
+                            <option value="宅配">宅配</option>
+                            <option value="7-11超商取貨">7-11超商取貨</option>
+                        </select>
+                        <div class="store_choose font16">
+                            <p>選擇門市</p>
+                            <div class="choose">
+                                <p>維群門市</p>
+                                <button type="button" class="inCart_btn1">選擇門市</button>
+                            </div>
+                            <p class="font12 text gray">當包裹送達您指定之7-11門市時，隔日將會發送簡訊到貨通知。<br>門市純取貨之訂單，收件人務必填寫與身分證上相符的姓名，並攜帶證件至門市領取包裹
+                            </p>
+                        </div>
                     </div>
                 </div>
-                
-            </div>
-            <!-- 會員紅利 -->
-            <div class="cart_bonus">
-                <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"></input>元</h6>
-                <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1">32</span>點(<span class="bonus_2">32</span>元)</p>
-            </div>
-            <!-- 付款&寄送方式 -->
-            <div class="cart_pay">
-                <div class="pay">
-                    <label for="">付款方式</label>
-                    <select name="" id="" >
-                        <option value="">信用卡(支援國內外VISA、Master、JCB)</option>
-                    </select>
+                <!-- 商城總計 -->
+                <!-- 總計 -->
+                <div class="total_next">
+                    <div class="total_container font16">
+                        <div class="item">小計</div>
+                        <div class="item">NT$<span id="detail_total">25,000</span></div>
+                        <div class="item">加購價</div>
+                        <div class="item">NT$<span id="detail_total">250</span></div>
+                        <div class="item">紅利點數</div>
+                        <div class="item">-NT$<span id="detail_total">50</span></div>
+                        <div class="item">總金額
+                        </div>
+                        <div class="item">NT$<span id="detail_total">25,000</span></div>
+                    </div>
+                    <!-- 下一步按鈕 -->
+                    <div class="btn_view">
+                        <p>下一步</p>
+                        <span>
+                            <p>next</p>
+                        </span>
+                    </div>
                 </div>
-                <div class="send">
-                    <label for="">寄送方式</label>
-                    <select name="" id="">
-                        <option value="宅配">宅配</option>
-                        <option value="7-11超商取貨">7-11超商取貨</option>
-                    </select>
+            </section>
+            <!-- 步驟1中間區塊主要內容結束=========== -->
+            <!-- 步驟2中間區塊主要內容結束=========== -->
+            <section class="cart_2_content">
+                <!-- 購物車商品 -->
+                <div class="cart_product">
+                    <!-- 商品標題 -->
+                    <div class="title">
+                        <p class="item1">商品資訊</p>
+                        <p class="item2">單價</p>
+                        <p class="item3">數量</p>
+                        <p class="item4">小計</p>
+                        <p class="item5"></p>
+                    </div>
+                    <!-- 商品list -->
+                    <div class="product_detail">
+                        <div class="item1 green-1">
+                            <div class="item1_img">
+                                <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                            </div>
+                            <h6 class="product_name">北海道海膽壽司北海道海膽壽司北海道海膽壽</h6>
+                        </div>
+                        <div class="item2">
+                            <h6>NT$<span class="product_money">700</span></h6>
+                        </div>
+                        <div class="item3">
+                            <div class="count">x2</div>
+                        </div>
+                        <div class="item4">
+                            <h6>NT$<span class="product_money_2">1400</span></h6>
+
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <!-- 商城總計 -->
-            <!-- 總計 -->
-            <div class="total_next">
-            <div class="total_container font16">
-                <div class="item">小計</div>
-                <div class="item">NT$<span id="detail_total">25,000</span></div>
-                <div class="item">加購價</div>
-                <div class="item">NT$<span id="detail_total">250</span></div>
-                <div class="item">紅利點數</div>
-                <div class="item">-NT$<span id="detail_total">50</span></div>
-                <div class="item">總金額 </div>
-                <div class="item">NT$<span id="detail_total">25,000</span></div>
-            </div>
-            <!-- 下一步按鈕 -->
-            <div class="btn_view">
-                <p>下一步</p>
-                <span>
-                    <p>next</p>
-                </span>
-            </div>
-            </div>
-        </section>
-        <!-- 步驟1中間區塊主要內容結束=========== -->
+                <!-- 商城總計 -->
+                <!-- 總計 -->
+                <div class="total_container font16">
+                    <div class="item">小計</div>
+                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                    <div class="item">加購價</div>
+                    <div class="item">NT$<span id="detail_total">250</span></div>
+                    <div class="item">紅利點數</div>
+                    <div class="item">-NT$<span id="detail_total">50</span></div>
+                    <div class="item">總金額
+                    </div>
+                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                </div>
 
-    </main>
+                <!-- 訂購人資訊 -->
+                <div class="cart_info">
+                    <!-- 標題 -->
+                    <div class="cart_title">
+                        <h6 class="green-1">訂購人資訊</h6>
+                        <!-- checkbox -->
+                        <div class="info_check gray">
+                            <input type="checkbox" name="info_check" id="info_check_yes">
+                            <label for="info_check">
+                                <p class="font16">同會員資料</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="buy_content">
+                        <label for="">姓名</label>
+                        <input type="text" placeholder="請輸入姓名">
+                        <label for="">手機號碼</label>
+                        <input type="text" placeholder="請輸入手機號碼">
+                        <label for="">地址</label>
+                        <select name="member_city" class="member_city">
+                            <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
+                        </select>
+                        <select name="member_area" class="member_area">
+                            <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
+                        </select>
+                        <input type="text" class="member_addr" placeholder="請輸入地址">
+                    </div>
+                </div>
+                <!-- 收件人資訊 -->
+                <div class="cart_info2">
+                    <!-- 標題 -->
+                    <div class="cart_title">
+                        <h6 class="green-1">收件人資訊</h6>
+                        <!-- checkbox -->
+                        <div class="info_check gray">
+                            <input type="checkbox" name="info_check" id="info_check_yes">
+                            <label for="info_check">
+                                <p class="font16">同訂購人資料</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="get_content">
+                        <label for="">姓名</label>
+                        <input type="text" placeholder="請輸入姓名">
+                        <label for="">手機號碼</label>
+                        <input type="text" placeholder="請輸入手機號碼">
+                        <label for="">地址</label>
+                        <select name="member_city" class="member_city">
+                            <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
+                        </select>
+                        <select name="member_area" class="member_area">
+                            <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
+                        </select>
+                        <input type="text" class="member_addr" placeholder="請輸入地址">
+                    </div>
+                </div>
+                <!-- 配送/發票 -->
+                <div class="deliver_invoice">
+                    <label for="deliver">配送時間</label>
+                    <select name="deliver" id="deliver" value="不指定">
+                        <option value="早">早(9-12)</option>
+                        <option value="午">午(13-17)</option>
+                        <option value="晚">晚(18-21)</option>
+                    </select>
+                    <label for="invoice">發票及載具</label>
+                    <select name="invoice" id="invoice" value="不使用載具-索取紙本發票">
+                        <option value="不使用載具-索取紙本發票">不使用載具-索取紙本發票</option>
+                        <option value="電子發票載具">電子發票載具</option>
+                        <option value="開立統一編號">開立統一編號</option>
+                        <option value="捐贈發票">捐贈發票</option>
+                    </select>
+                    <label for="">電子發票載具</label>
+                    <input type="text" placeholder="/開頭">
+                    <label for="">統一編號</label>
+                    <input type="text" placeholder="請輸入統一編號">
+                </div>
+                <!-- 付款資訊 -->
+                <div class="cart_title">
+                    <h6 class="green-1">付款資訊<span class="font14 gray title_pay">已選擇支付方式(VISA、Master、JCB)</span></h6>
+                </div>
+                <div class="creditcard_pay">
+                    <input type="text" placeholder="卡號">
+                    <input type="text" placeholder="持卡人姓名">
+                    <div class="creditcard_2">
+                        <input type="text" class="creditcard_date" placeholder="有效日期(MM/YY)">
+                    <input type="text" class="creditcard_cvc" placeholder="檢核碼">
+                    </div>
+                    
+                </div>
+                <!-- checkbox -->
+                <div class="info_check">
+                    <input type="checkbox" name="info_check" id="info_check_yes">
+                    <label for="info_check">
+                        <p class="font16">我同意接受服務條款 & 隱私權政策。
+                        </p>
+                    </label>
+                </div>
+                <!-- 下一步按鈕 -->
+                <div class="btn_view">
+                    <p>下一步</p>
+                    <span>
+                        <p>next</p>
+                    </span>
+                </div>
+                <div class="clear_both"></div>
+            </section>
+        </main>
 
-    <!-- @@include('layout/footer.html') -->
-</body>
+        <!-- @@include('layout/footer.html') -->
+    </body>
 
 </html>
