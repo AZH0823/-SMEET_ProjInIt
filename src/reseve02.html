@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    @@include('layout/header_01.html')
+    <!-- @@include('layout/header_01.html') -->
 
     <div class="fulid_wrapper reseve_flow">
         <div class="wrapper">
@@ -23,12 +23,12 @@
                         <li class="flowList" flowName="填寫資料">4</li>
                     </ul>
                     <form class="form_workFlow_contanier">
-                         <!-- 結帳顯示專區 -->
-                         <section class="oder_view">
+                        <!-- 結帳顯示專區 -->
+                        <section class="oder_view">
                             <ul class="checkout_contanier">
                                 <!-- 人員資訊 -->
                                 <li id="order_Info" class="order_detailInfo">
-
+                                    <h6 class="blockTitle">餐點明細</h6>
                                     <div class="setName"> <img src="./img/reserve_img/reserve_icon01.svg" alt="">名物-套餐名稱
                                     </div>
                                     <div class="count_person">
@@ -63,31 +63,42 @@
 
                             <!-- 套餐資訊 -->
                             <div class="setInfolist">
-                                <p class="setTitle"><span>名物 私套餐</span>  <span>x 6</span><span>$21,000</span></p>
+                                <p class="setTitle"><span>名物 私套餐</span> <span>x 6</span><span>$21,000</span></p>
                             </div>
                             <!-- 加購資訊 -->
                             <ul class="addorderlist">
                                 <!-- 單點菜品 -->
                                 <div class="addorderlist_title">加購</div>
-                               <li class="dish_title"><span>蘆筍蝦手卷</span><span>x 1</span><span>$600</span></li> 
-                               
-                               <!-- 服務 -->
-                               <div class="addorderlist_title">租借及服務</div>
-                               <li class="dish_title"><span>餐具</span><span>x 6</span><span>$600</span></li> 
-                               <li class="dish_title"><span>炊具</span><span>x 6</span><span>$600</span></li> 
-                               <li class="dish_title"><span>餐盤</span><span>x 6</span><span>$600</span></li> 
-                               <li class="dish_title"><span>服務人員</span><span>x 6</span><span>$600</span></li> 
+                                <li class="dish_title"><span>蘆筍蝦手卷</span><span>x 1</span><span>$600</span></li>
+
+                                <!-- 服務 -->
+                                <div class="addorderlist_title">租借及服務</div>
+                                <li class="dish_title"><span>餐具</span><span>x 6</span><span>$600</span></li>
+                                <li class="dish_title"><span>炊具</span><span>x 6</span><span>$600</span></li>
+                                <li class="dish_title"><span>餐盤</span><span>x 6</span><span>$600</span></li>
+                                <li class="dish_title"><span>服務人員</span><span>x 6</span><span>$600</span></li>
+
+                                 <!-- coupon 打折金額 -->
+                            
+                                <li class="dish_title"><span>紅利點數</span><span></span><span>-$ 2,114</span></li>
+                                
+                        
                             </ul>
+
+                           
                             <!-- 總計 -->
-                            <div class="totalPrice"><h6>總計</h6><h6>$991,234</h6></div>
+                            <div class="totalPrice">
+                                <h6>總計</h6>
+                                <h6>$991,234</h6>
+                            </div>
                             <!-- 結帳按鈕 -->
                             <button class="next_btn btn">下一步</button>
                             <button class="prev_btn btn">返回上一步</button>
 
                         </section>
                         <!-- 選擇套餐 -->
-                        <section class="step_flow step1 now" id="set">
-                            <h6 class="blockTitle">1-1.選擇套餐</h6>
+                        <section class="step_flow step1 " id="set">
+                            <h6 class="blockTitle">1.選擇套餐</h6>
                             <ul class="sets">
                                 <li class="setCard checked">
                                     <img src="img/reserve_img/reserve_set01.jpg" alt="">
@@ -102,7 +113,7 @@
                                     <div class="setName">苑 春堂套餐</div>
                                 </li>
                             </ul>
-                            <h6 class="blockTitle">1-2.選擇套餐內容</h6>
+                            <h6 class="blockTitle">2.選擇套餐內容</h6>
                             <ul class="setdetail">
                                 <p class="setkind">湯物</p>
 
@@ -168,11 +179,11 @@
                             </ul>
 
                         </section>
-                       
+
                         <!-- 加購服務 -->
                         <section class="step_flow step2" id="addOther">
 
-                            <h6 class="blockTitle">2-1.選擇單點加購</h6>
+                            <h6 class="blockTitle">3.選擇單點加購</h6>
                             <ul class="addOther_detail">
 
                                 <li class="stepper_input">
@@ -232,7 +243,7 @@
                                 </li>
 
                             </ul>
-                            <h6 class="blockTitle ">2-2.選擇租借服務</h6>
+                            <h6 class="blockTitle ">4.選擇租借服務</h6>
                             <ul class="addOther_rent">
                                 <li class="rent_service">
                                     <div class="tableware">
@@ -241,7 +252,7 @@
                                     </div>
                                     <div class="checkboxInner">
 
-                                        <input type="checkbox" name="cb" id="table_cb" checked disabled >
+                                        <input type="checkbox" name="cb" id="table_cb" checked disabled>
                                         <label for="table_cb" id="cb_table">
                                             <svg viewBox="0 0 100 100">
                                                 <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
@@ -316,7 +327,63 @@
                             <!-- inculde 詳細訂單 -->
                         </section>
                         <!-- 填寫資料 -->
-                        <section class="step_flow step4" id="comfrim"></section>
+                        <section class="step_flow step4 nowpage" id="comfrim">
+                            <h6 class="blockTitle">5.填寫預約資料<span><label for="sameAccount"><input type="checkbox" name="sameAccount" id="sameAccount">同會員資料</label></span></h6>
+                            <div class="user_name grid_confirm">
+                                <label for="name">
+                                    <h6>姓名</h6>
+                                </label>
+                                <input type="text" id="name" placeholder="請輸入姓名">
+                            </div>
+                            <div class="user_phone grid_confirm">
+                                <label for="phone">
+                                    <h6>手機號碼</h6>
+                                </label>
+                                <input type="text" id="phone" placeholder="請輸入號碼">
+                            </div>
+                            <div class="user_email grid_confirm">
+                                <label for="email">
+                                    <h6>電子信箱</h6>
+                                </label>
+                                <input type="text" id="email" placeholder="請輸入電子信箱">
+                            </div>
+                            <div class="user_addr">
+                                <label for="addr">
+                                    <h6>地址</h6>
+                                </label>
+                                <select class="addr">
+                                    <option value="" selected disabled>請選擇縣市</option>
+                                </select>
+                                <select class="addr-select">
+                                    <option value="" selected disabled>請選擇區域</option>
+                                </select class="addr-select">
+                                <input type="text" placeholder="請輸入地址" id="addr">
+                            </div>
+                            <div class="user_othertxt grid_confirm">
+                                <label for="othertxt">
+                                    <h6>備註</h6>
+                                </label>
+                                <textarea name="othertxt" id="othertxt" placeholder="其他需求"></textarea>
+                            </div>
+                            <div class="user_bonus grid_confirm">
+                                <label for="bonus" class="user_bonus">
+                                    <h6>使用會員紅利點數折抵訂單金額</h6>
+                                    <div class="bonus_input"><input type="number" id="bonus">元</div>
+                                </label>
+                            </div>
+                            <h6 class="blockTitle">6.付款資訊<span>已選擇支付方式(VISA、Master、JCB)</span></h6>
+                            <div class="user_pay">
+
+                                <input type="number" placeholder="卡號" required class="card_num">
+
+                                <input type="text" placeholder="持卡人姓名" required class = "card_name">
+
+                                <input type="number" placeholder="有效日期" required class="card-date">
+
+                                <input type="number" placeholder="檢核碼" required class="card_checknum" min="0" max="999">
+
+                            </div>
+                        </section>
                     </form>
 
 
@@ -324,7 +391,7 @@
             </main>
         </div>
     </div>
-    @@include('layout/footer.html')
+    <!-- @@include('layout/footer.html') -->
 </body>
 
 </html>
