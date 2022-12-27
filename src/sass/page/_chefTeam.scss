@@ -1,18 +1,56 @@
 .chef{
+    @include pad(){
+        // padding: 0 40px 0;           
+    }
+    @include mobile(){
+        // padding: 0 27px 0;
+    }
 
+    h1{
+        margin-left: 70px;
+        color: $green-1;
+        margin-right: 15px;
+        font-family: $font_family_e;
+    }
+
+    h2{
+        color: $green-1;
+        margin-right: 15px;
+        font-family: $font_family_c;
+        font-weight: bold;
+    }
+
+    p{
+        font-family: $font_family_c2;
+    }
 
     ._banner img{
         height: 100%;
         width: 100%;
     }
     
-    
     ._chef_tab{
         display:flex;
         flex-wrap:wrap;
         margin: 50px;
+        @include pad(){
+            margin: 10px;          
+        }
+        @include mobile(){
+            margin: 10px;   
+        }
+
         input{
             display:none
+        }
+
+        input:checked + label{
+            opacity: 1; 
+            font-weight:bold;
+        }
+        
+        input:checked + label + ._chef_content{
+            display: initial;
         }
         
         label{
@@ -20,7 +58,19 @@
             cursor: pointer; 
             color: rgb(6, 6, 6); 
             opacity: 0.5;
+            @include pad(){
+                margin: 0 14px 5px 15px;         
+            }
+            @include mobile(){
+                margin: 0 14px 5px 15px;   
+            }
         }
+        
+        label:hover{
+            opacity: 1; 
+            font-weight:bold;
+        }
+     
         ._chef_content{
             order:1;
             display: none;
@@ -28,42 +78,182 @@
             line-height: 1.6; 
             font-size: .9em; 
             padding: 15px;
+
             ._chef_line{
-                width: 1125px;
+                width: 99%;
                 height: 1px;
-                background-color: #8E8E8E;
-                margin-bottom: 20px;
+                background-color: $green-1;
+                margin-bottom: 50px;
+                @include pad(){
+                    margin-bottom: 5px;
+                }
+                @include mobile(){
+                    margin-bottom: 5px;
+                }
             }
+
             ._chef_top{
                 display: flex;
+                justify-content: center;
+
                 img{
                     width: 60%;
                 }
-                ._chef_infor{
+                ._chef_infor, ._chef_infor2, ._chef_infor3{
                     display: flex;
                     flex-direction: column;
                     z-index: 1;
                     flex-wrap: wrap-reverse;
                     text-align: right;
-                    ._chef_infor_line{
-                        // float: right;
-                        width: 300px;
-                        height: 1px;
-                        background-color: #0F3D3E;
+                    margin-left: 10px;
+                    background-image: url(../../img/chefteam_img/chef.png);
+                    background-position: left;
+                    background-repeat: no-repeat;
+                    @include pad(){
+                        max-width: 720px;
+                        background-size: 70%; 
+                        background-position: left; 
                     }
+                    @include mobile(){
+                        max-width: 428px;
+                        padding-bottom: 285px;
+                        background-size: 100%;  
+                        background-position: left; 
+                        background-position-y: 135px;  
+                    }
+                                      
+                    ._chef_infor_line{
+                        margin-left: 800px;
+                        padding: 0 20px;
+                        height: 2px;
+                        background-color: $green-1;
+                        margin-right: 20px;
+
+                        @include pad(){
+                            margin-bottom: 70px;
+                            padding: 0 150px;  
+                        }
+                        @include mobile(){
+                            margin-bottom: 70px;
+                            padding: 0 150px;
+                        }
+                        
+                    }
+
+                    .word_box {
+                        line-height: 2;
+                        margin: 20px 0 100px 660px ;
+                        position: relative;
+                        text-align: right;
+                        letter-spacing: 1px;
+                        @include pad(){
+                            display: none;
+                        }
+                        @include mobile(){
+                            display: none;
+                        }
+                    }
+
+                    .word_box > div:nth-of-type(1) {
+                        width: 445px;
+                    }
+            
+                    .words_box > div {
+                        overflow: hidden;
+                    }
+            
+                    .word_box > div p {
+                        font-size: 20px;
+                        width: 445px;
+                    }
+            
+            
+                    /* ---------------- 左邊文字 ---------------- */
+            
+                    .word_box > div:nth-of-type(2) {
+                        color: rgb(255, 255, 255);
+                        position: absolute;
+                        left:0;
+                        top: 0;
+                        width: 110px;
+                    }
+            
+                    .word_box > div {
+                        overflow: hidden;
+                    }
+            
+                    .words_box > div:nth-of-type(2) p {
+                        left: 0;
+                    }
+            
+                    .word_box > div p {
+                        width: 445px;
+                    }                        
+                }
+
+                ._chef_infor2{
+                    background-image: url(../../img/chefteam_img/chef2.png);
+                   
+                }
+
+                ._chef_infor3{
+                    background-image: url(../../img/chefteam_img/chef3.png);               
                 }
             }
+
+            ._chef_bottom{
+                ._chef_grid{
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-rows: auto;
+                    gap: 50px 50px;
+                    margin: 70px auto;
+                    margin-left: 5px;
+                    @include pad(){
+                        margin-top: 0;
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    @include mobile(){
+                        margin-top: 0;
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    ._chef_grid_1, ._chef_grid_2,._chef_grid_3,._chef_grid_4,
+                    ._chef_grid_5,._chef_grid_6,._chef_grid_7,._chef_grid_8{
+                        width: 100%;
+                        overflow: hidden;
+                        position: relative;
+                        border: 1px solid #787878;
+                        img{
+                            width: 100%;
+                        }
+                        img:hover {
+                            width: 100%;
+                            transform: scale(1.1);
+                            transition: 0.8s;
+                           
+                        }
+                        p{
+                            padding: 20px 20px 20px 20px;
+                            text-align: center;
+                        }
+                    }
+                    
+                }
+
+            }
+
+
+         
         }
     }
+}
+   
+
+        
 
    
-        .input:checked + label, label:hover{
-            opacity: 1; 
-            font-weight:bold;
-        }
-        input:checked + label + ._chef_content{
-            display: initial;
-        }
+        
+        
 
 
     
@@ -71,7 +261,3 @@
     
 
     
-
-    
-
-}

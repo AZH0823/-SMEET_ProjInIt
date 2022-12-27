@@ -1,3 +1,179 @@
 .shopMall{
-    
+    padding: 0 105px;
+    @include mobile(){
+        padding: 0 27px;
+    }
+    .shop_up{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        align-items: center;
+        position: relative;
+        .shop_tab{
+            display: flex;
+            
+            a{
+                text-decoration: none;
+                color: #898989;
+                margin-right: 40px;
+                h6{
+                    @include pad(){
+                        font-size: 18px;
+                    }
+                }
+            }.on_tab{
+                color: #000;
+            }
+        }
+        select{
+            width: 230px;
+            height: 35px;
+            padding: 0 10px;
+            letter-spacing: 1px;
+            border: 1px solid #898989;
+            color: #898989;
+            outline: 0;
+            @include pad(){
+                width: 175px;
+                height: 28px;
+                position: absolute;
+                bottom: -70px;
+                right: 0;
+            }
+            @include mobile(){
+                width: 130px;
+                bottom: -67px;
+            }
+        }
+    }
 }
+// 商城菜品卡片
+.collect_section{
+    padding: 35px 0;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    @include pad(){
+        padding-top: 80px;
+    }
+    @include mobile(){
+        padding-top: 65px;
+    }
+    ul{ 
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(245px,1fr));
+        grid-auto-rows: 1fr;
+        grid-row-gap: 20px;
+        grid-column-gap: 10px;
+        margin: 0 auto 60px;
+        
+        margin-bottom: 60px;
+        @include pad(){
+            grid-template-columns: repeat(auto-fill,minmax(173px,1fr));
+            grid-row-gap: 10px;
+            grid-column-gap: 10px;
+        }
+        @include mobile(){
+            grid-template-columns: repeat(auto-fill,minmax(135px,1fr));
+            grid-row-gap: 10px;
+            grid-column-gap: 10px;
+        }
+        @media screen and (max-width:375px){
+            grid-template-columns: repeat(auto-fill,minmax(135px,1fr));
+            grid-row-gap: 10px;
+            grid-column-gap: 10px;
+        }
+        // 商城card
+        li.collect_list{
+            margin: 0 auto;
+            min-width: 256px;
+            min-height: 350px;
+            border: 1px solid #898989;
+            @include pad(){
+                min-width: 180px;
+                min-height: 247px ;
+            }
+            @include mobile(){
+                min-width: 150px;
+                min-height: 235px;
+            }
+            @media screen and (max-width:375px){
+                min-width: 145px;
+                min-height: 201px;
+            }
+            a{
+                text-decoration: none;
+                display: block;
+                height: 100%;
+            }
+            .product_img{
+                height: 65%;
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+                img{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+
+                }
+                i{
+                    background: #FFF;
+                    border-radius: 50%;
+                    color: #ccc;
+                    font-size: 14px;
+                    display: block;
+                    width: 29px;
+                    line-height: 29px;
+                    text-align: center;
+                    position: absolute;
+                    top: 12px;
+                    right: 12px;
+                    &:hover{
+                        color: $red;
+                        border: 0;
+                    }
+                }
+            }
+            .product_content{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                padding: 14px 20px 20px;
+                @include pad(){
+                    padding: 8px 15px 3px;
+                
+                        
+                }
+                
+                h6.product_title{
+                    width: 100%;
+                    height: 60px;
+                    @include pad(){
+                        font-size: 16px;
+                        height: 40px;
+                    }
+                }
+                p{
+                    @include mobile(){
+                        font-size: 14px;
+                    }
+                }
+                button.cart_link{
+                    background-color: #fff;
+                    border: 0;
+                    // outline: 1px solid #000;
+                    cursor: pointer;
+                    color: $green-1;
+                    width: 30px;
+                    text-align: right;
+                    &:hover{
+                        color: $green-3;
+                    }
+                }
+            }
+        }
+    }
+}
+// ======================商城菜品結束

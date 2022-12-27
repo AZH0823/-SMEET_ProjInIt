@@ -170,10 +170,11 @@
 }
 
 .btn_view {
-    margin-left: 20px;
+    width: 235px;
+    height: 55px;
+    // margin-left: 20px;
     display: flex;
     @extend .font14;
-    font-weight: 1000;
     position: relative;
     text-decoration: none;
     color: #000;
@@ -195,12 +196,7 @@
     p {
         position: relative;
         margin-right: 50px;
-        position: relative;
-
-
     }
-
-
     span {
         border-radius: 50%;
         height: 70px;
