@@ -1,7 +1,6 @@
-div.back_message {
-    div.wrapper {
+div.back_contactUs {
+    div.backwrapper {
         display: flex;
-        position: relative;
         gap: 7%;
 
         header {
@@ -11,7 +10,7 @@ div.back_message {
         div.container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            width: 73%;
 
             main.right_content {
                 margin-bottom: 50px;
@@ -35,7 +34,7 @@ div.back_message {
                                 width: 100%;
                                 text-align: center;
                                 align-items: center;
-                                grid-template: repeat(1, 1fr) / repeat(2, 1fr) 300px 1fr;
+                                grid-template: repeat(1, 1fr) / repeat(3, 1fr) 300px 1fr;
 
                                 &:first-child {
                                     background-color: #ccc;
