@@ -33,6 +33,12 @@
         display:flex;
         flex-wrap:wrap;
         margin: 50px;
+        @include pad(){
+            margin: 10px;          
+        }
+        @include mobile(){
+            margin: 10px;   
+        }
 
         input{
             display:none
@@ -52,6 +58,12 @@
             cursor: pointer; 
             color: rgb(6, 6, 6); 
             opacity: 0.5;
+            @include pad(){
+                margin: 0 14px 5px 15px;         
+            }
+            @include mobile(){
+                margin: 0 14px 5px 15px;   
+            }
         }
         
         label:hover{
@@ -72,6 +84,12 @@
                 height: 1px;
                 background-color: $green-1;
                 margin-bottom: 50px;
+                @include pad(){
+                    margin-bottom: 5px;
+                }
+                @include mobile(){
+                    margin-bottom: 5px;
+                }
             }
 
             ._chef_top{
@@ -82,7 +100,6 @@
                     width: 60%;
                 }
                 ._chef_infor, ._chef_infor2, ._chef_infor3{
-                    // min-width: 1125px;
                     display: flex;
                     flex-direction: column;
                     z-index: 1;
@@ -92,6 +109,18 @@
                     background-image: url(../../img/chefteam_img/chef.png);
                     background-position: left;
                     background-repeat: no-repeat;
+                    @include pad(){
+                        max-width: 720px;
+                        background-size: 70%; 
+                        background-position: left; 
+                    }
+                    @include mobile(){
+                        max-width: 428px;
+                        padding-bottom: 285px;
+                        background-size: 100%;  
+                        background-position: left; 
+                        background-position-y: 135px;  
+                    }
                                       
                     ._chef_infor_line{
                         margin-left: 800px;
@@ -99,6 +128,16 @@
                         height: 2px;
                         background-color: $green-1;
                         margin-right: 20px;
+
+                        @include pad(){
+                            margin-bottom: 70px;
+                            padding: 0 150px;  
+                        }
+                        @include mobile(){
+                            margin-bottom: 70px;
+                            padding: 0 150px;
+                        }
+                        
                     }
 
                     .word_box {
@@ -107,6 +146,12 @@
                         position: relative;
                         text-align: right;
                         letter-spacing: 1px;
+                        @include pad(){
+                            display: none;
+                        }
+                        @include mobile(){
+                            display: none;
+                        }
                     }
 
                     .word_box > div:nth-of-type(1) {
@@ -164,6 +209,14 @@
                     gap: 50px 50px;
                     margin: 70px auto;
                     margin-left: 5px;
+                    @include pad(){
+                        margin-top: 0;
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    @include mobile(){
+                        margin-top: 0;
+                        grid-template-columns: repeat(2, 1fr);
+                    }
                     ._chef_grid_1, ._chef_grid_2,._chef_grid_3,._chef_grid_4,
                     ._chef_grid_5,._chef_grid_6,._chef_grid_7,._chef_grid_8{
                         width: 100%;
