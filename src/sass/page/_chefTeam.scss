@@ -1,4 +1,10 @@
 .chef{
+    @include pad(){
+        // padding: 0 40px 0;           
+    }
+    @include mobile(){
+        // padding: 0 27px 0;
+    }
 
     h1{
         margin-left: 70px;
