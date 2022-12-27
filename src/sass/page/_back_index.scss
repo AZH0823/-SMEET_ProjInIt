@@ -1,5 +1,5 @@
 .index_back {
-    .wrapper {
+    .backwrapper {
         display: flex;
         position: relative;
         gap: 7%;
@@ -11,7 +11,7 @@
         .container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            width: 73%;
 
             main.right_content {
                 margin-bottom: 50px;
@@ -48,7 +48,8 @@
                         }
                     }
                 }
-// ======================== 以上為導覽列 + 表格點的版型 ======================== //
+
+                // ======================== 以上為導覽列 + 表格點的版型 ======================== //
                 .section2 {
                     display: flex;
                     flex-direction: row;
@@ -56,11 +57,11 @@
                     margin-top: 60px;
                     gap: 125px;
 
-                    #chart-wrapper1 > #myChart1 {
+                    #chart-wrapper1>#myChart1 {
                         width: 400px;
                     }
 
-                    #chart-wrapper2 > #myChart2 {
+                    #chart-wrapper2>#myChart2 {
                         width: 400px;
                     }
                 }

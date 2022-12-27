@@ -1,5 +1,5 @@
 div.back_orderlist_shop {
-    div.wrapper {
+    div.backwrapper {
         display: flex;
         position: relative;
         gap: 7%;
@@ -11,7 +11,7 @@ div.back_orderlist_shop {
         div.container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            width: 73%;
 
             main.right_content {
                 margin-bottom: 50px;
