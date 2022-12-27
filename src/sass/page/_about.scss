@@ -1,23 +1,30 @@
-.banner{
+.about_banner{
     
     h1{
         margin-left: 80px;
         color: #0f3d3e;
+        @include pad {
+            margin-left: 27px;
+        }   
     }
     
     img{
         width: 100%;
-        object-fit: cover;
         height: 320px;
+        object-fit: cover;
+        @include pad {
+            width: 100%;
+            height: 200px;
+        }
     }
 }
 
 .about {
-    color: #0f3d3e;
-    height: 1870px;
     .about_title{
-        margin: 50px 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
         h2{
+            color: $green-1;
             text-align: center;
             font-weight: bold;
         }
@@ -28,264 +35,327 @@
             background-color: #0f3d3e;
         }            
     }
-    .part1_img{
-        height: 425px; /*can be anything*/
-        width: 740px; /*can be anything*/
-        position: relative;
-        img{
-            max-height: 100%;  
-            max-width: 100%; 
-            width: auto;
-            height: auto;
-            position: absolute;  
-            top: 0;  
-            bottom: 0;  
-            left: 120px;  
-            right: 0;  
-            margin: auto;
-        }
-    }
-    .part1_content{
-        height: 100px;
-        position: absolute;  
-        top: 620px;  
-        bottom: 0;  
-        left: 420px;  
-        right: 0;  
-        margin: auto;
-        /* ---------------- 底下文字 ---------------- */
-        div:nth-of-type(1) {
-            /*(一)減短左邊文字長度*/
-            position: relative;
-            left:20px;     /*(四)兩邊文字對齊*/
-            top:47px;
-            width: 800px;   /*(二)增加右邊文字長度*/
+    
+    .about_content{
+        max-width: 1125px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+        @include pad{
+            max-width: 720px;
         }
 
-        div {
-            overflow: hidden;
-        }
+        .part1{
+            text-align: right;
+            margin-bottom: 100px;
 
-        div h5 {
-            width: 900px;   /*調整全文字長度*/
+            @include pad{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 40px;
+            }
+
+            .part1_img{
+                position: relative;
+
+                @include pad{
+                    height: 425px;
+                }
+
+                img{
+                    max-width: 740px;
+                    max-height: 425px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
             
+            .part1_info{
+                @include pad{
+                    text-align: left;
+                    margin: 20px;
+                }
+                .content_line{
+                    width: 200px;
+                    border-top: solid 2px #0f3d3e;
+                    margin-left: 920px;
+                    @include pad{
+                        width: 100%;
+                        border-top: solid 2px #0f3d3e;
+                        margin-left: -20px;
+                        margin-bottom: 30px;
+                    }
+                }
+                .word_box{
+                    margin: 40px 0 100px 400px;
+                    position: relative;
+                    text-align: right;
+                    letter-spacing: 1px;
+                    @include pad{
+                        margin: 0;
+                        text-align: left;
+                    }
+                }
+                
+                .word_box > div:nth-of-type(1){
+                    width: 740px;
+                    @include pad{
+                        width: 650px;
+                    }
+                }
+
+                .word_box > div {
+                    overflow: hidden;
+                }
+
+                .word_box > div h6 {
+                    width: 740px;
+                    text-align: left;
+                    @include pad{
+                        width: 650px;
+                    }
+                }
+
+                /* -------------------- 左邊文字 ------------------*/
+                .word_box > div:nth-of-type(2) {
+                    color: #fff;
+                    position: absolute;
+                    left: 0px;
+                    top: 0;
+                    width: 340px;
+                    @include pad{
+                        width: 0px;
+                    }
+                }
+                
+                .word_box > div {
+                    overflow: hidden;
+                }
+
+                .word_box > div:nth-of-type(2) p {
+                    left: 0px;
+                    position: relative;
+                }
+
+                .word_box > div p {
+                    width: 445px;
+                }
+            }
+        }
+        .part2{
+            margin-bottom: 100px;
+
+            @include pad{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 40px;
+            }
+
+            .part2_img{
+                position: relative;
+
+                @include pad{
+                    height: 425px;
+                }
+
+                img{
+                    max-width: 740px;
+                    max-height: 425px;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    @include pad{
+                        left: 0;
+                    }
+                }
+            }
             
+            .part2_info{
+                @include pad{
+                    text-align: left;
+                    margin: 20px;
+                }
+                .content_line{
+                    width: 200px;
+                    border-top: solid 2px #0f3d3e;
+                    margin-left: 0;
+                    @include pad{
+                        width: 100%;
+                        border-top: solid 2px #0f3d3e;
+                        margin-left: -20px;
+                        margin-bottom: 30px;
+                    }
+                }
+                .word_box{
+                    margin: 40px 0 100px 0px;
+                    position: relative;
+                    text-align: right;
+                    letter-spacing: 1px;
+                    @include pad{
+                        margin: 0;
+                        text-align: left;
+                    }
+                }
+                
+                .word_box > div:nth-of-type(1){
+                    color: #fff;
+                    width: 740px;
+                    @include pad{
+                        
+                        width: 0px;
+                    }
+                }
+
+                .word_box > div {
+                    overflow: hidden;
+                }
+
+                .word_box > div h6 {
+                    width: 740px;
+                    text-align: left;
+                    @include pad{
+                        
+                        width: 0px;
+                    }
+                }
+
+                /* -------------------- 左邊文字 ------------------*/
+                .word_box > div:nth-of-type(2) {
+                    
+                    position: absolute;
+                    left: 0px;
+                    top: 0;
+                    width: 385px;
+                    @include pad{
+                        
+                        width: 650px;
+                    }
+                }
+                
+                .word_box > div {
+                    overflow: hidden;
+                }
+
+                .word_box > div:nth-of-type(2) p {
+                    left: 0px;
+                    position: relative;
+                }
+
+                .word_box > div h6 {
+                    width: 650px;
+                }
+            }
+        }
+        .part3{
+            text-align: right;
+            margin-bottom: 100px;
+
+            @include pad{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+            }
+
+            .part3_img{
+                position: relative;
+
+                @include pad{
+                    height: 425px;
+                }
+
+                img{
+                    max-width: 740px;
+                    max-height: 425px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+            
+            .part3_info{
+                @include pad{
+                    text-align: left;
+                    margin: 20px;
+                }
+                .content_line{
+                    width: 200px;
+                    border-top: solid 2px #0f3d3e;
+                    margin-left: 920px;
+                    @include pad{
+                        width: 100%;
+                        border-top: solid 2px #0f3d3e;
+                        margin-left: -20px;
+                        margin-bottom: 30px;
+                    }
+                }
+                .word_box{
+                    margin: 40px 0 100px 400px;
+                    position: relative;
+                    text-align: right;
+                    letter-spacing: 1px;
+                    @include pad{
+                        margin: 0;
+                        text-align: left;
+                    }
+                }
+                
+                .word_box > div:nth-of-type(1){
+                    width: 740px;
+                    @include pad{
+                        width: 650px;
+                    }
+                }
+
+                .word_box > div {
+                    overflow: hidden;
+                }
+
+                .word_box > div h6 {
+                    width: 740px;
+                    text-align: left;
+                    @include pad{
+                        width: 650px;
+                    }
+                }
+
+                /* -------------------- 左邊文字 ------------------*/
+                .word_box > div:nth-of-type(2) {
+                    color: #fff;
+                    position: absolute;
+                    left: 0px;
+                    top: 0;
+                    width: 340px;
+                    @include pad{
+                        width: 0px;
+                    }
+                }
+                
+                .word_box > div {
+                    overflow: hidden;
+                }
+
+                .word_box > div:nth-of-type(2) p {
+                    left: 0px;
+                    position: relative;
+                }
+
+                .word_box > div p {
+                    width: 445px;
+                }
+            }
         }
         
-
-
-        /* ---------------- 上面文字 ---------------- */
-
-        div:nth-of-type(2) {
-            color: #fff;
-            position: absolute;
-            left: 20px;     /*(四)兩邊文字對齊*/
-            top: 150px;
-            width: 420px;   /*(二)增加右邊文字長度*/
-        }
-
-        div {
-            overflow: hidden;
-        }
-
-        div:nth-of-type(2) p {
-            left: -550px;  /*(三)對齊文字*/
-            position: relative;
-        }
-
-        div h5 {
-            width: 900px;
-        }
-        h2{
-            margin-right: 100px;
-            text-align: right;
-            
-        }
-        h4{
-            text-align: right;
-            margin-right: 100px;
-        }
-        p{
-            width: 400px;
-            border-bottom: solid 2px #0f3d3e;
-            position: absolute;
-            left:340px;
-            top:100px;
-        }
-    }
-
-    .part2_img{
-        height: 425px; /*can be anything*/
-        width: 740px; /*can be anything*/
-        position: relative;
-        img{
-            max-height: 100%;  
-            max-width: 100%; 
-            width: auto;
-            height: auto;
-            position: absolute;  
-            top: 150px;  
-            bottom: 0;  
-            left: 420px;  
-            right: 0;  
-            margin: auto;
-        }
-    }
-    .part2_content{
-        height: 100px;
-        position: absolute;  
-        top: 1200px;  
-        bottom: 0;  
-        left: 420px;  
-        right: 0;  
-        margin: auto;
-        /* ---------------- 底下文字 ---------------- */
-        div:nth-of-type(1) {
-            color: #fff;
-            /*(一)減短左邊文字長度*/
-            position: absolute;
-            left:-300px;     /*(四)兩邊文字對齊*/
-            top:150px;
-            width: 800px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div h5 {
-            width: 900px;   /*調整全文字長度*/
-            
-            
-        }
-        
-    
-    
-        /* ---------------- 上面文字 ---------------- */
-    
-        div:nth-of-type(2) {
-            color: #0f3d3e;
-            position: absolute;
-            left: -300px;     /*(四)兩邊文字對齊*/
-            top: 150px;
-            width: 300px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div:nth-of-type(2) p {
-            left: -550px;  /*(三)對齊文字*/
-            position: relative;
-        }
-    
-        div h5 {
-            width: 900px;
-        }
-        h2{
-            margin-left: -300px;
-        }
-        h4{
-            margin-left: -300px;
-        }
-        p{
-            width: 400px;
-            border-bottom: solid 2px #0f3d3e;
-            position: absolute;
-            left:-300px;
-            top:100px;
-        }
-    }
-    .part3_img{
-        height: 425px; /*can be anything*/
-        width: 740px; /*can be anything*/
-        position: relative;
-        img{
-            max-height: 100%;  
-            max-width: 100%; 
-            width: auto;
-            height: auto;
-            position: absolute;  
-            top: 400px;  
-            bottom: 0;  
-            left: 120px;  
-            right: 0;  
-            margin: auto;
-        }
-    }
-    .part3_content{
-        height: 100px;
-        position: absolute;  
-        top: 1800px;  
-        bottom: 0;  
-        left: 420px;  
-        right: 0;  
-        margin: auto;
-        /* ---------------- 底下文字 ---------------- */
-        div:nth-of-type(1) {
-            /*(一)減短左邊文字長度*/
-            position: absolute;
-            left:20px;     /*(四)兩邊文字對齊*/
-            top:150px;
-            width: 800px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div h5 {
-            width: 900px;   /*調整全文字長度*/
-            
-            
-        }
-        
-    
-    
-        /* ---------------- 上面文字 ---------------- */
-    
-        div:nth-of-type(2) {
-            color: #fff;
-            position: absolute;
-            left: 20px;     /*(四)兩邊文字對齊*/
-            top: 150px;
-            width: 420px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div:nth-of-type(2) p {
-            left: -550px;  /*(三)對齊文字*/
-            position: relative;
-        }
-    
-        div h5 {
-            width: 900px;
-        }
-        h2{
-            margin-right: 100px;
-            text-align: right;
-            
-        }
-        h4{
-            text-align: right;
-            margin-right: 100px;
-        }
-        p{
-            width: 400px;
-            border-bottom: solid 2px #0f3d3e;
-            position: absolute;
-            left:340px;
-            top:100px;
-        }
     }
 }
 .serve{
+    width: 100%;
     height: 1163px;
     background-color: #E2DCC8,;
+    @include pad{
+        height: 1750px;
+    }
     .serve_title{
         margin: 50px 0;
         padding-top: 50px;
@@ -301,143 +371,142 @@
         }
             
     }
-    .serve_grid{
-        max-width: 1000px;
+    .serve_grid {
+        width: 1050px;
+        height: 800px;
         margin: 0 auto;
         display: grid;
-        gap: 10px;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        
-        
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 5px;
+        @include pad{
+            width: 660px;
+            height: 1500px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+        }
         .reserve{
-            grid-column: 1/3;
-            grid-row: 1/3;
-            display: flex;
-            img{
-                height: 100%;
-                width: 100%;
-                object-fit: cover;
-                object-position: center center;
+            background-image: url(../../img/about_img/about_box_reserve.jpg);
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            @include pad{
+                grid-column: 1/3;
+                grid-row: 1/2;
             }
-            .info{
-                width: 663px;
-                height: 305px;
-                display: none;
+            h4{
+                height: 100%;
+                line-height: 400px;
                 background-color: rgba(0,0,0,0.5);
+                text-align: center;
                 transition: 0.5s;
                 opacity: 0;
                 
             }          
         }
         .reserve:hover{
-            .info{
+            cursor: pointer;
+            h4{
                 opacity: 1;
-                display: block;
-                position: absolute;
                 color: #fff;
-                h4{
-                    text-align: center;
-                    padding-top: 20%;
-                }
+                
             }
         }
         .shopmall{
-            grid-column: 1/2;
-            grid-row: 3/6;
-            display: flex;
-            img{
-                height: 32%;
-                width: 100%;
-                object-fit: cover;
-                object-position: center center;
+            background-image: url(../../img/about_img/about_box_shopmall.jpg);
+            grid-column: 1 / 2;
+            grid-row: 3 / 6; 
+            @include pad{
+                grid-column: 1/2;
+                grid-row: 2/4;
             }
-            .info{
-                width: 327px;
-                height: 470px;
-                display: none;
+            h4{
+                height: 100%;
+                line-height: 478px;
                 background-color: rgba(0,0,0,0.5);
-                transition: 1s;
+                text-align: center;
+                transition: 0.5s;
                 opacity: 0;
+                @include pad{
+                    height: 100%;
+                    line-height: 930px;
+                }
             }
         }
         .shopmall:hover{
-            .info{
+            cursor: pointer;
+            h4{
                 opacity: 1;
-                display: block;
-                position: absolute;
                 color: #fff;
-                h4{
-                    text-align: center;
-                    padding-top: 60%;
-                }
             }
         }
-        .menu{
-            grid-column: 2/3;   
-            grid-row: 3/6;
-            display: flex;
-            img{
-                height: 32%;
-                width: 100%;
-                object-fit: cover;
-                object-position: center center;
+        .menu_grid{
+            background-image: url(../../img/about_img/about_box_menu.jpg);
+            grid-column: 2 / 3;
+            grid-row: 3 / 6;
+            @include pad{
+                grid-column: 2/3;
+                grid-row: 2/4;
             }
-            .info{
-                width: 327px;
-                height: 470px;
-                display: none;
+            h4{
+                height: 100%;
+                line-height: 478px;
                 background-color: rgba(0,0,0,0.5);
+                text-align: center;
                 transition: 0.5s;
                 opacity: 0;
+                @include pad{
+                    height: 100%;
+                    line-height: 930px;
+                }
             } 
         }
-        .menu:hover{
-            .info{
+        .menu_grid:hover{
+            cursor: pointer;
+            h4{
                 opacity: 1;
-                display: block;
-                position: absolute;
                 color: #fff;
-                h4{
-                    text-align: center;
-                    padding-top: 60%;
-                }
             }
         }
         .team{
-            grid-column-start: 3/4;
-            grid-row: 1/6;
-            display: flex;
-            img{
-                height: 44%;
-                width: 100%;
-                object-fit: cover;
-                object-position: center center;
+            background-image: url(../../img/about_img/about_box_team.jpg);
+            grid-column: 3 / 4;
+            grid-row: 1 / 6;
+            @include pad{
+                background-image: url(../../img/about_img/about_box_team_rwd.jpg);
+                grid-column: 1/3;
+                grid-row: 4/5;
             }
-            .info{
-                width: 327px;
-                height: 785px;
-                display: none;
+            h4{
+                height: 100%;
+                line-height: 800px;
                 background-color: rgba(0,0,0,0.5);
                 transition: 0.5s;
                 opacity: 0;
+                text-align: center;
+                @include pad{
+                    height: 318px;
+                    line-height: 318px;
+                }
             } 
         }
         .team:hover{
-            .info{
+            cursor: pointer;
+            h4{
                 opacity: 1;
-                display: block;
-                position: absolute;
                 color: #fff;
-                h4{
-                    text-align: center;
-                    padding-top: 110%;
-                }
             }
-        }
-        
+        }  
     }
+    .serve_grid >* {
+        background-size: cover;
+    }
+    
+    
 }
+
 .contact{
+    max-width: 1280px;
+    margin:0 auto;
     padding-bottom: 50px;
     .contact_title{
         margin: 50px;

@@ -1,5 +1,5 @@
 .banner{
-        
+    margin-bottom: 20px;
     h1{
         margin-left: 80px;
         color: #0f3d3e;
@@ -10,277 +10,179 @@
     }
 }
 
+
+
 .menu {
     color: #0f3d3e;
-    height: 1470px;
-    .about_title{
-        margin: 50px 0;
-        h2{
-            text-align: center;
-            font-weight: bold;
-        }
-        .border{
-            margin: 0 auto;
-            width: 72px;
-            height: 1px;
-            background-color: #0f3d3e;
-        }            
-    }
-    .part1_img{
-        height: 425px; /*can be anything*/
-        width: 740px; /*can be anything*/
-        position: relative;
-        img{
-            max-height: 100%;  
-            max-width: 100%; 
-            width: auto;
-            height: auto;
-            position: absolute;  
-            top: 0;  
-            bottom: 0;  
-            left: 120px;  
-            right: 0;  
-            margin: auto;
-        }
-    }
-    .part1_content{
-        height: 100px;
-        position: absolute;  
-        top: 550px;  
-        bottom: 0;  
-        left: 420px;  
-        right: 0;  
-        margin: auto;
-        /* ---------------- 底下文字 ---------------- */
-        div:nth-of-type(1) {
-            /*(一)減短左邊文字長度*/
-            position: absolute;
-            left:250px;     /*(四)兩邊文字對齊*/
-            top:150px;
-            width: 500px;   /*(二)增加右邊文字長度*/
-        }
-
-        div {
-            overflow: hidden;
-        }
-
-        div h5 {
-            width: 900px;   /*調整全文字長度*/
-            
-            
-        }
-        
-
-
-        /* ---------------- 上面文字 ---------------- */
-
-        div:nth-of-type(2) {
-            color: #fff;
-            position: absolute;
-            left: 250px;     /*(四)兩邊文字對齊*/
-            top: 150px;
-            width: 190px;   /*(二)增加右邊文字長度*/
-        }
-
-        div {
-            overflow: hidden;
-        }
-
-        div:nth-of-type(2) p {
-            left: -550px;  /*(三)對齊文字*/
-            position: relative;
-        }
-
-        div h5 {
-            width: 900px;
-        }
-        h2{
-            margin-right: 100px;
+    height: 1400px;
+    
+    
+    .menu_content{
+        max-width: 1150px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        .part1{
             text-align: right;
+            background-image: url(../../img/menu_img/menu_reserve01.jpg);
+            background-size: 860px 450px;
+            background-position: left;
+            background-repeat: no-repeat;
+            margin-bottom: 100px;
+            .content_line{
+                width: 200px;
+                border-top: solid 2px #0f3d3e;
+                margin-left: 950px;
+            }
+            .word_box{
+                margin: 40px 0 100px 600px;
+                position: relative;
+                text-align: right;
+                letter-spacing: 1px;
+            }
             
-        }
-        h4{
-            text-align: right;
-            margin-right: 100px;
-        }
-        p{
-            width: 400px;
-            border-bottom: solid 2px #0f3d3e;
-            position: absolute;
-            left:340px;
-            top:100px;
-        }
-    }
+            .word_box > div:nth-of-type(1){
+                width: 540px;
+            }
 
-    .part2_img{
-        height: 425px; /*can be anything*/
-        width: 740px; /*can be anything*/
-        position: relative;
-        img{
-            max-height: 100%;  
-            max-width: 100%; 
-            width: auto;
-            height: auto;
-            position: absolute;  
-            top: 150px;  
-            bottom: 0;  
-            left: 420px;  
-            right: 0;  
-            margin: auto;
-        }
-    }
-    .part2_content{
-        height: 100px;
-        position: absolute;  
-        top: 1050px;  
-        bottom: 0;  
-        left: 420px;  
-        right: 0;  
-        margin: auto;
-        /* ---------------- 底下文字 ---------------- */
-        div:nth-of-type(1) {
-            color: #fff;
-            /*(一)減短左邊文字長度*/
-            position: absolute;
-            left:-300px;     /*(四)兩邊文字對齊*/
-            top:120px;
-            width: 800px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div h5 {
-            width: 900px;   /*調整全文字長度*/
+            .word_box > div {
+                overflow: hidden;
+            }
+
+            .word_box > div h6 {
+                width: 540px;
+                text-align: left;
+            }
+
+            /* -------------------- 左邊文字 ------------------*/
+            .word_box > div:nth-of-type(2) {
+                color: #fff;
+                position: absolute;
+                left: 0px;
+                top: 0;
+                width: 258px;
+            }
             
+            .word_box > div {
+                overflow: hidden;
+            }
+
+            .word_box > div:nth-of-type(2) p {
+                left: 0px;
+                position: relative;
+            }
+
+            .word_box > div p {
+                width: 445px;
+            }
+        }
+        .part2{
+            background-image: url(../../img/menu_img/menu_reserve02.jpg);
+            background-size: 860px 450px;
+            background-position: right;
+            background-repeat: no-repeat;
+            margin-bottom: 100px;
+            .content_line{
+                width: 200px;
+                border-top: solid 2px #0f3d3e;
+            }
+            .word_box{
+                margin: 40px 0 150px 0;
+                position: relative;
+                letter-spacing: 1px;
+            }
             
-        }
-        
-    
-    
-        /* ---------------- 上面文字 ---------------- */
-    
-        div:nth-of-type(2) {
-            color: #0f3d3e;
-            position: absolute;
-            left: -300px;     /*(四)兩邊文字對齊*/
-            top: 120px;
-            width: 300px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div:nth-of-type(2) p {
-            left: -550px;  /*(三)對齊文字*/
-            position: relative;
-        }
-    
-        div h5 {
-            width: 900px;
-        }
-        h2{
-            margin-left: -300px;
-        }
-        h4{
-            margin-left: -300px;
-        }
-        p{
-            width: 400px;
-            border-bottom: solid 2px #0f3d3e;
-            position: absolute;
-            left:-300px;
-            top:100px;
-        }
-    }
-    .part3_img{
-        height: 425px; /*can be anything*/
-        width: 740px; /*can be anything*/
-        position: relative;
-        img{
-            max-height: 100%;  
-            max-width: 100%; 
-            width: auto;
-            height: auto;
-            position: absolute;  
-            top: 400px;  
-            bottom: 0;  
-            left: 120px;  
-            right: 0;  
-            margin: auto;
-        }
-    }
-    .part3_content{
-        height: 100px;
-        position: absolute;  
-        top: 1600px;  
-        bottom: 0;  
-        left: 420px;  
-        right: 0;  
-        margin: auto;
-        /* ---------------- 底下文字 ---------------- */
-        div:nth-of-type(1) {
-            /*(一)減短左邊文字長度*/
-            position: absolute;
-            left:250px;     /*(四)兩邊文字對齊*/
-            top:150px;
-            width: 500px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div h5 {
-            width: 900px;   /*調整全文字長度*/
+            .word_box > div:nth-of-type(1){
+                width: 740px;
+                color: #fff;
+            }
+
+            .word_box > div {
+                overflow: hidden;
+            }
+
+            .word_box > div h6 {
+                width: 740px;
+            }
+
+            /* -------------------- 左邊文字 ------------------*/
+            .word_box > div:nth-of-type(2) {
+                
+                position: absolute;
+                left: 0px;
+                top: 0;
+                width: 290px;
+            }
             
-            
+            .word_box > div {
+                overflow: hidden;
+            }
+
+            .word_box > div:nth-of-type(2) p {
+                left: 0px;
+                position: relative;
+            }
+
+            .word_box > div h6 {
+                width: 440px;
+            }
         }
-        
-    
-    
-        /* ---------------- 上面文字 ---------------- */
-    
-        div:nth-of-type(2) {
-            color: #fff;
-            position: absolute;
-            left: 250px;     /*(四)兩邊文字對齊*/
-            top: 150px;
-            width: 190px;   /*(二)增加右邊文字長度*/
-        }
-    
-        div {
-            overflow: hidden;
-        }
-    
-        div:nth-of-type(2) p {
-            left: -550px;  /*(三)對齊文字*/
-            position: relative;
-        }
-    
-        div h5 {
-            width: 900px;
-        }
-        h2{
-            margin-right: 100px;
+        .part3{
             text-align: right;
+            background-image: url(../../img/menu_img/menu_reserve03.jpg);
+            background-size: 860px 450px;
+            background-position: left;
+            background-repeat: no-repeat;
+            .content_line{
+                width: 200px;
+                border-top: solid 2px #0f3d3e;
+                margin-left: 950px;
+            }
+            .word_box{
+                margin: 40px 0 100px 600px;
+                position: relative;
+                text-align: right;
+                letter-spacing: 1px;
+            }
             
-        }
-        h4{
-            text-align: right;
-            margin-right: 100px;
-        }
-        p{
-            width: 400px;
-            border-bottom: solid 2px #0f3d3e;
-            position: absolute;
-            left:340px;
-            top:100px;
+            .word_box > div:nth-of-type(1){
+                width: 540px;
+            }
+
+            .word_box > div {
+                overflow: hidden;
+            }
+
+            .word_box > div h6 {
+                width: 540px;
+                text-align: left;
+            }
+
+            /* -------------------- 左邊文字 ------------------*/
+            .word_box > div:nth-of-type(2) {
+                color: #fff;
+                position: absolute;
+                left: 0px;
+                top: 0;
+                width: 258px;
+            }
+            
+            .word_box > div {
+                overflow: hidden;
+            }
+
+            .word_box > div:nth-of-type(2) p {
+                left: 0px;
+                position: relative;
+            }
+
+            .word_box > div p {
+                width: 445px;
+            }
         }
     }
 }
+
 
 .add{
 
@@ -301,6 +203,7 @@
             
     }
     .add_menu{
+        width: 1280px;
         margin: 0 auto;
         position: relative;
         ul{
@@ -322,7 +225,7 @@
                 }
             }
             li:last-child{
-                margin-right: 0;
+                // margin-right: 0;
             }
         }
     }
