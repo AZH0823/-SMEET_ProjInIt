@@ -8,6 +8,10 @@
 
     background-repeat: no-repeat;
 
+    @include mobile {
+        background-image: url("../img/index_img/index_head_banner_rwd.jpg");
+    }
+
     .header_scope {
 
         header {
@@ -109,9 +113,17 @@
 /*------------------- slide_header -------------------*/
 .slide_header {
     // display: none;
+    height: 10%;
 
+    @include mobile {
+        width: 100%;
+    }
 
     header.header_all {
+        z-index: 200;
+        // background-image: linear-gradient(180deg, #fff 50%, .5);
+        // background-color: rgb(160, 40, 40);
+        // background-image: linear-gradient(rgba(255, 255, 255)65%, rgba(255, 255, 255, 0));
         // display: flex;
         width: 100%;
         position: fixed;
@@ -123,14 +135,15 @@
         }
 
         .head_logo {
-            width: 115px;
+            margin-top: 10px;
+            width: 90px;
             // position: relative;
             // position: absolute;
             // top: 0;
             // left: 30px;
 
             img {
-                height: 115px;
+                height: 90px;
             }
         }
 
@@ -156,21 +169,36 @@
 
         nav {
             position: relative;
+            // padding-right: 20px;
 
             .header_user {
                 display: flex;
-                padding-right: 20px;
+                padding: 0;
 
-                a {
+                .slide_user {
                     display: block;
                     margin-top: 45px;
                     text-decoration: none;
                     padding-right: 20px;
                 }
 
-                a.reserve_btn {
+                .slide_ham {
+                    display: none;
+                    margin-top: 45px;
+                    text-decoration: none;
+                    padding-right: 20px;
+
+                    @include mobile() {
+
+                        display: block;
+
+                    }
+                }
+
+                .reserve_btn {
                     display: block;
                     margin-top: 0;
+                    padding: 0;
 
                     img {
 
@@ -178,11 +206,38 @@
                         height: 170px;
                     }
                 }
+
             }
 
+            @include mobile {
+                .slide_ham {
+                    display: block;
+                }
+            }
 
         }
 
     }
 
+
 }
+
+.header_bg {
+    background-color: rgb(255, 255, 255);
+    height: 110px;
+    position: fixed;
+    z-index: 199;
+}
+
+.header_mg {
+    background-color: rgb(255, 255, 255);
+    height: 100px;
+}
+
+/*------------------- rwd_header -------------------*/
+
+// @include pad() {}
+
+// @include mobile() {
+//     background-image: url("../img/index_img/index_head_banner_rwd.jpg");
+// }
