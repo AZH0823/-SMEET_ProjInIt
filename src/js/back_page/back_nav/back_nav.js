@@ -10,23 +10,29 @@ let slideContent = $(".side_subNav_wrap");
 // console.log(chevron_up);
 
 for (let i = 0; i < chevron_down.length; i++) {
-    on[i].addEventListener("click", function (e) {
-        e.preventDefault();
-        console.log(i);
-        chevron_down[i]
-            .classList
-            .toggle("-on");
-        chevron_up[i]
-            .classList
-            .toggle("-on");
+
+    if(i == 2 || i == 5 || i == 6){
+
+        on[i].addEventListener("click", function (e) {
+            
+            // e.preventDefault();
+            chevron_down[i]
+                .classList
+                .toggle("-on");
+            chevron_up[i]
+                .classList
+                .toggle("-on");
+
         // slideContent[i].slideToggle()
-        if (i == 2) {
-            $(slideContent[0]).slideToggle()
-        } else if (i == 5) {
-            $(slideContent[1]).slideToggle()
-        } else if (i == 6) {
-            $(slideContent[2]).slideToggle()
-        }
-    });
+            if (i == 2) {
+                $(slideContent[0]).slideToggle()
+            } else if (i == 5) {
+                $(slideContent[1]).slideToggle()
+            } else if (i == 6) {
+                $(slideContent[2]).slideToggle()
+            }
+        });
+    }
+    
 }
 

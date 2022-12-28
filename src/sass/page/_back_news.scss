@@ -1,7 +1,6 @@
-.news_back {
-    .wrapper {
+div.back_news {
+    div.backwrapper {
         display: flex;
-        justify-content: center;
         gap: 7%;
 
         header {
@@ -11,7 +10,7 @@
         .container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            width: 73%;
 
             // 表格
             main.right_content {
