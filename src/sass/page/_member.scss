@@ -471,6 +471,136 @@
     display: none !important;
   }
 
+  .message_section {
+    ul {
+      border-bottom: 1px solid #000;
+
+      .message_content {
+        border: 1px solid #000;
+        max-width: 70%;
+        margin: 0 auto;
+        margin-top: 5%;
+
+        @include pad {
+          font-size: 14px;
+          max-width: 80%;
+        }
+        @include mobile{
+           max-width: 100%;
+        }
+
+        @media all and (max-width:375px) {
+         
+          
+        }
+        .time_cover {
+          margin: 5% 0 2% 20%;
+          color: #a99797;
+
+          @include pad {
+            margin: 5% 0 2% 13%;
+          }
+          @include mobile {
+            margin: 5% 0 2% 16%;
+          }
+        }
+        .message_import {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          img {
+            width: 10%;
+            display: inline-block;
+            @include mobile { 
+              margin: -4% 5% 0 1%;
+            }
+          }
+          p {
+            margin-right: 3%;
+            @include mobile {
+               margin-top: 5%;
+            }
+          }
+        }
+      }
+
+      .message_customer {
+        border: 1px solid #000;
+        width: 30%;
+        margin: 5% 0 30% 55%;
+        @include pad {
+          width: 35%;
+        }
+        @include mobile {
+          width: 45%;
+        }
+        .time_cover {
+          margin: 5% 0 2% 15%;
+          color: #a99797;
+          @include mobile {
+            margin: 5% 0 2% 9%;
+          }
+        }
+        .customer_import {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin: 5%;
+
+          .fa-user {
+            border-radius: 50%;
+            color: #fff;
+            border: 1px solid $Camel-2;
+            background-color: $Camel-2;
+            width: 30px;
+            height: 30px;
+            line-height: 27px;
+            padding-left: 7px;
+          }
+        }
+      }
+    }
+    .customer_respond {
+      margin-top: 3%;
+      resize: none;
+      width: 70%;
+      margin-left: 15%;
+      @include pad {
+        width: 80%;
+        margin-left: 10%;
+      }
+      @include mobile {
+        width: 100%;
+        margin-left: 0;
+      }
+      // &::placeholder {
+      // }
+    }
+    .upload {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+      width: 70%;
+      padding: 1% 0 5% 0;
+      @include pad {
+        width: 80%;
+      }
+      @include mobile {
+        width: 100%;
+      }
+      .upload_plus {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        width: 200px;
+        p {
+          padding-left: 5%;
+        }
+      }
+    }
+  }
+
   // ======================訊息中心結束
   // ======================常見問題
 
@@ -535,9 +665,11 @@
             margin-top: 2%;
             margin-bottom: 2%;
           }
-          .fa-plus,
-          .fa-minus {
+          .fa-plus {
             padding-right: 4%;
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
         .question_none {
@@ -545,8 +677,20 @@
           justify-content: space-between;
           align-items: center;
           padding-left: 4%;
-          p {
-            padding-left: 1%;
+          display: none;
+          background-color: $Camel-3;
+          &.active {
+            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 4%;
+            background-color: $Camel-3;
+          }
+          h6 {
+            margin-top: 2%;
+            margin-bottom: 2%;
+            padding-left: 3%;
             width: 580px;
             @media all and (max-width: 992px) {
               padding: 0 8% 0 5%;
@@ -554,22 +698,18 @@
             @include pad {
               padding: 0 13% 0 5%;
             }
-            @include mobile {
-            font-size: 16px;
-            }
-          }
-          p,
-          .fa-solid {
-            font-size: 20px;
-            margin-top: 2%;
-            margin-bottom: 2%;
             @media all and (max-width: 375px) {
               font-size: 14px;
             }
           }
-
           .fa-a {
-            font-size: 17px;
+            font-size: 18px;
+          }
+          .fa-minus {
+            padding-right: 4%;
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }
