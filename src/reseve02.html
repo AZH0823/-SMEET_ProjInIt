@@ -9,8 +9,13 @@
 </head>
 
 <body>
-    @@include('layout/header_01.html')
-
+    <!-- @@include('layout/header_01.html') -->
+    <!-- 流程控制說明 -->
+    <!-- checked 控制上方工作流程到哪一個之項目 -->
+    <!-- nowPage 控制一個流程細項目打開  -->
+    <!-- detail_list 達到第三流程才可開啟 -->
+    <!-- setCard checked 切換菜單 -->
+    <!-- d_none 遮蔽不要的帳單細節 -->
     <div class="fulid_wrapper reseve_flow">
         <div class="wrapper">
             <main class="content">
@@ -22,13 +27,14 @@
                         <li class="flowList" flowName="確認訂單">3</li>
                         <li class="flowList" flowName="填寫資料">4</li>
                     </ul>
-                    <form class="form_workFlow_contanier">
-                        <!-- 結帳顯示專區 -->
-                        <section class="oder_view" style="display: none;">
+                    <form class="form_workFlow_contanier detail_list">
+                        <!-- detail_list  明細請打開,display: none;-->
+                        <!-- 結帳顯示專區  -->
+                        <section class="oder_view d_none">
                             <ul class="checkout_contanier">
                                 <!-- 人員資訊 -->
                                 <li id="order_Info" class="order_detailInfo">
-                                    <h6 class="blockTitle">餐點明細</h6>
+                                    <h6 class="blockTitle detailInfo">餐點明細</h6>
                                     <div class="setName"> <img src="./img/reserve_img/reserve_icon01.svg" alt="">名物-套餐名稱
                                     </div>
                                     <div class="count_person">
@@ -70,22 +76,22 @@
                                 <!-- 單點菜品 -->
                                 <div class="addorderlist_title">加購</div>
                                 <li class="dish_title"><span>蘆筍蝦手卷</span><span>x 1</span><span>$600</span></li>
-
+                            </ul>
+                            <ul class="servies">
                                 <!-- 服務 -->
-                                <div class="addorderlist_title">租借及服務</div>
-                                <li class="dish_title"><span>餐具</span><span>x 6</span><span>$600</span></li>
-                                <li class="dish_title"><span>炊具</span><span>x 6</span><span>$600</span></li>
-                                <li class="dish_title"><span>餐盤</span><span>x 6</span><span>$600</span></li>
-                                <li class="dish_title"><span>服務人員</span><span>x 6</span><span>$600</span></li>
-
-                                 <!-- coupon 打折金額 -->
-                            
-                                <li class="dish_title"><span>紅利點數</span><span></span><span>-$ 2,114</span></li>
-                                
-                        
+                                <div class="servieslist_title">租借及服務</div>
+                                <li class="servies_title"><span>餐具</span><span>x 6</span><span>$600</span></li>
+                                <li class="servies_title"><span>炊具</span><span>x 6</span><span>$600</span></li>
+                                <li class="servies_title"><span>餐盤</span><span>x 6</span><span>$600</span></li>
+                                <li class="servies_title"><span>服務人員</span><span>x 6</span><span>$600</span></li>
                             </ul>
 
-                           
+                            <ul class="coupon">
+                                <!-- coupon 打折金額 -->
+                                <li class="coupon_title"><span>紅利點數</span><span></span><span>-$ 2,114</span></li>
+                            </ul>
+
+
                             <!-- 總計 -->
                             <div class="totalPrice">
                                 <h6>總計</h6>
@@ -97,7 +103,7 @@
 
                         </section>
                         <!-- 選擇套餐 -->
-                        <section class="step_flow step1 " id="set">
+                        <section class="step_flow step1  " id="set">
                             <h6 class="blockTitle">1.選擇套餐</h6>
                             <ul class="sets">
                                 <li class="setCard checked">
@@ -181,7 +187,7 @@
                         </section>
 
                         <!-- 加購服務 -->
-                        <section class="step_flow step2" id="addOther">
+                        <section class="step_flow step2 " id="addOther">
 
                             <h6 class="blockTitle">3.選擇單點加購</h6>
                             <ul class="addOther_detail">
@@ -304,7 +310,7 @@
                                 </li>
                                 <li class="rent_service">
                                     <div class="waiter">
-                                        <p class="serive-title">餐盤</p>
+                                        <p class="serive-title">服務人員</p>
                                         <span class="aux-title">全程服務及售後清潔</span>
                                     </div>
                                     <div class="checkboxInner">
@@ -324,136 +330,146 @@
                         </section>
                         <!-- 確認訂單 -->
                         <section class="step_flow step3 nowpage" id="checkDetail">
-                            <!-- inculde 詳細訂單 -->
-                            
-                                <!-- MEMBER標題 -->
-                                
-                                <!-- 會員中心標題 -->
-                                
-                                <!-- 回到列表 -->
-                                
-                                <!-- 訂單編號 -->
-                                
-                                <!-- 上方訂單日期金額進度 -->
-                                <div class="list_top">
-                                    <div class="top_content gray">
-                                        <div class="item">訂購日期</div>
-                                        <div class="item">訂單金額</div>
-                                        <div class="item">支付方式</div>
-                                        <div class="item">處理進度</div>
+                            <div class="list_top">
+                                <div class="top_content gray">
+                                    <div class="item">預約日期</div>
+                                    <div class="item">預約時間</div>
+                                    <div class="item">人數</div>
+                                    <div class="item">私廚團隊</div>
+                                </div>
+                                <div class="top_content">
+                                    <div class="item">2022-12-24</div>
+                                    <div class="item"><span class="date">2021-11-24</span></div>
+                                    <div class="item">12人</div>
+                                    <div class="item">麗燕山 廚師長</div>
+                                </div>
+                            </div>
+                            <!-- 訂單內容明細 -->
+                            <!-- 私廚套餐 -->
+                            <div class="list_r">
+                                <h4 class="detail_title green-1">私廚預約</h4>
+                                <div class="meal_container">
+                                    <h6 class="meal_title">名物 私套餐</h6>
+                                    <div class="meal_cate font16 gray">
+                                        <p class="item">湯物</p>
+                                        <p class="item">前菜</p>
+                                        <p class="item">刺身</p>
+                                        <p class="item">主食</p>
+                                        <p class="item">甜點</p>
+                                        <p class="item">飲品</p>
                                     </div>
-                                    <div class="top_content">
-                                        <div class="item">2022-12-24</div>
-                                        <div class="item">NT$<span class="money">24,000</span></div>
-                                        <div class="item">信用卡</div>
-                                        <div class="item">訂單成立已付款</div>
+                                    <div class="meal_content font16">
+                                        <!-- 湯物 -->
+                                        <p class="item">奶香牛肝菌野菇濃湯</p>
+                                        <p class="item">石斑海鮮清湯</p>
+                                        <!-- 前菜 -->
+                                        <p class="item">燻鮭魚番茄佐優格醬</p>
+                                        <p class="item">深海魚皮野蔬沙拉佐醋醬</p>
+                                        <!-- 刺身 -->
+                                        <p class="item">大間本鮪中腹、秋鮭、貝類、牡丹蝦</p>
+                                        <!-- 主食 -->
+                                        <p class="item">嫩煎干貝佐松露菲力</p>
+                                        <p class="item">日本小田和牛壽喜燒</p>
+                                        <p class="item">龍蝦佐鮑魚海鮮拼盤</p>
+                                        <!-- 甜點 -->
+                                        <p class="item">抹茶布丁搭配綿密金時紅豆</p>
+                                        <p class="item">栗子羊羹</p>
+                                        <p class="item">春手毬和菓子</p>
+                                        <!-- 飲品 -->
+                                        <p class="item">抹茶海鹽奶蓋</p>
+                                        <p class="item">烘焙曼巴咖啡</p>
+                                        <p class="item">高山金萱茶</p>
+                                        <p class="item">檸檬海鹽氣泡飲</p>
+                                    </div>
+                                    <div class="meal_amount font16">
+
                                     </div>
                                 </div>
-                                <!-- 訂單內容明細 -->
-                                <!-- 私廚套餐 -->
-                                <div class="list_r">
-                                    <h4 class="detail_title green-1">私廚預約</h4>
-                                    <div class="meal_container">
-                                        <h6 class="meal_title">名物 私套餐</h6>
-                                        <div class="meal_cate font16 gray">
-                                            <p class="item">湯物</p>
-                                            <p class="item">前菜</p>
-                                            <p class="item">刺身</p>
-                                            <p class="item">主食</p>
-                                            <p class="item">甜點</p>
-                                            <p class="item">飲品</p>
-                                        </div>
-                                        <div class="meal_content font16">
-                                            <!-- 湯物 -->
-                                            <p class="item">奶香牛肝菌野菇濃湯</p>
-                                            <p class="item">石斑海鮮清湯</p>
-                                            <!-- 前菜 -->
-                                            <p class="item">燻鮭魚番茄佐優格醬</p>
-                                            <p class="item">深海魚皮野蔬沙拉佐醋醬</p>
-                                            <!-- 刺身 -->
-                                            <p class="item">大間本鮪中腹、秋鮭、貝類、牡丹蝦</p>
-                                            <!-- 主食 -->
-                                            <p class="item">嫩煎干貝佐松露菲力</p>
-                                            <p class="item">日本小田和牛壽喜燒</p>
-                                            <p class="item">龍蝦佐鮑魚海鮮拼盤</p>
-                                            <!-- 甜點 -->
-                                            <p class="item">抹茶布丁搭配綿密金時紅豆</p>
-                                            <p class="item">栗子羊羹</p>
-                                            <p class="item">春手毬和菓子</p>
-                                            <!-- 飲品 -->
-                                            <p class="item">抹茶海鹽奶蓋</p>
-                                            <p class="item">烘焙曼巴咖啡</p>
-                                            <p class="item">高山金萱茶</p>
-                                            <p class="item">檸檬海鹽氣泡飲</p>
-                                        </div>
-                                    </div>
+                            </div>
+                            <!-- 單點加購 -->
+                            <div class="list_one">
+                                <h4 class="detail_title green-1">單點加購</h4>
+                                <div class="meal_container font16">
+                                    <ul class="one_container">
+                                        <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div>
+                                        </li>
+                                        <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!-- 單點加購 -->
-                                <div class="list_one">
-                                    <h4 class="detail_title green-1">單點加購</h4>
-                                    <div class="meal_container font16">
-                                        <ul class="one_container">
+                            </div>
+                            <!-- 租借服務 -->
+                            <div class="shop_list">
+                                <h4 class="detail_title green-1">租借服務</h4>
+                                <div class="meal_container font16">
+                                    <ul class="one_container">
+                                        <li class="one_item">餐具<div class="one_count">x 6</div>
+                                        </li>
+                                        <li class="one_item">炊具<div class="one_count">x 6</div>
+                                        </li>
+                                    </ul>
+
+
+                                    <!-- <div class="item">餐具</div><div class="count">x 12</div> -->
+                                    <!-- <ul class="one_container">
                                             <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div></li>
-                                            <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- 商城訂購 -->
-                                <div class="shop_list">
-                                    <h4 class="detail_title green-1">商城訂購</h4>
+                                        </ul> -->
+                                    <!-- </div>
                                     <div class="meal_container font16">
-                                        <div class="item">主食</div>
-                                        <ul class="one_container">
-                                            <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div></li>
-                                            <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li>
-                                        </ul>
+                                        <div class="item">炊具</div><div class="count">x 12</div>
                                     </div>
                                     <div class="meal_container font16">
-                                        <div class="item">主食</div>
-                                        <ul class="one_container">
-                                            <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div></li>
-                                            <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li>
-                                        </ul>
+                                        <div class="item">餐盤</div><div class="count">x 12</div>
                                     </div>
+                                    <div class="meal_container font16">
+                                        <div class="item">服務人員</div><div class="count">x 12</div>
+                                    </div> -->
+
                                 </div>
                                 <!-- 訂單資料 -->
                                 <div class="list_info">
                                     <h4 class="detail_title green-1">訂單資料</h4>
-                                    
-                                        <ul class="detail_info">
-                                            
-                                            <li class="item">訂購人</li>
-                                            <li class="item">
-                                                <div class="detail_list_name" id="detail_name">楊一一 </div>
-                                                <div class="detail_list_name" id="detail_phone">0912-345-678</div>
-                                                <div class="detail_list_name" id="detail_phone">d4070707@gmail.com</div>
-                                            </li>
-                                            <li class="item">地址</li>
-                                            <li class="item" id="detail_addr">台北市中山區南京東路三段219號4樓</li>
-                                            <li class="item">餐點明細</li>
-                                            <li class="item gray">
-                                                <div class="cate">餐別<span id="detail_cate">晚餐</span></div>
-                                                <div class="people">人數<span id="detail_people">12人</span></div>
-                                            </li>
-                                        </ul>
+
+                                    <ul class="detail_info">
+
+                                        <li class="item">訂購人</li>
+                                        <li class="item">
+                                            <div class="detail_list_name" id="detail_name">楊一一 </div>
+                                            <div class="detail_list_name" id="detail_phone">0912-345-678</div>
+                                            <div class="detail_list_name" id="detail_phone">d4070707@gmail.com</div>
+                                        </li>
+                                        <li class="item">地址</li>
+                                        <li class="item" id="detail_addr">台北市中山區南京東路三段219號4樓</li>
+                                        <li class="item">餐點明細</li>
+                                        <li class="item gray">
+                                            <div class="cate">餐別<span id="detail_cate">晚餐</span></div>
+                                            <div class="people">人數<span id="detail_people">12人</span></div>
+                                        </li>
+                                    </ul>
                                 </div>
-                                 
+
                                 <!-- 總計 -->
                                 <div class="total_container font16">
                                     <div class="item">小計</div>
-                                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                                    <div class="item price">NT$<span id="detail_total">25,000</span></div>
                                     <div class="item">加購價</div>
-                                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                                    <div class="item price">NT$<span id="detail_total">25,000</span></div>
                                     <div class="item">紅利點數</div>
-                                    <div class="item">-NT$<span id="detail_total">500</span></div>
+                                    <div class="item price">-NT$<span id="detail_total">500</span></div>
                                     <div class="item">總金額 </div>
-                                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                                    <div class="item price">NT$<span id="detail_total">25,000</span></div>
+                                    <!-- 結帳按鈕 -->
+
+                                    <button class="next_btn btn item font16">下一步</button>
+                                    <button class="prev_btn btn item font16">返回上一步</button>
+
                                 </div>
-                            
+
                         </section>
                         <!-- 填寫資料 -->
                         <section class="step_flow step4 " id="comfrim">
-                            <h6 class="blockTitle">5.填寫預約資料<span><label for="sameAccount"><input type="checkbox" name="sameAccount" id="sameAccount">同會員資料</label></span></h6>
+                            <h6 class="blockTitle">5.填寫預約資料<span><label for="sameAccount"><input type="checkbox"
+                                            name="sameAccount" id="sameAccount">同會員資料</label></span></h6>
                             <div class="user_name grid_confirm">
                                 <label for="name">
                                     <h6>姓名</h6>
@@ -501,13 +517,14 @@
 
                                 <input type="number" placeholder="卡號" required class="card_num">
 
-                                <input type="text" placeholder="持卡人姓名" required class = "card_name">
+                                <input type="text" placeholder="持卡人姓名" required class="card_name">
 
                                 <input type="number" placeholder="有效日期" required class="card-date">
 
                                 <input type="number" placeholder="檢核碼" required class="card_checknum" min="0" max="999">
 
                             </div>
+
                         </section>
                     </form>
 
@@ -516,7 +533,7 @@
             </main>
         </div>
     </div>
-    @@include('layout/footer.html')
+    <!-- @@include('layout/footer.html') -->
 </body>
 
 </html>
