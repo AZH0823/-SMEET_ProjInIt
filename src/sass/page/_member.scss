@@ -473,104 +473,206 @@
 
     // ======================訊息中心結束
     // ======================常見問題
+
     .question_section {
       ul {
-        @extend .green-1;
-        margin-left: 20%;
-
+        margin-left: 15%;
+        @media all and (max-width:992px) {
+          margin-left: 13%;
+        }
         @include pad {
-          margin-left: unset;
+          margin-left: 10%;
+        }
+        @include mobile {
+          margin-left: 0;
         }
 
         h5 {
-          margin-top: 7%;
-          margin-bottom: 3%;
+          padding: 7% 0 1% 2%;
+          @extend .green-1;
+          width: 80%;
           @include mobile {
-            font-size: 16px;
+            font-size:16px;
           }
         }
-
-        .question_item {
-          width: 75%;
+        li.question_section_li {
+          display: flex;
+          flex-direction: column;
+          width: 80%;
+          border-top: 1px solid #000;
 
           @include pad {
+            width: 90%;
+          }
+          @include mobile{
             width: 100%;
           }
-          border-top: 1px solid #000;
-          h6 {
-            margin-top: 2%;
-            margin-bottom: 2%;
-            position: relative;
-            @media all and (max-width: 375px) {
-              font-size: 12px;
-              margin-top: 4%;
+
+          .question_flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 4%;
+            border-bottom: 1px solid #000;
+            h6 {
+              width: 530px;
+              @media all and (max-width:992px){
+                padding-left: 5%;              }
+
+              @include pad {
+                padding-left: 5%;
+              }
+              @include mobile {
+                font-size: 16px;
+              }
+              @media all and (max-width:375px) {  
+                font-size: 14px;
+              }
             }
+            h6,
             .fa-solid {
-              position: absolute;
-              top: 5px;
-              right: 25px;
-              @include mobile {
-                right: 5px;
-              }
-              @media all and (max-width: 375px){
-              right: 10px;
-              }
+              margin-top: 2%;
+              margin-bottom: 2%;
             }
-
-            &::before {
-              content: "Q";
-              display: inline-block;
-              width: 35px;
-              height: 35px;
-              margin-left: 3%;
-              margin-right: 4%;
-
-              @include mobile {
-                width: 5px;
-              }
-              @media all and (max-width:375px){
-                height: 25px;
-              }
+            .fa-plus,
+            .fa-minus {
+              padding-right: 4%;
             }
           }
           .question_none {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 4%;
             p {
-              font-size: 20px;
-              border-top: 1px solid #000;
-              padding-top: 2%;
-              padding-bottom: 2%;
-
+              padding-left: 1%;
+              width: 580px;
+              @media all and (max-width:992px){
+                padding: 0 8% 0 5%;
+              }
+              @include pad {
+                padding: 0 13% 0 5%;
+              }
               @include mobile {
-                font-size: 16px;
-               
+               @extend .font16;
               }
-              @media all and (max-width: 375px) {
-                font-size: 12px;
-                padding-top: 4%;
+            }
+            p,
+            .fa-solid {
+              font-size: 20px;
+              margin-top: 2%;
+              margin-bottom: 2%;
+              @media all and (max-width:375px) {  
+                font-size: 14px;
               }
+            }
 
-              a {
-                text-decoration: none;
-              }
-              &::before {
-                content: "A";
-                display: inline-block;
-                width: 40px;
-                height: 35px;
-                margin-left: 3%;
-                margin-right: 4%;
-                @include mobile {
-                  width: 10px;
-                }
-                @media all and (max-width:375px){
-                  height: 25px;
-                }
-              }
+            .fa-a {
+              font-size: 17px;
             }
           }
         }
       }
     }
+
+    // .question_section {
+    //   ul {
+    //     @extend .green-1;
+    //     margin-left: 20%;
+
+    //     @include pad {
+    //       margin-left: unset;
+    //     }
+
+    //     h5 {
+    //       margin-top: 7%;
+    //       margin-bottom: 3%;
+    //       @include mobile {
+    //         font-size: 16px;
+    //       }
+    //     }
+
+    //     .question_item {
+    //       width: 75%;
+
+    //       @include pad {
+    //         width: 100%;
+    //       }
+    //       border-top: 1px solid #000;
+    //       h6 {
+    //         margin-top: 2%;
+    //         margin-bottom: 2%;
+    //         position: relative;
+    //         @media all and (max-width: 375px) {
+    //           font-size: 12px;
+    //           margin-top: 4%;
+    //         }
+    //         .fa-solid {
+    //           position: absolute;
+    //           top: 5px;
+    //           right: 25px;
+    //           @include mobile {
+    //             right: 5px;
+    //           }
+    //           @media all and (max-width: 375px){
+    //           right: 10px;
+    //           }
+    //         }
+
+    //         &::before {
+    //           content: "Q";
+    //           display: inline-block;
+    //           width: 35px;
+    //           height: 35px;
+    //           margin-left: 3%;
+    //           margin-right: 4%;
+
+    //           @include mobile {
+    //             width: 5px;
+    //           }
+    //           @media all and (max-width:375px){
+    //             height: 25px;
+    //           }
+    //         }
+    //       }
+    //       .question_none {
+    //         p {
+    //           font-size: 20px;
+    //           border-top: 1px solid #000;
+    //           padding-top: 2%;
+    //           padding-bottom: 2%;
+
+    //           @include mobile {
+    //             font-size: 16px;
+
+    //           }
+    //           @media all and (max-width: 375px) {
+    //             font-size: 12px;
+    //             padding-top: 4%;
+    //           }
+
+    //           a {
+    //             text-decoration: none;
+    //           }
+    //           &::before {
+    //             content: "A";
+    //             display: inline-block;
+    //             width: 40px;
+    //             height: 35px;
+    //             margin-left: 3%;
+    //             margin-right: 4%;
+    //             @include mobile {
+    //               width: 10px;
+    //             }
+    //             @media all and (max-width:375px){
+    //               height: 25px;
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
     // ======================常見問題結束
   }

@@ -106,12 +106,17 @@
         h6 {
           padding-top: 5%;
           padding-left: 5%;
-          text-overflow: ellipsis;
-          white-space: nowrap;
           overflow: hidden;
+          text-overflow: ellipsis;
         }
         .news_item {
+          // overflow: hidden;
+          // text-overflow: ellipsis;
+          // display: -webkit-box;
+          // -webkit-line-clamp: 2;
+          // -webkit-box-orient: vertical;
           padding: 5% 5% 5% 5%;
+
           @extend .font14;
         }
       }
