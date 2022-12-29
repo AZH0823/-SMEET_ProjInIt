@@ -137,11 +137,48 @@
 }
 
 // resever page02
+// 公用區
+
+.reseve_flow.fulid_wrapper {
+    .d_none {
+        display: none;
+    }
+
+    .flow_container {}
+
+    .fz_rwd {
+        font-size: 20px;
+
+        @include pad() {
+            font-size: 16px;
+        }
+    }
+
+}
 
 .reseve_flow.fulid_wrapper {
 
-
+    // 流程大圖
     .flow_container {
+
+        // 標題公用
+        .blockTitle {
+            border-bottom: 1px solid black;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &>span {
+                margin-left: 10px;
+                font-size: 13px;
+            }
+
+            @include mobile {
+                margin-bottom: 20px;
+            }
+        }
+
         margin: 0 auto 70px auto;
         padding: 0 5%;
         max-width: 930px;
@@ -233,10 +270,89 @@
         }
     }
 
+    @mixin stepper_input {
+        .stepper_input {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #c8c8c8;
+            display: flex;
+            align-items: center;
+            color: #454343;
+
+            .dish-title {
+                margin-right: auto;
+                flex-basis: 55%;
+
+                @include pad() {
+                    // flex-basis: 60%
+                }
+
+                @include mobile() {
+                    font-size: 14px;
+                    flex-basis: 50%
+                }
+            }
+
+            .stepper_valueInput {
+                text-align: center;
+                width: 85px;
+                height: 35px;
+                border: 0px;
+
+                padding: 0 10px;
+                border-radius: 0;
+                box-shadow: none;
+
+                @include pad() {
+                    width: 60px;
+                }
+
+                @include mobile() {
+
+                    width: 40px;
+
+                }
+            }
+
+            .button {
+                cursor: pointer;
+                font-size: 18px;
+                
+                width: 40px;
+                padding: 5px 15px;
+                border: 0px;
+                border-radius: 4px;
+                color: black;
+                background-color: transparent;
+
+                &:hover {
+                    background-color: $Camel-1;
+                    color: white;
+                }
+
+                &:active {
+                    background-color: $red;
+                    color: white;
+                }
+
+                &:focus {
+                    border: 0px;
+                    outline: 0px;
+                }
+            }
+          
+        }
+        @content;
+    }
+
     .blockTitle {
         @extend .green-1;
         border-bottom: 1px solid black;
         padding: 0px 0px 15px 0px;
+        // &.detailInfo
+    }
+    // 當流程走到確認訂單將開啟
+    .form_workFlow_contanier.detail_list {
+        grid-template-columns: 1fr;
     }
 
     .form_workFlow_contanier {
@@ -248,10 +364,12 @@
         gap: 1% 2%;
         grid-template-columns: 1fr 30%;
 
+        // 預設流程細項目為關閉
         .step_flow {
             display: none;
         }
 
+        // 當流程走到某一項目時將開啟
         .step_flow.nowpage {
             display: block;
             grid-column: 1/2;
@@ -259,7 +377,7 @@
         }
 
         @include pad {
-            grid-template-columns: 1fr 0%;
+            grid-template-columns: 1fr;
             margin: 0px 5% 100px 5%;
 
             .step_flow.nowpage {
@@ -270,25 +388,8 @@
 
         }
 
-        // 標題公用
-        .blockTitle {
-            border-bottom: 1px solid black;
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            &>span {
-                margin-left: 10px;
-                font-size: 13px;
-            }
-
-            @include mobile {
-                margin-bottom: 20px;
-            }
-        }
-
-        // 右邊結算畫面
+        // 流程結帳清單
+        // 右邊結帳專區
         .oder_view {
             grid-column: 2 / 3;
             padding-left: 4.25%;
@@ -304,6 +405,8 @@
 
             .setInfolist,
             .addorderlist,
+            .servies,
+            .coupon,
             .totalPrice {
                 @extend .font18;
 
@@ -311,6 +414,8 @@
 
             .setInfolist .setTitle,
             .addorderlist .dish_title,
+            .servies .servies_title,
+            .coupon .coupon_title,
             .totalPric,
             .setInfolist .setTitle {
                 width: 100%;
@@ -360,10 +465,10 @@
                 &:after {}
             }
 
-            .addorderlist {
+            .addorderlist,.servies {
                 margin-top: 25px;
 
-                .addorderlist_title {
+                .addorderlist_title,.servieslist_title {
                     @extend .font16;
                     margin: 5% 0;
                     padding: 0 5%;
@@ -450,11 +555,13 @@
             }
         }
 
+
+        // 流程一
         // 選擇套餐
         .sets {
             display: flex;
             gap: 25px;
-            padding: 35px 0px 0px 0px;
+            padding: 35px 0px 35px 0px;
             justify-content: center;
 
             @include mobile() {
@@ -502,7 +609,6 @@
             }
         }
 
-
         // 選擇套餐內容
         .setdetail {
 
@@ -514,89 +620,41 @@
                 letter-spacing: 0.615em;
                 @extend .bgc_Camel-3;
             }
-
-            .stepper_input {
-                margin-bottom: 20px;
-                border-bottom: 1px solid #c8c8c8;
-                display: flex;
-                align-items: center;
-                color: #454343;
-
-                .dish-title {
-                    margin-right: auto;
-                    flex-basis: 70%;
-
-                    @include pad() {
-                        flex-basis: 60%
-                    }
-
-                    @include mobile() {
-                        font-size: 14px;
-                        flex-basis: 50%
-                    }
-                }
-
-                .stepper_valueInput {
-                    text-align: center;
-                    width: 85px;
-                    height: 35px;
-                    border: 0px;
-
-                    padding: 0 10px;
-                    border-radius: 0;
-                    box-shadow: none;
-
-                    @include pad() {
-                        width: 60px;
-                    }
-
-                    @include mobile() {
-
-                        width: 40px;
-
-                    }
-                }
-
-                .button {
-                    cursor: pointer;
-                    font-size: 18px;
-                    font-weight: 800;
-                    width: 40px;
-                    padding: 5px 15px;
-                    border: 0px;
-                    border-radius: 4px;
-                    color: black;
-                    background-color: transparent;
-
-                    &:hover {
-                        background-color: $Camel-1;
-                        color: white;
-                    }
-
-                    &:active {
-                        background-color: $red;
-                        color: white;
-                    }
-
-                    &:focus {
-                        border: 0px;
-                        outline: 0px;
-                    }
-                }
-            }
+            @include stepper_input();
+           
         }
 
+
+        // 流程二
         // 單點加購
         .addOther_detail {
             @extend .setdetail;
 
             .price {
                 margin-left: 15px;
+                min-width: 60px;
+                @media all and (max-width:880px) {
+
+                }
             }
-
-
+            @include stepper_input(){
+                .amoumt{
+                    display: flex;                
+                }
+              
+                @include pad(){
+                    .stepper_valueInput{
+                        width: 80px;
+                    }
+                }
+                
+                @include  mobile(){
+                    .amoumt{
+                        max-width: 125px;
+                    }
+                }
+            };
         }
-
 
         // 租借服務
         .addOther_rent {
@@ -647,7 +705,7 @@
                         padding: 3px;
 
                         svg {
-                            width: 35px;
+                            width: 30px;
                             stroke: green;
                             stroke-width: 18;
                             fill: black;
@@ -699,14 +757,392 @@
             }
         }
 
-        .fz_rwd {
-            font-size: 20px;
+        // 流程三
+        // =============================================
+        // 明細標題
+        .detail_title {
+            margin-top: 25px;
+
+            &::after {
+                content: '';
+                height: .5px;
+                width: calc(100% - 115px);
+                background-color: #000;
+                display: block;
+                float: right;
+                margin-top: 20px;
+
+                @include pad() {
+                    width: 100%;
+                    margin-top: 2px;
+                }
+            }
+
+            @include mobile() {
+                font-size: 16px;
+            }
+
+
+        }
+
+        .meal_container {
+            $meal_content_high: 32px;
+            line-height: 2;
+            padding-left: 115px;
+            padding-top: 7px;
+            display: grid;
+            grid-template: repeat(1, 1fr) / repeat(8, 1fr);
 
             @include pad() {
-                font-size: 16px;
+                padding-left: 1px;
+                grid-template: repeat(1, 1fr) / repeat(5, 1fr);
+            }
+
+            @include mobile() {
+                position: relative;
+
+            }
+
+            // 套餐名稱
+            .meal_title {
+                grid-column: 1 / 4;
+                padding-left: 20%;
+
+                @include pad() {
+                    padding-left: 0;
+
+                }
+
+                @include mobile() {
+                    position: absolute;
+                    top: -32px;
+                    right: -143px;
+
+                }
+
+                @media screen and (max-width:375px) {
+                    right: -125px;
+                }
+            }
+
+            // 餐點分類
+            .meal_cate {
+                grid-column: 4 / 5;
+                margin-top: 5px;
+
+                @include pad() {
+                    grid-column: 2 / 3;
+                }
+
+                @include mobile() {
+                    grid-column: 1 / 2;
+                }
+
+                p {
+                    height: $meal_content_high;
+
+                    &:first-child,
+                    &:nth-child(2) {
+                        height: $meal_content_high * 2;
+                    }
+
+                    &:nth-child(4),
+                    &:nth-child(5) {
+                        height: $meal_content_high * 3;
+
+                    }
+
+                    &:nth-child(3) {
+                        @media screen and (max-width:375px) {
+                            height: $meal_content_high * 2;
+                        }
+                    }
+                }
+            }
+
+            //餐點項目
+            .meal_content {
+                grid-column: 5 / 9;
+                margin-top: 5px;
+
+                @include pad() {
+                    grid-column: 3 / 9;
+                }
+
+                @include mobile() {
+                    grid-column: 2 / 6;
+                }
+            }
+
+            // 單點加購
+            .one_container {
+                grid-column: 4 / 9;
+
+                @include pad() {
+                    grid-column: 3 / 9;
+                }
+
+                @include mobile() {
+                    grid-column: 1/ 6;
+                }
+
+                li {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .one_count {
+                        text-align: right;
+                        padding-right: 15%;
+
+                        @include mobile() {
+                            padding-right: 0;
+                        }
+                    }
+
+                }
+            }
+
+
+        }
+
+        // 商城訂購
+        .shop_list {
+            .item {
+                grid-column: 1 / 4;
+                padding-left: 20%;
+
+                @include pad() {
+                    padding-left: 1px;
+                }
+
+                @include mobile() {
+                    grid-column: 1 / 2;
+                    color: #898989;
+                }
+
+            }
+
+            .count {
+                grid-column: 8/10;
+                padding-right: 15%;
+
+                @include pad() {
+                    grid-column: 5 / 6;
+                    padding-right: 0px;
+                    padding-left: 35%;
+                }
+
+                @include mobile() {
+                    padding-left: 50%;
+                    // padding-right: 15%;
+                }
+
+                @media all and (max-width:360px) {
+                    padding-left: 40%;
+                }
+
+
+            }
+
+            // .one_container {
+            //     @include mobile() {
+            //         grid-column: 2 / 6;
+
+            //     }
+            // }
+        }
+
+        // 訂單資料
+        .detail_info {
+            margin-left: 115px;
+            margin-top: 7px;
+            margin-bottom: 20px;
+            padding-bottom: 40px;
+            display: grid;
+            grid-template: repeat(3, 1fr) / repeat(8, 1fr);
+            grid-template-rows: 1fr min-content;
+            grid-row-gap: 10px;
+            border-bottom: 1px solid #000;
+
+            @include pad() {
+                display: flex;
+                flex-wrap: wrap;
+                margin-left: 0;
+            }
+
+            .item {
+                line-height: 2;
+
+                &:first-child {
+                    grid-area: 1 / 1 / 2 / 4;
+                    padding-left: 20%;
+
+                    @include pad() {
+                        width: 30%;
+                        padding-left: 0;
+
+                    }
+                }
+
+                &:nth-child(2) {
+                    grid-area: 1 / 4 / 2 / 9;
+
+                    @include pad() {
+                        width: 70%;
+                    }
+                }
+
+                &:nth-child(3) {
+                    grid-area: 2 / 1 / 3 / 4;
+                    padding-left: 20%;
+
+                    @include pad() {
+                        width: 30%;
+                        padding-left: 0;
+
+                    }
+                }
+
+                &:nth-child(4) {
+                    grid-area: 2 / 4 / 3 / 9;
+
+                    @include pad() {
+                        width: 70%;
+                    }
+                }
+
+                &:nth-child(5) {
+                    grid-area: 3 / 1 / 4 / 4;
+                    padding-left: 20%;
+
+                    @include pad() {
+                        width: 30%;
+
+                        padding-left: 0;
+
+                    }
+                }
+
+                &:nth-child(6) {
+                    grid-area: 3 / 4 / 4 / 9;
+
+                    @include pad() {
+                        width: 70%;
+
+                    }
+                }
+
+                span {
+                    padding-left: 20px;
+                    color: #000;
+                }
             }
         }
 
+        // 總計
+        .list_top {
+            margin-top: 30px;
+            border: 1px solid #898989;
+            padding: 25px 0;
+
+            @include mobile() {
+                display: flex;
+                padding: 20px 25px;
+                margin-top: 15px;
+            }
+
+            .top_content {
+
+                display: flex;
+                margin: 0 auto;
+
+                .item {
+                    width: 25%;
+                    text-align: center;
+                    line-height: 2;
+                    margin: 0 10px;
+
+                    @include mobile() {
+                        width: 100%;
+                        margin: 0;
+
+                    }
+                }
+
+                @include mobile() {
+                    flex-direction: column;
+                }
+            }
+
+        }
+
+        .total_container {
+            float: right;
+            // width: 240px;
+            display: grid;
+            grid-template: repeat(4, 1fr) / repeat(2, 1fr);
+            // grid-template-rows: 1fr min-content;
+            // grid-template-columns: 1fr min-content;
+            grid-row-gap: 5px;
+            margin-bottom: 50px;
+            align-items: center;
+
+            @include mobile() {
+                width: 100%;
+            }
+
+            .item {
+                grid-column: 1 / 2;
+
+                &:nth-child(5),
+                &:nth-child(6) {
+                    padding-bottom: 10px;
+
+                }
+
+                &:nth-child(even) {
+                    text-align: right;
+
+                }
+
+                &:nth-child(7),
+                &:nth-child(8) {
+                    padding-top: 10px;
+                    border-top: 1px solid #000;
+                }
+
+                &.price {
+                    grid-column: 2 / 4;
+                }
+
+                span {
+                    padding-left: 20px;
+                }
+
+                &.btn {
+                    grid-column: 1/3;
+                    text-align: center;
+                }
+
+                @include mobile() {
+                    &.price {
+                        grid-column: 2 / 3;
+                    }
+                }
+
+            }
+
+            .btn {
+                grid-column: 1/3;
+                text-align: center;
+                margin: 12px auto;
+            }
+        }
+
+
+
+
+        // 流程四
         // 填寫預約資料
         .grid_confirm {
             display: grid;
@@ -833,7 +1269,6 @@
         }
 
         // 地址
-
         .user_addr {
             display: grid;
             margin: 30px 0;
@@ -843,24 +1278,19 @@
             @include mobile() {
                 font-size: 16px;
                 grid-template-columns: 1fr 20px 1fr;
-                grid-template-rows: 35px 1fr 1fr;
+                grid-template-rows: 35px 1fr;
                 gap: 0px;
+                margin: 20px 0;
 
                 label {
                     grid-column: 1/4;
                     grid-row: 1/2;
                 }
-
-
-
-
                 #addr {
                     grid-column: 1/5;
-                    grid-row: 3/4;
+                    // grid-row: 3/4;
                 }
             }
-
-            label {}
 
             &>select,
             &>input {
@@ -942,323 +1372,30 @@
     }
 
 
-    // =============================================
-    // 明細標題
-    .detail_title {
-        margin-top: 25px;
-
-        &::after {
-            content: '';
-            height: .5px;
-            width: calc(100% - 115px);
-            background-color: #000;
-            display: block;
-            float: right;
-            margin-top: 20px;
-
-            @include pad() {
-                width: 100%;
-                margin-top: 2px;
-            }
-        }
-
-        @include mobile() {
-            font-size: 16px;
-        }
-
-
-    }
-
-    .meal_container {
-        $meal_content_high: 32px;
-        line-height: 2;
-        padding-left: 115px;
-        padding-top: 7px;
-        display: grid;
-        grid-template: repeat(1, 1fr) / repeat(8, 1fr);
-
-        @include pad() {
-            padding-left: 1px;
-            grid-template: repeat(1, 1fr) / repeat(5, 1fr);
-        }
-
-        @include mobile() {
-            position: relative;
-
-        }
-
-        // 套餐名稱
-        .meal_title {
-            grid-column: 1 / 4;
-            padding-left: 20%;
-
-            @include pad() {
-                padding-left: 0;
-
-            }
-
-            @include mobile() {
-                position: absolute;
-                top: -32px;
-                right: -143px;
-
-            }
-
-            @media screen and (max-width:375px) {
-                right: -125px;
-            }
-        }
-
-        // 餐點分類
-        .meal_cate {
-            grid-column: 4 / 5;
-            margin-top: 5px;
-
-            @include mobile() {
-                grid-column: 1 / 2;
-            }
-
-            p {
-                height: $meal_content_high;
-
-                &:first-child,
-                &:nth-child(2) {
-                    height: $meal_content_high * 2;
-                }
-
-                &:nth-child(4),
-                &:nth-child(5) {
-                    height: $meal_content_high * 3;
-
-                }
-
-                &:nth-child(3) {
-                    @media screen and (max-width:375px) {
-                        height: $meal_content_high * 2;
-                    }
-                }
-            }
-        }
-
-        //餐點項目
-        .meal_content {
-            grid-column: 5 / 9;
-            margin-top: 5px;
-
-            @include mobile() {
-                grid-column: 2 / 6;
-            }
-        }
-
-        // 單點加購
-        .one_container {
-            grid-column: 4 / 9;
-
-            @include mobile() {
-                grid-column: 1/ 6;
-            }
-
-            li {
-                display: flex;
-                justify-content: space-between;
-
-                .one_count {
-                    text-align: right;
-                    padding-right: 15%;
-
-                    @include mobile() {
-                        padding-right: 0;
-                    }
-                }
-
-            }
-        }
-
-
-    }
-
-    // 商城訂購
-    .shop_list {
-        .item {
-            grid-column: 1 / 4;
-            padding-left: 20%;
-
-            @include pad() {
-                padding-left: 1px;
-            }
-
-            @include mobile() {
-                grid-column: 1 / 2;
-                color: #898989;
-            }
-        }
-
-        .one_container {
-            @include mobile() {
-                grid-column: 2 / 6;
-
-            }
-        }
-    }
-
-    // 訂單資料
-    .detail_info {
-        margin-left: 115px;
-        margin-top: 7px;
-        margin-bottom: 20px;
-        padding-bottom: 40px;
-        display: grid;
-        grid-template: repeat(3, 1fr) / repeat(8, 1fr);
-        grid-template-rows: 1fr min-content;
-        grid-row-gap: 10px;
-        border-bottom: 1px solid #000;
-
-        @include pad() {
-            display: flex;
-            flex-wrap: wrap;
-            margin-left: 0;
-        }
-
-        .item {
-            line-height: 2;
-
-            &:first-child {
-                grid-area: 1 / 1 / 2 / 4;
-                padding-left: 20%;
-
-                @include pad() {
-                    width: 30%;
-                    padding-left: 0;
-
-                }
-            }
-
-            &:nth-child(2) {
-                grid-area: 1 / 4 / 2 / 9;
-
-                @include pad() {
-                    width: 70%;
-                }
-            }
-
-            &:nth-child(3) {
-                grid-area: 2 / 1 / 3 / 4;
-                padding-left: 20%;
-
-                @include pad() {
-                    width: 30%;
-                    padding-left: 0;
-
-                }
-            }
-
-            &:nth-child(4) {
-                grid-area: 2 / 4 / 3 / 9;
-
-                @include pad() {
-                    width: 70%;
-                }
-            }
-
-            &:nth-child(5) {
-                grid-area: 3 / 1 / 4 / 4;
-                padding-left: 20%;
-
-                @include pad() {
-                    width: 30%;
-
-                    padding-left: 0;
-
-                }
-            }
-
-            &:nth-child(6) {
-                grid-area: 3 / 4 / 4 / 9;
-
-                @include pad() {
-                    width: 70%;
-
-                }
-            }
-
-            span {
-                padding-left: 20px;
-                color: #000;
-            }
-        }
-    }
-
-    // 總計
-    .list_top{
-        margin-top: 30px;
-        border: 1px solid #898989;
-        padding: 25px 0;
-        @include mobile(){
-            display: flex;
-            padding: 20px 25px;
-            margin-top: 15px;
-        }
-        .top_content{
-            
-            display: flex;
-            margin: 0 auto;
-            .item{
-                width: 25%;
-                text-align: center;
-                line-height: 2;
-                margin: 0 10px;
-                @include mobile(){
-                    width: 100%; 
-                    margin: 0 ;
-
-                }
-            }
-            @include mobile(){
-                flex-direction: column;
-            }
-        }
-        
-    }
-    .total_container {
-        float: right;
-        width: 240px;
-        display: grid;
-        grid-template: repeat(4, 1fr) / repeat(2, 1fr);
-        grid-template-rows: 1fr min-content;
-        grid-template-columns: 1fr min-content;
-        grid-row-gap: 5px;
-        margin-bottom: 50px;
-
-        @include mobile() {
-            width: 100%;
-        }
-
-        .item {
-
-            &:nth-child(5),
-            &:nth-child(6) {
-                padding-bottom: 10px;
-
-            }
-
-            &:nth-child(even) {
-                text-align: right;
-            }
-
-            &:nth-child(7),
-            &:last-child {
-                padding-top: 10px;
-                border-top: 1px solid #000;
-            }
-
-            span {
-                padding-left: 20px;
-            }
-        }
-    }
-
-
-    // =============================================
-
 
 }
+
+
+
+
+// .reseve_flow.fulid_wrapper{
+//     .flow_container {
+//          // 標題公用
+//          .blockTitle {
+//             border-bottom: 1px solid black;
+//             margin: 15px 0;
+//             display: flex;
+//             align-items: center;
+//             justify-content: space-between;
+
+//             &>span {
+//                 margin-left: 10px;
+//                 font-size: 13px;
+//             }
+
+//             @include mobile {
+//                 margin-bottom: 20px;
+//             }
+//         }
+//     }
+// }
