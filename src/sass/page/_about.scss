@@ -24,7 +24,7 @@
         margin-top: 20px;
         margin-bottom: 20px;
         h2{
-            color: $green-1;
+            color: #0f3d3e;
             text-align: center;
             font-weight: bold;
         }
@@ -37,318 +37,280 @@
     }
     
     .about_content{
-        max-width: 1125px;
+        max-width: 1280x;
         margin: 0 auto;
+        padding:  0 105px;
         display: flex;
         flex-direction: column;
-
+        align-items: center;
         @include pad{
-            max-width: 720px;
+            padding: 0 65px;
+        }
+        @include mobile{
+            padding: 0 27px;
         }
 
-        .part1{
-            text-align: right;
-            margin-bottom: 100px;
+        
 
+        .part1{
+            display: flex;
+            margin-bottom: 100px;
+            width: 100%;
             @include pad{
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 40px;
             }
-
             .part1_img{
-                position: relative;
-
+                width: 70%;
+                max-height: 425px;
+                overflow: hidden;
                 @include pad{
-                    height: 425px;
+                    width: 100%;
                 }
-
                 img{
-                    max-width: 740px;
-                    max-height: 425px;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
             
             .part1_info{
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
                 @include pad{
-                    text-align: left;
-                    margin: 20px;
+                    align-items: flex-start;
+                    width: 100%;
                 }
-                .content_line{
-                    width: 200px;
-                    border-top: solid 2px #0f3d3e;
-                    margin-left: 920px;
+
+                h2{
+                    padding-top: 15%;
+                    line-height: 1.2;
                     @include pad{
-                        width: 100%;
-                        border-top: solid 2px #0f3d3e;
-                        margin-left: -20px;
-                        margin-bottom: 30px;
+                        padding-top: 3%;
                     }
                 }
-                .word_box{
-                    margin: 40px 0 100px 400px;
-                    position: relative;
+
+                h4{
+                    border-bottom: 1px solid #0f3d3e;
+                    width: 130%;
                     text-align: right;
-                    letter-spacing: 1px;
+                    padding-bottom: 15px;
                     @include pad{
-                        margin: 0;
                         text-align: left;
-                    }
-                }
-                
-                .word_box > div:nth-of-type(1){
-                    width: 740px;
-                    @include pad{
-                        width: 650px;
+                        width: 100%;
                     }
                 }
 
-                .word_box > div {
-                    overflow: hidden;
-                }
-
-                .word_box > div h6 {
-                    width: 740px;
-                    text-align: left;
-                    @include pad{
-                        width: 650px;
-                    }
-                }
-
-                /* -------------------- 左邊文字 ------------------*/
-                .word_box > div:nth-of-type(2) {
-                    color: #fff;
-                    position: absolute;
-                    left: 0px;
-                    top: 0;
-                    width: 340px;
-                    @include pad{
-                        width: 0px;
-                    }
-                }
-                
-                .word_box > div {
-                    overflow: hidden;
-                }
-
-                .word_box > div:nth-of-type(2) p {
-                    left: 0px;
+                .text1{
+                    text-align: justify;
+                    width: 250%;
+                    text-indent: 44px;
+                    letter-spacing: 1px;
+                    margin-top: 15px;
                     position: relative;
+                    padding-bottom: 40px;
+                    @include pad(){
+                        width: 100%;
+                        text-indent: 0;
+                    }
+
+                    .text2{
+                        color: #fff;
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        width: 60%;
+                        overflow: hidden;
+                        @include pad(){
+                            display: none;
+                        }
+                        .text_white{
+                            width: 167%;
+                        }
+                    }
                 }
 
-                .word_box > div p {
-                    width: 445px;
-                }
+                
+
             }
         }
         .part2{
+            display: flex;
+            flex-direction: row-reverse;
             margin-bottom: 100px;
-
+            width: 100%;
             @include pad{
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 40px;
             }
-
             .part2_img{
-                position: relative;
-
+                width: 70%;
+                max-height: 425px;
+                overflow: hidden;
                 @include pad{
-                    height: 425px;
+                    width: 100%;
                 }
-
                 img{
-                    max-width: 740px;
-                    max-height: 425px;
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    @include pad{
-                        left: 0;
-                    }
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
             
             .part2_info{
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
                 @include pad{
-                    text-align: left;
-                    margin: 20px;
-                }
-                .content_line{
-                    width: 200px;
-                    border-top: solid 2px #0f3d3e;
-                    margin-left: 0;
-                    @include pad{
-                        width: 100%;
-                        border-top: solid 2px #0f3d3e;
-                        margin-left: -20px;
-                        margin-bottom: 30px;
-                    }
-                }
-                .word_box{
-                    margin: 40px 0 100px 0px;
-                    position: relative;
-                    text-align: right;
-                    letter-spacing: 1px;
-                    @include pad{
-                        margin: 0;
-                        text-align: left;
-                    }
-                }
-                
-                .word_box > div:nth-of-type(1){
-                    color: #fff;
-                    width: 740px;
-                    @include pad{
-                        
-                        width: 0px;
-                    }
-                }
-
-                .word_box > div {
-                    overflow: hidden;
-                }
-
-                .word_box > div h6 {
-                    width: 740px;
-                    text-align: left;
-                    @include pad{
-                        
-                        width: 0px;
-                    }
-                }
-
-                /* -------------------- 左邊文字 ------------------*/
-                .word_box > div:nth-of-type(2) {
                     
-                    position: absolute;
-                    left: 0px;
-                    top: 0;
-                    width: 385px;
+                    width: 100%;
+                }
+
+                h2{
+                    padding-top: 15%;
+                    line-height: 1.2;
                     @include pad{
-                        
-                        width: 650px;
+                        padding-top: 3%;
                     }
                 }
-                
-                .word_box > div {
-                    overflow: hidden;
+
+                h4{
+                    border-bottom: 1px solid #0f3d3e;
+                    width: 130%;
+                    text-align: left;
+                    padding-bottom: 15px;
+                    @include pad{
+                        text-align: left;
+                        width: 100%;
+                    }
                 }
 
-                .word_box > div:nth-of-type(2) p {
-                    left: 0px;
+                .text1{     
+                    width: 250%;
+                    direction: rtl;
+                    text-align: left;
+                    margin-top: 15px;
                     position: relative;
+                    padding-bottom: 40px;
+                    @include pad(){
+                        width: 100%;
+                        text-indent: 0;
+                    }
+
+                    .text2{
+                        color: #fff;
+                        position: absolute;
+                        right: 0px;
+                        top: 0px;
+                        width: 60%;
+                        overflow: hidden;
+                        @include pad(){
+                            display: none;
+                        }
+                        .text_white{
+                            width: 167%;
+                        }
+                    }
                 }
 
-                .word_box > div h6 {
-                    width: 650px;
-                }
+                
+
             }
         }
         .part3{
-            text-align: right;
+            display: flex;
             margin-bottom: 100px;
-
+            width: 100%;
             @include pad{
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 10px;
+                margin-bottom: 40px;
             }
-
             .part3_img{
-                position: relative;
-
+                width: 70%;
+                max-height: 425px;
+                overflow: hidden;
                 @include pad{
-                    height: 425px;
+                    width: 100%;
                 }
-
                 img{
-                    max-width: 740px;
-                    max-height: 425px;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
             
             .part3_info{
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
                 @include pad{
-                    text-align: left;
-                    margin: 20px;
+                    align-items: flex-start;
+                    width: 100%;
                 }
-                .content_line{
-                    width: 200px;
-                    border-top: solid 2px #0f3d3e;
-                    margin-left: 920px;
+
+                h2{
+                    padding-top: 15%;
+                    line-height: 1.2;
                     @include pad{
-                        width: 100%;
-                        border-top: solid 2px #0f3d3e;
-                        margin-left: -20px;
-                        margin-bottom: 30px;
+                        padding-top: 3%;
                     }
                 }
-                .word_box{
-                    margin: 40px 0 100px 400px;
-                    position: relative;
+
+                h4{
+                    border-bottom: 1px solid #0f3d3e;
+                    width: 130%;
                     text-align: right;
-                    letter-spacing: 1px;
+                    padding-bottom: 15px;
                     @include pad{
-                        margin: 0;
                         text-align: left;
-                    }
-                }
-                
-                .word_box > div:nth-of-type(1){
-                    width: 740px;
-                    @include pad{
-                        width: 650px;
+                        width: 100%;
                     }
                 }
 
-                .word_box > div {
-                    overflow: hidden;
-                }
-
-                .word_box > div h6 {
-                    width: 740px;
-                    text-align: left;
-                    @include pad{
-                        width: 650px;
-                    }
-                }
-
-                /* -------------------- 左邊文字 ------------------*/
-                .word_box > div:nth-of-type(2) {
-                    color: #fff;
-                    position: absolute;
-                    left: 0px;
-                    top: 0;
-                    width: 340px;
-                    @include pad{
-                        width: 0px;
-                    }
-                }
-                
-                .word_box > div {
-                    overflow: hidden;
-                }
-
-                .word_box > div:nth-of-type(2) p {
-                    left: 0px;
+                .text1{
+                    text-align: justify;
+                    width: 250%;
+                    text-indent: 44px;
+                    letter-spacing: 1px;
+                    margin-top: 15px;
                     position: relative;
+                    padding-bottom: 40px;
+                    @include pad(){
+                        width: 100%;
+                        text-indent: 0;
+                    }
+
+                    .text2{
+                        color: #fff;
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        width: 60%;
+                        overflow: hidden;
+                        @include pad(){
+                            display: none;
+                        }
+                        .text_white{
+                            width: 167%;
+                        }
+                    }
                 }
 
-                .word_box > div p {
-                    width: 445px;
-                }
+                
+
             }
         }
         
     }
 }
+
 .serve{
     width: 100%;
     height: 1163px;
@@ -372,63 +334,80 @@
             
     }
     .serve_grid {
-        width: 1050px;
+        width: 90%;
         height: 800px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        grid-template-rows: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template: repeat(5, 1fr) / repeat(3, 1fr);
         gap: 5px;
         @include pad{
-            width: 660px;
-            height: 1500px;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr 1fr;
+            height: 640px;
+            grid-template: repeat(4, 1fr) / repeat(2, 1fr);
         }
         .reserve{
             background-image: url(../../img/about_img/about_box_reserve.jpg);
+            background-size: cover;
             grid-column: 1 / 3;
             grid-row: 1 / 3;
+
+            position: relative;
+            
             @include pad{
                 grid-column: 1/3;
                 grid-row: 1/2;
             }
             h4{
-                height: 100%;
-                line-height: 400px;
-                background-color: rgba(0,0,0,0.5);
-                text-align: center;
-                transition: 0.5s;
                 opacity: 0;
-                
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                background-color: rgba(0, 0, 0, .3);
+                color: white;
+                font-size: 22px;
+                width: 100%;
+                height: 100%;
+                top: 0;
             }          
         }
         .reserve:hover{
             cursor: pointer;
             h4{
                 opacity: 1;
+                transition: opacity 0.8s;
                 color: #fff;
                 
             }
         }
         .shopmall{
             background-image: url(../../img/about_img/about_box_shopmall.jpg);
+            background-size: cover;
             grid-column: 1 / 2;
             grid-row: 3 / 6; 
+
+            position: relative;
+
             @include pad{
                 grid-column: 1/2;
                 grid-row: 2/4;
             }
             h4{
-                height: 100%;
-                line-height: 478px;
-                background-color: rgba(0,0,0,0.5);
-                text-align: center;
-                transition: 0.5s;
                 opacity: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                background-color: rgba(0, 0, 0, .3);
+                color: white;
+                font-size: 22px;
+                width: 100%;
+                height: 100%;
+                top: 0;
                 @include pad{
                     height: 100%;
-                    line-height: 930px;
+                    
                 }
             }
         }
@@ -436,27 +415,38 @@
             cursor: pointer;
             h4{
                 opacity: 1;
+                transition: opacity 0.8s;
                 color: #fff;
             }
         }
         .menu_grid{
             background-image: url(../../img/about_img/about_box_menu.jpg);
+            background-size: cover;
             grid-column: 2 / 3;
             grid-row: 3 / 6;
+
+            position: relative;
+
             @include pad{
                 grid-column: 2/3;
                 grid-row: 2/4;
             }
             h4{
-                height: 100%;
-                line-height: 478px;
-                background-color: rgba(0,0,0,0.5);
-                text-align: center;
-                transition: 0.5s;
                 opacity: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                background-color: rgba(0, 0, 0, .3);
+                color: white;
+                font-size: 22px;
+                width: 100%;
+                height: 100%;
+                top: 0;
                 @include pad{
                     height: 100%;
-                    line-height: 930px;
+                    
                 }
             } 
         }
@@ -464,42 +454,49 @@
             cursor: pointer;
             h4{
                 opacity: 1;
+                transition: opacity 0.8s;
                 color: #fff;
             }
         }
         .team{
             background-image: url(../../img/about_img/about_box_team.jpg);
+            background-size: cover;
             grid-column: 3 / 4;
             grid-row: 1 / 6;
+
+            position: relative;
+
             @include pad{
                 background-image: url(../../img/about_img/about_box_team_rwd.jpg);
                 grid-column: 1/3;
                 grid-row: 4/5;
             }
             h4{
-                height: 100%;
-                line-height: 800px;
-                background-color: rgba(0,0,0,0.5);
-                transition: 0.5s;
                 opacity: 0;
-                text-align: center;
-                @include pad{
-                    height: 318px;
-                    line-height: 318px;
-                }
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                background-color: rgba(0, 0, 0, .3);
+                color: white;
+                font-size: 22px;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                
             } 
         }
         .team:hover{
             cursor: pointer;
             h4{
                 opacity: 1;
+                transition: opacity 0.8s;
                 color: #fff;
             }
         }  
     }
-    .serve_grid >* {
-        background-size: cover;
-    }
+    
     
     
 }
@@ -522,35 +519,37 @@
         }   
     }
     .name_email_wrapper{
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
+        justify-content: center;
         display: flex;
         flex-wrap: wrap;
         .yourname{
-            margin-left: 50px;
+            margin-right: 20px;
         }
         .yourphone{
-            margin-left: 25px;
+            margin-right: 20px;
         }
         .youremail{
-            margin-left: 50px;
-            margin-top: 20px;
+            margin-right: 20px;
         }
         .suggest_type{
-            margin-left: 25px;
-            margin-top: 20px;
+            margin-right: 20px;
         }
         input{
             width: 450px;
             line-height: 30px;
+            outline: none;
         }
     }
     .subject_message_submit_wrapper{
         display: flex;
         flex-direction: column;
-        margin-left: 50px;
+        margin-left: 0;
         position: relative;
         textarea{
+            outline: none;
+            resize:none;
             width: 925px;
             height: 164px;
         }
@@ -564,6 +563,7 @@
     }
 
 }
+
 .qanda{
     width: 80%;
     margin: 0 auto;
