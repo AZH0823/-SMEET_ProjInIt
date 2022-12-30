@@ -473,28 +473,30 @@
 
   .message_section {
     ul {
-      border-bottom: 1px solid #000;
+      // border-bottom: 1px solid #000;
 
       .message_content {
         border: 1px solid #000;
-        max-width: 70%;
+        max-width: 100%;
+        width: 600px;
         margin: 0 auto;
         margin-top: 5%;
-
         @include pad {
           font-size: 14px;
           max-width: 80%;
         }
-        @include mobile{
-           max-width: 100%;
+        @include mobile {
+          max-width: 100%;
         }
 
-        @media all and (max-width:375px) {
-         
-          
+        @media all and (max-width: 375px) {
+          font-size: 12px;
         }
         .time_cover {
-          margin: 5% 0 2% 20%;
+          display: flex;
+          justify-content: center;
+          width: 45%;
+          margin: 5% 0 2% 0;
           color: #a99797;
 
           @include pad {
@@ -503,22 +505,30 @@
           @include mobile {
             margin: 5% 0 2% 16%;
           }
+          @media all and (max-width: 375px) {
+            margin: 5% 0 2% 4%;
+          }
         }
         .message_import {
           display: flex;
           justify-content: space-around;
           align-items: center;
+          margin-top: 5%;
+          @media all and (max-width: 375px) {
+            margin-top: 0;
+          }
+
           img {
             width: 10%;
             display: inline-block;
-            @include mobile { 
+            @include mobile {
               margin: -4% 5% 0 1%;
             }
           }
           p {
             margin-right: 3%;
             @include mobile {
-               margin-top: 5%;
+              margin-top: 5%;
             }
           }
         }
@@ -526,19 +536,30 @@
 
       .message_customer {
         border: 1px solid #000;
-        width: 30%;
-        margin: 5% 0 30% 55%;
+        width: 220px;
+        margin: 5% 0 30% 57.5%;
         @include pad {
-          width: 35%;
+          width: 32%;
+          margin: 5% 0 30% 58%;
         }
         @include mobile {
-          width: 45%;
+          width: 42%;
+        }
+        @media all and (max-width: 375px) {
+          font-size: 12px;
         }
         .time_cover {
-          margin: 5% 0 2% 15%;
+          margin: 5% 0 2% 0;
           color: #a99797;
+          display: flex;
+          justify-content: center;
+          width: 64%;
           @include mobile {
             margin: 5% 0 2% 9%;
+          }
+
+          @media all and (max-width: 375px) {
+            margin: 5% 0 2% 0%;
           }
         }
         .customer_import {
@@ -559,43 +580,57 @@
           }
         }
       }
-    }
-    .customer_respond {
-      margin-top: 3%;
-      resize: none;
-      width: 70%;
-      margin-left: 15%;
-      @include pad {
-        width: 80%;
-        margin-left: 10%;
+      .message_textarea {
+        border-top: 1px solid #000;
+        width: 600px;
+        margin: 0 auto;
+        @include pad {
+          width: 80%;
+        }
+        @include mobile {
+          width: 100%;
+        }
+        .customer_respond {
+          margin-top: 3%;
+          resize: none;
+          width: 100%;
+          padding-top: 5%;
+          padding-left: 3%;
+
+          @include mobile {
+            width: 100%;
+            margin-left: 0;
+          }
+
+          @media all and (max-width: 375px) {
+            height: 100px;
+          }
+        }
       }
-      @include mobile {
-        width: 100%;
-        margin-left: 0;
-      }
-      // &::placeholder {
-      // }
-    }
-    .upload {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 0 auto;
-      width: 70%;
-      padding: 1% 0 5% 0;
-      @include pad {
-        width: 80%;
-      }
-      @include mobile {
-        width: 100%;
-      }
-      .upload_plus {
+      .upload {
         display: flex;
-        justify-content: start;
+        justify-content: space-between;
         align-items: center;
-        width: 200px;
-        p {
-          padding-left: 5%;
+        margin: 0 auto;
+        width: 55%;
+        padding: 1% 0 5% 0;
+        @include pad {
+          width: 80%;
+        }
+        @include mobile {
+          width: 100%;
+        }
+        .upload_plus {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          width: 200px;
+          p {
+            padding-left: 5%;
+            @include mobile {
+              font-size: 14px;
+            }
+          }
         }
       }
     }
