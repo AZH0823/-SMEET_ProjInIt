@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+</head>
+<body>
+    <div class="fulid_wrapper login">
+        <div class="container ">
+            <!-- 註冊登入tab -->
+            <div class="login_tab font16 Camel-1 none">
+                <div class="tab_add ">註冊會員</div>
+                <div class="tab_enter tab_line">會員登入</div>
+            </div>
+            <!-- 表單 -->
+            <!-- ==========註冊表單============= -->
+            <div action="" class="login_add none">
+                <input type="text" name="" id="" placeholder="帳號/信箱">
+                <p class="text_no">*此欄位尚未填寫</p>
+                <div class="login_pwd">
+                    <input type="password" name="" id="" placeholder="密碼(請使用 8 個字元以上的字母、數字)">
+                    <i class="fa-regular fa-eye-slash font12 gray"></i>
+                </div>
+                <div class="login_pwd">
+                    <input type="password" name="" id="login_pwd_again" placeholder="再次輸入密碼">
+                    <i class="fa-regular fa-eye-slash font12 gray"></i>
+                </div>
+                <div class="login_news">
+                    <input type="checkbox" name="login_news" id="login_news_yes1">
+                    <label for="login_news_yes">
+                        <p class="font14">我願意接收私覓的最新消息、優惠相關訊息</p>
+                    </label>
+                </div>
+                <div class="login_news">
+                    <input type="checkbox" name="login_news" id="login_news_yes2">
+                    <label for="login_news_yes">
+                        <p class="font14">我同意網站服務條款及隱私權政策</p>
+                    </label>
+                </div>
+                <button type="submit" class="btn_login font18">立即加入</button>
+            </div>
+            <!-- =========會員登入表單============ -->
+            <div action="" class="login_enter none">
+                <input type="text" name="" id="" placeholder="帳號/信箱">
+                <p class="text_no">*此欄位尚未填寫</p>
+                <div class="login_pwd">
+                    <input type="password" name="" id="" placeholder="密碼(請使用 8 個字元以上的字母、數字)">
+                    <i class="fa-regular fa-eye-slash font12 gray"></i>
+                </div>
+                <button type="submit" class="btn_login font18">立即加入</button>
+                <a class="btn_forget">忘記密碼？</a>
+            </div>
+            <!-- 或 -->
+            <div class="login_or none">
+                <p class="font16 gray">或</p>
+            </div>
+            <!-- 第三方 -->
+            <button type="button" class="btn_three font18 none">
+                <!-- <i class="fa-brands fa-line"></i> -->
+                使用LINE快速登入
+            </button>
+            <!-- =========註冊成功畫面=============== -->
+            <div class="login_success none">
+                <div class="yes">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h6>會員註冊成功</h6>
+                <button class="inCart_btn2">確定</button>
+            </div>
+
+            <!-- ==========忘記密碼畫面============= -->
+            <div class="login_forget">
+                <h6>忘記密碼</h6>
+                <div class="forget" action="">
+                    <input type="text" placeholder="請輸入電子信箱">
+                    <button class="inCart_btn1">傳送驗證碼</button>
+                    <input type="text" placeholder="請輸入驗證碼">
+                    <button class="inCart_btn1">驗證</button>
+                </div>
+
+                <div class="login_back login_tab font16 Camel-1">
+                    <div class="back_add tab_add">註冊會員</div>
+                    <div class="back_enter tab_enter">會員登入</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- =========購物車pop============ -->
+    <div class="fulid_wrapper cart ">
+        <div class="cart_container none">
+            <div class="icon_x font_light">x</div>
+            <!-- <i class="fa-solid fa-xmark"></i> -->
+            <ul class="cart_content none">
+                <li class="item">
+                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                    <div class="content">
+                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯</p>
+                        <p class="font14 count">數量</p>
+                        <div class="plus_minus">
+                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
+                            <div class="number">1</div>
+                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <p class="font14 money">金額</p>
+                        <p class="font14 money_cart">$ 1000</p>
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                </li>
+                <li class="item">
+                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                    <div class="content">
+                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯野菇濃湯湯野菇濃</p>
+                        <p class="font14 count">數量</p>
+                        <div class="plus_minus">
+                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
+                            <div class="number">1</div>
+                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <p class="font14 money">金額</p>
+                        <p class="font14 money_cart">$ 1000</p>
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                </li>
+                <li class="item">
+                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                    <div class="content">
+                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯</p>
+                        <p class="font14 count">數量</p>
+                        <div class="plus_minus">
+                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
+                            <div class="number">1</div>
+                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <p class="font14 money">金額</p>
+                        <p class="font14 money_cart">$ 1000</p>
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                </li>
+                <li class="item">
+                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                    <div class="content">
+                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯</p>
+                        <p class="font14 count">數量</p>
+                        <div class="plus_minus">
+                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
+                            <div class="number">1</div>
+                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <p class="font14 money">金額</p>
+                        <p class="font14 money_cart">$ 1000</p>
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                </li>
+            </ul>
+            <div class="btn">
+                <button type="button" class="checkout_btn">結帳</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
