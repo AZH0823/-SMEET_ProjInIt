@@ -1,8 +1,7 @@
 
 div.back_feedback {
-    .wrapper {
+    .backwrapper {
         display: flex;
-        justify-content: center;
         gap: 7%;
 
         header {
@@ -12,7 +11,7 @@ div.back_feedback {
         .container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            width: 73%;
 
             // 表格
             main.right_content {
@@ -32,17 +31,19 @@ div.back_feedback {
                         .back_from_wrapper {
                             .grid_container {
                                 margin: 0 auto;
-                                border: 1px solid #ccc;
+                                // border: 1px solid #ccc;
                                 display: grid;
                                 width: 100%;
                                 text-align: center;
                                 align-items: center;
-                                grid-template: repeat(1, 1fr) / repeat(3, 1fr) 300px 1fr 1fr;
+                                grid-template: repeat(1, 1fr) / repeat(3, 1fr) 250px 1fr 250px;
 
                                 &:first-child {
-                                    background-color: #ccc;
+                                    background-color: $Camel-3;
                                 }
-
+                                .grid_item:nth-child( n + 1){
+                                    border-bottom: .5px solid #ccc; // 加底线
+                                }
                                 .grid_item {
                                     padding: 20px;
 
@@ -51,7 +52,7 @@ div.back_feedback {
                                         position: relative;
                                         display: inline-block;
                                         width: 50px;
-                                        height: 24px;
+                                        height: 25.59px; // 同高
 
                                         input {
                                             opacity: 0;
@@ -99,6 +100,14 @@ div.back_feedback {
                                                 left: 0px;
                                                 top: 0px;
                                             }
+                                        }
+                                        // 上架
+                                        .slider_content{
+                                            position: absolute;
+                                            top: 0px;
+                                            left: 60px;
+                                            right: 0px;
+                                            width: 50px;
                                         }
                                     }
                                 }

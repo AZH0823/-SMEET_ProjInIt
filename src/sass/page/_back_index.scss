@@ -1,5 +1,5 @@
 .index_back {
-    .wrapper {
+    .backwrapper {
         display: flex;
         position: relative;
         gap: 7%;
@@ -11,7 +11,7 @@
         .container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            width: 73%;
 
             main.right_content {
                 margin-bottom: 50px;
@@ -30,7 +30,6 @@
                         .back_from_wrapper {
                             .grid_container {
                                 margin: 0 auto;
-                                border: 1px solid #ccc;
                                 display: grid;
                                 width: 100%;
                                 text-align: center;
@@ -38,7 +37,11 @@
                                 grid-template: repeat(1, 1fr) / repeat(5, 1fr) 155.5px;
 
                                 &:first-child {
-                                    background-color: #ccc;
+                                    background-color: $Camel-3;
+                                }
+                                
+                                .grid_item:nth-child( n + 1){
+                                    border-bottom: .5px solid #ccc; // 加底线
                                 }
 
                                 .grid_item {
@@ -48,7 +51,8 @@
                         }
                     }
                 }
-// ======================== 以上為導覽列 + 表格點的版型 ======================== //
+
+                // ======================== 以上為導覽列 + 表格點的版型 ======================== //
                 .section2 {
                     display: flex;
                     flex-direction: row;
@@ -56,11 +60,11 @@
                     margin-top: 60px;
                     gap: 125px;
 
-                    #chart-wrapper1 > #myChart1 {
+                    #chart-wrapper1>#myChart1 {
                         width: 400px;
                     }
 
-                    #chart-wrapper2 > #myChart2 {
+                    #chart-wrapper2>#myChart2 {
                         width: 400px;
                     }
                 }

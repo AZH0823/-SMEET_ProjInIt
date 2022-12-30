@@ -26,32 +26,39 @@
 
       <!-- Navigation-->
 
-    <!-- Navigation-->
-
-    <!-- banner component  -->
-    <div class="banner">
-      <div class="wrapper">
-        <h1 class="green-1 font_family_eng">NEWS</h1>
-      </div>
-      <div class="banner_container">
-        <img src="./img/news_img/news_headbanner.jpg" alt="" />
-      </div>
-    </div>
-
-    <!-- tab -->
-
-    <!-- search-->
-    <!-- <div class="wrapper search_container">
-      <div class="search">
-        <div class="search_container_item right">
-          <input type="text" placeholder="Search..." />
+      <!-- banner component  -->
+      <div class="banner">
+        <div class="wrapper">
+          <h1 class="green-1 font_family_eng">NEWS</h1>
         </div>
         <div class="banner_container">
           <img src="./img/news_img/news_headbanner.jpg" alt="" />
         </div>
-      </div> -->
+      </div>
 
       <!-- tab -->
+      <ul>
+        <div class="wrapper tab_container">
+          <li>
+            <a href="">
+              <h4>最新動態</h4>
+              <span>all</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h4>聯名限定</h4>
+              <span>ft.</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h4>限時優惠</h4>
+              <span>sales</span>
+            </a>
+          </li>
+        </div>
+      </ul>
 
       <!-- search-->
       <div class="wrapper search_container">
@@ -79,7 +86,7 @@
               <h6 class="green-1">冬季暖心</h6>
               <p class="news_item">
                 鮟鱇魚富含膠原蛋白且低脂肪熱量，味道
-                鮮甜淡雅，是健康又美味的海水魚.......
+                鮮甜淡雅，是健康又美味的海水魚
               </p>
             </div>
             <div class="btn_more">
@@ -98,7 +105,7 @@
               <h6 class="green-1">秋季限定料理</h6>
               <p class="font16 news_item">
                 私覓主理人與多位摯友於１９８９年
-                參加一場私廚派對，於派對中享用的鮮美食材仍深刻於心....
+                參加一場私廚派對，於派對中享用的鮮美食材仍深刻於心
               </p>
             </div>
             <div class="btn_more">
@@ -117,7 +124,7 @@
               <h6 class="green-1">精選獺祭-精碾二割三分</h6>
               <p class="font16 news_item">
                 獺祭精碾二割三分之名來自釀造用米精碾至23%，
-                是私覓主廚們心中的不可取代的日料搭配......
+                是私覓主廚們心中的不可取代的日料搭配
               </p>
             </div>
             <div class="btn_more">
@@ -135,7 +142,7 @@
               <p class="font12 green-1">2022/07/07</p>
               <h6 class="green-1">夏季限定料理</h6>
               <p class="font16 news_item">
-                夏季7月到8月之間的「土用丑日」是食用鰻魚的最佳時節，為了避免中暑而食用營養價值高的鰻魚......
+                夏季7月到8月之間的「土用丑日」是食用鰻魚的最佳時節，為了避免中暑而食用營養價值高的鰻魚
               </p>
             </div>
             <div class="btn_more">
@@ -171,7 +178,7 @@
               <p class="font12 green-1">2022/02/05</p>
               <h6 class="green-1">開幕消息</h6>
               <p class="font16 news_item">
-                私覓為您提供到府私廚的服務，讓您體驗最美好的響食體驗，在家也能享受到頂級的餐廳美味....
+                私覓為您提供到府私廚的服務，讓您體驗最美好的響食體驗，在家也能享受到頂級的餐廳美味
               </p>
             </div>
             <div class="btn_more">
@@ -194,5 +201,23 @@
 
       <!-- @@include('layout/footer.html') -->
     </body>
+
+    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script>
+      $(function () {
+        var len = 50; // 超過50個字以"..."取代
+        $(".news_item").each(function (i) {
+          console.log($(this).text());
+          if ($(this).text().length > len) {
+            $(this).attr("title", $(this).text());
+            var text =
+              $(this)
+                .text()
+                .substring(0, len - 1) + "...";
+            $(this).text(text);
+          }
+        });
+      });
+    </script>
   </html>
 </html>

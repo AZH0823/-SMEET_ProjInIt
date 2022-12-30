@@ -1,5 +1,5 @@
-div.common_back {
-    div.wrapper {
+div.back_message {
+    div.backwrapper {
         display: flex;
         position: relative;
         gap: 7%;
@@ -11,7 +11,7 @@ div.common_back {
         div.container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            width: 73%;
 
             main.right_content {
                 margin-bottom: 50px;
@@ -30,17 +30,19 @@ div.common_back {
                         div.back_from_wrapper {
                             div.grid_container {
                                 margin: 0 auto;
-                                border: 1px solid #ccc;
                                 display: grid;
                                 width: 100%;
                                 text-align: center;
                                 align-items: center;
-                                grid-template: repeat(1, 1fr) / repeat(5, 1fr) 155.5px;
+                                grid-template: repeat(1, 1fr) / repeat(2, 1fr) 300px 1fr;
 
                                 &:first-child {
-                                    background-color: #ccc;
+                                    background-color: $Camel-3;
                                 }
                                 // ======================== 以上為導覽列 + 表格點的版型 ======================== //
+                                .grid_item:nth-child( n + 1){
+                                    border-bottom: .5px solid #ccc; // 加底线
+                                }
 
                                 div.grid_item {
                                     padding: 20px;

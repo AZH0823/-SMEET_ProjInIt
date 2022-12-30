@@ -1,485 +1,755 @@
-.member{
-    main{
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 85px 0;
-        @include pad(){
-            padding: 0 40px 0;           
+.member {
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 85px 0;
+    @include pad() {
+      padding: 0 40px 0;
+    }
+    @include mobile() {
+      padding: 0 27px 0;
+    }
+    //MEMBER 標題
+    h1 {
+      margin-top: 90px;
+      margin-bottom: 30px;
+    }
+    // 會員中心
+    .member_title {
+      margin: 0 auto 62px;
+      text-align: center;
+      @include mobile() {
+        margin-bottom: 35px;
+      }
+      h2 {
+        position: relative;
+        &::after {
+          content: "";
+          width: 72px;
+          height: 2px;
+          background-color: $green-1;
+          position: absolute;
+          top: 73px;
+          left: 0;
+          right: 0;
+          margin: auto;
+          @include mobile() {
+            top: 50px;
+          }
         }
-        @include mobile(){
-            padding: 0 27px 0;
+      }
+    }
+    // tab
+    .member_tab {
+      ul {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        @include pad() {
+          margin-bottom: 25px;
         }
-        //MEMBER 標題
-        h1{
-            margin-top: 90px;
-            margin-bottom: 30px;
-        }
-        // 會員中心
-        .member_title{
-            margin: 0 auto 62px;
-            text-align: center;
-            @include mobile(){
-                margin-bottom: 35px;
-            }
-            h2{
-                position: relative;
-                &::after{
-                    content: "";
-                    width: 72px;
-                    height: 2px;
-                    background-color: $green-1;
-                    position: absolute;
-                    top: 73px;
-                    left: 0;
-                    right: 0;
-                    margin: auto;
-                    @include mobile(){
-                        top:50px;
-                    }
-
-                }
-            }
-        }
-        // tab
-        .member_tab{
-            ul{
-                display: flex;
-                justify-content: center;
-                margin-bottom: 40px;
-                flex-wrap: wrap;
-                @include pad(){
-                    margin-bottom: 25px;   
-                }
-                li{
-                    margin-bottom: 10px;
-                    @include pad(){
-                        margin-bottom: 20px;
-                    }
-                    a{
-                        text-decoration: none;
-                        color: $Camel-1;
-                        width: 160px;
-                        line-height: 36px;
-                        border-left: 1px solid $Camel-1;
-                        border-right: 1px solid $Camel-1;
-                        display: block;
-                        text-align: center;
-                        @include pad(){
-                            font-size: 14px;
-                            letter-spacing: 1px;
-                            width: 100px;
-                            line-height: 21px;
-                        }
-                        &:hover{
-                            color:$green-1;
-
-                            border-right: 1px solid $green-1;
-                            border-left: 1px solid $green-1;
-                        }
-                        
-                    }
-                    .now{
-                        color: $green-1;
-                        border-right: 1px solid $green-1;
-                        border-left: 1px solid $green-1;
-                    }
-                }
-                .member_tab_4{
-                    position: relative;
-                }
-                #member_msg{
-                    font-size: 14px;
-                    position: absolute;
-                    top: -5px;
-                    right: 30px;
-                    background-color: $red;
-                    display: block;
-                    line-height: 18px;
-                    width: 18px;
-                    border-radius: 50%;
-                    color: #fff;
-                    &:hover{
-                        color: #fff;
-                    }
-                    @include pad(){
-                        top: -12px;
-                        right: 10px;
-                    }
-                }
-            }
-            
-        }
-        // =======================會員中心
-        // 表單
-        .member_section{
-
-            display: flex;
-            
-
-            justify-content: space-between;
+        li {
+          margin-bottom: 10px;
+          @include pad() {
             margin-bottom: 20px;
-            @include pad(){
-                flex-direction: column;
+          }
+          a {
+            text-decoration: none;
+            color: $Camel-1;
+            width: 160px;
+            line-height: 36px;
+            border-left: 1px solid $Camel-1;
+            border-right: 1px solid $Camel-1;
+            display: block;
+            text-align: center;
+            @include pad() {
+              font-size: 14px;
+              letter-spacing: 1px;
+              width: 100px;
+              line-height: 21px;
             }
-            .member_section_title{
-                width: 100%;
-                line-height: 55px;
-                background-color: $Camel-3;
-                padding-left: 20px;
-                margin-bottom: 25px;
-            }
-            form#info, form#pwd{
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-            // 左邊個人資訊
-            .member_info{
-                width: 49%;
-                @include pad(){
-                    width: 100%;
-                }
-                .date_sex{
-                    input{
-                        width: 49%;
-                        padding-bottom: 9px;
-                    }
-                }
-                .bonus{
-                    border-bottom: 1px solid #000;
-                    padding: 0px 15px 10px;
-                    .bonus_member{
-                        margin: 0px 25px;
-                    }
+            &:hover {
+              color: $green-1;
 
-                    
-                }
-                .member_news{
-                    display: flex;
-                    margin-top: 15px;
-                    
-                    input{
-                        width: 20px;
-                        margin-top: 8px;
-                        background-color: #000;
-                        color: #fff;
-                    }
-                    label{
-                        // position: relative;
-                        // &::before{
-                        //     content: '';
-                        //     position: absolute;
-                        //     top: 8px;
-                        //     left: -21px;
-                        //     height: 16px;
-                        //     width: 16px;
-                        //     color: #fff;
-                        //     background: #000;
-                        //     border-radius: 2px;
-                        // }
-                    }
-                }
+              border-right: 1px solid $green-1;
+              border-left: 1px solid $green-1;
             }
-            // 右邊修該密碼
-            .member_pwd{
-                width: 49%;
-                @include pad(){
-                    width: 100%;
-                }
-                form{
-
-                }
-                .content{
-                    display: flex;
-                    position: relative;
-                    i{
-                        font-size: 12px;
-                        position: absolute;
-                        top: 10px;
-                        right: 0px;
-                        color: #898989;
-                    }
-                }
-                label{
-                    width: 103px;
-                    padding-top: 3px;
-                    margin-right: 10px;
-                }
-                input{
-                    width: calc(100% - 110px);
-                    position: relative;
-                }
-            }
-            // input select共同樣式
-            input, select{
-                outline: 0;
-                border-top: none;
-                border-right: none;
-                border-left: none;
-                border-bottom: 1px solid #000;
-                padding: 10px 15px;
-                letter-spacing: 1px;
-                margin-bottom: 25px;
-            }
-            select{
-                width: 49%;
-            }
-            // 按鈕btn
-            #btn_info, #btn_pwd{
-                align-self: end;
-                font-size: 16px;
-                width: 180px;
-                line-height:  50px;
-                padding: 0;
-                @include pad(){
-                    margin-bottom: 40px;
-                }
-            }
+          }
+          .now {
+            color: $green-1;
+            border-right: 1px solid $green-1;
+            border-left: 1px solid $green-1;
+          }
         }
-        //=======================會員中心結束
-        // ======================訂單查詢
-        .member_product_section{
-            border-top: 1px solid #000;
-            border-bottom: 1px solid #000;
-            // min-height:300px;
-            margin-bottom: 50px;
+        .member_tab_4 {
+          position: relative;
         }
-        .order_list_section{
-            
-            p{
-                padding-right: 15px;
-            }
-            .list1{
-                width: 7%;
-            }
-            .list2{
-                width: 15%;
-            }
-            .list3{
-                width: 20%;
-            }
-            .list4{
-                width: 15%;
-            }
-            .list5{
-                width: 20%;
-            }
-            .list6{
-                width: 20%;
-                text-align: right;
-            }
-            .order_list_title{
-                padding: 25px 0 25px 10px;
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                // border-top: 1px solid #000;
-                border-bottom: 1px solid #000;
-            }
-            .order_list_content{
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                align-items: center;
-                word-break: break-all;
-                padding: 35px 0 35px 10px;
-                border-bottom: 1px solid #ccc;
-                .inCart_btn1{
-                    background-color: #fff;
-                    color: $green-1;
-                    width: 130px;
-                    &:hover{
-                        background-color: $green-1;
-                        color: #fff;
-                    }
-                }           
-            }
-            .order_list_content:last-child{
-                margin-bottom: 200px;
-            }
-
-            @media screen and (max-width:920px){
-                .list1{
-                    display: none;
-                }
-                .list2{
-                    width: 50%;
-                    order: 1;
-                    margin-bottom: 15px;                
-                }
-                .list3{
-                    width: 50%;
-                    order: 2;
-                    text-align: right;
-                    margin-bottom: 15px;                  
-                }
-                .list4{
-                    width: 50%;
-                    order: 4;
-                    text-align: right;
-                    margin-bottom: 15px;
-                }
-                .list5{
-                    width: 50%;
-                    order: 3;
-                    margin-bottom: 15px;
-                }
-                .list6{
-                    width: 100%;
-                    text-align: right;
-                    order:5;
-                }
-                .order_list_title{
-                    display: none;
-                }
-                .order_list_content{
-                    border-bottom: 1px solid #ccc;
-                    padding: 20px 0 20px 10px;
-                }
-            }
+        #member_msg {
+          font-size: 14px;
+          position: absolute;
+          top: -5px;
+          right: 30px;
+          background-color: $red;
+          display: block;
+          line-height: 18px;
+          width: 18px;
+          border-radius: 50%;
+          color: #fff;
+          &:hover {
+            color: #fff;
+          }
+          @include pad() {
+            top: -12px;
+            right: 10px;
+          }
         }
-        // ======================訂單查詢結束
-        // ======================收藏菜品
-        .collect_section{
-            padding: 50px 0;
-            @include mobile(){
-                padding: 25px 0;
-            }
-            ul{
-                display: grid;
-                grid-template-columns: repeat(auto-fill,minmax(256px,1fr));
-                grid-auto-rows: 1fr;
-                grid-row-gap: 20px;
-                grid-column-gap: 20px;
-                margin: 0 auto 60px;
-                
-                margin-bottom: 60px;
-                @include pad(){
-                    grid-template-columns: repeat(auto-fill,minmax(173px,1fr));
-                    grid-row-gap: 10px;
-                    grid-column-gap: 10px;
-                }
-                @include mobile(){
-                    grid-template-columns: repeat(auto-fill,minmax(135px,1fr));
-                    grid-row-gap: 10px;
-                    grid-column-gap: 10px;
-                }
-                @media screen and (max-width:375px){
-                    grid-template-columns: repeat(auto-fill,minmax(135px,1fr));
-                    grid-row-gap: 10px;
-                    grid-column-gap: 10px;
-                }
-                // 商城card
-                li.collect_list{
-                    margin: 0 auto;
-                    // min-width: 256px;
-                    width: 256px;
-                    height: 350px;
-                    border: 1px solid #898989;
-                    @include pad(){
-                        width: 180px;
-                        height: 247px ;
-                    }
-                    @include mobile(){
-                        width: 176px;
-                        height: 245px;
-                    }
-                    @media screen and (max-width:375px){
-                        width: 150px;
-                        height: 211px;
-                    }
-                    a{
-                        text-decoration: none;
-                        display: block;
-                        height: 100%;
-                    }
-                    .product_img{
-                        height: 229px;
-                        width: 100%;
-                        position: relative;
-
-                        @include pad(){
-                        
-                            height: 163px ;
-                        }
-                        @include mobile(){
-                            height: 160px;
-                        }
-                        @media screen and (max-width:375px){
-
-                        }
-                        img{
-                            width: 100%;
-                            
-                            -o-object-fit: cover;
-                            object-fit: cover;
-
-                        }
-                        i{
-                            background: #FFF;
-                            border-radius: 50%;
-                            color: #ccc;
-                            font-size: 14px;
-                            display: block;
-                            width: 29px;
-                            line-height: 29px;
-                            text-align: center;
-                            position: absolute;
-                            top: 12px;
-                            right: 12px;
-                            &:hover{
-                                color: $red;
-                                border: 0;
-                            }
-                        }
-                    }
-                    .product_content{
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: space-between;
-                        padding: 14px 20px 20px;
-                        @include pad(){
-                            padding: 8px 15px 3px;
-                        
-                                
-                        }
-                        
-                        h6.product_title{
-                            width: 100%;
-                            height: 60px;
-                            @include pad(){
-                                font-size: 16px;
-                                height: 40px;
-                            }
-                        }
-                        p{
-                            @include mobile(){
-                                font-size: 14px;
-                            }
-                        }
-                        button.cart_link{
-                            background-color: #fff;
-                            border: 0;
-                            // outline: 1px solid #000;
-                            cursor: pointer;
-                            color: $green-1;
-                            width: 30px;
-                            text-align: right;
-                            &:hover{
-                                color: $green-3;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        // ======================收藏菜品結束
-
+      }
     }
-    .none{
-        display: none !important;  
+    // =======================會員中心
+    // 表單
+    .member_section {
+      display: flex;
+
+      justify-content: space-between;
+      margin-bottom: 20px;
+      @include pad() {
+        flex-direction: column;
+      }
+      .member_section_title {
+        width: 100%;
+        line-height: 55px;
+        background-color: $Camel-3;
+        padding-left: 20px;
+        margin-bottom: 25px;
+      }
+      form#info,
+      form#pwd {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      // 左邊個人資訊
+      .member_info {
+        width: 49%;
+        @include pad() {
+          width: 100%;
+        }
+        .date_sex {
+          input {
+            width: 49%;
+            padding-bottom: 9px;
+          }
+        }
+        .bonus {
+          border-bottom: 1px solid #000;
+          padding: 0px 15px 10px;
+          .bonus_member {
+            margin: 0px 25px;
+          }
+        }
+        .member_news {
+          display: flex;
+          margin-top: 15px;
+
+          input {
+            width: 20px;
+            margin-top: 8px;
+            background-color: #000;
+            color: #fff;
+          }
+          // label {
+          // position: relative;
+          // &::before{
+          //     content: '';
+          //     position: absolute;
+          //     top: 8px;
+          //     left: -21px;
+          //     height: 16px;
+          //     width: 16px;
+          //     color: #fff;
+          //     background: #000;
+          //     border-radius: 2px;
+          // }
+        }
+      }
     }
+    // 右邊修該密碼
+    .member_pwd {
+      width: 49%;
+      @include pad() {
+        width: 100%;
+      }
+      // form {
+      // }
+      .content {
+        display: flex;
+        position: relative;
+        i {
+          font-size: 12px;
+          position: absolute;
+          top: 10px;
+          right: 0px;
+          color: #898989;
+        }
+      }
+      label {
+        width: 103px;
+        padding-top: 3px;
+        margin-right: 10px;
+      }
+      input {
+        width: calc(100% - 110px);
+        position: relative;
+      }
+    }
+    // input select共同樣式
+    input,
+    select {
+      outline: 0;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-bottom: 1px solid #000;
+      padding: 10px 15px;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+    }
+    select {
+      width: 49%;
+    }
+    // 按鈕btn
+    #btn_info,
+    #btn_pwd {
+      align-self: end;
+      font-size: 16px;
+      width: 180px;
+      line-height: 50px;
+      padding: 0;
+      @include pad() {
+        margin-bottom: 40px;
+      }
+    }
+  }
+  //=======================會員中心結束
+  // ======================訂單查詢
+  .member_product_section {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    // min-height:300px;
+    margin-bottom: 50px;
+  }
+  .order_list_section {
+    p {
+      padding-right: 15px;
+    }
+    .list1 {
+      width: 7%;
+    }
+    .list2 {
+      width: 15%;
+    }
+    .list3 {
+      width: 20%;
+    }
+    .list4 {
+      width: 15%;
+    }
+    .list5 {
+      width: 20%;
+    }
+    .list6 {
+      width: 20%;
+      text-align: right;
+    }
+    .order_list_title {
+      padding: 25px 0 25px 10px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      // border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+    .order_list_content {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      word-break: break-all;
+      padding: 35px 0 35px 10px;
+      border-bottom: 1px solid #ccc;
+      .inCart_btn1 {
+        background-color: #fff;
+        color: $green-1;
+        width: 130px;
+        &:hover {
+          background-color: $green-1;
+          color: #fff;
+        }
+      }
+    }
+    .order_list_content:last-child {
+      margin-bottom: 200px;
+    }
+
+    @media screen and (max-width: 920px) {
+      .list1 {
+        display: none;
+      }
+      .list2 {
+        width: 50%;
+        order: 1;
+        margin-bottom: 15px;
+      }
+      .list3 {
+        width: 50%;
+        order: 2;
+        text-align: right;
+        margin-bottom: 15px;
+      }
+      .list4 {
+        width: 50%;
+        order: 4;
+        text-align: right;
+        margin-bottom: 15px;
+      }
+      .list5 {
+        width: 50%;
+        order: 3;
+        margin-bottom: 15px;
+      }
+      .list6 {
+        width: 100%;
+        text-align: right;
+        order: 5;
+      }
+      .order_list_title {
+        display: none;
+      }
+      .order_list_content {
+        border-bottom: 1px solid #ccc;
+        padding: 20px 0 20px 10px;
+      }
+    }
+  }
+  // ======================訂單查詢結束
+  // ======================收藏菜品
+  .collect_section {
+    padding: 50px 0;
+    @include mobile() {
+      padding: 25px 0;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+      grid-auto-rows: 1fr;
+      grid-row-gap: 20px;
+      grid-column-gap: 20px;
+      margin: 0 auto 60px;
+
+      margin-bottom: 60px;
+      @include pad() {
+        grid-template-columns: repeat(auto-fill, minmax(173px, 1fr));
+        grid-row-gap: 10px;
+        grid-column-gap: 10px;
+      }
+      @include mobile() {
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        grid-row-gap: 10px;
+        grid-column-gap: 10px;
+      }
+      @media screen and (max-width: 375px) {
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        grid-row-gap: 10px;
+        grid-column-gap: 10px;
+      }
+      // 商城card
+      li.collect_list {
+        margin: 0 auto;
+        // min-width: 256px;
+        width: 256px;
+        height: 350px;
+        border: 1px solid #898989;
+        @include pad() {
+          width: 180px;
+          height: 247px;
+        }
+        @include mobile() {
+          width: 176px;
+          height: 245px;
+        }
+        @media screen and (max-width: 375px) {
+          width: 150px;
+          height: 211px;
+        }
+        a {
+          text-decoration: none;
+          display: block;
+          height: 100%;
+        }
+        .product_img {
+          height: 229px;
+          width: 100%;
+          position: relative;
+
+          @include pad() {
+            height: 163px;
+          }
+          @include mobile() {
+            height: 160px;
+          }
+          @media screen and (max-width: 375px) {
+          }
+          img {
+            width: 100%;
+
+            //   -o-object-fit: cover;
+            object-fit: cover;
+          }
+          i {
+            background: #fff;
+            border-radius: 50%;
+            color: #ccc;
+            font-size: 14px;
+            display: block;
+            width: 29px;
+            line-height: 29px;
+            text-align: center;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            &:hover {
+              color: $red;
+              border: 0;
+            }
+          }
+        }
+        .product_content {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          padding: 14px 20px 20px;
+          @include pad() {
+            padding: 8px 15px 3px;
+          }
+
+          h6.product_title {
+            width: 100%;
+            height: 60px;
+            @include pad() {
+              font-size: 16px;
+              height: 40px;
+            }
+          }
+          p {
+            @include mobile() {
+              font-size: 14px;
+            }
+          }
+          button.cart_link {
+            background-color: #fff;
+            border: 0;
+            // outline: 1px solid #000;
+            cursor: pointer;
+            color: $green-1;
+            width: 30px;
+            text-align: right;
+            &:hover {
+              color: $green-3;
+            }
+          }
+        }
+      }
+    }
+  }
+  // ======================收藏菜品結束
+  // ======================訊息中心
+
+  .none {
+    display: none !important;
+  }
+
+  .message_section {
+    ul {
+      // border-bottom: 1px solid #000;
+
+      .message_content {
+        border: 1px solid #000;
+        max-width: 100%;
+        width: 600px;
+        margin: 0 auto;
+        margin-top: 5%;
+        @include pad {
+          font-size: 14px;
+          max-width: 80%;
+        }
+        @include mobile {
+          max-width: 100%;
+        }
+
+        @media all and (max-width: 375px) {
+          font-size: 12px;
+        }
+        .time_cover {
+          display: flex;
+          justify-content: center;
+          width: 45%;
+          margin: 5% 0 2% 0;
+          color: #a99797;
+
+          @include pad {
+            margin: 5% 0 2% 13%;
+          }
+          @include mobile {
+            margin: 5% 0 2% 16%;
+          }
+          @media all and (max-width: 375px) {
+            margin: 5% 0 2% 4%;
+          }
+        }
+        .message_import {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin-top: 5%;
+          @media all and (max-width: 375px) {
+            margin-top: 0;
+          }
+
+          img {
+            width: 10%;
+            display: inline-block;
+            @include mobile {
+              margin: -4% 5% 0 1%;
+            }
+          }
+          p {
+            margin-right: 3%;
+            @include mobile {
+              margin-top: 5%;
+            }
+          }
+        }
+      }
+
+      .message_customer {
+        border: 1px solid #000;
+        width: 220px;
+        margin: 5% 0 30% 57.5%;
+        @include pad {
+          width: 32%;
+          margin: 5% 0 30% 58%;
+        }
+        @include mobile {
+          width: 42%;
+        }
+        @media all and (max-width: 375px) {
+          font-size: 12px;
+        }
+        .time_cover {
+          margin: 5% 0 2% 0;
+          color: #a99797;
+          display: flex;
+          justify-content: center;
+          width: 64%;
+          @include mobile {
+            margin: 5% 0 2% 9%;
+          }
+
+          @media all and (max-width: 375px) {
+            margin: 5% 0 2% 0%;
+          }
+        }
+        .customer_import {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin: 5%;
+
+          .fa-user {
+            border-radius: 50%;
+            color: #fff;
+            border: 1px solid $Camel-2;
+            background-color: $Camel-2;
+            width: 30px;
+            height: 30px;
+            line-height: 27px;
+            padding-left: 7px;
+          }
+        }
+      }
+      .message_textarea {
+        border-top: 1px solid #000;
+        width: 600px;
+        margin: 0 auto;
+        @include pad {
+          width: 80%;
+        }
+        @include mobile {
+          width: 100%;
+        }
+        .customer_respond {
+          margin-top: 3%;
+          resize: none;
+          width: 100%;
+          padding-top: 5%;
+          padding-left: 3%;
+
+          @include mobile {
+            width: 100%;
+            margin-left: 0;
+          }
+
+          @media all and (max-width: 375px) {
+            height: 100px;
+          }
+        }
+      }
+      .upload {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 55%;
+        padding: 1% 0 5% 0;
+        @include pad {
+          width: 80%;
+        }
+        @include mobile {
+          width: 100%;
+        }
+        .upload_plus {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          width: 200px;
+          p {
+            padding-left: 5%;
+            @include mobile {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ======================訊息中心結束
+  // ======================常見問題
+
+  .question_section {
+    ul {
+      margin-left: 15%;
+      @media all and (max-width: 992px) {
+        margin-left: 13%;
+      }
+      @include pad {
+        margin-left: 10%;
+      }
+      @include mobile {
+        margin-left: 0;
+      }
+
+      h5 {
+        padding: 7% 0 1% 2%;
+        @extend .green-1;
+        width: 80%;
+        @include mobile {
+          font-size: 16px;
+        }
+      }
+      li.question_section_li {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        border-top: 1px solid #000;
+
+        @include pad {
+          width: 90%;
+        }
+        @include mobile {
+          width: 100%;
+        }
+
+        .question_flex {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-left: 4%;
+          border-bottom: 1px solid #000;
+          h6 {
+            width: 530px;
+            @media all and (max-width: 992px) {
+              padding-left: 5%;
+            }
+
+            @include pad {
+              padding-left: 5%;
+            }
+            @include mobile {
+              font-size: 16px;
+            }
+            @media all and (max-width: 375px) {
+              font-size: 14px;
+            }
+          }
+          h6,
+          .fa-solid {
+            margin-top: 2%;
+            margin-bottom: 2%;
+          }
+          .fa-plus {
+            padding-right: 4%;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+        .question_none {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-left: 4%;
+          display: none;
+          background-color: $Camel-3;
+          &.active {
+            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 4%;
+            background-color: $Camel-3;
+          }
+          h6 {
+            margin-top: 2%;
+            margin-bottom: 2%;
+            padding-left: 3%;
+            width: 580px;
+            @media all and (max-width: 992px) {
+              padding: 0 8% 0 5%;
+            }
+            @include pad {
+              padding: 0 13% 0 5%;
+            }
+            @media all and (max-width: 375px) {
+              font-size: 14px;
+            }
+          }
+          .fa-a {
+            font-size: 18px;
+          }
+          .fa-minus {
+            padding-right: 4%;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ======================常見問題結束
 }
-

@@ -1,265 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    @@include('layout/meta.html', {
-        "title":"會員中心"
-    })
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    @@include('layout/meta.html', { "title":"會員中心" })
+    <link rel="stylesheet" href="css/style.css" />
     <!-- fontawesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
     <!-- @@include('layout/header_01.html') -->
     <div class="fulid_wrapper member">
-        
-        <main>
-            <!-- MEMBER標題 -->
-            <h1 class="green-1 font_family_eng">MEMBER</h1>
-            <!-- 會員中心標題 -->
-            <div class="member_title">
-                <h2 class="green-1 font_bold font_family_tc">會員中心</h2>
+      <main>
+        <!-- MEMBER標題 -->
+        <h1 class="green-1 font_family_eng">MEMBER</h1>
+        <!-- 會員中心標題 -->
+        <div class="member_title">
+          <h2 class="green-1 font_bold font_family_tc">會員中心</h2>
+        </div>
+        <!-- tabbbbbbbbbb -->
+        <nav class="member_tab">
+          <ul class="font16 Camel-1">
+            <li class="member_tab_1"><a class="now" href="">會員中心</a></li>
+            <li class="member_tab_2"><a href="">訂單查詢</a></li>
+            <li class="member_tab_3"><a href="">收藏菜品</a></li>
+            <li class="member_tab_4">
+              <a href="">訊息中心<span id="member_msg">3</span></a>
+            </li>
+            <li class="member_tab_5"><a href="">常見問題</a></li>
+          </ul>
+        </nav>
+        <!-- ======會員中心內容===== -->
+        <section class="member_section">
+          <div class="member_info">
+            <h6 class="member_section_title">個人資訊</h6>
+            <form id="info" action="">
+              <input type="text" id="member_name" placeholder="請輸入姓名" />
+              <div class="date_sex">
+                <input type="date" id="member_date" placeholder="請輸入生日" />
+                <select name="member_sex" id="member_sex" value="請選擇性別">
+                  <option value="none" selected disabled hidden>
+                    請選擇性別
+                  </option>
+                  <option value="男">男</option>
+                  <option value="女">女</option>
+                </select>
+              </div>
+              <input
+                type="text"
+                id="member_phone"
+                placeholder="請輸入手機號碼"
+              />
+              <div class="city_area">
+                <select name="member_city" id="member_city">
+                  <option value="none" selected disabled hidden>
+                    請選擇縣市
+                  </option>
+                </select>
+                <select name="member_area" id="member_area">
+                  <option value="none" selected disabled hidden>
+                    請選擇區域
+                  </option>
+                </select>
+              </div>
+              <input type="text" id="member_addr" placeholder="請輸入地址" />
+              <div class="bonus">
+                <p class="font16">
+                  目前累計會員紅利點數<span class="bonus_member">0</span>點
+                </p>
+              </div>
+              <div class="member_news">
+                <input
+                  type="checkbox"
+                  name="member_news"
+                  id="member_news_yes"
+                />
+                <label for="member_news_yes">
+                  <p class="font16">我願意收到最新優惠消息</p>
+                </label>
+              </div>
+
+              <button type="submit" id="btn_info" class="inCart_btn2">
+                確認修改
+              </button>
+            </form>
+          </div>
+          <div class="member_pwd">
+            <h6 class="member_section_title">修改密碼</h6>
+            <form id="pwd" action="">
+              <div class="content">
+                <label for="member_account">帳號</label>
+                <input type="text" id="member_account" />
+              </div>
+              <div class="content">
+                <label for="member_pwd_old">請輸入舊密碼</label>
+                <input type="password" />
+                <i class="fa-regular fa-eye-slash"></i>
+              </div>
+              <div class="content">
+                <label for="member_pwd_new">請輸入新密碼</label>
+                <input
+                  type="password"
+                  placeholder="請使用 8 個字元以上的字母、數字"
+                />
+                <i class="fa-regular fa-eye-slash"></i>
+              </div>
+              <div class="content">
+                <label for="member_pwd_confirm">請確認新密碼</label>
+                <input type="password" />
+                <i class="fa-regular fa-eye-slash"></i>
+              </div>
+
+              <button type="submit" id="btn_pwd" class="inCart_btn2">
+                確認修改
+              </button>
+            </form>
+          </div>
+        </section>
+        <!-- ======會員中心內容END===== -->
+        <!-- ======訂單查詢===== -->
+        <section class="order_list_section member_product_section none">
+          <div class="order_list_title font14 gray">
+            <p class="list1">類別</p>
+            <p class="list2">訂單日期</p>
+            <p class="list3">訂單編號</p>
+            <p class="list4">訂單金額</p>
+            <p class="list5">訂單狀態</p>
+            <div class="list6"></div>
+          </div>
+          <div class="order_list_content font16">
+            <p class="list1">商城</p>
+            <p class="list2">2022/08/31</p>
+            <p class="list3">2022123456789</p>
+            <p class="list4">NT$<span class="list4_money">5,000</span></p>
+            <p class="list5">訂單成立已付款</p>
+            <div class="list6">
+              <button class="inCart_btn1">查看詳情</button>
             </div>
-            <!-- tabbbbbbbbbb -->
-            <nav class="member_tab">
-                <ul class="font16 Camel-1">
-                    <li class="member_tab_1"><a  class="now" href="">會員中心</a></li>
-                    <li class="member_tab_2"><a  href="">訂單查詢</a></li>
-                    <li class="member_tab_3"><a  href="">收藏菜品</a></li>
-                    <li class="member_tab_4"><a  href="">訊息中心<span id="member_msg">3</span></a></li>
-                    <li class="member_tab_5"><a  href="">常見問題</a></li>
-                </ul>
-            </nav>
-            <!-- ======會員中心內容===== -->
-            <section class="member_section ">
-                <div class="member_info">
-                    <h6 class="member_section_title">個人資訊</h6>
-                    <form id="info" action="">
-                        <input type="text" id="member_name" placeholder="請輸入姓名">
-                        <div class="date_sex">
-                            <input type="date" id="member_date" placeholder="請輸入生日">
-                        <select name="member_sex" id="member_sex" value="請選擇性別">
-                            <option value="none" selected disabled hidden>請選擇性別</option> 
-                            <option value="男">男</option>
-                            <option value="女">女</option>
-                        </select>
-                        </div>
-                        <input type="text" id="member_phone" placeholder="請輸入手機號碼">
-                        <div class="city_area">
-                            <select name="member_city" id="member_city">
-                                <option value="none" selected disabled hidden>請選擇縣市</option> 
-                            </select>
-                        <select name="member_area" id="member_area">
-                            <option value="none" selected disabled hidden>請選擇區域</option> 
-                        </select>
-                        </div>
-                        <input type="text" id="member_addr" placeholder="請輸入地址">
-                        <div class="bonus">
-                            <p class="font16">目前累計會員紅利點數<span class="bonus_member">0</span>點</p>
-                        </div>
-                        <div class="member_news">
-                            <input type="checkbox" name="member_news" id="member_news_yes">
-                            <label for="member_news_yes">
-                                <p class="font16">我願意收到最新優惠消息</p>
-                            </label>
-                        </div>
+          </div>
+          <div class="order_list_content font16">
+            <p class="list1">商城</p>
+            <p class="list2">2022/08/31</p>
+            <p class="list3">2022123456789</p>
+            <p class="list4">NT$<span class="list4_money">5,000</span></p>
+            <p class="list5">訂單成立已付款</p>
+            <div class="list6">
+              <button class="inCart_btn1">查看詳情</button>
+            </div>
+          </div>
+          <div class="order_list_content font16">
+            <p class="list1">商城</p>
+            <p class="list2">2022/08/31</p>
+            <p class="list3">2022123456789</p>
+            <p class="list4">NT$<span class="list4_money">5,000</span></p>
+            <p class="list5">訂單成立已付款</p>
+            <div class="list6">
+              <button class="inCart_btn1">查看詳情</button>
+            </div>
+          </div>
+        </section>
+        <!-- ======訂單查詢結束===== -->
+        <!-- ======收藏菜品====== -->
+        <section class="collect_section member_product_section">
+          <ul>
+            <li class="collect_list">
+              <a href="">
+                <div class="product_img">
+                  <img src="img/member_img/member_wish1.jpg" alt="" />
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="product_content green-1">
+                  <h6 class="product_title">黑鮪刺身</h6>
+                  <p class="font16">$<span class="product_money">700</span></p>
+                  <button type="button" class="cart_link" href="">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                </div>
+              </a>
+            </li>
+            <li class="collect_list">
+              <a href="">
+                <div class="product_img">
+                  <img src="img/member_img/member_wish1.jpg" alt="" />
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="product_content green-1">
+                  <h6 class="product_title">黑鮪刺身</h6>
+                  <p class="font16">$<span class="product_money">700</span></p>
+                  <button type="button" class="cart_link" href="">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                </div>
+              </a>
+            </li>
+            <li class="collect_list">
+              <a href="">
+                <div class="product_img">
+                  <img src="img/member_img/member_wish1.jpg" alt="" />
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="product_content green-1">
+                  <h6 class="product_title">黑鮪刺身</h6>
+                  <p class="font16">$<span class="product_money">700</span></p>
+                  <button type="button" class="cart_link" href="">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                </div>
+              </a>
+            </li>
+            <li class="collect_list">
+              <a href="">
+                <div class="product_img">
+                  <img src="img/member_img/member_wish1.jpg" alt="" />
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="product_content green-1">
+                  <h6 class="product_title">黑鮪刺身</h6>
+                  <p class="font16">$<span class="product_money">700</span></p>
+                  <button type="button" class="cart_link" href="">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                </div>
+              </a>
+            </li>
+            <li class="collect_list">
+              <a href="">
+                <div class="product_img">
+                  <img src="img/member_img/member_wish1.jpg" alt="" />
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="product_content green-1">
+                  <h6 class="product_title">黑鮪刺身</h6>
+                  <p class="font16">$<span class="product_money">700</span></p>
+                  <button type="button" class="cart_link" href="">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                </div>
+              </a>
+            </li>
+            <li class="collect_list">
+              <a href="">
+                <div class="product_img">
+                  <img src="img/member_img/member_wish1.jpg" alt="" />
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="product_content green-1">
+                  <h6 class="product_title">黑鮪刺身</h6>
+                  <p class="font16">$<span class="product_money">700</span></p>
+                  <button type="button" class="cart_link" href="">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </button>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <!-- ======收藏菜品結束====== -->
+        <!-- ======訊息中心====== -->
+        <section class="message_section member_product_section">
+          <ul class="fuild_wrapper">
+            <li class="message_content">
+              <div class="message_import">
+                <img src="./img/logo_img/logo_black-03.png" alt="" />
+                <p>
+                  您好，這邊是您預定12/24的聖誕饗宴，這邊提供您賣場連結♥♥♥<br />https://www.iloveit.fpe39fj23fpkxj1-0dfj12
+                </p>
+              </div>
+              <p class="time_cover">12 hour ago</p>
+            </li>
+            <li class="message_customer">
+              <div class="customer_import">
+                <p>好的，謝謝。</p>
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <p class="time_cover">4 hour ago</p>
+            </li>
+            <div class="message_textarea">
+              <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                class="customer_respond"
+              >
+  完成繳費了，帳號後五碼ＯＯＯＯＯ。</textarea
+              >
+            </div>
+            <div class="upload">
+              <div class="upload_plus">
+                <i class="fa-regular fa-plus"></i>
+                <p>加入圖片</p>
+              </div>
+              <button class="inCart_btn1">傳送</button>
+            </div>
+          </ul>
+        </section>
+        <!-- ======訊息中心結束====== -->
 
-                        <button type="submit" id="btn_info" class="inCart_btn2" >確認修改</button>
-                    </form>
-                </div>
-                <div class="member_pwd">
-                    <h6 class="member_section_title">修改密碼</h6>
-                    <form id="pwd" action="">
-                        <div class="content">
-                            <label for="member_account">帳號</label>
-                        <input type="text" id="member_account">
-                        </div>
-                        <div class="content">
-                            <label for="member_pwd_old">請輸入舊密碼</label>
-                            <input type="password">
-                            <i class="fa-regular fa-eye-slash"></i>
-                        </div>
-                        <div class="content">
-                            <label for="member_pwd_new">請輸入新密碼</label>
-                            <input type="password" placeholder="請使用 8 個字元以上的字母、數字">
-                            <i class="fa-regular fa-eye-slash"></i>
-                        </div>
-                        <div class="content">
-                            <label for="member_pwd_confirm">請確認新密碼</label>
-                            <input type="password">
-                            <i class="fa-regular fa-eye-slash"></i>
-                        </div>
+        <!-- ======常見問題====== -->
+        <section class="question_section member_product_section">
+          <ul>
+            <h5>預約流程</h5>
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為6人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
 
-                        <button  type="submit" id="btn_pwd" class="inCart_btn2">確認修改</button>
-                    </form>
-                </div>
-            </section>
-            <!-- ======會員中心內容END===== -->
-            <!-- ======訂單查詢===== -->
-            <section class="order_list_section member_product_section none">
-                <div class="order_list_title font14 gray">
-                    <p class="list1">類別</p>
-                    <p class="list2">訂單日期</p>
-                    <p class="list3">訂單編號</p>
-                    <p class="list4">訂單金額</p>
-                    <p class="list5">訂單狀態</p>
-                    <div class="list6"></div>
-                </div>
-                <div class="order_list_content font16 ">
-                    <p class="list1">商城</p>
-                    <p class="list2">2022/08/31</p>
-                    <p class="list3">2022123456789</p>
-                    <p class="list4">NT$<span class="list4_money">5,000</span></p>
-                    <p class="list5">訂單成立已付款</p>
-                    <div class="list6">
-                        <button class="inCart_btn1">查看詳情</button>
-                    </div>
-                </div>
-                <div class="order_list_content font16">
-                    <p class="list1">商城</p>
-                    <p class="list2">2022/08/31</p>
-                    <p class="list3">2022123456789</p>
-                    <p class="list4">NT$<span class="list4_money">5,000</span></p>
-                    <p class="list5">訂單成立已付款</p>
-                    <div class="list6">
-                        <button class="inCart_btn1">查看詳情</button>
-                    </div>
-                </div>
-                <div class="order_list_content font16">
-                    <p class="list1">商城</p>
-                    <p class="list2">2022/08/31</p>
-                    <p class="list3">2022123456789</p>
-                    <p class="list4">NT$<span class="list4_money">5,000</span></p>
-                    <p class="list5">訂單成立已付款</p>
-                    <div class="list6">
-                        <button class="inCart_btn1">查看詳情</button>
-                    </div>
-                </div>
-            </section>
-            <!-- ======訂單查詢結束===== -->
-            <!-- ======收藏菜品====== -->
-            <section class="collect_section member_product_section ">
-                <ul>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- ======收藏菜品結束====== -->
-            <!-- ======訊息中心====== -->
-            <section class="message_section member_product_section none">
-                <ul>
-                    <li class="message_content">
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有提供素食餐點嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>不好意思，目前暫無提供全素食餐點。</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
 
-                    </li>
-                </ul>
-                <div class="message_import">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                    <div class="upload">
-                        <i class="fa-regular fa-plus"></i>
-                        <p>加入圖片</p>
-                    </div>
-                    <button class="inCart_btn1">傳送</button>
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問廚師預約的時段有哪些呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
 
-                </div>
-            </section>
-            <!-- ======訊息中心結束====== -->
-            <!-- ======常見問題====== -->
-            <section class="question_section member_product_section none">
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
+                  10-14天內取消預約則退款70% 不足10天則不予退款。
+                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
 
-            </section>
-            <!-- ======常見問題結束====== -->
-        </main>
-        <!-- @@include('layout/footer.html') -->
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為6人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <h5>付款問題</h5>
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為6人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
 
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有提供素食餐點嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>不好意思，目前暫無提供全素食餐點。</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問廚師預約的時段有哪些呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
+                  10-14天內取消預約則退款70% 不足10天則不予退款。
+                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為６人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <h5>租借服務</h5>
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為6人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有提供素食餐點嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>不好意思，目前暫無提供全素食餐點。</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問廚師預約的時段有哪些呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
+                  10-14天內取消預約則退款70% 不足10天則不予退款。
+                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為６人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <h5>退貨問題</h5>
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為6人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有提供素食餐點嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>不好意思，目前暫無提供全素食餐點。</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問廚師預約的時段有哪些呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>
+                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
+                  10-14天內取消預約則退款70% 不足10天則不予退款。
+                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
+                </h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+
+            <li class="question_section_li">
+              <div class="question_flex">
+                <i class="fa-solid fa-q"></i>
+                <h6>請問有最低用餐人數嗎？</h6>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="question_none">
+                <i class="fa-solid fa-a"></i>
+                <h6>有的，最低廚師預約人數為６人</h6>
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <!-- ======常見問題結束====== -->
+      </main>
+      <!-- @@include('layout/footer.html') -->
     </div>
 
-</body>
+    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script>
+      $(function () {
+        $(".fa-plus").click(function (e) {
+          $(this).parents().siblings(".question_none").addClass("active");
+        });
+
+        $(".fa-minus").click(function (e) {
+          // console.log( $(this).parents());
+          $(this).parents().toggleClass("active");
+        });
+      });
+    </script>
+  </body>
 </html>
