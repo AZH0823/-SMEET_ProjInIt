@@ -7,50 +7,14 @@
     }
 
 
-    //-----------------------------------------預約流程-----------------------------------------//
 
-            ._index_reserve{
-                background-image: url(../../img/index_img/index_reserve.png);
-                background-position: bottom;
-                background-size: cover;
-                padding-bottom: 600px;
-                @include pad(){
-                    padding-bottom: 290px;
-                    background-position-y: 80px;
-                    background-position-x: -105px;
-                    background-repeat: no-repeat;
-                    background-size: 140%;
-                }
-                @include mobile(){
-                    padding-bottom: 290px;
-                    background-position-y: 80px;
-                    background-position-x: -105px;
-                    background-repeat: no-repeat;
-                    background-size: 140%;
-                }
-                h2{
-                    text-align: center;
-                    padding-top: 45px;
-                    margin-bottom: 10px;
-                }
-                ._index_line{
-                    margin: 0 400px;
-                    background-color: $green-1;
-                    padding: 1px;
-                    @include pad(){
-                        margin: 0 40px;  
-                    }
-                    @include mobile(){
-                        margin: 0 40px;  
-                    }
-                }
-            }
-            //-----------------------------------------招牌菜單-----------------------------------------//
+            
+        //-----------------------------------------招牌菜單-----------------------------------------//
 
 
             ._index_menu{
                 margin: 0 auto;
-                background-image: url(../../img/index_img/index_hotmenu_bg.jpg);
+                background-image: url(../img/index_img/index_hotmenu_bg.jpg);
                 display: flex;
                 background-position: center;
                
@@ -123,8 +87,20 @@
                         box-shadow: 16px -16px $green-1;
                     }
                 }
-        
             }
+
+            //-----------------------------------------線上商城-----------------------------------------//
+
+
+
+
+
+
+
+
+
+
+
 
             //-----------------------------------------預約日程-----------------------------------------//
 
@@ -150,7 +126,6 @@
                     flex-direction: row-reverse;
                     margin-bottom: 30px;
                     ._index_line{
-                        margin: 0 auto;
                         background-color: $green-1;
                         padding: 1px 225px;
                     }
@@ -170,7 +145,7 @@
             //-----------------------------------------最新動態-----------------------------------------//
 
             ._index_news{
-                background-image: url(../../img/index_img/index_news_bg.png);
+                background-image: url(../img/index_img/index_news_bg.png);
                 background-position: center;
                 display: flex;
                 flex-direction: column;
@@ -344,7 +319,7 @@
             ._if1, ._if2, ._if3{
                 width: 256px;
                 height: 327px;
-                background-image: url(../../img/index_img/index_evaluation.png);
+                background-image: url(../img/index_img/index_evaluation.png);
                 background-size: cover;
 
                 img{
