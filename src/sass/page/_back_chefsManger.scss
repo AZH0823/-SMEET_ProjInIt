@@ -11,13 +11,23 @@ div.back_chefstManger {
             display: flex;
             flex-direction: column;
             width: 73%;
-
             // 表格
             main.right_content {
                 margin-bottom: 50px;
                 width: 100%;
-
-                .section1 {
+                section.section1{
+                    div.swiper_img_update{
+                        h4{
+                            text-align: center;
+                            background-color: $Camel-3;
+                            div.addImg_block{
+                                display: flex;
+                                }
+                            }
+                        }
+                    }
+                }
+                .section2 {
                     margin-top: 100px;
 
                     .back_from {
@@ -30,26 +40,27 @@ div.back_chefstManger {
                         .back_from_wrapper {
                             .grid_container {
                                 margin: 0 auto;
-                                border: 1px solid #ccc;
                                 display: grid;
                                 width: 100%;
                                 text-align: center;
                                 align-items: center;
-                                grid-template: repeat(1, 1fr) / repeat(3, 1fr) 300px 1fr 1fr;
+                                grid-template: repeat(1, 1fr) / repeat(2, 1fr) 300px 1fr 1fr;
 
                                 &:first-child {
                                     background-color: $Camel-3;
                                 }
-
+                                .grid_item:nth-child( n + 1){
+                                    border-bottom: .5px solid #ccc; // 加底线
+                                }
                                 .grid_item {
                                     padding: 20px;
-
+                                    
                                     // switch btn
                                     .switch {
+                                        display: flex;
                                         position: relative;
-                                        display: inline-block;
-                                        width: 50px;
-                                        height: 24px;
+                                        width: 50px; 
+                                        height: 25.59px; // 同高
 
                                         input {
                                             opacity: 0;
@@ -98,42 +109,47 @@ div.back_chefstManger {
                                                 top: 0px;
                                             }
                                         }
+                                        
+                                        .slider_content{  // 上架
+                                            position: absolute;
+                                            top: 0px;
+                                            left: 60px;
+                                            right: 0px;
+                                            width: 50px;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
 
-                    // 頁簽
-                    .page {
-                        .page_ul {
-                            position: unset; // 取消原本的属性
-                            display: flex;
-                            justify-content: center;
+                // 頁簽
+                .page {
+                    .page_ul {
+                        position: unset; // 取消原本的属性
+                        display: flex;
+                        justify-content: center;
 
-                            li {
-                                line-height: 30.5px;
-                                margin-left: 12px;
-                                width: 33px;
-                                height: 33px;
-                                border-radius: 50%;
-                                background-color: #F9F4EC;
-                                margin: 39px 0 25px 21px;
-                                border: 1px solid #000;
+                        li {
+                            line-height: 30.5px;
+                            margin-left: 12px;
+                            width: 33px;
+                            height: 33px;
+                            border-radius: 50%;
+                            background-color: #F9F4EC;
+                            margin: 39px 0 25px 21px;
+                            border: 1px solid #000;
 
-                                a {
-                                    display: block;
-                                    text-decoration: none;
-                                    text-align: center;
-                                    color: #000;
-                                }
+                            a {
+                                display: block;
+                                text-decoration: none;
+                                text-align: center;
+                                color: #000;
                             }
                         }
                     }
-
                 }
             }
         }
-
     }
 }
