@@ -47,70 +47,138 @@
 
                 </div>
                 <div class="reseve-form">
-                    <form action="#" method="#" id="reseve_detail">
+                    <div id="reseve_detail">
 
                         <div class="form-input" id="agreement">
                             <label for="agrees">
-                                <input type="checkbox" name="agree" id="agrees"><span>我已確認已閱讀「商家通知」</span>
+                                <input type="checkbox" name="agree" id="agrees" v-model="inputData.agress"><span>我已確認已閱讀「商家通知」</span>
                             </label>
                         </div>
 
                         <div class="form-input" id="choose_set">
                             <img src="./img/reserve_img/reserve_icon01.svg" alt="">
-                            <select>
-                                <option selected disabled>--套餐--</option>
-                                <option>名物 私套餐</option>
-                                <option>極上 會席套餐</option>
-                                <option>苑 春堂套餐</option>
+                            <select v-model="inputData.sets">
+                                <option value="" selected disabled>--套餐--</option>
+                                <option v-for="set in data.sets" :key="set.id">{{set.setName}}</option>
+                                
                             </select>
-
                         </div>
 
                         <div class="form-input" id="count_people">
                             <img src="./img/reserve_img/reserve_icon02.svg" alt="">
-                            <select>
+                            <select v-model="inputData.peoCount">
                                 <i class="fa-solid fa-user"></i>
-                                <option selected disabled>--人數--</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
+                                <option value="" selected disabled>--人數--</option>
+                                <option v-for="idx in 12" :value="idx">{{idx}}人</option>
                             </select>
                         </div>
 
-                        <div class="form-input" id="order_date">
+                        <div class="form-input" id="order_date" >
                             <img src="./img/reserve_img/reserve_icon03.svg" alt="">
-                            <input type="date" id="start" name="trip-start" value="2022-12-24" min="2022-12-22" max="2023-02-30">
-
+                            <input type="date" id="start" :min="nowDate" :max="getMaxDate"  v-model="inputData.date"  @input="dateHandler">
+                            
                         </div>
                         <div class="form-input" id="perofTime">
                             <img src="./img/reserve_img/reserve_icon04.svg" alt="">
-                            <select>
-                                <option selected disabled>--時間--</option>
-                                <option>11:00-14:00</option>
-                                <option>14:30-16:30</option>
-                                <option>18:00-21:00</option>
+                            <select v-model="inputData.orderTime" :disabled="choose"> 
+                                <option value="" selected disabled >--時間--</option>
+                                <option v-for="(order,index) in data.oderTime" :value="order.txt" :key="index">{{order.time}}</option>
                             </select>
                         </div>
                         <div class="form-input" id="cheif_team">
                             <img src="./img/reserve_img/reserve_icon05.svg" alt="">
-                            <select disabled>
-                                <option selected disabled>--廚師團隊--</option>
-                                <option>廚師1</option>
-                                <option>廚師2</option>
-                                <option>廚師3</option>
+                            <select  v-model="inputData.chefTeam" :disabled="choose">
+                                <option  value="" selected disabled>--廚師團隊--</option>
+                                <option v-for="leder in data.chefTeam" :key="leder.id">{{leder.name}}</option>
+                                
                             </select>
                         </div>
 
+
+                        <p>現在幾號: {{nowDate}}</p>
+                        <p>你填選幾號: {{this.inputData.date}}</p>
+                        <p>預約限定日{{getMaxDate}}</p>
                         <button class="next_btn">下一步</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     @@include('layout/footer.html')
+    <script src="./js//vender/Vue/vue.global.js"></script>
+    <script>
+         const app = Vue.createApp({
+            data() {
+                return {
+                    data:{
+                        sets:[
+                            {id:1,setName:'名物 私套餐'},
+                            {id:2,setName:'極上 會席套餐'},
+                            {id:3,setName:'苑 春堂套餐'}
+                        ],
+                        chefTeam:[
+                            {id:'a',name:'麗燕山'},
+                            {id:'b',name:'吳寶劍'},
+                            {id:'c',name:'陳平安'}
+                        ],
+                        oderTime:[
+                            {txt:'午餐',time:'11:00-14:00'},
+                            {txt:'下午茶',time:'11:00-14:00'},
+                            {txt:'晚餐',time:'18:00-21:00'},
+                        ] ,               
+                    },
+                    
+                    inputData:{
+                        agress:false,
+                        sets:"",
+                        peoCount:"",
+                        date: '',
+                        orderTime:"",
+                        time:"",
+                        chefTeam:"",
+                    },
+
+                    historylist:[
+                        {id:1,date:'2022-12-31',teams:'a'},
+                        {id:2,date:'2022-12-31',teams:'b'},
+                    ]
+                    
+                };
+            },
+            computed:{
+                nowDate(){
+                    let nowDate = new Date().toISOString().slice(0,10)
+                    return nowDate
+                },
+                getMaxDate(){
+                    let nowDate = new Date()
+                    nowDate.setDate(nowDate.getDate() + 60);
+                    return nowDate.toISOString().slice(0,10)
+                },
+                choose(){
+                    if(this.inputData.date !==''){
+                        return false
+                    }else{
+                        return true
+                    }
+                },
+               
+
+                
+            },
+            methods:{
+                dateHandler(){
+                    console.log('換日期喔')
+                }
+            },
+            mounted(){
+                // console.log(typeof( this.inputData.date))
+            }
+            
+        });
+        app.mount("#reseve_detail");
+    </script>
+
 </body>
 
 </html>
