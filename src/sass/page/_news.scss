@@ -1,4 +1,54 @@
-/* search*/
+/* =========tab===========*/
+.tab_container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 45%;
+  align-items: center;
+  padding:5% 0 2% 0;
+  @include pad {
+    width: 70%;
+  }
+  @include mobile {
+    width: 90%;
+  }
+  li {
+    border-left: 1px solid #000;
+    padding-left: 5%;
+    padding-right: 5%;
+    &:last-child {
+      border-right: 1px solid #000;
+      padding-right: 5%;
+    }
+
+    @include pad {
+      font-size: 20px;
+    }
+
+    @media all and (max-width: 375px) {
+      font-size: 14px;
+    }
+    a {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: $green-1;
+
+      h4 {
+        @media all and (max-width: 375px) {
+          font-size: 14px;
+        }
+      }
+      span {
+        margin: 0 auto;
+      }
+      &:hover {
+        color: #d1cbb8;
+      }
+    }
+  }
+}
+
+/* ========search=======*/
 .wrapper.search_container {
   display: flex;
   justify-content: flex-end;
@@ -8,7 +58,7 @@
     display: flex;
     justify-content: center;
     margin-right: 10.5%;
-    margin-top: 17%;
+    margin-top: 5%;
 
     @include mobile {
       margin-right: 25%;
@@ -110,7 +160,7 @@
           // text-overflow: ellipsis;
         }
         .news_item {
-          overflow:hidden;
+          overflow: hidden;
           // white-space: nowrap;
           text-overflow: ellipsis;
           padding: 5% 5% 5% 5%;
