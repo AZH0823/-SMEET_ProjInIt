@@ -502,11 +502,11 @@
 }
 
 .contact{
-    max-width: 1280px;
+    max-width: 100%;
     margin:0 auto;
     padding-bottom: 50px;
     .contact_title{
-        margin: 50px;
+        margin: 50px 0;
         h2{
             text-align: center;
             color: #0f3d3e;
@@ -521,46 +521,59 @@
     .name_email_wrapper{
         width: 100%;
         margin: 0 auto;
-        justify-content: center;
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
+        column-gap: 10px;
         .yourname{
-            margin-right: 20px;
+            width: 450px;
+            input{
+                width: 100%;
+                line-height: 30px;
+                outline: none;
+            }
         }
         .yourphone{
-            margin-right: 20px;
+            width: 450px;
+            input{
+                width: 100%;
+                line-height: 30px;
+                outline: none;
+            }
         }
         .youremail{
-            margin-right: 20px;
+            width: 450px;
+            input{
+                width: 100%;
+                line-height: 30px;
+                outline: none;
+            }
         }
         .suggest_type{
-            margin-right: 20px;
-        }
-        input{
             width: 450px;
-            line-height: 30px;
-            outline: none;
+            input{
+                width: 100%;
+                line-height: 30px;
+                outline: none;
+            }
+        }
+        
+        
+        .subject_message_submit_wrapper{
+            width: 910px;
+            textarea{
+                width: 910px;
+                outline: none;
+                resize:none;
+            }
+            .serve_btn{
+                margin-top: 20px;
+                width: 50px;
+                
+            }
         }
     }
-    .subject_message_submit_wrapper{
-        display: flex;
-        flex-direction: column;
-        margin-left: 0;
-        position: relative;
-        textarea{
-            outline: none;
-            resize:none;
-            width: 925px;
-            height: 164px;
-        }
-        .serve_btn{
-            margin-top: 20px;
-            width: 50px;
-            position: absolute;
-            top: 190px;
-            left: 875px;
-        }
-    }
+    
 
 }
 
