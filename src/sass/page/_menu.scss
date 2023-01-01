@@ -10,184 +10,298 @@
     }
 }
 
-
+.menu_tap{
+    .tab_container{
+        width: 27%;
+    }
+}
 
 .menu {
-    max-width: 1280px;
-    color: #0f3d3e;
-    height: 1400px;
     
     
     .menu_content{
+        max-width: 1280x;
         margin: 0 auto;
+        padding-top: 20px;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        @include pad{
+            padding: 0 65px;
+        }
+        @include mobile{
+            padding: 0 27px;
+        }
+
+        
+
         .part1{
-            text-align: right;
-            background-image: url(../img/menu_img/menu_reserve01.jpg);
-            background-size: 860px 450px;
-            background-position: left;
-            background-repeat: no-repeat;
+            display: flex;
+            padding-right: 105px;
             margin-bottom: 100px;
-            .content_line{
-                width: 200px;
-                border-top: solid 2px #0f3d3e;
-                margin-left: 950px;
+            width: 100%;
+            @include pad{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 40px;
             }
-            .word_box{
-                margin: 40px 0 100px 600px;
-                position: relative;
-                text-align: right;
-                letter-spacing: 1px;
+            .part1_img{
+                width: 70%;
+                max-height: 425px;
+                overflow: hidden;
+                @include pad{
+                    width: 100%;
+                }
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
             
-            .word_box > div:nth-of-type(1){
-                width: 540px;
-            }
+            .part1_info{
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                @include pad{
+                    align-items: flex-start;
+                    width: 100%;
+                }
 
-            .word_box > div {
-                overflow: hidden;
-            }
+                h2{
+                    padding-top: 15%;
+                    line-height: 1.2;
+                    @include pad{
+                        padding-top: 3%;
+                    }
+                }
 
-            .word_box > div h6 {
-                width: 540px;
-                text-align: left;
-            }
+                h4{
+                    border-bottom: 1px solid #0f3d3e;
+                    width: 130%;
+                    text-align: right;
+                    padding-bottom: 15px;
+                    @include pad{
+                        text-align: left;
+                        width: 100%;
+                    }
+                }
 
-            /* -------------------- 左邊文字 ------------------*/
-            .word_box > div:nth-of-type(2) {
-                color: #fff;
-                position: absolute;
-                left: 0px;
-                top: 0;
-                width: 258px;
-            }
-            
-            .word_box > div {
-                overflow: hidden;
-            }
+                .text1{
+                    text-align: justify;
+                    width: 250%;
+                    text-indent: 44px;
+                    letter-spacing: 1px;
+                    margin-top: 15px;
+                    position: relative;
+                    padding-bottom: 40px;
+                    @include pad(){
+                        width: 100%;
+                        text-indent: 0;
+                    }
 
-            .word_box > div:nth-of-type(2) p {
-                left: 0px;
-                position: relative;
-            }
+                    .text2{
+                        color: #fff;
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        width: 60%;
+                        overflow: hidden;
+                        @include pad(){
+                            display: none;
+                        }
+                        .text_white{
+                            width: 167%;
+                        }
+                    }
+                }
 
-            .word_box > div p {
-                width: 445px;
+                
+
             }
         }
         .part2{
-            background-image: url(../img/menu_img/menu_reserve02.jpg);
-            background-size: 860px 450px;
-            background-position: right;
-            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: row-reverse;
+            padding-left: 105px;
             margin-bottom: 100px;
-            .content_line{
-                width: 200px;
-                border-top: solid 2px #0f3d3e;
+            width: 100%;
+            @include pad{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 40px;
             }
-            .word_box{
-                margin: 40px 0 150px 0;
-                position: relative;
-                letter-spacing: 1px;
+            .part2_img{
+                width: 70%;
+                max-height: 425px;
+                overflow: hidden;
+                @include pad{
+                    width: 100%;
+                }
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
             
-            .word_box > div:nth-of-type(1){
-                width: 740px;
-                color: #fff;
-            }
+            .part2_info{
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                @include pad{
+                    
+                    width: 100%;
+                }
 
-            .word_box > div {
-                overflow: hidden;
-            }
+                h2{
+                    padding-top: 15%;
+                    line-height: 1.2;
+                    @include pad{
+                        padding-top: 3%;
+                    }
+                }
 
-            .word_box > div h6 {
-                width: 740px;
-            }
+                h4{
+                    border-bottom: 1px solid #0f3d3e;
+                    width: 130%;
+                    text-align: left;
+                    padding-bottom: 15px;
+                    @include pad{
+                        text-align: left;
+                        width: 100%;
+                    }
+                }
 
-            /* -------------------- 左邊文字 ------------------*/
-            .word_box > div:nth-of-type(2) {
+                .text1{     
+                    width: 250%;
+                    direction: rtl;
+                    text-align: left;
+                    margin-top: 15px;
+                    position: relative;
+                    padding-bottom: 40px;
+                    @include pad(){
+                        width: 100%;
+                        text-indent: 0;
+                    }
+
+                    .text2{
+                        color: #fff;
+                        position: absolute;
+                        right: 0px;
+                        top: 0px;
+                        width: 60%;
+                        overflow: hidden;
+                        @include pad(){
+                            display: none;
+                        }
+                        .text_white{
+                            width: 167%;
+                        }
+                    }
+                }
+
                 
-                position: absolute;
-                left: 0px;
-                top: 0;
-                width: 290px;
-            }
-            
-            .word_box > div {
-                overflow: hidden;
-            }
 
-            .word_box > div:nth-of-type(2) p {
-                left: 0px;
-                position: relative;
-            }
-
-            .word_box > div h6 {
-                width: 440px;
             }
         }
         .part3{
-            text-align: right;
-            background-image: url(../img/menu_img/menu_reserve03.jpg);
-            background-size: 860px 450px;
-            background-position: left;
-            background-repeat: no-repeat;
-            .content_line{
-                width: 200px;
-                border-top: solid 2px #0f3d3e;
-                margin-left: 950px;
+            display: flex;
+            padding-right: 105px;
+            margin-bottom: 100px;
+            width: 100%;
+            @include pad{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 40px;
             }
-            .word_box{
-                margin: 40px 0 100px 600px;
-                position: relative;
-                text-align: right;
-                letter-spacing: 1px;
+            .part3_img{
+                width: 70%;
+                max-height: 425px;
+                overflow: hidden;
+                @include pad{
+                    width: 100%;
+                }
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
             
-            .word_box > div:nth-of-type(1){
-                width: 540px;
-            }
+            .part3_info{
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                @include pad{
+                    align-items: flex-start;
+                    width: 100%;
+                }
 
-            .word_box > div {
-                overflow: hidden;
-            }
+                h2{
+                    padding-top: 15%;
+                    line-height: 1.2;
+                    @include pad{
+                        padding-top: 3%;
+                    }
+                }
 
-            .word_box > div h6 {
-                width: 540px;
-                text-align: left;
-            }
+                h4{
+                    border-bottom: 1px solid #0f3d3e;
+                    width: 130%;
+                    text-align: right;
+                    padding-bottom: 15px;
+                    @include pad{
+                        text-align: left;
+                        width: 100%;
+                    }
+                }
 
-            /* -------------------- 左邊文字 ------------------*/
-            .word_box > div:nth-of-type(2) {
-                color: #fff;
-                position: absolute;
-                left: 0px;
-                top: 0;
-                width: 258px;
-            }
-            
-            .word_box > div {
-                overflow: hidden;
-            }
+                .text1{
+                    text-align: justify;
+                    width: 250%;
+                    text-indent: 44px;
+                    letter-spacing: 1px;
+                    margin-top: 15px;
+                    position: relative;
+                    padding-bottom: 40px;
+                    @include pad(){
+                        width: 100%;
+                        text-indent: 0;
+                    }
 
-            .word_box > div:nth-of-type(2) p {
-                left: 0px;
-                position: relative;
-            }
+                    .text2{
+                        color: #fff;
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        width: 60%;
+                        overflow: hidden;
+                        @include pad(){
+                            display: none;
+                        }
+                        .text_white{
+                            width: 167%;
+                        }
+                    }
+                }
 
-            .word_box > div p {
-                width: 445px;
+                
+
             }
         }
+        
     }
 }
 
 
 .add{
-
+    
     .add_title{
-        margin: 50px 0;
+        margin-bottom: 50px;
         padding-top: 50px;
         h2{
             text-align: center;
@@ -203,7 +317,7 @@
             
     }
     .add_menu{
-        width: 1280px;
+        width: 1250px;
         margin: 0 auto;
         position: relative;
         ul{
@@ -249,5 +363,8 @@
         .fa-angle-right{
             right: 10px;
         }
+    }
+    .btn_view{
+        margin: 0 auto;
     }
 }
