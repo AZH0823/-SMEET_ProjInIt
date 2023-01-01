@@ -41,7 +41,11 @@ div.back_mall_productManger {
                                 grid-template: repeat(1, 1fr) / repeat(3, 1fr) 300px 1fr 1fr;
 
                                 &:first-child {
-                                    background-color: #ccc;
+                                    background-color: $Camel-3;
+                                }
+
+                                .grid_item:nth-child( n + 1){
+                                    border-bottom: .5px solid #ccc; // 加底线
                                 }
 
                                 .grid_item {
@@ -52,7 +56,8 @@ div.back_mall_productManger {
                                         position: relative;
                                         display: inline-block;
                                         width: 50px;
-                                        height: 24px;
+                                        height: 25.59px; // 同高
+
 
                                         input {
                                             opacity: 0;
@@ -100,6 +105,14 @@ div.back_mall_productManger {
                                                 left: 0px;
                                                 top: 0px;
                                             }
+                                        }
+                                        // 上架
+                                        .slider_content{
+                                            position: absolute;
+                                            top: 0px;
+                                            left: 60px;
+                                            right: 0px;
+                                            width: 50px;
                                         }
                                     }
                                 }
