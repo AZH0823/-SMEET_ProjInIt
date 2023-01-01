@@ -112,13 +112,11 @@
     letter-spacing: 0.2em;
     @include btnGetor(305px, 8.75px, 18px,
         $green-1, $green-1, white, white,
-        $green-1, null);
+        $green-1, 1px, transparent);
 
     @include pad() {
         max-width: 380px;
     }
-
-    ;
 
     @include mobile() {
         margin: 0 auto;
