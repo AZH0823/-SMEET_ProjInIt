@@ -6,15 +6,27 @@
             <div class="head_logo">
                 <a href="index.html"><img src="../img/logo_img/logo_black-03.png" alt=""></a>
             </div>
-
-            <ul class="header_bar">
-                <li><a href="aboutUs.html" class="black">關於我們</a></li>
-                <li><a href="chefTeam.html" class="black">私廚陣容</a></li>
-                <li><a href="news.html" class="black">最新動態</a></li>
-                <li><a href="menu.html" class="black">到府私廚</a></li>
-                <li><a href="shopMall.html" class="black">線上商城</a></li>
-            </ul>
-
+            <div class="ham_div">
+                <ul class="header_bar">
+                    <li><a href="aboutUs.html" class="black">關於我們</a></li>
+                    <li><a href="chefTeam.html" class="black">私廚陣容</a></li>
+                    <li><a href="news.html" class="black">最新動態</a></li>
+                    <li><a href="menu.html" class="black">到府私廚</a></li>
+                    <li><a href="shopMall.html" class="black">線上商城</a></li>
+                </ul>
+                <div class="ham_user">
+                    <ul class="user_ham">
+                        <div class="border_ham">
+                            <li><a href="member.html" class="Camel-3">會員中心</a></li>
+                            <li><a href="orderList.html" class="Camel-3">訂單查詢</a></li>
+                            <li><a href="member.html" class="Camel-3">收藏菜品</a></li>
+                            <li><a href="member.html" class="Camel-3">訊息中心</a></li>
+                            <li><a href="member.html" class="Camel-3">常見問題</a></li>
+                        </div>
+                        <li><a href="member.html" class="log_ham green-1">登入</a></li>
+                    </ul>
+                </div>
+            </div>
             <nav>
                 <ul class="header_user">
                     <a href="member.html" class="black slide_user"><i class="fa-solid fa-user"></i></a>
@@ -34,3 +46,35 @@
 </div>
 <div class="header_bg fulid_wrapper"></div>
 <div class="header_mg fulid_wrapper"></div>
+
+<script src="../js/vender/Jquery/"></script>
+<script>
+    $(function () {
+
+        $(".ham").on("click", function () {
+            console.log("qwert");
+            $(".burger").toggleClass("-on")
+        })
+
+
+        $(".rwd_cart").on("click", function () {
+            console.log("qwert")
+            $(".addcart").toggleClass("active")
+        })
+
+        $(".pc_cart").on("click", function () {
+            console.log("qwert")
+            $(".addcart").toggleClass("active")
+        })
+
+        $(".remove_cart").on("click", function () {
+            console.log("qwert");
+            $(".addcart").removeClass("active")
+        })
+
+
+    })
+
+
+
+</script>
