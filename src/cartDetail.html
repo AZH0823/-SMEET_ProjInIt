@@ -10,11 +10,11 @@
     </head>
     <body>
         <!-- @@include('layout/header_01.html') -->
-        <main class="wrapper cart_detail">
+        <main class="wrapper cart_detail" id="cart_detail">
             <!-- 上方123 -->
             <ul class="flow_container">
                 <!-- finsh 完成填寫 checked 目前進度 -->
-                <li class="flowList checked" flowname="購物車">1</li>
+                <li class="flowList " :class="" flowname="購物車">1</li>
                 <li class="flowList " flowname="填寫資料">2</li>
                 <li class="flowList " flowname="訂單完成">3</li>
             </ul>
@@ -269,9 +269,47 @@
                 </div>
                 <div class="clear_both"></div>
             </section>
+
+            <!-- 步驟3完成訂單畫面-->
+            <section class="cart_3_content">
+                    <div class="cart_content">
+                    <i class="fa-solid fa-check"></i>
+                    <h3>訂單已完成(訂單編號：202212345678) </h3>
+                    </div>
+                    <div class="btn_flex">
+                        <button class="checkorder_btn">查詢訂單</button>
+                        <button class="checkorder_btn">繼續購物</button>
+                    </div>
+            </section>
+
         </main>
 
         <!-- @@include('layout/footer.html') -->
+        <script src="./js/vender/Vue/vue.global.js"></script>
+        <script>
+             const app = Vue.createApp({
+                data() {
+                    return {
+                        data:{
+                            // checked進度
+                            
+                        }
+                    }
+                },
+            computed :{
+
+            },
+            methods : {
+
+            }
+
+
+            
+        });
+
+        app.mount("#cart_detail");
+
+        </script>
     </body>
 
 </html>

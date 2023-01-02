@@ -1,416 +1,58 @@
-.index{
+
+.land{
+    display: flex;
+    flex-direction: column;
+    background-image: url(../../img/landpage_img/banner.jpg);
+    background-size: cover;
+    background-position: center;
+    
+
     @include pad(){
-        // padding: 0 40px 0;           
+        min-height:900px;
     }
-    @include mobile(){
-        // padding: 0 27px 0;
-    }
-
-
-    //-----------------------------------------預約流程-----------------------------------------//
-
-            ._index_reserve{
-                background-image: url(../../img/index_img/index_reserve.png);
-                background-position: bottom;
-                background-size: cover;
-                padding-bottom: 600px;
-                @include pad(){
-                    padding-bottom: 290px;
-                    background-position-y: 80px;
-                    background-position-x: -105px;
-                    background-repeat: no-repeat;
-                    background-size: 140%;
-                }
-                @include mobile(){
-                    padding-bottom: 290px;
-                    background-position-y: 80px;
-                    background-position-x: -105px;
-                    background-repeat: no-repeat;
-                    background-size: 140%;
-                }
-                h2{
-                    text-align: center;
-                    padding-top: 45px;
-                    margin-bottom: 10px;
-                }
-                ._index_line{
-                    margin: 0 400px;
-                    background-color: $green-1;
-                    padding: 1px;
-                    @include pad(){
-                        margin: 0 40px;  
-                    }
-                    @include mobile(){
-                        margin: 0 40px;  
-                    }
-                }
-            }
-            //-----------------------------------------招牌菜單-----------------------------------------//
-
-
-            ._index_menu{
-                margin: 0 auto;
-                background-image: url(../../img/index_img/index_hotmenu_bg.jpg);
-                display: flex;
-                background-position: center;
-               
-                .index_menu_left{
-                    width: 45%;
-                    display: flex;
-                    flex-direction: column;
-                    padding-left: 100px;
-                    padding-top: 100px;
-                    @include pad(){
-                        padding-left: 20px;  
-                     }
-                    @include mobile(){
-                        padding: 20px;  
-                    }
-
-                    }
-                    
-                    ._index_line{
-                        margin: 0;
-                        padding: 1px;
-                        margin-right: 80px;
-                        margin-bottom: 30px;
-                        background-color: $green-1;
-                        @include pad(){
-                            margin-right: -180px;
-                        }
-                        @include mobile(){
-                            margin-right: -180px;
-                        }
-                        
-                    }
-                    h3{
-                        margin-bottom: 30px;
-                        @include pad(){
-                            margin-bottom: 15px;  
-                            font-size: 16px; 
-                         }
-                        @include mobile(){
-                            margin-bottom: 15px;  
-                            font-size: 16px;
-                        }
-                    }
-                    p{
-                        margin-bottom: 40px;
-                        line-height: 2;
-                        @include pad(){
-                            margin-bottom: 20px;   
-                            line-height: 1;
-                            font-size: 12px;
-                        }
-                        @include mobile(){
-                            margin-bottom: 20px;  
-                            line-height: 1;
-                            font-size: 12px;
-                        }
-                    }
-                .index_menu_right{
-                    width: 55%;
-                    padding-top: 135px;
-                    padding-bottom: 110px;
-                    @include pad(){
-                        padding-bottom: 0;
-                    }
-                    @include mobile(){
-                        padding-bottom: 0;
-                    }
-                    img{
-                        width: 79%;
-                        box-shadow: 16px -16px $green-1;
-                    }
-                }
-        
-            }
-
-            //-----------------------------------------預約日程-----------------------------------------//
-
-            ._reserve_date{
-                margin-top: 75px;
-                padding: 0 110px;
-                display: flex;
-                flex-direction: column;
-
-                @include pad(){
-                    padding: 0 15px;
-                    margin: 50px auto;
-                }
-                @include mobile(){
-                    padding: 0 15px;
-                    margin: 50px auto;  
-                }
-                h2{
-                    text-align: right;
-                }
-                ._line_box  {
-                    display: flex;
-                    flex-direction: row-reverse;
-                    margin-bottom: 30px;
-                    ._index_line{
-                        margin: 0 auto;
-                        background-color: $green-1;
-                        padding: 1px 225px;
-                    }
-                    @include pad(){
-                        padding: 0;
-                    }
-                    @include mobile(){
-                        padding: 0;
-                    }
-                }
-                #calendar {
-                    margin: 0 auto;
-                    width: 100%;
-                    height: 500px
-                }
-            }
-            //-----------------------------------------最新動態-----------------------------------------//
-
-            ._index_news{
-                background-image: url(../../img/index_img/index_news_bg.png);
-                background-position: center;
-                display: flex;
-                flex-direction: column;
-                padding-top: 100px;
-                padding-right: 50px;
-                padding-bottom: 50px;
-                align-content: center;
-                @include pad(){
-                    padding: 0;
-                }
-                @include mobile(){
-                    padding: 0;
-                }
-               
-                h2 {
-                    margin-left: 110px;
-                    @include pad(){
-                        margin-left: 10px;  
-                    }
-                    @include mobile(){
-                        margin-left: 10px;   
-                    }
-                }
-                ._index_line{
-                    margin: 0 auto;
-                    margin-left: 110px;
-                    margin-bottom: 40px;
-                    background-color: $green-1;
-                    padding: 1px 225px;
-                    @include pad(){
-                        margin-left: 10px;  
-                        margin-bottom: 0;
-                        padding: 1px 165px;
-                    }
-                    @include mobile(){
-                        margin-left: 10px; 
-                        padding: 1px 165px;  
-                        margin-bottom: 0;
-                    }
-                }
-            }
-            
-            .div_index_newsbox{
-                display: flex;
-                @include pad(){
-                    flex-direction: column;
-                }
-                @include mobile(){
-                    flex-direction: column;
-                    flex-basis: auto;
-                    padding: 0;
-                }
-                ._index_news_left {
-                    order: 2;
-                    width: 25%;
-                    @include pad(){
-                        display: none;
-                    }
-                    @include mobile(){
-                        display: none;
-                    }
-                    img{
-                        width: 90%;
-                    }
-                }
-                ._index_news_right{
-                    order:1;
-                    width: 75%;
-                    padding-left: 90px;
-                    margin-top: 30px;
-                    
-                    @include pad(){
-                        padding-left: 0;
-                        margin-top: 5px;
-                    }
-                    @include mobile(){
-                        padding-left: 0;
-                        margin-top: 5px;
-                    }
-
-                    li{
-                        border-top: 1px #1d0101;
-                        ._news_table{
-                            width: 100%;
-                            display: flex;
-                            text-decoration: none;
-                            color: #1d0101;
-                            @include pad(){
-                                flex-direction: column;
-                                margin-left: 50px;
-                            }
-                            @include mobile(){
-                                flex-direction: column;
-                                margin-left: 50px;
-                            }
-                            h7 {
-                                margin-left: 30px;
-                                margin-right: 60px;
-                                font-size: 18px;
-                                line-height: 3;
-                                @include pad(){
-                                    margin: 0;
-                                    line-height: 1.5;
-                                    text-align: center;
-                                }
-                                @include mobile(){
-                                    margin: 0;
-                                    line-height: 1.5; 
-                                    text-align: center;
-                                    padding: 5px;
-                                }
-                            }
-                        }
-                    }
-                    ._news_line{
-                        width: 85%;
-                        padding: 0.3px 0;
-                        background-color: #1d0101;
-                        @include pad(){
-                            margin-left: 15px;
-                            width: 120%;
-                        }
-                        @include mobile(){
-                            margin-left: 15px;
-                            width: 120%;
-                        }
-                    }
-                    li:hover{
-                        width: 85%;
-                        background-color: #f2f1ecae;
-                    }
-                }
-            }
-
-    //-----------------------------------------顧客評價-----------------------------------------//
-    ._index_evaluation{
-        display: flex;
-        flex-direction: column;
+   
+    img{
+        width: 30%;
+        margin: 0 auto;
         @include pad(){
-            
-            overflow: hidden;
+            width: 50%;
+            margin: auto;
         }
         @include mobile(){
-            width: 414px;
-            overflow: hidden;
+            margin-top: 50%;
+            margin-bottom: 0;
         }
-
-
-        h2{
-            text-align: right;
-            margin-top: 80px;
-            margin-right: 100px;
+    }
+    
+    main{
+        display: flex;
+        justify-content: space-around;
+        margin: 0 20%;
+        @include pad(){
+            margin: auto;
         }
+        @include mobile(){
+            margin: 10%;
+            margin-bottom: 70%;
+        }
+        a{
+            width: 50%;
+            margin: 5%;
+            text-decoration: none;
+            color: $Camel-3;  
+            border: 1px solid $Camel-3;
 
-        ._line_box  {
-            display: flex;
-            flex-direction: row-reverse;
-            margin-bottom: 30px;
-
-            ._index_line{
-                margin: 0;     
-                margin-right: 100px;
+            &:hover{
+                background-color: $Camel-3;
+                color: #898989;
             }
-        }
 
-        ._index_feeback{
-            display: flex;
-            justify-content:space-between;
-            margin: 50px 0;
-
-            ._if1, ._if2, ._if3{
-                width: 256px;
-                height: 327px;
-                background-image: url(../../img/index_img/index_evaluation.png);
-                background-size: cover;
-
-                img{
-                    width: 231px;
-                }
-
-                ._if_body{
-                    padding-left: 20px;
-                    padding-right: 20px;
-
-                    ._p16{
-                        font-size: 16px;
-                    }
-                    ._p14{
-                        margin-top: 5px;
-                        font-size: 14px;
-                    }
-                    ._p12{
-                        font-size: 12px;
-                    }
-
-                    ._star{
-                        display: flex;
-
-                        ._ratings {
-                            position: relative;
-                            vertical-align: middle;
-                            display: inline-block;
-                            color: #ddd; 
-                            overflow: hidden;
-                            font-size: 15px;
-
-                            ._full_star, ._full_star2 {
-                                width: 90%;
-                                position: absolute;
-                                left: 0;
-                                top: 0;
-                                white-space: nowrap;
-                                overflow: hidden;
-                                color: #F5CB35;
-                            }
-                            
-                            ._full_star2{
-                                width: 100%;
-                            }
-                        }
-                
-                        ._star_line{
-                            width:15px;
-                            height: 1px;
-                            background-color: #E2DCC8;
-                            margin: auto 0;
-                            margin-left: 50px;
-                            margin-right: 5px; 
-                        }
-                        ._p12{
-                            color: #E2DCC8;
-                        }
-                    }
-                }
-
+            h2{
+                text-align: center;
+                padding: 6%;
             }
+
         }
-        
     }
 
-
 }
-

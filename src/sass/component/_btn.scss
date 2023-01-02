@@ -1,119 +1,130 @@
 // 前台
-.server_btn{
+.server_btn {
     font-size: 20px;
     letter-spacing: 0.4em;
 
     @include btnGetor(335px, 15.5px, 18px,
-                      white,$green-1, white,null,
-                      white, null );
-    @include pad(){
+        white, $green-1, white, null,
+        white, null);
+
+    @include pad() {
         max-width: 335px;
-    };       
-    @include mobile(){
+    }
+
+    ;
+
+    @include mobile() {
         width: 95%;
         margin: 0 auto;
     }
 }
 
-.home_btn{
-   font-size: 24px;
-   letter-spacing: 0.165em;
+.home_btn {
+    font-size: 24px;
+    letter-spacing: 0.165em;
 
-   @include btnGetor(480px, 13.5px, 18px,
-                     $green-1,$green-1, white,white,
-                     $green-1, null );
-    @include pad(){
+    @include btnGetor(480px, 13.5px, 18px,
+        $green-1, $green-1, white, white,
+        $green-1, null);
+
+    @include pad() {
         max-width: 378px;
-    };
-    @include mobile(){
-       padding: 8px 18px;
-       margin: 0 auto;
-       letter-spacing: 0.4em;
-       font-size: 16px;
+    }
+
+    ;
+
+    @include mobile() {
+        padding: 8px 18px;
+        margin: 0 auto;
+        letter-spacing: 0.4em;
+        font-size: 16px;
         width: 95%;
     }
 
 }
 
 
-.checkout_btn{
+.checkout_btn {
     font-size: 16px;
     letter-spacing: 0.4em;
- 
-    @include btnGetor(380px, 12px, 20px,
-                     white,white, $green-1,$green-1,
-                      $green-1, 1px,$green-1);
-   
-    @include mobile(){
-        font-size: 16px;
-         width: 95%;
-         margin: 0 auto;
-     }
- 
- }
 
- .inCart_btn1{
+    @include btnGetor(380px, 12px, 20px,
+        white, white, $green-1, $green-1,
+        $green-1, 1px, $green-1);
+
+    @include mobile() {
+        font-size: 16px;
+        width: 95%;
+        margin: 0 auto;
+    }
+
+}
+
+.inCart_btn1 {
     font-size: 16px;
     letter-spacing: 0.2em;
     // height: 35px;
     @include btnGetor(145px, 5px, 20px,
-                     white,white, $green-1,$green-1,
-                      $green-1, 1px,$green-1);
-   
-    @include mobile(){
+        white, white, $green-1, $green-1,
+        $green-1, 1px, $green-1);
+
+    @include mobile() {
         max-width: 145px;
-         width: 95%;
-     }
- }
- 
- .inCart_btn2{
+        width: 95%;
+    }
+}
+
+.inCart_btn2 {
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.2em;
     @include btnGetor(220px, 16px, 37.5px,
-    $green-1,$green-1, white,white,
-    $green-1, null);
+        $green-1, $green-1, white, white,
+        $green-1, null);
 
-    @include mobile(){
+    @include mobile() {
         font-size: 14px;
         max-width: 185px;
         padding: 12.5px 37.5px;
         width: 95%;
     }
-    
- }
+
+}
 
 
- .next_btn{
+.next_btn {
     font-weight: 400;
     letter-spacing: .4em;
-   
+
     @include btnGetor(305px, 8.75px, 20px,
-                     white,white, $red,$red,
-                      $red, 1px,$red);
-    @include mobile(){
+        white, white, $red, $red,
+        $red, 1px, $red);
+
+    @include mobile() {
         max-width: 380px;
         width: 95%;
         margin: 0 auto;
     }
- }
+}
 
- .prev_btn{
-     font-size: 16px; 
-     letter-spacing: 0.2em;
+.prev_btn {
+    font-size: 16px;
+    letter-spacing: 0.2em;
     @include btnGetor(305px, 8.75px, 18px,
-                      $green-1,$green-1, white,white,
-                      $green-1, null );
-    @include pad(){
-     max-width: 380px;
-    };
-    @include mobile(){
-    margin: 0 auto;
-    letter-spacing: 0.4em;
-    width: 95%;
+        $green-1, $green-1, white, white,
+        $green-1, 1px, transparent);
+
+    @include pad() {
+        max-width: 380px;
     }
 
- }
+    @include mobile() {
+        margin: 0 auto;
+        letter-spacing: 0.4em;
+        width: 95%;
+    }
+
+}
 
 
 
@@ -125,7 +136,6 @@
     margin-left: 20px;
     display: flex;
     @extend .font14;
-    font-weight: 1000;
     position: relative;
     text-decoration: none;
     color: #000;
@@ -197,6 +207,7 @@
         position: relative;
         margin-right: 50px;
     }
+
     span {
         border-radius: 50%;
         height: 70px;
@@ -226,9 +237,10 @@
     @extend .font12;
     font-weight: 1000;
     @include btnGetor(85px, 4.5px, 10px,
-    black, $Camel-3, black, white,
-    #8B8B8B, .5px);
+        black, $Camel-3, black, white,
+        #8B8B8B, .5px);
 }
+
 //  ============= Eric 新增 insert按鈕  12/21 ============= //
 
 
@@ -237,20 +249,21 @@
 
 
 //  後台
-.save_btn{
-   @extend .font12;
-   font-weight: 1000;
-   @include btnGetor(85px, 4.5px, 10px,
-   black,$Camel-1, white,$Camel-3,
-   #8B8B8B, null );
+.save_btn {
+    @extend .font12;
+    font-weight: 1000;
+    @include btnGetor(85px, 4.5px, 10px,
+        black, $Camel-1, white, $Camel-3,
+        #8B8B8B, null);
 }
 
-.order-list{
+.order-list {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
     padding: 10px;
-    .timeorder_btn{
+
+    .timeorder_btn {
         position: relative;
         text-align: center;
         font-size: 8px;
@@ -259,13 +272,16 @@
         border-radius: 6px;
         color: white;
         cursor: pointer;
-        &{
-            background-color:#59886B;
+
+        & {
+            background-color: #59886B;
         }
-        &.is_Order{
+
+        &.is_Order {
             background-color: $red;
         }
-        &.is_Order:after{
+
+        &.is_Order:after {
             content: "";
             position: absolute;
             width: 10px;
@@ -276,9 +292,11 @@
             font-size: 15px;
             font-weight: bold;
         }
-        &:hover{
+
+        &:hover {
             box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
-            filter:grayscale(40%);;
+            filter: grayscale(40%);
+            ;
         }
     }
 }

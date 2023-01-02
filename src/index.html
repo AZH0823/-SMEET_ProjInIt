@@ -1,195 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  @@include('layout/meta.html', {
-    "title": "私覓SMEET",
-  }) 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="./img/index_img/logo2-03 1.ico" type="image/x-icon" />
-  <script src="./js/vender/calender/calender.js"></script>
-  <script src="./js/vender/calender/index.global.js"></script>
-  
-  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私覓SMEET</title>
+    <link rel="icon" href="./img/index_img/logo2-03 1.ico" type="image/x-icon" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  @@include('layout/header_01.html')
-
-  <div class="fulid_wrapper index">
-    
-  <!--------------------------- 預約流程 --------------------------->
-      <div class="_index_reserve">
-        <h2 class="font_bold font_family_tc green-1">預約流程</h2>
-        <div class="_index_line"></div>
-      </div>
-    
-
-  <!--------------------------- 招牌菜單 --------------------------->
-      <div class="_index_menu" >
-        <div class="index_menu_left" data-aos="fade-right" data-aos-duration="2000">
-          <h2 class="font_bold font_family_tc green-1">招牌菜單</h2>
-          <div class="_index_line"></div>
-          <h3 class="red">極炙鮮美&nbsp&nbsp&nbsp岩燒日料</h3>
-          <p>取自取自日本男鹿半島傳統岩燒料理方式<br>
-            天然岩板直火加熱至300度<br>
-            接觸瞬間完美保存食材原汁原味<br>
-            征服您的味蕾<br>
-          </p>
-          <p>按鈕元件</p>
-        </div>
-        <div class="index_menu_right" data-aos="fade-right" data-aos-duration="2000"><img src="./img/index_img/index_hotmenu.jpg" alt=""></div>
+    <div class="fulid_wrapper land">
+      <img class="" src="./img/logo_img/logo_camel.png" alt="">
+      <main>  
+        <a href="./index_home.html"><h2>前台</h2></a>
+        <a href="./back_index.html"><h2>後台</h2></a>
+      </main>
     </div>
-
-  <!--------------------------- 預約日程 --------------------------->
-  <div class="_reserve_date" data-aos="fade-left" data-aos-duration="2000">
-    <h2 class="font_bold font_family_tc green-1">預約日程</h2>
-    <div class="_line_box"><div class="_index_line"></div></div>
-    <div id='calendar'></div>
-  </div>
-
-  <div><p>立即預約</p></div>
-
-  <!--------------------------- 最新動態 --------------------------->
-  <div class="_index_news">
-    <h2 class="font_bold font_family_tc green-1">最新動態</h2>
-    <div class="_index_line"></div>
-
-    <div class="div_index_newsbox">
-
-      <div class="_index_news_left">
-        <img src="./img/index_img/index_news.jpg" alt="">
-      </div>
-
-      <div class="_index_news_right">
-        <ul>
-          <li>
-            <a class="_news_table" href="">
-              <h7>2022.11.08</h7><h7>京都百年老鋪聯名和食旬滋味，打造冬季旬鮮味</h7>
-            </a>
-          </li>
-          <div class="_news_line"></div>
-          <li>
-            <a class="_news_table" href="">
-              <h7>2022.10.25</h7><h7>中信銀行JCB 日本吉鶴信用卡優惠｜私覓｜消費...</h7>
-            </a>
-          </li>
-          <div class="_news_line"></div>
-          <li>
-            <a class="_news_table" href="">
-            <h7>2022.10.19</h7><h7>【美麗佳人】推薦，最適合拍照的日式視覺饗宴</h7>
-            </a>
-          </li>
-          <div class="_news_line"></div>
-          <li>
-            <a class="_news_table" href="">
-              <h7>2022.09.08</h7><h7>10月中秋預定-私密各所有私廚團隊已全數額滿</h7>
-            </a>
-          </li>
-          <div class="_news_line"></div>
-          <li>
-            <a class="_news_table" href="">
-              <h7>2022.08.11</h7><h7>MuHUA日本京都抹茶-私覓獨家代理｜限定販售</h7>
-            </a>
-          </li>
-          <div class="_news_line"></div>
-        </ul>
-        <p>more按鈕</p>
-
-      </div>
-
-    </div>
-    
-  </div>
-
-  <!--------------------------- 顧客評價 --------------------------->
-
-<div class="_index_evaluation">
-    <h2 class="font_bold font_family_tc green-1">顧客評價</h2>
-    <div class="_line_box"><div class="_index_line"></div></div>
-
-    <div class="_index_feeback">
-
-      <div class="_if1">
-        <img src="./img/index_img/index_feedback1.jpg" alt="">
-        <div class="_if_body">
-          <p class="_p14">陳O庵</p>
-          <p class="_p12">上週五舉辦孩子的慶生派對，廚師超用心還特製超可愛和菓子，一條龍服務讓家長非常放心。</p>
-          
-          <div class="_if_bottom">
-            <p class="_p12">顧客評價:</p>
-            <div class="_star">
-              <div class="_ratings">
-                <div class="_empty_star">★★★★★</div>
-                <div class="_full_star">★★★★★</div>
-              </div>
-              <div class="_star_line"></div>
-              <p class="_p12">2022-07-21</p>
-            </div>
-          </div>
-        </div>   
-      </div>
-
-      <div class="_if2">
-          <img src="./img/index_img/index_feedback2.jpg" alt="">
-          <div class="_if_body">
-            <p class="_p14">吳O痣</p>
-            <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
-            <div class="_if_bottom">
-              <p class="_p12">顧客評價:</p>
-              <div class="_star">
-                <div class="_ratings">
-                  <div class="_empty_star">★★★★★</div>
-                  <div class="_full_star2">★★★★★</div>
-                </div>
-                <div class="_star_line"></div>
-                <p class="_p12">2022-06-15</p>
-              </div>
-            </div>
-          </div> 
-      </div>
-
-      <div class="_if3">
-          <img src="./img/index_img/index_feedback3.jpg" alt="">
-          <div class="_if_body">
-            <p class="_p14">蔡O军</p>
-            <p class="_p12">濱崎步廚師超厲害，每一道料理都心意滿滿，無可挑剔！以後都不想吃外面的日本餐廳了。</p>
-            <div class="_if_bottom">
-              <p class="_p12">顧客評價:</p>
-              <div class="_star">
-                <div class="_ratings">
-                  <div class="_empty_star">★★★★★</div>
-                  <div class="_full_star2">★★★★★</div>
-                </div>
-                <div class="_star_line"></div>
-                <p class="_p12">2022-11-04</p>
-              </div>
-            </div>
-          </div>
-      </div>
-
-      <div class="_if2">
-        <img src="./img/index_img/index_feedback2.jpg" alt="">
-        <div class="_if_body">
-          <p class="_p14">吳O痣</p>
-          <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
-          <div class="_if_bottom">
-            <p class="_p12">顧客評價:</p>
-            <div class="_star">
-              <div class="_ratings">
-                <div class="_empty_star">★★★★★</div>
-                <div class="_full_star2">★★★★★</div>
-              </div>
-              <div class="_star_line"></div>
-              <p class="_p12">2022-06-15</p>
-            </div>
-          </div>
-        </div> 
-    </div> 
-
-  </div>
-</div>
-<!-- @@include('layout/footer.html') -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 </body>
 </html>

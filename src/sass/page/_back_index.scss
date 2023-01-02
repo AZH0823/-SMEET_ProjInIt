@@ -30,7 +30,6 @@
                         .back_from_wrapper {
                             .grid_container {
                                 margin: 0 auto;
-                                border: 1px solid #ccc;
                                 display: grid;
                                 width: 100%;
                                 text-align: center;
@@ -38,7 +37,11 @@
                                 grid-template: repeat(1, 1fr) / repeat(5, 1fr) 155.5px;
 
                                 &:first-child {
-                                    background-color: #ccc;
+                                    background-color: $Camel-3;
+                                }
+                                
+                                .grid_item:nth-child( n + 1){
+                                    border-bottom: .5px solid #ccc; // 加底线
                                 }
 
                                 .grid_item {
