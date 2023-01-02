@@ -505,6 +505,9 @@
     max-width: 80%;
     margin:0 auto;
     padding-bottom: 150px;
+    @include pad{
+       max-width: 100%;
+    }
     .contact_title{
         margin: 50px 0;
         h2{
@@ -527,6 +530,9 @@
         column-gap: 10px;
         .yourname{
             width: 450px;
+            @include pad{
+                width: 90%;
+            }
             input{
                 width: 100%;
                 line-height: 30px;
@@ -535,6 +541,9 @@
         }
         .yourphone{
             width: 450px;
+            @include pad{
+                width: 90%;
+            }
             input{
                 width: 100%;
                 line-height: 30px;
@@ -543,6 +552,9 @@
         }
         .youremail{
             width: 450px;
+            @include pad{
+                width: 90%;
+            }
             input{
                 width: 100%;
                 line-height: 30px;
@@ -551,6 +563,9 @@
         }
         .suggest_type{
             width: 450px;
+            @include pad{
+                width: 90%;
+            }
             input{
                 width: 100%;
                 line-height: 30px;
@@ -564,6 +579,9 @@
             position: relative;
             @media all and (max-width: 1163px){
                 width: 450px;
+            }
+            @include pad{
+                width: 90%;
             }
             textarea{
                 width: 100%;
