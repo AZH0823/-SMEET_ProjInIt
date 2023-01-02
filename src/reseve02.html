@@ -104,9 +104,9 @@
                         <section class="step_flow step1" :class="{'nowpage': workFlow.step === 1}" id="set">
                             <h6 class="blockTitle">1.選擇套餐</h6>
                             <ul class="sets">
-                                <li v-for="set in APIData.sets" :key="set.id" class="setCard">
+                                <li v-for="set in APIData.sets" :key="set.id" class="setCard" :class="{checked:this.inputData.sets === set.id}">
                                     <!-- checked 未新增 -->
-                                    <img :src="set.imgUrl" :alt="set.setName" :title="set.setName">
+                                    <img :src="set.imgUrl" :alt="set.setName" :title="set.setName" @click="changeOrederViewImg(set)">
                                     <div class="setName">{{set.setName}}</div>
                                 </li>
                             </ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
@@ -646,7 +646,12 @@
                 changeStep(val){                    
                     this.workFlow.step += val;
                 },
-                
+                changeOrederViewImg(e){
+                    // console.log(e)
+                    this.$refs.oderVeiwPic.src = e.imgUrl
+                    this.inputData.sets = e.id
+                },
+            
             },
             computed:{
 
