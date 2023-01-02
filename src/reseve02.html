@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <!-- @@include('layout/header_01.html') -->
+    @@include('layout/header_01.html')
     <!-- 流程控制說明 -->
     <!-- checked 控制上方工作流程到哪一個之項目 -->
     <!-- nowPage 控制一個流程細項目打開  -->
@@ -19,49 +19,47 @@
     <div class="fulid_wrapper reseve_flow">
         <div class="wrapper">
             <main class="content">
-                <div class="work_flow_lists">
+                <div class="work_flow_lists" id="myWorkFlow">
                     <ul class="flow_container">
                         <!-- finsh 完成填寫 checked 目前進度 -->
-                        <li class="flowList checked" flowName="選擇套餐">1</li>
-                        <li class="flowList" flowName="加購服務">2</li>
-                        <li class="flowList" flowName="確認訂單">3</li>
-                        <li class="flowList" flowName="填寫資料">4</li>
+                        <li class="flowList" :class="{'checked':workFlow.step >= 1}" flowName="選擇套餐">1</li>
+                        <li class="flowList" :class="{'checked':workFlow.step >= 2}" flowName="加購服務">2</li>
+                        <li class="flowList" :class="{'checked':workFlow.step >= 3}" flowName="確認訂單">3</li>
+                        <li class="flowList" :class="{'checked':workFlow.step >= 4}" flowName="填寫資料">4</li>
                     </ul>
-                    <form class="form_workFlow_contanier detail_list">
+                    <div class="form_workFlow_contanier " :class="{'detail_list':workFlow.step === 3}">
                         <!-- detail_list  明細請打開,display: none;-->
                         <!-- 結帳顯示專區  -->
-                        <section class="oder_view d_none">
+                        <section class="oder_view" :class="{'d_none':workFlow.step === 3}">
                             <ul class="checkout_contanier">
                                 <!-- 人員資訊 -->
                                 <li id="order_Info" class="order_detailInfo">
+                                    <p>now workFlow is:{{this.workFlow.step}}</p>
                                     <h6 class="blockTitle detailInfo">餐點明細</h6>
-                                    <div class="setName"> <img src="./img/reserve_img/reserve_icon01.svg" alt="">名物-套餐名稱
+                                    <div class="setName">
+                                        <img src="./img/reserve_img/reserve_icon01.svg" alt="">
+                                        {{setName}}
                                     </div>
                                     <div class="count_person">
                                         <img src="./img/reserve_img/reserve_icon02.svg" alt="">
-                                        <select>
-                                            <i class="fa-solid fa-user"></i>
+                                        <select v-model="inputData.peoCount">
+                                            <i class="fa-solid fa-user" ></i>
                                             <option selected disabled>--人數--</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
+                                            <option v-for="idx in 12" :value="idx">{{idx}}人</option>
                                         </select>
                                     </div>
 
 
                                     <div class="datespan">
                                         <img src="./img/reserve_img/reserve_icon04.svg" alt="">
-                                        <span>2022/12/12 18:00</span>
+                                        <span>{{inputData.date}}</span>
                                     </div>
                                     <div class="cheifTeam">
                                         <img src="./img/reserve_img/reserve_icon05.svg" alt="">
-                                        <span>預約廚師 - 立雁山廚師長</span>
+                                        <span>團隊廚師長:{{chefTeamName}}</span>
                                     </div>
                                     <div class="order_set_pic">
-                                        <img src="img/reserve_img/reserve_set01.jpg" alt="" class="order_set_img">
+                                        <img src="img/reserve_img/reserve_set01.jpg" alt="" class="order_set_img" ref="oderVeiwPic">
                                     </div>
                                 </li>
 
@@ -69,15 +67,15 @@
 
                             <!-- 套餐資訊 -->
                             <div class="setInfolist">
-                                <p class="setTitle"><span>名物 私套餐</span> <span>x 6</span><span>$21,000</span></p>
+                                <p class="setTitle"><span>{{setName}}</span> <span>X {{inputData.peoCount}}</span><span>{{setPrice}}</span></p>
                             </div>
                             <!-- 加購資訊 -->
-                            <ul class="addorderlist">
+                            <ul class="addorderlist" v-if="workFlow.step >= 2">
                                 <!-- 單點菜品 -->
                                 <div class="addorderlist_title">加購</div>
                                 <li class="dish_title"><span>蘆筍蝦手卷</span><span>x 1</span><span>$600</span></li>
                             </ul>
-                            <ul class="servies">
+                            <ul class="servies" v-if="workFlow.step >= 2">
                                 <!-- 服務 -->
                                 <div class="servieslist_title">租借及服務</div>
                                 <li class="servies_title"><span>餐具</span><span>x 6</span><span>$600</span></li>
@@ -86,7 +84,7 @@
                                 <li class="servies_title"><span>服務人員</span><span>x 6</span><span>$600</span></li>
                             </ul>
 
-                            <ul class="coupon">
+                            <ul class="coupon"  v-if="workFlow.step >= 4">
                                 <!-- coupon 打折金額 -->
                                 <li class="coupon_title"><span>紅利點數</span><span></span><span>-$ 2,114</span></li>
                             </ul>
@@ -98,27 +96,20 @@
                                 <h6>$991,234</h6>
                             </div>
                             <!-- 結帳按鈕 -->
-                            <button class="next_btn btn">下一步</button>
-                            <button class="prev_btn btn">返回上一步</button>
+                            <button class="next_btn btn" @click="changeStep(1)">下一步</button>
+                            <button class="prev_btn btn" @click="changeStep(-1)">返回上一步</button>
 
                         </section>
                         <!-- 選擇套餐 -->
-                        <section class="step_flow step1  " id="set">
+                        <section class="step_flow step1" :class="{'nowpage': workFlow.step === 1}" id="set">
                             <h6 class="blockTitle">1.選擇套餐</h6>
                             <ul class="sets">
-                                <li class="setCard checked">
-                                    <img src="img/reserve_img/reserve_set01.jpg" alt="">
-                                    <div class="setName">名物 私套餐</div>
+                                <li v-for="set in APIData.sets" :key="set.id" class="setCard">
+                                    <!-- checked 未新增 -->
+                                    <img :src="set.imgUrl" :alt="set.setName" :title="set.setName">
+                                    <div class="setName">{{set.setName}}</div>
                                 </li>
-                                <li class="setCard">
-                                    <img src="img/reserve_img/reserve_set02.jpg" alt="">
-                                    <div class="setName">極上 會席套餐</div>
-                                </li>
-                                <li class="setCard">
-                                    <img src="img/reserve_img/reserve_set03.jpg" alt="">
-                                    <div class="setName">苑 春堂套餐</div>
-                                </li>
-                            </ul>
+                            </ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                             <h6 class="blockTitle">2.選擇套餐內容</h6>
                             <ul class="setdetail">
                                 <p class="setkind">湯物</p>
@@ -187,7 +178,7 @@
                         </section>
 
                         <!-- 加購服務 -->
-                        <section class="step_flow step2 " id="addOther">
+                        <section class="step_flow step2" :class="{'nowpage': workFlow.step === 2}" id="addOther">
 
                             <h6 class="blockTitle">3.選擇單點加購</h6>
                             <ul class="addOther_detail">
@@ -329,7 +320,7 @@
                             </ul>
                         </section>
                         <!-- 確認訂單 -->
-                        <section class="step_flow step3 nowpage" id="checkDetail">
+                        <section class="step_flow step3" :class="{'nowpage': workFlow.step === 3}" id="checkDetail">
                             <div class="list_top">
                                 <div class="top_content gray">
                                     <div class="item">預約日期</div>
@@ -460,14 +451,14 @@
                                     <div class="item price">NT$<span id="detail_total">25,000</span></div>
                                     <!-- 結帳按鈕 -->
 
-                                    <button class="next_btn btn item font16">下一步</button>
-                                    <button class="prev_btn btn item font16">返回上一步</button>
+                                    <button class="next_btn btn item font16" @click="changeStep(1)">下一步</button>
+                                    <button class="prev_btn btn item font16" @click="changeStep(-1)">返回上一步</button>
 
                                 </div>
 
                         </section>
                         <!-- 填寫資料 -->
-                        <section class="step_flow step4 " id="comfrim">
+                        <section class="step_flow step4 " :class="{'nowpage': workFlow.step === 4}" id="comfrim">
                             <h6 class="blockTitle">5.填寫預約資料<span><label for="sameAccount"><input type="checkbox"
                                             name="sameAccount" id="sameAccount">同會員資料</label></span></h6>
                             <div class="user_name grid_confirm">
@@ -526,14 +517,176 @@
                             </div>
 
                         </section>
-                    </form>
+                    </div>
 
 
                 </div>
             </main>
         </div>
     </div>
-    <!-- @@include('layout/footer.html') -->
+    @@include('layout/footer.html')
+    <script src="./js/vender/Vue/vue.global.js"></script>
+    <script type="module">
+        const RootComponent  = {
+            data(){
+                return{
+                    // 控制流程
+                    workFlow:{
+                        step:1,
+                    },
+                    // 使用者訂單建立
+                    inputData:{
+                        // 第一階段使用者所有的資訊(已經LocalStroage 儲存完畢)
+                        // 以下唯接收的資料型態
+                        // agress:true,
+                        // sets:3,
+                        // peoCount:5,
+                        // date:"2023-01-31",
+                        // orderTime:2,
+                        // chefTeam:"c",
+
+                    },
+                    APIData:{
+                        // 套餐資料
+                        sets:[
+                            {
+                                id:1,setName:'名物 私套餐',
+                                setprice:1800, // 每人單價
+                                imgUrl:'img/reserve_img/reserve_set01.jpg'
+                            },
+                            {
+                                id:2,setName:'極上 會席套餐',
+                                setprice:3200, // 每人單價
+                                imgUrl:'img/reserve_img/reserve_set02.jpg',
+                            },
+                            {
+                                id:3,setName:'苑 春堂套餐',
+                                setprice:4600 , // 每人單價
+                                imgUrl:'img/reserve_img/reserve_set03.jpg',
+                            }
+                        ],
+                        // 廚師團隊
+                        chefTeam:[
+                            {id:1,team:'a',name:'麗燕山'},
+                            {id:2,team:'b',name:'吳寶劍'},
+                            {id:3,team:'c',name:'陳平安'}
+                        ],
+
+                        // 套餐詳細選項
+                        setsDetail:{
+                            setA:{
+                                dish:[
+                                    {id:1,dishName:'奶香牛肝菌野菇濃湯-A',qut:0,dishType:'湯物'},
+                                    {id:2,dishName:'石斑海鮮清湯-A',qut:0,dishType:'湯物'},
+                                    {id:3,dishName:'燻鮭魚番茄佐優格醬-A',qut:0,dishType:'前菜'},
+                                    {id:4,dishName:'深海魚皮野蔬沙拉佐醋醬-A',qut:0,dishType:'前菜'},
+                                    {id:5,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-A',qut:0,dishType:'刺身'},
+                                    {id:6,dishName:'嫩煎干貝佐松露菲力-A',qut:0,dishType:'主食'},
+                                    {id:7,dishName:'日本小田和牛壽喜燒-A',qut:0,dishType:'主食'},
+                                    {id:8,dishName:'龍蝦佐鮑魚海鮮拼盤-A',qut:0,dishType:'主食'},
+                                    {id:9,dishName:'抹茶布丁搭配綿密金時紅豆-A',qut:0,dishType:'甜點'},
+                                    {id:10,dishName:'栗子羊羹-A',qut:0,dishType:'甜點'},
+                                    {id:11,dishName:'抹茶海鹽奶蓋-A',qut:0,dishType:'甜點'},
+                                    {id:12,dishName:'春手毬和菓子-A',qut:0,dishType:'飲品'},
+                                    {id:13,dishName:'烘焙曼巴咖啡-A',qut:0,dishType:'飲品'},
+                                    {id:14,dishName:'烘焙曼巴咖啡-A',qut:0,dishType:'飲品'},                                
+                                    {id:15,dishName:'高山金萱茶-A',qut:0,dishType:'飲品'},                                
+                                    {id:16,dishName:'檸檬海鹽氣泡飲-A',qut:0,dishType:'飲品'},                                
+                                ]
+                            },
+                            setB:{
+                                
+                                dish:[
+                                    {id:17,dishName:'奶香牛肝菌野菇濃湯-B',qut:0,dishType:'湯物'},
+                                    {id:18,dishName:'石斑海鮮清湯-B',qut:0,dishType:'湯物'},
+                                    {id:19,dishName:'燻鮭魚番茄佐優格醬-B',qut:0,dishType:'前菜'},
+                                    {id:20,dishName:'深海魚皮野蔬沙拉佐醋醬-B',qut:0,dishType:'前菜'},
+                                    {id:21,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-B',qut:0,dishType:'刺身'},
+                                    {id:22,dishName:'嫩煎干貝佐松露菲力-B',qut:0,dishType:'主食'},
+                                    {id:23,dishName:'日本小田和牛壽喜燒-B',qut:0,dishType:'主食'},
+                                    {id:24,dishName:'龍蝦佐鮑魚海鮮拼盤-B',qut:0,dishType:'主食'},
+                                    {id:25,dishName:'抹茶布丁搭配綿密金時紅豆-B',qut:0,dishType:'甜點'},
+                                    {id:26,dishName:'栗子羊羹-B',qut:0,dishType:'甜點'},
+                                    {id:27,dishName:'抹茶海鹽奶蓋-B',qut:0,dishType:'甜點'},
+                                    {id:28,dishName:'春手毬和菓子-B',qut:0,dishType:'飲品'},
+                                    {id:29,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},
+                                    {id:30,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},                                
+                                    {id:31,dishName:'高山金萱茶-B',qut:0,dishType:'飲品'},                                
+                                    {id:32,dishName:'檸檬海鹽氣泡飲-B',qut:0,dishType:'飲品'},                                
+                                ]
+                            },
+                            setC:{
+                                checked:false,// 菜單是否有被選擇
+                                imgUrl:'img/reserve_img/reserve_set03.jpg',  
+                                dish:[
+                                    {id:33,dishName:'奶香牛肝菌野菇濃湯-c',qut:0,dishType:'湯物'},
+                                    {id:34,dishName:'石斑海鮮清湯-c',qut:0,dishType:'湯物'},
+                                    {id:35,dishName:'燻鮭魚番茄佐優格醬-c',qut:0,dishType:'前菜'},
+                                    {id:36,dishName:'深海魚皮野蔬沙拉佐醋醬-c',qut:0,dishType:'前菜'},
+                                    {id:37,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-c',qut:0,dishType:'刺身'},
+                                    {id:38,dishName:'嫩煎干貝佐松露菲力-c',qut:0,dishType:'主食'},
+                                    {id:39,dishName:'日本小田和牛壽喜燒-c',qut:0,dishType:'主食'},
+                                    {id:40,dishName:'龍蝦佐鮑魚海鮮拼盤-c',qut:0,dishType:'主食'},
+                                    {id:41,dishName:'抹茶布丁搭配綿密金時紅豆-c',qut:0,dishType:'甜點'},
+                                    {id:42,dishName:'栗子羊羹-c',qut:0,dishType:'甜點'},
+                                    {id:43,dishName:'抹茶海鹽奶蓋-c',qut:0,dishType:'甜點'},
+                                    {id:44,dishName:'春手毬和菓子-c',qut:0,dishType:'飲品'},
+                                    {id:45,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},
+                                    {id:46,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},                                
+                                    {id:47,dishName:'高山金萱茶-c',qut:0,dishType:'飲品'},                                
+                                    {id:48,dishName:'檸檬海鹽氣泡飲-c',qut:0,dishType:'飲品'},                                
+                                ]
+
+                            },
+                        },
+                    }
+                }
+            },
+            methods:{
+                changeStep(val){                    
+                    this.workFlow.step += val;
+                },
+                
+            },
+            computed:{
+
+                // 套餐內容
+                chefTeamName(){
+                    let orderTeamName = this.APIData.chefTeam.find(el=>el.team === this.inputData.chefTeam)
+                    return {...orderTeamName}.name
+                },
+                setName(){
+                    let orderSetName = this.APIData.sets.find(el=>el.id===this.inputData.sets)
+                    return {...orderSetName}.setName
+                },
+                setPrice(){
+                    let orderSetName = this.APIData.sets.find(el=>el.id===this.inputData.sets)
+                    let setPrice = {...orderSetName}.setprice
+                    let setPeo = this.inputData.peoCount
+                    console.log( setPrice * setPeo)
+                    return setPrice * setPeo
+                }
+            },
+            watch:{
+                'workFlow.step'(newValue){
+                    // 限制控制流程1(套餐選擇),2(單品選擇),3(細項列表),4(填寫資料), 5(還沒做Sumit Form 表單)
+                    if(newValue < 1){
+                        this.workFlow.step = 1
+                    }else if(newValue > 4){
+                        this.workFlow.step = 4
+                    }
+                }
+            },
+            mounted(){
+                // 把Local Stroage 給讀出來並渲染在網頁畫面上
+                this.inputData = JSON.parse(localStorage.getItem('reseverOrder'))
+                // console.log(this.APIData.sets)
+                // console.log(this.$refs.oderVeiwPic)
+            }
+        }
+
+        let vm = Vue.createApp(RootComponent).mount('#myWorkFlow')
+    </script>
 </body>
 
 </html>
