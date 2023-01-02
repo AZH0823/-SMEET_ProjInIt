@@ -1,14 +1,15 @@
 
 .land{
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    background-image: url(../../img/landpage_img/banner.jpg);
+    background-image: url(../img/landpage_img/banner.jpg);
     background-size: cover;
     background-position: center;
-    
+    height: 100vh;
 
     @include pad(){
-        min-height:900px;
+        // min-height:900px;
     }
    
     img{
