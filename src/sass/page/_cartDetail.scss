@@ -649,9 +649,60 @@
         }
       }
     }
-    .btn_view {
-      float: right;
-      margin-top: 40px;
+    .cart_product_btn {
+      margin-top: 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .next_btn {
+        font-weight: 400;
+        letter-spacing: 0.4em;
+
+        @include btnGetor(
+          305px,
+          8.75px,
+          20px,
+          white,
+          white,
+          $red,
+          $red,
+          $red,
+          1px,
+          $red
+        );
+
+        @include mobile() {
+          max-width: 380px;
+          width: 95%;
+          margin: 0 auto;
+        }
+      }
+      .prev_btn {
+        font-size: 16px;
+        letter-spacing: 0.2em;
+        @include btnGetor(
+          305px,
+          8.75px,
+          18px,
+          $green-1,
+          $green-1,
+          white,
+          white,
+          $green-1,
+          1px,
+          transparent
+        );
+
+        @include pad() {
+          max-width: 380px;
+        }
+
+        @include mobile() {
+          margin: 0 auto;
+          letter-spacing: 0.4em;
+          width: 95%;
+        }
+      }
     }
     .clear_both {
       clear: both;
@@ -673,24 +724,24 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      .fa-check{
-        padding:10% 0 5% 0;
+      .fa-check {
+        padding: 10% 0 5% 0;
         font-size: 80px;
-        color:$Camel-1;
+        color: $Camel-1;
 
-        @include mobile{
+        @include mobile {
           font-size: 40px;
         }
       }
-      h3{
+      h3 {
         padding-bottom: 13%;
-        @include mobile{
+        @include mobile {
           font-size: 16px;
           padding-bottom: 5%;
         }
       }
     }
-  //步驟三的按鈕
+    //步驟三的按鈕
     .btn_flex {
       display: flex;
       justify-content: space-evenly;
@@ -731,7 +782,6 @@
     }
   }
 
-
   // 共同使用
 
   .cart_none {
@@ -741,6 +791,9 @@
   .cart_open {
     display: block;
   }
+
+  .btn {
+    margin-top: 12px;
+    margin-bottom: 50px;
+  }
 }
-
-

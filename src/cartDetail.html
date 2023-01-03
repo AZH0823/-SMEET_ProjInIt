@@ -80,17 +80,17 @@
                         <label for="">寄送方式</label>
                         <select name="" id="">
                             <option value="宅配">宅配</option>
-                            <option value="7-11超商取貨">7-11超商取貨</option>
+                            <!-- <option value="7-11超商取貨">7-11超商取貨</option> -->
                         </select>
-                        <div class="store_choose font16">
-                            <p>選擇門市</p>
-                            <div class="choose">
+                        <!-- <div class="store_choose font16">
+                           <p>選擇門市</p> 
+                             <div class="choose">
                                 <p>{{shop}}</p>
                                 <button type="button" class="inCart_btn1" @click="chooseShop">選擇門市</button>
                             </div>
                             <p class="font12 text gray">當包裹送達您指定之7-11門市時，隔日將會發送簡訊到貨通知。<br>門市純取貨之訂單，收件人務必填寫與身分證上相符的姓名，並攜帶證件至門市領取包裹
                             </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- 商城總計 -->
@@ -99,8 +99,8 @@
                     <div class="total_container font16">
                         <div class="item">小計</div>
                         <div class="item">NT$<span id="detail_total">{{cartTotal}}</span></div>
-                        <div class="item">加購價</div>
-                        <div class="item">NT$<span id="detail_total">250</span></div>
+                        <!-- <div class="item">加購價</div>
+                        <div class="item">NT$<span id="detail_total">250</span></div> -->
                         <div class="item">紅利點數</div>
                         <div class="item">-NT$<span id="detail_total">{{point}}</span></div>
                         <div class="item">總金額
@@ -108,17 +108,12 @@
                         <div class="item">NT$<span id="detail_total">{{detailTotal}}</span></div>
                     </div>
                     <!-- 下一步按鈕 -->
-                    <div class="btn_view step1" @click="changePage(1)">
-                        <p>下一步</p>
-                        <span>
-                            <p>next</p>
-                        </span>
-                    </div>
+                    <div class="next_btn btn" @click="changePage(1)">下一步</div>
                 </div>
             </section>
             <!-- 步驟1中間區塊主要內容結束=========== -->
             <!-- 步驟2中間區塊主要內容=========== -->
-            <section class="cart_2_content" v-if="process.step ===2 " >
+            <section class="cart_2_content" v-if="process.step === 2 " >
                 <!-- 購物車商品 -->
                 <div class="cart_product cart_none" :class="{'cart_open' : process.step === 2 }" >
                     <!-- 商品標題 -->
@@ -261,13 +256,12 @@
                         </p>
                     </label>
                 </div>
+                <div class="cart_product_btn">
                 <!-- 下一步按鈕 -->
-                <div class="btn_view step2"  @click="changePage(1)">
-                    <p>下一步</p>
-                    <span>
-                        <p>next</p>
-                    </span>
-                </div>
+                    <div class="next_btn" @click="changePage(1)">下一步</div>
+                <!-- 上一步按鈕 -->
+                    <div class="prev_btn btn" @click="changePage(-1)">返回上一步</div>
+                    </div>
                 <div class="clear_both"></div>
             </section>
             <!-- 步驟2中間區塊主要內容結束=========== -->
