@@ -664,6 +664,11 @@
     margin: 0 108px;
     border-top: 1px solid #000;
     border-bottom: 1px solid #000;
+
+    @include pad {
+      margin: 0 30px;
+      justify-content: space-around;
+    }
     .cart_content {
       display: flex;
       flex-direction: column;
@@ -673,16 +678,27 @@
         font-size: 80px;
         color:$Camel-1;
 
+        @include mobile{
+          font-size: 40px;
+        }
       }
       h3{
         padding-bottom: 13%;
+        @include mobile{
+          font-size: 16px;
+          padding-bottom: 5%;
+        }
       }
     }
-
+  //步驟三的按鈕
     .btn_flex {
       display: flex;
       justify-content: space-evenly;
       padding-bottom: 20%;
+
+      @include mobile {
+        flex-direction: column;
+      }
 
       .checkorder_btn {
         font-size: 24px;
@@ -701,18 +717,29 @@
         );
 
         @include pad() {
-          max-width: 378px;
+          max-width: 300px;
         }
 
         @include mobile() {
           padding: 8px 18px;
-          margin: 0 auto;
+          margin: 2% auto;
           letter-spacing: 0.4em;
           font-size: 16px;
           width: 95%;
         }
       }
     }
+  }
+
+
+  // 共同使用
+
+  .cart_none {
+    display: none;
+  }
+
+  .cart_open {
+    display: block;
   }
 }
 

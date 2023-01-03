@@ -674,82 +674,88 @@
         }
 
         .question_flex {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-left: 4%;
-          border-bottom: 1px solid #000;
-          h6 {
-            width: 530px;
-            @media all and (max-width: 992px) {
-              padding-left: 5%;
-            }
-
-            @include pad {
-              padding-left: 5%;
-            }
-            @include mobile {
-              font-size: 16px;
-            }
-            @media all and (max-width: 375px) {
-              font-size: 14px;
-            }
-          }
-          h6,
-          .fa-solid {
-            margin-top: 2%;
-            margin-bottom: 2%;
-          }
-          .fa-plus {
-            padding-right: 4%;
-            &:hover {
-              cursor: pointer;
-            }
-          }
-        }
-        .question_none {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-left: 4%;
-          display: none;
-          background-color: $Camel-3;
-          &.active {
-            display: block;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-left: 4%;
-            background-color: $Camel-3;
-          }
-          h6 {
-            margin-top: 2%;
-            margin-bottom: 2%;
-            padding-left: 3%;
-            width: 580px;
-            @media all and (max-width: 992px) {
-              padding: 0 8% 0 5%;
+            border-bottom: 1px solid #000;
+            h6 {
+              width: 530px;
+              @media all and (max-width: 992px) {
+                padding-left: 5%;
+              }
+
+              @include pad {
+                padding-left: 5%;
+              }
+              @include mobile {
+                font-size: 16px;
+              }
+              @media all and (max-width: 375px) {
+                font-size: 14px;
+              }
             }
-            @include pad {
-              padding: 0 13% 0 5%;
+            h6,
+            .fa-solid {
+              margin-top: 2%;
+              margin-bottom: 2%;
             }
-            @media all and (max-width: 375px) {
-              font-size: 14px;
+            .fa-plus {
+              padding-right: 4%;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+            .fa-minus {
+              // display: none;
+              padding-right: 4%;
+              &:hover {
+                cursor: pointer;
+              }
             }
           }
-          .fa-a {
-            font-size: 18px;
-          }
-          .fa-minus {
-            padding-right: 4%;
-            &:hover {
-              cursor: pointer;
-            }
-          }
+        .question_none {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding-left: 4%;
+              display: none;
+              background-color: $Camel-3;
+              &.active {
+                display: block;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-left: 4%;
+                background-color: $Camel-3;
+              }
+              h6 {
+                margin-top: 2%;
+                margin-bottom: 2%;
+                width: 640px;
+                @media all and (max-width: 992px) {
+                  padding: 0 8% 0 5%;
+                }
+                @include pad {
+                  padding: 0 13% 0 5%;
+                }
+                @media all and (max-width: 375px) {
+                  font-size: 14px;
+                }
+              }
+              .fa-a {
+                font-size: 18px;
+              }
+              // .fa-minus {
+              //   padding-right: 4%;
+              //   &:hover {
+              //     cursor: pointer;
+              //   }
+        }
         }
       }
     }
   }
 
   // ======================常見問題結束
-}
+
