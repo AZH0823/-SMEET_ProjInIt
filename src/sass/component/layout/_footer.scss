@@ -47,94 +47,14 @@
     }
 }
 
-// .information_footer {
-//     display: none;
-
-//     .footer_all {
-//         .footer_btm {
-//             display: flex;
-//             justify-content: space-evenly;
-//             width: 70%;
-//             margin: 0 auto;
-//             margin-top: 50px;
-
-//             .info_footer {
-//                 margin-right: 10%;
-//                 width: 30%;
-//                 margin-bottom: 5%;
-
-
-//                 ul {
-//                     h6 {
-//                         padding-bottom: 10%;
-//                     }
-
-//                     a {
-//                         text-decoration: none;
-//                     }
-
-//                     li {
-//                         padding-bottom: 5%;
-//                         font-size: 12px;
-//                     }
-//                 }
-//             }
-
-//             .label_footer {
-//                 margin-right: 10%;
-//                 width: 30%;
-//                 margin-bottom: 5%;
-
-//                 ul {
-//                     h6 {
-//                         padding-bottom: 10%;
-//                     }
-
-//                     a {
-//                         text-decoration: none;
-//                     }
-
-//                     li {
-//                         padding-bottom: 5%;
-//                         font-size: 12px;
-//                     }
-//                 }
-//             }
-
-//             .follow_footer {
-//                 margin-bottom: 5%;
-
-//                 ul {
-
-//                     text-align: right;
-
-//                     h6 {
-//                         padding-bottom: 5%;
-//                     }
-
-
-
-//                     li {
-//                         text-align: left;
-//                         font-size: 12px;
-//                     }
-
-//                     a {
-//                         font-size: 25px;
-//                         margin-left: 5%;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
 /*------------------- no_img_footer -------------------*/
 
 .noimg_footer {
     // display: none;
+    overflow: hidden;
 
     .footer_all {
+
         // display: flex;
         // flex-direction: column;
 
@@ -143,13 +63,20 @@
         .footer_btm {
             display: flex;
             justify-content: space-evenly;
-            width: 70%;
+            width: 60%;
             margin: 0 auto;
             margin-top: 50px;
 
+            @media all and (max-width: 922px) {
+                flex-direction: column;
+
+            }
+
+
+
             &::before {
                 content: "";
-                width: 100%;
+                width: 90%;
                 height: .5px;
                 background-color: black;
                 position: absolute;
@@ -166,19 +93,38 @@
                 width: 30%;
                 margin-bottom: 5%;
 
+                @media all and (max-width: 922px) {
+                    width: 100%;
+                }
+
 
                 ul {
                     h6 {
                         padding-bottom: 10%;
+
+                        @media all and (max-width: 922px) {
+                            padding-bottom: 3%;
+                        }
                     }
 
-                    a {
-                        text-decoration: none;
-                    }
+                    .info_rwd {
 
-                    li {
-                        padding-bottom: 5%;
-                        font-size: 12px;
+                        @media all and (max-width: 922px) {
+                            display: flex;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+
+                        }
+
+                        a {
+                            text-decoration: none;
+
+                        }
+
+                        li {
+                            padding-bottom: 5%;
+                            font-size: 12px;
+                        }
                     }
                 }
             }
@@ -189,18 +135,34 @@
                 width: 30%;
                 margin-bottom: 5%;
 
+                @media all and (max-width: 922px) {
+                    width: 100%;
+                }
+
                 ul {
                     h6 {
                         padding-bottom: 10%;
+
+                        @media all and (max-width: 922px) {
+                            padding-bottom: 3%;
+                        }
                     }
 
-                    a {
-                        text-decoration: none;
-                    }
+                    .label_rwd {
+                        @media all and (max-width: 922px) {
+                            display: flex;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+                        }
 
-                    li {
-                        padding-bottom: 5%;
-                        font-size: 12px;
+                        a {
+                            text-decoration: none;
+                        }
+
+                        li {
+                            padding-bottom: 5%;
+                            font-size: 12px;
+                        }
                     }
                 }
             }
@@ -215,6 +177,14 @@
 
                     h6 {
                         padding-bottom: 5%;
+
+                        @media all and (max-width: 922px) {
+                            padding-bottom: 2%;
+                        }
+
+                        @media all and (max-width: 922px) {
+                            text-align: left;
+                        }
                     }
 
                     // width: 100%;
@@ -223,11 +193,26 @@
                     li {
                         text-align: justify;
                         font-size: 12px;
+
+                        @media all and (max-width: 922px) {
+                            margin-bottom: 5%;
+                        }
                     }
 
-                    a {
+                    .social_icon {
                         font-size: 25px;
-                        margin-left: 5%;
+
+                        a {
+                            margin-left: 6%;
+
+                            @media all and (max-width: 922px) {
+                                margin: 0 3%;
+                            }
+                        }
+
+                        @media all and (max-width: 922px) {
+                            text-align: center;
+                        }
                     }
                 }
             }

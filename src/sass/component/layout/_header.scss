@@ -152,61 +152,181 @@
             }
         }
 
-        .header_bar {
-
-            display: flex;
-            // justify-content: center;
-            justify-content: space-between;
+        .ham_div {
+            display: none;
             width: 50%;
+            // display: block;
 
             @include pad() {
-
-                // display: none;
-                width: 50%;
-                flex-direction: column;
-                background-color: $green-1;
-                position: absolute;
-                top: 29%;
-                right: 0;
-                margin: 0 auto;
-
-
+                .-on {
+                    right: 0%;
+                }
             }
 
-            li {
-                margin-top: 45px;
-                margin-bottom: 45px;
+            .header_bar {
 
+                justify-content: space-between;
+                // justify-content: center;
+                display: flex;
+
+                // width: 50%;
                 @include pad() {
-                    border-bottom: .5px solid $Camel-3;
-                    width: 80%;
-                    text-align: center;
+
+                    // display: none;
+                    width: 50%;
+                    flex-direction: column;
+                    background-color: $green-1;
+                    position: absolute;
+                    top: 29%;
+                    right: 0;
                     margin: 0 auto;
-                    margin-top: 20px;
-                    margin-bottom: 0;
+
+
+                    @media all and (max-width: 600px) {
+                        width: 60%;
+                    }
+
+                    @media all and (max-width: 500px) {
+                        width: 70%;
+                    }
+
+                    @include mobile() {
+                        width: 80%;
+                    }
+
+
                 }
+
+                li {
+                    margin-top: 45px;
+                    margin-bottom: 45px;
+
+                    @include pad() {
+                        border-bottom: .5px solid $Camel-3;
+                        width: 80%;
+                        text-align: center;
+                        margin: 0 auto;
+                        margin-top: 20px;
+                        margin-bottom: 0;
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+
+                    @include pad() {
+                        color: $Camel-3;
+                        margin-bottom: 20px;
+                        display: block;
+
+                    }
+
+                    &:hover {
+                        border-bottom: 1px solid #000;
+                    }
+                }
+
+                // @media all and (max-width: 1000px) {
+                //     margin-left: 20px;
+                //     margin-right: 20px;
+                // }
             }
 
-            a {
-                text-decoration: none;
+            .ham_user {
+                display: none;
 
                 @include pad() {
-                    color: $Camel-3;
-                    margin-bottom: 20px;
                     display: block;
+                    // border: 1px solid $Camel-3;
 
                 }
 
-                &:hover {
-                    border-bottom: 1px solid #000;
+                .user_ham {
+
+                    @include pad() {
+                        background-color: $green-1;
+                        position: absolute;
+                        top: 161%;
+                        right: 0;
+                        margin: 0 auto;
+                        width: 50%;
+
+                        @media all and (max-width: 600px) {
+                            width: 60%;
+                        }
+
+                        @media all and (max-width: 500px) {
+                            width: 70%;
+                        }
+
+                        @include mobile() {
+                            width: 80%;
+                        }
+
+                    }
+
+                    .border_ham {
+                        border: .5px solid $Camel-3;
+                        width: 50%;
+                        margin: 35px auto;
+
+                        li {
+                            margin-top: 45px;
+                            margin-bottom: 45px;
+
+                            @include pad() {
+                                border-bottom: .5px solid $Camel-3;
+                                width: 80%;
+                                text-align: center;
+                                margin: 0 auto;
+                                margin-top: 20px;
+                                margin-bottom: 0;
+                                border-bottom: none;
+                            }
+
+                        }
+
+                        a {
+                            text-decoration: none;
+
+                            @include pad() {
+                                // color: $Camel-3;
+                                margin-bottom: 20px;
+                                display: block;
+
+                            }
+
+                        }
+                    }
+
+                    .log_ham {
+                        display: none;
+                        background-color: $Camel-3;
+                        width: 80%;
+                        text-align: center;
+
+                        li {
+
+                            @include pad() {}
+
+                        }
+
+                        a {
+
+                            // @include pad() {
+                            // }
+                        }
+
+                        @include pad() {
+                            margin: 20px auto;
+                            text-decoration: none;
+                            display: block;
+                            line-height: 250%;
+
+                        }
+                    }
                 }
             }
-
-            // @media all and (max-width: 1000px) {
-            //     margin-left: 20px;
-            //     margin-right: 20px;
-            // }
-
         }
 
         nav {
@@ -270,6 +390,10 @@
                     margin-top: 0;
                     padding: 0;
 
+                    @include pad() {
+                        // display: none;
+                    }
+
                     img {
 
                         border-radius: 10px 0 0 0;
@@ -320,6 +444,11 @@
     height: 110px;
     position: fixed;
     z-index: 199;
+
+    @include pad() {
+        position: fixed;
+        top: 0;
+    }
 }
 
 .header_mg {
