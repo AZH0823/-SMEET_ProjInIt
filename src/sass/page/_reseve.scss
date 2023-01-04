@@ -625,15 +625,27 @@
 
         // 選擇套餐內容
         .setdetail {
-
+            position: relative;
             p.setkind {
                 color: black;
                 text-align: center;
                 padding: 5px 0;
                 line-height: 20px;
                 letter-spacing: 0.615em;
+                margin-top: 30px;
                 @extend .bgc_Camel-3;
+                &:first-child{
+                    margin-top: 0px;
+                }
+                span{
+                    position: absolute;
+                    right: 2%;
+                    font-size: 12px;
+                    letter-spacing: 1.2px;
+                    color: red;
+                }
             }
+           
             @include stepper_input();
            
         }
