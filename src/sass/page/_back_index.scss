@@ -44,6 +44,11 @@
                                     border-bottom: .5px solid #ccc; // 加底线
                                 }
 
+                                // Popup點擊hover
+                                .checked:hover{
+                                    cursor: pointer;
+                                    color: #ccc;
+                                }
                                 .grid_item {
                                     padding: 20px;
                                 }

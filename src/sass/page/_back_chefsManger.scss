@@ -13,21 +13,30 @@ div.back_chefstManger {
             width: 73%;
             // 表格
             main.right_content {
-                margin-bottom: 50px;
                 width: 100%;
                 section.section1{
                     div.swiper_img_update{
-                        h4{
-                            text-align: center;
+                        
+                        & h4:first-child {
+                            text-align: start;
+                            margin: 80px 0 20px;
+                        }
+                        
+                        .second{
                             background-color: $Camel-3;
-                            div.addImg_block{
-                                display: flex;
-                                .dragImg{
-                                    margin-top: 35px;
-                                    img{
-                                        display: block;
-                                    }
-                                }
+                            margin-bottom: 25px;
+                            text-align: center;
+                            
+                        }
+                        div.addImg_block{
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            img{
+                                display: block;
+                            }
+                            i.fa-square-plus{
+                                cursor: pointer;
                             }
                         }
                     }
@@ -37,7 +46,7 @@ div.back_chefstManger {
                     margin-top: 30px;
                     .btn_wrap{
                         display: flex;
-                        justify-content: end;
+                        justify-content: flex-end;
                         margin: 0 50px 30px 0;
                     }
 
@@ -63,6 +72,13 @@ div.back_chefstManger {
                                 .grid_item:nth-child( n + 1){
                                     border-bottom: .5px solid #ccc; // 加底线
                                 }
+
+                                // Popup點擊hover
+                                .checked:hover{
+                                    cursor: pointer;
+                                    color: #ccc;
+                                }
+
                                 .grid_item {
                                     padding: 20px;
                                     
