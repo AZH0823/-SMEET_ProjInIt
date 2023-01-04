@@ -84,5 +84,72 @@ div.back_contactUs {
             }
         }
     }
+    div.section_contactus{
+        border: 1px solid #000;      
+        width: 650px;
+        height: 620px;
+        margin: 0 auto;
+        .contactus_top{
+            height: 45px;
+            text-align: center;
+            background-color: #F3F3F3;
+            h6{
+                line-height: 45px;
+            }
+        }
+        .contactus_mail{
+            width: 95%;
+            margin: 0 auto;
+            display: flex;
+            margin-top: 15px;
+        }
+        .contactus_date{
+            width: 95%;
+            margin: 0 auto;
+            display: flex;
+            margin-top: 15px;
+        }
+        .contactus_name_phone{
+            width: 95%;
+            margin: 0 auto;
+            display: flex;
+            margin-top: 15px;
+            h6{
+                margin-right: 35px;
+            }
+        }
+        .contactus_type{
+            width: 95%;
+            margin: 0 auto;
+            display: flex;
+            margin-top: 15px;
+        }
+        .contactus_content{
+            width: 95%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+            p{
+                width: 600px;
+                background-color: #F9F4EC;
+                font-size: 12px;
+                padding: 10px;
+            }
+            textarea{
+                margin-top: 25px;
+                width: 578px;
+                height: 68px;
+                outline: none;
+                resize:none;
+            }
+            .contactus_content_btn{
+                width: 140px;
+                height: 30px;
+                margin: 50px auto;
+            }
+        }
+        
+    }
 }
 
