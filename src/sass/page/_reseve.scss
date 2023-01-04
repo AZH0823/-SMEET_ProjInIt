@@ -6,7 +6,7 @@
 
     .reseve_list {
         // border: 2px solid yellow;
-        margin: 0px 8.6%;
+        margin: 15px 8.6% 0;
 
         @include pad() {
             margin: 0px 5%;
@@ -14,7 +14,7 @@
 
         .reseve_title {
             margin-left: -10px;
-            margin-bottom: 65px;
+            margin-bottom: 18px;
 
             @include mobile() {
                 margin-left: 0;
@@ -46,9 +46,9 @@
 
             .text-area {
                 overflow-y: auto;
-                height: 1100px;
-                margin: 0 7.5%;
-                padding: 5% 6.5%;
+                height: 1015px;
+                // margin: 0 7.5%;
+                padding: 7% 11.5%;
                 border: 2px solid $Camel-2;
 
                 @include pad() {
@@ -60,7 +60,9 @@
                     margin: 0 2%;
                     height: 550px;
                 }
-
+                .noticeTxt{
+                    margin-bottom: 30px;
+                }
                 .noticeTxt,
                 .cancelTxt {
                     font-weight: 400;
@@ -74,8 +76,15 @@
 
                     &>li {
                         margin-left: 5px;
-                        list-style: disc;
-                        font-size: 18px;
+                        // list-style: disc;
+                        font-size: 16px;
+                        text-align: justify;
+                        color: #454343;
+                    }
+                    p{
+                        font-size: 16px;
+                        text-align: justify;
+                        color: #454343;
 
                     }
 
@@ -134,11 +143,16 @@
                 select,
                 input[type="date"] {
                     padding-left: 5%;
-                    color: $red;
+                    color: $green-1;
                     background-color: $Camel-3;
                     flex-basis: calc(100% - 50px);
                     height: 50px;
+                    border: 0;
+                    border-bottom: 1px solid rgb(155, 155, 155);
+                    outline: 0;
+                    // padding-right: 5%;
                 }
+
             }
 
             .next_btn {
@@ -193,7 +207,7 @@
             }
         }
 
-        margin: 0 auto 70px auto;
+        margin: 50px auto 70px auto;
         padding: 0 5%;
         max-width: 930px;
         // outline: 2px solid red;

@@ -112,7 +112,7 @@
       display: flex;
 
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 133px;
       @include pad() {
         flex-direction: column;
       }
@@ -123,8 +123,8 @@
         padding-left: 20px;
         margin-bottom: 25px;
       }
-      form#info,
-      form#pwd {
+      #info,
+      #pwd {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -136,6 +136,8 @@
           width: 100%;
         }
         .date_sex {
+          display: flex;
+          justify-content: space-between;
           input {
             width: 49%;
             padding-bottom: 9px;
@@ -180,8 +182,6 @@
       @include pad() {
         width: 100%;
       }
-      // form {
-      // }
       .content {
         display: flex;
         position: relative;
@@ -235,7 +235,7 @@
   // ======================訂單查詢
   .member_product_section {
     border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
+    // border-bottom: 1px solid #000;
     // min-height:300px;
     margin-bottom: 50px;
   }
@@ -338,6 +338,7 @@
   // ======================收藏菜品
   .collect_section {
     padding: 50px 0;
+    border-bottom: 0 solid #000;
     @include mobile() {
       padding: 25px 0;
     }
@@ -641,31 +642,34 @@
 
   .question_section {
     ul {
-      margin-left: 15%;
+      width: 80%;
+      margin: 0 auto;
       @media all and (max-width: 992px) {
-        margin-left: 13%;
+        // margin-left: 13%;
       }
       @include pad {
-        margin-left: 10%;
+        // margin-left: 10%;
       }
       @include mobile {
-        margin-left: 0;
+        // margin-left: 0;
+        width: 100%;
       }
 
       h5 {
-        padding: 7% 0 1% 2%;
+        padding: 7% 0 2% 2%;
         @extend .green-1;
         width: 80%;
         @include mobile {
           font-size: 16px;
         }
       }
+      .li_1{
+        border-top: 1px solid #000;
+      }
       li.question_section_li {
         display: flex;
         flex-direction: column;
-        width: 80%;
-        border-top: 1px solid #000;
-
+        width: 100%;
         @include pad {
           width: 90%;
         }
@@ -680,7 +684,9 @@
             padding-left: 4%;
             border-bottom: 1px solid #000;
             h6 {
-              width: 530px;
+              width: 80%;
+              font-size: 16px;
+              line-height: 42px;
               @media all and (max-width: 992px) {
                 padding-left: 5%;
               }
@@ -695,13 +701,19 @@
                 font-size: 14px;
               }
             }
+            .fa-q{
+              width: 10%;
+            }
             h6,
             .fa-solid {
+              font-size: 16px;
               margin-top: 2%;
               margin-bottom: 2%;
             }
             .fa-plus {
               padding-right: 4%;
+              font-size: 16px;
+              width: 10%;
               &:hover {
                 cursor: pointer;
               }
@@ -709,6 +721,7 @@
             .fa-minus {
               // display: none;
               padding-right: 4%;
+              width: 10%;
               &:hover {
                 cursor: pointer;
               }
@@ -721,6 +734,7 @@
               padding-left: 4%;
               display: none;
               background-color: $Camel-3;
+              border-bottom: 1px solid #000;
               &.active {
                 display: block;
                 display: flex;
@@ -732,7 +746,10 @@
               h6 {
                 margin-top: 2%;
                 margin-bottom: 2%;
-                width: 640px;
+                width: 90%;
+                padding-right: 5%;
+                font-size: 16px;
+                line-height: 42px;
                 @media all and (max-width: 992px) {
                   padding: 0 8% 0 5%;
                 }
@@ -744,7 +761,7 @@
                 }
               }
               .fa-a {
-                font-size: 18px;
+                font-size: 16px;
               }
               // .fa-minus {
               //   padding-right: 4%;

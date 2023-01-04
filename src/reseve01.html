@@ -13,12 +13,12 @@
     <div class="reseve fulid_wrapper ">
         <div class="wrapper">
             <div class="reseve_list">
-                <h1 class="font_family_c green-1 reseve_title">RESERVE</h1>
+                <h1 class="font_family_eng green-1 reseve_title">RESERVE</h1>
                 <div class="reseve_notice">
-                    <h2 class="notice_title green-1">預約須知</h2>
+                    <h2 class="notice_title green-1 font_family_tc font_bold">預約須知</h2>
                     <div class="text-area">
                         <ul class="noticeTxt">
-                            <h6>【預約注意事項】</h6>
+                            <h6 class="green-1">【預約注意事項】</h6>
 
                             <li>為防止新型冠狀病毒感染擴大，進入貴廚前會測量體溫並進行消毒。如果您當天體溫為37.5℃或更高，我們可能會停止提供該服務並延期。</li>
                             <li>我們的商店是一個完整的預訂系統。您可以在預訂日期的前一天的 15:00 之前進行預訂</li>
@@ -37,8 +37,8 @@
 
                         </ul>
                         <div class="cancelTxt">
-                            <h6>【取消政策】</h6>
-                            <h6>預訂確認後，除特殊情況外，自預訂日期前3天起收取取消費。請注意。</h6>
+                            <h6 class="green-1">【取消政策】</h6>
+                            <p class="red">預訂確認後，除特殊情況外，自預訂日期前3天起收取取消費。請注意。</p>
                             <p>3天前至2天前取消，收取費用的 50%。</p>
                             <p>從前一天到當天取消是價格的 100%。</p>
                             <p>如果取消，恕不另行通知，價格的 100%。</p>
@@ -51,9 +51,9 @@
 
                         <div class="form-input" id="agreement">
                             <label for="agrees">
-                                <input type="checkbox" name="agree" id="agrees" v-model="inputData.agress"><span>我已確認已閱讀「商家通知」</span>
+                                <input type="checkbox" name="agree" id="agrees" v-model="inputData.agress"><span class=" font14 font_med">我已確認已閱讀「商家通知」</span>
                             </label>
-                            <span class="warning_title db" v-if="vaildAgress">＊項目尚未勾選</span>
+                            <span class="warning_title db font_med" v-if="vaildAgress">＊項目尚未勾選</span>
                         </div>
 
                         <div class="form-input" id="choose_set">
@@ -68,7 +68,7 @@
                         <div class="form-input" id="count_people">
                             <img src="./img/reserve_img/reserve_icon02.svg" alt="">
                             <select v-model="inputData.peoCount">
-                                <i class="fa-solid fa-user"></i>
+                                <i class="fa-solid fa-user "></i>
                                 <option value="" selected disabled>--人數--</option>
                                 <option v-for="idx in 12" :value="idx">{{idx}}人</option>
                             </select>

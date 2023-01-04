@@ -56,8 +56,8 @@
     width: 200px;
     border: 1px solid #7c7c7c;
     display: flex;
-    justify-content: center;
-    margin-right: 10.5%;
+    justify-content: space-around;
+    margin-right: 10%;
     margin-top: 5%;
 
     @include mobile {
@@ -72,12 +72,16 @@
         outline: none;
         border: 0;
         padding-left: 3%;
+        line-height: 30px;
+        
       }
 
       .fa-magnifying-glass {
         color: #7c7c7c;
         border-left: 1px solid #7c7c7c;
         padding-left: 20%;
+        padding-right: 2%;
+        font-size: 13px;
         &:hover {
           cursor: pointer;
         }
@@ -93,7 +97,7 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-template-rows: auto;
     gap: 30px 40px;
-    margin: 5% 10% 7% 10%;
+    margin: 4% 10% 7% 10%;
 
     @media all and (max-width: 800px) {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
