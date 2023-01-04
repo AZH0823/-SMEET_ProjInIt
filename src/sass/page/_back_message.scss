@@ -83,5 +83,55 @@ div.back_message {
             }
         }
     }
+    div.section_message{
+        border: 1px solid #000;      
+        width: 650px;
+        height: 400px;
+        margin: 0 auto;
+        .message_top{
+            height: 45px;
+            text-align: center;
+            background-color: #F3F3F3;
+            h6{
+                line-height: 45px;
+            }
+        }
+        .message_content{
+            width: 95%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            row-gap: 5px;
+            margin-top: 15px;
+            .message_text{
+                h6{
+                    font-size: 16px;
+                }
+                h1{
+                    text-align: right;
+                    font-size: 12px;
+                }
+                p{
+                    width: 605px;
+                    height: 38px;
+                    background-color: #f9f4ec;
+                    padding: 5px;
+                    font-size: 12px;
+                }
+            }
+            textarea{
+                width: 605px;
+                height: 73px;
+                outline: none;
+                resize:none;
+                
+            }
+            .message_content_btn{
+                width: 140px;
+                height: 30px;
+                margin: 20px auto;
+            }
+        }
+    }
 }
 

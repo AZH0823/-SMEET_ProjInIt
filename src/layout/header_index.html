@@ -2,20 +2,35 @@
 <div class="wrap_header fulid_wrapper">
     <div class="header_scope wrapper">
         <header class="header_index">
-            <ul class="header_bar">
-                <li><a href="aboutUs.html" class="Camel-3">關於我們</a></li>
-                <li><a href="chefTeam.html" class="Camel-3">私廚陣容</a></li>
-                <li><a href="news.html" class="Camel-3">最新動態</a></li>
-                <li><a href="menu.html" class="Camel-3">到府私廚</a></li>
-                <li><a href="shopMall.html" class="Camel-3">線上商城</a></li>
-            </ul>
-            <ul class="header_user">
-                <a href="member.html" class="Camel-3"><i class="fa-solid fa-user"></i></a>
-                <a href="#" class="Camel-3"><i class="fa-solid fa-cart-shopping"></i></a>
+            <div class="indexham_div">
+                <ul class="indexheader_bar">
+                    <li><a href="aboutUs.html" class="Camel-3">關於我們</a></li>
+                    <li><a href="chefTeam.html" class="Camel-3">私廚陣容</a></li>
+                    <li><a href="news.html" class="Camel-3">最新動態</a></li>
+                    <li><a href="menu.html" class="Camel-3">到府私廚</a></li>
+                    <li><a href="shopMall.html" class="Camel-3">線上商城</a></li>
+                </ul>
+                <div class="indexham_user">
+                    <ul class="indexuser_ham">
+                        <div class="indexborder_ham">
+                            <li><a href="member.html" class="Camel-3">會員中心</a></li>
+                            <li><a href="orderList.html" class="Camel-3">訂單查詢</a></li>
+                            <li><a href="member.html" class="Camel-3">收藏菜品</a></li>
+                            <li><a href="member.html" class="Camel-3">訊息中心</a></li>
+                            <li><a href="member.html" class="Camel-3">常見問題</a></li>
+                        </div>
+                        <li><a href="member.html" class="indexlog_ham green-1">登入</a></li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="indexheader_user">
+                <a href="member.html" class="Camel-3 indexslide_user"><i class="fa-solid fa-user"></i></a>
+                <a href="#" class="Camel-3 indexslide_cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="#" class="indexslide_ham Camel-3"><i class="fa-solid fa-bars"></i></a>
             </ul>
         </header>
 
-        <div class="head_logo">
+        <div class="indexhead_logo">
             <img src="../img/logo_img/logo_camel_2-04.png" alt="">
         </div>
 
@@ -29,3 +44,16 @@
 
     </div>
 </div>
+
+<script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+<script>
+
+    $(function () {
+
+        $(".indexslide_ham").on("click", function () {
+            console.log("qwert");
+            $(".indexheader_bar").toggleClass("--on")
+            $(".indexuser_ham").toggleClass("--on")
+        })
+    })
+</script>

@@ -12,8 +12,12 @@
 
 .menu_tap{
     .tab_container{
-        width: 27%;
+        width: 37%;
+        @include pad{
+        width: 70%;
     }
+    }
+    
 }
 
 .menu {
@@ -26,12 +30,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        @include pad{
-            padding: 0 65px;
-        }
-        @include mobile{
-            padding: 0 27px;
-        }
+        
 
         
 
@@ -44,6 +43,7 @@
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 40px;
+                padding-right: 0px;
             }
             .part1_img{
                 width: 70%;
@@ -67,6 +67,11 @@
                 @include pad{
                     align-items: flex-start;
                     width: 100%;
+                    padding: 0 30px;
+                }
+                
+                @include mobile{
+                    padding: 0 27px;
                 }
 
                 h2{
@@ -130,6 +135,7 @@
             @include pad{
                 display: flex;
                 flex-direction: column;
+                padding-left: 0px;
                 margin-bottom: 40px;
             }
             .part2_img{
@@ -152,8 +158,12 @@
                 flex-direction: column;
                 align-items: flex-start;
                 @include pad{
-                    
+                    padding: 0 30px;
                     width: 100%;
+                }
+                
+                @include mobile{
+                    padding: 0 27px;
                 }
 
                 h2{
@@ -216,6 +226,7 @@
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 40px;
+                padding-right: 0px;
             }
             .part3_img{
                 width: 70%;
@@ -239,7 +250,13 @@
                 @include pad{
                     align-items: flex-start;
                     width: 100%;
+                    padding: 0 30px;
                 }
+                
+                @include mobile{
+                    padding: 0 27px;
+                }
+
 
                 h2{
                     padding-top: 15%;

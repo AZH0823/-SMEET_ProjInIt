@@ -4,7 +4,7 @@
     <header class="header_all">
         <div class="contain wrapper">
             <div class="head_logo">
-                <a href="index.html"><img src="../img/logo_img/logo_black-03.png" alt=""></a>
+                <a href="index_home.html"><img src="../img/logo_img/logo_black-03.png" alt=""></a>
             </div>
             <div class="ham_div">
                 <ul class="header_bar">
@@ -47,34 +47,15 @@
 <div class="header_bg fulid_wrapper"></div>
 <div class="header_mg fulid_wrapper"></div>
 
-<script src="../js/vender/Jquery/"></script>
+<script src="js/vender/Jquery/jquery-3.6.1.js"></script>
 <script>
+
     $(function () {
 
-        $(".ham").on("click", function () {
+        $(".slide_ham").on("click", function () {
             console.log("qwert");
-            $(".burger").toggleClass("-on")
+            $(".header_bar").toggleClass("-on")
+            $(".user_ham").toggleClass("-on")
         })
-
-
-        $(".rwd_cart").on("click", function () {
-            console.log("qwert")
-            $(".addcart").toggleClass("active")
-        })
-
-        $(".pc_cart").on("click", function () {
-            console.log("qwert")
-            $(".addcart").toggleClass("active")
-        })
-
-        $(".remove_cart").on("click", function () {
-            console.log("qwert");
-            $(".addcart").removeClass("active")
-        })
-
-
     })
-
-
-
 </script>
