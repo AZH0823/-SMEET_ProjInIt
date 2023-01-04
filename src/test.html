@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @@include('layout/meta.html', { "title": "私覓SMEET-e.購物商城", })
+        <link rel="stylesheet" href="./css/style.css"/>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    </head>
+    <body>
+        <!-- @@include('layout/header_01.html') -->
+        <!-- banner -->
+        <main class="wrapper shopMall" id="shopMall" >
+            <!-- 商城tab+排序 -->
+            <div class="shop_up">
+                <!-- tab -->
+                <div class="shop_tab" 
+                    v-for="tab in tabs" 
+                    :class="{active: currentTab == tab.id}" 
+                    :key="tab.id" 
+                    @click="currentTab = tab.id">
+                    <span href="" :class="{active: on_tab == tab.id}">{{ tab.name }}</span>
+                </div>
+                <!-- 商品排序 -->
+                <select name="" id="">
+                    <option value="none" selected disabled hidden>商品排序</option> 
+                    <option value="最新">最新</option>
+                    <option value="價格：由高到低">價格：由高到低</option>
+                    <option value="價格：由低到高">價格：由低到高</option>
+                </select>
+            </div>
+            <!-- 商城卡片 -->
+            <section class="collect_section" id="collectSection">
+                <ul>
+                    <!-- template -->
+                    <component v-bind:is="current_tab_component" class="shop_tab"></component>
+                </ul>
+            </section>
+        </main>
+
+
+        <div class="wrapper product_pop" id="product_pop" v-show="isShow">
+            <div class="container">
+                <div class="img_product">
+                    <img src="img/shopmall_img/shopmall_cart.jpg" alt="">
+                </div>
+                <h6>大黑鮪生魚片大黑鮪生魚片大黑鮪生魚片大黑</h6>
+                <p class="font16">$<span class="money_pop">700</span></p>
+                <div class="count_btn">
+                    <div class="plus_minus">
+                        <div class="minus"><i class="fa-solid fa-minus"></i></div>
+                        <div class="number">1</div>
+                        <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                    </div>
+                    <button type="button" class="inCart_btn1">加入購物車</button>
+                </div>
+            </div>
+        </div>
+        <!-- @@include('layout/footer.html') -->
+        <script src="./js/vender/Vue/vue.global.js"></script>
+        <script type="module">
+            const app = Vue.createApp({
+                data(){
+                    return{
+                        isShow: true,
+
+                        classObject: {
+
+                        },
+                        currentTab: "tab1",
+                        tabs: [
+                        {
+                            id: "tab1",
+                            name: "主食"
+                        },
+                        {
+                            id: "tab2",
+                            name: "湯品"
+                        },
+                        {
+                            id: "tab3",
+                            name: "甜品"
+                        }
+                        ]
+                        
+                    };
+                },
+                computed: {
+                    current_tab_component(){
+                        return this.currentTab + "_content";
+                    }
+                },
+                
+                methods:{
+                },
+            })
+            // 掛載shopmall
+            app.mount("#shopMall");
+
+            // tab 子元件
+            app.component("tab1_content", {
+                
+                template: `
+                <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping" v-model="isShow"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                `
+            });
+
+            app.component("tab2_content", {
+                template: `
+                <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">北海道壽司</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping" v-model="isShow"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                `
+            });
+
+            app.component("tab3_content", {
+                template: `
+                <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">極品生魚片</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping" v-model="isShow"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                `
+            });
+        </script>
+
+
+
+
+
+            <!-- li 的项目 -->
+                <!-- <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"  ></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping" @click=""></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list" >
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping" @click=""></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list" >
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="collect_list">
+                        <a href="">
+                            <div class="product_img">
+                                <img src="img/member_img/member_wish1.jpg" alt="">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="product_content green-1">
+                                <h6 class="product_title ">黑鮪刺身</h6>
+                                <p class="font16">$<span class="product_money">700</span></p>
+                                <button type="button" class="cart_link" href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </a>
+                    </li>  -->
+    </body>
+</html>
