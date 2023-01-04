@@ -80,7 +80,7 @@
       <div class="content wrapper">
         <div class="content_grid">
           <div class="content_grid_item" v-if="tabID === 1" >
-            <a href="./newsDetail.html" :class="{ 'active_op': tabID === 1}"></a>
+            <a href="./newsDetail.html"></a>
             <div class="content_hidden">
               <span class="item_mark font12 Camel-3">最新動態</span>
               <img src="./img/news_img/news_post1.jpg" alt="" />
@@ -94,12 +94,11 @@
               </p>
             </div>
             <button class="btn_more">
-              <p>more</p>
+              <a href="./newsDetail.html">more</a>
               <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
             </button>
           </div>
           <div class="content_grid_item" v-if="tabID === 2">
-            <a href="./newsDetail.html" :class="{ 'active_op': tabID === 2}"></a>
             <div class="content_hidden">
               <span class="item_mark font12 Camel-3 diff">聯名限定</span>
               <img src="./img/news_img/news_post2.jpg" alt="" />
@@ -113,7 +112,7 @@
               </p>
             </div>
             <button class="btn_more">
-              <p>more</p>
+              <a href="./newsDetail.html">more</a>
               <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
             </button>
           </div>
@@ -132,7 +131,7 @@
               </p>
             </div>
             <button class="btn_more">
-              <p>more</p>
+              <a href="./newsDetail.html">more</a>
               <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
             </button>
           </div>
@@ -150,7 +149,7 @@
               </p>
             </div>
             <button class="btn_more">
-              <p>more</p>
+              <a href="./newsDetail.html">more</a>
               <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
             </button>
           </div>
@@ -168,7 +167,7 @@
               </p>
             </div>
             <button class="btn_more">
-              <p>more</p>
+              <a href="./newsDetail.html">more</a>
               <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
             </button>
           </div>
@@ -186,7 +185,7 @@
               </p>
             </div>
             <button class="btn_more">
-              <p>more</p>
+              <a href="./newsDetail.html">more</a>
               <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
             </button>
           </div>
@@ -212,7 +211,7 @@
       $(function () {
         var len = 50; // 超過50個字以"..."取代
         $(".news_item").each(function (i) {
-          console.log($(this).text());
+          // console.log($(this).text());
           if ($(this).text().length > len) {
             $(this).attr("title", $(this).text());
             var text =

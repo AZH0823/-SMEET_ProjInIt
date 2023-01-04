@@ -4,7 +4,7 @@
   justify-content: center;
   width: 80%;
   align-items: center;
-  padding:5% 0 2% 0;
+  padding: 5% 0 2% 0;
   @include pad {
     width: 70%;
   }
@@ -73,7 +73,6 @@
         border: 0;
         padding-left: 3%;
         line-height: 30px;
-        
       }
 
       .fa-magnifying-glass {
@@ -92,6 +91,7 @@
 
 /*------content------*/
 .content.wrapper {
+ 
   .content_grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -115,7 +115,13 @@
       position: relative;
       border: 1px solid #787878;
       height: 500px;
+    
 
+      a {
+        display: block;
+     
+      }
+      
       &:hover {
         cursor: pointer;
         img {
@@ -188,10 +194,11 @@
           margin-left: 54%;
         }
 
-        p {
+        a {
           position: relative;
           margin-right: 50px;
-
+          text-decoration: none;
+          color:$green-1;
           &::after {
             display: block;
             content: "";
@@ -240,6 +247,6 @@
 
 /*==========共用===========*/
 
-.active_op{
+.active_op {
   display: block;
 }
