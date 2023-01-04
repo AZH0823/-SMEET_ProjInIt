@@ -1,4 +1,4 @@
-/*------------------- serve_footer -------------------*/
+/*------------------- serve_footer（圖片） -------------------*/
 .bottom_footer {
     // display: none;
     background-image: url("../img/footer_img/footer_banner.png");
@@ -53,17 +53,18 @@
     // display: none;
     overflow: hidden;
 
+    /*----------- 1280寬 ----------*/
+
     .footer_all {
 
-        // display: flex;
-        // flex-direction: column;
-
         position: relative;
+
+        /*----------- footer內容 ----------*/
 
         .footer_btm {
             display: flex;
             justify-content: space-evenly;
-            width: 60%;
+            width: 70%;
             margin: 0 auto;
             margin-top: 50px;
 
@@ -86,6 +87,8 @@
                 left: 0;
                 margin: 0 auto;
             }
+
+            /*----------- footer『Info』 ----------*/
 
             .info_footer {
                 margin-right: 10%;
@@ -129,6 +132,8 @@
                 }
             }
 
+            /*----------- footer『Labbel』 ----------*/
+
             .label_footer {
                 margin-right: 10%;
                 // border: 1px solid #000;
@@ -167,6 +172,8 @@
                 }
             }
 
+            /*----------- footer『Follow』 ----------*/
+
             .follow_footer {
                 margin-bottom: 5%;
 
@@ -198,6 +205,8 @@
                             margin-bottom: 5%;
                         }
                     }
+
+                    /*----------- footer『Icon』 ----------*/
 
                     .social_icon {
                         font-size: 25px;

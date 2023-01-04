@@ -8,13 +8,15 @@
 
     background-repeat: no-repeat;
 
-    @include mobile {
+    @include mobile () {
         background-image: url("../img/index_img/index_head_banner_rwd.jpg");
     }
 
     .header_scope {
 
-        header {
+        /*----------- 導覽列＋Icon ----------*/
+
+        .header_index {
             display: flex;
             width: 100%;
             justify-content: center;
@@ -22,40 +24,243 @@
             height: 80px;
             position: relative;
 
-            .header_bar {
-                display: flex;
+            /*----------- 漢堡專用div ----------*/
 
-                margin-top: 45px;
+            .indexham_div {
+                // display: none;
+                width: 50%;
+                z-index: 222;
+                // display: block;
 
-                // margin-bottom: 90px;
-                li {
-                    margin-left: 40px;
-                    margin-right: 40px;
+
+                /*----------- 漢堡專用div『導覽文字』 ----------*/
+
+                .indexheader_bar {
+                    justify-content: space-between;
+                    display: flex;
+                    margin-top: 45px;
+
+                    @media all and (max-width: 980px) {
+                        font-size: 14px;
+                    }
+
+                    @include pad() {
+                        // display: none;
+                        width: 50%;
+                        flex-direction: column;
+                        background-color: $green-1;
+                        position: absolute;
+                        top: 89%;
+                        right: 0;
+                        margin: 0 auto;
+
+                        @media all and (max-width: 600px) {
+                            width: 60%;
+                        }
+
+                        @media all and (max-width: 500px) {
+                            width: 70%;
+                        }
+
+                        @include mobile() {
+                            width: 80%;
+                        }
+                    }
+
+                    li {
+                        @include pad() {
+                            border-bottom: .5px solid $Camel-3;
+                            width: 80%;
+                            text-align: center;
+                            margin: 0 auto;
+                            margin-top: 20px;
+                            margin-bottom: 0;
+                        }
+                    }
+
+                    a {
+                        text-decoration: none;
+
+                        @include pad() {
+                            color: $Camel-3;
+                            margin-bottom: 20px;
+                            display: block;
+
+                        }
+
+                        &:hover {
+                            border-bottom: 1px solid $Camel-3;
+                        }
+                    }
                 }
 
-                a {
-                    text-decoration: none;
+                /*----------- 漢堡專用div『會員內容』 ----------*/
 
-                    &:hover {
-                        border-bottom: 1px solid $Camel-3;
+                .indexham_user {
+                    display: none;
+
+                    @include pad() {
+                        display: block;
+
                     }
+
+                    .indexuser_ham {
+                        @include pad() {
+                            background-color: $green-1;
+                            position: absolute;
+                            top: 480%;
+                            right: 0;
+                            margin: 0 auto;
+                            width: 50%;
+
+                            @media all and (max-width: 600px) {
+                                width: 60%;
+                            }
+
+                            @media all and (max-width: 500px) {
+                                width: 70%;
+                            }
+
+                            @include mobile() {
+                                width: 80%;
+                            }
+                        }
+
+                        .indexborder_ham {
+                            border: .5px solid $Camel-3;
+                            width: 50%;
+                            margin: 35px auto;
+
+                            li {
+                                margin-top: 45px;
+                                margin-bottom: 45px;
+
+                                @include pad() {
+                                    border-bottom: .5px solid $Camel-3;
+                                    width: 80%;
+                                    text-align: center;
+                                    margin: 0 auto;
+                                    margin-top: 20px;
+                                    margin-bottom: 0;
+                                    border-bottom: none;
+                                }
+
+                            }
+
+                            a {
+                                text-decoration: none;
+
+                                @include pad() {
+                                    // color: $Camel-3;
+                                    margin-bottom: 20px;
+                                    display: block;
+
+                                }
+
+                            }
+                        }
+
+                        /*----------- 漢堡專用div『登入按鈕』 ----------*/
+
+                        .indexlog_ham {
+                            display: none;
+                            background-color: $Camel-3;
+                            width: 80%;
+                            text-align: center;
+
+                            li {
+
+                                @include pad() {}
+
+                            }
+
+                            a {}
+
+                            @include pad() {
+                                margin: 20px auto;
+                                text-decoration: none;
+                                display: block;
+                                line-height: 250%;
+
+                            }
+                        }
+                    }
+                }
+
+                /*----------- 漢堡『開關』 ----------*/
+                .--on {
+                    right: 0%;
+                    transition: 1s;
                 }
             }
 
-            .header_user {
+            /*----------- 『 Icon 人頭 購物車 漢堡線』 ----------*/
+            .indexheader_user {
                 position: absolute;
-                top: 55%;
+                top: 0;
                 right: 0;
                 padding-right: 20px;
+                display: flex;
+
+                @include pad() {
+                    justify-content: flex-end;
+                    flex-wrap: wrap;
+                    width: 99.9%;
+
+                }
 
                 a {
                     text-decoration: none;
                     padding-right: 20px;
                 }
+
+                .indexslide_user {
+                    display: block;
+                    margin-top: 45px;
+                    text-decoration: none;
+                    padding-right: 20px;
+
+                    @include pad() {
+                        display: none;
+                    }
+                }
+
+                .indexslide_cart {
+                    display: block;
+                    margin-top: 45px;
+                    text-decoration: none;
+                    padding-right: 20px;
+
+                    @include pad() {
+                        font-size: 25px;
+                        margin-top: 30px;
+                    }
+                }
+
+                /*----------- 漢堡專用div『登入按鈕』 ----------*/
+                /*-----------『 漢堡線Icon 』 ----------*/
+                .indexslide_ham {
+                    display: none;
+                    margin-top: 45px;
+                    text-decoration: none;
+                    padding-right: 20px;
+
+                    @include pad() {
+
+                        display: block;
+                        font-size: 30px;
+                        margin-top: 25px;
+
+
+                    }
+                }
             }
+
+
         }
 
-        .head_logo {
+        /*----------- LOGO ----------*/
+        .indexhead_logo {
             margin: auto;
             width: 218px;
             height: 218px;
@@ -73,6 +278,7 @@
             }
         }
 
+        /*----------- 立即預約按鈕 ----------*/
         nav {
             position: absolute;
             bottom: 0;
@@ -98,6 +304,8 @@
 
             }
 
+            /*----------- 引導線 ----------*/
+
             .guide_line {
                 display: block;
                 background-color: #fff;
@@ -107,9 +315,10 @@
                 margin-top: 20px;
             }
         }
-    }
 
+    }
 }
+
 
 /*------------------- slide_header -------------------*/
 .slide_header {
@@ -120,7 +329,9 @@
     //     width: 100%;
     // }
 
-    header.header_all {
+    /*----------- header 1280px ----------*/
+
+    .header_all {
         z-index: 200;
         // background-image: linear-gradient(180deg, #fff 50%, .5);
         // background-color: rgb(160, 40, 40);
@@ -131,125 +342,54 @@
 
         // position: relative;
         @include pad() {
-            position: relative;
+            // position: relative;
         }
+
+        /*----------- logo 導覽列 Icon ----------*/
 
         .contain {
             display: flex;
             justify-content: space-between;
-        }
+            position: relative;
 
-        .head_logo {
-            margin-top: 10px;
-            width: 90px;
-            // position: relative;
-            // position: absolute;
-            // top: 0;
-            // left: 30px;
 
-            img {
-                height: 90px;
-            }
-        }
+            .head_logo {
+                margin-top: 10px;
+                width: 90px;
+                // position: relative;
+                // position: absolute;
+                // top: 0;
+                // left: 30px;
 
-        .ham_div {
-            display: none;
-            width: 50%;
-            // display: block;
-
-            @include pad() {
-                .-on {
-                    right: 0%;
+                img {
+                    height: 90px;
                 }
             }
 
-            .header_bar {
+            /*----------- 漢堡專用div ----------*/
 
-                justify-content: space-between;
-                // justify-content: center;
-                display: flex;
+            .ham_div {
+                // display: none;
+                width: 50%;
 
-                // width: 50%;
-                @include pad() {
+                /*----------- 漢堡專用div『導覽文字』 ----------*/
 
-                    // display: none;
-                    width: 50%;
-                    flex-direction: column;
-                    background-color: $green-1;
-                    position: absolute;
-                    top: 29%;
-                    right: 0;
-                    margin: 0 auto;
+                .header_bar {
 
-
-                    @media all and (max-width: 600px) {
-                        width: 60%;
-                    }
-
-                    @media all and (max-width: 500px) {
-                        width: 70%;
-                    }
-
-                    @include mobile() {
-                        width: 80%;
-                    }
-
-
-                }
-
-                li {
-                    margin-top: 45px;
-                    margin-bottom: 45px;
+                    justify-content: space-between;
+                    display: flex;
 
                     @include pad() {
-                        border-bottom: .5px solid $Camel-3;
-                        width: 80%;
-                        text-align: center;
-                        margin: 0 auto;
-                        margin-top: 20px;
-                        margin-bottom: 0;
-                    }
-                }
 
-                a {
-                    text-decoration: none;
-
-                    @include pad() {
-                        color: $Camel-3;
-                        margin-bottom: 20px;
-                        display: block;
-
-                    }
-
-                    &:hover {
-                        border-bottom: 1px solid #000;
-                    }
-                }
-
-                // @media all and (max-width: 1000px) {
-                //     margin-left: 20px;
-                //     margin-right: 20px;
-                // }
-            }
-
-            .ham_user {
-                display: none;
-
-                @include pad() {
-                    display: block;
-                    // border: 1px solid $Camel-3;
-
-                }
-
-                .user_ham {
-
-                    @include pad() {
+                        width: 50%;
+                        flex-direction: column;
                         background-color: $green-1;
                         position: absolute;
-                        top: 161%;
-                        right: 0;
+                        top: 29%;
+                        right: -360px;
                         margin: 0 auto;
-                        width: 50%;
+                        transition: 1s;
+
 
                         @media all and (max-width: 600px) {
                             width: 60%;
@@ -263,136 +403,231 @@
                             width: 80%;
                         }
 
+
                     }
 
-                    .border_ham {
-                        border: .5px solid $Camel-3;
-                        width: 50%;
-                        margin: 35px auto;
-
-                        li {
-                            margin-top: 45px;
-                            margin-bottom: 45px;
-
-                            @include pad() {
-                                border-bottom: .5px solid $Camel-3;
-                                width: 80%;
-                                text-align: center;
-                                margin: 0 auto;
-                                margin-top: 20px;
-                                margin-bottom: 0;
-                                border-bottom: none;
-                            }
-
-                        }
-
-                        a {
-                            text-decoration: none;
-
-                            @include pad() {
-                                // color: $Camel-3;
-                                margin-bottom: 20px;
-                                display: block;
-
-                            }
-
-                        }
-                    }
-
-                    .log_ham {
-                        display: none;
-                        background-color: $Camel-3;
-                        width: 80%;
-                        text-align: center;
-
-                        li {
-
-                            @include pad() {}
-
-                        }
-
-                        a {
-
-                            // @include pad() {
-                            // }
-                        }
+                    li {
+                        margin-top: 45px;
+                        margin-bottom: 45px;
 
                         @include pad() {
-                            margin: 20px auto;
-                            text-decoration: none;
-                            display: block;
-                            line-height: 250%;
+                            border-bottom: .5px solid $Camel-3;
+                            width: 80%;
+                            text-align: center;
+                            margin: 0 auto;
+                            margin-top: 20px;
+                            margin-bottom: 0;
+                        }
+                    }
 
+                    a {
+                        text-decoration: none;
+
+                        @include pad() {
+                            color: $Camel-3;
+                            margin-bottom: 20px;
+                            display: block;
+
+                        }
+
+                        &:hover {
+                            border-bottom: 1px solid #000;
+                        }
+                    }
+
+                    // @media all and (max-width: 1000px) {
+                    //     margin-left: 20px;
+                    //     margin-right: 20px;
+                    // }
+                }
+
+                /*----------- 漢堡專用div『會員內容』 ----------*/
+
+                .ham_user {
+                    display: none;
+
+                    @include pad() {
+                        display: block;
+                        // border: 1px solid $Camel-3;
+
+                    }
+
+                    .user_ham {
+
+                        @include pad() {
+                            background-color: $green-1;
+                            position: absolute;
+                            top: 161%;
+                            right: -360px;
+                            margin: 0 auto;
+                            width: 50%;
+                            transition: 1s;
+
+                            @media all and (max-width: 600px) {
+                                width: 60%;
+                            }
+
+                            @media all and (max-width: 500px) {
+                                width: 70%;
+                            }
+
+                            @include mobile() {
+                                width: 80%;
+                            }
+
+                        }
+
+                        .border_ham {
+                            border: .5px solid $Camel-3;
+                            width: 50%;
+                            margin: 35px auto;
+
+                            li {
+                                margin-top: 45px;
+                                margin-bottom: 45px;
+
+                                @include pad() {
+                                    border-bottom: .5px solid $Camel-3;
+                                    width: 80%;
+                                    text-align: center;
+                                    margin: 0 auto;
+                                    margin-top: 20px;
+                                    margin-bottom: 0;
+                                    border-bottom: none;
+                                }
+
+                            }
+
+                            a {
+                                text-decoration: none;
+
+                                @include pad() {
+                                    // color: $Camel-3;
+                                    margin-bottom: 20px;
+                                    display: block;
+
+                                }
+
+                            }
+                        }
+
+                        /*----------- 漢堡專用div『登入按鈕』 ----------*/
+
+                        .log_ham {
+                            display: none;
+                            background-color: $Camel-3;
+                            width: 80%;
+                            text-align: center;
+
+                            li {
+
+                                @include pad() {}
+
+                            }
+
+                            a {
+
+                                // @include pad() {
+                                // }
+                            }
+
+                            @include pad() {
+                                margin: 20px auto;
+                                text-decoration: none;
+                                display: block;
+                                line-height: 250%;
+
+                            }
                         }
                     }
                 }
             }
-        }
 
-        nav {
-            // position: relative;
-            // padding-right: 20px;
+            /*----------- Icon『人頭 購物車 漢堡線』 ----------*/
 
-
-
-            .header_user {
-                display: flex;
-                padding: 0;
-
-                @include pad() {
-                    justify-content: flex-end;
-                    flex-wrap: wrap;
-                    width: 99.9%;
-
-                }
-
-                .slide_user {
-                    display: block;
-                    margin-top: 45px;
-                    text-decoration: none;
-                    padding-right: 20px;
-
-                    @include pad() {
-                        display: none;
-                    }
-                }
-
-                .slide_cart {
-                    display: block;
-                    margin-top: 45px;
-                    text-decoration: none;
-                    padding-right: 20px;
-
-                    @include pad() {
-                        font-size: 25px;
-                        margin-top: 30px;
-                    }
-                }
-
-                .slide_ham {
-                    display: none;
-                    margin-top: 45px;
-                    text-decoration: none;
-                    padding-right: 20px;
-
-                    @include pad() {
-
-                        display: block;
-                        font-size: 30px;
-                        margin-top: 25px;
+            nav {
+                // position: relative;
+                // padding-right: 20px;
 
 
-                    }
-                }
 
-                .reserve_btn {
-                    display: block;
-                    margin-top: 0;
+                .header_user {
+                    display: flex;
                     padding: 0;
 
                     @include pad() {
-                        // display: none;
+                        justify-content: flex-end;
+                        flex-wrap: wrap;
+                        width: 99.9%;
+
                     }
+
+                    .slide_user {
+                        display: block;
+                        margin-top: 45px;
+                        text-decoration: none;
+                        padding-right: 20px;
+
+                        @include pad() {
+                            display: none;
+                        }
+                    }
+
+                    .slide_cart {
+                        display: block;
+                        margin-top: 45px;
+                        text-decoration: none;
+                        padding-right: 20px;
+
+                        @include pad() {
+                            font-size: 25px;
+                            margin-top: 30px;
+                        }
+                    }
+
+                    /*----------- 漢堡線 ----------*/
+
+                    .slide_ham {
+                        display: none;
+                        margin-top: 45px;
+                        text-decoration: none;
+                        padding-right: 20px;
+
+                        @include pad() {
+
+                            display: block;
+                            font-size: 30px;
+                            margin-top: 25px;
+
+
+                        }
+                    }
+
+                    /*----------- 立即預約按鈕 ----------*/
+
+                    .reserve_btn {
+                        display: block;
+                        margin-top: 0;
+                        padding: 0;
+
+                        @include pad() {
+                            // display: none;
+                        }
+
+                        img {
+
+                            border-radius: 10px 0 0 0;
+                            height: 170px;
+                        }
+
+                    }
+
+                }
+
+                .reserve_pad {
+                    display: none;
+                    margin-top: 0;
+                    padding: 0;
 
                     img {
 
@@ -400,44 +635,27 @@
                         height: 170px;
                     }
 
-                    // @include pad() {
-                    //     display: none;
-                    // }
+                    @include pad() {
+                        display: block;
+                        text-align: right;
+                        margin-top: 10%;
+                    }
+
                 }
 
             }
-
-            .reserve_pad {
-                display: none;
-                margin-top: 0;
-                padding: 0;
-
-                img {
-
-                    border-radius: 10px 0 0 0;
-                    height: 170px;
-                }
-
-                @include pad() {
-                    display: block;
-                    text-align: right;
-                    margin-top: 10%;
-                }
-
-            }
-
-            // @include mobile {
-            //     .slide_ham {
-            //         display: block;
-            //     }
-            // }
 
         }
 
+        /*----------- 漢堡開關 ----------*/
+        .-on {
+            right: 0 !important;
+            transition: 1s;
+        }
     }
-
-
 }
+
+/*----------- deader高度（浮起） ----------*/
 
 .header_bg {
     background-color: rgb(255, 255, 255);
@@ -448,8 +666,12 @@
     @include pad() {
         position: fixed;
         top: 0;
+
     }
 }
+
+/*----------- deader（下推內頁） ----------*/
+
 
 .header_mg {
     background-color: rgb(255, 255, 255);
