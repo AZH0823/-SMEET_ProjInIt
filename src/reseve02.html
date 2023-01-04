@@ -34,7 +34,6 @@
                             <ul class="checkout_contanier">
                                 <!-- 人員資訊 -->
                                 <li id="order_Info" class="order_detailInfo">
-                                    <p>now workFlow is:{{this.workFlow.step}}</p>
                                     <h6 class="blockTitle detailInfo">餐點明細</h6>
                                     <div class="setName">
                                         <img src="./img/reserve_img/reserve_icon01.svg" alt="">
@@ -42,7 +41,7 @@
                                     </div>
                                     <div class="count_person">
                                         <img src="./img/reserve_img/reserve_icon02.svg" alt="">
-                                        <select v-model="inputData.peoCount">
+                                        <select v-model="inputData.peoCount" @change="resetDataInput">
                                             <i class="fa-solid fa-user" ></i>
                                             <option selected disabled>--人數--</option>
                                             <option v-for="idx in 12" :value="idx">{{idx}}人</option>
@@ -93,26 +92,59 @@
                             <!-- 總計 -->
                             <div class="totalPrice">
                                 <h6>總計</h6>
-                                <h6>$991,234</h6>
+                                <h6>{{totalPrice}}</h6>
                             </div>
                             <!-- 結帳按鈕 -->
                             <button class="next_btn btn" @click="changeStep(1)">下一步</button>
-                            <button class="prev_btn btn" @click="changeStep(-1)">返回上一步</button>
+                            <button class="prev_btn btn" @click="changeStep(-1)" v-if="this.workFlow.step !=1">返回上一步</button>
 
                         </section>
                         <!-- 選擇套餐 -->
                         <section class="step_flow step1" :class="{'nowpage': workFlow.step === 1}" id="set">
                             <h6 class="blockTitle">1.選擇套餐</h6>
                             <ul class="sets">
-                                <li v-for="set in APIData.sets" :key="set.id" class="setCard">
+                                <li v-for="set in APIData.sets" :key="set.id" class="setCard" :class="{checked:this.inputData.sets === set.id}">
                                     <!-- checked 未新增 -->
-                                    <img :src="set.imgUrl" :alt="set.setName" :title="set.setName">
+                                    <img :src="set.imgUrl" :alt="set.setName" :title="set.setName" @click="changeOrederViewImg(set)">
                                     <div class="setName">{{set.setName}}</div>
                                 </li>
                             </ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                             <h6 class="blockTitle">2.選擇套餐內容</h6>
                             <ul class="setdetail">
-                                <p class="setkind">湯物</p>
+                                <!-- v-if="this.inputData.sets === 1 -->
+                                <!-- setsDetail:{
+                                    setA:{
+                                        dish:[ -->
+
+                                    <!-- APIData>>sets[0]>>dish>>湯物 -->
+                                    <template v-for="(value,key,idx) in APIData.sets[this.inputData.sets - 1].dish" :key="idx" >
+                                        <!-- {{value}}
+                                        {{index}} -->
+                                        <p class="setkind">{{key}}<span style="color:red" v-if="setKind(this.inputData.sets - 1,key)"> ＊尚未正確合乎人數</span></p> 
+                                        <template v-for="(itemdetail ,sub_key) in value"  :key="sub_key">
+                                            <li class="stepper_input" :data-set="itemdetail.id" :set-id="idx">
+                                                <div class=dish-title>{{itemdetail.dishName}}</div>
+                                                <div class="amoumt" :data-id="itemdetail.id">
+                                                    <button class="button sub" @click="setclickCount(itemdetail,'minus',this.inputData.sets - 1)">-</button>
+                                                    <input v-model="itemdetail.qty" class="input stepper_valueInput"/>
+                                                    <button class="button add" @click="setclickCount(itemdetail,'plus',this.inputData.sets - 1,key)">+</button>
+                                                </div>
+                                            </li> 
+                                        </template>
+
+                                        <!-- <p>{{itemdetail}}</p> -->
+                                            <!-- <p class="setkind">{{item.dishType}}{{}}</p>
+                                        <p class="setkind">{{item.dishType}}{{}}</p>
+                                        <li class="stepper_input">
+                                            <div class=dish-title>{{item.dishName}}</div>
+                                            <div class=amoumt :data-id="idx">
+                                                <button class="button sub">-</button>
+                                                <input value="0" class="input stepper_valueInput" min="0" max="12" @click ='orderthisMeal(this.idx)'/>
+                                                <button class="button add">+</button>
+                                            </div>
+                                        </li> -->
+                                    </template>
+                                <!-- <p class="setkind">湯物</p>
 
                                 <li class="stepper_input">
                                     <div class=dish-title>燻鮭魚番茄佐優格醬</div>
@@ -171,10 +203,9 @@
                                         <input value="0" class="input stepper_valueInput" min="0" max="12" />
                                         <button class="button add">+</button>
                                     </div>
-                                </li>
+                                </li> -->
 
                             </ul>
-
                         </section>
 
                         <!-- 加購服務 -->
@@ -536,15 +567,22 @@
                     },
                     // 使用者訂單建立
                     inputData:{
+                        // step 1 user Data
                         // 第一階段使用者所有的資訊(已經LocalStroage 儲存完畢)
                         // 以下唯接收的資料型態
-                        // agress:true,
-                        // sets:3,
-                        // peoCount:5,
-                        // date:"2023-01-31",
-                        // orderTime:2,
-                        // chefTeam:"c",
+                        agress:true,
+                        sets:1,
+                        peoCount:5,
+                        date:new Date().toISOString().slice(0,10),
+                        orderTime:2,
+                        chefTeam:"c",
 
+
+                        // step 2 user Data
+
+
+
+                        // step 4 user Data
                     },
                     APIData:{
                         // 套餐資料
@@ -552,17 +590,114 @@
                             {
                                 id:1,setName:'名物 私套餐',
                                 setprice:1800, // 每人單價
-                                imgUrl:'img/reserve_img/reserve_set01.jpg'
+                                imgUrl:'img/reserve_img/reserve_set01.jpg',
+                                dish:{
+                                    "湯物":[
+                                        {id:1,dishName:'奶香牛肝菌野菇濃湯-A',qty:0,dishType:'湯物'},
+                                        {id:2,dishName:'石斑海鮮清湯-A',qty:0,dishType:'湯物'},
+                                    ],
+                                    "前菜":[
+                                        {id:3,dishName:'燻鮭魚番茄佐優格醬-A',qty:0,dishType:'前菜'},
+                                        {id:4,dishName:'深海魚皮野蔬沙拉佐醋醬-A',qty:0,dishType:'前菜'},
+                                    ],
+                                    "刺身":[
+                                        {id:5,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-A',qty:0,dishType:'刺身'},
+                                    ],
+                                    "主食":[
+                                        {id:6,dishName:'嫩煎干貝佐松露菲力-A',qty:0,dishType:'主食'},
+                                        {id:7,dishName:'日本小田和牛壽喜燒-A',qty:0,dishType:'主食'},
+                                        {id:8,dishName:'龍蝦佐鮑魚海鮮拼盤-A',qty:0,dishType:'主食'},
+                                    ],
+                                    "甜點":[
+                                        {id:9,dishName:'抹茶布丁搭配綿密金時紅豆-A',qty:0,dishType:'甜點'},
+                                        {id:10,dishName:'栗子羊羹-A',qty:0,dishType:'甜點'},
+                                        {id:11,dishName:'抹茶海鹽奶蓋-A',qty:0,dishType:'甜點'},
+                                    ],
+                                    "飲品":[
+                                        {id:12,dishName:'春手毬和菓子-A',qty:0,dishType:'飲品'},
+                                        {id:13,dishName:'烘焙曼巴咖啡-A',qty:0,dishType:'飲品'},
+                                        {id:14,dishName:'烘焙曼巴咖啡-A',qty:0,dishType:'飲品'},                                
+                                        {id:15,dishName:'高山金萱茶-A',qty:0,dishType:'飲品'},                                
+                                        {id:16,dishName:'檸檬海鹽氣泡飲-A',qty:0,dishType:'飲品'},
+                                    ]                              
+                                }
+                                
                             },
                             {
                                 id:2,setName:'極上 會席套餐',
                                 setprice:3200, // 每人單價
                                 imgUrl:'img/reserve_img/reserve_set02.jpg',
+                                dish:{
+                                    
+                                    '湯物':[
+                                        {id:17,dishName:'奶香牛肝菌野菇濃湯-B',qty:0,dishType:'湯物'},
+                                        {id:18,dishName:'石斑海鮮清湯-B',qty:0,dishType:'湯物'},
+                                    ],
+                                    '前菜':[
+                                        {id:19,dishName:'燻鮭魚番茄佐優格醬-B',qty:0,dishType:'前菜'},
+                                        {id:20,dishName:'深海魚皮野蔬沙拉佐醋醬-B',qty:0,dishType:'前菜'},
+                                    ],
+                                    '刺身':[
+                                        {id:21,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-B',qty:0,dishType:'刺身'},
+                                    ],
+                                    '主食':[
+                                        {id:22,dishName:'嫩煎干貝佐松露菲力-B',qty:0,dishType:'主食'},
+                                        {id:23,dishName:'日本小田和牛壽喜燒-B',qty:0,dishType:'主食'},
+                                        {id:24,dishName:'龍蝦佐鮑魚海鮮拼盤-B',qty:0,dishType:'主食'},
+                                    ],
+                                    '甜點':[
+                                        {id:25,dishName:'抹茶布丁搭配綿密金時紅豆-B',qty:0,dishType:'甜點'},
+                                        {id:26,dishName:'栗子羊羹-B',qty:0,dishType:'甜點'},
+                                        {id:27,dishName:'抹茶海鹽奶蓋-B',qty:0,dishType:'甜點'},
+                                    ],
+                                    '飲品':[
+                                        {id:28,dishName:'春手毬和菓子-B',qty:0,dishType:'飲品'},
+                                        {id:29,dishName:'烘焙曼巴咖啡-B',qty:0,dishType:'飲品'},
+                                        {id:30,dishName:'烘焙曼巴咖啡-B',qty:0,dishType:'飲品'},                                
+                                        {id:31,dishName:'高山金萱茶-B',qty:0,dishType:'飲品'},                                
+                                        {id:32,dishName:'檸檬海鹽氣泡飲-B',qty:0,dishType:'飲品'},
+                                    ]                                       
+                                }
                             },
                             {
                                 id:3,setName:'苑 春堂套餐',
                                 setprice:4600 , // 每人單價
                                 imgUrl:'img/reserve_img/reserve_set03.jpg',
+                                dish:{
+                                    '湯物':[
+                                        {id:33,dishName:'奶香牛肝菌野菇濃湯-C',qty:0,dishType:'湯物'},
+                                        {id:34,dishName:'石斑海鮮清湯-C',qty:0,dishType:'湯物'},
+                                    ],
+                                    
+                                    '前菜':[
+                                        {id:35,dishName:'燻鮭魚番茄佐優格醬-C',qty:0,dishType:'前菜'},
+                                        {id:36,dishName:'深海魚皮野蔬沙拉佐醋醬-C',qty:0,dishType:'前菜'},
+                                    ],
+
+                                    '刺身':[
+                                        {id:37,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-C',qty:0,dishType:'刺身'},
+                                    ],
+
+                                    '主食':[
+                                        {id:38,dishName:'嫩煎干貝佐松露菲力-C',qty:0,dishType:'主食'},
+                                        {id:39,dishName:'日本小田和牛壽喜燒-C',qty:0,dishType:'主食'},
+                                        {id:40,dishName:'龍蝦佐鮑魚海鮮拼盤-C',qty:0,dishType:'主食'},
+                                    ],
+                                    
+                                    '甜點':[
+                                        {id:41,dishName:'抹茶布丁搭配綿密金時紅豆-C',qty:0,dishType:'甜點'},
+                                        {id:42,dishName:'栗子羊羹-C',qty:0,dishType:'甜點'},
+                                        {id:43,dishName:'抹茶海鹽奶蓋-C',qty:0,dishType:'甜點'},
+                                    ],
+
+                                    '飲品':[
+                                        {id:44,dishName:'春手毬和菓子-C',qty:0,dishType:'飲品'},
+                                        {id:45,dishName:'烘焙曼巴咖啡-C',qty:0,dishType:'飲品'},
+                                        {id:46,dishName:'烘焙曼巴咖啡-C',qty:0,dishType:'飲品'},                                
+                                        {id:47,dishName:'高山金萱茶-C',qty:0,dishType:'飲品'},                                
+                                        {id:48,dishName:'檸檬海鹽氣泡飲-C',qty:0,dishType:'飲品'}, 
+                                    ],                             
+                                }
                             }
                         ],
                         // 廚師團隊
@@ -572,70 +707,70 @@
                             {id:3,team:'c',name:'陳平安'}
                         ],
 
-                        // 套餐詳細選項
+                        // 套餐詳細選項(舊版Data 先備份)
                         setsDetail:{
                             setA:{
                                 dish:[
-                                    {id:1,dishName:'奶香牛肝菌野菇濃湯-A',qut:0,dishType:'湯物'},
-                                    {id:2,dishName:'石斑海鮮清湯-A',qut:0,dishType:'湯物'},
-                                    {id:3,dishName:'燻鮭魚番茄佐優格醬-A',qut:0,dishType:'前菜'},
-                                    {id:4,dishName:'深海魚皮野蔬沙拉佐醋醬-A',qut:0,dishType:'前菜'},
-                                    {id:5,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-A',qut:0,dishType:'刺身'},
-                                    {id:6,dishName:'嫩煎干貝佐松露菲力-A',qut:0,dishType:'主食'},
-                                    {id:7,dishName:'日本小田和牛壽喜燒-A',qut:0,dishType:'主食'},
-                                    {id:8,dishName:'龍蝦佐鮑魚海鮮拼盤-A',qut:0,dishType:'主食'},
-                                    {id:9,dishName:'抹茶布丁搭配綿密金時紅豆-A',qut:0,dishType:'甜點'},
-                                    {id:10,dishName:'栗子羊羹-A',qut:0,dishType:'甜點'},
-                                    {id:11,dishName:'抹茶海鹽奶蓋-A',qut:0,dishType:'甜點'},
-                                    {id:12,dishName:'春手毬和菓子-A',qut:0,dishType:'飲品'},
-                                    {id:13,dishName:'烘焙曼巴咖啡-A',qut:0,dishType:'飲品'},
-                                    {id:14,dishName:'烘焙曼巴咖啡-A',qut:0,dishType:'飲品'},                                
-                                    {id:15,dishName:'高山金萱茶-A',qut:0,dishType:'飲品'},                                
-                                    {id:16,dishName:'檸檬海鹽氣泡飲-A',qut:0,dishType:'飲品'},                                
+                                    // {id:1,dishName:'奶香牛肝菌野菇濃湯-A',qut:0,dishType:'湯物'},
+                                    // {id:2,dishName:'石斑海鮮清湯-A',qut:0,dishType:'湯物'},
+                                    // {id:3,dishName:'燻鮭魚番茄佐優格醬-A',qut:0,dishType:'前菜'},
+                                    // {id:4,dishName:'深海魚皮野蔬沙拉佐醋醬-A',qut:0,dishType:'前菜'},
+                                    // {id:5,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-A',qut:0,dishType:'刺身'},
+                                    // {id:6,dishName:'嫩煎干貝佐松露菲力-A',qut:0,dishType:'主食'},
+                                    // {id:7,dishName:'日本小田和牛壽喜燒-A',qut:0,dishType:'主食'},
+                                    // {id:8,dishName:'龍蝦佐鮑魚海鮮拼盤-A',qut:0,dishType:'主食'},
+                                    // {id:9,dishName:'抹茶布丁搭配綿密金時紅豆-A',qut:0,dishType:'甜點'},
+                                    // {id:10,dishName:'栗子羊羹-A',qut:0,dishType:'甜點'},
+                                    // {id:11,dishName:'抹茶海鹽奶蓋-A',qut:0,dishType:'甜點'},
+                                    // {id:12,dishName:'春手毬和菓子-A',qut:0,dishType:'飲品'},
+                                    // {id:13,dishName:'烘焙曼巴咖啡-A',qut:0,dishType:'飲品'},
+                                    // {id:14,dishName:'烘焙曼巴咖啡-A',qut:0,dishType:'飲品'},                                
+                                    // {id:15,dishName:'高山金萱茶-A',qut:0,dishType:'飲品'},                                
+                                    // {id:16,dishName:'檸檬海鹽氣泡飲-A',qut:0,dishType:'飲品'},                                
                                 ]
                             },
                             setB:{
                                 
-                                dish:[
-                                    {id:17,dishName:'奶香牛肝菌野菇濃湯-B',qut:0,dishType:'湯物'},
-                                    {id:18,dishName:'石斑海鮮清湯-B',qut:0,dishType:'湯物'},
-                                    {id:19,dishName:'燻鮭魚番茄佐優格醬-B',qut:0,dishType:'前菜'},
-                                    {id:20,dishName:'深海魚皮野蔬沙拉佐醋醬-B',qut:0,dishType:'前菜'},
-                                    {id:21,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-B',qut:0,dishType:'刺身'},
-                                    {id:22,dishName:'嫩煎干貝佐松露菲力-B',qut:0,dishType:'主食'},
-                                    {id:23,dishName:'日本小田和牛壽喜燒-B',qut:0,dishType:'主食'},
-                                    {id:24,dishName:'龍蝦佐鮑魚海鮮拼盤-B',qut:0,dishType:'主食'},
-                                    {id:25,dishName:'抹茶布丁搭配綿密金時紅豆-B',qut:0,dishType:'甜點'},
-                                    {id:26,dishName:'栗子羊羹-B',qut:0,dishType:'甜點'},
-                                    {id:27,dishName:'抹茶海鹽奶蓋-B',qut:0,dishType:'甜點'},
-                                    {id:28,dishName:'春手毬和菓子-B',qut:0,dishType:'飲品'},
-                                    {id:29,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},
-                                    {id:30,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},                                
-                                    {id:31,dishName:'高山金萱茶-B',qut:0,dishType:'飲品'},                                
-                                    {id:32,dishName:'檸檬海鹽氣泡飲-B',qut:0,dishType:'飲品'},                                
-                                ]
+                                // dish:[
+                                //     {id:17,dishName:'奶香牛肝菌野菇濃湯-B',qut:0,dishType:'湯物'},
+                                //     {id:18,dishName:'石斑海鮮清湯-B',qut:0,dishType:'湯物'},
+                                //     {id:19,dishName:'燻鮭魚番茄佐優格醬-B',qut:0,dishType:'前菜'},
+                                //     {id:20,dishName:'深海魚皮野蔬沙拉佐醋醬-B',qut:0,dishType:'前菜'},
+                                //     {id:21,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-B',qut:0,dishType:'刺身'},
+                                //     {id:22,dishName:'嫩煎干貝佐松露菲力-B',qut:0,dishType:'主食'},
+                                //     {id:23,dishName:'日本小田和牛壽喜燒-B',qut:0,dishType:'主食'},
+                                //     {id:24,dishName:'龍蝦佐鮑魚海鮮拼盤-B',qut:0,dishType:'主食'},
+                                //     {id:25,dishName:'抹茶布丁搭配綿密金時紅豆-B',qut:0,dishType:'甜點'},
+                                //     {id:26,dishName:'栗子羊羹-B',qut:0,dishType:'甜點'},
+                                //     {id:27,dishName:'抹茶海鹽奶蓋-B',qut:0,dishType:'甜點'},
+                                //     {id:28,dishName:'春手毬和菓子-B',qut:0,dishType:'飲品'},
+                                //     {id:29,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},
+                                //     {id:30,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},                                
+                                //     {id:31,dishName:'高山金萱茶-B',qut:0,dishType:'飲品'},                                
+                                //     {id:32,dishName:'檸檬海鹽氣泡飲-B',qut:0,dishType:'飲品'},                                
+                                // ]
                             },
                             setC:{
                                 checked:false,// 菜單是否有被選擇
                                 imgUrl:'img/reserve_img/reserve_set03.jpg',  
-                                dish:[
-                                    {id:33,dishName:'奶香牛肝菌野菇濃湯-c',qut:0,dishType:'湯物'},
-                                    {id:34,dishName:'石斑海鮮清湯-c',qut:0,dishType:'湯物'},
-                                    {id:35,dishName:'燻鮭魚番茄佐優格醬-c',qut:0,dishType:'前菜'},
-                                    {id:36,dishName:'深海魚皮野蔬沙拉佐醋醬-c',qut:0,dishType:'前菜'},
-                                    {id:37,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-c',qut:0,dishType:'刺身'},
-                                    {id:38,dishName:'嫩煎干貝佐松露菲力-c',qut:0,dishType:'主食'},
-                                    {id:39,dishName:'日本小田和牛壽喜燒-c',qut:0,dishType:'主食'},
-                                    {id:40,dishName:'龍蝦佐鮑魚海鮮拼盤-c',qut:0,dishType:'主食'},
-                                    {id:41,dishName:'抹茶布丁搭配綿密金時紅豆-c',qut:0,dishType:'甜點'},
-                                    {id:42,dishName:'栗子羊羹-c',qut:0,dishType:'甜點'},
-                                    {id:43,dishName:'抹茶海鹽奶蓋-c',qut:0,dishType:'甜點'},
-                                    {id:44,dishName:'春手毬和菓子-c',qut:0,dishType:'飲品'},
-                                    {id:45,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},
-                                    {id:46,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},                                
-                                    {id:47,dishName:'高山金萱茶-c',qut:0,dishType:'飲品'},                                
-                                    {id:48,dishName:'檸檬海鹽氣泡飲-c',qut:0,dishType:'飲品'},                                
-                                ]
+                                // dish:[
+                                //     {id:33,dishName:'奶香牛肝菌野菇濃湯-c',qut:0,dishType:'湯物'},
+                                //     {id:34,dishName:'石斑海鮮清湯-c',qut:0,dishType:'湯物'},
+                                //     {id:35,dishName:'燻鮭魚番茄佐優格醬-c',qut:0,dishType:'前菜'},
+                                //     {id:36,dishName:'深海魚皮野蔬沙拉佐醋醬-c',qut:0,dishType:'前菜'},
+                                //     {id:37,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-c',qut:0,dishType:'刺身'},
+                                //     {id:38,dishName:'嫩煎干貝佐松露菲力-c',qut:0,dishType:'主食'},
+                                //     {id:39,dishName:'日本小田和牛壽喜燒-c',qut:0,dishType:'主食'},
+                                //     {id:40,dishName:'龍蝦佐鮑魚海鮮拼盤-c',qut:0,dishType:'主食'},
+                                //     {id:41,dishName:'抹茶布丁搭配綿密金時紅豆-c',qut:0,dishType:'甜點'},
+                                //     {id:42,dishName:'栗子羊羹-c',qut:0,dishType:'甜點'},
+                                //     {id:43,dishName:'抹茶海鹽奶蓋-c',qut:0,dishType:'甜點'},
+                                //     {id:44,dishName:'春手毬和菓子-c',qut:0,dishType:'飲品'},
+                                //     {id:45,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},
+                                //     {id:46,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},                                
+                                //     {id:47,dishName:'高山金萱茶-c',qut:0,dishType:'飲品'},                                
+                                //     {id:48,dishName:'檸檬海鹽氣泡飲-c',qut:0,dishType:'飲品'},                                
+                                // ]
 
                             },
                         },
@@ -644,9 +779,86 @@
             },
             methods:{
                 changeStep(val){                    
+                    // step 1 檢查套餐及套及數量
+                    if(this.workFlow.step === 1){
+                        // 使用者點選餐點
+                        let setID = this.inputData.sets - 1
+                        // 訂餐人數
+                        const count = this.inputData.peoCount
+
+                        // 儲存種類使否有符合總人數  data = [true,true,false....]
+                        let checkDishTypeVail = []
+
+                        let set = this.APIData.sets[setID].dish
+               
+                        for (const key in set){
+                            let dishTypetotal = 0 //ex : [湯品],[菜品]..總數
+                            // console.log(set[key])
+                            for (let j = 0; j < set[key].length; j++) {                        
+                                dishTypetotal += set[key][j].qty                            
+                            }
+                            // 若人數符合種類餐點總和
+                            if(dishTypetotal === count){
+                                    // console.log(`${set[key]}資料OK`)
+                                    checkDishTypeVail.push(true)
+                            }else{
+                                // console.log(`${set[key]}資料不OK`)
+                                checkDishTypeVail.push(false)
+                            }
+                        }
+                        // console.log(checkDishTypeVail)
+                        checkDishTypeVail = checkDishTypeVail.find(el=>!el)
+                        if(checkDishTypeVail === false)return alert('請選取相對應人數的餐點')
+
+                    }
                     this.workFlow.step += val;
+                    
                 },
-                
+                changeOrederViewImg(e){
+                    // 小圖換大圖
+                    this.$refs.oderVeiwPic.src = e.imgUrl;
+                    this.inputData.sets = e.id;
+                    this.resetDataInput()
+                },
+                setclickCount(item,stauts,setID,dishType){
+                    // 商品, 點擊(+ , - ),套餐編號,餐點類型
+                    if(stauts ==='minus'){
+                        // 假如點擊的是 - 商品的話
+                        item.qty <= 0 ?  0 : item.qty--;
+                    }else{
+                            // 當一種類若超過人數 
+                            let totalNum = this.APIData.sets[setID].dish[`${dishType}`]
+                                                .map((el)=>el.qty).reduce((a,b)=>a+b);
+                            if(totalNum >= this.inputData.peoCount ) return
+                            // 若沒有超過人數，可以增加餐點
+                            item.qty >= this.inputData.peoCount ?  this.inputData.peoCount: item.qty++;
+                    }
+                },
+                dishTypeisOver(){
+
+
+                },
+                resetDataInput(){
+                    // event 當切換人數全部菜餐清除
+                    // console.log(`清空資料套餐及單品及服務的數量`);               
+                    for(let i=0; i<3; i++){
+                        let set = this.APIData.sets[i].dish
+                        for (const key in set){
+                            for (let j = 0; j < set[key].length; j++) {
+                                // 清空套餐菜品數量
+                                set[key][j].qty = 0
+                            }
+                            
+                        }
+                    }
+                },
+                // 確認種類是否有符合人數
+                setKind(setID,dishType){
+                    let totalNum = this.APIData.sets[setID].dish[`${dishType}`]
+                                                .map((el)=>el.qty).reduce((a,b)=>a+b);
+                    
+                    return totalNum !== this.inputData.peoCount                                               
+                }
             },
             computed:{
 
@@ -660,12 +872,17 @@
                     return {...orderSetName}.setName
                 },
                 setPrice(){
-                    let orderSetName = this.APIData.sets.find(el=>el.id===this.inputData.sets)
-                    let setPrice = {...orderSetName}.setprice
+                    let setPrice = {...this.APIData.sets.find(el=>el.id===this.inputData.sets)}.setprice
                     let setPeo = this.inputData.peoCount
-                    console.log( setPrice * setPeo)
-                    return setPrice * setPeo
-                }
+                   
+                    return `$ ${(setPrice * setPeo).toLocaleString()}`
+                },
+                totalPrice(){
+                    let setPrice = {...this.APIData.sets.find(el=>el.id===this.inputData.sets)}.setprice
+                    let setPeo = this.inputData.peoCount
+                    
+                    return `$ ${(setPrice * setPeo).toLocaleString()}`
+                },
             },
             watch:{
                 'workFlow.step'(newValue){
@@ -679,9 +896,7 @@
             },
             mounted(){
                 // 把Local Stroage 給讀出來並渲染在網頁畫面上
-                this.inputData = JSON.parse(localStorage.getItem('reseverOrder'))
-                // console.log(this.APIData.sets)
-                // console.log(this.$refs.oderVeiwPic)
+                // this.inputData = JSON.parse(localStorage.getItem('reseverOrder'))
             }
         }
 

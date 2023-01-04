@@ -22,13 +22,24 @@ div.back_chefstManger {
                             background-color: $Camel-3;
                             div.addImg_block{
                                 display: flex;
+                                .dragImg{
+                                    margin-top: 35px;
+                                    img{
+                                        display: block;
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            }
                 .section2 {
-                    margin-top: 100px;
+                    margin-top: 30px;
+                    .btn_wrap{
+                        display: flex;
+                        justify-content: end;
+                        margin: 0 50px 30px 0;
+                    }
 
                     .back_from {
                         width: 100%;

@@ -14,14 +14,14 @@
             <!-- 上方123 -->
             <ul class="flow_container">
                 <!-- finsh 完成填寫 checked 目前進度 -->
-                <li class="flowList " :class="" flowname="購物車">1</li>
-                <li class="flowList " flowname="填寫資料">2</li>
-                <li class="flowList " flowname="訂單完成">3</li>
+                <li class="flowList " :class="{'checked':process.step >= 1}" flowname="購物車">1</li>
+                <li class="flowList " :class="{'checked':process.step >= 2}" flowname="填寫資料">2</li>
+                <li class="flowList " :class="{'checked':process.step >= 3}" flowname="訂單完成">3</li>
             </ul>
             <!-- 步驟1中間區塊主要內容=========== -->
-            <section class="cart_1_content">
+            <section class="cart_1_content" v-if="process.step === 1">
                 <!-- 購物車商品 -->
-                <div class="cart_product">
+                <div class="cart_product"  :class="{'cart_open' : process.step === 1 }">
                     <!-- 商品標題 -->
                     <div class="title">
                         <p class="item1">商品資訊</p>
@@ -31,41 +31,42 @@
                         <p class="item5"></p>
                     </div>
                     <!-- 商品list -->
-                    <div class="product_detail">
+                    <div class="product_detail" v-for="(item, index) in product_list" :key="item.id">
                         <div class="item1 green-1">
                             <div class="item1_img">
-                                <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                                <img :src="item.img_url" alt="">
                             </div>
-                            <h6 class="product_name">北海道海膽壽司北海道海膽壽司北海道海膽壽</h6>
+                            <h6 class="product_name">{{item.product_name}}</h6>
                         </div>
                         <div class="item2">
-                            <h6>NT$<span class="product_money">700</span></h6>
+                            <h6>NT$<span class="product_money">{{item.price}}</span></h6>
                         </div>
                         <div class="item3">
                             <div class="cart_minus_plus">
                                 <div class="minus">
-                                    <i class="fa-solid fa-minus"></i>
+                                    <i class="fa-solid fa-minus" @click="dealMinus(item)"></i>
                                 </div>
-                                <div class="count">2</div>
+                                <div class="count">{{item.count}}</div>
                                 <div class="plus">
-                                    <i class="fa-solid fa-plus"></i>
+                                    <i class="fa-solid fa-plus" @click="dealPlus(item)"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="item4">
-                            <h6>NT$<span class="product_money_2">1400</span></h6>
-
+                            <h6>NT$<span class="product_money_2">{{item.price * item.count}}</span></h6>
+ 
                         </div>
                         <div class="item5">
-                            <i class="fa-regular fa-trash-can"></i>
+                            <i class="fa-regular fa-trash-can" @click=" dealDelete(index)"></i>
                         </div>
                     </div>
 
                 </div>
                 <!-- 會員紅利 -->
                 <div class="cart_bonus">
-                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"></input>元</h6>
-                    <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1">32</span>點(<span class="bonus_2">32</span>元)</p>
+                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"  v-model="point" @blur="bounsBig()" >{{}}</input>元</h6>
+                    <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1" ref="bouns">{{bouns}}</span>點(<span class="bonus_2">{{bouns}}</span>元)　<span v-bind:style="noneClass" ref="msg">{{msg}}</p>
+                        <!--紅利點數會從資料庫回傳-->
                 </div>
                 <!-- 付款&寄送方式 -->
                 <div class="cart_pay">
@@ -79,17 +80,17 @@
                         <label for="">寄送方式</label>
                         <select name="" id="">
                             <option value="宅配">宅配</option>
-                            <option value="7-11超商取貨">7-11超商取貨</option>
+                            <!-- <option value="7-11超商取貨">7-11超商取貨</option> -->
                         </select>
-                        <div class="store_choose font16">
-                            <p>選擇門市</p>
-                            <div class="choose">
-                                <p>維群門市</p>
-                                <button type="button" class="inCart_btn1">選擇門市</button>
+                        <!-- <div class="store_choose font16">
+                           <p>選擇門市</p> 
+                             <div class="choose">
+                                <p>{{shop}}</p>
+                                <button type="button" class="inCart_btn1" @click="chooseShop">選擇門市</button>
                             </div>
                             <p class="font12 text gray">當包裹送達您指定之7-11門市時，隔日將會發送簡訊到貨通知。<br>門市純取貨之訂單，收件人務必填寫與身分證上相符的姓名，並攜帶證件至門市領取包裹
                             </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- 商城總計 -->
@@ -97,29 +98,24 @@
                 <div class="total_next">
                     <div class="total_container font16">
                         <div class="item">小計</div>
-                        <div class="item">NT$<span id="detail_total">25,000</span></div>
-                        <div class="item">加購價</div>
-                        <div class="item">NT$<span id="detail_total">250</span></div>
+                        <div class="item">NT$<span id="detail_total">{{cartTotal}}</span></div>
+                        <!-- <div class="item">加購價</div>
+                        <div class="item">NT$<span id="detail_total">250</span></div> -->
                         <div class="item">紅利點數</div>
-                        <div class="item">-NT$<span id="detail_total">50</span></div>
+                        <div class="item">-NT$<span id="detail_total">{{point}}</span></div>
                         <div class="item">總金額
                         </div>
-                        <div class="item">NT$<span id="detail_total">25,000</span></div>
+                        <div class="item">NT$<span id="detail_total">{{detailTotal}}</span></div>
                     </div>
                     <!-- 下一步按鈕 -->
-                    <div class="btn_view">
-                        <p>下一步</p>
-                        <span>
-                            <p>next</p>
-                        </span>
-                    </div>
+                    <div class="next_btn btn" @click="changePage(1);toTop()">下一步</div>
                 </div>
             </section>
             <!-- 步驟1中間區塊主要內容結束=========== -->
-            <!-- 步驟2中間區塊主要內容結束=========== -->
-            <section class="cart_2_content">
+            <!-- 步驟2中間區塊主要內容=========== -->
+            <section class="cart_2_content" v-if="process.step === 2 " >
                 <!-- 購物車商品 -->
-                <div class="cart_product">
+                <div class="cart_product cart_none" :class="{'cart_open' : process.step === 2 }" >
                     <!-- 商品標題 -->
                     <div class="title">
                         <p class="item1">商品資訊</p>
@@ -129,21 +125,21 @@
                         <p class="item5"></p>
                     </div>
                     <!-- 商品list -->
-                    <div class="product_detail">
+                    <div class="product_detail" v-for="(item, index) in product_list" :key="item.id">
                         <div class="item1 green-1">
                             <div class="item1_img">
-                                <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                                <img :src="item.img_url" alt="">
                             </div>
-                            <h6 class="product_name">北海道海膽壽司北海道海膽壽司北海道海膽壽</h6>
+                            <h6 class="product_name">{{item.product_name}}</h6>
                         </div>
                         <div class="item2">
-                            <h6>NT$<span class="product_money">700</span></h6>
+                            <h6>NT$<span class="product_money">{{item.price}}</span></h6>
                         </div>
                         <div class="item3">
-                            <div class="count">x2</div>
+                            <div class="count">{{item.count}}</div>
                         </div>
                         <div class="item4">
-                            <h6>NT$<span class="product_money_2">1400</span></h6>
+                            <h6>NT$<span class="product_money_2">{{item.price * item.count}}</span></h6>
 
                         </div>
                     </div>
@@ -153,14 +149,14 @@
                 <!-- 總計 -->
                 <div class="total_container font16">
                     <div class="item">小計</div>
-                    <div class="item">NT$<span id="detail_total">25,000</span></div>
-                    <div class="item">加購價</div>
-                    <div class="item">NT$<span id="detail_total">250</span></div>
+                    <div class="item">NT$<span id="detail_total">{{cartTotal}}</span></div>
+                    <!-- <div class="item">加購價</div>
+                    <div class="item">NT$<span id="detail_total">250</span></div> -->
                     <div class="item">紅利點數</div>
-                    <div class="item">-NT$<span id="detail_total">50</span></div>
+                    <div class="item">-NT$<span id="detail_total">{{point}}</span></div>
                     <div class="item">總金額
                     </div>
-                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                    <div class="item">NT$<span id="detail_total">{{detailTotal}}</span></div>
                 </div>
 
                 <!-- 訂購人資訊 -->
@@ -260,19 +256,18 @@
                         </p>
                     </label>
                 </div>
+                <div class="cart_product_btn">
                 <!-- 下一步按鈕 -->
-                <div class="btn_view">
-                    <p>下一步</p>
-                    <span>
-                        <p>next</p>
-                    </span>
-                </div>
+                    <div class="next_btn" @click="changePage(1)">下一步</div>
+                <!-- 上一步按鈕 -->
+                    <div class="prev_btn btn" @click="changePage(-1);toTop()">返回上一步</div>
+                    </div>
                 <div class="clear_both"></div>
             </section>
-
+            <!-- 步驟2中間區塊主要內容結束=========== -->
             <!-- 步驟3完成訂單畫面-->
-            <section class="cart_3_content">
-                    <div class="cart_content">
+            <section class="cart_3_content" v-if="process.step ===3 ">
+                    <div class="cart_content cart_none" class="{'cart_open' : process.step === 3 }">
                     <i class="fa-solid fa-check"></i>
                     <h3>訂單已完成(訂單編號：202212345678) </h3>
                     </div>
@@ -281,26 +276,146 @@
                         <button class="checkorder_btn">繼續購物</button>
                     </div>
             </section>
-
+            <!-- 步驟3完成訂單畫面結束=========== -->
         </main>
 
         <!-- @@include('layout/footer.html') -->
         <script src="./js/vender/Vue/vue.global.js"></script>
         <script>
              const app = Vue.createApp({
+        
+
+
                 data() {
                     return {
-                        data:{
-                            // checked進度
-                            
+
+                        //控制流程
+                        process:{
+                            // checked步驟一、二、三加上class
+                            step:1,
+                        },
+                        //商品list的內->這裡寫死,但之後應該要接從購物車傳進來的值
+                        product_list : [
+                        {
+                            id:'1',
+                            product_name:'黑鮪刺身',
+                            img_url:'img/atcart_img/atcart_addp.jpg',
+                            price:'700',
+                            count:'2'
+                        },
+                        {
+                            id:'2',
+                            product_name:'北海道海膽壽司',
+                            img_url:'img/atcart_img/Rectangle1.jpg',
+                            price:'750',
+                            count:'1'
+                        },
+                        {
+                            id:'3',
+                            product_name:'大黑鮪生魚片',
+                            img_url:'img/atcart_img/Rectangle2.jpg',
+                            price:'650',
+                            count:'5'
+                        },
+                        {
+                            id:'4',
+                            product_name:'北海道松葉蟹蒸蛋',
+                            img_url:'img/atcart_img/atcart_addp.jpg',
+                            price:'700',
+                            count:'3'
+                        }
+
+                        ],
+
+                        //回傳point的空字串
+                        point:'0',
+
+                        //回傳7-11門市的名稱
+                        shop:'',
+
+                        //回傳紅利點數的金額,
+                        //讓input限制最高只能輸入紅利點數的上限
+                        bouns:'32',
+
+                        msg:'*紅利點數折抵必須小於您目前的會員點數',
+                        //用v-if控制出現與否,這個還做不出來
+                        addClass: {
+                            fontsize:'14px',
+                            color:'red',
+                            display:'block'
+                        },
+                        //先把msg的字藏起來
+                        noneClass : {
+                            display:'none'
                         }
                     }
                 },
             computed :{
+                //小計的所有金額
+                cartTotal () {
+                    let cartTotal = 0;
+                    for(let i in this.product_list){
+                        cartTotal += this.product_list[i].price * this.product_list[i].count;
+                    }
+                    return cartTotal;
+                },
 
+                //總金額=小計+加價購(要再刪掉)-紅利點數
+                detailTotal (){
+                    let detailTotal = 0;
+                    detailTotal = this.cartTotal-this.point;
+                    return detailTotal;
+                },
+              
+                
+                
             },
             methods : {
+                //換下一步
+                changePage(val){
+                    this.process.step += val;
 
+                },
+
+                //數量加
+                dealPlus(item){
+                    // console.log(item);
+                    item.count++;
+                },
+                 //數量減
+                dealMinus(item){
+                    console.log(item);
+                    if(item.count > 1){
+                        item.count--;
+                    }
+                },
+                //刪除
+                dealDelete(index){
+                    this.product_list.splice(index,1);
+                },
+                //選擇門市
+                chooseShop(){
+                    this.shop = "維群門市";
+                },
+                //按下一步或上一步會回到最上方
+                toTop(){
+                    window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                    })
+                },
+                //當keyup的時候觸發的blur事件會
+                //判斷輸入的數字是否大於會員本身的紅利點數
+                bounsBig(e){
+                    // console.log(this.$refs.bouns.innerText);
+                    let bonus_V = this.$refs.bouns.innerText;
+                    let e_v = event.path[0].value;
+                    if(e_v > bonus_V){
+                    
+                        //  console.log(bouns_1);
+                    alert(`紅利點數折抵必須小於您目前的會員點數：${bonus_V}元`);
+                    }
+                }
             }
 
 
