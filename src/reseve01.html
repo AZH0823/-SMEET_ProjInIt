@@ -98,9 +98,9 @@
                         </div>
 
                         <!-- 測試用先別管 -->
-                        <ul>
+                        <!-- <ul>
                             <li v-for="(member, key) in inputData"> 項目:{{key}} / 使用者選填的:{{member}}</li>
-                        </ul>
+                        </ul> -->
                         <!-- 測試用先別管 -->
 
                         
@@ -204,12 +204,14 @@
                             return historyOneDay 
                         }
                     })
+                    // console.log(filterItems.length)
                     // 假若有訂單的話
-                    if(filterItems.length> 0 && filterItems < 3){                       
+                    if(filterItems.length> 0 && filterItems.length < 3){                       
                         this.data.chefScheduled = this.data.chefTeam.filter(el=>{
                             // Object.values(el)[1]:團隊編號
                             // isOrderTeam : 歷史訂單團隊編號
                             if(!isOrderTeam.includes(Object.values(el)[1])){
+                                // console.log(isOrderTeam.includes(Object.values(el)[1]))
                                 return el
                             }
                         })

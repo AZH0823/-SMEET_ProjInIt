@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="count_person">
                                         <img src="./img/reserve_img/reserve_icon02.svg" alt="">
-                                        <select v-model="inputData.peoCount" @change="resetDataInput">
+                                        <select v-model="inputData.peoCount" @change="resetDataInput" :disabled="this.workFlow.step >= 2">
                                             <i class="fa-solid fa-user" ></i>
                                             <option selected disabled>--人數--</option>
                                             <option v-for="idx in 12" :value="idx">{{idx}}人</option>
@@ -72,15 +72,26 @@
                             <ul class="addorderlist" v-if="workFlow.step >= 2">
                                 <!-- 單點菜品 -->
                                 <div class="addorderlist_title">加購</div>
-                                <li class="dish_title"><span>蘆筍蝦手卷</span><span>x 1</span><span>$600</span></li>
+                                <template  v-for="(item) in this.APIData.otherDish" :key="item.id">
+                                    <li class="dish_title" v-if="item.qty > 0"> 
+                                        <span>{{item.dishName}}</span><span>X{{item.qty}}</span><span>${{(item.qty*item.price).toLocaleString()}}</span>
+                                    </li>
+                                </template>
                             </ul>
                             <ul class="servies" v-if="workFlow.step >= 2">
                                 <!-- 服務 -->
+                                <!--   {id:1,title:'廚具',desc:'盤子、餐具、餐巾(必選)',checked:true,price:300}, -->
                                 <div class="servieslist_title">租借及服務</div>
-                                <li class="servies_title"><span>餐具</span><span>x 6</span><span>$600</span></li>
+                                <template  v-for="(servie) in this.APIData.servies" :key="servie.id">
+                                    <li class="servies_title" v-if="servie.checked"> 
+                                        <span>{{servie.title}}</span><span>X{{this.inputData.peoCount}}</span><span>${{(servie.price*this.inputData.peoCount).toLocaleString()}}</span>
+                                    </li>
+                                </template>
+
+                                <!-- <li class="servies_title"><span>餐具</span><span>x 6</span><span>$600</span></li>
                                 <li class="servies_title"><span>炊具</span><span>x 6</span><span>$600</span></li>
                                 <li class="servies_title"><span>餐盤</span><span>x 6</span><span>$600</span></li>
-                                <li class="servies_title"><span>服務人員</span><span>x 6</span><span>$600</span></li>
+                                <li class="servies_title"><span>服務人員</span><span>x 6</span><span>$600</span></li> -->
                             </ul>
 
                             <ul class="coupon"  v-if="workFlow.step >= 4">
@@ -126,7 +137,7 @@
                                                 <div class=dish-title>{{itemdetail.dishName}}</div>
                                                 <div class="amoumt" :data-id="itemdetail.id">
                                                     <button class="button sub" @click="setclickCount(itemdetail,'minus',this.inputData.sets - 1)">-</button>
-                                                    <input v-model="itemdetail.qty" class="input stepper_valueInput"/>
+                                                    <input v-model="itemdetail.qty" class="input stepper_valueInput" disabled/>
                                                     <button class="button add" @click="setclickCount(itemdetail,'plus',this.inputData.sets - 1,key)">+</button>
                                                 </div>
                                             </li> 
@@ -213,79 +224,39 @@
 
                             <h6 class="blockTitle">3.選擇單點加購</h6>
                             <ul class="addOther_detail">
-
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                    <div class="price">
-                                        $ 500
-                                    </div>
-                                </li>
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                    <div class="price">
-                                        $ 500
-                                    </div>
-                                </li>
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                    <div class="price">
-                                        $ 500
-                                    </div>
-                                </li>
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                    <div class="price">
-                                        $ 500
-                                    </div>
-                                </li>
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                    <div class="price">
-                                        $ 500
-                                    </div>
-                                </li>
-
+                                <!-- // 單點菜品 -->
+                                <!-- otherDish:[ -->
+                                <template v-for="(item) in this.APIData.otherDish" :key="item.id">
+                                    <!-- <p>{{item}}</p> -->
+                                    <li class="stepper_input">
+                                        <div class=dish-title>{{item.dishName}}</div>
+                                        <div class="amoumt">
+                                            <button class="button sub" @click="otherItemCount(item,'minus')">-</button>
+                                            <input  class="input stepper_valueInput" :v-model="item.qty" :value="item.qty" disabled/>
+                                            <button class="button add" @click="otherItemCount(item,'add')">+</button>
+                                        </div>
+                                        <div class="price">
+                                            {{item.price.toLocaleString()}}元
+                                        </div>
+                                    </li>
+                                </template>
                             </ul>
+                                  <!-- APIData >> servies -->
                             <h6 class="blockTitle ">4.選擇租借服務</h6>
                             <ul class="addOther_rent">
                                 <li class="rent_service">
                                     <div class="tableware">
-                                        <p class="serive-title">廚具</p>
-                                        <span class="aux-title">盤子、餐具、餐巾</span>
+                                        <p class="serive-title">{{this.APIData.servies[0].title}}</p>
+                                        <span class="aux-title">{{this.APIData.servies[0].desc}}</span>
                                     </div>
                                     <div class="checkboxInner">
 
-                                        <input type="checkbox" name="cb" id="table_cb" checked disabled>
+                                        <input type="checkbox" name="cb" id="table_cb" :checked="this.APIData.servies[0].checked" disabled>
                                         <label for="table_cb" id="cb_table">
                                             <svg viewBox="0 0 100 100">
                                                 <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
                                             </svg>
-                                            <span class="info">每人 300NT$</span>
+                                            <span class="info">每人 {{this.APIData.servies[0].price}}元</span>
                                         </label>
                                     </div>
 
@@ -293,17 +264,17 @@
                                 </li>
                                 <li class="rent_service">
                                     <div class="utensils">
-                                        <p class="serive-title">炊具</p>
-                                        <span class="aux-title">鍋碗瓢盆</span>
+                                        <p class="serive-title">{{this.APIData.servies[1].title}}</p>
+                                        <span class="aux-title">{{this.APIData.servies[1].desc}}</span>
                                     </div>
                                     <div class="checkboxInner">
 
-                                        <input type="checkbox" name="cb" id="utensils_cb" checked disabled>
+                                        <input type="checkbox" name="cb" id="utensils_cb" :checked="this.APIData.servies[1].checked" disabled>
                                         <label for="utensils_cb" id="utensils_cb">
                                             <svg viewBox="0 0 100 100">
                                                 <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
                                             </svg>
-                                            <span class="info">每人 300NT$</span>
+                                            <span class="info">每人 {{this.APIData.servies[1].price}}元</span>
                                         </label>
                                     </div>
 
@@ -313,17 +284,17 @@
                                 <li class="rent_service">
 
                                     <div class="plate">
-                                        <p class="serive-title">餐盤</p>
-                                        <span class="aux-title">餐盤&拼盤</span>
+                                        <p class="serive-title">{{this.APIData.servies[2].title}}</p>
+                                        <span class="aux-title">{{this.APIData.servies[2].desc}}</span>
                                     </div>
                                     <div class="checkboxInner">
 
-                                        <input type="checkbox" name="cb" id="plate_cb">
+                                        <input type="checkbox" name="cb" id="plate_cb" v-model="this.APIData.servies[2].checked">
                                         <label for="plate_cb" id="plate_cb">
                                             <svg viewBox="0 0 100 100">
                                                 <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
                                             </svg>
-                                            <span class="info">每人 300NT$</span>
+                                            <span class="info">每人 {{this.APIData.servies[2].price}}元</span>
                                         </label>
                                     </div>
 
@@ -332,17 +303,17 @@
                                 </li>
                                 <li class="rent_service">
                                     <div class="waiter">
-                                        <p class="serive-title">服務人員</p>
-                                        <span class="aux-title">全程服務及售後清潔</span>
+                                        <p class="serive-title">{{this.APIData.servies[3].title}}</p>
+                                        <span class="aux-title">{{this.APIData.servies[3].desc}}</span>
                                     </div>
                                     <div class="checkboxInner">
 
-                                        <input type="checkbox" name="cb" id="waiter_cb">
+                                        <input type="checkbox" name="cb" id="waiter_cb"  v-model="this.APIData.servies[3].checked">
                                         <label for="waiter_cb" id="waiter_cb">
                                             <svg viewBox="0 0 100 100">
                                                 <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
                                             </svg>
-                                            <span class="info">每人 300NT$</span>
+                                            <span class="info">每人 {{this.APIData.servies[3].price}}元</span>
                                         </label>
                                     </div>
 
@@ -421,6 +392,8 @@
                                 </div>
                             </div>
                             <!-- 租借服務 -->
+
+                      
                             <div class="shop_list">
                                 <h4 class="detail_title green-1">租借服務</h4>
                                 <div class="meal_container font16">
@@ -450,9 +423,9 @@
                                 </div>
                                 <!-- 訂單資料 -->
                                 <div class="list_info">
-                                    <h4 class="detail_title green-1">訂單資料</h4>
+                                    <!-- <h4 class="detail_title green-1">訂單資料</h4> -->
 
-                                    <ul class="detail_info">
+                                    <!-- <ul class="detail_info">
 
                                         <li class="item">訂購人</li>
                                         <li class="item">
@@ -467,7 +440,7 @@
                                             <div class="cate">餐別<span id="detail_cate">晚餐</span></div>
                                             <div class="people">人數<span id="detail_people">12人</span></div>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
 
                                 <!-- 總計 -->
@@ -707,6 +680,23 @@
                             {id:3,team:'c',name:'陳平安'}
                         ],
 
+                        // 單點菜品
+                        otherDish:[
+                            {id:46,dishName:'黑鮪刺身',price:1000,qty:0,dishType:'單品'},
+                            {id:47,dishName:'廣島牡蠣釜飯',price:750,qty:0,dishType:'單品'},
+                            {id:48,dishName:'蘆筍蝦手捲',price:600,qty:0,dishType:'單品'},                                
+                            {id:49,dishName:'大閘蟹握壽司',price:650,qty:0,dishType:'單品'},                                
+                            {id:50,dishName:'和牛蕈菇釜飯',price:700,qty:0,dishType:'單品'}, 
+                        ],
+                        
+                        // 租借及服務
+                        servies:[
+                            {id:1,title:'廚具',desc:'盤子、餐具、餐巾(必選)',checked:true,price:300},
+                            {id:2,title:'炊具',desc:'鍋碗瓢盆(必選)',checked:true,price:300},
+                            {id:3,title:'餐盤',desc:'餐盤&拼盤',checked:false,price:400},
+                            {id:4,title:'服務人員',desc:'全程服務及售後清潔',checked:false,price:500},
+                        ],
+
                         // 套餐詳細選項(舊版Data 先備份)
                         setsDetail:{
                             setA:{
@@ -834,6 +824,14 @@
                             item.qty >= this.inputData.peoCount ?  this.inputData.peoCount: item.qty++;
                     }
                 },
+                otherItemCount(item,stauts){
+                    if(stauts ==='minus'){
+                        // 假如點擊的是 - 商品的話
+                        item.qty <= 0 ?  0 : item.qty--;
+                    }else{
+                        item.qty ++;
+                    }
+                },
                 dishTypeisOver(){
 
 
@@ -878,10 +876,38 @@
                     return `$ ${(setPrice * setPeo).toLocaleString()}`
                 },
                 totalPrice(){
-                    let setPrice = {...this.APIData.sets.find(el=>el.id===this.inputData.sets)}.setprice
-                    let setPeo = this.inputData.peoCount
+                    // 訂單人數
+                    const count = this.inputData.peoCount
                     
-                    return `$ ${(setPrice * setPeo).toLocaleString()}`
+                    // 套餐金額
+                    let setPrice = {...this.APIData.sets.find(el=>el.id===this.inputData.sets)}.setprice
+                    let setTotal = count * setPrice
+
+                    // 單點金額
+                    let otherDish = 0
+                    let otherServies = 0
+                    if(this.workFlow.step == 2){
+                        otherDish = this.APIData.otherDish.map(item=>{
+                            //  console.log(item.price,item.qty)
+                             if(item.qty > 0){
+                                return item.qty * item.price;
+                             }else return 0;
+                        }).reduce((a,b)=>a+b);
+
+                        otherServies = this.APIData.servies.map(serve=>{
+                            if(serve.checked === true){
+                                console.log(serve.title)
+                                return serve.price;
+                            }else return 0
+                        }).reduce((a,b)=>a+b)
+                        // console.log(otherServies)
+                        otherServies = otherServies * count
+                        // console.log(otherServies)
+                    }
+                    
+
+                    
+                    return `$ ${(setTotal + otherDish + otherServies).toLocaleString()}`;
                 },
             },
             watch:{
@@ -896,7 +922,7 @@
             },
             mounted(){
                 // 把Local Stroage 給讀出來並渲染在網頁畫面上
-                // this.inputData = JSON.parse(localStorage.getItem('reseverOrder'))
+                this.inputData = JSON.parse(localStorage.getItem('reseverOrder'))
             }
         }
 
