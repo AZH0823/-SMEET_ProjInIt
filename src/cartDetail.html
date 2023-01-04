@@ -125,21 +125,21 @@
                         <p class="item5"></p>
                     </div>
                     <!-- 商品list -->
-                    <div class="product_detail">
+                    <div class="product_detail" v-for="(item, index) in product_list" :key="item.id">
                         <div class="item1 green-1">
                             <div class="item1_img">
-                                <img src="img/atcart_img/atcart_addp.jpg" alt="">
+                                <img :src="item.img_url" alt="">
                             </div>
-                            <h6 class="product_name">北海道海膽壽司北海道海膽壽司北海道海膽壽</h6>
+                            <h6 class="product_name">{{item.product_name}}</h6>
                         </div>
                         <div class="item2">
-                            <h6>NT$<span class="product_money">700</span></h6>
+                            <h6>NT$<span class="product_money">{{item.price}}</span></h6>
                         </div>
                         <div class="item3">
-                            <div class="count">x2</div>
+                            <div class="count">{{item.count}}</div>
                         </div>
                         <div class="item4">
-                            <h6>NT$<span class="product_money_2">1400</span></h6>
+                            <h6>NT$<span class="product_money_2">{{item.price * item.count}}</span></h6>
 
                         </div>
                     </div>
@@ -149,14 +149,14 @@
                 <!-- 總計 -->
                 <div class="total_container font16">
                     <div class="item">小計</div>
-                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                    <div class="item">NT$<span id="detail_total">{{cartTotal}}</span></div>
                     <!-- <div class="item">加購價</div>
                     <div class="item">NT$<span id="detail_total">250</span></div> -->
                     <div class="item">紅利點數</div>
-                    <div class="item">-NT$<span id="detail_total">50</span></div>
+                    <div class="item">-NT$<span id="detail_total">{{point}}</span></div>
                     <div class="item">總金額
                     </div>
-                    <div class="item">NT$<span id="detail_total">25,000</span></div>
+                    <div class="item">NT$<span id="detail_total">{{detailTotal}}</span></div>
                 </div>
 
                 <!-- 訂購人資訊 -->
@@ -328,7 +328,7 @@
                         ],
 
                         //回傳point的空字串
-                        point:'',
+                        point:'0',
 
                         //回傳7-11門市的名稱
                         shop:'',
@@ -338,7 +338,7 @@
                         bouns:'32',
 
                         msg:'*紅利點數折抵必須小於您目前的會員點數',
-                        //用v-if控制出現與否
+                        //用v-if控制出現與否,這個還做不出來
                         addClass: {
                             fontsize:'14px',
                             color:'red',
@@ -410,7 +410,7 @@
                     // console.log(this.$refs.bouns.innerText);
                     let bonus_V = this.$refs.bouns.innerText;
                     let e_v = event.path[0].value;
-                    if(e_v >= bonus_V){
+                    if(e_v > bonus_V){
                     
                         //  console.log(bouns_1);
                     alert(`紅利點數折抵必須小於您目前的會員點數：${bonus_V}元`);
