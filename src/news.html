@@ -38,20 +38,20 @@
 
       <!-- tab -->
       <ul>
-        <div class="wrapper tab_container">
-          <li>
+        <div class="wrapper tab_container" id="tab_change">
+          <li id="all" @click="changeTab(1)">
             <a href="">
               <h4>最新動態</h4>
               <span>all</span>
             </a>
           </li>
-          <li>
+          <li id="ft"  @click="changeTab(1)">
             <a href="">
               <h4>聯名限定</h4>
               <span>ft.</span>
             </a>
           </li>
-          <li>
+          <li id="sales"  @click="changeTab(1)">
             <a href="">
               <h4>限時優惠</h4>
               <span>sales</span>
@@ -75,8 +75,8 @@
       <!-- content-->
       <div class="content wrapper">
         <div class="content_grid">
-          <div class="content_grid_item">
-            <a href="#"></a>
+          <div class="content_grid_item" v-if="tabID === 1" >
+            <a href="#" :class="{ 'active_op': tabID === 1}"></a>
             <div class="content_hidden">
               <span class="item_mark font12 Camel-3">最新動態</span>
               <img src="./img/news_img/news_post1.jpg" alt="" />
@@ -94,8 +94,8 @@
               <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
             </button>
           </div>
-          <div class="content_grid_item">
-            <a href="#"></a>
+          <div class="content_grid_item" v-if="tabID === 2">
+            <a href="#" :class="{ 'active_op': tabID === 2}"></a>
             <div class="content_hidden">
               <span class="item_mark font12 Camel-3 diff">聯名限定</span>
               <img src="./img/news_img/news_post2.jpg" alt="" />
@@ -218,6 +218,40 @@
           }
         });
       });
+    </script>
+
+    <script src="./js/vender/Vue/vue.global.js"></script>
+    <script>
+       
+        const app = Vue.createApp ({
+          data() {
+            return {
+              news_list : [
+                {
+
+
+                }
+              ],
+
+              //回傳tab的id
+              tabID: {
+                id:1,
+              }
+
+            }
+            
+          },
+
+          methods : {
+            //切換頁籤
+            changeTab(val){
+              this.tabID += val ;
+
+            }
+          }
+        });
+
+        app.mount("#tab_change");
     </script>
   </html>
 </html>
