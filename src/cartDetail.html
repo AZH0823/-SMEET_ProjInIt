@@ -64,8 +64,8 @@
                 </div>
                 <!-- 會員紅利 -->
                 <div class="cart_bonus">
-                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"  v-model="point" max></input>元</h6>
-                    <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1">32</span>點(<span class="bonus_2">32</span>元)</p>
+                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"  v-model="point" @blur="bounsBig()" >{{}}</input>元</h6>
+                    <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1" ref="bouns">{{bouns}}</span>點(<span class="bonus_2">{{bouns}}</span>元)　<span v-bind:style="noneClass" ref="msg">{{msg}}</p>
                         <!--紅利點數會從資料庫回傳-->
                 </div>
                 <!-- 付款&寄送方式 -->
@@ -108,7 +108,7 @@
                         <div class="item">NT$<span id="detail_total">{{detailTotal}}</span></div>
                     </div>
                     <!-- 下一步按鈕 -->
-                    <div class="next_btn btn" @click="changePage(1)">下一步</div>
+                    <div class="next_btn btn" @click="changePage(1);toTop()">下一步</div>
                 </div>
             </section>
             <!-- 步驟1中間區塊主要內容結束=========== -->
@@ -150,8 +150,8 @@
                 <div class="total_container font16">
                     <div class="item">小計</div>
                     <div class="item">NT$<span id="detail_total">25,000</span></div>
-                    <div class="item">加購價</div>
-                    <div class="item">NT$<span id="detail_total">250</span></div>
+                    <!-- <div class="item">加購價</div>
+                    <div class="item">NT$<span id="detail_total">250</span></div> -->
                     <div class="item">紅利點數</div>
                     <div class="item">-NT$<span id="detail_total">50</span></div>
                     <div class="item">總金額
@@ -260,7 +260,7 @@
                 <!-- 下一步按鈕 -->
                     <div class="next_btn" @click="changePage(1)">下一步</div>
                 <!-- 上一步按鈕 -->
-                    <div class="prev_btn btn" @click="changePage(-1)">返回上一步</div>
+                    <div class="prev_btn btn" @click="changePage(-1);toTop()">返回上一步</div>
                     </div>
                 <div class="clear_both"></div>
             </section>
@@ -283,6 +283,9 @@
         <script src="./js/vender/Vue/vue.global.js"></script>
         <script>
              const app = Vue.createApp({
+        
+
+
                 data() {
                     return {
 
@@ -332,8 +335,19 @@
 
                         //回傳紅利點數的金額,
                         //讓input限制最高只能輸入紅利點數的上限
-                       
+                        bouns:'32',
 
+                        msg:'*紅利點數折抵必須小於您目前的會員點數',
+                        //用v-if控制出現與否
+                        addClass: {
+                            fontsize:'14px',
+                            color:'red',
+                            display:'block'
+                        },
+                        //先把msg的字藏起來
+                        noneClass : {
+                            display:'none'
+                        }
                     }
                 },
             computed :{
@@ -360,6 +374,7 @@
                 //換下一步
                 changePage(val){
                     this.process.step += val;
+
                 },
 
                 //數量加
@@ -378,10 +393,29 @@
                 dealDelete(index){
                     this.product_list.splice(index,1);
                 },
-
+                //選擇門市
                 chooseShop(){
                     this.shop = "維群門市";
                 },
+                //按下一步或上一步會回到最上方
+                toTop(){
+                    window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                    })
+                },
+                //當keyup的時候觸發的blur事件會
+                //判斷輸入的數字是否大於會員本身的紅利點數
+                bounsBig(e){
+                    // console.log(this.$refs.bouns.innerText);
+                    let bonus_V = this.$refs.bouns.innerText;
+                    let e_v = event.path[0].value;
+                    if(e_v >= bonus_V){
+                    
+                        //  console.log(bouns_1);
+                    alert(`紅利點數折抵必須小於您目前的會員點數：${bonus_V}元`);
+                    }
+                }
             }
 
 
