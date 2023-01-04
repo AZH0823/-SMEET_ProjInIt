@@ -7,18 +7,37 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
     </head>
+
     <body>
-        <!-- @@include('layout/header_01.html') -->
+        @@include('layout/header_01.html')
         <!-- banner -->
-        <main class="wrapper shopMall">
+        <main class="wrapper shopMall" id="app">
             <!-- 商城tab+排序 -->
             <div class="shop_up">
                 <!-- tab -->
-                <div class="shop_tab">
-                    <a href="" class="on_tab"><h6>主食</h6></a>
-                    <a href=""><h6>湯品</h6></a>
-                    <a href=""><h6>甜品</h6></a>
-                </div>
+                <!-- <ul class="shop_tab">
+                    <li class="shop_tabItem" >
+                        <a href="" data-tablink="one" class="on_tab"><h6>主食</h6></a>
+                    </li>
+                    <li class="shop_tabItem">
+                        <a href="" data-tablink="two"><h6>湯品</h6></a>
+                    </li>
+                    <li class="shop_tabItem">
+                        <a href="" data-tablink="three"><h6>甜品</h6></a>
+                    </li>
+                </ul> -->
+                <ul class="shop_tab " style="margin-top: 100px;">
+                    <template v-for="tab in shopMall_tab">
+                        <li class="shop_tabItem" >
+                            <a href="" 
+                            class="green-1" 
+                            @click.prevent 
+                            @click="current_tab = tab.id" 
+                            :class="{ on_tab : current_tab ===  tab.id}"><h6>{{ tab.name }}</h6></a>
+                        </li>
+                    </template>
+                </ul>
+
                 <!-- 商品排序 -->
                 <select name="" id="">
                     <option value="none" selected disabled hidden>商品排序</option> 
@@ -29,116 +48,308 @@
             </div>
             <!-- 商城卡片 -->
             <section class="collect_section ">
-                <ul>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="collect_list">
-                        <a href="">
-                            <div class="product_img">
-                                <img src="img/member_img/member_wish1.jpg" alt="">
-                                <i class="fa-solid fa-heart"></i>
-                            </div>
-                            <div class="product_content green-1">
-                                <h6 class="product_title ">黑鮪刺身</h6>
-                                <p class="font16">$<span class="product_money">700</span></p>
-                                <button type="button" class="cart_link" href="">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </button>
-                            </div>
-                        </a>
-                    </li> 
+
+                <ul id="three" class="tab-inner">
+                    <template 
+                    v-for="(item, i) in filtered_list" 
+                    :key="item.name">
+                
+                        <li class="collect_list">
+                            <a href="./shopMallDetail.html">
+                                <div class="product_img">
+                                    <img :src="item.img" alt="">
+                                    <i class="fa-solid fa-heart" :class="{shopMall_checkHeart: item.heart}" @click="collect_heart(item)"></i>
+                                </div>
+                                <div class="product_content green-1">
+                                    <h6 class="product_title ">{{ item.name }}</h6>
+                                    <p class="font16">$<span class="product_money">{{ item.price }}</span></p>
+                                    <button type="button" class="cart_link" href="">
+                                        <i class="fa-solid fa-cart-shopping" @click="shopCar(isShow)"></i>
+                                    </button>
+                                </div>
+                            </a>
+                        </li>
+                    </template>
+
             </section>
-        </main>
-        <div class="wrapper product_pop">
-            <div class="container">
-                <div class="img_product">
-                    <img src="img/shopmall_img/shopmall_cart.jpg" alt="">
-                </div>
-                <h6>大黑鮪生魚片大黑鮪生魚片大黑鮪生魚片大黑</h6>
-                <p class="font16">$<span class="money_pop">700</span></p>
-                <div class="count_btn">
-                    <div class="plus_minus">
-                        <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                        <div class="number">1</div>
-                        <div class="plus"><i class="fa-solid fa-plus"></i></div>
+
+            <!-- 收藏燈箱 -->
+            <div class="wrapper overlay1" v-if="success_popup !== '' ">
+                
+                <article>
+                    <div class="check_text">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h6 >{{success_popup}}</h6> 
                     </div>
-                    <button type="button" class="inCart_btn1">加入購物車</button>
+                </article>
+            </div>
+            <!-- cart 燈箱 -->
+            
+            <div class="wrapper product_pop" id="product_pop" v-if="isShow">
+                <div class="container">
+                    <div class="img_product">
+                        <img src="img/shopmall_img/shopmall_cart.jpg" alt="">
+                    </div>
+                    <h6 v-if="isShow.name">{{isShow.name}}</h6>
+                    <p class="font16">$<span class="money_pop">{{isShow.price}}</span></p>
+                    <div class="count_btn">
+                        <div class="plus_minus">
+                            <!-- 的methods -->
+                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
+                            <div class="number">{{productnumber}}</div>
+                            <!-- 減少的methods -->
+                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                        </div>
+                        <button type="button" class="inCart_btn1">加入購物車</button>
+                    </div>
                 </div>
             </div>
-        </div>
-         <!-- @@include('layout/footer.html') -->
+        </main>
+
+
+
+        
+        
+        @@include('layout/footer.html')
+        <script src="./js/vender/Vue/vue.global.js"></script>
+        <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+        <script>
+
+
+
+            const app = Vue.createApp({
+                data(){
+                    return{
+                        // 使用者行為
+                        ueser:{
+                            order:[{
+
+                            }],
+                            favilst:[{
+
+                            }],
+                        },
+
+                        productnumber:0,
+                        isShow:false, // FIXME
+
+                        // 篩選分頁
+                        success_popup_interval:null,
+                        success_popup:'',
+
+                        // 分頁器
+                        current_tab: "tab1",
+                        shopMall_tab:[
+                            {
+                                id: "tab1",
+                                name:"主食"
+                            },
+                            {
+                                id: "tab2",
+                                name:"湯品"
+                            },
+                            {
+                                id: "tab3",
+                                name:"甜品"
+                            }
+                    
+                        ],
+                        
+                        // 商品清單
+                        MealsInfo: [
+                            {
+                                category:'tab1',
+                                id: "1",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab1',
+                                id: "2",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab1',
+                                id: "3",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab2',
+                                id: "1",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab2',
+                                id: "2",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab2',
+                                id: "3",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab3',
+                                id: "1",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab3',
+                                id: "2",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                            {
+                                category:'tab3',
+                                id: "3",
+                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                heart: false,
+                                name: "黑鮪刺身",
+                                price: "700",
+                                collectTime: new Date()
+                            },
+                        ],
+                        
+                    };
+                },
+                computed: {
+
+                    // TODO 購物車
+                    shopCar(isShow){
+                    
+                    },
+
+
+                    // 原本菜單陣列依照curren_tab過濾
+                    filtered_list(){
+                        const filtered =  this.MealsInfo.filter((post) => {
+                        return this.current_tab === post.category
+                            // return  post.title.toLowerCase().includes(this.keyword.toLowerCase());
+                        });
+                        return filtered
+                    }
+                },
+                methods: {
+                    // 收藏成功
+                    isshow(item){
+                        // popon
+                        console.log(item.heart);
+                        if(item.heart == true){
+                            item.heart = false;
+                            this.success_popup = '移除收藏成功'
+                        }else{
+                            item.heart = true;
+                            this.success_popup = '加入收藏成功'
+                        }
+
+                    },
+                    
+                    collect_heart(item){
+                        // 加减爱心
+                        console.log(item.heart);
+                        if(item.heart == true){
+                            item.heart = false;
+                            this.success_popup = '移除收藏成功'
+                        }else{
+                            item.heart = true;
+                            this.success_popup = '加入收藏成功'
+                        }
+
+                        // 收藏成功 PopOn
+                        clearInterval(this.success_popup_interval)
+                        this.success_popup_interval = setInterval(() => {
+                            this.success_popup= ''
+                        }, 1000);
+
+                    }
+                },
+            });
+            const vm = app.mount("#app");
+
+
+
+            
+        $(document).ready(function () {
+
+
+            // =========== 卡片燈箱 =========== //
+
+            // console.log($(".collect_section ul > a"));s
+            
+            $("li.collect_list").on('click',function(e){
+                let cartLink = document.querySelectorAll(".cart_link");
+                for(let i =0; i < cartLink.length; i++){
+                    
+                }
+                e.preventDefault();
+                // if(EventTarget == )s
+                // $s(this).next($('.lightbox_cart')).removeClass('none');
+            })
+
+
+
+            // =========== tab切換 =========== //
+            // function tabCutover() {
+            //     //抓出li.active的data-tablink的內容;例如是"one"
+            //     var tablink = $(".shop_tabItem").find("a").data("tablink");
+            //     // console.log(tablink);
+                
+            //     //將$("#one").顯示，而其他兄弟們(叫做.tab-inner)都隱藏
+                
+            //     $('#'+ tablink).show().siblings(".tab-inner").hide();
+                
+
+            //     //當tab標題li被點到時
+            //     $(".shop_tab .shop_tabItem").click(function (e) {
+            //         //抓出當下被點到的data-tablink的內容;例如是"Two",將$("#Two").顯示，而其他兄弟們(叫做.tab-inner)都隱藏
+            //         e.preventDefault();
+            //         // console.log('#'+$(this).find("a").data("tablink"));
+            //         $('#'+$(this).find("a").data("tablink")).show().siblings(".tab-inner").hide();
+                    
+            //         // 點擊後渲染黑色
+            //         console.log($(this));
+            //         $(this).find("a").addClass("on_tab");
+            //         console.log($(this));
+
+            //         // FIXME 移除不了class
+            //         $(this).next("shop_tabItem").find("a").removeClass("on_tab");
+            //     });
+            // }
+            // // tab 執行
+            // tabCutover();
+            
+        });
+
+        </script>
     </body>
 </html>
