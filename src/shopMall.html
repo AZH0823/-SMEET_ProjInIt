@@ -11,6 +11,10 @@
     <body>
         @@include('layout/header_01.html')
         <!-- banner -->
+        @@include('layout/banner.html',{
+            "title":"SHOP",
+            "src":"./img/shopmall_img/shopmall_headbanner.jpg"
+          })
         <main class="wrapper shopMall" id="app">
             <!-- 商城tab+排序 -->
             <div class="shop_up">
@@ -112,6 +116,7 @@
 
         
         
+
         @@include('layout/footer.html')
         <script src="./js/vender/Vue/vue.global.js"></script>
         <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>

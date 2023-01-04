@@ -59,7 +59,7 @@
 .collect_section{
     padding: 35px 0;
     border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
+    // border-bottom: 1px solid #000;
     @include pad(){
         padding-top: 80px;
     }
@@ -72,9 +72,9 @@
         grid-auto-rows: 1fr;
         grid-row-gap: 20px;
         grid-column-gap: 10px;
-        margin: 0 auto 60px;
+        margin: 0 auto 160px;
         
-        margin-bottom: 60px;
+        // margin-bottom: 60px;
         @include pad(){
             grid-template-columns: repeat(auto-fill,minmax(173px,1fr));
             grid-row-gap: 10px;
