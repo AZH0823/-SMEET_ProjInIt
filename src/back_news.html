@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    
     <title>動態管理</title>
 </head>
 <body>
@@ -239,7 +242,47 @@
                 @@include('layout/back_footer.html')
             </div><!-- container -->
             
-        </div><!-- wrapper -->
+        </div>
+        <!-- wrapper -->
+
+        
+        <div class="section_news">
+            <div class="news_top">
+                <p>新增動態</p>
+            </div>
+            <div class="news_type">
+                <p>公告類型：</p>
+                <select name="" id="">
+                    <option value="">最新動態（預設）</option>
+                    <option value="">聯名限定</option>
+                    <option value="">限時優惠</option>
+                </select>
+            </div>
+            <div class="news_date">
+                <p>上架日期：</p>
+                <input  id="datepicker" placeholder="2022/01/13">
+                <input  placeholder="16：00">
+            </div>
+            <div class="news_title">
+                <p>動態標題：</p>
+                <input placeholder="秋季限定料理        （6/25）">
+            </div>
+            <div class="news_pic">
+                <label type="button" class="btn">
+                    <span>圖片：</span>
+                    <input type="file" onchange="openFile(event)">
+                    <img id="output" height="200" style="display:none">
+                </label>
+            </div>
+            <div class="news_content">
+                <h6>內容：</h6>
+                <textarea>私覓主理人與多位摯友於1989年參加一場私廚派對，於派對中享用的鮮美食材仍深刻於心，多年後再度憶起來當年的感動，私覓主理人與專業團隊共同開發秋寄限定料理，希望再次複刻最初的感動。以鰹魚為食，輔以柑橘類的柚子醬『ポン酢』調味，再加一點梅子提味，提升整體的層次感。秋天的味蕾－松茸ごはん（松茸飯）」，使用昆布高湯，並將松茸與其他像是銀杏果等食材一同放進炊飯器煮。而秋天更不能錯過柿子、水梨，私覓嚴選千葉縣水梨，於前菜至主食期望帶給預約私覓的顧客，能和私覓主理人一同回到1989年的秋天，體驗這份私藏的心意。
+                </textarea>
+                <p>(0/300)</p>
+                <button class="news_content_btn">儲存</button>
+            </div>
+        
+        </div>
         
     </div>
 
@@ -274,6 +317,29 @@
         }
         
     </script>
-    
+
+    <!-- 日期選擇器 -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
+
+    <!-- 縮圖預覽 -->
+    <script>
+        function openFile(event){
+            var input = event.target; //取得上傳檔案
+            var reader = new FileReader(); //建立FileReader物件
+
+            reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+            reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+                var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+                $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+            };
+        }
+    </script>
 </body>
 </html>

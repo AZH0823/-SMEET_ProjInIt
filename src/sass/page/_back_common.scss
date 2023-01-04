@@ -143,4 +143,61 @@
             }
     
         }
+        div.section_common { 
+            border: 1px solid #000;      
+            width: 650px;
+            height: 530px;
+            margin: 0 auto;
+            .common_top{
+                height: 45px;
+                text-align: center;
+                background-color: #F3F3F3;
+                h6{
+                    line-height: 45px;
+                }
+            }
+            .common_type{
+                width: 95%;
+                margin: 0 auto;
+                display: flex;
+                margin-top: 25px;
+            }
+            .common_question{
+                width: 95%;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                margin-top: 25px;
+                textarea{
+                    width: 355px;
+                    height: 33px;
+                    outline: none;
+                    resize:none;
+                }
+            }
+            .commmon_answer{
+                width: 95%;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                margin-top: 25px;
+                textarea{
+                    width: 600px;
+                    height: 160px;
+                    background-color: #F9F4EC;
+                    outline: none;
+                    resize:none;
+                }
+                p{
+                    font-size: 12px;
+                    text-align: right;
+                    margin-right: 15px;
+                }
+                .common_content_btn{
+                    width: 85px;
+                    height: 27px;
+                    margin: 50px auto;
+                }
+            }
+        }
     }
