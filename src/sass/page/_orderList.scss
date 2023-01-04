@@ -11,8 +11,8 @@
         }
         //MEMBER 標題
         h1{
-            margin-top: 90px;
-            margin-bottom: 30px;
+            margin-top: 25px;
+            margin-bottom: 7px;
         }
         // 訂單查詢標題
         .member_title{
@@ -360,5 +360,8 @@
 
     .none{
         display: none !important;  
-    }   
+    }  
+    .clear_both{
+        clear: both;
+    }
 }
