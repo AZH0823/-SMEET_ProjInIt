@@ -10,8 +10,8 @@
     />
   </head>
   <body>
-    <!-- @@include('layout/header_01.html') -->
-    <div class="fulid_wrapper member">
+    @@include('layout/header_01.html')
+    <div class="fulid_wrapper member" id="member">
       <main>
         <!-- MEMBER標題 -->
         <h1 class="green-1 font_family_eng">MEMBER</h1>
@@ -22,24 +22,30 @@
         <!-- tabbbbbbbbbb -->
         <nav class="member_tab">
           <ul class="font16 Camel-1">
-            <li class="member_tab_1"><a class="now" href="">會員中心</a></li>
-            <li class="member_tab_2"><a href="">訂單查詢</a></li>
+            <template v-for="tab in member_tab">
+              <li >
+                <a :class="[{ now: current_tab == tab.id }, tab.member_tab_4 ]" @click="current_tab = tab.id">{{ tab.name }} 
+                  <span :id="tab.member_msg">{{ tab.msg_count }}</span>
+                </a>
+              </li>
+            </template>
+            <!-- <li class="member_tab_2"><a href="">訂單查詢</a></li>
             <li class="member_tab_3"><a href="">收藏菜品</a></li>
             <li class="member_tab_4">
               <a href="">訊息中心<span id="member_msg">3</span></a>
             </li>
-            <li class="member_tab_5"><a href="">常見問題</a></li>
+            <li class="member_tab_5"><a href="">常見問題</a></li> -->
           </ul>
         </nav>
         <!-- ======會員中心內容===== -->
-        <section class="member_section">
+        <section class="member_section" v-show="current_tab == 'tab1' ">
           <div class="member_info">
             <h6 class="member_section_title">個人資訊</h6>
-            <form id="info" action="">
-              <input type="text" id="member_name" placeholder="請輸入姓名" />
+            <div id="info">
+              <input type="text" id="member_name" placeholder="請輸入姓名" v-model="member_info.name"/>
               <div class="date_sex">
-                <input type="date" id="member_date" placeholder="請輸入生日" />
-                <select name="member_sex" id="member_sex" value="請選擇性別">
+                <input type="date" id="member_date" placeholder="請輸入生日"  v-model="member_info.birthday" />
+                <select name="member_sex" id="member_sex" value="請選擇性別"  v-model="member_info.sex">
                   <option value="none" selected disabled hidden>
                     請選擇性別
                   </option>
@@ -50,9 +56,9 @@
               <input
                 type="text"
                 id="member_phone"
-                placeholder="請輸入手機號碼"
+                placeholder="請輸入手機號碼"  v-model="member_info.phone"
               />
-              <div class="city_area">
+              <!-- <div class="city_area">
                 <select name="member_city" id="member_city">
                   <option value="none" selected disabled hidden>
                     請選擇縣市
@@ -63,11 +69,11 @@
                     請選擇區域
                   </option>
                 </select>
-              </div>
-              <input type="text" id="member_addr" placeholder="請輸入地址" />
+              </div> -->
+              <input type="text" id="member_addr" placeholder="請輸入地址"   v-model="member_info.addr"/>
               <div class="bonus">
                 <p class="font16">
-                  目前累計會員紅利點數<span class="bonus_member">0</span>點
+                  目前累計會員紅利點數<span class="bonus_member"  >{{member_info.bonus}}</span>點
                 </p>
               </div>
               <div class="member_news">
@@ -84,43 +90,46 @@
               <button type="submit" id="btn_info" class="inCart_btn2">
                 確認修改
               </button>
-            </form>
+              {{member_info}}
+            </div>
           </div>
           <div class="member_pwd">
             <h6 class="member_section_title">修改密碼</h6>
-            <form id="pwd" action="">
+            <div id="pwd" >
               <div class="content">
                 <label for="member_account">帳號</label>
-                <input type="text" id="member_account" />
+                <input type="text" id="member_account" v-model="update_pwd.account" />
               </div>
               <div class="content">
-                <label for="member_pwd_old">請輸入舊密碼</label>
-                <input type="password" />
-                <i class="fa-regular fa-eye-slash"></i>
+                <label for="member_pwd_old"  >請輸入舊密碼</label>
+                <input type="password" v-model="update_pwd.pwd_old" />
+                <i class="fa-regular fa-eye-slash" @click="eye_icon"></i>
               </div>
               <div class="content">
-                <label for="member_pwd_new">請輸入新密碼</label>
+                <label for="member_pwd_new" >請輸入新密碼</label>
                 <input
-                  type="password"
-                  placeholder="請使用 8 個字元以上的字母、數字"
+                  type="password" 
+                  placeholder="請使用 8 個字元以上的字母、數字" v-model="update_pwd.pwd_new"
                 />
-                <i class="fa-regular fa-eye-slash"></i>
+                <i class="fa-regular fa-eye-slash" @click="eye_icon"></i>
               </div>
               <div class="content">
                 <label for="member_pwd_confirm">請確認新密碼</label>
                 <input type="password" />
-                <i class="fa-regular fa-eye-slash"></i>
+                <i class="fa-regular fa-eye-slash" @click="eye_icon"></i>
               </div>
 
               <button type="submit" id="btn_pwd" class="inCart_btn2">
                 確認修改
               </button>
-            </form>
+              {{update_pwd}}
+
+            </div>
           </div>
         </section>
         <!-- ======會員中心內容END===== -->
         <!-- ======訂單查詢===== -->
-        <section class="order_list_section member_product_section none">
+        <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
           <div class="order_list_title font14 gray">
             <p class="list1">類別</p>
             <p class="list2">訂單日期</p>
@@ -136,7 +145,7 @@
             <p class="list4">NT$<span class="list4_money">5,000</span></p>
             <p class="list5">訂單成立已付款</p>
             <div class="list6">
-              <button class="inCart_btn1">查看詳情</button>
+              <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
             </div>
           </div>
           <div class="order_list_content font16">
@@ -146,7 +155,7 @@
             <p class="list4">NT$<span class="list4_money">5,000</span></p>
             <p class="list5">訂單成立已付款</p>
             <div class="list6">
-              <button class="inCart_btn1">查看詳情</button>
+              <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
             </div>
           </div>
           <div class="order_list_content font16">
@@ -156,15 +165,32 @@
             <p class="list4">NT$<span class="list4_money">5,000</span></p>
             <p class="list5">訂單成立已付款</p>
             <div class="list6">
-              <button class="inCart_btn1">查看詳情</button>
+              <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
             </div>
           </div>
         </section>
         <!-- ======訂單查詢結束===== -->
         <!-- ======收藏菜品====== -->
-        <section class="collect_section member_product_section">
+        <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'tab3' ">
           <ul>
-            <li class="collect_list">
+            <template v-for="(item, key) in collection" :key="item.name">
+              <li class="collect_list">
+                <a>
+                  <div class="product_img">
+                    <img :src=item.img alt="" />
+                    <i class="fa-solid fa-heart " :class="{check_heart :item.check_heart}" @click="cancel_collect(key)"></i>
+                  </div>
+                  <div class="product_content green-1">
+                    <h6 class="product_title">{{item.name}}</h6>
+                    <p class="font16">$<span class="product_money">{{item.money}}</span></p>
+                    <button type="button" class="cart_link" href="">
+                      <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                  </div>
+                </a>
+              </li>
+            </template>
+            <!-- <li class="collect_list">
               <a href="">
                 <div class="product_img">
                   <img src="img/member_img/member_wish1.jpg" alt="" />
@@ -178,87 +204,12 @@
                   </button>
                 </div>
               </a>
-            </li>
-            <li class="collect_list">
-              <a href="">
-                <div class="product_img">
-                  <img src="img/member_img/member_wish1.jpg" alt="" />
-                  <i class="fa-solid fa-heart"></i>
-                </div>
-                <div class="product_content green-1">
-                  <h6 class="product_title">黑鮪刺身</h6>
-                  <p class="font16">$<span class="product_money">700</span></p>
-                  <button type="button" class="cart_link" href="">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </button>
-                </div>
-              </a>
-            </li>
-            <li class="collect_list">
-              <a href="">
-                <div class="product_img">
-                  <img src="img/member_img/member_wish1.jpg" alt="" />
-                  <i class="fa-solid fa-heart"></i>
-                </div>
-                <div class="product_content green-1">
-                  <h6 class="product_title">黑鮪刺身</h6>
-                  <p class="font16">$<span class="product_money">700</span></p>
-                  <button type="button" class="cart_link" href="">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </button>
-                </div>
-              </a>
-            </li>
-            <li class="collect_list">
-              <a href="">
-                <div class="product_img">
-                  <img src="img/member_img/member_wish1.jpg" alt="" />
-                  <i class="fa-solid fa-heart"></i>
-                </div>
-                <div class="product_content green-1">
-                  <h6 class="product_title">黑鮪刺身</h6>
-                  <p class="font16">$<span class="product_money">700</span></p>
-                  <button type="button" class="cart_link" href="">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </button>
-                </div>
-              </a>
-            </li>
-            <li class="collect_list">
-              <a href="">
-                <div class="product_img">
-                  <img src="img/member_img/member_wish1.jpg" alt="" />
-                  <i class="fa-solid fa-heart"></i>
-                </div>
-                <div class="product_content green-1">
-                  <h6 class="product_title">黑鮪刺身</h6>
-                  <p class="font16">$<span class="product_money">700</span></p>
-                  <button type="button" class="cart_link" href="">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </button>
-                </div>
-              </a>
-            </li>
-            <li class="collect_list">
-              <a href="">
-                <div class="product_img">
-                  <img src="img/member_img/member_wish1.jpg" alt="" />
-                  <i class="fa-solid fa-heart"></i>
-                </div>
-                <div class="product_content green-1">
-                  <h6 class="product_title">黑鮪刺身</h6>
-                  <p class="font16">$<span class="product_money">700</span></p>
-                  <button type="button" class="cart_link" href="">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </button>
-                </div>
-              </a>
-            </li>
+            </li> -->
           </ul>
         </section>
         <!-- ======收藏菜品結束====== -->
         <!-- ======訊息中心====== -->
-        <section class="message_section member_product_section">
+        <section class="message_section member_product_section" v-show="current_tab == 'tab4' ">
           <ul class="fuild_wrapper">
             <li class="message_content">
               <div class="message_import">
@@ -299,10 +250,10 @@
         <!-- ======訊息中心結束====== -->
 
         <!-- ======常見問題====== -->
-        <section class="question_section member_product_section">
+        <section class="question_section member_product_section" v-show="current_tab == 'tab5' ">
           <ul>
             <h5>預約流程</h5>
-            <li class="question_section_li">
+            <li class="question_section_li li_1">
               <div class="question_flex">
                 <i class="fa-solid fa-q"></i>
                 <h6>請問有最低用餐人數嗎？</h6>
@@ -375,7 +326,7 @@
           </ul>
           <ul>
             <h5>付款問題</h5>
-            <li class="question_section_li">
+            <li class="question_section_li  li_1">
               <div class="question_flex">
                 <i class="fa-solid fa-q"></i>
                 <h6>請問有最低用餐人數嗎？</h6>
@@ -448,7 +399,7 @@
           </ul>
           <ul>
             <h5>租借服務</h5>
-            <li class="question_section_li">
+            <li class="question_section_li li_1">
               <div class="question_flex">
                 <i class="fa-solid fa-q"></i>
                 <h6>請問有最低用餐人數嗎？</h6>
@@ -521,7 +472,7 @@
           </ul>
           <ul>
             <h5>退貨問題</h5>
-            <li class="question_section_li">
+            <li class="question_section_li li_1">
               <div class="question_flex">
                 <i class="fa-solid fa-q"></i>
                 <h6>請問有最低用餐人數嗎？</h6>
@@ -595,17 +546,146 @@
         </section>
         <!-- ======常見問題結束====== -->
       </main>
-      <!-- @@include('layout/footer.html') -->
+      @@include('layout/footer.html')
     </div>
-
+    <script src="js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
     <script>
+      //常見問題
       $(function () {
-        $(".question_flex").click(function (e) {
-          // console.log(this);
+        // $(".question_flex").click(function (e) {
+        //   // console.log(this);
           $(this).siblings().toggleClass("active");
-        });
+        // });
 
+        // $(".fa-minus").click(function (e) {
+        //   // console.log( $(this).parents());
+        //   $(this).parents().toggleClass("active");
+        // });
+
+        $(".question_section_li").on("click",function(e){
+          e.preventDefault();
+          $(this).find('.question_none').toggleClass("active");
+        })
+      });
+
+      //收藏清單
+      let collection_lo = [{
+                id:1,
+                name:"黑鮪刺身",
+                img:'img/member_img/member_wish1.jpg',
+                money: 700,
+                check_heart:true
+              },
+              {
+                id:2,
+                name:"黑鮪刺身1",
+                img:'img/member_img/member_wish2.jpg',
+                money: 700,
+                check_heart:true
+              },
+              {
+                id:3,
+                name:"黑鮪刺身2",
+                img:'img/member_img/member_wish1.jpg',
+                money: 700,
+                check_heart:true
+              },              
+              {
+                id:4,
+                name:"黑鮪刺身3",
+                img:'img/member_img/member_wish2.jpg',
+                money: 700,
+                check_heart:true
+              }];
+
+      let member = Vue.createApp({
+        data(){
+          return {
+            // tab
+            current_tab:"tab1",
+            member_tab:[
+              {
+                id:"tab1",
+                name:"會員中心",
+                
+              },
+              {
+                id:"tab2",
+                name:"訂單查詢",
+                
+              },
+              {
+                id:"tab3",
+                name:"收藏菜品",
+                
+              },
+              {
+                id:"tab4",
+                name:"訊息中心",
+                member_tab_4:"member_tab_4",
+                member_msg:"member_msg",
+                msg_count:3
+              },
+              {
+                id:"tab5",
+                name:"常見問題",
+                
+              }
+            ],
+            // 會員中心-個人資訊
+            member_info:{
+              name:"",
+              birthday:"",
+              sex:"",
+              phone:"",
+              addr:"",
+              bonus:32
+            },
+            // 會員中心-修改密碼
+            update_pwd:{
+              account:"",
+              pwd_old:"",
+              pwd_new:""
+            },
+            // 收藏
+            collection:[
+              
+            ]
+          }
+        },
+        created(){
+          this.collection = collection_lo;
+        },
+        methods:{
+          //tab
+
+          //愛心點擊後取消收藏(移除陣列資訊)
+          cancel_collect(i){
+            let r = confirm('確定取消收藏');
+            if(r){
+              setTimeout(()=>{
+                this.collection.splice(i,1);
+              },500);
+              console.log(collection_lo);
+            }
+          },
+          //眼睛icon
+          eye_icon(e){
+                    let pwd_type = e.target.previousSibling;
+                    console.log(pwd_type.type);
+                    if(pwd_type.type == "password"){
+                        pwd_type.type = "text";
+                        e.target.classList.remove('fa-eye-slash');
+                        e.target.classList.add('fa-eye');
+                    }else{
+                        pwd_type.type = "password";
+                        e.target.classList.add('fa-eye-slash');
+                        e.target.classList.remove('fa-eye');
+                    }
+                },
+        }
+      }).mount('#member');
         $(".question_flex").click(function (e) {
           if ($(this).children("i.fa-solid").hasClass("fa-plus")) {
             // console.log(this);
@@ -617,8 +697,6 @@
               $(this).children("i:nth-child(3)").removeClass("fa-minus")
             $(this).children("i:nth-child(3)").addClass("fa-plus")
             }
-          });
-
           });
 
         // $(".question_flex").click(function (e){

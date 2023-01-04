@@ -7,28 +7,28 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-
 </head>
 <body>
-    <div class="fulid_wrapper login">
+    <div class="fulid_wrapper login" id="login">
         <div class="container ">
             <!-- 註冊登入tab -->
-            <div class="login_tab font16 Camel-1 none">
-                <div class="tab_add ">註冊會員</div>
-                <div class="tab_enter tab_line">會員登入</div>
+            <div class="login_tab font16 Camel-1" ref="tab">
+                <div class="tab_add " @click="add_tab" ref="tab1">註冊會員</div>
+                <div class="tab_enter tab_line" @click="enter_tab" ref="tab2">會員登入</div>
             </div>
             <!-- 表單 -->
             <!-- ==========註冊表單============= -->
-            <div action="" class="login_add none">
-                <input type="text" name="" id="" placeholder="帳號/信箱">
-                <p class="text_no">*此欄位尚未填寫</p>
+            <div action="" class="login_add none" ref="add_tab">
+                <input type="text" name="" id="" placeholder="帳號/信箱" v-model="user_add.account" >  
+                <!-- <p class="text_no none">{{error}}</p> -->
                 <div class="login_pwd">
-                    <input type="password" name="" id="" placeholder="密碼(請使用 8 個字元以上的字母、數字)">
-                    <i class="fa-regular fa-eye-slash font12 gray"></i>
+                    <input type="password" name="" id="" placeholder="密碼(請使用 8 個字元以上的字母、數字)" @blur="check_pwd"  v-model="user_add.pwd">
+                    <i class="fa-regular fa-eye-slash font12 gray" @click="eye_icon" ></i>
                 </div>
                 <div class="login_pwd">
-                    <input type="password" name="" id="login_pwd_again" placeholder="再次輸入密碼">
-                    <i class="fa-regular fa-eye-slash font12 gray"></i>
+                    <input type="password" name="" id="login_pwd_again" placeholder="再次輸入密碼" @blur="check_pwd">
+                    <i class="fa-regular fa-eye-slash font12 gray" @click="eye_icon" ></i>
+                    <!-- <i class="fa-regular fa-eye"></i> -->
                 </div>
                 <div class="login_news">
                     <input type="checkbox" name="login_news" id="login_news_yes1">
@@ -42,25 +42,25 @@
                         <p class="font14">我同意網站服務條款及隱私權政策</p>
                     </label>
                 </div>
-                <button type="submit" class="btn_login font18">立即加入</button>
+                <button type="submit" class="btn_login font18" @click="member_add">立即加入</button>
             </div>
             <!-- =========會員登入表單============ -->
-            <div action="" class="login_enter none">
-                <input type="text" name="" id="" placeholder="帳號/信箱">
+            <div action="" class="login_enter" ref="enter_tab">
+                <input type="text" name="" id="" placeholder="帳號/信箱" v-model="user_enter.account">
                 <p class="text_no">*此欄位尚未填寫</p>
                 <div class="login_pwd">
-                    <input type="password" name="" id="" placeholder="密碼(請使用 8 個字元以上的字母、數字)">
-                    <i class="fa-regular fa-eye-slash font12 gray"></i>
+                    <input type="password" name="" id="" placeholder="密碼(請使用 8 個字元以上的字母、數字)" @blur="check_pwd" v-model="user_enter.pwd">
+                    <i class="fa-regular fa-eye-slash font12 gray" @click="eye_icon"></i>
                 </div>
                 <button type="submit" class="btn_login font18">立即加入</button>
-                <a class="btn_forget">忘記密碼？</a>
+                <a class="btn_forget" @click="forget">忘記密碼？</a>
             </div>
             <!-- 或 -->
-            <div class="login_or none">
+            <div class="login_or" ref="or">
                 <p class="font16 gray">或</p>
             </div>
             <!-- 第三方 -->
-            <button type="button" class="btn_three font18 none">
+            <button type="button" class="btn_three font18 " ref="three">
                 <!-- <i class="fa-brands fa-line"></i> -->
                 使用LINE快速登入
             </button>
@@ -74,7 +74,7 @@
             </div>
 
             <!-- ==========忘記密碼畫面============= -->
-            <div class="login_forget">
+            <div class="login_forget none" ref="forget">
                 <h6>忘記密碼</h6>
                 <div class="forget" action="">
                     <input type="text" placeholder="請輸入電子信箱">
@@ -84,15 +84,16 @@
                 </div>
 
                 <div class="login_back login_tab font16 Camel-1">
-                    <div class="back_add tab_add">註冊會員</div>
-                    <div class="back_enter tab_enter">會員登入</div>
+                    <div class="back_add tab_add" @click="add_tab">註冊會員</div>
+                    <div class="back_enter tab_enter" @click="enter_tab">會員登入</div>
                 </div>
 
             </div>
         </div>
-
+        會員註冊{{user_add}}
+        會員登入{{user_enter}}
     </div>
-
+    
 
     <!-- =========購物車pop============ -->
     <div class="fulid_wrapper cart ">
@@ -166,5 +167,170 @@
             </div>
         </div>
     </div>
+    
+    <script src="js/vender/Vue/vue.global.js"></script>
+    <script>
+        let users = [
+            {
+                id:1,
+                account:'abc',
+                pwd:'123456789'
+            },
+            {
+                id:2,
+                account:'qwe',
+                pwd:'123456789'
+            }
+        ]
+
+        let login_app = Vue.createApp({
+            data(){
+                return{
+                    //帳號、密碼格式
+                    format:{
+                        // notext:`<p class="text_no none">*此欄位尚未填寫</p>`,
+                        error:`<p class="text_no none">*格式錯誤</p>`,
+                        // error:""
+                    },
+                    //儲存會員註冊資料
+                    users:[]
+                    ,
+                    //會員註冊
+                    user_add:{
+                        account:"",
+                        pwd:""
+                    },
+                    //會員登入
+                    user_enter:{
+                        account:"",
+                        pwd:""
+                    }
+                }
+            },
+            //生命週期
+            created(){
+                this.users = users;
+            },
+            computed:{
+
+            },
+            mounted(){
+                //api
+            },
+            methods:{
+                
+                //tab切換-註冊會員
+                add_tab(){
+                    let add_tab = this.$refs.add_tab; 
+                    let enter_tab = this.$refs.enter_tab;
+                    let tab1 = this.$refs.tab1;
+                    let tab2 = this.$refs.tab2;
+                    let forget= this.$refs.forget;
+                    let or = this.$refs.or;
+                    let three = this.$refs.three;
+                    let tab = this.$refs.tab;
+                    tab.classList.remove('none');
+                    add_tab.classList.remove('none');
+                    enter_tab.classList.add('none');
+                    tab1.classList.add('tab_line');
+                    tab2.classList.remove('tab_line');
+                    forget.classList.add('none');
+                    or.classList.remove('none');
+                    three.classList.remove('none');
+                },
+                //tab切換-會員登入
+                enter_tab(){
+                    let add_tab = this.$refs.add_tab; 
+                    let enter_tab = this.$refs.enter_tab;
+                    let tab1 = this.$refs.tab1;
+                    let tab2 = this.$refs.tab2;
+                    let or = this.$refs.or;
+                    let three = this.$refs.three;
+                    let tab = this.$refs.tab;
+                    let forget= this.$refs.forget;
+                    tab.classList.remove('none');
+                    add_tab.classList.add('none');
+                    enter_tab.classList.remove('none');
+                    tab1.classList.remove('tab_line');
+                    tab2.classList.add('tab_line');
+                    forget.classList.add('none');
+                    or.classList.remove('none');
+                    three.classList.remove('none');
+                },
+                //input 驗證格式
+                check_pwd(e){
+                    // console.log(e.target.value.length);
+                    if(e.target.value.length <= 16 && e.target.value.length >= 8){
+
+                    }else{
+                        console.log(this.format.error);
+                        this.format.error = `<p class="text_no none">*格式錯誤</p>`;
+                    }
+                },
+                //眼睛icon
+                eye_icon(e){
+                    let pwd_type = e.target.previousSibling;
+                    console.log(pwd_type.type);
+                    if(pwd_type.type == "password"){
+                        pwd_type.type = "text";
+                        e.target.classList.remove('fa-eye-slash');
+                        e.target.classList.add('fa-eye');
+                    }else{
+                        pwd_type.type = "password";
+                        e.target.classList.add('fa-eye-slash');
+                        e.target.classList.remove('fa-eye');
+                    }
+                },
+                //忘記密碼
+                forget(){
+                    let add_tab = this.$refs.add_tab; 
+                    let enter_tab = this.$refs.enter_tab;
+                    let or = this.$refs.or;
+                    let three = this.$refs.three;
+                    let forget = this.$refs.forget;
+                    let tab = this.$refs.tab;
+                    tab.classList.add('none');
+                    add_tab.classList.add('none');
+                    enter_tab.classList.add('none');
+                    or.classList.add('none');
+                    three.classList.add('none');
+                    forget.classList.remove('none');
+
+                },
+            
+                //當立即加入按下
+                member_add(){
+                    console.log(users);
+                    //把會員帳號密碼 資料寫到陣列
+                    this.user_add.id = new Date().getTime();
+                    this.users.push(this.user_add);
+                    this.user_add = {};
+                    // 1.確認都有填寫
+                    // 2.從資料庫撈資料比對有沒有一樣的帳號
+                    // 3.成功
+                    // 4.發送驗證信
+                    // 5.成為會員(跳下個畫面)
+                    // 6.關掉POP
+                },
+                // 當會員登入按下
+                member_enter(){
+                    // 1.確認都有填寫
+                    // 2.資料庫比較
+                    // 3.登入成功畫面→關掉pop
+                    // 3.帳號或密碼錯誤訊息跳出
+                }
+
+                //input 擋掉%
+            }
+            
+
+            
+            
+
+            
+            
+        });
+        login_app.mount("#login");
+    </script>
 </body>
 </html>
