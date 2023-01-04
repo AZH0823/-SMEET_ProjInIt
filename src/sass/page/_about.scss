@@ -358,7 +358,7 @@
             padding: 0 27px 55px;
         }
         .reserve{
-            background-image: url(../../img/about_img/about_box_reserve.jpg);
+            background-image: url(../img/about_img/about_box_reserve.jpg);
             background-size: cover;
             background-position: center center;
             grid-column: 1 / 3;
@@ -398,7 +398,7 @@
             }
         }
         .shopmall{
-            background-image: url(../../img/about_img/about_box_shopmall.jpg);
+            background-image: url(../img/about_img/about_box_shopmall.jpg);
             background-size: cover;
             background-position: center center;
             grid-column: 1 / 2;
@@ -441,7 +441,7 @@
             }
         }
         .menu_grid{
-            background-image: url(../../img/about_img/about_box_menu.jpg);
+            background-image: url(../img/about_img/about_box_menu.jpg);
             background-size: cover;
             background-position: center center;
             grid-column: 2 / 3;
@@ -481,7 +481,7 @@
             }
         }
         .team{
-            background-image: url(../../img/about_img/about_box_team.jpg);
+            background-image: url(../img/about_img/about_box_team.jpg);
             background-size: cover;
             background-position: center center;
             grid-column: 3 / 4;
@@ -490,7 +490,7 @@
             position: relative;
 
             @include pad{
-                background-image: url(../../img/about_img/about_box_team_rwd.jpg);
+                background-image: url(../img/about_img/about_box_team_rwd.jpg);
                 grid-column: 1/3;
                 grid-row: 4/5;
                 min-height: 200px;

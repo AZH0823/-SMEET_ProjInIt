@@ -166,5 +166,5 @@ exports.default = series(parallel(html , sassStyle ,jsmini ,img, otherSvg, other
 
 
 // 打包上線用
-exports.package = series(clear,parallel(html ,sassStyle , babel5 , img,otherSvg,otherPng))
+exports.package = series(clear,parallel(html ,sassStyle , babel5 , imgmini,otherSvg,otherPng))
 // exports.package = series(clear,parallel(html ,sassStyleMini , babel5 , imgmini))
