@@ -23,8 +23,22 @@ div.back_orderlist_prev {
                     div.back_from {
                         width: 100%;
 
-                        h4 {
-                            margin-bottom: 30px;
+                        .back_fromTitle{
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 30px; // 🙆🏻 後台統一30px
+
+                            .search{
+                                display: flex;
+                                justify-content: flex-end;
+                                align-items: center;
+                                .search_container_item{
+                                    margin-right: 10px;
+                                    input{
+                                        padding: 6px;
+                                    }
+                                }
+                            }
                         }
 
                         div.back_from_wrapper {
@@ -43,7 +57,13 @@ div.back_orderlist_prev {
                                 .grid_item:nth-child( n + 1){
                                     border-bottom: .5px solid #ccc; // 加底线
                                 }
-                                // ======================== 以上為導覽列 + 表格點的版型 ======================== //
+                                
+
+                                // Popup點擊hover
+                                .checked:hover{
+                                    cursor: pointer;
+                                    color: #ccc;
+                                }
 
                                 div.grid_item {
                                     padding: 20px;

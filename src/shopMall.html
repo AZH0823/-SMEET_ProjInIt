@@ -55,9 +55,11 @@
                     :key="item.name">
                 
                         <li class="collect_list">
-                            <a href="./shopMallDetail.html">
+                            <div>
                                 <div class="product_img">
-                                    <img :src="item.img" alt="">
+                                    <a href="./shopMallDetail.html">
+                                        <img :src="item.img" alt="">
+                                    </a>
                                     <i class="fa-solid fa-heart" :class="{shopMall_checkHeart: item.heart}" @click="collect_heart(item)"></i>
                                 </div>
                                 <div class="product_content green-1">
@@ -67,7 +69,7 @@
                                         <i class="fa-solid fa-cart-shopping" @click="shopCar(isShow)"></i>
                                     </button>
                                 </div>
-                            </a>
+                            </div>
                         </li>
                     </template>
 
@@ -96,7 +98,7 @@
                         <div class="plus_minus">
                             <!-- 的methods -->
                             <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                            <div class="number">{{productnumber}}</div>
+                            <div class="number">{{ueser.order}}</div>
                             <!-- 減少的methods -->
                             <div class="plus"><i class="fa-solid fa-plus"></i></div>
                         </div>
@@ -122,15 +124,11 @@
                     return{
                         // 使用者行為
                         ueser:{
-                            order:[{
-
-                            }],
-                            favilst:[{
-
-                            }],
+                            // 產品數量
+                            order: 0,
                         },
 
-                        productnumber:0,
+                        // 控制popup開關
                         isShow:false, // FIXME
 
                         // 篩選分頁
@@ -169,72 +167,72 @@
                             {
                                 category:'tab1',
                                 id: "2",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product02.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "北海道海膽壽司",
                                 price: "700",
                                 collectTime: new Date()
                             },
                             {
                                 category:'tab1',
                                 id: "3",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product03.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "蘆筍蝦手捲",
                                 price: "700",
                                 collectTime: new Date()
                             },
                             {
                                 category:'tab2',
                                 id: "1",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product04.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "極品生魚片",
                                 price: "700",
                                 collectTime: new Date()
                             },
                             {
                                 category:'tab2',
                                 id: "2",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product05.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "番茄海鮮清湯",
                                 price: "700",
                                 collectTime: new Date()
                             },
                             {
                                 category:'tab2',
                                 id: "3",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product06.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "奶香牛肝菌野菇濃湯",
                                 price: "700",
                                 collectTime: new Date()
                             },
                             {
                                 category:'tab3',
                                 id: "1",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product07.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "手沖牛肉湯",
                                 price: "700",
                                 collectTime: new Date()
                             },
                             {
                                 category:'tab3',
                                 id: "2",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product08.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "酒焰龍蝦盛宴",
                                 price: "700",
                                 collectTime: new Date()
                             },
                             {
                                 category:'tab3',
                                 id: "3",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
+                                img: "./img/shopmall_img/shopmall_product10.jpg",
                                 heart: false,
-                                name: "黑鮪刺身",
+                                name: "繡球花和菓子",
                                 price: "700",
                                 collectTime: new Date()
                             },
@@ -243,12 +241,10 @@
                     };
                 },
                 computed: {
-
-                    // TODO 購物車
-                    shopCar(isShow){
-                    
-                    },
-
+                    // // TODO 購物車
+                    // shopCar(isShow){
+                    //     // this.isShow != isShow;
+                    // },
 
                     // 原本菜單陣列依照curren_tab過濾
                     filtered_list(){
@@ -260,6 +256,13 @@
                     }
                 },
                 methods: {
+                    // TODO 購物車
+                    shopCar(isShow){
+                        // this.isShow != isShow;
+                    },
+
+
+
                     // 收藏成功
                     isshow(item){
                         // popon
@@ -297,58 +300,6 @@
             const vm = app.mount("#app");
 
 
-
-            
-        $(document).ready(function () {
-
-
-            // =========== 卡片燈箱 =========== //
-
-            // console.log($(".collect_section ul > a"));s
-            
-            $("li.collect_list").on('click',function(e){
-                let cartLink = document.querySelectorAll(".cart_link");
-                for(let i =0; i < cartLink.length; i++){
-                    
-                }
-                e.preventDefault();
-                // if(EventTarget == )s
-                // $s(this).next($('.lightbox_cart')).removeClass('none');
-            })
-
-
-
-            // =========== tab切換 =========== //
-            // function tabCutover() {
-            //     //抓出li.active的data-tablink的內容;例如是"one"
-            //     var tablink = $(".shop_tabItem").find("a").data("tablink");
-            //     // console.log(tablink);
-                
-            //     //將$("#one").顯示，而其他兄弟們(叫做.tab-inner)都隱藏
-                
-            //     $('#'+ tablink).show().siblings(".tab-inner").hide();
-                
-
-            //     //當tab標題li被點到時
-            //     $(".shop_tab .shop_tabItem").click(function (e) {
-            //         //抓出當下被點到的data-tablink的內容;例如是"Two",將$("#Two").顯示，而其他兄弟們(叫做.tab-inner)都隱藏
-            //         e.preventDefault();
-            //         // console.log('#'+$(this).find("a").data("tablink"));
-            //         $('#'+$(this).find("a").data("tablink")).show().siblings(".tab-inner").hide();
-                    
-            //         // 點擊後渲染黑色
-            //         console.log($(this));
-            //         $(this).find("a").addClass("on_tab");
-            //         console.log($(this));
-
-            //         // FIXME 移除不了class
-            //         $(this).next("shop_tabItem").find("a").removeClass("on_tab");
-            //     });
-            // }
-            // // tab 執行
-            // tabCutover();
-            
-        });
 
         </script>
     </body>

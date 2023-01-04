@@ -1,5 +1,7 @@
 // ============  chart.js ============ //
 
+import Chart from 'chart.js/auto';
+
 const myChart1 = document.getElementById('myChart1').getContext('2d');
 const myChart2 = document.getElementById('myChart2').getContext('2d');
 
@@ -11,7 +13,7 @@ let massPopChart1 = new Chart(myChart1, {
         labels: ['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6'],
         datasets: [{
             label: 'date',
-            data: [50, 50, 3, 5, 2, 3],
+            data: [30, 30, 3, 5, 2, 3],
             borderWidth: 1,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -51,7 +53,7 @@ let massPopChart2 = new Chart(myChart2, {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'month',
-            data: [50, 50, 3, 5, 2, 3, 10],
+            data: [25, 30, 3, 5, 2, 3, 10],
             borderWidth: 1,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
