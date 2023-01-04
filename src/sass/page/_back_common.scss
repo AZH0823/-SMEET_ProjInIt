@@ -21,8 +21,26 @@
     
                         .back_from {
                             width: 100%;
-                            h4 {
-                                margin-bottom: 30px;
+                            
+                            .back_fromTitle{
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 30px; // 🙆🏻 後台統一30px
+    
+                                .search{
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    align-items: center;
+                                    .insert_btn{
+                                        margin-right: 20px;
+                                    }
+                                    .search_container_item{
+                                        margin-right: 10px;
+                                        input{
+                                            padding: 6px;
+                                        }
+                                    }
+                                }
                             }
     
                             .back_from_wrapper {
