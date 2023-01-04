@@ -5,35 +5,43 @@
     background-image: url(../../img/landpage_img/banner.jpg);
     background-size: cover;
     background-position: center;
-    
+    width: 100vw;
+    height: 100vh;
 
     @include pad(){
-        min-height:900px;
+        // min-height:900px;
     }
-   
+    main{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
     img{
-        width: 30%;
-        margin: 0 auto;
+        width: 25%;
+        margin: 0 auto 1%;
         @include pad(){
             width: 50%;
-            margin: auto;
+            // margin: auto;
         }
         @include mobile(){
-            margin-top: 50%;
-            margin-bottom: 0;
+            // margin-top: 50%;
+            // margin-bottom: 0;
         }
     }
     
-    main{
+    .front_back{
         display: flex;
         justify-content: space-around;
-        margin: 0 20%;
+        margin: 0 auto 3%;
+        width: 60%;
         @include pad(){
-            margin: auto;
+            width: 80%;
         }
         @include mobile(){
-            margin: 10%;
-            margin-bottom: 70%;
+            margin: 0 auto 20%;
+            // margin-bottom: 70%;
         }
         a{
             width: 50%;
@@ -41,7 +49,7 @@
             text-decoration: none;
             color: $Camel-3;  
             border: 1px solid $Camel-3;
-
+            background-color: rgba(255,255,255,0.25);
             &:hover{
                 background-color: $Camel-3;
                 color: #898989;
