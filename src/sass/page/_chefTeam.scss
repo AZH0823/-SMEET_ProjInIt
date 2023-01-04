@@ -146,7 +146,7 @@
                     flex-wrap: wrap-reverse;
                     text-align: right;
                     margin-left: 10px;
-                    background-image: url(../../img/chefteam_img/chef.png);
+                    background-image: url(../img/chefteam_img/chef.png);
                     background-position: left;
                     background-repeat: no-repeat;
                     @include pad(){
@@ -233,12 +233,12 @@
                 }
 
                 ._chef_infor2{
-                    background-image: url(../../img/chefteam_img/chef2.png);
+                    background-image: url(../img/chefteam_img/chef2.png);
                    
                 }
 
                 ._chef_infor3{
-                    background-image: url(../../img/chefteam_img/chef3.png);               
+                    background-image: url(../img/chefteam_img/chef3.png);               
                 }
             }
 
