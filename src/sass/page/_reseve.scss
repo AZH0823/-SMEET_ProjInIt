@@ -188,7 +188,6 @@
 
     // 流程大圖
     .flow_container {
-
         // 標題公用
         .blockTitle {
             border-bottom: 1px solid black;
@@ -376,7 +375,18 @@
         @extend .green-1;
         border-bottom: 1px solid black;
         padding: 0px 0px 15px 0px;
+        display: flex;
+        align-items: flex-end;
+        justify-content:space-between;
         // &.detailInfo
+        span{
+            font-size: 14px;
+            
+            @include mobile(){
+                font-size: 12px;
+                margin-left: 5%;
+            }
+        }
     }
     // 當流程走到確認訂單將開啟
     .form_workFlow_contanier.detail_list {
@@ -1234,7 +1244,7 @@
             // 備註
             &.user_othertxt {
                 align-items: start;
-
+                margin-bottom: 30px;
             }
 
             // 紅利點數
@@ -1286,8 +1296,9 @@
                 }
 
                 &.user_othertxt {
+                    
                     grid-template-columns: 1fr;
-
+                    
                     h6 {
                         margin-bottom: 10px;
                     }
@@ -1380,7 +1391,7 @@
             display: grid;
             grid-template-columns: 1fr 20px 1fr;
             gap: 20px 0px;
-
+            margin-top: 30px;
             &>input {
                 font-size: 20px;
                 display: block;
