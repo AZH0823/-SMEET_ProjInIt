@@ -261,12 +261,16 @@
                     // console.log(this.inputData)
 
                     let vaildResult = []
+                    let errMsg = ''
                     for (const [key, value] of Object.entries(this.inputData)) {
                         // console.log(`${key}: ${value}`);
+
+                        
                         switch(key){
                             case 'agress':
                                 if(value === '' || value === false){
-                                    alert(`尚未確認預約須知`)
+                                    // alert(`尚未確認預約須知`)
+                                    errMsg +=`尚未確認預約須知\n`
                                     vaildResult.push(false)
                                 }else{
                                     vaildResult.push(true)
@@ -274,7 +278,8 @@
                                 break;
                             case 'sets':
                                 if(value === '' || value === false){
-                                    alert(`套餐未選擇`)
+                                    // alert(`套餐未選擇`)
+                                    errMsg +=`套餐未選擇\n`
                                     vaildResult.push(false)
                                 }else{
                                     vaildResult.push(true)
@@ -282,7 +287,8 @@
                             break;
                             case 'peoCount':
                                 if(value === '' || value === false){
-                                    alert(`人數未選擇`)
+                                    // alert(`人數未選擇`)
+                                    errMsg +=`人數未選擇\n`
                                     vaildResult.push(false)
                                 }else{
                                     vaildResult.push(true)
@@ -290,7 +296,8 @@
                             break;
                             case 'date':
                                 if(value === '' || value === false){
-                                    alert(`預約日期未選擇`)
+                                    // alert(`預約日期未選擇`)
+                                    errMsg +=`預約日期未選擇\n`
                                     vaildResult.push(false)
                                 }else{
                                         vaildResult.push(true)
@@ -298,7 +305,8 @@
                             break;
                             case 'orderTime':
                                 if(value === '' || value === false){
-                                    alert(`預約時段未選擇`)
+                                    // alert(`預約時段未選擇`)
+                                    errMsg +=`預約時段未選擇\n`
                                     vaildResult.push(false)
                                 }else{
                                         vaildResult.push(true)
@@ -306,20 +314,23 @@
                             break;
                             case 'chefTeam':
                                 if(value === '' || value === false){
-                                    alert(`尚未選擇預約時段`)
+                                    // alert(`尚未選擇預約團隊`)
+                                    errMsg +=`尚未選擇預約團隊`
                                     vaildResult.push(false)
                                 }else{
                                     vaildResult.push(true)
                                 }
                             break;
                         }
+
                         // if(!vaildResult) break;
                         // if(value === '' || value === false){
-                        //     alert(`${key} : 請填選資料`)
-                        //     break;
-                        // }
-                        
-                    }
+                            //     alert(`${key} : 請填選資料`)
+                            //     break;
+                            // }
+                            
+                        }
+                        if(errMsg.length !== 0) alert(errMsg)
 
                     // 使用者六個項目有一個沒有就停止以下動作
                     if(vaildResult.includes(false))return
