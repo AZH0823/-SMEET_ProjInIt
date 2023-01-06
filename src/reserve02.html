@@ -106,7 +106,7 @@
                                 <h6>{{totalPrice}}</h6>
                             </div>
                             <!-- 結帳按鈕 -->
-                            <button class="next_btn btn" @click="changeStep(1)">下一步</button>
+                            <button class="next_btn btn" @click="changeStep(1)" ref="comfirm">下一步</button>
                             <button class="prev_btn btn" @click="changeStep(-1)" v-if="this.workFlow.step !=1">返回上一步</button>
 
                         </section>
@@ -131,7 +131,7 @@
                                     <template v-for="(value,key,idx) in APIData.sets[this.inputData.sets - 1].dish" :key="idx" >
                                         <!-- {{value}}
                                         {{index}} -->
-                                        <p class="setkind">{{key}}<span style="color:red" v-if="setKind(this.inputData.sets - 1,key)"> ＊尚未正確合乎人數</span></p> 
+                                        <p class="setkind">{{key}}<span class="error_Msg" v-if="setKind(this.inputData.sets - 1,key)"> ＊尚未正確合乎人數</span></p> 
                                         <template v-for="(itemdetail ,sub_key) in value"  :key="sub_key">
                                             <li class="stepper_input" :data-set="itemdetail.id" :set-id="idx">
                                                 <div class=dish-title>{{itemdetail.dishName}}</div>
@@ -326,15 +326,21 @@
                             <div class="list_top">
                                 <div class="top_content gray">
                                     <div class="item">預約日期</div>
-                                    <div class="item">預約時間</div>
+                                    <div class="item">預約時段</div>
                                     <div class="item">人數</div>
                                     <div class="item">私廚團隊</div>
                                 </div>
+
+                                <!-- <span>{{inputData.date}}</span>
+                                    </div>
+                                    <div class="cheifTeam">
+                                        <img src="./img/reserve_img/reserve_icon05.svg" alt="">
+                                        <span>團隊廚師長:{{chefTeamName}}</span> -->
                                 <div class="top_content">
-                                    <div class="item">2022-12-24</div>
-                                    <div class="item"><span class="date">2021-11-24</span></div>
-                                    <div class="item">12人</div>
-                                    <div class="item">麗燕山 廚師長</div>
+                                    <div class="item">{{inputData.date}}</div>
+                                    <div class="item"><span class="date">{{displayOrederTime}}</span></div>
+                                    <div class="item">{{inputData.peoCount}}</div>
+                                    <div class="item">{{chefTeamName}} 廚師長</div>
                                 </div>
                             </div>
                             <!-- 訂單內容明細 -->
@@ -343,40 +349,50 @@
                                 <h4 class="detail_title green-1">私廚預約</h4>
                                 <div class="meal_container">
                                     <h6 class="meal_title">名物 私套餐</h6>
-                                    <div class="meal_cate font16 gray">
-                                        <p class="item">湯物</p>
-                                        <p class="item">前菜</p>
-                                        <p class="item">刺身</p>
-                                        <p class="item">主食</p>
-                                        <p class="item">甜點</p>
-                                        <p class="item">飲品</p>
-                                    </div>
+                                    
                                     <div class="meal_content font16">
-                                        <!-- 湯物 -->
-                                        <p class="item">奶香牛肝菌野菇濃湯</p>
-                                        <p class="item">石斑海鮮清湯</p>
-                                        <!-- 前菜 -->
-                                        <p class="item">燻鮭魚番茄佐優格醬</p>
-                                        <p class="item">深海魚皮野蔬沙拉佐醋醬</p>
-                                        <!-- 刺身 -->
-                                        <p class="item">大間本鮪中腹、秋鮭、貝類、牡丹蝦</p>
-                                        <!-- 主食 -->
-                                        <p class="item">嫩煎干貝佐松露菲力</p>
-                                        <p class="item">日本小田和牛壽喜燒</p>
-                                        <p class="item">龍蝦佐鮑魚海鮮拼盤</p>
-                                        <!-- 甜點 -->
-                                        <p class="item">抹茶布丁搭配綿密金時紅豆</p>
-                                        <p class="item">栗子羊羹</p>
-                                        <p class="item">春手毬和菓子</p>
-                                        <!-- 飲品 -->
-                                        <p class="item">抹茶海鹽奶蓋</p>
-                                        <p class="item">烘焙曼巴咖啡</p>
-                                        <p class="item">高山金萱茶</p>
-                                        <p class="item">檸檬海鹽氣泡飲</p>
-                                    </div>
-                                    <div class="meal_amount font16">
 
+                                        <!-- <template v-for="(value,key,idx) in APIData.sets[this.inputData.sets - 1].dish" :key="idx" >
+                                           
+                                            <p class="setkind">{{key}}<span style="color:red" v-if="setKind(this.inputData.sets - 1,key)"> ＊尚未正確合乎人數</span></p> 
+                                            <template v-for="(itemdetail ,sub_key) in value"  :key="sub_key"> -->
+                                        <template v-for="(value,key,idx) in APIData.sets[this.inputData.sets - 1].dish" :key="idx">
+                                            <h6 class="dishType meal_cate font16 gray">{{key}}</h6>
+                                            <template v-for="(itemDetail) in value" :key="itemDetail.id">
+                                                <!-- {{itemDetail}} -->
+
+                                                <p class="item" v-if="itemDetail.qty > 0"><span class="dishQty">X {{itemDetail.qty}}</span>{{itemDetail.dishName}}</p>
+                                            </template>
+                                        </template>
+                                        <!-- 湯物 -->
+                                        <!-- <h6 class="dishType meal_cate font16 gray">湯物</h6>
+                                        <p class="item">奶香牛肝菌野菇濃湯<span class="dishQty">X 2</span></p>
+                                        <p class="item">石斑海鮮清湯<span class="dishQty">X 2</span></p> -->
+                                        <!-- 前菜 -->
+                                        <!-- <h6 class="dishType meal_cate font16 gray">前菜</h6>
+                                        <p class="item">燻鮭魚番茄佐優格醬<span class="dishQty">X 2</span></p>
+                                        <p class="item">深海魚皮野蔬沙拉佐醋醬<span class="dishQty">X 2</span></p> -->
+                                        <!-- 刺身 -->
+                                        <!-- <h6 class="dishType meal_cate font16 gray">刺身</h6>
+                                        <p class="item">大間本鮪中腹、秋鮭、貝類、牡丹蝦<span class="dishQty">X 2</span></p> -->
+                                        <!-- 主食 -->
+                                        <!-- <h6 class="dishType meal_cate font16 gray">主食</h6>
+                                        <p class="item">嫩煎干貝佐松露菲力<span class="dishQty">X 2</span></p>
+                                        <p class="item">日本小田和牛壽喜燒<span class="dishQty">X 2</span></p>
+                                        <p class="item">龍蝦佐鮑魚海鮮拼盤<span class="dishQty">X 2</span></p> -->
+                                        <!-- 甜點 -->
+                                        <!-- <h6 class="dishType meal_cate font16 gray">甜點</h6>
+                                        <p class="item">抹茶布丁搭配綿密金時紅豆<span class="dishQty">X 2</span></p>
+                                        <p class="item">栗子羊羹<span class="dishQty">X 2</span></p>
+                                        <p class="item">春手毬和菓子<span class="dishQty">X 2</span></p> -->
+                                        <!-- 飲品 -->
+                                        <!-- <h6 class="dishType meal_cate font16 gray">飲品</h6>
+                                        <p class="item">抹茶海鹽奶蓋<span class="dishQty">X 2</span></p>
+                                        <p class="item">烘焙曼巴咖啡<span class="dishQty">X 2</span></p>
+                                        <p class="item">高山金萱茶<span class="dishQty">X 2</span></p>
+                                        <p class="item">檸檬海鹽氣泡飲<span class="dishQty">X 2</span></p> -->
                                     </div>
+                                    
                                 </div>
                             </div>
                             <!-- 單點加購 -->
@@ -384,75 +400,36 @@
                                 <h4 class="detail_title green-1">單點加購</h4>
                                 <div class="meal_container font16">
                                     <ul class="one_container">
-                                        <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div>
+                                        <template v-for=" item in APIData.otherDish" :key="item.id">
+                                            <li class="one_item" v-if="item.qty > 0">{{item.dishName}}<div class="one_count">X {{item.qty}}</div>
+                                            </li>    
+                                        </template>
+                                        <!-- <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div>
                                         </li>
                                         <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
                             <!-- 租借服務 -->
-
-                      
                             <div class="shop_list">
                                 <h4 class="detail_title green-1">租借服務</h4>
                                 <div class="meal_container font16">
                                     <ul class="one_container">
-                                        <li class="one_item">餐具<div class="one_count">x 6</div>
-                                        </li>
-                                        <li class="one_item">炊具<div class="one_count">x 6</div>
-                                        </li>
+                                        <template  v-for="(servie) in this.APIData.servies" :key="servie.id">
+                                            <li class="one_item">{{servie.title}}<div class="one_count">X {{inputData.peoCount}}</div></li>
+                                        </template>
                                     </ul>
-
-
-                                    <!-- <div class="item">餐具</div><div class="count">x 12</div> -->
-                                    <!-- <ul class="one_container">
-                                            <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div></li>
-                                        </ul> -->
-                                    <!-- </div>
-                                    <div class="meal_container font16">
-                                        <div class="item">炊具</div><div class="count">x 12</div>
-                                    </div>
-                                    <div class="meal_container font16">
-                                        <div class="item">餐盤</div><div class="count">x 12</div>
-                                    </div>
-                                    <div class="meal_container font16">
-                                        <div class="item">服務人員</div><div class="count">x 12</div>
-                                    </div> -->
-
                                 </div>
-                                <!-- 訂單資料 -->
-                                <div class="list_info">
-                                    <!-- <h4 class="detail_title green-1">訂單資料</h4> -->
-
-                                    <!-- <ul class="detail_info">
-
-                                        <li class="item">訂購人</li>
-                                        <li class="item">
-                                            <div class="detail_list_name" id="detail_name">楊一一 </div>
-                                            <div class="detail_list_name" id="detail_phone">0912-345-678</div>
-                                            <div class="detail_list_name" id="detail_phone">d4070707@gmail.com</div>
-                                        </li>
-                                        <li class="item">地址</li>
-                                        <li class="item" id="detail_addr">台北市中山區南京東路三段219號4樓</li>
-                                        <li class="item">餐點明細</li>
-                                        <li class="item gray">
-                                            <div class="cate">餐別<span id="detail_cate">晚餐</span></div>
-                                            <div class="people">人數<span id="detail_people">12人</span></div>
-                                        </li>
-                                    </ul> -->
-                                </div>
-
                                 <!-- 總計 -->
                                 <div class="total_container font16">
                                     <div class="item">小計</div>
-                                    <div class="item price">NT$<span id="detail_total">25,000</span></div>
+                                    <div class="item price">NT$<span id="detail_total">{{setPrice}}</span></div>
                                     <div class="item">加購價</div>
-                                    <div class="item price">NT$<span id="detail_total">25,000</span></div>
-                                    <div class="item">紅利點數</div>
-                                    <div class="item price">-NT$<span id="detail_total">500</span></div>
-                                    <div class="item">總金額 </div>
-                                    <div class="item price">NT$<span id="detail_total">25,000</span></div>
+                                    <div class="item price">NT$<span id="detail_total">{{otherPrice}}</span></div>
+                                    
+                                    <div class="item totalprice">總金額 </div>
+                                    <div class="item price totalprice">NT$<span id="detail_total">{{totalPrice}}</span></div>
                                     <!-- 結帳按鈕 -->
 
                                     <button class="next_btn btn item font16" @click="changeStep(1)">下一步</button>
@@ -472,38 +449,40 @@
                                     <h6>姓名</h6>
                                 </label>
                                 <input type="text" id="name" placeholder="請輸入姓名" v-model.trim="this.inputData.name">
+                                <span class="error_Msg">格式錯誤</span>
                             </div>
                             <div class="user_phone grid_confirm">
                                 <label for="phone">
                                     <h6>手機號碼</h6>
                                 </label>
                                 <input type="text" id="phone" placeholder="請輸入號碼" v-model.trim="this.inputData.phone" maxlength="10" >                                
-                                <span v-if="!checkPhoneNum">格式錯誤</span>
+                                <span v-if="!checkPhoneNum" class="error_Msg">格式錯誤</span>
                             </div>
                             <div class="user_email grid_confirm">
                                 <label for="email">
                                     <h6>電子信箱</h6>
                                 </label>
-                                <input type="text" id="email" placeholder="請輸入電子信箱" v-model.trim="this.inputData.email">
-                                <span v-if="!vaildEmail">格式錯誤</span>
+                                <input type="text" id="email" placeholder="請輸入電子信箱" v-model.trim="this.inputData.email" @blur="checkEmail">
+                                <span v-if="!checkEmail" class="error_Msg">格式錯誤</span>
                             </div>
                             <div class="user_addr">
                                 <label for="addr">
                                     <h6>地址</h6>
                                 </label>
-                                <!-- <select class="addr">
-                                    <option value="" selected disabled>請選擇縣市</option>
-                                </select>
-                                <select class="addr-select">
-                                    <option value="" selected disabled>請選擇區域</option> -->
-                                </select class="addr-select">
-                                <input type="text" placeholder="請輸入地址" id="addr" v-model="this.inputData.addr" maxlength="80">
+                            </select class="addr-select">
+                            <input type="text" placeholder="請輸入地址" id="addr" v-model="this.inputData.addr" maxlength="80">
+                            <span v-if="!checkEmail" class="error_Msg">格式錯誤</span>
+                            <!-- <select class="addr">
+                                <option value="" selected disabled>請選擇縣市</option>
+                            </select>
+                            <select class="addr-select">
+                                <option value="" selected disabled>請選擇區域</option> -->
                             </div>
                             <div class="user_othertxt grid_confirm">
                                 <label for="othertxt">
                                     <h6>備註</h6>
                                 </label>
-                                <textarea name="othertxt" id="othertxt" placeholder="其他需求" v-model="this.inputData.note"></textarea>
+                                <textarea name="othertxt" id="othertxt" placeholder="其他需求" v-model="this.inputData.note" maxlength="500"></textarea>
                             </div>
                             <!-- <div class="user_bonus grid_confirm">
                                 <label for="bonus" class="user_bonus">

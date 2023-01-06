@@ -440,7 +440,6 @@
                 padding-left: 0%;
                 grid-column: 1
             }
-
             .setInfolist,
             .addorderlist,
             .servies,
@@ -666,7 +665,7 @@
                     right: 2%;
                     font-size: 12px;
                     letter-spacing: 1.2px;
-                    color: red;
+                    color: $red;
                 }
             }
            
@@ -877,11 +876,12 @@
 
             // 餐點分類
             .meal_cate {
-                grid-column: 4 / 5;
+                grid-column: 1/2;
+                // grid-column: 4 / 5;
                 margin-top: 5px;
 
                 @include pad() {
-                    grid-column: 2 / 3;
+                    grid-column: 1 / 2;
                 }
 
                 @include mobile() {
@@ -912,15 +912,24 @@
 
             //餐點項目
             .meal_content {
-                grid-column: 5 / 9;
-                margin-top: 5px;
-
+                // grid-column: 5 / 9;
+                // margin-top: 5px;
+                display: grid;
+                grid-column: 4/8;
+                grid-template-columns: 1fr 3fr;
+                align-items: center;
                 @include pad() {
-                    grid-column: 3 / 9;
+                    grid-column: 2 / 9;
                 }
 
                 @include mobile() {
-                    grid-column: 2 / 6;
+                    grid-column: 1 / 6;
+                }
+                .item{
+                    grid-column: 2/3;
+                    .dishQty{
+                        margin-right: 30px;
+                    }
                 }
             }
 
@@ -967,7 +976,7 @@
 
                 @include mobile() {
                     grid-column: 1 / 2;
-                    color: #898989;
+                    // color: #898989;
                 }
 
             }
@@ -1136,9 +1145,10 @@
             grid-row-gap: 5px;
             margin-bottom: 50px;
             align-items: center;
-
+            margin-top: 50px;
             @include mobile() {
                 width: 100%;
+                margin-top: 20px;
             }
 
             .item {
@@ -1154,9 +1164,10 @@
                     text-align: right;
 
                 }
-
-                &:nth-child(7),
-                &:nth-child(8) {
+                
+                // &:nth-child(7),
+                // &:nth-child(8) {
+                &.totalprice{
                     padding-top: 10px;
                     border-top: 1px solid #000;
                 }
@@ -1197,7 +1208,7 @@
         // 填寫預約資料
         .grid_confirm {
             display: grid;
-
+            position: relative;
             grid-template-columns: 100px 1fr;
             // margin: 20px 10px;
             font-size: 20px;
@@ -1229,6 +1240,13 @@
             input::placeholder {
                 font-size: 20px;
 
+            }
+            // 格式錯誤驗證文字
+            .error_Msg{
+                color: $red;
+                position: absolute;
+                font-size: 12px;
+                right: 2%;
             }
 
             @include mobile {
@@ -1273,8 +1291,6 @@
                         }
                     }
                 }
-
-
             }
 
             textarea {
@@ -1285,8 +1301,6 @@
 
                 &::placeholder {
                     font-size: 20px;
-
-
                 }
             }
 
@@ -1326,7 +1340,14 @@
             margin: 30px 0;
             gap: 15px 0px;
             grid-template-columns: 100px 1fr 20px 1fr;
-
+            position: relative;
+            .error_Msg{
+                position: absolute;
+                font-size: 12px;
+                color:$red;
+                right: 3%;
+                top: 25%;
+            }
             @include mobile() {
                 font-size: 16px;
                 grid-template-columns: 1fr 20px 1fr;

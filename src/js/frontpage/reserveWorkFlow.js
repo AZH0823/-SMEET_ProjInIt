@@ -19,8 +19,9 @@ const RootComponent  = {
 
 
                 // step 2 user Data
-
-
+                // 將資料儲存於APIDATA
+                
+                // step 3 user Data
 
                 // step 4 user Data
                 name:'',
@@ -30,6 +31,12 @@ const RootComponent  = {
                 note:''
             },
             APIData:{
+                // 訂餐時間
+                orderTime:[
+                    {id:1,txt:'午餐',time:'11:00-14:00'},
+                    {id:2,txt:'下午茶',time:'11:00-14:00'},
+                    {id:3,txt:'晚餐',time:'18:00-21:00'},
+                ], 
                 // 套餐資料
                 sets:[
                     {
@@ -191,50 +198,7 @@ const RootComponent  = {
                             // {id:16,dishName:'檸檬海鹽氣泡飲-A',qut:0,dishType:'飲品'},                                
                         ]
                     },
-                    setB:{
-                        
-                        // dish:[
-                        //     {id:17,dishName:'奶香牛肝菌野菇濃湯-B',qut:0,dishType:'湯物'},
-                        //     {id:18,dishName:'石斑海鮮清湯-B',qut:0,dishType:'湯物'},
-                        //     {id:19,dishName:'燻鮭魚番茄佐優格醬-B',qut:0,dishType:'前菜'},
-                        //     {id:20,dishName:'深海魚皮野蔬沙拉佐醋醬-B',qut:0,dishType:'前菜'},
-                        //     {id:21,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-B',qut:0,dishType:'刺身'},
-                        //     {id:22,dishName:'嫩煎干貝佐松露菲力-B',qut:0,dishType:'主食'},
-                        //     {id:23,dishName:'日本小田和牛壽喜燒-B',qut:0,dishType:'主食'},
-                        //     {id:24,dishName:'龍蝦佐鮑魚海鮮拼盤-B',qut:0,dishType:'主食'},
-                        //     {id:25,dishName:'抹茶布丁搭配綿密金時紅豆-B',qut:0,dishType:'甜點'},
-                        //     {id:26,dishName:'栗子羊羹-B',qut:0,dishType:'甜點'},
-                        //     {id:27,dishName:'抹茶海鹽奶蓋-B',qut:0,dishType:'甜點'},
-                        //     {id:28,dishName:'春手毬和菓子-B',qut:0,dishType:'飲品'},
-                        //     {id:29,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},
-                        //     {id:30,dishName:'烘焙曼巴咖啡-B',qut:0,dishType:'飲品'},                                
-                        //     {id:31,dishName:'高山金萱茶-B',qut:0,dishType:'飲品'},                                
-                        //     {id:32,dishName:'檸檬海鹽氣泡飲-B',qut:0,dishType:'飲品'},                                
-                        // ]
-                    },
-                    setC:{
-                        checked:false,// 菜單是否有被選擇
-                        imgUrl:'img/reserve_img/reserve_set03.jpg',  
-                        // dish:[
-                        //     {id:33,dishName:'奶香牛肝菌野菇濃湯-c',qut:0,dishType:'湯物'},
-                        //     {id:34,dishName:'石斑海鮮清湯-c',qut:0,dishType:'湯物'},
-                        //     {id:35,dishName:'燻鮭魚番茄佐優格醬-c',qut:0,dishType:'前菜'},
-                        //     {id:36,dishName:'深海魚皮野蔬沙拉佐醋醬-c',qut:0,dishType:'前菜'},
-                        //     {id:37,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-c',qut:0,dishType:'刺身'},
-                        //     {id:38,dishName:'嫩煎干貝佐松露菲力-c',qut:0,dishType:'主食'},
-                        //     {id:39,dishName:'日本小田和牛壽喜燒-c',qut:0,dishType:'主食'},
-                        //     {id:40,dishName:'龍蝦佐鮑魚海鮮拼盤-c',qut:0,dishType:'主食'},
-                        //     {id:41,dishName:'抹茶布丁搭配綿密金時紅豆-c',qut:0,dishType:'甜點'},
-                        //     {id:42,dishName:'栗子羊羹-c',qut:0,dishType:'甜點'},
-                        //     {id:43,dishName:'抹茶海鹽奶蓋-c',qut:0,dishType:'甜點'},
-                        //     {id:44,dishName:'春手毬和菓子-c',qut:0,dishType:'飲品'},
-                        //     {id:45,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},
-                        //     {id:46,dishName:'烘焙曼巴咖啡-c',qut:0,dishType:'飲品'},                                
-                        //     {id:47,dishName:'高山金萱茶-c',qut:0,dishType:'飲品'},                                
-                        //     {id:48,dishName:'檸檬海鹽氣泡飲-c',qut:0,dishType:'飲品'},                                
-                        // ]
-
-                    },
+                   
                 },
             }
         }
@@ -271,7 +235,13 @@ const RootComponent  = {
                 // console.log(checkDishTypeVail)
                 checkDishTypeVail = checkDishTypeVail.find(el=>!el)
                 if(checkDishTypeVail === false)return alert('請選取相對應人數的餐點')
+            }
 
+
+            if(this.workFlow.step == 4){
+                console.log(`step 4 confrim`)
+                this.$refs.comfirm.innerHTML=`完成填寫`
+                // console.log()
             }
             this.workFlow.step += val;
             
@@ -328,7 +298,17 @@ const RootComponent  = {
                                         .map((el)=>el.qty).reduce((a,b)=>a+b);
             
             return totalNum !== this.inputData.peoCount                                               
+        },
+        phoneRule(str){
+            // this.inputData.phone.replace(/\D/g, "");
+            let phoneRule =  new RegExp("^09\\d{8}$");
+            return phoneRule.test(str)
+        },
+        emailRule(str){
+            let emailRule =  new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+            return emailRule.test(str);
         }
+
     },
     computed:{
 
@@ -342,6 +322,8 @@ const RootComponent  = {
             let orderSetName = this.APIData.sets.find(el=>el.id===this.inputData.sets)
             return {...orderSetName}.setName
         },
+
+        // 套餐加購總金額計算
         setPrice(){
             let setPrice = {...this.APIData.sets.find(el=>el.id===this.inputData.sets)}.setprice
             let setPeo = this.inputData.peoCount
@@ -349,7 +331,18 @@ const RootComponent  = {
             return `$ ${(setPrice * setPeo).toLocaleString()}`
         },
 
-        // orderview 金額計算
+        // 單品加購總金額計算
+        otherPrice(){
+            let otherDish = this.APIData.otherDish.map(item=>{
+                 if(item.qty > 0){
+                    return item.qty * item.price;
+                 }else return 0;
+            }).reduce((a,b)=>a+b)
+            
+            return otherDish
+        },
+
+        // orderview 總金額計算
         totalPrice(){
             // 訂單人數
             const count = this.inputData.peoCount
@@ -382,17 +375,30 @@ const RootComponent  = {
             return `$ ${(setTotal + otherDish + otherServies).toLocaleString()}`;
         },
 
+        // workFlow step 3
+        displayOrederTime(){
+            // let timeString = 
+            // console.log(this.APIData.orderTime)
+            let displayTime = this.APIData.orderTime.find((el)=>{
+                if(el.id ===this.inputData.orderTime){
+                    return el.time
+                }
+            })
+            // console.log(displayTime.time)
+            return displayTime.time;
+        },
+
         // workFlow step 4
+        // 格式驗證
         checkPhoneNum(){
             // 手機驗證格式
-            let phoneRule =  new RegExp("^09\\d{8}$");
-            return phoneRule.test(this.inputData.phone);
+            return this.phoneRule(this.inputData.phone);
         },
-        vaildEmail(){
-            let emailRegxp =  new RegExp("^([\w]+)(.[\w]+)*@([\w]+)(.[\w]{2,3}){1,2}$");
-            console.log(emailRegxp.test(this.inputData.email))
-            return emailRegxp.test(this.inputData.email);
-        }
+        checkEmail(){
+            // 電子信箱驗證格式
+            return this.emailRule(this.inputData.email);
+        },
+      
        
     },
     watch:{
@@ -412,4 +418,4 @@ const RootComponent  = {
    
 }
 
-let vm = Vue.createApp(RootComponent).mount('#myWorkFlow')
+const vm = Vue.createApp(RootComponent).mount('#myWorkFlow')
