@@ -14,8 +14,8 @@
         @@include('layout/banner.html',{
             "title":"SHOP",
             "src":"./img/shopmall_img/shopmall_headbanner.jpg"
-          })
-        <main class="wrapper shopMall" id="app">
+        })
+        <main class="wrapper shopMall" id="app" @click="xxx()">
             <!-- 商城tab+排序 -->
             <div class="shop_up">
                 <!-- tab -->
@@ -58,19 +58,24 @@
                     v-for="(item, i) in filtered_list" 
                     :key="item.name">
                 
-                        <li class="collect_list">
+                        <li class="collect_list" data-inside="true">
                             <div>
-                                <div class="product_img">
-                                    <a href="./shopMallDetail.html">
-                                        <img :src="item.img" alt="">
+                                <div class="product_img" data-inside="true">
+                                    <a href="./shopMallDetail.html" data-inside="true">
+                                        <img :src="item.img" alt="" data-inside="true">
                                     </a>
-                                    <i class="fa-solid fa-heart" :class="{shopMall_checkHeart: item.heart}" @click="collect_heart(item)"></i>
+                                    <i class="fa-solid fa-heart"
+                                    :class="{shopMall_checkHeart: item.heart}" 
+                                    @click="collect_heart(item)"
+                                    data-inside="true"></i>
                                 </div>
-                                <div class="product_content green-1">
-                                    <h6 class="product_title ">{{ item.name }}</h6>
-                                    <p class="font16">$<span class="product_money">{{ item.price }}</span></p>
-                                    <button type="button" class="cart_link" href="">
-                                        <i class="fa-solid fa-cart-shopping" @click="shopCar(isShow)"></i>
+                                <div class="product_content green-1" data-inside="true">
+                                    <h6 class="product_title" data-inside="true">{{ item.name }}</h6>
+                                    <p class="font16" data-inside="true">$<span class="product_money" data-inside="true">{{ item.price }}</span></p>
+                                    <button type="button" class="cart_link" href="" data-inside="true">
+                                        <i class="fa-solid fa-cart-shopping" 
+                                        @click="shopCar(item.id, item.name, item.price, item.img)"
+                                        data-inside="true"></i>
                                     </button>
                                 </div>
                             </div>
@@ -89,22 +94,24 @@
                     </div>
                 </article>
             </div>
+
+
             <!-- cart 燈箱 -->
-            
-            <div class="wrapper product_pop" id="product_pop" v-if="isShow">
-                <div class="container">
+            <div class="wrapper product_pop" id="product_pop" v-if="isShow" @click="popUp_Close()" :class="{shopMallOverfloat : isShow}">
+                <div class="container" :data-id="this.popupData.id" @click="popUp_ClosePreventD(e)">
+                    <i class="fa-solid fa-xmark" id="close_popUp" @click="close_popUp()"></i>
                     <div class="img_product">
-                        <img src="img/shopmall_img/shopmall_cart.jpg" alt="">
+                        <img :src="popupData.img" alt="">
                     </div>
-                    <h6 v-if="isShow.name">{{isShow.name}}</h6>
-                    <p class="font16">$<span class="money_pop">{{isShow.price}}</span></p>
+                    <h6>{{popupData.name}}</h6>
+                    <p class="font16">$<span class="money_pop">{{popupData.price}}</span></p>
                     <div class="count_btn">
                         <div class="plus_minus">
                             <!-- 的methods -->
-                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                            <div class="number">{{ueser.order}}</div>
+                            <div class="minus"><i class="fa-solid fa-minus" @click=""></i></div>
+                            <div class="number">{{popupData.amount}}</div>
                             <!-- 減少的methods -->
-                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
+                            <div class="plus"><i class="fa-solid fa-plus" @click=""></i></div>
                         </div>
                         <button type="button" class="inCart_btn1">加入購物車</button>
                     </div>
@@ -127,21 +134,27 @@
             const app = Vue.createApp({
                 data(){
                     return{
-                        // 使用者行為
-                        ueser:{
-                            // 產品數量
-                            order: 0,
+
+                        // 當點擊購物車將菜單中的資料抓進來，彈窗顯示這裡的資料
+                        popupData: {
+                            id: "",
+                            img: "",
+                            name: "",
+                            price: "",
+                            amount: 1
                         },
 
                         // 控制popup開關
-                        isShow:false, // FIXME
+                        isShow:false, 
 
-                        // 篩選分頁
+                        // 清空原本分頁資料
                         success_popup_interval:null,
                         success_popup:'',
 
-                        // 分頁器
+                        // 當前分頁狀態
                         current_tab: "tab1",
+
+                        // 現有分頁的data
                         shopMall_tab:[
                             {
                                 id: "tab1",
@@ -155,10 +168,9 @@
                                 id: "tab3",
                                 name:"甜品"
                             }
-                    
                         ],
                         
-                        // 商品清單
+                        // 商品清單假資料
                         MealsInfo: [
                             {
                                 category:'tab1',
@@ -167,7 +179,8 @@
                                 heart: false,
                                 name: "黑鮪刺身",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab1',
@@ -176,7 +189,8 @@
                                 heart: false,
                                 name: "北海道海膽壽司",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab1',
@@ -185,72 +199,73 @@
                                 heart: false,
                                 name: "蘆筍蝦手捲",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab2',
-                                id: "1",
+                                id: "4",
                                 img: "./img/shopmall_img/shopmall_product04.jpg",
                                 heart: false,
                                 name: "極品生魚片",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab2',
-                                id: "2",
+                                id: "5",
                                 img: "./img/shopmall_img/shopmall_product05.jpg",
                                 heart: false,
                                 name: "番茄海鮮清湯",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab2',
-                                id: "3",
+                                id: "6",
                                 img: "./img/shopmall_img/shopmall_product06.jpg",
                                 heart: false,
                                 name: "奶香牛肝菌野菇濃湯",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab3',
-                                id: "1",
+                                id: "7",
                                 img: "./img/shopmall_img/shopmall_product07.jpg",
                                 heart: false,
                                 name: "手沖牛肉湯",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab3',
-                                id: "2",
+                                id: "8",
                                 img: "./img/shopmall_img/shopmall_product08.jpg",
                                 heart: false,
                                 name: "酒焰龍蝦盛宴",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                             {
                                 category:'tab3',
-                                id: "3",
+                                id: "9",
                                 img: "./img/shopmall_img/shopmall_product10.jpg",
                                 heart: false,
                                 name: "繡球花和菓子",
                                 price: "700",
-                                collectTime: new Date()
+                                collectTime: new Date(),
+                                amount:1
                             },
                         ],
-                        
                     };
                 },
                 computed: {
-                    // // TODO 購物車
-                    // shopCar(isShow){
-                    //     // this.isShow != isShow;
-                    // },
-
                     // 原本菜單陣列依照curren_tab過濾
                     filtered_list(){
                         const filtered =  this.MealsInfo.filter((post) => {
@@ -260,28 +275,57 @@
                         return filtered
                     }
                 },
+
                 methods: {
-                    // TODO 購物車
-                    shopCar(isShow){
-                        // this.isShow != isShow;
-                    },
-
-
-
-                    // 收藏成功
-                    isshow(item){
-                        // popon
-                        console.log(item.heart);
-                        if(item.heart == true){
-                            item.heart = false;
-                            this.success_popup = '移除收藏成功'
-                        }else{
-                            item.heart = true;
-                            this.success_popup = '加入收藏成功'
-                        }
-
-                    },
                     
+                    // 點擊 X 關閉popUp並清空資料
+                    popUp_xClose(id, name, price, img){
+                        
+                        // 關閉popUp
+                        this.isShow = false;
+                        // 清空資料
+                        this.popupData.name = ""
+                        this.popupData.id = ""
+                        this.popupData.price = ""
+                        this.popupData.img = ""
+                    },
+                    // FIXME 怎麼觸及燈箱以外的地方，就可以讓燈箱關閉（目前在html結構上加上data-inside=”true“來判斷），但是這樣會報錯
+                    // xxx(){
+                    //     const target = e.target
+
+                    //     if (!target.matches('[data-inside]')) { 
+                    //         this.isShow = false;
+                    //     }
+                    // },
+
+                    
+                    // 點擊加入購物車 資料存到 loacalStorage，且關閉popUp
+
+                    
+
+                    // 清空popUp資料
+
+                    // 增加加商品數量
+
+                    // 減少商品數量
+
+                    // 點擊購物車 icon 後 顯示 popUp
+                    shopCar(id, name, price, img){
+                        // 開啟popUp
+                        this.isShow = true;
+                        // console.log(id, name, price, img);
+
+                        // asign 資料到popUp
+                        this.popupData.name = name
+                        this.popupData.id = id
+                        this.popupData.price = price
+                        this.popupData.img = img
+
+                        // 增加overfloat：hidden，使其不能滾動及點擊其他項目
+
+                    },
+
+                    // 商品愛心 收藏 及 移除
                     collect_heart(item){
                         // 加减爱心
                         console.log(item.heart);
@@ -292,7 +336,6 @@
                             item.heart = true;
                             this.success_popup = '加入收藏成功'
                         }
-
                         // 收藏成功 PopOn
                         clearInterval(this.success_popup_interval)
                         this.success_popup_interval = setInterval(() => {
@@ -302,8 +345,10 @@
                     }
                 },
             });
+
             const vm = app.mount("#app");
 
+            
 
 
         </script>
