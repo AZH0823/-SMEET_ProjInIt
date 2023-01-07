@@ -215,6 +215,11 @@ div.back_news {
             display: flex;
             height: 220px;
             margin-top: 25px;
+            img{
+                display: block;
+                object-fit: cover;
+            }
+            
         }
         .news_content{
             width: 95%;
