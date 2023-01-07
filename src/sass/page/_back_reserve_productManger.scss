@@ -145,4 +145,64 @@ div.back_reserve_productManger {
         }
 
     }
+    div.section_reserve{
+        border: 1px solid #000;      
+        width: 650px;
+        height: 830px;
+        margin: 0 auto;
+        h6{
+            font-size: 16px;
+            margin: 20px auto;
+        }
+
+        .reserve_top{
+            height: 45px;
+            text-align: center;
+            background-color: #F9F4EC;
+            p{
+                line-height: 45px;
+            }
+        }
+        .reserve_info{
+            width: 95%;
+            margin: 0 auto;
+            border-bottom: 1px solid #000;
+            
+        }
+        .reserve_type{
+            width: 95%;
+            margin: 0 auto;
+            margin-top: 20px;
+            li{
+                margin: 30px auto;
+                .type_content{
+                    margin-left: 50px;
+                    .name{
+                        input{
+                            width: 265px;
+                            height: 33px;
+                        }
+                    }
+                    .number{
+                        input{
+                            width: 160px;
+                            height: 33px;
+                        }
+                    }
+                    .price{
+                        input{
+                            width: 160px;
+                            height: 33px;
+                        }
+                    }
+                    
+                }
+            }
+        }
+        .section_reserve_btn{
+            width: 85px;
+            height: 27px;
+            margin-left: 270px;
+        }
+    }
 }
