@@ -520,11 +520,32 @@
                 </div>
             </main>
         </div>
+        <button id="getData">拿到資料</button>
     </div>
     @@include('layout/footer.html')
     <script src="./js/vender/Vue/vue.global.js"></script>
+    <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
     <script src="./js/vender/isJS/is.min.js"></script>
     <script src="./js/frontpage/reserveWorkFlow.js" type="module"></script>
+    <script>
+        const getdata =  document.querySelector('#getData');
+        getdata.addEventListener('click',select) 
+        function select(){    
+        $.ajax({            
+            method: "GET",
+            url: "php/frontpage/resev.php",
+            data:{},            
+            dataType: "json",
+            success: function (response) {                
+                // showCate(response);                                
+                console.log(response)
+            },
+            error: function(exception) {
+                alert("數據載入失敗: " + exception.status);
+            }
+        });
+    }
+    </script>
 </body>
 
 </html>
