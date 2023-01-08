@@ -7,6 +7,9 @@ const RootComponent  = {
             },
             // 使用者訂單建立
             inputData:{
+                // 取得會員是否登入
+                isLogin:false,
+
                 // step 1 user Data
                 // 第一階段使用者所有的資訊(已經LocalStroage 儲存完畢)
                 // 以下唯接收的資料型態
@@ -22,13 +25,16 @@ const RootComponent  = {
                 // 將資料儲存於APIDATA
                 
                 // step 3 user Data
+                // 將資料儲存於APIDATA
 
+                // 服務尚未儲存
                 // step 4 user Data
                 name:'',
                 phone:'',
                 email:'',
                 addr:'',
-                note:''
+                note:'',
+                point:0,
             },
             APIData:{
                 // 訂餐時間
@@ -204,8 +210,9 @@ const RootComponent  = {
         }
     },
     methods:{
-        changeStep(val){                    
+        changeStep(val,e){                    
             // step 1 檢查套餐及套及數量
+            let vaildStep = false;
             if(this.workFlow.step === 1){
                 // 使用者點選餐點
                 let setID = this.inputData.sets - 1
@@ -235,15 +242,54 @@ const RootComponent  = {
                 // console.log(checkDishTypeVail)
                 checkDishTypeVail = checkDishTypeVail.find(el=>!el)
                 if(checkDishTypeVail === false)return alert('請選取相對應人數的餐點')
-            }
-
-
-            if(this.workFlow.step == 4){
-                console.log(`step 4 confrim`)
-                this.$refs.comfirm.innerHTML=`完成填寫`
+                vaildStep = true
+            }else if(this.workFlow.step == 2){
+                // 最後要把客戶選的菜單塞回去
+                vaildStep = true
+            }else if(this.workFlow.step == 3){
+                let btn = e.target
                 // console.log()
+                if(btn.className.includes('next_btn')){
+                    // 模擬會員登錄
+                    let c = confirm('你要登入嗎?')
+                    if(c){
+                        this.inputData.isLogin = !this.inputData 
+                        vaildStep = true
+                    }else{
+                        alert('要登入才能進入下一個流程')
+                    }
+                }else{
+                    vaildStep = true
+                }
+               
+                
+            }else if(this.workFlow.step == 4){
+                // console.log(`step 4 confrim`)
+                // 拿取會員資料 API 
+                // 驗證格式
+                let btn = e.target
+                if(btn.className.includes('next_btn')){
+                    // 模擬會員登錄
+                    let c = confirm('是否要送出訂單')
+                    if(c){
+                        console.log(`檢驗格式`)
+                        // vaildStep = true
+                        for (const [key, value] of Object.entries(this.inputData)) {
+                            console.log(key,value)
+                            // console.log(this.inputData.key)
+                        }
+                    }else{
+                        
+                    }
+                }else{
+                    vaildStep = true
+                }
+
+            }else if(this.workFlow.step == 5){
+               
             }
-            this.workFlow.step += val;
+            
+            if(vaildStep)this.workFlow.step += val;
             
         },
         changeOrederViewImg(e){
@@ -339,9 +385,20 @@ const RootComponent  = {
                  }else return 0;
             }).reduce((a,b)=>a+b)
             
-            return otherDish
-        },
+            let otherServies = this.APIData.servies.map(serve=>{
+                if(serve.checked === true){
+                    // console.log(serve.title)
+                    return serve.price;
+                }else return 0
+            }).reduce((a,b)=>a+b)
+            // console.log(otherServies)
+            otherServies = otherServies * this.inputData.peoCount
 
+            return ( otherDish + otherServies ).toLocaleString()
+        },
+        pointDiscount(){
+            return this.inputData.point.toLocaleString()
+        },
         // orderview 總金額計算
         totalPrice(){
             // 訂單人數
@@ -354,7 +411,10 @@ const RootComponent  = {
             // 單點金額
             let otherDish = 0
             let otherServies = 0
-            if(this.workFlow.step == 2){
+
+            // 紅利點數扣款
+            let point = this.inputData.point || 0
+            if(this.workFlow.step == 2 ||this.workFlow.step == 3){
                 otherDish = this.APIData.otherDish.map(item=>{
                     //  console.log(item.price,item.qty)
                      if(item.qty > 0){
@@ -364,7 +424,7 @@ const RootComponent  = {
 
                 otherServies = this.APIData.servies.map(serve=>{
                     if(serve.checked === true){
-                        console.log(serve.title)
+                        // console.log(serve.title)
                         return serve.price;
                     }else return 0
                 }).reduce((a,b)=>a+b)
@@ -372,7 +432,11 @@ const RootComponent  = {
                 otherServies = otherServies * count
                 // console.log(otherServies)
             }
-            return `$ ${(setTotal + otherDish + otherServies).toLocaleString()}`;
+
+            if(this.workFlow.step == 4){
+                // console.log()
+            }
+            return `$ ${(setTotal + otherDish + otherServies - point).toLocaleString()}`;
         },
 
         // workFlow step 3
@@ -397,23 +461,29 @@ const RootComponent  = {
         checkEmail(){
             // 電子信箱驗證格式
             return this.emailRule(this.inputData.email);
-        },
-      
-       
+        },       
     },
     watch:{
         'workFlow.step'(newValue){
             // 限制控制流程1(套餐選擇),2(單品選擇),3(細項列表),4(填寫資料), 5(還沒做Sumit Form 表單)
             if(newValue < 1){
                 this.workFlow.step = 1
-            }else if(newValue > 4){
-                this.workFlow.step = 4
+            }else if(newValue > 5){
+                this.workFlow.step = 5
             }
+        },
+        'inputData.point'(newValue){
+            this.$nextTick(() => {
+                this.inputData.point= String(newValue).replace(/\D/g, '');
+
+            });
+          
         }
     },
     mounted(){
         // 把Local Stroage 給讀出來並渲染在網頁畫面上
         this.inputData = JSON.parse(localStorage.getItem('reseverOrder'))
+        
     },
    
 }
