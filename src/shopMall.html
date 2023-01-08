@@ -68,6 +68,7 @@
                                     <i class="fa-solid fa-heart"
                                     :class="{shopMall_checkHeart: item.heart}" 
                                     @click="collect_heart(item)"
+                                    @click="addCollectList(item)"
                                     data-inside="true"></i>
                                 </div>
                                 <div class="product_content green-1" data-inside="true">
@@ -78,6 +79,9 @@
                                         @click="shopCar(item.id, item.name, item.price, item.img)"
                                         data-inside="true"></i>
                                     </button>
+
+                                    
+
                                 </div>
                             </div>
                         </li>
@@ -109,12 +113,12 @@
                     <div class="count_btn">
                         <div class="plus_minus">
                             <!-- 的methods -->
-                            <div class="minus"><i class="fa-solid fa-minus" @click=""></i></div>
+                            <div class="minus" @click="popUpMinus(popupData.amount)"><i class="fa-solid fa-minus" @click=""></i></div>
                             <div class="number">{{popupData.amount}}</div>
                             <!-- 減少的methods -->
-                            <div class="plus"><i class="fa-solid fa-plus" @click=""></i></div>
+                            <div class="plus" @click="popUpPlus(popupData.amount)"><i class="fa-solid fa-plus" @click=""></i></div>
                         </div>
-                        <button type="button" class="inCart_btn1" @click="save_shoppingData(popupData)">加入購物車</button>
+                        <button type="button" class="inCart_btn1" @click="addShoppingCart(popupData, popupData.id)">加入購物車</button>
                     </div>
                 </div>
             </div>
@@ -136,24 +140,24 @@
                 data(){
                     return{
                         // ========= popUp ========= //
-                        // 控制popup開關
+                        // 控制卡片 popup 開關
                         isShow:false, 
 
-                        // 當點擊購物車將菜單中的資料抓進來，彈窗顯示這裡的資料
+                        // 燈箱資料，資料源自 MealsInfo
                         popupData: {
                             id: "",
                             img: "",
                             name: "",
                             price: "",
-                            amount: 1
+                            amount: 1,
                         },
-                        // ========= 收藏後的資料會帶到這裡，並且會存到 LoacalStorage ========= //
-                        
-                        // 點擊後的愛心存到這裡顯示
-                        collect_heart_data:[],
-
-                        // 第二個點擊後的愛心存到這裡
+                        // ========= 收藏後的資料會帶到這裡 ========= //
                         collect_heart_data_list:[],
+
+                        // ========= 點擊購物車的資料會帶到這裡 ========= //
+                        ShoppingCartList: [],
+
+                        ShoppingCartListAll: [],
 
                         
                         // ========= 分頁 ========= // 
@@ -191,7 +195,7 @@
                                 name: "黑鮪刺身",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:3
                             },
                             {
                                 category:'tab1',
@@ -201,7 +205,7 @@
                                 name: "北海道海膽壽司",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:5
                             },
                             {
                                 category:'tab1',
@@ -211,7 +215,7 @@
                                 name: "蘆筍蝦手捲",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:3
                             },
                             {
                                 category:'tab2',
@@ -221,7 +225,7 @@
                                 name: "極品生魚片",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:7
                             },
                             {
                                 category:'tab2',
@@ -231,7 +235,7 @@
                                 name: "番茄海鮮清湯",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:2
                             },
                             {
                                 category:'tab2',
@@ -241,7 +245,7 @@
                                 name: "奶香牛肝菌野菇濃湯",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:9
                             },
                             {
                                 category:'tab3',
@@ -251,7 +255,7 @@
                                 name: "手沖牛肉湯",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:17
                             },
                             {
                                 category:'tab3',
@@ -261,7 +265,7 @@
                                 name: "酒焰龍蝦盛宴",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:6
                             },
                             {
                                 category:'tab3',
@@ -271,7 +275,7 @@
                                 name: "繡球花和菓子",
                                 price: "700",
                                 collectTime: new Date(),
-                                amount:1
+                                amount:11
                             },
                         ],
                     };
@@ -288,17 +292,6 @@
                 },
 
                 methods: {
-                    
-                    // 點擊 X 關閉popUp並清空資料
-                    popUp_xClose(id, name, price, img){
-                        // 關閉popUp
-                        this.isShow = false;
-                        // 清空資料
-                        this.popupData.name = ""
-                        this.popupData.id = ""
-                        this.popupData.price = ""
-                        this.popupData.img = ""
-                    },
                     // TODO 怎麼觸及燈箱以外的地方，就可以讓燈箱關閉（目前在html結構上加上data-inside=”true“來判斷），但是這樣會報錯
                     // xxx(){
                     //     const target = e.target
@@ -308,75 +301,122 @@
                     //     }
                     // },
 
-
-                    // 點擊加入購物車 資料存到 loacalStorage，且關閉popUp
-                    save_shoppingData(shoppingData){
-                        localStorage.setItem("shoppingData", JSON.stringify(popupData));
-                    },
-
-
-                    // 增加加商品數量
-
-                    // 減少商品數量
+                    // ========= 購物車行為 ========= //
 
                     // 點擊卡片購物車 icon 後 顯示 popUp
                     shopCar(id, name, price, img){
                         // 開啟popUp
                         this.isShow = true;
-                        // console.log(id, name, price, img);
 
                         // asign 資料到popUp
                         this.popupData.name = name
                         this.popupData.id = id
                         this.popupData.price = price
                         this.popupData.img = img
-
-                        // push 到新的陣列以便存到 localStorage
-                        // this.collect_heart_data.push(this.popupData);
-                        // console.log(collect_heart_data);
-                        // console.log("111");
-
-                        // localStorage.setItem("shopCollect", JSON.stringify(collect_heart_data)); // 增加localStorage，傳給會員中心
                     },
 
-                    // 點擊加入購物車後關閉PopUp，並將資料帶入localStorage
-                    addShoppingCart(){
+                    // 點擊 X 關閉popUp並清空資料
+                    popUp_xClose(id, name, price, img){
+                        // 關閉popUp
                         this.isShow = false;
+                        // 清空資料
+                        this.popupData.amount = 1;
                     },
 
-                    // 商品愛心 收藏 及 移除
+                    // 商品數量加
+                    popUpPlus(amount){
+                        // console.log(amount);
+                        this.popupData.amount ++;
+                    },
+                    // 商品數量減
+                    popUpMinus(amount){
+                        // console.log(amount);
+                        if(this.popupData.amount > 1){
+                            this.popupData.amount --;
+                        }
+                    },
+                    
+                    // FIXME 還沒想到怎麼將陣列中重復的值相加
+                    // addShoppingCart(popupData, id){
+                        
+                        // asign 資料到popUp
+                        // this.ShoppingCartList.id = popupData.id
+                        // console.log(this.ShoppingCartList.id); // 值為：1
+                        
+                        // this.ShoppingCartList.push(popupData);
+                        
+
+                        // const cacheData = [];
+                        // const newData = [];
+                        // console.log(this.ShoppingCartList); // 得到商品物件
+                        // let shopCartLi = this.ShoppingCartList;
+
+                        // shopCartLi.forEach((item) => {
+                            
+                        //     // 避免陣列第0筆一開始就上傳，所以預設就-1
+                        //     const str = item.id - 1;
+
+                        //     if (typeof cacheData[str] === 'undefined') {
+                        //         cacheData[str] = item;
+                        //         console.log(cacheData);
+                        //     } else {
+                        //         parseInt(cacheData[str].amount) + parseInt(item.amount);
+                        //     }
+                        // });
+
+                        // 關閉購物車
+                        // this.isShow = false;
+
+                        // 數量回到初始值
+                        // this.popupData.amount = 1;
+                    // },
+
+                    // 點擊加入購物車 資料存到 loacalStorage，且關閉popUp
+                    // save_shoppingData(shoppingData){
+                    //     localStorage.setItem("shoppingData", JSON.stringify(popupData));
+                    // },
+
+                    // ========= 商品收藏 ========= //
+
+                    // 收藏商品資料加入空陣列
+                    addCollectList(item){
+                        // console.log(item);
+                        // push 到新的陣列以便存到 localStorage
+                        this.collect_heart_data_list.push(item);
+                    },
+
+                    // 收藏商品資料移除
+                    removeCollectList(item){
+                        this.collect_heart_data_list.shift(item);
+                    },
+
+
+                    // 商品愛心收藏及移除（樣式及提醒popUp）
                     collect_heart(item){
                         // 加减爱心
                         console.log(item.heart);
                         if(item.heart == true){
                             item.heart = false;
                             this.success_popup = '移除收藏成功'
-                            localStorage.removeItem("shopCollect"); // 刪除localStorage
+                            this.removeCollectList(item)
+
                         }else{
                             item.heart = true;
                             this.success_popup = '加入收藏成功'
-
-                            // push 到新的陣列以便存到 localStorage
-
-                            this.collect_heart_data.name = item.name
-                            this.collect_heart_data.id = item.id
-                            this.collect_heart_data.price = item.price
-                            this.collect_heart_data.img = item.img
-                            
-                            //FIXME 這樣會變成物件包陣列
-                            this.collect_heart_data_list.push(this.collect_heart_data);
-                            // console.log(this.collect_heart_data_list);
-
-                            // localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list)); // 增加localStorage，傳給會員中心
-
+                            this.addCollectList(item)
                         }
-                        // 收藏成功 PopOn
+
+                        // 收藏 & 移除 PopOn 消失
                         clearInterval(this.success_popup_interval)
                         this.success_popup_interval = setInterval(() => {
                             this.success_popup= ''
                         }, 1000);
 
-                    }
+                        // 收藏增加 LoacalStorage
+                        // console.log(this.collect_heart_data_list);
+                        localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
+                    },
+
                 },
             });
 
