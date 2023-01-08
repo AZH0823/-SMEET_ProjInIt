@@ -19,8 +19,8 @@
     <div class="fulid_wrapper reseve_flow">
         <div class="wrapper">
             <main class="content">
-                <div class="work_flow_lists" id="myWorkFlow">
-                    <ul class="flow_container">
+                <div class="work_flow_lists" id="myWorkFlow" >
+                    <ul class="flow_container" v-if="workFlow.step !== 5">
                         <!-- finsh 完成填寫 checked 目前進度 -->
                         <li class="flowList" :class="{'checked':workFlow.step >= 1}" flowName="選擇套餐">1</li>
                         <li class="flowList" :class="{'checked':workFlow.step >= 2}" flowName="加購服務">2</li>
@@ -30,7 +30,7 @@
                     <div class="form_workFlow_contanier " :class="{'detail_list':workFlow.step === 3}">
                         <!-- detail_list  明細請打開,display: none;-->
                         <!-- 結帳顯示專區  -->
-                        <section class="oder_view" :class="{'d_none':workFlow.step === 3}">
+                        <section class="oder_view" :class="{'d_none':workFlow.step === 3 ||workFlow.step === 5 }">
                             <ul class="checkout_contanier">
                                 <!-- 人員資訊 -->
                                 <li id="order_Info" class="order_detailInfo">
@@ -96,7 +96,7 @@
 
                             <ul class="coupon"  v-if="workFlow.step >= 4">
                                 <!-- coupon 打折金額 -->
-                                <li class="coupon_title"><span>紅利點數</span><span></span><span>-$ 2,114</span></li>
+                                <li class="coupon_title" v-if="this.inputData.point > 0"><span>紅利點數</span><span></span><span>-$ {{pointDiscount}}</span></li>
                             </ul>
 
 
@@ -106,8 +106,8 @@
                                 <h6>{{totalPrice}}</h6>
                             </div>
                             <!-- 結帳按鈕 -->
-                            <button class="next_btn btn" @click="changeStep(1)" ref="comfirm">下一步</button>
-                            <button class="prev_btn btn" @click="changeStep(-1)" v-if="this.workFlow.step !=1">返回上一步</button>
+                            <button class="next_btn btn" @click="changeStep(1,$event)" ref="comfirm">下一步</button>
+                            <button class="prev_btn btn" @click="changeStep(-1,$event)" v-if="this.workFlow.step !=1">返回上一步</button>
 
                         </section>
                         <!-- 選擇套餐 -->
@@ -432,8 +432,8 @@
                                     <div class="item price totalprice">NT$<span id="detail_total">{{totalPrice}}</span></div>
                                     <!-- 結帳按鈕 -->
 
-                                    <button class="next_btn btn item font16" @click="changeStep(1)">下一步</button>
-                                    <button class="prev_btn btn item font16" @click="changeStep(-1)">返回上一步</button>
+                                    <button class="next_btn btn item font16" @click="changeStep(1,$event)" >下一步</button>
+                                    <button class="prev_btn btn item font16" @click="changeStep(-1,$event)">返回上一步</button>
 
                                 </div>
 
@@ -484,16 +484,20 @@
                                 </label>
                                 <textarea name="othertxt" id="othertxt" placeholder="其他需求" v-model="this.inputData.note" maxlength="500"></textarea>
                             </div>
-                            <!-- <div class="user_bonus grid_confirm">
+                            <div class="user_bonus grid_confirm">
                                 <label for="bonus" class="user_bonus">
                                     <h6>使用會員紅利點數折抵訂單金額</h6>
-                                    <div class="bonus_input"><input type="number" id="bonus">元</div>
+                                    <div class="bonus_input"><input type="text" id="bonus" v-model.number="this.inputData.point">元</div>
                                 </label>
-                            </div> -->
-                            <!-- <h6 class="blockTitle">6.付款資訊<span>已選擇支付方式(VISA、Master、JCB)</span></h6>
+                            </div>
+                            <h6 class="blockTitle">6.付款資訊<span>已選擇支付方式(VISA、Master、JCB)</span></h6>
                             <div class="user_pay">
-
-                                <input type="number" placeholder="卡號" required class="card_num">
+                                <div>
+                                    <input type="number" placeholder="卡號" required class="card_num">
+                                    <input type="number" placeholder="卡號" required class="card_num">
+                                    <input type="number" placeholder="卡號" required class="card_num">
+                                    <input type="number" placeholder="卡號" required class="card_num">
+                                </div> 
 
                                 <input type="text" placeholder="持卡人姓名" required class="card_name">
 
@@ -501,8 +505,16 @@
 
                                 <input type="number" placeholder="檢核碼" required class="card_checknum" min="0" max="999">
 
-                            </div> -->
+                            </div>
 
+                        </section>
+
+                        <section class="step_flow  step5" :class="{'nowpage': workFlow.step === 5}">
+                            <div class="container">
+                                <h3>訂單已完成(訂單編號：1)</h3>
+                                <h5>24小時內會有專人與您聯繫，再請留意來電</h5>
+                                <a href="index_home.html" class="home_btn">回到首頁</a>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -511,6 +523,7 @@
     </div>
     @@include('layout/footer.html')
     <script src="./js/vender/Vue/vue.global.js"></script>
+    <script src="./js/vender/isJS/is.min.js"></script>
     <script src="./js/frontpage/reserveWorkFlow.js" type="module"></script>
 </body>
 
