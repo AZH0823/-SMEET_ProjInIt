@@ -1,179 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>廚師管理</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- ============== 缺搜尋BAR ============== -->
     <div class="back_chefstManger fulid_wrapper">
-        <div class="backwrapper">
-            <header>
-                @@include('layout/back_header.html')
-            </header>
+      <div class="backwrapper">
+        <header>@@include('layout/back_header.html')</header>
 
-            <div class="container">
-                <main class="right_content">
-                    <section class="section1">
-                        <div class="swiper_img_update">
-                            <h4 class="h4  green-1">廚師管理</h4>
-                            <h4 class="h4 second">輪播圖</h4>
-                            <div class="addImg_block">
-                                <img src="./img/back_page/chefs_addImag.png" alt="">
-                                <img src="./img/back_page/chefs_addImag.png" alt="">
-                                <img src="./img/back_page/chefs_addImag.png" alt="">
-                                <i class="fa-regular fa-square-plus"></i>
-                            </div>
+        <div class="container">
+          <main class="right_content">
+            <section class="section1">
+              <div class="swiper_img_update">
+                <h4 class="h4 green-1">廚師管理</h4>
+                <h4 class="h4 second">輪播圖</h4>
+                <div class="addImg_block">
+                  <img src="./img/back_page/chefs_addImag.png" alt="" />
+                  <img src="./img/back_page/chefs_addImag.png" alt="" />
+                  <img src="./img/back_page/chefs_addImag.png" alt="" />
+                  <i class="fa-regular fa-square-plus"></i>
+                </div>
+              </div>
+            </section>
+            <section class="section2">
+              <div class="btn_wrap">
+                <div class="insert_btn" style="margin-left: 20px">新增</div>
+                <div class="insert_btn" style="margin-left: 20px">班表</div>
+              </div>
+              <!-- form -->
+              <div class="back_from">
+                <div class="back_from_wrapper">
+                  <!-- row-1 -->
+                  <div class="grid_container">
+                    <div class="grid_item">團隊編號</div>
+                    <div class="grid_item">團隊名稱</div>
+                    <div class="grid_item">簡介</div>
+                    <div class="grid_item">資訊</div>
+                    <div class="grid_item">狀態</div>
+                  </div>
+
+                  <!-- row-2 -->
+                  <div class="grid_container">
+                    <div class="grid_item">G00136</div>
+                    <div class="grid_item">立雁杉團隊</div>
+                    <div class="grid_item">人稱，平成末的日式...</div>
+                    <div class="grid_item green-2 checked">查看/編輯</div>
+                    <div class="grid_item">
+                      <label class="switch">
+                        <input type="checkbox" class="switch_btn" checked />
+                        <span class="slider"></span>
+                        <p class="slider_content">上架</p>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- row-3 -->
+                  <div class="grid_container">
+                    <div class="grid_item">G00136</div>
+                    <div class="grid_item">立雁杉團隊</div>
+                    <div class="grid_item">人稱，平成末的日式...</div>
+                    <div class="grid_item green-2 checked">查看/編輯</div>
+                    <div class="grid_item">
+                      <label class="switch">
+                        <input type="checkbox" class="switch_btn" checked />
+                        <span class="slider"></span>
+                        <p class="slider_content">上架</p>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- row-4 -->
+                  <div class="grid_container">
+                    <div class="grid_item">G00136</div>
+                    <div class="grid_item">立雁杉團隊</div>
+                    <div class="grid_item">人稱，平成末的日式...</div>
+                    <div class="grid_item green-2 checked">查看/編輯</div>
+                    <div class="grid_item">
+                      <label class="switch">
+                        <input type="checkbox" class="switch_btn" checked />
+                        <span class="slider"></span>
+                        <p class="slider_content">上架</p>
+                      </label>
+                    </div>
+                  </div>
+                  <!-- row-4 -->
+                  <div class="grid_container">
+                    <div class="grid_item">G00136</div>
+                    <div class="grid_item">立雁杉團隊</div>
+                    <div class="grid_item">人稱，平成末的日式...</div>
+                    <div class="grid_item green-2 checked">查看/編輯</div>
+                    <div class="grid_item">
+                      <label class="switch">
+                        <input type="checkbox" class="switch_btn" checked />
+                        <span class="slider"></span>
+                        <p class="slider_content">上架</p>
+                      </label>
+                    </div>
+                  </div>
+                  <!-- row-4 -->
+                  <div class="grid_container">
+                    <div class="grid_item">G00136</div>
+                    <div class="grid_item">立雁杉團隊</div>
+                    <div class="grid_item">人稱，平成末的日式...</div>
+                    <div class="grid_item green-2 checked">查看/編輯</div>
+                    <div class="grid_item">
+                      <label class="switch">
+                        <input type="checkbox" class="switch_btn" checked />
+                        <span class="slider"></span>
+                        <p class="slider_content">上架</p>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- wrapper -->
+              </div>
+              <!-- back_from -->
+
+              <!--新增廚師團隊的popon開始-->
+              <div class="chef_popon">
+                <div class="chef_popon_top">
+                  <p>新增廚師團隊</p>
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="chef_label">
+                  <label for="name">團隊名稱：</label>
+                  <input type="text" id="name" />
+                </div>
+                <div class="chef_label">
+                  <label for="number">團隊編號：</label>
+                  <input type="text" id="number" />
+                </div>
+                <div class="chef_label">
+                  <label for="chef_introduce">廚師簡介：</label>
+                  <textarea
+                    name=""
+                    id="chef_introduce"
+                    cols="30"
+                    rows="10"
+                    maxlength="150"
+                  >
+人稱，平成末的日式料理專家，在冷熱料理中輕鬆切換，變化中不失和諧感，經典懷石風味的割烹料理彷如露天寫生一般充滿藝術的氣息，一口一口的念念不忘，打斷你對日式料理的初想，給你獨一無二的念想。
+                          </textarea
+                  >
+                </div>
+                <div class="chef_info">
+                  <label for="information">團隊資訊：</label>
+                  <div class="chef_info_img">
+                    <div>拖曳放入素材</div>
+                    <p>（團隊圖片）</p>
+                  </div>
+                </div>
+                <div class="chef_popon_flex">
+                  <div class="chef_pop_col">
+                    <label for="job">職稱：</label>
+                    <input type="text" id="job" />
+                    <label for="chef_popon_name">名稱</label>
+                    <input type="text" id="chef_popon_name" />
+                    <label for="">圖片：</label>
+                    <div>加入圖片</div>
+                  </div>
+                  <div class="chef_pop_col">
+                    <label for="job">職稱：</label>
+                    <input type="text" id="job" />
+                    <label for="chef_popon_name">名稱</label>
+                    <input type="text" id="chef_popon_name" />
+                    <label for="">圖片：</label>
+                    <div>加入圖片</div>
+                  </div>
+                  <div class="chef_pop_col">
+                    <label for="job">職稱：</label>
+                    <input type="text" id="job" />
+                    <label for="chef_popon_name">名稱</label>
+                    <input type="text" id="chef_popon_name" />
+                    <label for="">圖片：</label>
+                    <div>加入圖片</div>
+                  </div>
+                </div>
+                <div class="save_btn_chef">儲存</div>
+              </div>
+              <!--新增廚師團隊的popon結束-->
+
+              <!--新增團隊班表的popon開始-->
+              <div class="chef_schedule">
+                <div class="chef_schedule_top">
+                  <p>團隊班表</p>
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="chef_schedule_flex">
+                  <!--放日曆的地方-->
+                  <div>日曆</div>
+                  <!--三個團隊的按鈕區-->
+                  <div class="chef_schedule_col">
+                    <!--立雁杉的按鈕區-->
+                    <div class="chef_schedule_item">
+                      <p>立雁杉團隊</p>
+                      <div class="btn_flex">
+                        <div class="timeorder_btn">
+                          <p class="meal_t">午餐時段</p>
+                          <p class="period_t">(11:00-14:00)</p>
                         </div>
-                    </section>
-                    <section class="section2">
-                        <div class="btn_wrap">
-                            <div class="insert_btn" style="margin-left: 20px;">新增</div>  
-                            <div class="insert_btn" style="margin-left: 20px;">班表</div>  
+                        <div class="timeorder_btn is_Order">
+                          <p class="meal_t">午茶時段</p>
+                          <p class="period_t">(14:30~16:30)</p>
                         </div>
-                        <!-- form -->
-                        <div class="back_from">
-                            <div class="back_from_wrapper">
-    
-                                    <!-- row-1 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">團隊編號</div>
-                                    <div class="grid_item">團隊名稱</div>
-                                    <div class="grid_item">簡介</div>
-                                    <div class="grid_item">資訊</div>
-                                    <div class="grid_item">狀態</div>
-                                </div>
-
-                                <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">G00136</div>
-                                    <div class="grid_item">立雁杉團隊</div>
-                                    <div class="grid_item">人稱，平成末的日式...</div>
-                                    <div class="grid_item green-2 checked">查看/編輯</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">G00136</div>
-                                    <div class="grid_item">立雁杉團隊</div>
-                                    <div class="grid_item">人稱，平成末的日式...</div>
-                                    <div class="grid_item green-2 checked">查看/編輯</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">G00136</div>
-                                    <div class="grid_item">立雁杉團隊</div>
-                                    <div class="grid_item">人稱，平成末的日式...</div>
-                                    <div class="grid_item green-2 checked">查看/編輯</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">G00136</div>
-                                    <div class="grid_item">立雁杉團隊</div>
-                                    <div class="grid_item">人稱，平成末的日式...</div>
-                                    <div class="grid_item green-2 checked">查看/編輯</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">G00136</div>
-                                    <div class="grid_item">立雁杉團隊</div>
-                                    <div class="grid_item">人稱，平成末的日式...</div>
-                                    <div class="grid_item green-2 checked">查看/編輯</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                            </div><!-- wrapper -->
-                        </div><!-- back_from -->
-
-
-                        <!--新增廚師團隊的popon-->
-
-                        
-                        
-                        <!-- 頁碼-->
-                        <div class="page">
-                            <ul class="page_ul">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            </ul>
+                        <div class="timeorder_btn is_Order">
+                          <p class="meal_t">晚餐時段</p>
+                          <p class="period_t">(18:30~21:00)</p>
                         </div>
-                    </section><!-- section1 -->
-                </main>
-                
-                @@include('layout/back_footer.html')
-            </div><!-- container -->
+                      </div>
+                    </div>
+
+                    <!--章煾蘋的按鈕區-->
+                    <div class="chef_schedule_item">
+                      <p>章煾蘋團隊</p>
+                      <div class="btn_flex">
+                        <div class="timeorder_btn">
+                          <p class="meal_t">午餐時段</p>
+                          <p class="period_t">(11:00-14:00)</p>
+                        </div>
+                        <div class="timeorder_btn is_Order">
+                          <p class="meal_t">午茶時段</p>
+                          <p class="period_t">(14:30~16:30)</p>
+                        </div>
+                        <div class="timeorder_btn is_Order">
+                          <p class="meal_t">晚餐時段</p>
+                          <p class="period_t">(18:30~21:00)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <!--張聖潔的按鈕區-->
+                    <div class="chef_schedule_item">
+                      <p>張聖潔團隊</p>
+                      <div class="btn_flex">
+                        <div class="timeorder_btn">
+                          <p class="meal_t">午餐時段</p>
+                          <p class="period_t">(11:00-14:00)</p>
+                        </div>
+                        <div class="timeorder_btn is_Order">
+                          <p class="meal_t">午茶時段</p>
+                          <p class="period_t">(14:30~16:30)</p>
+                        </div>
+                        <div class="timeorder_btn is_Order">
+                          <p class="meal_t">晚餐時段</p>
+                          <p class="period_t">(18:30~21:00)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--新增團隊班表的popon結束-->
+              <!-- 頁碼-->
+              <div class="page">
+                <ul class="page_ul">
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                </ul>
+              </div>
+            </section>
+            <!-- section1 -->
+          </main>
+
+          @@include('layout/back_footer.html')
         </div>
+        <!-- container -->
+      </div>
     </div>
 
-    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
+    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+    <!-- JQ -->
     <script
-        type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><!-- icon_cdn -->
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <!-- icon_cdn -->
     <script
-        nomodule="nomodule"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+      nomodule="nomodule"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <!-- icon_cdn -->
+    <script src="./js/back_page/back_nav/back_nav.js"></script>
+    <!-- 導覽列 -->
     <script>
-        const switchBtn = document.querySelectorAll(".switch_btn");
-        const sliderContent = document.querySelectorAll(".slider_content");
-        // console.log(switchBtn);
+      const switchBtn = document.querySelectorAll(".switch_btn");
+      const sliderContent = document.querySelectorAll(".slider_content");
+      // console.log(switchBtn);
 
-        for(let i=0; i < switchBtn.length; i++){
-            // console.log(i)
-            switchBtn[i].addEventListener("click", function(){
-                console.log(this.checked); // ture /false
-                console.log(i); 
-                console.log(this)
+      for (let i = 0; i < switchBtn.length; i++) {
+        // console.log(i)
+        switchBtn[i].addEventListener("click", function () {
+          console.log(this.checked); // ture /false
+          console.log(i);
+          console.log(this);
 
-                if (this.checked == true) {
-
-                    $(this).closest("label").find(".slider_content").text('上架');
-                } else{
-                    $(this).closest("label").find(".slider_content").text('下架');
-                }
-            });
-        }
+          if (this.checked == true) {
+            $(this).closest("label").find(".slider_content").text("上架");
+          } else {
+            $(this).closest("label").find(".slider_content").text("下架");
+          }
+        });
+      }
     </script>
-</body>
+  </body>
 </html>
