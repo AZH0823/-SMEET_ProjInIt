@@ -533,8 +533,10 @@
         function select(){    
         $.ajax({            
             method: "GET",
-            url: "php/frontpage/resev.php",
-            data:{},            
+            url: "php/frontpage/reserveAPI.php",
+            data:{
+                // id:16,
+            },            
             dataType: "json",
             success: function (response) {                
                 // showCate(response);                                

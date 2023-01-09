@@ -1,15 +1,23 @@
 <?php
- include ('../conectDB/Connection.php');
+    include ('../conectDB/Connection.php');
 
- // echo $pdo;
+    //  單撈一筆
+    //  $keyword =$_GET["id"];  
+    //  $SearhDishSql = " SELECT * FROM `Dish` where id = ? ";
 
- $SearhDishSql = " SELECT * FROM `Dish`";
- $Searhstatement = getPDO()->prepare($SearhDishSql);
- $Searhstatement -> execute();
+    //  撈全部
+    $SearhDishSql = " SELECT * FROM `Dish`";
+    // 將include Connection Fuction 給引出
+    $Searhstatement = getPDO()->prepare($SearhDishSql);
+
+    // 單筆
+    //  $Searhstatement -> bindValue(1,$keyword); 
+    $Searhstatement -> execute();
 
  
- $searchData = $Searhstatement -> fetchAll();
+    $searchData = $Searhstatement -> fetchAll();
 
- echo json_encode($searchData);
+    // 吐回給ajax
+    echo json_encode($searchData);
 
 ?>
