@@ -652,7 +652,7 @@
               sex:"",
               phone:"",
               addr:"",
-              bonus:32
+              bonus:"",
             },
             // 會員中心-修改密碼
             update_pwd:{
@@ -663,12 +663,30 @@
             // 收藏
             collection:[
               
-            ]
+            ],
           }
         },
-        created(){
+        mounted(){
           this.collection = collection_lo;
+          let member_ID = localStorage.getItem("member_ID");
+          let bonus_member = document.querySelector('.bonus_member')
+          //取得會員點數
+          $.ajax({
+                method: "POST",
+                url: "php/frontpage/member_point.php",
+                data: {
+                  member_ID: member_ID,
+                },
+                dataType: "text",
+                success: function (response) {
+                  bonus_member.innerHTML = response ;
+                },
+                error: function (exception) {
+                    alert("發生錯誤: " + exception.status);
+                }
+            });
         },
+        computed: {},
         methods:{
           //tab
 
@@ -701,15 +719,7 @@
 
       //常見問題
       $(function () {
-        // $(".question_flex").click(function (e) {
-        //   // console.log(this);
           $(this).siblings().toggleClass("active");
-        // });
-
-        // $(".fa-minus").click(function (e) {
-        //   // console.log( $(this).parents());
-        //   $(this).parents().toggleClass("active");
-        // });
 
         $(".question_section_li").on("click",function(e){
           e.preventDefault();
@@ -730,11 +740,6 @@
             }
           });
 
-        // $(".question_flex").click(function (e){
-        //   if($(this).children("i").hasClass('fa-minus')){
-        //   $(this).children("i:nth-child(3)").addClass('fa-plus');
-        // }
-        // })
     </script>
   </body>
 </html>
