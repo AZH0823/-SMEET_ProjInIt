@@ -5,7 +5,7 @@
         $db_host = "127.0.0.1";
         $db_user = "root";
         // MySql 密碼統一
-        $db_pass = "poping123";
+        $db_pass = "password";
         // 專案名稱  名稱統一
         $db_select = "smeet";
 
