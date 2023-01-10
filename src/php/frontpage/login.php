@@ -19,17 +19,31 @@
        //抓出全部且依照順序封裝成一個二維陣列
        $data = $statement->fetchAll();
 
-       if(count($data)>0){
-              echo "Y";
+       $memberID = "";
+       $memberName = "";
 
-              // set session
-              session_start();
-              $_SESSION["account"] = $account;
+       foreach($data as $index => $row){
+              $memberID = $row["ID"];
+              $memberName = $row["Email"];
+       }
+       // echo $memberID;
+       // echo "<br>";
+       // echo $memberName;
 
-              //redirect
-              // header("Location:Welcome.php");
+       //判斷是否有會員資料?
+       if($memberID != "" && $memberName != ""){
+
+	       include("../conectDB/member_statue.php");
+
+              
+              //將會員資訊寫入session
+              setMemberInfo($memberID, $memberName);
+
+              //登入成功        
+              echo "Y"; 
 
        }else{
+              //登入成功
               echo "N";
 
        };

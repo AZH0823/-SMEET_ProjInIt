@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-</head>
-<body>
-    <div class="fulid_wrapper login" id="login">
-        <div class="container ">
+    <div class="fulid_wrapper login none" id="login_bg">
+        <div class="container none" id="login">
             <!-- 註冊登入tab -->
             <div class="login_tab font16 Camel-1" ref="tab">
                 <div class="tab_add " @click="add_tab" ref="tab1">註冊會員</div>
@@ -69,12 +58,13 @@
                 使用LINE快速登入
             </button>
             <!-- =========註冊成功畫面=============== -->
-            <div class="login_success none">
+            <div class="login_success " ref="join_ok">
                 <div class="yes">
                     <i class="fa-solid fa-check"></i>
                 </div>
-                <h6>會員註冊成功</h6>
-                <button class="inCart_btn2">確定</button>
+                <h6>註冊成功</h6>
+                <h6>請再次登入</h6>
+                <button class="inCart_btn2" @click="add_ok">確定</button>
             </div>
 
             <!-- ==========忘記密碼畫面============= -->
@@ -98,81 +88,6 @@
         <!-- 會員登入{{user_enter}} -->
     </div>
     
-
-    <!-- =========購物車pop============ -->
-    <div class="fulid_wrapper cart ">
-        <div class="cart_container none">
-            <div class="icon_x font_light">x</div>
-            <!-- <i class="fa-solid fa-xmark"></i> -->
-            <ul class="cart_content none">
-                <li class="item">
-                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
-                    <div class="content">
-                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯</p>
-                        <p class="font14 count">數量</p>
-                        <div class="plus_minus">
-                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                            <div class="number">1</div>
-                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
-                        </div>
-                        <p class="font14 money">金額</p>
-                        <p class="font14 money_cart">$ 1000</p>
-                        <i class="fa-regular fa-trash-can"></i>
-                    </div>
-                </li>
-                <li class="item">
-                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
-                    <div class="content">
-                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯野菇濃湯湯野菇濃</p>
-                        <p class="font14 count">數量</p>
-                        <div class="plus_minus">
-                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                            <div class="number">1</div>
-                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
-                        </div>
-                        <p class="font14 money">金額</p>
-                        <p class="font14 money_cart">$ 1000</p>
-                        <i class="fa-regular fa-trash-can"></i>
-                    </div>
-                </li>
-                <li class="item">
-                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
-                    <div class="content">
-                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯</p>
-                        <p class="font14 count">數量</p>
-                        <div class="plus_minus">
-                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                            <div class="number">1</div>
-                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
-                        </div>
-                        <p class="font14 money">金額</p>
-                        <p class="font14 money_cart">$ 1000</p>
-                        <i class="fa-regular fa-trash-can"></i>
-                    </div>
-                </li>
-                <li class="item">
-                    <img src="img/atcart_img/atcart_addp.jpg" alt="">
-                    <div class="content">
-                        <p class="font16 green-1 title">奶香牛肝菌野菇濃湯</p>
-                        <p class="font14 count">數量</p>
-                        <div class="plus_minus">
-                            <div class="minus"><i class="fa-solid fa-minus"></i></div>
-                            <div class="number">1</div>
-                            <div class="plus"><i class="fa-solid fa-plus"></i></div>
-                        </div>
-                        <p class="font14 money">金額</p>
-                        <p class="font14 money_cart">$ 1000</p>
-                        <i class="fa-regular fa-trash-can"></i>
-                    </div>
-                </li>
-            </ul>
-            <div class="btn">
-                <button type="button" class="checkout_btn">結帳</button>
-            </div>
-        </div>
-    </div>
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
     <script src="js/vender/Vue/vue.global.js"></script>
     <script src="js/frontpage/login.js"></script>
-</body>
-</html>

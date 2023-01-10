@@ -14,24 +14,26 @@
                     <li><a href="menu.html" class="black">到府私廚</a></li>
                     <li><a href="shopMall.html" class="black">線上商城</a></li>
                 </ul>
-                <div class="ham_user">
-                    <ul class="user_ham">
-                        <div class="border_ham">
-                            <li><a href="member.html" class="Camel-3">會員中心</a></li>
-                            <li><a href="orderList.html" class="Camel-3">訂單查詢</a></li>
-                            <li><a href="member.html" class="Camel-3">收藏菜品</a></li>
-                            <li><a href="member.html" class="Camel-3">訊息中心</a></li>
-                            <li><a href="member.html" class="Camel-3">常見問題</a></li>
-                        </div>
-                        <li><a href="member.html" class="log_ham green-1">登入</a></li>
-                    </ul>
-                </div>
+                <!-- <div class="ham_user"> -->
+                <ul class="user_ham">
+                    <div class="border_ham">
+                        <li class="member_li"><a href="member.html" class="Camel-3 member_open">會員中心</a></li>
+                        <li class="member_li"><a href="orderList.html" class="Camel-3 member_open">訂單查詢</a></li>
+                        <li class="member_li"><a href="member.html" class="Camel-3 member_open">收藏菜品</a></li>
+                        <li class="member_li"><a href="member.html" class="Camel-3 member_open">訊息中心<span
+                                    class="msg_signal">3</span></a>
+                        </li>
+                        <li class="member_li"><a href="member.html" class="Camel-3 member_open">常見問題</a></li>
+                    </div>
+                    <li><a href="member.html" class="log_ham green-1">登入</a></li>
+                </ul>
+                <!-- </div> -->
             </div>
             <nav>
                 <ul class="header_user">
                     <a href="member.html" class="black slide_user"><i class="fa-solid fa-user"></i></a>
                     <a href="cartDetail.html" class="black slide_cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <a href="#" class="black slide_ham"><i class="fa-solid fa-bars"></i></a>
+                    <li class="black slide_ham"><i class="fa-solid fa-bars"></i></li>
                     <a href="reserve01.html" class="black reserve_btn">
                         <img src="./img/btn_reserve_img/btn_reserve_c_img.png" alt="">
                     </a>
@@ -48,14 +50,4 @@
 <div class="header_mg fulid_wrapper"></div>
 
 <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
-<script>
-
-    $(function () {
-
-        $(".slide_ham").on("click", function () {
-            console.log("qwert");
-            $(".header_bar").toggleClass("-on")
-            $(".user_ham").toggleClass("-on")
-        })
-    })
-</script>
+<script src="js/header.js"></script> //提醒大家放進去
