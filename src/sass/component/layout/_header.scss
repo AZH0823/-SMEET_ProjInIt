@@ -253,89 +253,91 @@
 
 
             /*----------- 『 Icon 人頭 購物車 漢堡線』 ----------*/
-.indexheader_user {
-    position: fixed;
-    // position: absolute;
-    top: 0;
-    right: 0;
-    // padding-right: 10px 0;
-    display: flex;
+            .indexheader_user {
+                position: fixed;
+                // position: absolute;
+                top: 0;
+                right: 0;
+                // padding-right: 10px 0;
+                display: flex;
 
-    @include pad() {
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        width: 99.9%;
+                @include pad() {
+                    justify-content: flex-end;
+                    flex-wrap: wrap;
+                    width: 99.9%;
 
-    }
+                }
 
-    a {
-        text-decoration: none;
-        padding: 10px 10px;
-    }
+                a {
+                    text-decoration: none;
+                    padding: 10px 10px;
+                }
 
-    .indexslide_user {
-        display: block;
-        margin-top: 25%;
-        text-decoration: none;
-        // padding-right: 20px;
+                .indexslide_user {
+                    display: block;
+                    margin-top: 25%;
+                    text-decoration: none;
+                    // padding-right: 20px;
 
-        @include pad() {
-            display: none;
-        }
-    }
+                    @include pad() {
+                        display: none;
+                    }
+                }
 
-    .indexslide_cart {
-        display: block;
-        margin-top: 25%;
-        text-decoration: none;
-        // padding-right: 20px;
-
-        @include pad() {
-            font-size: 23px;
-            margin-top: 0px;
-        }
-    }
-
-    /*----------- 漢堡專用div『登入按鈕』 ----------*/
-    /*-----------『 漢堡線Icon 』 ----------*/
-    .indexslide_ham {
-        display: none;
-        // margin-top: 45px;
-        text-decoration: none;
-
-        @include pad() {
-            padding: 10px 10px;
-            display: block;
-            font-size: 25px;
-            line-height: 40px;
-            // margin-top: 25px;
+                .indexslide_cart {
+                    display: block;
+                    margin-top: 25%;
+                    text-decoration: none;
+                    padding: 10px 10px;
+                    cursor: pointer;
 
 
-        }
-    }
+                    @include pad() {
+                        font-size: 23px;
+                        margin-top: 0px;
+                    }
+                }
 
-    /*----------- 立即預約按鈕 ----------*/
+                /*----------- 漢堡專用div『登入按鈕』 ----------*/
+                /*-----------『 漢堡線Icon 』 ----------*/
+                .indexslide_ham {
+                    display: none;
+                    // margin-top: 45px;
+                    text-decoration: none;
 
-    .indexreserve_btn {
-        display: block;
-        margin-top: 0;
-        padding: 0;
+                    @include pad() {
+                        padding: 10px 10px;
+                        display: block;
+                        font-size: 25px;
+                        line-height: 40px;
+                        // margin-top: 25px;
 
-        @include pad() {
-            // display: none;
-            position: fixed;
-            top: 7%;
-            right: 0;
-        }
 
-        img {
+                    }
+                }
 
-            border-radius: 10px 0 0 0;
-            height: 140px;
-        }
+                /*----------- 立即預約按鈕 ----------*/
 
-    }
-}
+                .indexreserve_btn {
+                    display: block;
+                    margin-top: 0;
+                    padding: 0;
+
+                    @include pad() {
+                        // display: none;
+                        position: fixed;
+                        top: 7%;
+                        right: 0;
+                    }
+
+                    img {
+
+                        border-radius: 10px 0 0 0;
+                        height: 140px;
+                    }
+
+                }
+            }
         }
     }
 
@@ -406,6 +408,10 @@
 
 
 /*------------------- slide_header -------------------*/
+body {
+    box-sizing: border-box;
+}
+
 .slide_header {
     // display: none;
     height: 10%;
@@ -708,6 +714,7 @@
                 margin-top: 20%;
                 text-decoration: none;
                 padding: 20px 15px;
+                cursor: pointer;
 
                 @include pad() {
                     font-size: 15px;
@@ -753,7 +760,7 @@
                 img {
 
                     border-radius: 10px 0 0 0;
-                    height: 110px;
+                    height: 130px;
                 }
 
             }
