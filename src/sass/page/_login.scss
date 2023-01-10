@@ -44,7 +44,12 @@
             margin-top: -20px;
             margin-bottom: 1px;
             text-align: right;
+            opacity: 0;
         }
+        .appear{
+            opacity: 1;
+        }
+        
         //所有表單
         .login_add, .login_enter{
             input{

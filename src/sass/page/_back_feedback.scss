@@ -154,4 +154,121 @@ div.back_feedback {
         }
 
     }
+    div.section_feedback { 
+        border: 1px solid #000;      
+        width: 650px;
+        height: 720px;
+        margin: 0 auto;
+        .feedback_top{
+            height: 45px;
+            text-align: center;
+            background-color: #F9F4EC;
+            p{
+                line-height: 45px;
+            }
+        }
+        .feedback_info{
+            width: 95%;
+            margin: 0 auto;
+            h6{
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        }
+        .feedback_star{
+            width: 95%;
+            margin: 0 auto;
+            border-top: 1px solid #000;
+            display: flex;
+
+            p{
+                font-size: 16px;
+                margin-top: 10px;
+
+            }
+
+            .evaluate_star{
+                margin-top: 10px;
+                margin-left: 10px;
+                color: #f5cb35;
+            }
+        }
+        .feedback_content{
+            width: 95%;
+            margin: 0 auto;
+            textarea{
+                width: 615px;
+                height: 160px;
+                background-color: #f9f4ec;
+                outline: none;
+                resize:none;
+                margin-top: 10px;
+            }
+
+            h6{
+                font-size: 16px;
+                margin-top: 10px;
+
+            }
+
+            p{
+                font-size: 12px;
+                text-align: right;
+                margin-right: 15px;
+            }
+            .feedback_pic{
+                height: 200px;
+            }
+
+            .feedback_content_btn{
+                width: 85px;
+                height: 27px;
+                margin: 50px auto;
+            }
+        }
+        
+    }
+    div.check_feedback{
+        border: 1px solid #000;      
+        width: 650px;
+        height: 390px;
+        margin: 0 auto;
+        .check_top{
+            height: 45px;
+            text-align: center;
+            background-color: #F9F4EC;
+            p{
+                line-height: 45px;
+            }
+        }
+        .check_main{
+            width: 95%;
+            margin: 0 auto;
+            h6{
+                font-size: 16px;
+                margin-top: 10px;
+            }
+            .feedback_star{
+                display: flex;
+                p{
+                    font-size: 16px;
+                    margin-top: 10px;
+                }
+                .evaluate_star{
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    color: #f5cb35;
+                }
+            }
+            textarea{
+                width: 510px;
+                height: 115px;
+                background-color: #f9f4ec;
+                outline: none;
+                resize:none;
+                margin-top: 10px;
+                margin-left: 50px;
+            }
+        }
+    }
 }

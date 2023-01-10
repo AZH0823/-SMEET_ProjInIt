@@ -37,6 +37,9 @@
     "sass": "^1.57.1"
   },
   "dependencies": {
-    "swiper": "^8.4.5"
+    "@fullcalendar/core": "^6.0.2",
+    "@fullcalendar/daygrid": "^6.0.2",
+    "swiper": "^8.4.5",
+    "v-calendar": "^2.4.1"
   }
 }

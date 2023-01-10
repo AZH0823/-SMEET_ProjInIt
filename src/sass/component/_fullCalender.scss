@@ -1,0 +1,16 @@
+.fullCalender{
+    width: 700px;
+    height: 600px;
+
+    // 置中
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    box-shadow: 5px 10px 7px gray;
+    padding: 20px;
+    .fc-toolbar-title{
+        color: $green-1;
+    }
+}

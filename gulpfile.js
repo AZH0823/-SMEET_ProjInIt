@@ -34,8 +34,14 @@ function cssminify() {
 
 exports.cssm = cssminify;
 
-
+// php move
+function phpmove() {
+  return src(['src/php/*.php','src/php/**/*.php','src/php/**/**/*.php']).pipe(dest("dist/php"));
+}
 // js minify
+function jsmove() {
+  return src(['src/js/*.js','src/js/**/*.js','src/js/**/**/*.js']).pipe(dest("dist/js"));
+}
 function jsmini() {
   return src(['src/js/*.js','src/js/**/*.js','src/js/**/**/*.js']).pipe(uglify()).pipe(dest("dist/js"));
 }
@@ -52,6 +58,7 @@ function babel5() {
 
 exports.es5 = babel5;
 exports.js = jsmini;
+exports.jsm = jsmove;
 
 
 // sass complier
@@ -154,7 +161,8 @@ function browser(done) {
     });
     watch(['src/*.html' , 'src/layout/*.html'] ,html).on('change' , reload)
     watch(['src/sass/*.style' , 'src/sass/**/*.scss'] ,sassStyle).on('change' , reload)
-    watch('src/js/*.js' , jsmini).on('change' , reload)
+    watch(['src/js/*.js', 'src/js/**/*.js','src/js/**/**/*.js'], jsmove).on('change' , reload)
+    watch(['src/php/*.php','src/php/**/*.php','src/php/**/**/*.php'], phpmove).on('change' , reload)
     watch(['src/img/*.*', 'src/img/**/*.*'] , img).on('change' , reload)
     watch(['src/img/*.png','src/img/**/*.png'] , otherPng).on('change' , reload)
     watch(['src/img/*.svg','src/img/**/*.svg'] , otherSvg).on('change' , reload)
@@ -162,9 +170,9 @@ function browser(done) {
 }
 
 //開發用
-exports.default = series(parallel(html , sassStyle ,jsmini ,img, otherSvg, otherPng) , browser);
+exports.default = series(parallel(html , sassStyle ,jsmove ,img, otherSvg, otherPng,phpmove) , browser);
 
 
 // 打包上線用
-exports.package = series(clear,parallel(html ,sassStyle , babel5 , imgmini,otherSvg,otherPng))
+exports.package = series(clear,parallel(html ,sassStyle , babel5 , imgmini,otherSvg,otherPng,phpmove))
 // exports.package = series(clear,parallel(html ,sassStyleMini , babel5 , imgmini))
