@@ -282,519 +282,527 @@
           margin: 0 4px;
         }
       }
-      .all_bonus {
-        @include mobile() {
-          font-size: 14px;
-        }
-      }
-    }
-    //付款與寄送方式
-    .cart_pay {
-      padding: 30px 7px 40px;
-      border-bottom: 1px solid #000;
-      .pay {
-        margin-bottom: 15px;
-      }
-      .pay,
-      .send {
-        @include mobile() {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-      label {
-        @include mobile() {
-          margin-bottom: 5px;
-        }
-      }
-      select {
-        width: 40%;
-        height: 50px;
-        margin-left: 10px;
-        padding: 0 15px;
-        letter-spacing: 1px;
-        outline: 0;
-        @include pad() {
-          width: 100%;
-          margin-left: 0;
-        }
-      }
-      .store_choose {
-        margin-top: 15px;
+      .cart_bonus_flex {
         display: flex;
-        flex-wrap: wrap;
-        .choose {
-          margin-left: 13px;
-          padding-left: 3%;
-          display: flex;
-          width: 40%;
-          justify-content: space-between;
-          margin-bottom: 15px;
-          @include pad() {
-            width: calc(100% - 82px);
-          }
-          @include mobile() {
-            padding-left: 0;
-          }
-        }
-        .text {
-          width: 60%;
-          @include pad() {
-            width: 100%;
-          }
-        }
-      }
-    }
-    // 總計
-    .total_container {
-      padding: 20px 7px 30px 0;
-      // float: right;
-      width: 240px;
-      display: grid;
-      grid-template: repeat(3, 1fr) / repeat(2, 1fr);
-      grid-template-rows: 1fr min-content;
-      grid-template-columns: 1fr min-content;
-      grid-row-gap: 5px;
-      margin-bottom: 50px;
-      @include mobile() {
-        width: 100%;
-      }
-      .item {
-        &:nth-child(5),
-        &:nth-child(6) {
-          padding-top: 8%;
-          padding-bottom: 10px;
-          border-top: 1px solid #000;
-        }
-        // &:nth-child(even) {
-        //   text-align: right;
-        // }
-        &:last-child,
-        &:nth-child(7) {
-          padding-top: 10px;
-          border-top: 1px solid #000;
-        }
-        span {
-          padding-left: 20px;
-        }
-      }
-    }
-    .total_next {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      .btn_view {
-        margin-bottom: 60px;
-      }
-    }
-  }
-  section.cart_2_content {
-    margin: 0 108px;
-    border-top: 1px solid #000;
-    // border-bottom: 1px solid #000;
 
-    @include pad() {
-      margin: 0 30px;
-    }
-    @include mobile() {
-      margin: 0 27px;
-    }
-    // 步驟2中間區塊主要內容
-    .cart_product {
-      padding: 20px 0 40px;
-      border-bottom: 1px solid #000;
-      h6 {
-        @include pad() {
-          font-size: 18px;
-        }
-        @include mobile() {
-          font-size: 16px;
-        }
-      }
-      .product_detail,
-      .title {
-        display: flex;
-        @include pad() {
-          display: grid;
-          grid-template: repeat(2, 1fr) / repeat(3, 1fr);
-          row-gap: 30px;
-        }
-      }
-      .title {
-        .item1 {
-          padding-left: 10%;
-        }
-        @include pad() {
-          font-size: 14px;
-          display: none;
-        }
-      }
-      .product_detail {
-        margin: 15px 0;
-      }
-      .item1,
-      .item2,
-      .item3,
-      .item4 {
-        padding: 0 7px;
-        text-align: center;
-      }
-
-      .item1 {
-        width: 40%;
-        display: flex;
-        @include pad() {
-          width: 100%;
-          grid-row: 1/3;
-          grid-column: 1/4;
-        }
-
-        .item1_img {
-          width: 47%;
+        .all_bonus {
           margin-right: 5%;
-          margin-top: 8px;
-
-          @include pad() {
-            width: 30%;
-          }
-          img {
-            width: 100%;
+          @include mobile() {
+            font-size: 14px;
           }
         }
-        .product_name {
-          text-align: left;
-          width: 53%;
-          @include pad() {
-            width: 70%;
-            margin-top: 2px;
+        .all_bonus_pnone {
+          color: red;
+          @include mobile() {
+            font-size: 14px;
           }
         }
       }
-      .item2 {
-        width: 20%;
-        @include pad() {
-          display: none;
-        }
-      }
-      // 金額
-      .product_money,
-      .product_money_2 {
-        padding-left: 10px;
-      }
-      // 加減
-      .item3 {
-        width: 20%;
-        @include pad() {
-          grid-row: 2/3;
-          grid-column: 2/3;
-          align-self: flex-end;
-          text-align-last: left;
-          font-size: 18px;
-        }
-      }
-      .item4 {
-        width: 20%;
-        @include pad() {
-          grid-row: 2/3;
-          grid-column: 3/4;
-          text-align: right;
-          align-self: flex-end;
-          margin-bottom: 6px;
-        }
-      }
-      .item1,
-      .item2,
-      .item3,
-      .item4 {
-        @include pad() {
-          width: 100%;
-        }
-      }
-    }
-    // 總計
-    .total_container {
-      padding: 20px 7px 30px 0;
-      float: right;
-      width: 240px;
-      display: grid;
-      grid-template: repeat(3, 1fr) / repeat(2, 1fr);
-      grid-template-rows: 1fr min-content;
-      grid-template-columns: 1fr min-content;
-      grid-row-gap: 5px;
-      margin-bottom: 50px;
-      @include mobile() {
-        width: 100%;
-      }
-      .item {
-        &:nth-child(5) {
-          padding-top: 8%;
-          padding-bottom: 10px;
-          border-top: 1px solid #000;
-        }
-        // this.bouns.class
-        &:last-child,
-        &:nth-child(7) {
-          padding-top: 10px;
-          border-top: 1px solid #000;
-        }
-        span {
-          padding-left: 20px;
-        }
-      }
-    }
-    .cart_title {
-      display: flex;
-      padding-left: 7px;
-      border-bottom: 1px solid #000;
-      padding-bottom: 10px;
-      width: 100%;
-      justify-content: space-between;
-    }
-    .info_check {
-      display: flex;
-      // margin-top: 15px;
-      margin-right: 30%;
-      @include pad() {
-        margin-right: 0;
-      }
-      input {
-        width: 15px;
-        margin-top: 1px;
-        background-color: #000;
-        color: #fff;
-      }
-    }
-    .buy_content,
-    .get_content,
-    .deliver_invoice {
-      padding: 20px 0 20px 7px;
-      width: 70%;
-      @include mobile() {
-        padding-left: 0;
-      }
-      @include pad() {
-        width: 100%;
-      }
-      label {
-        display: inline-block;
-        width: 115px;
-        @include mobile() {
-          width: 102px;
-        }
-      }
-      input,
-      select {
-        letter-spacing: 1px;
-        padding: 0 15px;
-        border: 1px solid #898989;
-        outline: 0;
-        height: 45px;
-        width: calc(100% - 115px - 7px);
-        margin-bottom: 15px;
-        @include mobile() {
-          width: calc(100% - 107px);
-        }
-      }
-      .member_area,
-      .member_city {
-        width: calc((100% - 115px - 14px) / 2);
-        @include mobile() {
-          width: calc((100% - 115px) / 2);
-        }
-      }
-      .member_city {
-        margin-right: 3px;
-        // @include mobile(){
-        //     margin-right: 4px;
-        // }
-      }
-      .member_addr {
-        margin-left: 108px;
-      }
-    }
-    .get_content {
-      padding-bottom: 0;
-    }
-    .deliver_invoice {
-      padding-top: 0;
-    }
-    // 付款資訊
-    span.title_pay {
-      margin-left: 20px;
-    }
-    .creditcard_pay {
-      padding: 20px 0 10px 7px;
-      width: 70%;
-      @include pad() {
-        width: 100%;
-      }
-      @include mobile() {
-        padding-left: 0;
-      }
-      input {
-        width: 100%;
-        letter-spacing: 1px;
-        padding: 0 15px;
-        border: 1px solid #898989;
-        outline: 0;
-        height: 50px;
-        margin-bottom: 15px;
-      }
-      .creditcard_2 {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        .creditcard_date,
-        .creditcard_cvc {
-          width: 49%;
-        }
-      }
-    }
-    .cart_product_btn {
-      margin-top: 5%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      .next_btn {
-        font-weight: 400;
-        letter-spacing: 0.4em;
-
-        @include btnGetor(
-          305px,
-          8.75px,
-          20px,
-          white,
-          white,
-          $red,
-          $red,
-          $red,
-          1px,
-          $red
-        );
-
-        @include mobile() {
-          max-width: 380px;
-          width: 95%;
-          margin: 0 auto;
-        }
-      }
-      .prev_btn {
-        font-size: 16px;
-        letter-spacing: 0.2em;
-        @include btnGetor(
-          305px,
-          8.75px,
-          18px,
-          $green-1,
-          $green-1,
-          white,
-          white,
-          $green-1,
-          1px,
-          transparent
-        );
-
-        @include pad() {
-          max-width: 380px;
-        }
-
-        @include mobile() {
-          margin: 0 auto;
-          letter-spacing: 0.4em;
-          width: 95%;
-        }
-      }
-    }
-    .clear_both {
-      clear: both;
-      margin-bottom: 100px;
     }
   }
-
-  // 步驟3==================
-  section.cart_3_content {
-    margin: 0 108px;
-    border-top: 1px solid #000;
+  //付款與寄送方式
+  .cart_pay {
+    padding: 30px 7px 40px;
     border-bottom: 1px solid #000;
-
-    @include pad {
-      margin: 0 30px;
-      justify-content: space-around;
+    .pay {
+      margin-bottom: 15px;
     }
-    .cart_content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .fa-check {
-        padding: 10% 0 5% 0;
-        font-size: 80px;
-        color: $Camel-1;
-
-        @include mobile {
-          font-size: 40px;
-        }
-      }
-      h3 {
-        padding-bottom: 13%;
-        @include mobile {
-          font-size: 16px;
-          padding-bottom: 5%;
-        }
-      }
-    }
-    //步驟三的按鈕
-    .btn_flex {
-      display: flex;
-      justify-content: space-evenly;
-      padding-bottom: 20%;
-
-      @include mobile {
+    .pay,
+    .send {
+      @include mobile() {
+        display: flex;
         flex-direction: column;
       }
-
-      .checkorder_btn {
-        font-size: 24px;
-        letter-spacing: 0.165em;
-
-        @include btnGetor(
-          480px,
-          13.5px,
-          18px,
-          $green-1,
-          $green-1,
-          white,
-          white,
-          $green-1,
-          null
-        );
-
+    }
+    label {
+      @include mobile() {
+        margin-bottom: 5px;
+      }
+    }
+    select {
+      width: 40%;
+      height: 50px;
+      margin-left: 10px;
+      padding: 0 15px;
+      letter-spacing: 1px;
+      outline: 0;
+      @include pad() {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+    .store_choose {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      .choose {
+        margin-left: 13px;
+        padding-left: 3%;
+        display: flex;
+        width: 40%;
+        justify-content: space-between;
+        margin-bottom: 15px;
         @include pad() {
-          max-width: 300px;
+          width: calc(100% - 82px);
         }
-
         @include mobile() {
-          padding: 8px 18px;
-          margin: 2% auto;
-          letter-spacing: 0.4em;
-          font-size: 16px;
-          width: 95%;
+          padding-left: 0;
+        }
+      }
+      .text {
+        width: 60%;
+        @include pad() {
+          width: 100%;
         }
       }
     }
   }
-
-  // 共同使用
-
-  .cart_none {
-    display: none;
-  }
-
-  .cart_open {
-    display: block;
-  }
-
-  .btn {
-    margin-top: 12px;
+  // 總計
+  .total_container {
+    padding: 20px 7px 30px 0;
+    // float: right;
+    width: 240px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+    grid-template-rows: 1fr min-content;
+    grid-template-columns: 1fr min-content;
+    grid-row-gap: 5px;
     margin-bottom: 50px;
+    @include mobile() {
+      width: 100%;
+    }
+    .item {
+      &:nth-child(5),
+      &:nth-child(6) {
+        padding-top: 8%;
+        padding-bottom: 10px;
+        border-top: 1px solid #000;
+      }
+      // &:nth-child(even) {
+      //   text-align: right;
+      // }
+      &:last-child,
+      &:nth-child(7) {
+        padding-top: 10px;
+        border-top: 1px solid #000;
+      }
+      span {
+        padding-left: 20px;
+      }
+    }
   }
+  .total_next {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .btn_view {
+      margin-bottom: 60px;
+    }
+  }
+}
+section.cart_2_content {
+  margin: 0 108px;
+  border-top: 1px solid #000;
+  // border-bottom: 1px solid #000;
+
+  @include pad() {
+    margin: 0 30px;
+  }
+  @include mobile() {
+    margin: 0 27px;
+  }
+  // 步驟2中間區塊主要內容
+  .cart_product {
+    padding: 20px 0 40px;
+    border-bottom: 1px solid #000;
+    h6 {
+      @include pad() {
+        font-size: 18px;
+      }
+      @include mobile() {
+        font-size: 16px;
+      }
+    }
+    .product_detail,
+    .title {
+      display: flex;
+      @include pad() {
+        display: grid;
+        grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+        row-gap: 30px;
+      }
+    }
+    .title {
+      .item1 {
+        padding-left: 10%;
+      }
+      @include pad() {
+        font-size: 14px;
+        display: none;
+      }
+    }
+    .product_detail {
+      margin: 15px 0;
+    }
+    .item1,
+    .item2,
+    .item3,
+    .item4 {
+      padding: 0 7px;
+      text-align: center;
+    }
+
+    .item1 {
+      width: 40%;
+      display: flex;
+      @include pad() {
+        width: 100%;
+        grid-row: 1/3;
+        grid-column: 1/4;
+      }
+
+      .item1_img {
+        width: 47%;
+        margin-right: 5%;
+        margin-top: 8px;
+
+        @include pad() {
+          width: 30%;
+        }
+        img {
+          width: 100%;
+        }
+      }
+      .product_name {
+        text-align: left;
+        width: 53%;
+        @include pad() {
+          width: 70%;
+          margin-top: 2px;
+        }
+      }
+    }
+    .item2 {
+      width: 20%;
+      @include pad() {
+        display: none;
+      }
+    }
+    // 金額
+    .product_money,
+    .product_money_2 {
+      padding-left: 10px;
+    }
+    // 加減
+    .item3 {
+      width: 20%;
+      @include pad() {
+        grid-row: 2/3;
+        grid-column: 2/3;
+        align-self: flex-end;
+        text-align-last: left;
+        font-size: 18px;
+      }
+    }
+    .item4 {
+      width: 20%;
+      @include pad() {
+        grid-row: 2/3;
+        grid-column: 3/4;
+        text-align: right;
+        align-self: flex-end;
+        margin-bottom: 6px;
+      }
+    }
+    .item1,
+    .item2,
+    .item3,
+    .item4 {
+      @include pad() {
+        width: 100%;
+      }
+    }
+  }
+  // 總計
+  .total_container {
+    padding: 20px 7px 30px 0;
+    float: right;
+    width: 240px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+    grid-template-rows: 1fr min-content;
+    grid-template-columns: 1fr min-content;
+    grid-row-gap: 5px;
+    margin-bottom: 50px;
+    @include mobile() {
+      width: 100%;
+    }
+    .item {
+      &:nth-child(5) {
+        padding-top: 8%;
+        padding-bottom: 10px;
+        border-top: 1px solid #000;
+      }
+      // this.bouns.class
+      &:last-child,
+      &:nth-child(7) {
+        padding-top: 10px;
+        border-top: 1px solid #000;
+      }
+      span {
+        padding-left: 20px;
+      }
+    }
+  }
+  .cart_title {
+    display: flex;
+    padding-left: 7px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .info_check {
+    display: flex;
+    // margin-top: 15px;
+    margin-right: 30%;
+    @include pad() {
+      margin-right: 0;
+    }
+    input {
+      width: 15px;
+      margin-top: 1px;
+      background-color: #000;
+      color: #fff;
+    }
+  }
+  .buy_content,
+  .get_content,
+  .deliver_invoice {
+    padding: 20px 0 20px 7px;
+    width: 70%;
+    @include mobile() {
+      padding-left: 0;
+    }
+    @include pad() {
+      width: 100%;
+    }
+    label {
+      display: inline-block;
+      width: 115px;
+      @include mobile() {
+        width: 102px;
+      }
+    }
+    input,
+    select {
+      letter-spacing: 1px;
+      padding: 0 15px;
+      border: 1px solid #898989;
+      outline: 0;
+      height: 45px;
+      width: calc(100% - 115px - 7px);
+      margin-bottom: 15px;
+      @include mobile() {
+        width: calc(100% - 107px);
+      }
+    }
+    .member_area,
+    .member_city {
+      width: calc((100% - 115px - 14px) / 2);
+      @include mobile() {
+        width: calc((100% - 115px) / 2);
+      }
+    }
+    .member_city {
+      margin-right: 3px;
+      // @include mobile(){
+      //     margin-right: 4px;
+      // }
+    }
+  }
+  .get_content {
+    padding-bottom: 0;
+  }
+  .deliver_invoice {
+    padding-top: 0;
+  }
+  // 付款資訊
+  span.title_pay {
+    margin-left: 20px;
+  }
+  .creditcard_pay {
+    padding: 20px 0 10px 7px;
+    width: 70%;
+    @include pad() {
+      width: 100%;
+    }
+    @include mobile() {
+      padding-left: 0;
+    }
+    input {
+      width: 100%;
+      letter-spacing: 1px;
+      padding: 0 15px;
+      border: 1px solid #898989;
+      outline: 0;
+      height: 50px;
+      margin-bottom: 15px;
+    }
+    .creditcard_2 {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .creditcard_date,
+      .creditcard_cvc {
+        width: 49%;
+      }
+    }
+  }
+  .cart_product_btn {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .next_btn {
+      font-weight: 400;
+      letter-spacing: 0.4em;
+
+      @include btnGetor(
+        305px,
+        8.75px,
+        20px,
+        white,
+        white,
+        $red,
+        $red,
+        $red,
+        1px,
+        $red
+      );
+
+      @include mobile() {
+        max-width: 380px;
+        width: 95%;
+        margin: 0 auto;
+      }
+    }
+    .prev_btn {
+      font-size: 16px;
+      letter-spacing: 0.2em;
+      @include btnGetor(
+        305px,
+        8.75px,
+        18px,
+        $green-1,
+        $green-1,
+        white,
+        white,
+        $green-1,
+        1px,
+        transparent
+      );
+
+      @include pad() {
+        max-width: 380px;
+      }
+
+      @include mobile() {
+        margin: 0 auto;
+        letter-spacing: 0.4em;
+        width: 95%;
+      }
+    }
+  }
+  .clear_both {
+    clear: both;
+    margin-bottom: 100px;
+  }
+}
+
+// 步驟3==================
+section.cart_3_content {
+  margin: 0 108px;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+
+  @include pad {
+    margin: 0 30px;
+    justify-content: space-around;
+  }
+  .cart_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .fa-check {
+      padding: 10% 0 5% 0;
+      font-size: 80px;
+      color: $Camel-1;
+
+      @include mobile {
+        font-size: 40px;
+      }
+    }
+    h3 {
+      padding-bottom: 13%;
+      @include mobile {
+        font-size: 16px;
+        padding-bottom: 5%;
+      }
+    }
+  }
+  //步驟三的按鈕
+  .btn_flex {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 20%;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    .checkorder_btn {
+      font-size: 24px;
+      letter-spacing: 0.165em;
+
+      @include btnGetor(
+        480px,
+        13.5px,
+        18px,
+        $green-1,
+        $green-1,
+        white,
+        white,
+        $green-1,
+        null
+      );
+
+      @include pad() {
+        max-width: 300px;
+      }
+
+      @include mobile() {
+        padding: 8px 18px;
+        margin: 2% auto;
+        letter-spacing: 0.4em;
+        font-size: 16px;
+        width: 95%;
+      }
+    }
+  }
+}
+
+// 共同使用
+
+.cart_none {
+  display: none;
+}
+
+.cart_open {
+  display: block;
+}
+
+.btn {
+  margin-top: 12px;
+  margin-bottom: 50px;
 }

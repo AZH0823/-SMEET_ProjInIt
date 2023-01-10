@@ -64,8 +64,11 @@
                 </div>
                 <!-- 會員紅利 -->
                 <div class="cart_bonus">
-                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"  v-model="point" @blur="bounsBig()" >{{}}</input>元</h6>
-                    <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1" ref="bouns">{{bouns}}</span>點(<span class="bonus_2">{{bouns}}</span>元)　<span v-bind:style="noneClass" ref="msg">{{msg}}</p>
+                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"  maxlength="3" v-model.lazy="point" @blur="check_bouns" @keydown="check_bouns" @keyup="check_bouns">{{}}</input>元</h6>
+                    <div class="cart_bonus_flex">
+                        <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1" ref="bouns">{{bouns}}</span>點(<span>{{bouns}}</span>元)
+                        <p class="all_bonus_pnone" v-if="show">{{msg}}</p>
+                    </div>
                         <!--紅利點數會從資料庫回傳-->
                 </div>
                 <!-- 付款&寄送方式 -->
@@ -153,7 +156,7 @@
                     <!-- <div class="item">加購價</div>
                     <div class="item">NT$<span id="detail_total">250</span></div> -->
                     <div class="item">紅利點數</div>
-                    <div class="item">-NT$<span id="detail_total">{{point}}</span></div>
+                    <div class="item">-NT$<span id="detail_total" >{{point}}</span></div>
                     <div class="item">總金額
                     </div>
                     <div class="item">NT$<span id="detail_total">{{detailTotal}}</span></div>
@@ -178,13 +181,14 @@
                         <label for="">手機號碼</label>
                         <input type="text" placeholder="請輸入手機號碼">
                         <label for="">地址</label>
-                        <select name="member_city" class="member_city">
+                        <input type="text" placeholder="請輸入地址">
+                        <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
                         </select>
                         <select name="member_area" class="member_area">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
-                        </select>
-                        <input type="text" class="member_addr" placeholder="請輸入地址">
+                        </select> -->
+                  
                     </div>
                 </div>
                 <!-- 收件人資訊 -->
@@ -206,12 +210,12 @@
                         <label for="">手機號碼</label>
                         <input type="text" placeholder="請輸入手機號碼">
                         <label for="">地址</label>
-                        <select name="member_city" class="member_city">
+                        <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
                         </select>
                         <select name="member_area" class="member_area">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
-                        </select>
+                        </select> -->
                         <input type="text" class="member_addr" placeholder="請輸入地址">
                     </div>
                 </div>
@@ -326,28 +330,32 @@
                         ],
 
                         //回傳point的空字串
-                        point:'0',
+                        point:'',
 
                         //回傳7-11門市的名稱
                         shop:'',
 
                         //回傳紅利點數的金額,
                         //讓input限制最高只能輸入紅利點數的上限
+                        //這裡要接資料庫select後的值
                         bouns:'32',
 
+                        //用v-if渲染出若金額大於會員點數會出現紅字
                         msg:'*紅利點數折抵必須小於您目前的會員點數',
-                        //用v-if控制出現與否,這個還做不出來
-                        addClass: {
-                            fontsize:'14px',
-                            color:'red',
-                            display:'block'
-                        },
-                        //先把msg的字藏起來
-                        noneClass : {
-                            display:'none'
-                        }
+                        show: false,
+                   
+
+                        //這裡要接從購物車收到的localstorage
+                        inputData:{
+                            isLogindIn:false,
+
+                            },
                     }
                 },
+
+            mounted:{
+
+            },
             computed :{
                 //小計的所有金額
                 cartTotal () {
@@ -387,7 +395,7 @@
                         item.count--;
                     }
                 },
-                //刪除
+                //刪除點選到的商品 ->垃圾桶
                 dealDelete(index){
                     this.product_list.splice(index,1);
                 },
@@ -402,23 +410,38 @@
                     behavior: "smooth"
                     })
                 },
-                //當keyup的時候觸發的blur事件會
+                //當keyup/keydown的時候觸發的blur事件會
                 //判斷輸入的數字是否大於會員本身的紅利點數
-                bounsBig(e){
-                    // console.log(this.$refs.bouns.innerText);
-                    let bonus_V = this.$refs.bouns.innerText;
-                    let e_v = event.path[0].value;
-                    if(e_v > bonus_V){
-                    
-                        //  console.log(bouns_1);
-                    alert(`紅利點數折抵必須小於您目前的會員點數：${bonus_V}元`);
-                    }
-                }
-            }
 
+                check_bouns(e){
+                    //設定當輸入英文字母時會取代為空字串
+                    let str = (e.target.value).replace(/\D/g, "");
+                    e.target.value = str;
+                    //取得目前會員點數的金額
+                    
+                    let bounsVal = e.path[1].nextElementSibling.children[0].firstElementChild.innerText;
+                    // console.log(bounsVal);
+                 
+
+                    //
+                    if(parseInt(e.target.value) > bounsVal){
+                    this.show = true; 
+                    // console.log(bounsVal);
+                    e.target.value = bounsVal
+                    }else if((e.which >= 48 && e.which <= 57) || e.which == 8){
+                        // console.log(`ttt`);
+                    }
+                    else {
+                        e.preventDefault();
+                    }
+                    // return check_bouns(e);
+                },
+            
+                }
+        });
 
             
-        });
+      
 
         app.mount("#cart_detail");
 

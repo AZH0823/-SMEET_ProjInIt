@@ -74,9 +74,10 @@
     }
     
     ._chef_tab{
+        max-width: 1280px;
         display:flex;
         flex-wrap:wrap;
-        margin: 50px;
+        margin: 50px auto;
         @include pad(){
             margin: 10px;          
         }
@@ -143,108 +144,101 @@
                 img{
                     width: 60%;
                 }
-                ._chef_infor, ._chef_infor2, ._chef_infor3{
-                    display: flex;
-                    flex-direction: column;
-                    z-index: 1;
-                    flex-wrap: wrap-reverse;
-                    text-align: right;
-                    margin-left: 10px;
-                    background-image: url(../img/chefteam_img/chef.png);
-                    background-position: left;
-                    background-repeat: no-repeat;
-                    @include pad(){
-                        max-width: 720px;
-                        background-size: 70%; 
-                        padding-bottom: 285px;
-                        background-position: left; 
-                    }
-                    @include mobile(){
-                        overflow: hidden;
-                        max-width: 428px;
-                        // padding-bottom: 285px;
-                        padding-bottom: 230px;
-                        background-size: 100%;  
-                        background-position: left; 
-                        background-position-y: 135px;  
-                    }
-                                      
-                    ._chef_infor_line{
-                        margin-left: 800px;
-                        padding: 0 20px;
-                        height: 2px;
-                        background-color: $green-1;
-                        margin-right: 20px;
 
-                        @include pad(){
-                            margin-bottom: 70px;
-                            padding: 0 150px;  
+                .part1{
+                    display: flex;
+                    margin-bottom: 100px;
+                    width: 100%;
+                    @include pad{
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 40px;
+                        padding-right: 0px;
+                    }
+                    .part1_img{
+                        width: 70%;
+                        max-height: 425px;
+                        overflow: hidden;
+                        @include pad{
+                            margin-top: 25px;
+                            width: 100%;
                         }
                         @include mobile(){
-                            margin-bottom: 70px;
-                            padding: 0 150px;
+                            margin-top: 15px;
+                        }
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    
+                    .part1_info{
+                        width: 30%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+                        @include pad{
+                            align-items: flex-start;
+                            width: 100%;
+                            padding: 0 30px;
                         }
                         
-                    }
-
-                    .word_box {
-                        line-height: 2;
-                        margin: 20px 0 100px 660px ;
-                        position: relative;
-                        text-align: right;
-                        letter-spacing: 1px;
-                        @include pad(){
-                            display: none;
+                        @include mobile{
+                            padding: 0;
                         }
-                        @include mobile(){
-                            display: none;
+        
+                        h2{
+                            padding-top: 15%;
+                            line-height: 1.2;
+                            @include pad{
+                                padding-top: 3%;
+                            }
+                        }
+        
+                        h4{
+                            border-bottom: 1px solid #0f3d3e;
+                            width: 130%;
+                            text-align: right;
+                            padding-bottom: 15px;
+                            @include pad{
+                                text-align: left;
+                                width: 100%;
+                            }
+                        }
+        
+                        .text1{
+                            text-align: justify;
+                            width: 250%;
+                            text-indent: 44px;
+                            letter-spacing: 1px;
+                            margin-top: 15px;
+                            position: relative;
+                            padding-bottom: 40px;
+                            h6{
+                                text-align: right;
+                            }
+                            @include pad(){
+                                width: 100%;
+                                text-indent: 0;
+                            }
+        
+                            .text2{
+                                color: #fff;
+                                position: absolute;
+                                left: 0px;
+                                top: 0px;
+                                width: 60%;
+                                overflow: hidden;
+                                @include pad(){
+                                    display: none;
+                                }
+                                .text_white{
+                                    width: 167%;
+                                }
+                            }
                         }
                     }
-
-                    .word_box > div:nth-of-type(1) {
-                        width: 445px;
-                    }
-            
-                    .words_box > div {
-                        overflow: hidden;
-                    }
-            
-                    .word_box > div p {
-                        font-size: 20px;
-                        width: 445px;
-                    }
-            
-            
-                    /* ---------------- 左邊文字 ---------------- */
-            
-                    .word_box > div:nth-of-type(2) {
-                        color: rgb(255, 255, 255);
-                        position: absolute;
-                        left:0;
-                        top: 0;
-                        width: 110px;
-                    }
-            
-                    .word_box > div {
-                        overflow: hidden;
-                    }
-            
-                    .words_box > div:nth-of-type(2) p {
-                        left: 0;
-                    }
-            
-                    .word_box > div p {
-                        width: 445px;
-                    }                        
-                }
-
-                ._chef_infor2{
-                    background-image: url(../img/chefteam_img/chef2.png);
-                   
-                }
-
-                ._chef_infor3{
-                    background-image: url(../img/chefteam_img/chef3.png);               
                 }
             }
 
@@ -258,7 +252,7 @@
                     margin-left: 5px;
                     @include pad(){
                         margin-top: 0;
-                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-columns: repeat(3, 1fr);
                     }
                     @include mobile(){
                         margin-top: 0;

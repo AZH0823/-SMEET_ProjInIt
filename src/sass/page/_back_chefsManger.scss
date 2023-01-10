@@ -153,8 +153,8 @@ div.back_chefstManger {
         .chef_popon {
           display: none;
           max-width: 65%;
-          height: 1050px;
-          box-shadow: 3px 3px 4px 3px #777777;
+          height: 800px;
+          box-shadow: 3px 4px 6px -1px #777777;
           //   position: absolute;
           //   z-index: 10;
           .chef_popon_top {
@@ -180,6 +180,10 @@ div.back_chefstManger {
               resize: none;
               width: 475px;
               border-color: #777777;
+            }
+            p {
+              margin-left: 85%;
+              margin-top: -2%;
             }
           }
           .chef_info {
@@ -210,25 +214,27 @@ div.back_chefstManger {
             .chef_pop_col {
               display: flex;
               flex-direction: column;
+              margin-left: 3%;
               label {
                 padding-top: 5%;
               }
               input {
                 margin-top: 3%;
                 padding-top: 5%;
+                width: 85%;
               }
-              div {
-                border: 1px solid #777777;
-                width: 150px;
-                height: 150px;
-                line-height: 150px;
-                text-align: center;
-                margin-top: 5%;
-              }
+              // div {
+              //   border: 1px solid #777777;
+              //   width: 150px;
+              //   height: 150px;
+              //   line-height: 150px;
+              //   text-align: center;
+              //   margin-top: 5%;
+              // }
             }
           }
           .save_btn_chef {
-            margin: 10% auto;
+            margin: 15% auto;
             @extend .font12;
             font-weight: 1000;
             @include btnGetor(
@@ -248,9 +254,10 @@ div.back_chefstManger {
 
         //團隊班表的popon開始
         .chef_schedule {
+          display: none;
           max-width: 80%;
-          height: 500px;
-          box-shadow: 3px 3px 4px 3px #777777;
+          height:500px;
+          box-shadow: 3px 4px 6px -1px #777777;
           .chef_schedule_top {
             background-color: $Camel-3;
             width: 100%;
@@ -272,8 +279,11 @@ div.back_chefstManger {
               flex-direction: column;
               margin-top: 5%;
               .chef_schedule_item {
-                p {
-
+                margin-bottom: 5%;  
+                .chef_schedule_item_p {
+                  margin-bottom: 2%;
+                  border-bottom: 1px solid #000;
+                  width: 97%;
                 }
                 .btn_flex {
                   display: flex;
@@ -286,7 +296,7 @@ div.back_chefstManger {
                     border-radius: 6px;
                     color: white;
                     cursor: pointer;
-
+                    margin-right: 4%;
                     & {
                       background-color: #59886b;
                     }
@@ -315,6 +325,22 @@ div.back_chefstManger {
                 }
               }
             }
+          }
+          .save_btn_schedule {
+            margin: 10% auto;
+            @extend .font12;
+            font-weight: 1000;
+            @include btnGetor(
+              85px,
+              4.5px,
+              10px,
+              black,
+              $Camel-1,
+              white,
+              $Camel-3,
+              #8b8b8b,
+              null
+            );
           }
         }
 

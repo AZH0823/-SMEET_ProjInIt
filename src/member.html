@@ -11,8 +11,10 @@
   </head>
   <body>
     @@include('layout/header_01.html')
+    @@include('layout/login.html')
     <div class="fulid_wrapper member" id="member">
       <main>
+        
         <!-- MEMBER標題 -->
         <h1 class="green-1 font_family_eng">MEMBER</h1>
         <!-- 會員中心標題 -->
@@ -37,6 +39,8 @@
             <li class="member_tab_5"><a href="">常見問題</a></li> -->
           </ul>
         </nav>
+        <!-- 登出測試 -->
+        <button type="button" onclick="logout_test()">登出</button>
         <!-- ======會員中心內容===== -->
         <section class="member_section" v-show="current_tab == 'tab1' ">
           <div class="member_info">
@@ -550,24 +554,32 @@
     </div>
     <script src="js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script src="js/frontpage/login_check.js"></script>
     <script>
-      //常見問題
-      $(function () {
-        // $(".question_flex").click(function (e) {
-        //   // console.log(this);
-          $(this).siblings().toggleClass("active");
-        // });
-
-        // $(".fa-minus").click(function (e) {
-        //   // console.log( $(this).parents());
-        //   $(this).parents().toggleClass("active");
-        // });
-
-        $(".question_section_li").on("click",function(e){
-          e.preventDefault();
-          $(this).find('.question_none').toggleClass("active");
-        })
-      });
+      //header 會員登入測試
+      let user_icon = document.querySelector('.slide_user');
+      user_icon.addEventListener('click',function(e){
+        // console.log('qqq')
+        e.preventDefault();
+        login_check();
+      })
+      //登出測試
+      function logout_test(){
+        $.ajax({            
+          method: "POST",
+          url: "php/frontpage/logout.php",
+          data:{},            
+          dataType: "text",
+          success: function (response) {
+              alert("登出成功");
+              localStorage.removeItem('member_ID');
+          },
+          error: function(exception) {
+              alert("數據載入失敗: " + exception.status);
+          }
+        });
+      };
+      
 
       //收藏清單
       let collection_lo = [{
@@ -686,6 +698,25 @@
                 },
         }
       }).mount('#member');
+
+      //常見問題
+      $(function () {
+        // $(".question_flex").click(function (e) {
+        //   // console.log(this);
+          $(this).siblings().toggleClass("active");
+        // });
+
+        // $(".fa-minus").click(function (e) {
+        //   // console.log( $(this).parents());
+        //   $(this).parents().toggleClass("active");
+        // });
+
+        $(".question_section_li").on("click",function(e){
+          e.preventDefault();
+          $(this).find('.question_none').toggleClass("active");
+        })
+      });
+
         $(".question_flex").click(function (e) {
           if ($(this).children("i.fa-solid").hasClass("fa-plus")) {
             // console.log(this);
