@@ -51,6 +51,8 @@
         }
         li {
           margin-bottom: 10px;
+          cursor: pointer;
+
           @include pad() {
             margin-bottom: 20px;
           }
@@ -63,6 +65,7 @@
             border-right: 1px solid $Camel-1;
             display: block;
             text-align: center;
+            cursor: pointer;
             @include pad() {
               font-size: 14px;
               letter-spacing: 1px;
@@ -670,6 +673,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        cursor: pointer;
         @include pad {
           width: 90%;
         }
