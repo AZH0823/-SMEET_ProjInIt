@@ -3,15 +3,10 @@
     height: 100vh;
     width: 100vw;
     position: fixed;
-<<<<<<< HEAD
-
-    .container {
-=======
     overflow: hidden;
     z-index: 10000;
     top: 0;
     .container{
->>>>>>> dev
         background-color: #fff;
         width: 470px;
         height: 525px;
@@ -419,28 +414,21 @@
 
 
     }
-<<<<<<< HEAD
 
-    // .none {
-    //     display: none !important;
-    // }
-
+    
 }
 
 .-carton {
     transition: 1s;
     right: 0 !important;
-
+    
 }
 
 .-closeon {
     transition-delay: 200s, 4ms;
     right: -100% !important;
-
-=======
     
 }
-.none{
+.none {
     display: none !important;
->>>>>>> dev
 }
