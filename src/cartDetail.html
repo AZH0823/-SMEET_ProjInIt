@@ -361,20 +361,21 @@
                 },
 
             mounted() {
+
                 //我要先載入function取得member的資料
                 // console.log(`ttt`);
                 function doSubmit(str) {
                 $.ajax({
                 method: "POST",
-                url: "login_check.php",
+                url: "member_point.php",
                 dataType: "text",
                 success: function (response) {
-                    // console.log(response);
-                    if (response == "Y") {
-                    console.log(`成功`);
-                    } else {
-                    console.log(`失敗`);
-                    }
+                    console.log(`ttt`);
+                    // if (response == "Y") {
+                    // console.log(`成功`);
+                    // } else {
+                    // console.log(`失敗`);
+                    // }
                  },
 
           error: function (exception) {
