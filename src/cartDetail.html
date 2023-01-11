@@ -118,7 +118,7 @@
             <!-- 步驟1中間區塊主要內容結束=========== -->
             <!-- 步驟2中間區塊主要內容=========== -->
             <section class="cart_2_content" v-if="process.step === 2 " >
-                <!-- 購物車商品 -->
+                <!-- 購物車商品 --> 
                 <div class="cart_product cart_none" :class="{'cart_open' : process.step === 2 }" >
                     <!-- 商品標題 -->
                     <div class="title">
@@ -181,11 +181,11 @@
                     </div>
                     <div class="buy_content">
                         <label for="">姓名</label>
-                        <input type="text" placeholder="請輸入姓名" value="{{}}">
+                        <input type="text" placeholder="請輸入姓名" value="">
                         <label for="">手機號碼</label>
-                        <input type="text" placeholder="請輸入手機號碼" value="{{}}">
+                        <input type="text" placeholder="請輸入手機號碼" value="">
                         <label for="">地址</label>
-                        <input type="text" placeholder="請輸入地址" value="{{}}">
+                        <input type="text" placeholder="請輸入地址" value="">
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
                         </select>
@@ -211,9 +211,9 @@
                     </div>
                     <div class="get_content">
                         <label for="">姓名</label>
-                        <input type="text" placeholder="請輸入姓名" value="{{}}">
+                        <input type="text" placeholder="請輸入姓名" value="">
                         <label for="">手機號碼</label>
-                        <input type="text" placeholder="請輸入手機號碼" value="{{}}"> 
+                        <input type="text" placeholder="請輸入手機號碼" value=""> 
                         <label for="" >地址</label>
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
@@ -221,7 +221,7 @@
                         <select name="member_area" class="member_area">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
                         </select> -->
-                        <input type="text" class="member_addr" placeholder="請輸入地址" value="{{}}">
+                        <input type="text" class="member_addr" placeholder="請輸入地址" value="">
                     </div>
                 </div>
                 <!-- 配送/發票 -->
@@ -337,14 +337,7 @@
                             price:'700',
                             count:'3'
                         },
-                        //測試用的陣列
-                        {
-                            id:'',
-                            product_name:'',
-                            img_url:'',
-                            price:'',
-                            count:''
-                        }
+            
 
                         ],
 
@@ -365,11 +358,14 @@
                    
 
                         //商城傳回的資料
-
                         inputShopMall : [
 
                             {
-
+                                id:'',
+                                product_name:'',
+                                img_url:'',
+                                price:'',
+                                count:''
                             }
                         ]
                     }
@@ -433,7 +429,6 @@
                 //換下一步
                 changePage(val){
                     this.process.step += val;
-
                 },
 
                 //數量加
