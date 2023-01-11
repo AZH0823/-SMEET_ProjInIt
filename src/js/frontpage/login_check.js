@@ -11,7 +11,7 @@ function login_check(){
                 login_pop();
             }else{
                 //已有登入的話 執行.....
-                location.href="member.html"
+                // history.go(0);
             }              
         },
         error: function(exception) {

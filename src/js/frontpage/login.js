@@ -23,49 +23,30 @@ let login_app = Vue.createApp({
     computed: {},
     mounted() {},
     methods: {
-
         //tab切換-註冊會員
         add_tab() {
-            let add_tab = this.$refs.add_tab;
-            let enter_tab = this.$refs.enter_tab;
-            let tab1 = this.$refs.tab1;
-            let tab2 = this.$refs.tab2;
-            let forget = this.$refs.forget;
-            let or = this.$refs.or;
-            let three = this.$refs.three;
-            let tab = this.$refs.tab;
-            let join_ok = this.$refs.join_ok;
-            join_ok.classList.add('none');
-            tab.classList.remove('none');
-            add_tab.classList.remove('none');
-            enter_tab.classList.add('none');
-            tab1.classList.add('tab_line');
-            tab2.classList.remove('tab_line');
-            forget.classList.add('none');
-            or.classList.remove('none');
-            three.classList.remove('none');
+            this.$refs.join_ok.classList.add('none');
+            this.$refs.tab.classList.remove('none');
+            this.$refs.add_tab.classList.remove('none');
+            this.$refs.enter_tab.classList.add('none');
+            this.$refs.tab1.classList.add('tab_line');
+            this.$refs.tab2.classList.remove('tab_line');
+            this.$refs.forget.classList.add('none');
+            this.$refs.or.classList.remove('none');
+            this.$refs.three.classList.remove('none');
 
         },
         //tab切換-會員登入
         enter_tab() {
-            let add_tab = this.$refs.add_tab;
-            let enter_tab = this.$refs.enter_tab;
-            let tab1 = this.$refs.tab1;
-            let tab2 = this.$refs.tab2;
-            let or = this.$refs.or;
-            let three = this.$refs.three;
-            let tab = this.$refs.tab;
-            let forget = this.$refs.forget;
-            let join_ok = this.$refs.join_ok;
-            join_ok.classList.add('none');
-            tab.classList.remove('none');
-            add_tab.classList.add('none');
-            enter_tab.classList.remove('none');
-            tab1.classList.remove('tab_line');
-            tab2.classList.add('tab_line');
-            forget.classList.add('none');
-            or.classList.remove('none');
-            three.classList.remove('none');
+            this.$refs.join_ok.classList.add('none');
+            this.$refs.tab.classList.remove('none');
+            this.$refs.add_tab.classList.add('none');
+            this.$refs.enter_tab.classList.remove('none');
+            this.$refs.tab1.classList.remove('tab_line');
+            this.$refs.tab2.classList.add('tab_line');
+            this.$refs.forget.classList.add('none');
+            this.$refs.or.classList.remove('none');
+            this.$refs.three.classList.remove('none');
         },
         //input 驗證格式_密碼
         check_pwd(e) {
@@ -95,11 +76,18 @@ let login_app = Vue.createApp({
             }
             return this.emailRule(e.target.value);  //true or false
         },
+        checkEmail_join(str){
+            // 電子信箱驗證格式
+            // console.log(this.emailRule(e.target.value));
+            let a = this.emailRule(str);
+            // console.log(a);
+            return a;  //true or false
+        },
         //input 驗證格式_帳號
         //眼睛icon
         eye_icon(e) {
             let pwd_type = e.target.previousSibling;
-            console.log(pwd_type.type);
+            // console.log(pwd_type.type);
             e.stoppropagation;
             if (pwd_type.type == "password") {
                 pwd_type.type = "text";
@@ -113,21 +101,13 @@ let login_app = Vue.createApp({
         },
         //忘記密碼
         forget() {
-            let add_tab = this.$refs.add_tab;
-            let enter_tab = this.$refs.enter_tab;
-            let or = this.$refs.or;
-            let three = this.$refs.three;
-            let forget = this.$refs.forget;
-            let tab = this.$refs.tab;
-            let join_ok = this.$refs.join_ok;
-            join_ok.classList.add('none');
-            tab.classList.add('none');
-            add_tab.classList.add('none');
-            enter_tab.classList.add('none');
-            or.classList.add('none');
-            three.classList.add('none');
-            forget.classList.remove('none');
-
+            this.$refs.join_ok.classList.add('none');
+            this.$refs.tab.classList.add('none');
+            this.$refs.add_tab.classList.add('none');
+            this.$refs.enter_tab.classList.add('none');
+            this.$refs.or.classList.add('none');
+            this.$refs.three.classList.add('none');
+            this.$refs.forget.classList.remove('none');
         },
 
         //當立即加入按下
@@ -160,7 +140,6 @@ let login_app = Vue.createApp({
             let login_bg = document.getElementById('login_bg');
             let login = document.getElementById('login');
             let body = document.querySelector('body');
-
             account.nextElementSibling.classList.remove('appear');
             pwd.nextElementSibling.nextElementSibling.classList.remove('appear');
             if (account.value == '') {
@@ -169,7 +148,6 @@ let login_app = Vue.createApp({
             if (pwd.value == '') {
                 return false;
             }  
-
             $.ajax({
                 method: "POST",
                 url: "php/frontpage/login.php",
@@ -185,8 +163,7 @@ let login_app = Vue.createApp({
                         login_bg.classList.add('none');
                         body.style.overflow = "auto";
                         get_Member_ID();
-                        history.go(0);
-
+                        // history.go(0);
                     } else {
                         account.nextElementSibling.classList.add('appear');
                         pwd.nextElementSibling.nextElementSibling.classList.add('appear');
@@ -197,26 +174,17 @@ let login_app = Vue.createApp({
                     alert("發生錯誤: " + exception.status);
                 }
             });
-
         },
         //註冊成功畫面
         join_success(){
-            let add_tab = this.$refs.add_tab;
-            let enter_tab = this.$refs.enter_tab;
-            let or = this.$refs.or;
-            let three = this.$refs.three;
-            let forget = this.$refs.forget;
-            let tab = this.$refs.tab;
-            let join_ok = this.$refs.join_ok;
-            join_ok.classList.remove('none');
-            tab.classList.add('none');
-            add_tab.classList.add('none');
-            enter_tab.classList.add('none');
-            or.classList.add('none');
-            three.classList.add('none');
-            forget.classList.add('none');
+            this.$refs.join_ok.classList.remove('none');
+            this.$refs.tab.classList.add('none');
+            this.$refs.add_tab.classList.add('none');
+            this.$refs.enter_tab.classList.add('none');
+            this.$refs.or.classList.add('none');
+            this.$refs.three.classList.add('none');
+            this.$refs.forget.classList.add('none');
         },
-        
         //註冊成功點擊確定關掉popup
         add_ok(){
             let login_bg = document.getElementById('login_bg');
@@ -226,35 +194,19 @@ let login_app = Vue.createApp({
             login_bg.classList.add('none');
             body.style.overflow = "auto";
             // 重新登入打開Login
-            let add_tab = this.$refs.add_tab;
-            let enter_tab = this.$refs.enter_tab;
-            let tab1 = this.$refs.tab1;
-            let tab2 = this.$refs.tab2;
-            let or = this.$refs.or;
-            let three = this.$refs.three;
-            let tab = this.$refs.tab;
-            let forget = this.$refs.forget;
-            let join_ok = this.$refs.join_ok;
-            join_ok.classList.add('none');
-            tab.classList.remove('none');
-            add_tab.classList.add('none');
-            enter_tab.classList.remove('none');
-            tab1.classList.remove('tab_line');
-            tab2.classList.add('tab_line');
-            forget.classList.add('none');
-            or.classList.remove('none');
-            three.classList.remove('none');
+            this.enter_tab();
         },
         //會員註冊ajax
         join_ajax(){
             let account = document.getElementById('join_account').value;
             let pwd = document.getElementById('join_pwd').value;
             let pwd_again = document.getElementById('join_again').value;
+            let that = this ;
             if (account == '') {
                 return false;
             }
             //驗證信箱格式
-            if(checkEmail(account) == false){
+            if(this.checkEmail_join(account) == false){
                 return false;
             };
             
@@ -276,10 +228,7 @@ let login_app = Vue.createApp({
                             //帳號不重複
                             // alert('註冊成功');
                             
-                            join_success();
-                            // account = "";
-                            // pwd = "";
-                            // pwd_again = "";
+                            that.join_success();
                         } else {
                             // 帳號重複
                             // console.log("帳號重複");
@@ -290,46 +239,8 @@ let login_app = Vue.createApp({
                         alert("發生錯誤: " + exception.status);
                     }
                 });
-                
-
-                
             }
-                
-
         }
     }
 });
 login_app.mount("#login");
-
-//註冊成功畫面
-function join_success(){
-    let add_tab = document.querySelector('.login_add');
-    let enter_tab = document.querySelector('.login_enter');
-    let or = document.querySelector('.login_or');
-    let three = document.querySelector('.btn_three');
-    let forget = document.querySelector('.login_forget');
-    let tab = document.querySelector('.login_tab');
-    let join_ok = document.querySelector('.login_success');
-    let tab1 = document.querySelector('.tab_add');
-    let tab2 = document.querySelector('.tab_enter');
-    join_ok.classList.remove('none');
-    tab.classList.add('none');
-    add_tab.classList.add('none');
-    enter_tab.classList.add('none');
-    or.classList.add('none');
-    three.classList.add('none');
-    forget.classList.add('none');
-};
-
-function emailRule(str){
-    let emailRule =  new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    return emailRule.test(str);
-};
-function checkEmail(str){
-    // 電子信箱驗證格式
-    // console.log(this.emailRule(e.target.value));
-    let a = this.emailRule(str);
-    // console.log(a);
-    return a;  //true or false
-    
-};
