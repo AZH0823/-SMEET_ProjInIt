@@ -110,7 +110,6 @@ initial-scale=1.0">
                                 
                                 <div class="product_img">
                                     <a :href="'./shopMallDetail.html?ID='+ item.ID">
-
                                         <img :src="item.IMG" alt="">
                                     </a>
                                     <i class="fa-solid fa-heart"
@@ -277,7 +276,7 @@ initial-scale=1.0">
                         // ========= 收藏後的資料會帶到這裡 ========= //
                         collect_heart_data_list:[],
 
-                        // ========= 點擊購物車的資料會帶到這裡 ========= //
+                        // ========= 點擊加入購物車的資料會帶到這裡 ========= //
                         ShoppingCartList: [],
 
                         // ========= 分頁 ========= // 
@@ -385,9 +384,10 @@ initial-scale=1.0">
                     // 取得商品清單
                     getCate(){    
                         $.ajax({            
+
                             method: "GET",
                             url: "./php/frontpage/shopMall.php",
-                            data:{},            
+                            data:{},
                             dataType: "json",
                             success: (response)=> {
                                 if(response != ""){
@@ -423,7 +423,7 @@ initial-scale=1.0">
 
 
                     // 點擊卡片購物車 icon 後 顯示 popUp
-                    shopCar(ID, Name, Price, IMG){
+                    shopCar(ID, Name, Price, IMG, amount){
                         // 開啟popUp
                         this.isShow = true;
                         // console.log(ID, Name, Price, IMG, heart, amount);

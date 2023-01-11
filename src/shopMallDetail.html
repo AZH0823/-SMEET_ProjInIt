@@ -75,8 +75,8 @@ initial-scale=1.0">
                 
                 <!-- 右邊標題 -->               
                 <div class="right_text">
-                    <h3 class="green-1 title" v-if="shopMallDetailInfo.name">{{shopMallDetailInfo.Name}}</h3>
-                    <p class="font18 summary">{{ shopMallDetailInfo.shopPoint }}</p>
+                    <h3 class="green-1 title" >{{shopMallDetailInfo.Name}}</h3>
+                    <p class="font18 summary">{{ shopMallDetailInfo.shopPoint}}</p>
                     <div class="money_love">
                         <h3>$<span>{{ shopMallDetailInfo.Price }}</span></h3>
                         <i class="fa-solid fa-heart" 
@@ -114,7 +114,7 @@ initial-scale=1.0">
                 <h6 class="new_product_title">最新商品</h6>
                 <ul class="">
                     <template 
-                    v-for="(item, i) in shopMallDetailInfo" 
+                    v-for="(item, i) in MealsInfo" 
                     :key="item.Name">
                 
                         <li class="collect_list" data-inside="true">
@@ -134,7 +134,7 @@ initial-scale=1.0">
                                     <p class="font16" data-inside="true">$<span class="product_money" data-inside="true">{{ item.Price }}</span></p>
                                     <button type="button" class="cart_link" href="" data-inside="true">
                                         <i class="fa-solid fa-cart-shopping" 
-                                        @click="shopCar(item.ID, item.Name, item.Price, item.IMG)"
+                                        @click="shopCar(item.ID, item.Name, item.Price, item.IMG, item.amount)"
                                         data-inside="true"></i>
                                     </button>
                                 </div>
@@ -146,12 +146,12 @@ initial-scale=1.0">
             </div>
 
             <!-- 收藏燈箱 -->
-            <!-- <div class="wrapper overlay1" v-if="success_popup !== '' "> -->
+            <div class="wrapper overlay1" v-if="success_popup !== '' ">
                 
                 <article>
                     <div class="check_text">
                         <i class="fa-solid fa-circle-check"></i>
-                        <!-- <h6 >{{success_popup}}</h6>  -->
+                        <h6 >{{success_popup}}</h6> 
                     </div>
                 </article>
             </div>
@@ -159,7 +159,7 @@ initial-scale=1.0">
             <!-- cart 燈箱 -->
             <div class="wrapper product_pop" id="product_pop" v-if="isShow">
                 <div class="container" :data-id="this.popupData.id">
-                    <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG)"></i>
+                    <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG, popupData.amount)"></i>
                     <div class="img_product">
                         <img :src="popupData.IMG" alt="">
                     </div>
@@ -177,6 +177,7 @@ initial-scale=1.0">
                     </div>
                 </div>
             </div>
+
         </div>
         <!--         ------  no_img_footer  ------          -->
 <div class="noimg_footer fulid_wrapper">
@@ -262,19 +263,17 @@ initial-scale=1.0">
                 return{
                     // ========= popUp ========= //
                     // 控制卡片 popup 開關
-                    isShow:false, 
+                    isShow: false, 
                     
 
                     // 燈箱資料，資料源自 MealsInfo
-                    popupData: {
-                        id: "",
-                        img1: "",
-                        img2: "",
-                        img3: "",
-                        name: "",
-                        price: "",
+                    popupData: [{
+                        ID: "",
+                        IMG: "",
+                        Name: "",
+                        Price: "",
                         amount: 1,
-                    },
+                    }],
 
                     // ========= 收藏後的資料會帶到這裡 ========= //
                     collect_heart_data_list:[],
@@ -282,37 +281,69 @@ initial-scale=1.0">
                     // ========= 點擊購物車的資料會帶到這裡 ========= //
                     ShoppingCartList: [],
 
+                    // ========= 分頁 ========= // 
+                        // 清空原本分頁資料
+                        success_popup_interval:null,
+                        success_popup:'',
+
+                        // 當前分頁狀態
+                        current_tab: 8,
+
+                        // 現有分頁的data
+                        shopMall_tab:[
+                            {
+                                Type: 8,
+                                name:"主食"
+                            },
+                            {
+                                Type: 9,
+                                name:"湯品"
+                            },
+                            {
+                                Type: 10,
+                                name:"甜品"
+                            }
+                        ],
+
                     // ========= 商品清單 ========= //
-                    // 測試資料
+                    // 最新商品測試資料
                     MealsInfo: [
-                        // {
-                        //     category:'tab1',
-                        //     id: "1",
-                        //     img1: "./img/shopmall_img/shopmall_product01.jpg",
-                        //     img2: "./img/shopmall_img/shopmall_product01.jpg",
-                        //     img3: "./img/shopmall_img/shopmall_product01.jpg",
-                        //     heart: false,
-                        //     name: "黑鮪刺身",
-                        //     price: "700",
-                        //     collectTime: new Date(),
-                        //     amount:3,
-                        //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
-                        //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
-                        // },
-                        // {
-                        //     category:'tab1',
-                        //     id: "2",
-                        //     img1: "./img/shopmall_img/shopmall_product02.jpg",
-                        //     img2: "./img/shopmall_img/shopmall_product02.jpg",
-                        //     img3: "./img/shopmall_img/shopmall_product02.jpg",
-                        //     heart: false,
-                        //     name: "北海道海膽壽司",
-                        //     price: "700",
-                        //     collectTime: new Date(),
-                        //     amount:5,
-                        //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
-                        //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
-                        // },
+                        {
+                            category:'tab1',
+                            ID: "1",
+                            Name: "黑鮪刺身",
+                            IMG: "./img/shopmall_img/shopmall_product01.jpg",
+                            heart: false,
+                            Price: "700",
+                            collectTime: new Date(),
+                            amount:3,
+                            shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
+                            Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
+                        },
+                        {
+                            category:'tab1',
+                            ID: "2",
+                            Name: "黑鮪刺身",
+                            IMG: "./img/shopmall_img/shopmall_product02.jpg",
+                            heart: false,
+                            Price: "700",
+                            collectTime: new Date(),
+                            amount:3,
+                            shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
+                            Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
+                        },
+                        {
+                            category:'tab1',
+                            ID: "3",
+                            Name: "黑鮪刺身",
+                            IMG: "./img/shopmall_img/shopmall_product03.jpg",
+                            heart: false,
+                            Price: "700",
+                            collectTime: new Date(),
+                            amount:3,
+                            shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
+                            Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
+                        },
                         
                     ],
                     current_img: 0, // 當前照片預設值
@@ -321,15 +352,24 @@ initial-scale=1.0">
                             "./img/shopmall_img/shopmall_product04.jpg",
                             "./img/shopmall_img/shopmall_product04.jpg",
                             "./img/shopmall_img/shopmall_product04.jpg",
-                            "./img/shopmall_img/shopmall_product04.jpg",
                         ]
                     },
 
                     // AJAX傳入資料
-                    shopMallDetailInfo: []
+                    shopMallDetailInfo: {}
                 };
             },
             computed: {
+                filtered_list(){
+                        const filtered =  this.AjaxMealsInfo.filter((post) => {
+                        // console.log(this.current_tab);
+                        // console.log(post.Type);
+                        // console.log(this.current_tab === post.Type);
+                        return this.current_tab === post.Type
+                            // return  post.title.toLowerCase().includes(this.keyword.toLowerCase());
+                        });
+                        return filtered
+                    }
 
             },
 
@@ -355,10 +395,11 @@ initial-scale=1.0">
                             ID: DetailData // 变数
                         },            
                         dataType: "json",
-                        success: function (response) {
+                        success: (response) =>{
                             if(response != ""){
-                                this.shopMallDetailInfo = response;
-                                console.log(this.shopMallDetailInfo) // 
+
+                                this.shopMallDetailInfo = response[0];
+                                console.log(this.shopMallDetailInfo) 
                             }                
                         },
                         error: function(exception) {
@@ -381,21 +422,20 @@ initial-scale=1.0">
 
                 
                 // 點擊卡片購物車 icon 後 顯示 popUp
-                shopCar(ID, Name, Price, IMG){
+                shopCar(ID, Name, Price, IMG, amount){
                     // 開啟popUp
                     this.isShow = true;
-
+                    console.log(this.popupData);
                     // asign 資料到popUp
-                    this.popupData.Name = Name
-                    this.popupData.ID = ID
-                    this.popupData.Price = price
-                    this.popupData.IMG = IMG
-                    // this.popupData.img2 = img2
-                    // this.popupData.img3 = img3
+                    this.popupData.ID = ID;
+                    this.popupData.Name = Name;
+                    this.popupData.Price = Price;
+                    this.popupData.IMG = IMG;
+                    this.popupData.amount = 1;
                 },
 
                 // 點擊 X 關閉popUp並清空資料
-                popUp_xClose(ID, Name, Price, IMG){
+                popUp_xClose(ID, Name, Price, IMG, heart, amount){
 
                     // 關閉popUp
                     this.isShow = false;
@@ -406,22 +446,25 @@ initial-scale=1.0">
                 // 商品數量加
                 popUpPlus(amount){
                     // console.log(amount);
-                    this.shopMallDetailInfo.amount ++;
+                    this.popupData.amount ++;
                 },
                 // 商品數量減
                 popUpMinus(amount){
                     // console.log(amount);
-                    if(this.shopMallDetailInfo.amount > 1){
-                        this.shopMallDetailInfo.amount --;
+                    if(this.popupData.amount > 1){
+                        this.popupData.amount --;
                     }
                 },
                 
-                // FIXME push data到陣列
+                // 最新商品popUp
                 addShoppingCart(popupData){
-                    
+                    // consloe.log(popupData);
                     // asign 到 LoacalStorage
-                    this.ShoppingCartList.push(popupData);
-                    // localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList));
+                    
+                    // 解除 popupData 跟 mealsInfo的聯動
+                    this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData)));
+                    // console.log(JSON.parse(JSON.stringify(popupData)));
+                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList));
 
                     // 關閉購物車
                     this.isShow = false;
@@ -433,7 +476,7 @@ initial-scale=1.0">
 
                 // 收藏商品資料加入空陣列
                 addCollectList(item){
-                    // console.log(item);
+                    console.log(item);
                     // push 到新的陣列以便存到 localStorage
                     this.collect_heart_data_list.push(item);
                 },
@@ -444,26 +487,26 @@ initial-scale=1.0">
                 },
 
 
-                // 商品愛心收藏及移除（樣式及提醒popUp）
+                 // 商品愛心收藏及移除（樣式及提醒popUp）
                 collect_heart(item){
                     // 加减爱心
-                    // console.log(item.heart);
-                    // if(item.heart == true){
-                    //     item.heart = false;
-                    //     this.success_popup = '移除收藏成功'
-                    //     this.removeCollectList(item)
+                    console.log(item.heart);
+                    if(item.heart == true){
+                        item.heart = false;
+                        this.success_popup = '移除收藏成功'
+                        this.removeCollectList(item)
 
-                    // }else{
-                    //     item.heart = true;
-                    //     this.success_popup = '加入收藏成功'
-                    //     this.addCollectList(item)
-                    // }
+                    }else{
+                        item.heart = true;
+                        this.success_popup = '加入收藏成功'
+                        this.addCollectList(item)
+                    }
 
                     // 收藏 & 移除 PopOn 消失
-                    // clearInterval(this.success_popup_interval)
-                    // this.success_popup_interval = setInterval(() => {
-                    //     this.success_popup= ''
-                    // }, 1000);
+                    clearInterval(this.success_popup_interval)
+                    this.success_popup_interval = setInterval(() => {
+                        this.success_popup= ''
+                    }, 1000);
 
                     // 收藏增加 LoacalStorage
                     // console.log(this.collect_heart_data_list);
