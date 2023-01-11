@@ -31,6 +31,7 @@
                         <p class="item5"></p>
                     </div>
                     <!-- 商品list -->
+                
                     <div class="product_detail" v-for="(item, index) in product_list" :key="item.id">
                         <div class="item1 green-1">
                             <div class="item1_img">
@@ -132,7 +133,9 @@
                         <div class="item1 green-1">
                             <div class="item1_img">
                                 <img :src="item.img_url" alt="">
+                       
                             </div>
+                    
                             <h6 class="product_name">{{item.product_name}}</h6>
                         </div>
                         <div class="item2">
@@ -285,9 +288,11 @@
 
         <!-- @@include('layout/footer.html') -->
         <script src="./js/vender/Vue/vue.global.js"></script>
+        <!-- <script src="https://unpkg.com/vue@next" defer></script> -->
+
         <script>
              const app = Vue.createApp({
-    
+            
                 data() {
                     return {
 
@@ -316,6 +321,7 @@
                             id:'3',
                             product_name:'大黑鮪生魚片',
                             img_url:'img/atcart_img/Rectangle2.jpg',
+                            // url:'./aboutUs.html',
                             price:'650',
                             count:'5'
                         },
@@ -346,17 +352,40 @@
                    
 
                         //這裡要接從購物車收到的localstorage
-                        inputData:{
-                            isLogindIn:false,
+                        inputData:[
+                            {
 
                             },
+                        ]
                     }
                 },
 
-            mounted:{
+            mounted() {
+                //我要先載入function取得member的資料
+                // console.log(`ttt`);
+                function doSubmit(str) {
+                $.ajax({
+                method: "POST",
+                url: "login_check.php",
+                dataType: "text",
+                success: function (response) {
+                    // console.log(response);
+                    if (response == "Y") {
+                    console.log(`成功`);
+                    } else {
+                    console.log(`失敗`);
+                    }
+                 },
+
+          error: function (exception) {
+            alert("發生錯誤: " + exception.status);
+          },
+        });
+      }
+
 
             },
-            computed :{
+            computed:{
                 //小計的所有金額
                 cartTotal () {
                     let cartTotal = 0;
@@ -418,11 +447,8 @@
                     let str = (e.target.value).replace(/\D/g, "");
                     e.target.value = str;
                     //取得目前會員點數的金額
-                    
                     let bounsVal = e.path[1].nextElementSibling.children[0].firstElementChild.innerText;
                     // console.log(bounsVal);
-                 
-
                     //
                     if(parseInt(e.target.value) > bounsVal){
                     this.show = true; 
