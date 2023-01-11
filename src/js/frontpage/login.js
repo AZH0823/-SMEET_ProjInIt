@@ -1,17 +1,3 @@
-let users = [
-    {
-        id: 1,
-        account: 'abc',
-        pwd: '123456789'
-    }, {
-        id: 2,
-        account: 'qwe',
-        pwd: '123456789'
-    }
-]
-
-
-
 let login_app = Vue.createApp({
     data() {
         return {
@@ -34,14 +20,8 @@ let login_app = Vue.createApp({
             }
         }
     },
-    //生命週期
-    created() {
-        this.users = users;
-    },
     computed: {},
-    mounted() {
-        //api
-    },
+    mounted() {},
     methods: {
 
         //tab切換-註冊會員
@@ -205,6 +185,7 @@ let login_app = Vue.createApp({
                         login_bg.classList.add('none');
                         body.style.overflow = "auto";
                         get_Member_ID();
+                        history.go(0);
 
                     } else {
                         account.nextElementSibling.classList.add('appear');
@@ -269,12 +250,11 @@ let login_app = Vue.createApp({
             let account = document.getElementById('join_account').value;
             let pwd = document.getElementById('join_pwd').value;
             let pwd_again = document.getElementById('join_again').value;
-            let join_account = document.getElementById('join_account').value;
             if (account == '') {
                 return false;
             }
             //驗證信箱格式
-            if(checkEmail(join_account) == false){
+            if(checkEmail(account) == false){
                 return false;
             };
             
@@ -295,17 +275,22 @@ let login_app = Vue.createApp({
                         if (response == "N") {
                             //帳號不重複
                             // alert('註冊成功');
+                            
                             join_success();
+                            // account = "";
+                            // pwd = "";
+                            // pwd_again = "";
                         } else {
                             // 帳號重複
-                            console.log("帳號重複")
+                            // console.log("帳號重複");
+                            document.getElementById('join_account').nextElementSibling.classList.add('appear');
                         }
                     },
                     error: function (exception) {
                         alert("發生錯誤: " + exception.status);
                     }
                 });
-
+                
 
                 
             }
