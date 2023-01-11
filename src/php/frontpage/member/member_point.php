@@ -1,6 +1,6 @@
 <?php
     $member_ID = $_POST["member_ID"];
-    include('../conectDB/Connection.php');
+    include('../../conectDB/Connection.php');
 
     //建立SQL
     $sql = 'SELECT point FROM smeet.Member WHERE ID = ?';
