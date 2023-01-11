@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        @@include('layout/meta.html', { "title": "私覓SMEET-e.購物商城", })
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, 
+initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+<title>私覓SMEET-e.購物商城</title>
         <link rel="stylesheet" href="./css/style.css"/>
         <link
             rel="stylesheet"
@@ -9,40 +14,81 @@
     </head>
 
     <body>
-        @@include('layout/header_01.html')
-        <!-- banner -->
-        @@include('layout/banner.html',{
-            "title":"SHOP",
-            "src":"./img/shopmall_img/shopmall_headbanner.jpg"
-        })
-        <main class="wrapper shopMall" id="app" @click="xxx()">
-            <!-- 商城tab+排序 -->
+        <!--         ------  slide_header  ------          -->
+<div class="slide_header fulid_wrapper">
+
+    <header class="header_all">
+        <div class="contain wrapper">
+            <div class="head_logo">
+                <a href="index_home.html"><img src="./img/logo_img/logo_black-03.png" alt=""></a>
+            </div>
+            <div class="ham_div">
+                <ul class="header_bar">
+                    <li><a href="aboutUs.html" class="black">關於我們</a></li>
+                    <li><a href="chefTeam.html" class="black">私廚陣容</a></li>
+                    <li><a href="news.html" class="black">最新動態</a></li>
+                    <li><a href="menu.html" class="black">到府私廚</a></li>
+                    <li><a href="shopMall.html" class="black">線上商城</a></li>
+                </ul>
+                <div class="ham_user">
+                    <ul class="user_ham">
+                        <div class="border_ham">
+                            <li><a href="member.html" class="Camel-3">會員中心</a></li>
+                            <li><a href="orderList.html" class="Camel-3">訂單查詢</a></li>
+                            <li><a href="member.html" class="Camel-3">收藏菜品</a></li>
+                            <li><a href="member.html" class="Camel-3">訊息中心</a></li>
+                            <li><a href="member.html" class="Camel-3">常見問題</a></li>
+                        </div>
+                        <li><a href="member.html" class="log_ham green-1">登入</a></li>
+                    </ul>
+                </div>
+            </div>
+            <nav>
+                <ul class="header_user">
+                    <a href="member.html" class="black slide_user"><i class="fa-solid fa-user"></i></a>
+                    <a href="cartDetail.html" class="black slide_cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="#" class="black slide_ham"><i class="fa-solid fa-bars"></i></a>
+                    <a href="reserve01.html" class="black reserve_btn">
+                        <img src="./img/btn_reserve_img/btn_reserve_c_img.png" alt="">
+                    </a>
+                </ul>
+                <!-- <a href="reseve.html" class="black reserve_pad">
+                    <img src="../img/btn_reserve_img/btn_reserve_c_img.png" alt="">
+                </a> -->
+            </nav>
+
+        </div>
+    </header>
+</div>
+<div class="header_bg fulid_wrapper"></div>
+<div class="header_mg fulid_wrapper"></div>
+
+        <!-- ========== banner ========== -->
+        <!-- ========== banner component ========== -->
+<div class="banner">
+    <div class="wrapper">
+        <h1 class="green-1 font_family_eng">SHOP</h1>
+    </div>
+    <div class="banner_container">
+        <img src=./img/shopmall_img/shopmall_headbanner.jpg alt="" />
+    </div>
+</div>
+        <main class="wrapper shopMall" id="app">
+            <!-- ========== 商城tab+排序 ========== -->
             <div class="shop_up">
-                <!-- tab -->
-                <!-- <ul class="shop_tab">
-                    <li class="shop_tabItem" >
-                        <a href="" data-tablink="one" class="on_tab"><h6>主食</h6></a>
-                    </li>
-                    <li class="shop_tabItem">
-                        <a href="" data-tablink="two"><h6>湯品</h6></a>
-                    </li>
-                    <li class="shop_tabItem">
-                        <a href="" data-tablink="three"><h6>甜品</h6></a>
-                    </li>
-                </ul> -->
                 <ul class="shop_tab " style="margin-top: 100px;">
-                    <template v-for="tab in shopMall_tab">
+                    <template v-for="tab in shopMall_tab" :key="tab.id">
                         <li class="shop_tabItem" >
                             <a href="" 
                             class="green-1" 
                             @click.prevent 
-                            @click="current_tab = tab.id" 
-                            :class="{ on_tab : current_tab ===  tab.id}"><h6>{{ tab.name }}</h6></a>
+                            @click="current_tab = tab.Type" 
+                            :class="{ on_tab : current_tab ===  tab.Type}"><h6>{{ tab.name }}</h6></a>
                         </li>
                     </template>
                 </ul>
 
-                <!-- 商品排序 -->
+                <!-- ========== 商品排序 ========== -->
                 <select name="" id="">
                     <option value="none" selected disabled hidden>商品排序</option> 
                     <option value="最新">最新</option>
@@ -51,37 +97,37 @@
                 </select>
             </div>
             
-            <!-- 商城卡片 -->
+            <!-- ========== 商城卡片 ========== -->
             <section class="collect_section ">
 
                 <ul id="three" class="tab-inner">
                     <template 
                     v-for="(item, i) in filtered_list" 
-                    :key="item.name">
+                    :key="item.Name">
                 
-                        <li class="collect_list" data-inside="true">
+                        <li class="collect_list">
                             <div>
-                                <div class="product_img" data-inside="true">
-                                    <a href="./shopMallDetail.html" data-inside="true">
-                                        <img :src="item.img" alt="" data-inside="true">
+                                
+                                <div class="product_img">
+                                    <a :href="'./shopMallDetail.html?ID='+ item.ID">
+
+                                        <img :src="item.IMG" alt="">
                                     </a>
                                     <i class="fa-solid fa-heart"
                                     :class="{shopMall_checkHeart: item.heart}" 
                                     @click="collect_heart(item)"
                                     @click="addCollectList(item)"
-                                    data-inside="true"></i>
+                                    ></i>
                                 </div>
-                                <div class="product_content green-1" data-inside="true">
-                                    <h6 class="product_title" data-inside="true">{{ item.name }}</h6>
-                                    <p class="font16" data-inside="true">$<span class="product_money" data-inside="true">{{ item.price }}</span></p>
-                                    <button type="button" class="cart_link" href="" data-inside="true">
-                                        <i class="fa-solid fa-cart-shopping" 
-                                        @click="shopCar(item.id, item.name, item.price, item.img)"
-                                        data-inside="true"></i>
-                                    </button>
-
+                                <div class="product_content green-1">
                                     
-
+                                    <h6 class="product_title">{{item.Name}}</h6>
+                                    <p class="font16">$<span class="product_money">{{ item.Price}}</span></p>
+                                    <button type="button" class="cart_link" href="">
+                                        <i class="fa-solid fa-cart-shopping" 
+                                        @click="shopCar(item.ID, item.Name, item.Price, item.IMG, item.heart, item.amount)"
+                                        ></i>
+                                    </button>
                                 </div>
                             </div>
                         </li>
@@ -89,7 +135,7 @@
 
             </section>
 
-            <!-- 收藏燈箱 -->
+            <!-- ========== 收藏燈箱 ========== -->
             <div class="wrapper overlay1" v-if="success_popup !== '' ">
                 
                 <article>
@@ -101,24 +147,24 @@
             </div>
 
 
-            <!-- cart 燈箱 -->
+            <!-- ========== cart 燈箱 ========== -->
             <div class="wrapper product_pop" id="product_pop" v-if="isShow">
-                <div class="container" :data-id="this.popupData.id">
-                    <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.id, popupData.name, popupData.price, popupData.img)"></i>
+                <div class="container">
+                    <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG, popupData.heart, popupData.amount)"></i>
                     <div class="img_product">
-                        <img :src="popupData.img" alt="">
+                        <img :src="popupData.IMG" alt="">
                     </div>
-                    <h6>{{popupData.name}}</h6>
-                    <p class="font16">$<span class="money_pop">{{popupData.price}}</span></p>
+                    <h6>{{popupData.Name}}</h6>
+                    <p class="font16">$<span class="money_pop">{{popupData.Price}}</span></p>
                     <div class="count_btn">
                         <div class="plus_minus">
                             <!-- 的methods -->
-                            <div class="minus" @click="popUpMinus(popupData.amount)"><i class="fa-solid fa-minus" @click=""></i></div>
+                            <div class="minus" @click="popUpMinus(popupData.amount)"><i class="fa-solid fa-minus"></i></div>
                             <div class="number">{{popupData.amount}}</div>
                             <!-- 減少的methods -->
-                            <div class="plus" @click="popUpPlus(popupData.amount)"><i class="fa-solid fa-plus" @click=""></i></div>
+                            <div class="plus" @click="popUpPlus(popupData.amount)"><i class="fa-solid fa-plus"></i></div>
                         </div>
-                        <button type="button" class="inCart_btn1" @click="addShoppingCart(popupData, popupData.id)">加入購物車</button>
+                        <button type="button" class="inCart_btn1" @click="addShoppingCart(popupData)">加入購物車</button>
                     </div>
                 </div>
             </div>
@@ -129,170 +175,244 @@
         
         
 
-        @@include('layout/footer.html')
+        <!--         ------  no_img_footer  ------          -->
+<div class="noimg_footer fulid_wrapper">
+    <div class="footer_all wrapper">
+
+        <div class="footer_btm">
+            <div class="info_footer">
+                <ul>
+                    <h6>Info</h6>
+                    <div class="info_rwd">
+                        <a href="member.html" class="black">
+                            <li>FAQs</li>
+                        </a>
+                        <a href="member.html" class="black">
+                            <li>常見問題</li>
+                        </a>
+                        <!-- <a href="#" class="black">
+                            <li>配送須知</li>
+                        </a>
+                        <a href="#" class="black">
+                            <li>隱私權政策</li>
+                        </a> -->
+                        <a href="aboutUs.html" class="black">
+                            <li>聯繫我們</li>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+            <div class="label_footer">
+                <ul>
+                    <h6>Label</h6>
+                    <div class="label_rwd">
+                        <a href="aboutUs.html" class="black">
+                            <li>關於我們</li>
+                        </a>
+                        <a href="chefTeam.html" class="black">
+                            <li>私廚陣容</li>
+                        </a>
+                        <a href="reseve.html" class="black">
+                            <li>到府私廚</li>
+                        </a>
+                        <a href="shopMall.html" class="black">
+                            <li>線上商城</li>
+                        </a>
+                        <a href="news.html" class="black">
+                            <li>最新動態</li>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+            <div class="follow_footer">
+                <ul>
+                    <h6>Flollow us</h6>
+                    <li>Lorem ipsum dolor sit amet consectetur. Quam risus cras nisl eros non. Gravida fringilla
+                        pellentesque sed dictum aenean <br>本網站為緯育TibaMe前端設計工程師班第80期第__組學員專題成果作品，本平台僅供學習、展示之用。</li>
+                    <div class="social_icon">
+                        <a href="#"><i class="fa-brands fa-facebook black"></i></a>
+                        <a href="#"><i class="fa-brands fa-square-instagram black"></i></a>
+                        <a href="#"><i class="fa-brands fa-line black"></i></a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
         <script src="./js/vender/Vue/vue.global.js"></script>
         <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
         <script>
 
 
+            // 導覽列
+            $(function () {
+
+                $(".slide_ham").on("click", function () {
+                    console.log("qwert");
+                    $(".header_bar").toggleClass("-on")
+                    $(".user_ham").toggleClass("-on")
+                })
+            })
 
             const app = Vue.createApp({
+
                 data(){
                     return{
                         // ========= popUp ========= //
                         // 控制卡片 popup 開關
                         isShow:false, 
 
-                        // 燈箱資料，資料源自 MealsInfo
+                        // 燈箱資料，資料源自 AjaxMealsInfo
                         popupData: {
-                            id: "",
-                            img: "",
-                            name: "",
-                            price: "",
-                            amount: 1,
+                            ID: "",
+                            IMG: "",
+                            img2: "",
+                            img3: "",
+                            Name: "",
+                            Price: "",
+                            heart: "",
+                            amount: "",
                         },
+
                         // ========= 收藏後的資料會帶到這裡 ========= //
                         collect_heart_data_list:[],
 
                         // ========= 點擊購物車的資料會帶到這裡 ========= //
                         ShoppingCartList: [],
 
-                        ShoppingCartListAll: [],
-
-                        
                         // ========= 分頁 ========= // 
                         // 清空原本分頁資料
                         success_popup_interval:null,
                         success_popup:'',
 
                         // 當前分頁狀態
-                        current_tab: "tab1",
+                        current_tab: 8,
 
                         // 現有分頁的data
                         shopMall_tab:[
                             {
-                                id: "tab1",
+                                Type: 8,
                                 name:"主食"
                             },
                             {
-                                id: "tab2",
+                                Type: 9,
                                 name:"湯品"
                             },
                             {
-                                id: "tab3",
+                                Type: 10,
                                 name:"甜品"
                             }
                         ],
 
                         // ========= 商品清單 ========= //
-                        // 商品清單假資料
+                        // 商品清單測試資料
                         MealsInfo: [
-                            {
-                                category:'tab1',
-                                id: "1",
-                                img: "./img/shopmall_img/shopmall_product01.jpg",
-                                heart: false,
-                                name: "黑鮪刺身",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:3
-                            },
-                            {
-                                category:'tab1',
-                                id: "2",
-                                img: "./img/shopmall_img/shopmall_product02.jpg",
-                                heart: false,
-                                name: "北海道海膽壽司",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:5
-                            },
-                            {
-                                category:'tab1',
-                                id: "3",
-                                img: "./img/shopmall_img/shopmall_product03.jpg",
-                                heart: false,
-                                name: "蘆筍蝦手捲",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:3
-                            },
-                            {
-                                category:'tab2',
-                                id: "4",
-                                img: "./img/shopmall_img/shopmall_product04.jpg",
-                                heart: false,
-                                name: "極品生魚片",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:7
-                            },
-                            {
-                                category:'tab2',
-                                id: "5",
-                                img: "./img/shopmall_img/shopmall_product05.jpg",
-                                heart: false,
-                                name: "番茄海鮮清湯",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:2
-                            },
-                            {
-                                category:'tab2',
-                                id: "6",
-                                img: "./img/shopmall_img/shopmall_product06.jpg",
-                                heart: false,
-                                name: "奶香牛肝菌野菇濃湯",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:9
-                            },
-                            {
-                                category:'tab3',
-                                id: "7",
-                                img: "./img/shopmall_img/shopmall_product07.jpg",
-                                heart: false,
-                                name: "手沖牛肉湯",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:17
-                            },
-                            {
-                                category:'tab3',
-                                id: "8",
-                                img: "./img/shopmall_img/shopmall_product08.jpg",
-                                heart: false,
-                                name: "酒焰龍蝦盛宴",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:6
-                            },
-                            {
-                                category:'tab3',
-                                id: "9",
-                                img: "./img/shopmall_img/shopmall_product10.jpg",
-                                heart: false,
-                                name: "繡球花和菓子",
-                                price: "700",
-                                collectTime: new Date(),
-                                amount:11
-                            },
+                            // {
+                            //     category:'tab1',
+                            //     id: "1",
+                            //     img1: "./img/shopmall_img/shopmall_product01.jpg",
+                            //     img2: "./img/shopmall_img/shopmall_product01.jpg",
+                            //     img3: "./img/shopmall_img/shopmall_product01.jpg",
+                            //     heart: false,
+                            //     name: "黑鮪刺身",
+                            //     price: "700",
+                            //     collectTime: new Date(),
+                            //     amount:3,
+                            //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
+                            //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
+                            // },
+                            
+                            // {
+                            //     category:'tab2',
+                            //     id: "4",
+                            //     img1: "./img/shopmall_img/shopmall_product04.jpg",
+                            //     img2: "./img/shopmall_img/shopmall_product04.jpg",
+                            //     img3: "./img/shopmall_img/shopmall_product04.jpg",
+                            //     heart: false,
+                            //     name: "極品生魚片",
+                            //     price: "700",
+                            //     collectTime: new Date(),
+                            //     amount:7,
+                            //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
+                            //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
+                            // },
+                            
+                            // {
+                            //     category:'tab3',
+                            //     id: "7",
+                            //     img1: "./img/shopmall_img/shopmall_product07.jpg",
+                            //     img2: "./img/shopmall_img/shopmall_product07.jpg",
+                            //     img3: "./img/shopmall_img/shopmall_product07.jpg",
+                            //     heart: false,
+                            //     name: "手沖牛肉湯",
+                            //     price: "700",
+                            //     collectTime: new Date(),
+                            //     amount:17,
+                            //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
+                            //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
+                            // },
+                            
                         ],
+
+                        // ========= AJAX傳入資料 ========= //
+                        AjaxMealsInfo: [],
                     };
                 },
+
                 computed: {
-                    // 原本菜單陣列依照curren_tab過濾
+                    // ========= 原本菜單陣列依照curren_tab過濾 ========= //
                     filtered_list(){
-                        const filtered =  this.MealsInfo.filter((post) => {
-                        return this.current_tab === post.category
+                        const filtered =  this.AjaxMealsInfo.filter((post) => {
+                        // console.log(this.current_tab);
+                        // console.log(post.Type);
+                        // console.log(this.current_tab === post.Type);
+                        return this.current_tab === post.Type
                             // return  post.title.toLowerCase().includes(this.keyword.toLowerCase());
                         });
                         return filtered
                     }
                 },
 
+                mounted() {
+                    
+                    // ========= 商品data AJAX 傳入 ========= //
+                    this.getCate();
+                },
+                
                 methods: {
-                    // TODO 怎麼觸及燈箱以外的地方，就可以讓燈箱關閉（目前在html結構上加上data-inside=”true“來判斷），但是這樣會報錯
+                    // ========= AJAX ========= //
+
+                    // 取得商品清單
+                    getCate(){    
+                        $.ajax({            
+                            method: "GET",
+                            url: "./php/frontpage/shopMall.php",
+                            data:{},            
+                            dataType: "json",
+                            success: (response)=> {
+                                if(response != ""){
+                                    // console.log(response);
+
+                                    // 將amount及heart資料帶入，變成新陣列
+                                    const adjusted_res = response.map((x) => {
+                                        x.heart = false
+                                        x.amount = 0  // 預設值: 在消費者行為前為 0
+                                        return x
+                                    });
+                                    this.AjaxMealsInfo = adjusted_res;
+                                    console.log(this.AjaxMealsInfo);
+
+                                }                
+                            },
+                            error: (exception)=> {
+                                alert("數據載入失敗: " + exception.status);
+                            }
+                        });
+                    },
+
+                    // ========= 購物車行為 ========= //
+
+                     // TODO 怎麼觸及燈箱以外的地方，就可以讓燈箱關閉（目前在html結構上加上data-inside=”true“來判斷），但是這樣會報錯
                     // xxx(){
                     //     const target = e.target
 
@@ -301,22 +421,22 @@
                     //     }
                     // },
 
-                    // ========= 購物車行為 ========= //
 
                     // 點擊卡片購物車 icon 後 顯示 popUp
-                    shopCar(id, name, price, img){
+                    shopCar(ID, Name, Price, IMG){
                         // 開啟popUp
                         this.isShow = true;
+                        // console.log(ID, Name, Price, IMG, heart, amount);
 
-                        // asign 資料到popUp
-                        this.popupData.name = name
-                        this.popupData.id = id
-                        this.popupData.price = price
-                        this.popupData.img = img
+                        this.popupData.Name = Name
+                        this.popupData.ID = ID
+                        this.popupData.Price = Price
+                        this.popupData.IMG = IMG
+                        this.popupData.amount = 1 // 預設值 1
                     },
 
                     // 點擊 X 關閉popUp並清空資料
-                    popUp_xClose(id, name, price, img){
+                    popUp_xClose(ID, Name, Price, IMG, heart, amount){
                         // 關閉popUp
                         this.isShow = false;
                         // 清空資料
@@ -336,51 +456,27 @@
                         }
                     },
                     
-                    // FIXME 還沒想到怎麼將陣列中重復的值相加
-                    // addShoppingCart(popupData, id){
-                        
-                        // asign 資料到popUp
-                        // this.ShoppingCartList.id = popupData.id
-                        // console.log(this.ShoppingCartList.id); // 值為：1
-                        
-                        // this.ShoppingCartList.push(popupData);
-                        
+                    // FIXME push data到陣列
+                    addShoppingCart(popupData){
+                        // console.log("这里是addShoppingCart")
 
-                        // const cacheData = [];
-                        // const newData = [];
-                        // console.log(this.ShoppingCartList); // 得到商品物件
-                        // let shopCartLi = this.ShoppingCartList;
-
-                        // shopCartLi.forEach((item) => {
-                            
-                        //     // 避免陣列第0筆一開始就上傳，所以預設就-1
-                        //     const str = item.id - 1;
-
-                        //     if (typeof cacheData[str] === 'undefined') {
-                        //         cacheData[str] = item;
-                        //         console.log(cacheData);
-                        //     } else {
-                        //         parseInt(cacheData[str].amount) + parseInt(item.amount);
-                        //     }
-                        // });
+                        // 解除 popupData 跟 mealsInfo的聯動
+                        this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData)));
+                        console.log(JSON.parse(JSON.stringify(popupData)));
+                        localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList));
 
                         // 關閉購物車
-                        // this.isShow = false;
+                        this.isShow = false;
 
                         // 數量回到初始值
-                        // this.popupData.amount = 1;
-                    // },
-
-                    // 點擊加入購物車 資料存到 loacalStorage，且關閉popUp
-                    // save_shoppingData(shoppingData){
-                    //     localStorage.setItem("shoppingData", JSON.stringify(popupData));
-                    // },
+                        this.popupData.amount = 1;
+                    },
 
                     // ========= 商品收藏 ========= //
 
                     // 收藏商品資料加入空陣列
                     addCollectList(item){
-                        // console.log(item);
+                        console.log(item);
                         // push 到新的陣列以便存到 localStorage
                         this.collect_heart_data_list.push(item);
                     },
