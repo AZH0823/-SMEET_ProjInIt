@@ -116,6 +116,9 @@
 
       justify-content: space-between;
       margin-bottom: 133px;
+      input{
+        position: relative;
+      }
       @include pad() {
         flex-direction: column;
       }
@@ -162,6 +165,7 @@
             margin-top: 8px;
             background-color: #000;
             color: #fff;
+
           }
           // label {
           // position: relative;
@@ -177,6 +181,18 @@
           //     border-radius: 2px;
           // }
         }
+      }
+      //提示文字
+      .m_text_no{
+        position: absolute;
+        color: $red;
+        bottom: 4px;
+        right: 0;
+        font-size: 12px;
+        opacity: 0;
+      }
+      .appear{
+        opacity: 1;
       }
     }
     // 右邊修該密碼
@@ -232,6 +248,9 @@
       @include pad() {
         margin-bottom: 40px;
       }
+    }
+    #btn_pwd {
+      margin-top: 20px;
     }
   }
   //=======================會員中心結束

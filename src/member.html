@@ -50,7 +50,7 @@
               <div class="date_sex">
                 <input type="date" id="member_date" placeholder="請輸入生日"  v-model="member_info.birthday" />
                 <select name="member_sex" id="member_sex" value="請選擇性別"  v-model="member_info.sex">
-                  <option value="none" selected disabled hidden>
+                  <option value="" selected disabled >
                     請選擇性別
                   </option>
                   <option value="男">男</option>
@@ -60,7 +60,7 @@
               <input
                 type="text"
                 id="member_phone"
-                placeholder="請輸入手機號碼"  v-model="member_info.phone"
+                placeholder="請輸入手機號碼"  v-model.trim="member_info.phone"
               />
               <!-- <div class="city_area">
                 <select name="member_city" id="member_city">
@@ -74,7 +74,7 @@
                   </option>
                 </select>
               </div> -->
-              <input type="text" id="member_addr" placeholder="請輸入地址"   v-model="member_info.addr"/>
+              <input type="text" id="member_addr" placeholder="請輸入地址"   v-model.trim="member_info.addr"/>
               <div class="bonus">
                 <p class="font16">
                   目前累計會員紅利點數<span class="bonus_member"  >{{member_info.bonus}}</span>點
@@ -91,7 +91,7 @@
                 </label>
               </div>
 
-              <button type="submit" id="btn_info" class="inCart_btn2">
+              <button type="button" id="btn_info" class="inCart_btn2" @click="info_change">
                 確認修改
               </button>
               <!-- {{member_info}} -->
@@ -102,28 +102,32 @@
             <div id="pwd" >
               <div class="content">
                 <label for="member_account">帳號</label>
-                <input type="text" id="member_account" v-model="update_pwd.account" />
+                <input type="text" id="member_account" v-model.trim="update_pwd.account" />
+                <p class="m_text_no">*請填寫正確的帳號</p>
               </div>
               <div class="content">
                 <label for="member_pwd_old"  >請輸入舊密碼</label>
-                <input type="password" v-model="update_pwd.pwd_old" />
+                <input type="password" id="member_pwd_old" v-model.trim="update_pwd.pwd_old" />
                 <i class="fa-regular fa-eye-slash" @click="eye_icon"></i>
+                <p class="m_text_no">*請填寫正確的密碼</p>
               </div>
               <div class="content">
                 <label for="member_pwd_new" >請輸入新密碼</label>
                 <input
-                  type="password" 
-                  placeholder="請使用 8 個字元以上的字母、數字" v-model="update_pwd.pwd_new"
+                  type="password" id="member_pwd_new" 
+                  placeholder="請使用 8 個字元以上的字母、數字" v-model.trim="update_pwd.pwd_new"
                 />
                 <i class="fa-regular fa-eye-slash" @click="eye_icon"></i>
+                <p class="m_text_no">*請填寫正確的密碼格式</p>
               </div>
               <div class="content">
                 <label for="member_pwd_confirm">請確認新密碼</label>
-                <input type="password" />
+                <input type="password" id="member_pwd_confirm"/>
                 <i class="fa-regular fa-eye-slash" @click="eye_icon"></i>
+                <p class="m_text_no">*請填寫正確的密碼格式</p>
               </div>
 
-              <button type="submit" id="btn_pwd" class="inCart_btn2">
+              <button type="button" id="btn_pwd" class="inCart_btn2" @click="pwd_change">
                 確認修改
               </button>
               <!-- {{update_pwd}} -->
@@ -556,6 +560,8 @@
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
     <script src="js/frontpage/login_check.js"></script>
     <script>
+      //取得會員id
+      let member_ID = localStorage.getItem("member_ID");
       //header 會員登入測試
       let user_icon = document.querySelector('.slide_user');
       user_icon.addEventListener('click',function(e){
@@ -573,6 +579,7 @@
           success: function (response) {
               alert("登出成功");
               localStorage.removeItem('member_ID');
+              history.go(0);
           },
           error: function(exception) {
               alert("數據載入失敗: " + exception.status);
@@ -647,12 +654,14 @@
             ],
             // 會員中心-個人資訊
             member_info:{
+              account:"",
+              pwd:"",
               name:"",
               birthday:"",
               sex:"",
               phone:"",
               addr:"",
-              bonus:"",
+              bonus:"0",
             },
             // 會員中心-修改密碼
             update_pwd:{
@@ -667,27 +676,160 @@
           }
         },
         mounted(){
-          this.collection = collection_lo;
-          let member_ID = localStorage.getItem("member_ID");
-          let bonus_member = document.querySelector('.bonus_member')
-          //取得會員點數
-          $.ajax({
-                method: "POST",
-                url: "php/frontpage/member_point.php",
-                data: {
-                  member_ID: member_ID,
-                },
-                dataType: "text",
-                success: function (response) {
-                  bonus_member.innerHTML = response ;
-                },
-                error: function (exception) {
-                    alert("發生錯誤: " + exception.status);
-                }
-            });
+          this.info_show();
         },
         computed: {},
         methods:{
+          //顯示會員資訊
+          info_show(){
+            let that = this ;
+            if( member_ID > 0 ){
+              $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_info.php",
+                    data: {
+                      member_ID:member_ID
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                      // console.log(response);
+                      // console.log(response[0].name);
+                      // console.log(that.member_info);
+                      that.member_info = response[0];
+                      that.get_point();
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+            }
+            
+          },
+          //會員中心-個人資訊 確認修改按鈕按下
+          info_change(){
+            let that = this ;
+            let name = this.member_info.name;
+            let birthday = this.member_info.birthday;
+            let sex = this.member_info.sex;
+            let phone = this.member_info.phone;
+            let addr = this.member_info.addr;
+            //修改會員資訊
+            $.ajax({
+                  method: "POST",
+                  url: "php/frontpage/member/member_info_update.php",
+                  data: {
+                    member_ID:member_ID,
+                    name:name,
+                    birthday:birthday,
+                    sex:sex,
+                    phone:phone,
+                    addr:addr
+                  },
+                  dataType: "text",
+                  success: function (response) {
+                    // console.log(response);
+                    alert('修改完成');
+                  },
+                  error: function (exception) {
+                      alert("發生錯誤: " + exception.status);
+                  }
+              });
+          },
+          //修改會員密碼
+          pwd_change(){
+            let account = this.update_pwd.account;
+            let pwd_old = this.update_pwd.pwd_old;
+            let pwd_new = this.update_pwd.pwd_new;
+            let pwd_confirm = document.getElementById('member_pwd_confirm');
+            let change = true ;
+            //判斷帳號相等且不為空值
+            if(account !== "" && account == this.member_info.account){
+              $("#member_account").next().removeClass('appear');
+            }else{
+              //如果帳號不等於
+              $("#member_account").next().addClass('appear');
+              change = false ;
+            };
+            //判斷舊密碼相等且不為空值
+            if(pwd_old == this.member_info.pwd && pwd_old !== ""){
+              $('#member_pwd_old').next().next().removeClass('appear');
+            }else{
+              //舊密碼不相等
+              $('#member_pwd_old').next().next().addClass('appear');
+              change = false ;
+
+            };
+            //舊密碼不等於新密碼
+            if(pwd_old !== pwd_new && pwd_new !== ""){
+              $('#member_pwd_new').next().next().removeClass('appear');
+              //判斷密碼長度再8到16
+              if(pwd_new.length <= 16 && pwd_new.length >= 8 ){
+                $('#member_pwd_new').next().next().removeClass('appear');
+              }else{
+                $('#member_pwd_new').next().next().addClass('appear');
+              change = false ;
+
+              };
+            }else{
+              $('#member_pwd_new').next().next().addClass('appear');
+              change = false ;
+
+            };
+            //新密碼等於確認密碼
+            if(pwd_new == pwd_confirm.value && pwd_confirm.value !== ""){
+              $('#member_pwd_confirm').next().next().removeClass('appear');
+            }else{
+              $('#member_pwd_confirm').next().next().addClass('appear');
+              change = false ;
+
+            };
+            if(change){
+              //更改密碼
+              $.ajax({
+                  method: "POST",
+                  url: "php/frontpage/member/member_pwd_update.php",
+                  data: {
+                    member_ID:member_ID,
+                    pwd_new: pwd_new
+                  },
+                  dataType: "text",
+                  success: function (response) {
+                      alert('修改成功');
+                  },
+                  error: function (exception) {
+                      alert("發生錯誤: " + exception.status);
+                  }
+              });
+            }else{
+              return false;
+
+            }
+          },
+          //取得會員點數
+          get_point(){
+            this.collection = collection_lo;
+            let member_ID = localStorage.getItem("member_ID");
+            let that = this ;
+            // let bonus_member = document.querySelector('.bonus_member')
+            //取得會員點數
+              $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_point.php",
+                    data: {
+                      member_ID: member_ID,
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                      // bonus_member.innerHTML = response ;
+                      that.member_info.bonus = response;
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+
+
+          },
           //tab
 
           //愛心點擊後取消收藏(移除陣列資訊)
