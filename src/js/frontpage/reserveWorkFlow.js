@@ -3,8 +3,18 @@ const RootComponent  = {
         return{
             // 控制流程
             workFlow:{
-                step:4,
+                step:2,
             },
+            
+            // sets (( 暫時存放資料處 ))
+            InputSetDetail:[],
+            // cardname:'',
+            cards:[
+                {},
+                {},
+                {},
+                {}
+            ],
             // 使用者訂單建立
             inputData:{
                 // 取得會員是否登入
@@ -18,24 +28,81 @@ const RootComponent  = {
                 peoCount:5,
                 date:new Date().toISOString().slice(0,10),
                 orderTime:2,
-                chefTeam:"c",
+                chefTeam:"A",
 
-
+                
                 // step 2 user Data
                 // 將資料儲存於APIDATA
-                
+                setsList:[
+
+                ],
                 // step 3 user Data
                 // 將資料儲存於APIDATA
+                otherDish:[
 
+                ],
                 // 服務尚未儲存
                 // step 4 user Data
+                otherServies:[
+
+                ],
+                // 預約資料
                 name:'',
                 phone:'',
                 email:'',
                 addr:'',
                 note:'',
                 point:0,
+
+                // 信用卡
+                cardName:'',
+                cardDate:0,
+                cardCode:0,
+
+                
             },
+            APIData_in:{
+                // 訂餐時間
+                orderTime:[
+                    {id:1,txt:'午餐',time:'11:00-14:00'},
+                    {id:2,txt:'下午茶',time:'11:00-14:00'},
+                    {id:3,txt:'晚餐',time:'18:00-21:00'},
+                ], 
+                // 套餐資料
+                sets:[
+                    {   
+                        dish:{
+                            "湯物":[],"前菜":[],"刺身":[],
+                             "主食":[],"甜點":[],"飲品":[]                              
+                        } 
+                    },
+                    {
+                        dish:{
+                            "湯物":[],"前菜":[],"刺身":[],
+                             "主食":[],"甜點":[],"飲品":[]                              
+                        } 
+                    }, {
+                        dish:{
+                            "湯物":[],"前菜":[],"刺身":[],
+                             "主食":[],"甜點":[],"飲品":[]                              
+                        } 
+                    },
+                ],
+                // 廚師團隊
+                chefTeam:[],
+                // 單點菜品
+                otherDish:[],
+                // 租借及服務
+                servies:[],
+                // 會員資訊 進入第 4 流程會取得此資料
+                member:{
+                    id:1,point:330,isLogin:true
+                }, 
+            },
+
+
+
+            // Backup
             APIData:{
                 // 訂餐時間
                 orderTime:[
@@ -46,7 +113,8 @@ const RootComponent  = {
                 // 套餐資料
                 sets:[
                     {
-                        id:1,setName:'名物 私套餐',
+                        id:1,
+                        setName:'名物 私套餐',
                         setprice:1800, // 每人單價
                         imgUrl:'img/reserve_img/reserve_set01.jpg',
                         dish:{
@@ -160,9 +228,9 @@ const RootComponent  = {
                 ],
                 // 廚師團隊
                 chefTeam:[
-                    {id:1,team:'a',name:'麗燕山'},
-                    {id:2,team:'b',name:'吳寶劍'},
-                    {id:3,team:'c',name:'陳平安'}
+                    {id:1,team:'A',name:'麗燕山'},
+                    {id:2,team:'B',name:'吳寶劍'},
+                    {id:3,team:'C',name:'陳平安'}
                 ],
 
                 // 單點菜品
@@ -181,7 +249,10 @@ const RootComponent  = {
                     {id:3,title:'餐盤',desc:'餐盤&拼盤',checked:false,price:400},
                     {id:4,title:'服務人員',desc:'全程服務及售後清潔',checked:false,price:500},
                 ],
-
+                // 會員資訊 進入第 4 流程會取得此資料
+                member:{
+                    id:1,point:330,isLogin:true
+                },
                 // 套餐詳細選項(舊版Data 先備份)
                 setsDetail:{
                     setA:{
@@ -210,6 +281,146 @@ const RootComponent  = {
         }
     },
     methods:{
+        // GET API
+        getSetPrice(){
+            fetch('php/reserveAPI/getSetPriceAPI.php')
+            .then(response =>{
+                return response.json()
+            })
+            .then( data =>{
+                for(let i = 0;i < this.APIData_in.sets.length;i++){
+                    for(let type in data[i]){
+                        this.APIData_in.sets[i][`${type}`] = data[i][`${type}`]
+                    } 
+                } 
+            }).catch(err=>{
+                console.log(err)
+            })
+        },
+        getSetdishDetail(){
+            fetch('php/reserveAPI/setAPI.php')
+            .then(function(response) {
+                // console.log(response)
+                return response.json();
+            })
+            .then((res)=>{
+                // 塞A,B,C 套餐資訊
+                res.forEach(data => {
+                        let dishType = data.dishType
+                        // console.log(data)
+                        // 初始化數量
+                        data.qty = 0;
+                        for(let i =0;i<3; i++){
+                            if(data.SetID == 1 && i == 0 ){
+                                // if(el.dishType == dishType){
+                                    this.APIData_in.sets[i].dish[dishType].push(data)
+                                // }
+                                // }else if(el.dishType =='前菜'){
+                                //     this.APIData_in.sets[i].dish[dishType].push(el)
+                                // }else if(el.dishType =='刺身'){
+                                //     this.APIData_in.sets[i].dish[dishType].push(el)
+                                // }else if(el.dishType =='主食'){
+                                //     this.APIData_in.sets[i].dish[dishType].push(el)
+                                // }else if(el.dishType =='甜點'){
+                                //     this.APIData_in.sets[i].dish[dishType].push(el)
+                                // }else if(el.dishType =='飲品'){
+                                //     this.APIData_in.sets[i].dish[dishType].push(el)
+                                // }
+                                // return el
+                            }else if(data.SetID == 2  && i == 1){
+                                this.APIData_in.sets[i].dish[dishType].push(data)
+                            }else if(data.SetID == 3  && i == 2){
+                                this.APIData_in.sets[i].dish[dishType].push(data)
+                            }
+                        }
+                    });
+            
+                // 物件寫法 尚未重構完成                    
+                //     let c = res.map(el=>{
+                //         const dish_SetID = el.SetID
+                //         const dishType = el.dishType
+                //         console.log(dishType)
+                //         // console.log(key);
+                //         // console.log(!res.hasOwnProperty(key));
+                //         console.log(!this.APITest.hasOwnProperty("set"+dish_SetID))
+                //         if(!this.APITest.hasOwnProperty("set"+dish_SetID)){
+                //             // console.log(el)
+                //             this.APITest["set"+dish_SetID] = {}
+                           
+                //             // console.log( this.APITest[`${el.dishType}`]);
+                //         }
+                //         // console.log(!this.APITest["set"+dish_SetID].hasOwnProperty(dishType));
+
+                //         if(!this.APITest["set"+dish_SetID].hasOwnProperty(dishType)){
+                //             // console.log('s');
+                //             this.APITest["set"+dish_SetID][dishType]=[]
+                //         }
+                //         this.APITest["set"+dish_SetID][dishType].push(el)                       
+                //     })
+            }).catch(error=>{
+                alert(error)
+            });
+
+
+        },
+        getOtherDish(){
+            fetch('php/reserveAPI/otherAPI.php')
+                .then(response =>{
+                    return  response.json()
+                })
+                .then( data =>{
+                    // console.log(data)
+                    data.forEach((data_el)=>{  
+                        
+                        let obj={
+                            id:data_el.id,
+                            dishName:data_el.disName,
+                            dishType:data_el.dishType,
+                            price:data_el.price,
+                            qty:0
+                        }
+                        this.APIData_in.otherDish.push(obj)
+                    })
+                }).catch(err=>{
+                    console.log(err)
+                })
+        },
+        getServier(){
+            fetch('php/reserveAPI/servesAPI.php')
+            .then(response =>{
+                return  response.json()
+            })
+            .then( data =>{
+                // console.log(data)
+                // servies
+                data.forEach((servie,idx)=>{                  
+                    // init checked = false
+                    if(idx >= 0 && idx <= 1 ){
+                        servie.checked = true    
+                    }else servie.checked = false
+                    
+                    this.APIData_in.servies.push(servie)
+                })      
+            }).catch(err=>{
+                console.log(err)
+            })
+        },
+        getTeam(){
+            fetch('php/reserveAPI/getTeamAPI.php')
+            .then(response =>{
+                return  response.json()
+            })
+            .then( datalist =>{
+                datalist.forEach(data=>{
+                    this.APIData_in.chefTeam.push(data)
+                })
+            }).catch(err=>{
+                console.log(err)
+            })
+        },
+
+
+        // Vue 流程邏輯
         changeStep(val,e){                    
             // step 1 檢查套餐及套及數量
             let vaildStep = false;
@@ -222,13 +433,15 @@ const RootComponent  = {
                 // 儲存種類使否有符合總人數  data = [true,true,false....]
                 let checkDishTypeVail = []
 
-                let set = this.APIData.sets[setID].dish
+                let set = this.APIData_in.sets[setID].dish
        
                 for (const key in set){
                     let dishTypetotal = 0 //ex : [湯品],[菜品]..總數
                     // console.log(set[key])
-                    for (let j = 0; j < set[key].length; j++) {                        
-                        dishTypetotal += set[key][j].qty                            
+                    for (let j = 0; j < set[key].length; j++) {  
+                        // console.log(set[key][j])          
+                        dishTypetotal += set[key][j].qty
+                        // this.setsList.push(set[key])                            
                     }
                     // 若人數符合種類餐點總和
                     if(dishTypetotal === count){
@@ -242,6 +455,9 @@ const RootComponent  = {
                 // console.log(checkDishTypeVail)
                 checkDishTypeVail = checkDishTypeVail.find(el=>!el)
                 if(checkDishTypeVail === false)return alert('請選取相對應人數的餐點')
+                // 紀錄餐點
+                let setDetail= this.setDetail(setID)
+                console.log(setDetail)
                 vaildStep = true
             }else if(this.workFlow.step == 2){
                 // 最後要把客戶選的菜單塞回去
@@ -255,6 +471,8 @@ const RootComponent  = {
                     if(c){
                         this.inputData.isLogin = !this.inputData 
                         vaildStep = true
+                        
+                        
                     }else{
                         alert('要登入才能進入下一個流程')
                     }
@@ -294,7 +512,7 @@ const RootComponent  = {
         },
         changeOrederViewImg(e){
             // 小圖換大圖
-            this.$refs.oderVeiwPic.src = e.imgUrl;
+            this.$refs.oderVeiwPic.src = e.IMG;
             this.inputData.sets = e.id;
             // this.resetDataInput()
         },
@@ -305,7 +523,7 @@ const RootComponent  = {
                 item.qty <= 0 ?  0 : item.qty--;
             }else{
                     // 當一種類若超過人數 
-                    let totalNum = this.APIData.sets[setID].dish[`${dishType}`]
+                    let totalNum = this.APIData_in.sets[setID].dish[`${dishType}`]
                                         .map((el)=>el.qty).reduce((a,b)=>a+b);
                     if(totalNum >= this.inputData.peoCount ) return
                     // 若沒有超過人數，可以增加餐點
@@ -320,10 +538,27 @@ const RootComponent  = {
                 item.qty ++;
             }
         },
-        dishTypeisOver(){
 
-
+        // 撈出使用者套餐項目細節
+        setDetail(setID){
+            let set = this.APIData.sets[setID].dish
+            this.InputSetDetail = []
+            this.inputData.setsList  = []
+            let temp = []
+            for (const key in set){
+                for (let j = 0; j < set[key].length; j++){
+                    // this.inputData.setsList.push({...set[key][j]})
+                    console.log( set[key][j])
+                    if(set[key][j].qty > 0){
+                        // temp.push(set[key][j])
+                        this.inputData.setsList.push(set[key][j])
+                        // this.InputSetDetail.push(set[key][j])
+                    }
+                }
+            }
+            return temp
         },
+        // 撈出使用者單點資料項目細節
         resetDataInput(){
             // event 當切換人數全部菜餐清除
             // console.log(`清空資料套餐及單品及服務的數量`);               
@@ -340,10 +575,17 @@ const RootComponent  = {
         },
         // 確認種類是否有符合人數
         setKind(setID,dishType){
-            let totalNum = this.APIData.sets[setID].dish[`${dishType}`]
-                                        .map((el)=>el.qty).reduce((a,b)=>a+b);
-            
+            let totalNum = this.APIData_in.sets[setID].dish[`${dishType}`]
+                                        .map((el)=>{
+                                            if(el.qty === undefined){
+                                               return el.qty = 0
+                                            }else return el.qty
+                                        }).reduce((a,b)=>a+b,0);
             return totalNum !== this.inputData.peoCount                                               
+        },
+        nameRule(nameStr){
+            let nameRule =  new RegExp('^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$');
+           return nameRule.test(nameStr);
         },
         phoneRule(str){
             // this.inputData.phone.replace(/\D/g, "");
@@ -353,27 +595,86 @@ const RootComponent  = {
         emailRule(str){
             let emailRule =  new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
             return emailRule.test(str);
-        }
+        },
+        creditCardRule(){
+            let cardNumString = this.cards
+            .map(cardStr=>cardStr.str)
+            .reduce((a,b)=>a + b);
+            
+            return is.creditCard(cardNumString)
+        },
+        lengthRule(inputData,vaildlength){
+            return inputData.length === vaildlength
+        },
+        checkMemberPoint(){
+            if(this.APIData.member.point <= this.inputData.point){
+                this.inputData.point = 0
+                alert('您剩餘的紅利為: '+ this.APIData.member.point+ '點,請重新輸入')
+            }
+        },
+        
+   
+
+        // 信用卡UX 程式1
+        cardKDCheck(e,idx){
+            // console.log(`keydown`)
+            if((e.which >= 48 && e.which <= 57) || e.which == 8){
+                // 0~9 keycode 48~57; 8 keycode backspace
+                if((e.target.value.length == 0 && e.which == 8)){
+                    if(idx=== 0)return
+                    const previous_el = e.target.previousElementSibling.previousElementSibling;
+                    if(previous_el == null)return
+                    previous_el.focus();
+                }
+              }else{
+                e.preventDefault();
+              }
+        },
+        // 信用卡UX 程式2
+        cardKUPheck(e,idx){
+            let str = (e.target.value).replace(/\D/g, "");
+            e.target.value = str;
+            // console.log(e.target.value)
+            // console.log(idx)
+            if(str.length == 4 && idx <= 2){
+              let next_el = e.target.nextElementSibling.nextElementSibling;
+              if(next_el != null){
+                next_el.focus();
+              }
+            }
+        },
+      
+        // vaildCard(idx){
+        //     if(idx !== 3) return
+        //     console.log(this.$refs.ccc)
+        //     console.log(`第四個欄位`)
+        //     console.log(this.cards)
+        //     return console.log(this.creditCardRule())
+        // }
 
     },
     computed:{
-
+        cardCheck(){
+            return '11'
+            
+        },
         // 套餐內容
         // workflow step 1
         chefTeamName(){
-            let orderTeamName = this.APIData.chefTeam.find(el=>el.team === this.inputData.chefTeam)
+            let orderTeamName = this.APIData.chefTeam.find(el=>el.team == this.inputData.chefTeam)
+            console.log({...orderTeamName}.name)
             return {...orderTeamName}.name
         },
         setName(){
-            let orderSetName = this.APIData.sets.find(el=>el.id===this.inputData.sets)
+            let orderSetName = this.APIData_in.sets.find(el=>el.id==this.inputData.sets)
             return {...orderSetName}.setName
         },
 
         // 套餐加購總金額計算
         setPrice(){
-            let setPrice = {...this.APIData.sets.find(el=>el.id===this.inputData.sets)}.setprice
+            let setPrice = {...this.APIData_in.sets.find(el=>el.id==this.inputData.sets)}.price
             let setPeo = this.inputData.peoCount
-           
+
             return `$ ${(setPrice * setPeo).toLocaleString()}`
         },
 
@@ -391,13 +692,14 @@ const RootComponent  = {
                     return serve.price;
                 }else return 0
             }).reduce((a,b)=>a+b)
-            // console.log(otherServies)
+            
             otherServies = otherServies * this.inputData.peoCount
-
             return ( otherDish + otherServies ).toLocaleString()
         },
         pointDiscount(){
-            return this.inputData.point.toLocaleString()
+            // console.log(this.inputData.point)
+            let pointCovert = parseInt(this.inputData.point)
+            return pointCovert.toLocaleString()
         },
         // orderview 總金額計算
         totalPrice(){
@@ -405,9 +707,11 @@ const RootComponent  = {
             const count = this.inputData.peoCount
             
             // 套餐金額
-            let setPrice = {...this.APIData.sets.find(el=>el.id===this.inputData.sets)}.setprice
+            let setPrice = {...this.APIData_in.sets.find(el=>el.id===this.inputData.sets)}.price
+            console.log(setPrice)
+            console.log(count)
             let setTotal = count * setPrice
-
+            
             // 單點金額
             let otherDish = 0
             let otherServies = 0
@@ -415,14 +719,17 @@ const RootComponent  = {
             // 紅利點數扣款
             let point = this.inputData.point || 0
             if(this.workFlow.step == 2 ||this.workFlow.step == 3){
-                otherDish = this.APIData.otherDish.map(item=>{
-                    //  console.log(item.price,item.qty)
+                otherDish = this.APIData_in.otherDish.map(item=>{
+                     console.log(item.price,item.qty)
                      if(item.qty > 0){
-                        return item.qty * item.price;
+                        
+                        return parseInt(item.qty) * parseInt(item.price);
+                        
                      }else return 0;
-                }).reduce((a,b)=>a+b);
+                })
+                // .reduce((a,b)=>a+b,0);
 
-                otherServies = this.APIData.servies.map(serve=>{
+                otherServies = this.APIData_in.servies.map(serve=>{
                     if(serve.checked === true){
                         // console.log(serve.title)
                         return serve.price;
@@ -454,6 +761,11 @@ const RootComponent  = {
 
         // workFlow step 4
         // 格式驗證
+        checkName(){
+            // 姓名驗證 (中文與英文)
+            if(this.inputData.name =="")return false
+            return this.nameRule(this.inputData.name);
+        },
         checkPhoneNum(){
             // 手機驗證格式
             return this.phoneRule(this.inputData.phone);
@@ -461,7 +773,26 @@ const RootComponent  = {
         checkEmail(){
             // 電子信箱驗證格式
             return this.emailRule(this.inputData.email);
-        },       
+        },     
+        checkCard(){
+            // console.log(this.creditCardRule())
+            return this.creditCardRule()
+        },
+        checkCardName(){
+            // 姓名驗證 (中文與英文)
+            if(this.inputData.cardName =="")return false
+            return this.nameRule(this.inputData.cardName);
+        }, 
+        checkCardDate(){
+            if(this.inputData.cardDate =="" || this.inputData.cardDate == undefined )return false
+                //  return this.inputData.cardDate.length === 4
+               return this.lengthRule(this.inputData.cardDate,4)
+        },
+        checkCardCode(){
+            if(this.inputData.cardCode =="" || this.inputData.cardCode == undefined )return false
+                 return this.lengthRule(this.inputData.cardCode,3)
+        },
+       
     },
     watch:{
         'workFlow.step'(newValue){
@@ -473,17 +804,47 @@ const RootComponent  = {
             }
         },
         'inputData.point'(newValue){
+            // 強制只能輸入數字
             this.$nextTick(() => {
                 this.inputData.point= String(newValue).replace(/\D/g, '');
-
+            });
+          
+        },
+        'inputData.cardDate'(newValue){
+            // 強制只能輸入數字
+            this.$nextTick(() => {
+                this.inputData.cardDate= String(newValue).replace(/\D/g, '');
+            });
+          
+        },
+        'inputData.cardCode'(newValue){
+            // 強制只能輸入數字
+            this.$nextTick(() => {
+                this.inputData.cardCode= String(newValue).replace(/\D/g, '');
             });
           
         }
     },
     mounted(){
         // 把Local Stroage 給讀出來並渲染在網頁畫面上
-        this.inputData = JSON.parse(localStorage.getItem('reseverOrder'))
-        
+        this.inputData = JSON.parse(localStorage.getItem('reseverOrder'));        
+    },
+    created(){
+        this.$nextTick(() => {
+            this.getSetdishDetail();
+        });
+        this.$nextTick(() => {
+            this.getOtherDish();
+        });
+        this.$nextTick(() => {
+            this.getServier();
+        });
+        this.$nextTick(() => {
+            this.getSetPrice();
+        });
+        this.$nextTick(() => {
+            this.getTeam();
+        });
     },
    
 }

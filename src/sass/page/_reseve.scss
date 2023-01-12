@@ -717,9 +717,9 @@
                 border-bottom: 1px solid #c8c8c8;
                 height: 80px;
 
-                .serive-title {}
+                .serive_title {}
 
-                .aux-title {
+                .aux_title {
                     @extend .font14;
                     // color: #9F9F9F;
                     @extend .gray
@@ -1413,35 +1413,57 @@
         .user_pay {
             display: grid;
             grid-template-columns: 1fr 20px 1fr;
-            gap: 20px 0px;
+            gap: 30px 0px;
             margin-top: 30px;
-            &>input {
-                font-size: 20px;
-                display: block;
-                padding: 10px 20px;
+            font-size: 20px;
+            .error_Msg{
+                color: #B91646;
+                position: absolute;
+                font-size: 12px;
+                right: 2%;
+                top: -50%;
+            }
+            input{
                 width: 100%;
-                // max-width: 630px;
+                padding: 10px 20px;
+                font-size: 20px;
             }
-            
-            .card_num {
+            .card_num,.card_name,
+            .card_data,.card_code{
+                position: relative;
+            }
+            .card_num,.card_name{
                 grid-column: 1/4;
-                grid-row: 1/2;
             }
-
-            .card_name {
-                grid-column: 1/4;
-                grid-row: 2/3;
+            .card_num{
+                display: flex;
+                align-items: center;
+                .split{
+                    margin: 0 15px;
+                }
             }
-
-            .card-date {
-                grid-column: 1/2;
-                grid-row: 3/4;
-            }
-
-            .card_checknum {
+            .card_code{
                 grid-column: 3/4;
-                grid-row: 3/4;
             }
+
+            @include pad(){
+                .card_num .split{
+                    margin: 0 10px;
+                }
+                input{
+                    padding: 10px 8px;
+                }
+            }
+            @include mobile(){
+                font-size: 16px;
+                .card_num .split{
+                    margin: 0 5px;
+                }
+                input{
+                    font-size: 16px;
+                    padding: 5px 5px;
+                }
+            }   
         }
 
         // 流程五確認完成
@@ -1467,28 +1489,3 @@
 
 
 }
-
-
-
-
-// .reseve_flow.fulid_wrapper{
-//     .flow_container {
-//          // 標題公用
-//          .blockTitle {
-//             border-bottom: 1px solid black;
-//             margin: 15px 0;
-//             display: flex;
-//             align-items: center;
-//             justify-content: space-between;
-
-//             &>span {
-//                 margin-left: 10px;
-//                 font-size: 13px;
-//             }
-
-//             @include mobile {
-//                 margin-bottom: 20px;
-//             }
-//         }
-//     }
-// }

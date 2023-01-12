@@ -31,6 +31,7 @@
                         <p class="item5"></p>
                     </div>
                     <!-- 商品list -->
+                
                     <div class="product_detail" v-for="(item, index) in product_list" :key="item.id">
                         <div class="item1 green-1">
                             <div class="item1_img">
@@ -117,7 +118,7 @@
             <!-- 步驟1中間區塊主要內容結束=========== -->
             <!-- 步驟2中間區塊主要內容=========== -->
             <section class="cart_2_content" v-if="process.step === 2 " >
-                <!-- 購物車商品 -->
+                <!-- 購物車商品 --> 
                 <div class="cart_product cart_none" :class="{'cart_open' : process.step === 2 }" >
                     <!-- 商品標題 -->
                     <div class="title">
@@ -132,7 +133,9 @@
                         <div class="item1 green-1">
                             <div class="item1_img">
                                 <img :src="item.img_url" alt="">
+                       
                             </div>
+                    
                             <h6 class="product_name">{{item.product_name}}</h6>
                         </div>
                         <div class="item2">
@@ -170,18 +173,19 @@
                         <!-- checkbox -->
                         <div class="info_check gray">
                             <input type="checkbox" name="info_check" id="info_check_yes">
-                            <label for="info_check">
+                            <label for="info_check" @click=""> 
+                                <!--這裡按了click會帶入會員資料,會員資料是從會員登入後selectDB存在localstorage的陣列-->
                                 <p class="font16">同會員資料</p>
                             </label>
                         </div>
                     </div>
                     <div class="buy_content">
                         <label for="">姓名</label>
-                        <input type="text" placeholder="請輸入姓名">
+                        <input type="text" placeholder="請輸入姓名" value="">
                         <label for="">手機號碼</label>
-                        <input type="text" placeholder="請輸入手機號碼">
+                        <input type="text" placeholder="請輸入手機號碼" value="">
                         <label for="">地址</label>
-                        <input type="text" placeholder="請輸入地址">
+                        <input type="text" placeholder="請輸入地址" value="">
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
                         </select>
@@ -200,39 +204,42 @@
                         <div class="info_check gray">
                             <input type="checkbox" name="info_check" id="info_check_yes">
                             <label for="info_check">
+                                <!--同訂購人資料跟同會員資料是相同的,methods一樣即可-->
                                 <p class="font16">同訂購人資料</p>
                             </label>
                         </div>
                     </div>
                     <div class="get_content">
                         <label for="">姓名</label>
-                        <input type="text" placeholder="請輸入姓名">
+                        <input type="text" placeholder="請輸入姓名" value="">
                         <label for="">手機號碼</label>
-                        <input type="text" placeholder="請輸入手機號碼">
-                        <label for="">地址</label>
+                        <input type="text" placeholder="請輸入手機號碼" value=""> 
+                        <label for="" >地址</label>
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
                         </select>
                         <select name="member_area" class="member_area">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
                         </select> -->
-                        <input type="text" class="member_addr" placeholder="請輸入地址">
+                        <input type="text" class="member_addr" placeholder="請輸入地址" value="">
                     </div>
                 </div>
                 <!-- 配送/發票 -->
                 <div class="deliver_invoice">
                     <label for="deliver">配送時間</label>
                     <select name="deliver" id="deliver" value="不指定">
+                        <option value="不指定">不指定</option>
                         <option value="早">早(9-12)</option>
                         <option value="午">午(13-17)</option>
                         <option value="晚">晚(18-21)</option>
                     </select>
                     <label for="invoice">發票及載具</label>
                     <select name="invoice" id="invoice" value="不使用載具-索取紙本發票">
+                        <!--當選擇紙本時其他兩個option要反灰,其他兩個option一樣-->
                         <option value="不使用載具-索取紙本發票">不使用載具-索取紙本發票</option>
                         <option value="電子發票載具">電子發票載具</option>
                         <option value="開立統一編號">開立統一編號</option>
-                        <option value="捐贈發票">捐贈發票</option>
+                        <!-- <option value="捐贈發票">捐贈發票</option> -->
                     </select>
                     <label for="">電子發票載具</label>
                     <input type="text" placeholder="/開頭">
@@ -285,9 +292,11 @@
 
         <!-- @@include('layout/footer.html') -->
         <script src="./js/vender/Vue/vue.global.js"></script>
+        <!-- <script src="https://unpkg.com/vue@next" defer></script> -->
+
         <script>
              const app = Vue.createApp({
-    
+            
                 data() {
                     return {
 
@@ -298,6 +307,7 @@
                         },
                         //商品list的內->這裡寫死,但之後應該要接從購物車傳進來的值
                         product_list : [
+                        
                         {
                             id:'1',
                             product_name:'黑鮪刺身',
@@ -316,6 +326,7 @@
                             id:'3',
                             product_name:'大黑鮪生魚片',
                             img_url:'img/atcart_img/Rectangle2.jpg',
+                            // url:'./aboutUs.html',
                             price:'650',
                             count:'5'
                         },
@@ -325,38 +336,76 @@
                             img_url:'img/atcart_img/atcart_addp.jpg',
                             price:'700',
                             count:'3'
-                        }
+                        },
+            
 
                         ],
 
                         //回傳point的空字串
                         point:'',
 
-                        //回傳7-11門市的名稱
+                        //回傳7-11門市的名稱,目前先將7-11取貨功能取消[沒有使用]
                         shop:'',
 
                         //回傳紅利點數的金額,
                         //讓input限制最高只能輸入紅利點數的上限
                         //這裡要接資料庫select後的值
-                        bouns:'32',
+                        bouns:"",
 
                         //用v-if渲染出若金額大於會員點數會出現紅字
                         msg:'*紅利點數折抵必須小於您目前的會員點數',
                         show: false,
                    
 
-                        //這裡要接從購物車收到的localstorage
-                        inputData:{
-                            isLogindIn:false,
+                        //商城傳回的資料
+                        inputShopMall : [
 
-                            },
+                            {
+                                id:'',
+                                product_name:'',
+                                img_url:'',
+                                price:'',
+                                count:''
+                            }
+                        ]
                     }
                 },
 
-            mounted:{
+            mounted() {
+                //抓取localStorage的memberID
+                let member_ID = localStorage.getItem("member_ID");
+                let that = this ;
+
+                //取得會員點數
+                $.ajax({
+                        
+                        method: "POST",
+                        url: "php/frontpage/member_point.php",
+                        data: {
+                        member_ID: member_ID,
+                        },
+                        dataType: "text",
+                        success: function (response) {
+                            // console.log(that.bouns);
+                            that.bouns = response;
+                        },
+                        error: function (exception) {
+                            alert("發生錯誤: " + exception.status);
+                        }
+                    });
+
+                    //如果顧客直接輸入購物車的網址
+                        // 1. 進到購物車的畫面要先判斷有沒有登入就跳出沒有登入的popon
+                        // 2. 跳回首頁(location."index_home.html")
+                        // 3. 再跳出登入popon
 
             },
-            computed :{
+                //生命週期
+            //     created () {
+            //     this.inputShopMall = localStorage.getItem('商城內容') || ''
+            // },
+
+            computed:{
                 //小計的所有金額
                 cartTotal () {
                     let cartTotal = 0;
@@ -380,7 +429,6 @@
                 //換下一步
                 changePage(val){
                     this.process.step += val;
-
                 },
 
                 //數量加
@@ -412,17 +460,13 @@
                 },
                 //當keyup/keydown的時候觸發的blur事件會
                 //判斷輸入的數字是否大於會員本身的紅利點數
-
                 check_bouns(e){
                     //設定當輸入英文字母時會取代為空字串
                     let str = (e.target.value).replace(/\D/g, "");
                     e.target.value = str;
                     //取得目前會員點數的金額
-                    
                     let bounsVal = e.path[1].nextElementSibling.children[0].firstElementChild.innerText;
                     // console.log(bounsVal);
-                 
-
                     //
                     if(parseInt(e.target.value) > bounsVal){
                     this.show = true; 
@@ -434,10 +478,17 @@
                     else {
                         e.preventDefault();
                     }
-                    // return check_bouns(e);
+                },
+
+                //確認訂購人資訊的格式
+                  // 1. 姓名 -> 不用檢核格式 , 只要確定不是空值即可
+                nameRule(str) {
+                    let
                 },
             
-                }
+                },
+
+                
         });
 
             
