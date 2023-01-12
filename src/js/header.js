@@ -52,12 +52,12 @@ $(function () {
     })
 })
 
-$(function () {
-    $(".slide_user").on("click", function () {
-        console.log("yyy");
+// $(function () {
+//     $(".slide_user").on("click", function () {
+//         // console.log("yyy");
 
-    })
-})
+//     })
+// })
 
 // $(function () {
 //     $(".abouttab_a").on("click", function () {

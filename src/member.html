@@ -11,7 +11,6 @@
   </head>
   <body>
     @@include('layout/header_01.html')
-    @@include('layout/login.html')
     <div class="fulid_wrapper member" id="member">
       <main>
         
@@ -40,7 +39,7 @@
           </ul>
         </nav>
         <!-- 登出測試 -->
-        <button type="button" onclick="logout_test()">登出</button>
+        <!-- <button type="button" onclick="logout_test()">登出</button> -->
         <!-- ======會員中心內容===== -->
         <section class="member_section" v-show="current_tab == 'tab1' ">
           <div class="member_info">
@@ -60,7 +59,7 @@
               <input
                 type="text"
                 id="member_phone"
-                placeholder="請輸入手機號碼"  v-model.trim="member_info.phone"
+                placeholder="請輸入手機號碼" maxlength="10" v-model.trim="member_info.phone"
               />
               <!-- <div class="city_area">
                 <select name="member_city" id="member_city">
@@ -580,29 +579,13 @@
       //取得會員id
       let member_ID = localStorage.getItem("member_ID");
       //header 會員登入測試
-      let user_icon = document.querySelector('.slide_user');
-      user_icon.addEventListener('click',function(e){
-        // console.log('qqq')
-        e.preventDefault();
-        login_check();
-      })
-      //登出測試
-      function logout_test(){
-        $.ajax({            
-          method: "POST",
-          url: "php/frontpage/logout.php",
-          data:{},            
-          dataType: "text",
-          success: function (response) {
-              alert("登出成功");
-              localStorage.removeItem('member_ID');
-              history.go(0);
-          },
-          error: function(exception) {
-              alert("數據載入失敗: " + exception.status);
-          }
-        });
-      };
+      // let user_icon = document.querySelector('.slide_user');
+      // user_icon.addEventListener('click',function(e){
+      //   // console.log('qqq')
+      //   e.preventDefault();
+      //   login_check();
+      // })
+      
       
 
       //收藏清單
@@ -898,6 +881,7 @@
           // ==========================訂單===========================
           //拿到預約訂單資訊
           get_order_list(){
+            if( member_ID > 0 ){
             $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_list_order.php",
@@ -913,6 +897,7 @@
                         alert("發生錯誤: " + exception.status);
                     }
                 });
+              }
           },
 
 
