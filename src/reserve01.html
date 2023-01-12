@@ -154,17 +154,17 @@
 
                     // 由後臺撈回來的單日歷史訂單(目前先全撈資料,方便做測試)
                     historylist:[
-                        {id:1,date:'2022-12-31',teams:'a'},
-                        {id:2,date:'2022-12-31',teams:'b'},
-                        {id:3,date:'2022-12-30',teams:'c'},
-                        {id:4,date:'2023-01-11',teams:'b'},
-                        {id:5,date:'2023-01-11',teams:'c'},
-                        {id:6,date:'2023-01-12',teams:'a'},
-                        {id:7,date:'2023-01-13',teams:'b'},
-                        {id:8,date:'2023-01-13',teams:'a'},
-                        {id:9,date:'2023-01-14',teams:'a'},
-                        {id:10,date:'2023-01-14',teams:'b'},
-                        {id:11,date:'2023-01-14',teams:'c'},
+                        {id:1,date:'2022-12-31',teams:'A'},
+                        {id:2,date:'2022-12-31',teams:'B'},
+                        {id:3,date:'2022-12-30',teams:'C'},
+                        {id:4,date:'2023-01-11',teams:'B'},
+                        {id:5,date:'2023-01-11',teams:'C'},
+                        {id:6,date:'2023-01-12',teams:'A'},
+                        {id:7,date:'2023-01-13',teams:'B'},
+                        {id:8,date:'2023-01-13',teams:'A'},
+                        {id:9,date:'2023-01-14',teams:'A'},
+                        {id:10,date:'2023-01-14',teams:'B'},
+                        {id:11,date:'2023-01-14',teams:'C'},
                     ]
                     
                 };
@@ -193,25 +193,26 @@
                 // 當使用者按下日期重新渲染團隊
                 dateHandler(){
                     let isOrderTeam = []
-                    
+                    // console.log(this.inputData.date)
                     // 每當觸發日期有改變就去後台撈單日資料
                     // historylist 以後要去後台撈歷史訂單的資料
                     let filterItems = this.historylist.filter((historyOneDay)=>{
-                        // console.log(history)
+                        // console.log(historyOneDay)
                         if(historyOneDay.date === this.inputData.date){
                             // 今天有訂單的話，把有訂單的團隊給記錄起來
                             isOrderTeam.push(historyOneDay.teams)
                             return historyOneDay 
                         }
                     })
+                
                     // console.log(filterItems.length)
                     // 假若有訂單的話
-                    if(filterItems.length> 0 && filterItems.length < 3){                       
+                    if(filterItems.length> 0 && filterItems.length < 3){   
                         this.data.chefScheduled = this.data.chefTeam.filter(el=>{
                             // Object.values(el)[1]:團隊編號
                             // isOrderTeam : 歷史訂單團隊編號
+            
                             if(!isOrderTeam.includes(Object.values(el)[1])){
-                                // console.log(isOrderTeam.includes(Object.values(el)[1]))
                                 return el
                             }
                         })
