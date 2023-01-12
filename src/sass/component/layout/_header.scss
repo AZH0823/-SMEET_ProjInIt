@@ -703,6 +703,53 @@ body {
                 margin-top: 20%;
                 text-decoration: none;
                 padding: 20px 15px;
+                position: relative;
+                cursor: pointer;
+
+                .user_pop {
+                    background-color: #fff;
+                    width: 150px;
+                    position: absolute;
+                    border: .5px solid $green-1;
+                    padding: 20px 30px 10px 30px;
+                    top: 50%;
+                    right: -110%;
+
+                    .userpop_li {
+                        padding: 0 10px 10px 10px;
+                        text-align: center;
+
+                        .userpop_open {
+                            position: relative;
+
+                            .userpopmsg_signal {
+                                font-size: 14px;
+                                position: absolute;
+                                top: -5px;
+                                right: -15px;
+                                background-color: #B91646;
+                                display: block;
+                                line-height: 18px;
+                                width: 18px;
+                                border-radius: 50%;
+                                color: #fff;
+                            }
+                        }
+                    }
+
+                    .userpop_log {
+                        text-align: center;
+                        display: block;
+                        border-top: .5px solid rgb(195, 195, 195);
+                        padding: 10px 10px 10px 10px;
+                    }
+
+                    a {
+                        text-decoration: none;
+                    }
+
+
+                }
 
                 @include pad() {
                     display: none;
@@ -795,6 +842,11 @@ body {
     right: 0 !important;
     transition: 1s;
 }
+
+/*----------- 加入頁籤 ----------*/
+// .tabborder {
+    //     border-bottom: 1px solid #000;
+    // }
 
 
 
