@@ -126,9 +126,9 @@
             <p class="border"></p>
         </div>
         <div class="owl-carousel owl-theme">
-            <div class="item"><img src="./img/menu_img/menu_add.jpg"></div>
             <div class="item"><img src="./img/menu_img/menu_add01.png"></div>
             <div class="item"><img src="./img/menu_img/menu_add02.jpg"></div>
+            <div class="item"><img src="./img/menu_img/menu_add.jpg"></div>
             <div class="item"><img src="./img/menu_img/menu_add04.jpg"></div>
             <div class="item"><img src="./img/menu_img/menu_add05.png"></div>
         </div>
@@ -148,21 +148,22 @@
 
 <script>
     $('.owl-carousel').owlCarousel({
-        center:true,
         loop:true,
+        margin:10,
         nav:true,
-        margin:5,
         responsive:{
             0:{
-                items:2.3
+                items:1.5,
+                center: true
             },
             600:{
-                items:2.3
+                items:3.5,
+                center: true
             },
             1000:{
-                items:4
+                items:5
             }
         }
-    });
+    })
 </script>
 </html>
