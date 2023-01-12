@@ -4,9 +4,8 @@
         @@include('layout/meta.html', { "title": "私覓SMEET", })
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="./img/index_img/logo2-03 1.ico" type="image/x-icon"/>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
         <script src="./js/vender/calender/calender.js"></script>
         <script src="./js/vender/calender/index.global.js"></script>
     </head>
@@ -42,77 +41,168 @@
             </div>
 
             <!--------------------------- 線上商城 --------------------------->
-            <div class="fulid_wrapper index_shop">
+            <div class="fulid_wrapper index_shop ">
                 <div class="_index_reserve">
                     <h2 class="font_bold font_family_tc green-1">線上商城</h2>
                     <div class="_index_line"></div>
                 </div>
-                <div class="shop_card">
-                    <i class="fa-solid fa-chevron-left"></i>
-                    <ul>
-                        <li class="collect_list">
-                            <a href="shopMallDetail.html">
-                                <div class="product_img">
-                                    <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-                                <div class="product_content green-1">
-                                    <h6 class="product_title">黑鮪刺身</h6>
-                                    <p class="font16">$<span class="product_money">700</span></p>
-                                    <button type="button" class="cart_link" href="">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="collect_list">
-                            <a href="shopMallDetail.html">
-                                <div class="product_img">
-                                    <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-                                <div class="product_content green-1">
-                                    <h6 class="product_title">黑鮪刺身</h6>
-                                    <p class="font16">$<span class="product_money">700</span></p>
-                                    <button type="button" class="cart_link" href="">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="collect_list">
-                            <a href="shopMallDetail.html">
-                                <div class="product_img">
-                                    <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-                                <div class="product_content green-1">
-                                    <h6 class="product_title">黑鮪刺身</h6>
-                                    <p class="font16">$<span class="product_money">700</span></p>
-                                    <button type="button" class="cart_link" href="">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="collect_list">
-                            <a href="shopMallDetail.html">
-                                <div class="product_img">
-                                    <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                    <i class="fa-solid fa-heart"></i>
-                                </div>
-                                <div class="product_content green-1">
-                                    <h6 class="product_title">黑鮪刺身</h6>
-                                    <p class="font16">$<span class="product_money">700</span></p>
-                                    <button type="button" class="cart_link" href="">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </button>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <i class="fa-solid fa-chevron-right"></i>
+                <div class="swiper mySwiper wrapper">
+                    <div class="shop_card swiper-wrapper">
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身1</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身2</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身3</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身4</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身5</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身6</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身7</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="collect_list">
+                                    <a href="shopMallDetail.html">
+                                        <div class="product_img">
+                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
+                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="product_content green-1">
+                                            <h6 class="product_title">黑鮪刺身8</h6>
+                                            <p class="font16">$<span class="product_money">700</span></p>
+                                            <button type="button" class="cart_link" href="">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
 
             <!--------------------------- 預約日程 --------------------------->
@@ -132,7 +222,7 @@
                 </div>
             </div>
             <!--------------------------- 最新動態 --------------------------->
-            <div class="_index_news">
+            <div class="_index_news fulid_wrapper">
                 <div class="wrapper">
                     <h2 class="font_bold font_family_tc green-1">最新動態</h2>
                     <div class="_index_line"></div>
@@ -147,35 +237,35 @@
                             <ul>
                                 <li>
                                     <a class="_news_table" href="">
-                                        <p class="font18 news_date red">2022.11.08</p>
+                                        <p class="font16 news_date red">2022.11.08</p>
                                         <p class="font18 news_title green-2">京都百年老鋪聯名和食旬滋味，打造冬季旬鮮味</p>
                                     </a>
                                 </li>
                                 <div class="_news_line"></div>
                                 <li>
                                     <a class="_news_table" href="">
-                                        <p class="font18 news_date">2022.10.25</p>
+                                        <p class="font16 news_date">2022.10.25</p>
                                         <p class="font18 news_title">中信銀行JCB 日本吉鶴信用卡優惠｜私覓｜消費...</p>
                                     </a>
                                 </li>
                                 <div class="_news_line"></div>
                                 <li>
                                     <a class="_news_table" href="">
-                                        <p class="font18 news_date">2022.10.19</p>
+                                        <p class="font16 news_date">2022.10.19</p>
                                         <p class="font18 news_title">【美麗佳人】推薦，最適合拍照的日式視覺饗宴</p>
                                     </a>
                                 </li>
                                 <div class="_news_line"></div>
                                 <li>
                                     <a class="_news_table" href="">
-                                        <p class="font18 news_date">2022.09.08</p>
+                                        <p class="font16 news_date">2022.09.08</p>
                                         <p class="font18 news_title">10月中秋預定-私密各所有私廚團隊已全數額滿</p>
                                     </a>
                                 </li>
                                 <div class="_news_line"></div>
                                 <li>
                                     <a class="_news_table" href="">
-                                        <p class="font18 news_date">2022.08.11</p>
+                                        <p class="font16 news_date">2022.08.11</p>
                                         <p class="font18 news_title">MuHUA日本京都抹茶-私覓獨家代理｜限定販售</p>
                                     </a>
                                 </li>
@@ -192,95 +282,128 @@
 
             <!--------------------------- 顧客評價 --------------------------->
 
-            <div class="_index_evaluation wrapper">
+            <!-- <div class="_index_evaluation wrapper">
                 <h2 class="font_bold font_family_tc green-1">顧客評價</h2>
                 <div class="_line_box">
                     <div class="_index_line"></div>
                 </div>
 
-                <div class="_index_feeback">
+                <div class="swiper MySwiper wrapper">
+                    <div class="_index_feeback swiper-wrapper">
 
-                    <div class="_if1">
-                        <img src="./img/index_img/index_feedback1.jpg" alt="">
-                        <div class="_if_body">
-                            <p class="_p14">陳O庵</p>
-                            <p class="_p12">上週五舉辦孩子的慶生派對，廚師超用心還特製超可愛和菓子，一條龍服務讓家長非常放心。</p>
+                        <div class="_if1 swiper-slide" style="width: 255.5px; margin-right: 30px;">
+                            <img src="./img/index_img/index_feedback1.jpg" alt="">
+                            <div class="_if_body">
+                                <p class="_p14">陳O庵</p>
+                                <p class="_p12">上週五舉辦孩子的慶生派對，廚師超用心還特製超可愛和菓子，一條龍服務讓家長非常放心。</p>
 
-                            <div class="_if_bottom">
-                                <p class="_p12">顧客評價:</p>
-                                <div class="_star">
-                                    <div class="_ratings">
-                                        <div class="_empty_star">★★★★★</div>
-                                        <div class="_full_star">★★★★★</div>
+                                <div class="_if_bottom">
+                                    <p class="_p12">顧客評價:</p>
+                                    <div class="_star">
+                                        <div class="_ratings">
+                                            <div class="_empty_star">★★★★★</div>
+                                            <div class="_full_star">★★★★★</div>
+                                        </div>
+                                        <div class="_star_line"></div>
+                                        <p class="_p12">2022-07-21</p>
                                     </div>
-                                    <div class="_star_line"></div>
-                                    <p class="_p12">2022-07-21</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="_if2">
-                        <img src="./img/index_img/index_feedback2.jpg" alt="">
-                        <div class="_if_body">
-                            <p class="_p14">吳O痣</p>
-                            <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
-                            <div class="_if_bottom">
-                                <p class="_p12">顧客評價:</p>
-                                <div class="_star">
-                                    <div class="_ratings">
-                                        <div class="_empty_star">★★★★★</div>
-                                        <div class="_full_star2">★★★★★</div>
+                        <div class="_if2 swiper-slide">
+                            <img src="./img/index_img/index_feedback2.jpg" alt="">
+                            <div class="_if_body">
+                                <p class="_p14">吳O痣</p>
+                                <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
+                                <div class="_if_bottom">
+                                    <p class="_p12">顧客評價:</p>
+                                    <div class="_star">
+                                        <div class="_ratings">
+                                            <div class="_empty_star">★★★★★</div>
+                                            <div class="_full_star2">★★★★★</div>
+                                        </div>
+                                        <div class="_star_line"></div>
+                                        <p class="_p12">2022-06-15</p>
                                     </div>
-                                    <div class="_star_line"></div>
-                                    <p class="_p12">2022-06-15</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="_if3">
-                        <img src="./img/index_img/index_feedback3.jpg" alt="">
-                        <div class="_if_body">
-                            <p class="_p14">蔡O军</p>
-                            <p class="_p12">濱崎步廚師超厲害，每一道料理都心意滿滿，無可挑剔！以後都不想吃外面的日本餐廳了。</p>
-                            <div class="_if_bottom">
-                                <p class="_p12">顧客評價:</p>
-                                <div class="_star">
-                                    <div class="_ratings">
-                                        <div class="_empty_star">★★★★★</div>
-                                        <div class="_full_star2">★★★★★</div>
+                        <div class="_if3 swiper-slide">
+                            <img src="./img/index_img/index_feedback3.jpg" alt="">
+                            <div class="_if_body">
+                                <p class="_p14">蔡O军</p>
+                                <p class="_p12">濱崎步廚師超厲害，每一道料理都心意滿滿，無可挑剔！以後都不想吃外面的日本餐廳了。</p>
+                                <div class="_if_bottom">
+                                    <p class="_p12">顧客評價:</p>
+                                    <div class="_star">
+                                        <div class="_ratings">
+                                            <div class="_empty_star">★★★★★</div>
+                                            <div class="_full_star2">★★★★★</div>
+                                        </div>
+                                        <div class="_star_line"></div>
+                                        <p class="_p12">2022-11-04</p>
                                     </div>
-                                    <div class="_star_line"></div>
-                                    <p class="_p12">2022-11-04</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="_if2">
-                        <img src="./img/index_img/index_feedback2.jpg" alt="">
-                        <div class="_if_body">
-                            <p class="_p14">吳O痣</p>
-                            <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
-                            <div class="_if_bottom">
-                                <p class="_p12">顧客評價:</p>
-                                <div class="_star">
-                                    <div class="_ratings">
-                                        <div class="_empty_star">★★★★★</div>
-                                        <div class="_full_star2">★★★★★</div>
+                        <div class="_if2 swiper-slide">
+                            <img src="./img/index_img/index_feedback2.jpg" alt="">
+                            <div class="_if_body">
+                                <p class="_p14">吳O痣</p>
+                                <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
+                                <div class="_if_bottom">
+                                    <p class="_p12">顧客評價:</p>
+                                    <div class="_star">
+                                        <div class="_ratings">
+                                            <div class="_empty_star">★★★★★</div>
+                                            <div class="_full_star2">★★★★★</div>
+                                        </div>
+                                        <div class="_star_line"></div>
+                                        <p class="_p12">2022-06-15</p>
                                     </div>
-                                    <div class="_star_line"></div>
-                                    <p class="_p12">2022-06-15</p>
                                 </div>
                             </div>
                         </div>
+                        <div class="Swiper-pagination"></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
-    </div>
+    </div> 
     @@include('layout/serve.html') @@include('layout/footer.html')
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+
+      var swiper = new Swiper(".MySwiper", {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".Swiper-pagination",
+          clickable: true,
+        }
+      });
+    </script>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();

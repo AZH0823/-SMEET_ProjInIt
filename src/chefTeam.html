@@ -8,9 +8,7 @@
         <link rel="icon" href="./img/index_img/logo2-03 1.ico" type="image/x-icon"/>
         <link rel="stylesheet" href="css/style.css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">           
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">    
     </head>
     <body>
@@ -362,11 +360,17 @@
 
         <script>
             var swiper = new Swiper(".mySwiper", {
-                pagination: {
-                    el: ".swiper-pagination"
-                }
+              slidesPerView: 3,
+              spaceBetween: 30,
+              slidesPerGroup: 3,
+              loop: true,
+              loopFillGroupWithBlank: true,
+              pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+              }
             });
-        </script>
+          </script>
 
     </body>
 </html>
