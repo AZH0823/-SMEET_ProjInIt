@@ -32,9 +32,10 @@
             <nav>
                 <ul class="header_user">
                     <li class="black slide_user"><i class="fa-solid fa-user"></i>
-                        <ul class="user_pop">
+                        <!-- 會員中心的popup -->
+                        <ul class="user_pop none">
                             <li class="userpop_li"><a href="member.html" class="black userpop_open">會員中心</a></li>
-                            <li class="userpop_li"><a href="orderList.html" class="black userpop_open">訂單查詢</a></li>
+                            <li class="userpop_li"><a href="member.html" class="black userpop_open">訂單查詢</a></li>
                             <li class="userpop_li"><a href="member.html" class="black userpop_open">收藏菜品</a></li>
                             <li class="userpop_li"><a href="member.html" class="black userpop_open">訊息中心<span
                                         class="userpopmsg_signal">3</span></a>
@@ -49,6 +50,16 @@
                         <img src="./img/btn_reserve_img/btn_reserve_c_img.png" alt="">
                     </a>
                 </ul>
+                <!-- 登出成功popup -->
+                <div class="wrapper logout_pop none">
+                
+                    <article>
+                        <div class="check_text">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <h6 >登出成功</h6> 
+                        </div>
+                    </article>
+                </div>
                 <!-- <a href="reseve.html" class="black reserve_pad">
                     <img src="../img/btn_reserve_img/btn_reserve_c_img.png" alt="">
                 </a> -->
@@ -59,6 +70,7 @@
 </div>
 <div class="header_bg fulid_wrapper"></div>
 <div class="header_mg fulid_wrapper"></div>
+@@include('login.html')
 @@include("../cart_pop.html")
 
 <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
