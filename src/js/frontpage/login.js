@@ -88,7 +88,7 @@ let login_app = Vue.createApp({
         eye_icon(e) {
             let pwd_type = e.target.previousSibling;
             // console.log(pwd_type.type);
-            e.stoppropagation;
+            e.stopPropagation();
             if (pwd_type.type == "password") {
                 pwd_type.type = "text";
                 e.target.classList.remove('fa-eye-slash');
@@ -288,8 +288,8 @@ user_icon.addEventListener('mouseleave',function(){
 
 //登出
 userpop_log.addEventListener('click',function(e){
-    // e.preventDefault();
-    // e.stopPropogation();
+    e.preventDefault();
+    e.stopPropagation();
     $.ajax({            
         method: "POST",
         url: "php/frontpage/logout.php",
@@ -300,7 +300,7 @@ userpop_log.addEventListener('click',function(e){
             document.querySelector('.logout_pop').classList.remove('none');
             setTimeout(function(){
                 document.querySelector('.logout_pop').classList.add('none');
-            },1000);
+            },2000);
             localStorage.removeItem('member_ID');
             // history.go(0); 
         },

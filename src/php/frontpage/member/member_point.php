@@ -3,7 +3,7 @@
     include('../../conectDB/Connection.php');
 
     //建立SQL
-    $sql = 'SELECT point FROM smeet.Member WHERE ID = ?';
+    $sql = 'SELECT point FROM Member WHERE ID = ?';
 
     $statement = getPDO()->prepare($sql);  
     $statement->bindValue(1, $member_ID);  
