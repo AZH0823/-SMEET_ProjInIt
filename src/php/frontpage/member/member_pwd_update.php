@@ -8,7 +8,7 @@
     //---------------------------------------------------
 
        //建立SQL語法-修改會員資訊
-       $sql = 'UPDATE SMEET.Member 
+       $sql = 'UPDATE Member 
                 set 
                     password = ?
                 where
