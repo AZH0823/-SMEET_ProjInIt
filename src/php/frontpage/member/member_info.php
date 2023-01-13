@@ -8,7 +8,7 @@
     //---------------------------------------------------
 
        //建立SQL語法-取得會員資訊
-       $sql = "SELECT Email, password, Name, Phone, BirthDate, Sex, Address FROM SMEET.Member WHERE ID = ?";
+       $sql = "SELECT Email, password, Name, Phone, BirthDate, Sex, Address FROM Member WHERE ID = ?";
        $statement = getPDO()->prepare($sql);  
        $statement->bindValue(1, $member_ID);  
        $result = $statement->execute();  

@@ -5,7 +5,7 @@
     include('../conectDB/Connection.php');
 
     //建立SQL
-    $check = 'SELECT Email FROM smeet.Member
+    $check = 'SELECT Email FROM Member
     where Email = ? ';
 
     $statement = getPDO()->prepare($check);  
@@ -21,7 +21,7 @@
     }else{
         
         //建立SQL
-        $sql = "INSERT INTO SMEET.Member(Email, Password) VALUES (?,?)";
+        $sql = "INSERT INTO Member(Email, Password) VALUES (?,?)";
 
         $statement1 = getPDO()->prepare($sql);  
         $statement1->bindValue(1, $account);  
