@@ -6,9 +6,9 @@
     //  $SearhDishSql = " SELECT * FROM `Dish` where id = ? ";
     
     //  撈全部 Set 套資資訊
-    $SearhDishSql = "SELECT d.id as id, d.`Name` as disName, d.SetID,dt.`Name` as dishType
-    FROM smeet.Dish d
-        join smeet.DishsType dt
+    $SearhDishSql = " SELECT  d.ID as id, d.`Name` as disName, d.SetID,dt.`Name` as dishType
+    FROM Dish d
+        join DishsType dt
             on d.`type` = dt.ID
     where d.ProductType = '私廚單點' and dt.`Name` != '單品'";
     // 將include Connection Fuction 給引出
