@@ -227,7 +227,7 @@
                                         <div class=dish-title>{{item.dishName}}</div>
                                         <div class="amoumt">
                                             <button class="button sub" @click="otherItemCount(item,'minus')">-</button>
-                                            <input  class="input stepper_valueInput" :v-model="item.qty" :value="item.qty" disabled/>
+                                            <input  class="input stepper_valueInput" :v-model="item.qty" :value="item.qty"/>
                                             <button class="button add" @click="otherItemCount(item,'add')">+</button>
                                         </div>
                                         <div class="price">
@@ -247,7 +247,7 @@
                                             <span class="aux_title">{{item.desc}}</span>
                                         </div>
                                         <div class="checkboxInner">
-                                            <input type="checkbox" name="cb" :id="item.id" :checked="item.checked" v-model="item.checked">
+                                            <input type="checkbox" name="cb" :id="item.id" :checked="item.checked" v-model="item.checked"  :disabled="item.title == '廚具' || item.title == '炊具'">
                                             <label :for="item.id" id="cb_table">
                                                 <svg viewBox="0 0 100 100">
                                                     <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
@@ -458,7 +458,6 @@
                 </div>
             </main>
         </div>
-        <button id="getData">拿到資料</button>
     </div>
     @@include('layout/footer.html')
     <script src="./js/vender/Vue/vue.global.js"></script>

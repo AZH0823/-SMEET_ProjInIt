@@ -2,7 +2,7 @@
  include ('../conectDB/Connection.php');
 
  //  撈除所有服務
- $SearhDishSql = "Select id,setname,SetPrice,IMG from smeet.sets";
+ $SearhDishSql = "Select ID,SetName,SetPrice,IMG from Sets";
 
  $Searhstatement = getPDO()->prepare($SearhDishSql);
  $Searhstatement -> execute();
@@ -11,8 +11,8 @@
  $arr=array();
   foreach($searchData as $newData){
      $arr[] = array(
-                'id'=>$newData['id'],
-                'setName' => $newData['setname'],
+                'id'=>$newData['ID'],
+                'setName' => $newData['SetName'],
                 'price'=>$newData['SetPrice'],
                 'IMG'=> $newData['IMG']
      );

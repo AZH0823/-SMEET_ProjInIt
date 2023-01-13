@@ -2,10 +2,10 @@
   include ('../conectDB/Connection.php');
 
   //  撈除所有服務
-  $SearhDishSql = "SELECT d.id,d.`Name`,d.Price,d.Introduction
-  FROM smeet.Dish d
-        join smeet.DishsType dt
-            on d.`type` = dt.ID
+  $SearhDishSql = "SELECT d.id, d.`Name`, d.Price, d.Introduction
+  FROM Dish d
+        join DishsType dt
+            on d.`Type` = dt.ID
   where type = 11";
 
   $Searhstatement = getPDO()->prepare($SearhDishSql);
