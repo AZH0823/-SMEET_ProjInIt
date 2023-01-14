@@ -3,7 +3,7 @@ const RootComponent  = {
         return{
             // 控制流程
             workFlow:{
-                step:2,
+                step:1,
             },
             
             // sets (( 暫時存放資料處 ))
@@ -371,7 +371,7 @@ const RootComponent  = {
                 .then( data =>{
                     // console.log(data)
                     data.forEach((data_el)=>{  
-                        
+                        // console.log(data_el.price)
                         let obj={
                             id:data_el.id,
                             dishName:data_el.disName,
@@ -563,7 +563,7 @@ const RootComponent  = {
             // event 當切換人數全部菜餐清除
             // console.log(`清空資料套餐及單品及服務的數量`);               
             for(let i=0; i<3; i++){
-                let set = this.APIData.sets[i].dish
+                let set = this.APIData_in.sets[i].dish
                 for (const key in set){
                     for (let j = 0; j < set[key].length; j++) {
                         // 清空套餐菜品數量
@@ -661,7 +661,7 @@ const RootComponent  = {
         // 套餐內容
         // workflow step 1
         chefTeamName(){
-            let orderTeamName = this.APIData.chefTeam.find(el=>el.team == this.inputData.chefTeam)
+            let orderTeamName = this.APIData_in.chefTeam.find(el=>el.team == this.inputData.chefTeam)
             console.log({...orderTeamName}.name)
             return {...orderTeamName}.name
         },
@@ -720,14 +720,14 @@ const RootComponent  = {
             let point = this.inputData.point || 0
             if(this.workFlow.step == 2 ||this.workFlow.step == 3){
                 otherDish = this.APIData_in.otherDish.map(item=>{
-                     console.log(item.price,item.qty)
+                    //  console.log(item.price,item.qty)
                      if(item.qty > 0){
                         
                         return parseInt(item.qty) * parseInt(item.price);
                         
                      }else return 0;
                 })
-                // .reduce((a,b)=>a+b,0);
+                .reduce((a,b)=>a+b,0);
 
                 otherServies = this.APIData_in.servies.map(serve=>{
                     if(serve.checked === true){
@@ -743,6 +743,10 @@ const RootComponent  = {
             if(this.workFlow.step == 4){
                 // console.log()
             }
+            // console.log('套餐:',setTotal)
+            // console.log( "單點",otherDish )
+            // console.log("服務",otherServies);
+            // console.log('會員點數',point)
             return `$ ${(setTotal + otherDish + otherServies - point).toLocaleString()}`;
         },
 
@@ -827,7 +831,11 @@ const RootComponent  = {
     },
     mounted(){
         // 把Local Stroage 給讀出來並渲染在網頁畫面上
-        this.inputData = JSON.parse(localStorage.getItem('reseverOrder'));        
+
+        if(JSON.parse(localStorage.getItem('reseverOrder')) !== null){    
+            this.inputData = JSON.parse(localStorage.getItem('reseverOrder'));        
+        }
+       
     },
     created(){
         this.$nextTick(() => {
