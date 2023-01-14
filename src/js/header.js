@@ -52,43 +52,19 @@ $(function () {
     })
 })
 
-// $(function () {
-//     $(".slide_user").on("click", function () {
-//         // console.log("yyy");
+$(document).click(function (event) {
+    //目標
+    let ham_div = $('.ham_div');
+    console.log("aaa")
+    // let testInput2 = $('#testInput2');
+    // if (!ham_div.is(event.target) && !testInput2.is(event.target))
+    $(".key").slideUp();
+});
 
-//     })
-// })
+// document.addEventListener('click', function () {
+//     $('.ham_div').hide();
+// }, true);
 
-// $(function () {
-//     $(".abouttab_a").on("click", function () {
-//         console.log("www");
-//         $(".abouttab").attr("border-bottom: 1px solid #000");
-//         console.log("aaa")
-//     })
-// })
-
-function html_border() {
-    let activeNav = document.querySelector('.navtab.active');
-    // var activeTab = document.querySelector('.tab.active');
-    // console.log(this);
-    let currentNav = this;
-    // let currentTab = document.querySelector(this.getAttribute('href'));
-
-    // activeNav.classList.remove('active');
-    // activeTab.classList.remove('active');
-    // currentNav.classList.add('active');
-    // currentTab.classList.add('active');
-
-    // let border = document.querySelector('.navtab');
-    // border.style.border = "1px solid black";
-    // console.log(border);
-    // box.style.outline = "3px solid blue";
-}
-html_border();
-
-
-
-// var navTabs = document.querySelectorAll('.nav-tab');
-// for (var i = 0; i < navTabs.length; i++) {
-//     navTabs[i].addEventListener('click', activeTabHandler)
-// }
+// document.getElementsByClassName('slide_ham').addEventListener('click', function () {
+//     $('.header_bar').slideDown(300);
+// });
