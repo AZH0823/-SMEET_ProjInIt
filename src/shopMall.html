@@ -13,57 +13,10 @@ initial-scale=1.0">
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
     </head>
 
-    <body>
+    <body class="shop-page">
         <!--         ------  slide_header  ------          -->
-<div class="slide_header fulid_wrapper">
+        @@include('layout/header_01.html')
 
-    <header class="header_all">
-        <div class="contain wrapper">
-            <div class="head_logo">
-                <a href="index_home.html"><img src="./img/logo_img/logo_black-03.png" alt=""></a>
-            </div>
-            <div class="ham_div">
-                <ul class="header_bar">
-                    <li><a href="aboutUs.html" class="black">關於我們</a></li>
-                    <li><a href="chefTeam.html" class="black">私廚陣容</a></li>
-                    <li><a href="news.html" class="black">最新動態</a></li>
-                    <li><a href="menu.html" class="black">到府私廚</a></li>
-                    <li><a href="shopMall.html" class="black">線上商城</a></li>
-                </ul>
-                <div class="ham_user">
-                    <ul class="user_ham">
-                        <div class="border_ham">
-                            <li><a href="member.html" class="Camel-3">會員中心</a></li>
-                            <li><a href="orderList.html" class="Camel-3">訂單查詢</a></li>
-                            <li><a href="member.html" class="Camel-3">收藏菜品</a></li>
-                            <li><a href="member.html" class="Camel-3">訊息中心</a></li>
-                            <li><a href="member.html" class="Camel-3">常見問題</a></li>
-                        </div>
-                        <li><a href="member.html" class="log_ham green-1">登入</a></li>
-                    </ul>
-                </div>
-            </div>
-            <nav>
-                <ul class="header_user">
-                    <a href="member.html" class="black slide_user"><i class="fa-solid fa-user"></i></a>
-                    <a href="cartDetail.html" class="black slide_cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <a href="#" class="black slide_ham"><i class="fa-solid fa-bars"></i></a>
-                    <a href="reserve01.html" class="black reserve_btn">
-                        <img src="./img/btn_reserve_img/btn_reserve_c_img.png" alt="">
-                    </a>
-                </ul>
-                <!-- <a href="reseve.html" class="black reserve_pad">
-                    <img src="../img/btn_reserve_img/btn_reserve_c_img.png" alt="">
-                </a> -->
-            </nav>
-
-        </div>
-    </header>
-</div>
-<div class="header_bg fulid_wrapper"></div>
-<div class="header_mg fulid_wrapper"></div>
-
-        <!-- ========== banner ========== -->
         <!-- ========== banner component ========== -->
 <div class="banner">
     <div class="wrapper">
@@ -126,7 +79,7 @@ initial-scale=1.0">
                                     <p class="font16">$<span class="product_money">{{ item.Price}}</span></p>
                                     <button type="button" class="cart_link" href="">
                                         <i class="fa-solid fa-cart-shopping" 
-                                        @click="shopCar(item.ID, item.Name, item.Price, item.IMG, item.heart, item.qty)"
+                                        @click="shopCar(item.ID, item.Name, item.Price, item.IMG[0], item.heart, item.qty)"
                                         ></i>
                                     </button>
                                 </div>
@@ -178,69 +131,8 @@ initial-scale=1.0">
         
 
         <!--         ------  no_img_footer  ------          -->
-<div class="noimg_footer fulid_wrapper">
-    <div class="footer_all wrapper">
 
-        <div class="footer_btm">
-            <div class="info_footer">
-                <ul>
-                    <h6>Info</h6>
-                    <div class="info_rwd">
-                        <a href="member.html" class="black">
-                            <li>FAQs</li>
-                        </a>
-                        <a href="member.html" class="black">
-                            <li>常見問題</li>
-                        </a>
-                        <!-- <a href="#" class="black">
-                            <li>配送須知</li>
-                        </a>
-                        <a href="#" class="black">
-                            <li>隱私權政策</li>
-                        </a> -->
-                        <a href="aboutUs.html" class="black">
-                            <li>聯繫我們</li>
-                        </a>
-                    </div>
-                </ul>
-            </div>
-            <div class="label_footer">
-                <ul>
-                    <h6>Label</h6>
-                    <div class="label_rwd">
-                        <a href="aboutUs.html" class="black">
-                            <li>關於我們</li>
-                        </a>
-                        <a href="chefTeam.html" class="black">
-                            <li>私廚陣容</li>
-                        </a>
-                        <a href="reseve.html" class="black">
-                            <li>到府私廚</li>
-                        </a>
-                        <a href="shopMall.html" class="black">
-                            <li>線上商城</li>
-                        </a>
-                        <a href="news.html" class="black">
-                            <li>最新動態</li>
-                        </a>
-                    </div>
-                </ul>
-            </div>
-            <div class="follow_footer">
-                <ul>
-                    <h6>Flollow us</h6>
-                    <li>Lorem ipsum dolor sit amet consectetur. Quam risus cras nisl eros non. Gravida fringilla
-                        pellentesque sed dictum aenean <br>本網站為緯育TibaMe前端設計工程師班第80期第__組學員專題成果作品，本平台僅供學習、展示之用。</li>
-                    <div class="social_icon">
-                        <a href="#"><i class="fa-brands fa-facebook black"></i></a>
-                        <a href="#"><i class="fa-brands fa-square-instagram black"></i></a>
-                        <a href="#"><i class="fa-brands fa-line black"></i></a>
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+@@include('layout/footer.html')
     <script src="./js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
     <script>
@@ -477,18 +369,61 @@ initial-scale=1.0">
                 
                 // FIXME push data到陣列
                 addShoppingCart(popupData){
-                    // console.log("这里是addShoppingCart")
-
-                    // 解除 popupData 跟 mealsInfo的聯動
-                    this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData)));
-                    console.log(JSON.parse(JSON.stringify(popupData)));
                     
-                    // 推到 LoacalStorage
+                    // 存到 Storage
+                    this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData))); // 將popUpData物件 加進 cartList陣列
+                    console.log(this.ShoppingCartList[0]); // 物件
+                    const shoppingCartlist = this.ShoppingCartList[0] // 物件存到變數
+                    console.log(this.ShoppingCartList[0]);
+
                     localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList));
 
+                    // 將 Storage的 value 抓下來存到變數
+                    let xxx = localStorage.getItem("shoppingData");
+                    // console.log(typeof(xxx)); // string
+                    zzz = JSON.parse(xxx);  // 轉型為陣列
+
+                    // localStorage qty 及 data 存到變數
+                    let localStorageQty = zzz[0].qty;
+                    let localStorageArr = zzz;
+                    // console.log(localStorageQty); // qty 數量
+                    // console.log(localStorageArr); // 資料格式 ： ID IMG Name Price heart img2 img3 qty
+                    
+                
+                    //  如果使用者點擊的商品的 ID 跟 Storage 的 ID 一樣，就把 使用者的qty 加到 Storage的 qty
+                    // Storage 的資料形態是陣列，所以要用迴圈把 Key抓出來才能比對
+                
+
+                    for(let i = 0; i < zzz.length; i++){
+                        console.log(zzz[i].ID);
+
+                        if( this.ShoppingCartList.ID !== zzz[i].ID){
+                            console.log("123");
+                            // this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData))); 
+                        }
+                    }
+                    // else popupData.qty + zzz[i].qty
+                    // for(let i = 0; i < this.ShoppingCartList.length; i++){
+                        
+                    //     console.log(this.ShoppingCartList);
+
+                    //     if( cartList[i].length === ){
+                    //         console.log("123");
+                    //         
+                    //     }else if(this.ShoppingCartList[i].length > 0){
+                    //         let qtyResult = this.ShoppingCartList[i].qty += popupData.qty
+                    //         console.log(cartResult);
+                    //         // cartList[i].qty = cartResult;
+                    //     }
+                    // }
+
+                    // console.log(JSON.parse(JSON.stringify(popupData)));
+                    
+                    
+                    
+                    
                     // 關閉購物車
                     this.isShow = false;
-
                     // 數量回到初始值
                     this.popupData.qty = 1;
                 },
