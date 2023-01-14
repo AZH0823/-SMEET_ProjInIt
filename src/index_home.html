@@ -245,7 +245,7 @@
                                 <li>
                                     <a class="_news_table" href="">
                                         <p class="font16 news_date">2022.10.25</p>
-                                        <p class="font18 news_title">中信銀行JCB 日本吉鶴信用卡優惠｜私覓｜消費...</p>
+                                        <p class="font18 news_title">中信銀行JCB 日本吉鶴信用卡優惠｜私覓｜消費｜菜品</p>
                                     </a>
                                 </li>
                                 <div class="_news_line"></div>
@@ -282,7 +282,7 @@
 
             <!--------------------------- 顧客評價 --------------------------->
 
-            <!-- <div class="_index_evaluation wrapper">
+            <div class="_index_evaluation wrapper">
                 <h2 class="font_bold font_family_tc green-1">顧客評價</h2>
                 <div class="_line_box">
                     <div class="_index_line"></div>
@@ -291,8 +291,8 @@
                 <div class="swiper MySwiper wrapper">
                     <div class="_index_feeback swiper-wrapper">
 
-                        <div class="_if1 swiper-slide" style="width: 255.5px; margin-right: 30px;">
-                            <img src="./img/index_img/index_feedback1.jpg" alt="">
+                        <div class="_if1 swiper-slide" >
+                            <div class="if_img"><img src="./img/index_img/index_feedback1.jpg" alt=""></div>
                             <div class="_if_body">
                                 <p class="_p14">陳O庵</p>
                                 <p class="_p12">上週五舉辦孩子的慶生派對，廚師超用心還特製超可愛和菓子，一條龍服務讓家長非常放心。</p>
@@ -312,7 +312,8 @@
                         </div>
 
                         <div class="_if2 swiper-slide">
-                            <img src="./img/index_img/index_feedback2.jpg" alt="">
+                            <div class="if_img"><img src="./img/index_img/index_feedback2.jpg" alt=""></div>
+                            
                             <div class="_if_body">
                                 <p class="_p14">吳O痣</p>
                                 <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
@@ -331,7 +332,7 @@
                         </div>
 
                         <div class="_if3 swiper-slide">
-                            <img src="./img/index_img/index_feedback3.jpg" alt="">
+                            <div class="if_img"><img src="./img/index_img/index_feedback3.jpg" alt=""></div>
                             <div class="_if_body">
                                 <p class="_p14">蔡O军</p>
                                 <p class="_p12">濱崎步廚師超厲害，每一道料理都心意滿滿，無可挑剔！以後都不想吃外面的日本餐廳了。</p>
@@ -350,7 +351,7 @@
                         </div>
 
                         <div class="_if2 swiper-slide">
-                            <img src="./img/index_img/index_feedback2.jpg" alt="">
+                            <div class="if_img"><img src="./img/index_img/index_feedback2.jpg" alt=""></div>
                             <div class="_if_body">
                                 <p class="_p14">吳O痣</p>
                                 <p class="_p12">公司要求辦內部聚餐，老闆超滿意這次的餐點，不知道日料也有私廚！海鮮都很鮮甜，超級棒。</p>
@@ -370,7 +371,7 @@
                         <div class="Swiper-pagination"></div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div> 
     @@include('layout/serve.html') @@include('layout/footer.html')
@@ -380,9 +381,27 @@
     
     <script>
       var swiper = new Swiper(".mySwiper", {
+        // slidesPerView: 4,
+        // spaceBetween: 30,
+        // slidesPerGroup: 4,
         slidesPerView: 4,
-        spaceBetween: 30,
-        slidesPerGroup: 4,
+                spaceBetween: 30,
+                slidesPerGroup: 4,
+        breakpoints: {
+          
+
+            720: {
+                slidesPerView: 2,
+                spaceBetween: 30,
+                slidesPerGroup: 2,
+            },
+            428: {
+                slidesPerView: 1,
+                spaceBetween: 15,
+                slidesPerGroup: 1,
+            }
+        },
+      
         loop: true,
         loopFillGroupWithBlank: true,
         pagination: {
@@ -391,18 +410,25 @@
         },
       });
 
-      var swiper = new Swiper(".MySwiper", {
-        slidesPerView: 4,
-        spaceBetween: 30,
-        slidesPerGroup: 4,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        pagination: {
-          el: ".Swiper-pagination",
-          clickable: true,
-        }
-      });
-    </script>
+    //   var swiper = new Swiper(".MySwiper", {
+    //     slidesPerView: 4,
+    //     spaceBetween: 30,
+    //     slidesPerGroup: 4,
+    //     // breakpoints: {
+    //     //     '@1.50': {
+    //     //     slidesPerView: 2,
+    //     //     spaceBetween: 20,
+    //     //     slidesPerGroup: 4,
+    //     //     },
+    //     // },
+    //     loop: true,
+    //     loopFillGroupWithBlank: true,
+    //     pagination: {
+    //       el: ".Swiper-pagination",
+    //       clickable: true,
+    //     }
+    //   });
+    // </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
