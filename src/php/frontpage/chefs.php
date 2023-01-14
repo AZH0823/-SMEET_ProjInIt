@@ -2,13 +2,13 @@
     include("../conectDB/Connection.php");
     
     //建立SQL
-    $sql = "SELECT * FROM TEAMS";
+    $sql = "SELECT * FROM CHEFS";
 
-    $sql = "SELECT t.ID, `LederName`, `LederProfiles`
-    FROM smeet.Teams t
-    join smeet.Chefs c
-    on d.ID = c.ID 
-    where t.ID = '1'";
+    $sql = "SELECT c.ID, c.Name, `Job`, `IMG`,`TeamID`
+    FROM smeet.Chefs c
+    join smeet.Teams t
+    on c.ID = t.ID 
+    where TeamID = '1'";
 
 
     $statement = getPDO()->prepare($sql);  
@@ -20,20 +20,24 @@
     $data = $statement->fetchAll();
     print_r($data);
 
+
     // print_r ($data);
     $arr = [];
 
     foreach($data as $newData){
         $arr[] = array(
             'ID'=>$newData['ID'],
-            'LederName'=> $newData['LederName'],
-            'LederProfiles'=> $newData['LederProfiles'],
+            'Name'=> $newData['Name'],
+            'Job'=> $newData['Job'],
+            'IMG'=> $newData['IMG'],
+            'TeamID'=> $newData['TeamID'],
         );
     }
 
 
     // 回傳json
     echo json_encode($arr); 
-    // // echo json_encode($data);      
+    // // echo json_encode($data);     
+
 
 ?>
