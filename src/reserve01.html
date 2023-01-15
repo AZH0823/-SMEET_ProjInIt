@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    @@include('layout/meta.html', { "title": "私覓SMEET-預約須知", })
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
+
+<head>
+    @@include('layout/meta.html', {
+    "title": "私覓SMEET-預約須知",
+    })
+    <link rel="stylesheet" href="./css/style.css">
+</head>
 
 <body>
     <!-- @@include('layout/header_01.html') -->
@@ -17,95 +20,60 @@
                         <ul class="noticeTxt">
                             <h6 class="green-1">【預約注意事項】</h6>
 
-                <li>
-                  為防止新型冠狀病毒感染擴大，進入貴廚前會測量體溫並進行消毒。如果您當天體溫為37.5℃或更高，我們可能會停止提供該服務並延期。
-                </li>
-                <li>
-                  我們的商店是一個完整的預訂系統。您可以在預訂日期的前一天的
-                  15:00 之前進行預訂
-                </li>
-                <li>我們可能無法滿足您的選座要求。</li>
-                <li>如果您想使用私人房間，請通過電話進行預訂。</li>
-                <li>
-                  12人以上預約時，或中學生以下兒童預約時，請直接與店鋪聯繫。
-                </li>
-                <li>
-                  我們會根據預訂提前幾天準備食物，因此如果您想更改人數，取消等，請至少提前2天通過電話告知我們。<span
-                    >*根據當天的預訂情況，可能無法更改。</span
-                  >
-                </li>
+                            <li>為防止新型冠狀病毒感染擴大，進入貴廚前會測量體溫並進行消毒。如果您當天體溫為37.5℃或更高，我們可能會停止提供該服務並延期。</li>
+                            <li>我們的商店是一個完整的預訂系統。您可以在預訂日期的前一天的 15:00 之前進行預訂</li>
+                            <li>我們可能無法滿足您的選座要求。</li>
+                            <li>如果您想使用私人房間，請通過電話進行預訂。</li>
+                            <li>12人以上預約時，或中學生以下兒童預約時，請直接與店鋪聯繫。</li>
+                            <li>我們會根據預訂提前幾天準備食物，因此如果您想更改人數，取消等，請至少提前2天通過電話告知我們。<span>*根據當天的預訂情況，可能無法更改。</span></li>
 
-                <li>
-                  如果我們在您預訂時間的 30
-                  分鐘內無法聯繫到您，我們將不可避免地視為取消。對於給您帶來的不便，我們深表歉意，但如果您遲到了，請務必與我們聯繫。
-                </li>
 
-                <li>
-                  我們會根據預訂提前幾天準備食物，因此如果您想更改人數，取消等，請至少提前2天通過電話告知我們。
-                </li>
-                <li>
-                  如果您在預訂時沒有提出有關過敏成分或您不擅長的成分的要求，請注意，當天無法更改。
-                </li>
-                <li>我們可能會在預訂日期前至少 2 天致電您確認您的預訂。</li>
-                <li>未與我們聯繫而不來店的顧客將無法進行以後的預訂。</li>
-              </ul>
-              <div class="cancelTxt">
-                <h6 class="green-1">【取消政策】</h6>
-                <p class="red">
-                  預訂確認後，除特殊情況外，自預訂日期前3天起收取取消費。請注意。
-                </p>
-                <p>3天前至2天前取消，收取費用的 50%。</p>
-                <p>從前一天到當天取消是價格的 100%。</p>
-                <p>如果取消，恕不另行通知，價格的 100%。</p>
-              </div>
-            </div>
-          </div>
-          <div class="reseve-form">
-            <div id="reseve_detail">
-              <div class="form-input" id="agreement">
-                <label for="agrees">
-                  <input
-                    type="checkbox"
-                    name="agree"
-                    id="agrees"
-                    v-model="inputData.agress"
-                  /><span class="font14 font_med"
-                    >我已確認已閱讀「商家通知」</span
-                  >
-                </label>
-                <span class="warning_title db font_med" v-if="vaildAgress"
-                  >＊項目尚未勾選</span
-                >
-              </div>
+                            <li>如果我們在您預訂時間的 30 分鐘內無法聯繫到您，我們將不可避免地視為取消。對於給您帶來的不便，我們深表歉意，但如果您遲到了，請務必與我們聯繫。</li>
 
-              <div class="form-input" id="choose_set">
-                <img src="./img/reserve_img/reserve_icon01.svg" alt="" />
-                <select v-model="inputData.sets">
-                  <option value="" selected disabled>--套餐--</option>
-                  <option
-                    v-for="set in data.sets"
-                    :key="set.id"
-                    :value="set.id"
-                  >
-                    {{set.setName}}
-                  </option>
-                </select>
-                <span class="warning_title" v-if="vaildSets"
-                  >＊欄位尚未填寫</span
-                >
-              </div>
+                            <li>我們會根據預訂提前幾天準備食物，因此如果您想更改人數，取消等，請至少提前2天通過電話告知我們。</li>
+                            <li>如果您在預訂時沒有提出有關過敏成分或您不擅長的成分的要求，請注意，當天無法更改。</li>
+                            <li>我們可能會在預訂日期前至少 2 天致電您確認您的預訂。</li>
+                            <li>未與我們聯繫而不來店的顧客將無法進行以後的預訂。</li>
 
-              <div class="form-input" id="count_people">
-                <img src="./img/reserve_img/reserve_icon02.svg" alt="" />
-                <select v-model="inputData.peoCount">
-                  <i class="fa-solid fa-user"></i>
-                  <option value="" selected disabled>--人數--</option>
-                  <option v-for="idx in 12" :value="idx">{{idx}}人</option>
-                </select>
-                <span class="warning_title" v-if="vaildPeo"
-                  >＊欄位尚未填寫</span
-                >
-              </div>
+                        </ul>
+                        <div class="cancelTxt">
+                            <h6 class="green-1">【取消政策】</h6>
+                            <p class="red">預訂確認後，除特殊情況外，自預訂日期前3天起收取取消費。請注意。</p>
+                            <p>3天前至2天前取消，收取費用的 50%。</p>
+                            <p>從前一天到當天取消是價格的 100%。</p>
+                            <p>如果取消，恕不另行通知，價格的 100%。</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="reseve-form">
+                    <div id="reseve_detail">
+
+                        <div class="form-input" id="agreement">
+                            <label for="agrees">
+                                <input type="checkbox" name="agree" id="agrees" v-model="inputData.agress"><span class=" font14 font_med">我已確認已閱讀「商家通知」</span>
+                            </label>
+                            <span class="warning_title db font_med" v-if="vaildAgress">＊項目尚未勾選</span>
+                        </div>
+
+                        <div class="form-input" id="choose_set">
+                            <img src="./img/reserve_img/reserve_icon01.svg" alt="">
+                            <select v-model="inputData.sets">
+                                <option value="" selected disabled>--套餐--</option>
+                                <option v-for="set in data.sets" :key="set.id" :value="set.id">{{set.setName}}</option>
+                            </select>
+                            <span class="warning_title" v-if="vaildSets">＊欄位尚未填寫</span>
+                        </div>
+
+                        <div class="form-input" id="count_people">
+                            <img src="./img/reserve_img/reserve_icon02.svg" alt="">
+                            <select v-model="inputData.peoCount">
+                                <i class="fa-solid fa-user "></i>
+                                <option value="" selected disabled>--人數--</option>
+                                <option v-for="idx in 12" :value="idx">{{idx}}人</option>
+                            </select>
+                            <span class="warning_title" v-if="vaildPeo">＊欄位尚未填寫</span>
+                        </div>
 
                         <div class="form-input" id="order_date" >
                             <img src="./img/reserve_img/reserve_icon03.svg" alt="">
@@ -129,19 +97,19 @@
                             <span class="warning_title" v-if="vaildTeam">＊欄位尚未填寫</span>
                         </div>
 
-              <!-- 測試用先別管 -->
-              <!-- <ul>
+                        <!-- 測試用先別管 -->
+                        <!-- <ul>
                             <li v-for="(member, key) in inputData"> 項目:{{key}} / 使用者選填的:{{member}}</li>
                         </ul> -->
-              <!-- 測試用先別管 -->
+                        <!-- 測試用先別管 -->
 
-              <button class="next_btn" @click="vaildDataLists($event)">
-                下一步
-              </button>
+                        
+
+                        <button class="next_btn" @click="vaildDataLists($event)">下一步</button>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     @@include('layout/footer.html')
     <script src="./js//vender/Vue/vue.global.js"></script>
@@ -307,107 +275,107 @@
                 vaildDataLists(e){
                     // console.log(this.inputData)
 
-            let vaildResult = [];
-            let errMsg = "";
-            for (const [key, value] of Object.entries(this.inputData)) {
-              // console.log(`${key}: ${value}`);
+                    let vaildResult = []
+                    let errMsg = ''
+                    for (const [key, value] of Object.entries(this.inputData)) {
+                        // console.log(`${key}: ${value}`);
 
-              switch (key) {
-                case "agress":
-                  if (value === "" || value === false) {
-                    // alert(`尚未確認預約須知`)
-                    errMsg += `尚未確認預約須知\n`;
-                    vaildResult.push(false);
-                  } else {
-                    vaildResult.push(true);
-                  }
-                  break;
-                case "sets":
-                  if (value === "" || value === false) {
-                    // alert(`套餐未選擇`)
-                    errMsg += `套餐未選擇\n`;
-                    vaildResult.push(false);
-                  } else {
-                    vaildResult.push(true);
-                  }
-                  break;
-                case "peoCount":
-                  if (value === "" || value === false) {
-                    // alert(`人數未選擇`)
-                    errMsg += `人數未選擇\n`;
-                    vaildResult.push(false);
-                  } else {
-                    vaildResult.push(true);
-                  }
-                  break;
-                case "date":
-                  if (value === "" || value === false) {
-                    // alert(`預約日期未選擇`)
-                    errMsg += `預約日期未選擇\n`;
-                    vaildResult.push(false);
-                  } else {
-                    vaildResult.push(true);
-                  }
-                  break;
-                case "orderTime":
-                  if (value === "" || value === false) {
-                    // alert(`預約時段未選擇`)
-                    errMsg += `預約時段未選擇\n`;
-                    vaildResult.push(false);
-                  } else {
-                    vaildResult.push(true);
-                  }
-                  break;
-                case "chefTeam":
-                  if (value === "" || value === false) {
-                    // alert(`尚未選擇預約團隊`)
-                    errMsg += `尚未選擇預約團隊`;
-                    vaildResult.push(false);
-                  } else {
-                    vaildResult.push(true);
-                  }
-                  break;
-              }
+                        
+                        switch(key){
+                            case 'agress':
+                                if(value === '' || value === false){
+                                    // alert(`尚未確認預約須知`)
+                                    errMsg +=`尚未確認預約須知\n`
+                                    vaildResult.push(false)
+                                }else{
+                                    vaildResult.push(true)
+                                }
+                                break;
+                            case 'sets':
+                                if(value === '' || value === false){
+                                    // alert(`套餐未選擇`)
+                                    errMsg +=`套餐未選擇\n`
+                                    vaildResult.push(false)
+                                }else{
+                                    vaildResult.push(true)
+                                }
+                            break;
+                            case 'peoCount':
+                                if(value === '' || value === false){
+                                    // alert(`人數未選擇`)
+                                    errMsg +=`人數未選擇\n`
+                                    vaildResult.push(false)
+                                }else{
+                                    vaildResult.push(true)
+                                }
+                            break;
+                            case 'date':
+                                if(value === '' || value === false){
+                                    // alert(`預約日期未選擇`)
+                                    errMsg +=`預約日期未選擇\n`
+                                    vaildResult.push(false)
+                                }else{
+                                        vaildResult.push(true)
+                                }
+                            break;
+                            case 'orderTime':
+                                if(value === '' || value === false){
+                                    // alert(`預約時段未選擇`)
+                                    errMsg +=`預約時段未選擇\n`
+                                    vaildResult.push(false)
+                                }else{
+                                        vaildResult.push(true)
+                                }
+                            break;
+                            case 'chefTeam':
+                                if(value === '' || value === false){
+                                    // alert(`尚未選擇預約團隊`)
+                                    errMsg +=`尚未選擇預約團隊`
+                                    vaildResult.push(false)
+                                }else{
+                                    vaildResult.push(true)
+                                }
+                            break;
+                        }
 
-              // if(!vaildResult) break;
-              // if(value === '' || value === false){
-              //     alert(`${key} : 請填選資料`)
-              //     break;
-              // }
-            }
-            if (errMsg.length !== 0) alert(errMsg);
+                        // if(!vaildResult) break;
+                        // if(value === '' || value === false){
+                            //     alert(`${key} : 請填選資料`)
+                            //     break;
+                            // }
+                            
+                        }
+                        if(errMsg.length !== 0) alert(errMsg)
 
-            // 使用者六個項目有一個沒有就停止以下動作
-            if (vaildResult.includes(false)) return;
+                    // 使用者六個項目有一個沒有就停止以下動作
+                    if(vaildResult.includes(false))return
 
-            this.sentToNextPage();
+                    this.sentToNextPage();
 
-            // for(let good in this.inputData){
-            //     console.log(good)
-            //     console.log(this.inputDat.good)
-            // }
-            // this.saveLocalStroage()
-          },
-          saveLocalStroage() {
-            // console.log(`儲存使用者資訊`)
-            localStorage.setItem(
-              "reseverOrder",
-              JSON.stringify(this.inputData)
-            );
-          },
-          sentToNextPage() {
-            let c = confirm(`確認送出資料嗎?`);
-            if (c) {
-              // 送出表單前儲存資訊
-              this.saveLocalStroage();
-              // console.log(`切換頁面並將資料送出`)
-              location.href = "reserve02.html";
-            }
-          },
-        },
-        mounted() {
-          // 這邊之後要放入API
-          // 要取得團隊名稱, 時段,
+                    // for(let good in this.inputData){
+                    //     console.log(good)
+                    //     console.log(this.inputDat.good)
+                    // }
+                    // this.saveLocalStroage()
+                },
+                saveLocalStroage(){
+                    // console.log(`儲存使用者資訊`)
+                    localStorage.setItem('reseverOrder',JSON.stringify(this.inputData))
+                },
+                sentToNextPage(){
+                    let c  = confirm(`確認送出資料嗎?`)
+                    if(c){
+                        // 送出表單前儲存資訊
+                        this.saveLocalStroage();
+                        // console.log(`切換頁面並將資料送出`)
+                        location.href = 'reserve02.html';
+                    }
+                },
+               
+            },
+            mounted(){
+                // 這邊之後要放入API
+                // 要取得團隊名稱, 時段, 
 
                 // localStroe 放入 
                 let LS = JSON.parse(localStorage.getItem('reseverOrder'))
@@ -421,5 +389,7 @@
         });
         app.mount("#reseve_detail");
     </script>
-  </body>
+
+</body>
+
 </html>
