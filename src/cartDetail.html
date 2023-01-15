@@ -32,29 +32,29 @@
                     </div>
                     <!-- 商品list -->
                 
-                    <div class="product_detail" v-for="(item, index) in product_list" :key="item.id">
+                    <div class="product_detail" v-for="(item, i) in inputShoppingData" :key="this.inputShoppingData[i]">
                         <div class="item1 green-1">
                             <div class="item1_img">
-                                <img :src="item.img_url" alt="">
+                                <img :src="item.IMG" alt="">
                             </div>
-                            <h6 class="product_name">{{item.product_name}}</h6>
+                            <h6 class="product_name">{{item.Name}}</h6>
                         </div>
                         <div class="item2">
-                            <h6>NT$<span class="product_money">{{item.price}}</span></h6>
+                            <h6>NT$<span class="product_money">{{item.Price}}</span></h6>
                         </div>
                         <div class="item3">
                             <div class="cart_minus_plus">
                                 <div class="minus">
                                     <i class="fa-solid fa-minus" @click="dealMinus(item)"></i>
                                 </div>
-                                <div class="count">{{item.count}}</div>
+                                <div class="count">{{item.amount}}</div>
                                 <div class="plus">
                                     <i class="fa-solid fa-plus" @click="dealPlus(item)"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="item4">
-                            <h6>NT$<span class="product_money_2">{{item.price * item.count}}</span></h6>
+                            <h6>NT$<span class="product_money_2">{{item.Price * item.amount}}</span></h6>
  
                         </div>
                         <div class="item5">
@@ -129,23 +129,23 @@
                         <p class="item5"></p>
                     </div>
                     <!-- 商品list -->
-                    <div class="product_detail" v-for="(item, index) in product_list" :key="item.id">
+                    <div class="product_detail" v-for="(item, i) in inputShoppingData" :key="this.inputShoppingData[i]">
                         <div class="item1 green-1">
                             <div class="item1_img">
-                                <img :src="item.img_url" alt="">
+                                <img :src="item.IMG" alt="">
                        
                             </div>
                     
-                            <h6 class="product_name">{{item.product_name}}</h6>
+                            <h6 class="product_name">{{item.Name}}</h6>
                         </div>
                         <div class="item2">
-                            <h6>NT$<span class="product_money">{{item.price}}</span></h6>
+                            <h6>NT$<span class="product_money">{{item.Price}}</span></h6>
                         </div>
                         <div class="item3">
-                            <div class="count">{{item.count}}</div>
+                            <div class="count">{{item.amount}}</div>
                         </div>
                         <div class="item4">
-                            <h6>NT$<span class="product_money_2">{{item.price * item.count}}</span></h6>
+                            <h6>NT$<span class="product_money_2">{{item.Price * item.amount}}</span></h6>
 
                         </div>
                     </div>
@@ -181,11 +181,11 @@
                     </div>
                     <div class="buy_content">
                         <label for="">姓名</label>
-                        <input type="text" placeholder="請輸入姓名" value="">
+                        <input type="text" placeholder="請輸入姓名" v-model="orderInfo.name">
                         <label for="">手機號碼</label>
-                        <input type="text" placeholder="請輸入手機號碼" value="">
+                        <input type="text" placeholder="請輸入手機號碼" v-model="orderInfo.phone">
                         <label for="">地址</label>
-                        <input type="text" placeholder="請輸入地址" value="">
+                        <input type="text" placeholder="請輸入地址"  v-model="orderInfo.address">
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
                         </select>
@@ -202,18 +202,17 @@
                         <h6 class="green-1">收件人資訊</h6>
                         <!-- checkbox -->
                         <div class="info_check gray">
-                            <input type="checkbox" name="info_check" id="info_check_yes">
+                            <input type="checkbox" name="info_check" id="info_check_yes" @click="checkOrderValue">
                             <label for="info_check">
-                                <!--同訂購人資料跟同會員資料是相同的,methods一樣即可-->
-                                <p class="font16">同訂購人資料</p>
+                                <p class="font16" >同訂購人資料</p>
                             </label>
                         </div>
                     </div>
                     <div class="get_content">
                         <label for="">姓名</label>
-                        <input type="text" placeholder="請輸入姓名" value="">
-                        <label for="">手機號碼</label>
-                        <input type="text" placeholder="請輸入手機號碼" value=""> 
+                        <input type="text" placeholder="請輸入姓名" v-model="reviInfo.name">
+                        <label for="" >手機號碼</label>
+                        <input type="text" placeholder="請輸入手機號碼" v-model="reviInfo.phone"> 
                         <label for="" >地址</label>
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
@@ -221,7 +220,7 @@
                         <select name="member_area" class="member_area">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
                         </select> -->
-                        <input type="text" class="member_addr" placeholder="請輸入地址" value="">
+                        <input type="text" class="member_addr" placeholder="請輸入地址" v-model="reviInfo.address">
                     </div>
                 </div>
                 <!-- 配送/發票 -->
@@ -261,9 +260,9 @@
                 </div>
                 <!-- checkbox -->
                 <div class="info_check">
-                    <input type="checkbox" name="info_check" id="info_check_yes">
+                    <input type="checkbox" name="info_check" id="info_check_yes" v-if="agree">
                     <label for="info_check">
-                        <p class="font16">我同意接受服務條款 & 隱私權政策。
+                        <p class="font16" >我同意接受服務條款 & 隱私權政策。
                         </p>
                     </label>
                 </div>
@@ -305,7 +304,7 @@
                             // checked步驟一、二、三加上class
                             step:1,
                         },
-                        //商品list的內->這裡寫死,但之後應該要接從購物車傳進來的值
+                        //商品list的內->這裡寫死,但之後應該要接從購物車傳進來的值,這裡已經被inputShoppingData的陣列取代,不再使用
                         product_list : [
                         
                         {
@@ -348,39 +347,88 @@
                         shop:'',
 
                         //回傳紅利點數的金額,
-                        //讓input限制最高只能輸入紅利點數的上限
+                        //讓input限制最高只能輸入紅利點數的上限 
                         //這裡要接資料庫select後的值
                         bouns:"",
 
                         //用v-if渲染出若金額大於會員點數會出現紅字
-                        msg:'*紅利點數折抵必須小於您目前的會員點數',
+                        msg:'*紅利點數折抵必須小於或等於您目前的會員點數',
                         show: false,
                    
 
                         //商城傳回的資料
-                        inputShopMall : [
+                        inputShoppingData : [
 
                             {
-                                id:'',
-                                product_name:'',
-                                img_url:'',
-                                price:'',
-                                count:''
-                            }
-                        ]
+                                ID:'',
+                                Name:'',
+                                IMG:'',
+                                Price:'',
+                                amount:'',
+                                // heart:'',
+                                // img2:'',
+                                // img3:'',
+                            },
+                        ],
+
+                        //訂購人的資料用get方法
+                        //訂購人資訊
+                        orderInfo : [
+                            {
+                                name: "",
+                                phone:"",
+                                address:"", 
+                                deliveryTime:"",
+                                invoice:"",
+
+                            },
+                        ],
+                        
+                        
+
+                        // 1. 同會員資料的內容要藉由取得登入後member_ID到資料庫撈會員資訊
+                        // 2. 再用陣列轉字串的方式放到這裡
+                        // 3. 再寫一個methods放@click到同會員資料的check後填入memberInfo的資料
+
+
+
+                        //收件人資訊
+                        reviInfo : [
+                            {
+                                name: "",
+                                phone:"",
+                                address:"",
+                            },
+                        ],
+
+                        //同意接受服務條款的v-if
+                        agree:true,
                     }
                 },
+
+            //生命週期
+            created () {
+                    let shoppingData = localStorage.getItem("shoppingData");
+                    // console.log(shoppingData);
+                    if (shoppingData) {
+                        this.inputShoppingData = JSON.parse(shoppingData);
+                        // console.log(this.inputShoppingData);
+                    }
+           
+            },
 
             mounted() {
                 //抓取localStorage的memberID
                 let member_ID = localStorage.getItem("member_ID");
+                // this.inputShoppingData[0] = shoppingData;
+                // console.log(this.inputShoppingData[0]);
                 let that = this ;
 
                 //取得會員點數
                 $.ajax({
                         
                         method: "POST",
-                        url: "php/frontpage/member_point.php",
+                        url: "php/frontpage/member/member_point.php",
                         data: {
                         member_ID: member_ID,
                         },
@@ -394,23 +442,22 @@
                         }
                     });
 
+         
                     //如果顧客直接輸入購物車的網址
-                        // 1. 進到購物車的畫面要先判斷有沒有登入就跳出沒有登入的popon
+                        // 1. 進到購物車的畫面要先判斷有沒有登入就跳出沒有登入的alert
+                        
                         // 2. 跳回首頁(location."index_home.html")
                         // 3. 再跳出登入popon
 
             },
-                //生命週期
-            //     created () {
-            //     this.inputShopMall = localStorage.getItem('商城內容') || ''
-            // },
-
+            
+        
             computed:{
                 //小計的所有金額
                 cartTotal () {
                     let cartTotal = 0;
-                    for(let i in this.product_list){
-                        cartTotal += this.product_list[i].price * this.product_list[i].count;
+                    for(let i in this.inputShoppingData){
+                        cartTotal += this.inputShoppingData[i].Price * this.inputShoppingData[i].amount;
                     }
                     return cartTotal;
                 },
@@ -434,18 +481,18 @@
                 //數量加
                 dealPlus(item){
                     // console.log(item);
-                    item.count++;
+                    item.amount++;
                 },
                  //數量減
                 dealMinus(item){
-                    console.log(item);
-                    if(item.count > 1){
-                        item.count--;
+                    // console.log(item);
+                    if(item.amount > 1){
+                        item.amount--;
                     }
                 },
                 //刪除點選到的商品 ->垃圾桶
                 dealDelete(index){
-                    this.product_list.splice(index,1);
+                    this.inputShoppingData.splice(index,1);
                 },
                 //選擇門市
                 chooseShop(){
@@ -482,10 +529,18 @@
 
                 //確認訂購人資訊的格式
                   // 1. 姓名 -> 不用檢核格式 , 只要確定不是空值即可
-                nameRule(str) {
-                    let
+           
+                
+
+                //點擊收件人的[同訂購人資料]會將上方訂購人的資訊帶到下方的input裡
+                checkOrderValue(){
+                    // console.log(`ttt`);
+                    this.reviInfo.name = this.orderInfo.name;
+                    this.reviInfo.phone = this.orderInfo.phone;
+                    this.reviInfo.address = this.orderInfo.address;
                 },
-            
+
+
                 },
 
                 
