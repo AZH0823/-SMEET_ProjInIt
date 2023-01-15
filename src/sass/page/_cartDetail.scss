@@ -806,3 +806,8 @@ section.cart_3_content {
   margin-top: 12px;
   margin-bottom: 50px;
 }
+
+.disabled {
+  background-color: $Camel-3;
+  pointer-events: none;
+}

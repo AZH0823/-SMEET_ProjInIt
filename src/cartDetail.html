@@ -228,22 +228,23 @@
                     <label for="deliver">配送時間</label>
                     <select name="deliver" id="deliver" value="不指定">
                         <option value="不指定">不指定</option>
-                        <option value="早">早(9-12)</option>
-                        <option value="午">午(13-17)</option>
-                        <option value="晚">晚(18-21)</option>
+                        <option value="早">早上(9點-12點)</option>
+                        <option value="午">中午(13點-17點)</option>
+                        <option value="晚">晚上(18點-21點)</option>
                     </select>
                     <label for="invoice">發票及載具</label>
-                    <select name="invoice" id="invoice" value="不使用載具-索取紙本發票">
+                    <select name="invoice" id="invoice" value="不使用載具-索取紙本發票" v-model="selectedOption">
                         <!--當選擇紙本時其他兩個option要反灰,其他兩個option一樣-->
-                        <option value="不使用載具-索取紙本發票">不使用載具-索取紙本發票</option>
-                        <option value="電子發票載具">電子發票載具</option>
-                        <option value="開立統一編號">開立統一編號</option>
+                        <option :value="option.value" v-for="option in options">{{option.text}}</option>
+                        <!-- <option :value="options.value">電子發票載具</option>
+                        <option :value="options.value">開立統一編號</option> -->
                         <!-- <option value="捐贈發票">捐贈發票</option> -->
                     </select>
                     <label for="">電子發票載具</label>
-                    <input type="text" placeholder="/開頭">
+                    <!-- v-bind 設定class的bgc設為gray,pointer-events:none,當option不等2的時候 disabled會取消 -->
+                    <input type="text" placeholder="/開頭"  :class="{'disabled': selectedOption !== 'option2'}" type="text">
                     <label for="">統一編號</label>
-                    <input type="text" placeholder="請輸入統一編號">
+                    <input type="text" placeholder="請輸入統一編號"  :class="{'disabled': selectedOption !== 'option3'}" type="text">
                 </div>
                 <!-- 付款資訊 -->
                 <div class="cart_title">
@@ -378,9 +379,6 @@
                                 name: "",
                                 phone:"",
                                 address:"", 
-                                deliveryTime:"",
-                                invoice:"",
-
                             },
                         ],
                         
@@ -398,11 +396,33 @@
                                 name: "",
                                 phone:"",
                                 address:"",
+                                deliveryTime:"",
+                                invoice:"",
                             },
                         ],
 
                         //同意接受服務條款的v-if
                         agree:true,
+
+                        selectedOption:'',
+                        // input標籤 v-for渲染
+                        options : [
+                            { 
+                                value:'option1', 
+                                text:'不使用載具-索取紙本發票',
+                            },
+                            {
+                                value:'option2',
+                                text:'電子發票載具',
+                            },
+                            {
+                                value:'option3',
+                                text:'開立統一編號',
+                            },
+
+                        ],
+                   
+                       
                     }
                 },
 
@@ -534,15 +554,23 @@
 
                 //點擊收件人的[同訂購人資料]會將上方訂購人的資訊帶到下方的input裡
                 checkOrderValue(){
-                    // console.log(`ttt`);
-                    this.reviInfo.name = this.orderInfo.name;
-                    this.reviInfo.phone = this.orderInfo.phone;
-                    this.reviInfo.address = this.orderInfo.address;
+                    if(this.reviInfo.name && this.reviInfo.phone && this.reviInfo.address){
+                        this.reviInfo.name = "";
+                        this.reviInfo.phone="";
+                        this.reviInfo.address = "";
+                    }else{
+                        this.reviInfo.name = this.orderInfo.name;
+                        this.reviInfo.phone = this.orderInfo.phone;
+                        this.reviInfo.address =this.orderInfo.address;
+                    }
                 },
+                changeOption(){
+                    if(this.selectedOption === 'disabled'){
 
+                    }
 
                 },
-
+            },
                 
         });
 
