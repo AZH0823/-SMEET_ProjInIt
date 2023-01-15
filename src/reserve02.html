@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    @@include('layout/header_01.html')
+    <!-- @@include('layout/header_01.html') -->
     <!-- 流程控制說明 -->
     <!-- checked 控制上方工作流程到哪一個之項目 -->
     <!-- nowPage 控制一個流程細項目打開  -->
@@ -32,7 +32,8 @@
                         <!-- 結帳顯示專區  -->
                         <section class="oder_view" :class="{'d_none':workFlow.step === 3 ||workFlow.step === 5 }">
                             <ul class="checkout_contanier">
-                                <!-- 人員資訊 -->
+                                <!-- 人員資訊 --> 
+                                <!-- <p>{{memberID}}sssss</p>    -->
                                 <li id="order_Info" class="order_detailInfo">
                                     <h6 class="blockTitle detailInfo">餐點明細</h6>
                                     <div class="setName">
@@ -108,6 +109,7 @@
                             <!-- 結帳按鈕 -->
                             <button class="next_btn btn" @click="changeStep(1,$event)" ref="comfirm">下一步</button>
                             <button class="prev_btn btn" @click="changeStep(-1,$event)" v-if="this.workFlow.step !=1">返回上一步</button>
+                            <button @click="input">塞入自動測試訂單</button>
 
                         </section>
                         <!-- 選擇套餐 -->
@@ -350,7 +352,7 @@
                                 <div class="meal_container font16">
                                     <ul class="one_container">
                                         <template  v-for="(servie) in this.APIData_in.servies" :key="servie.id">
-                                            <li class="one_item">{{servie.title}}<div class="one_count">X {{inputData.peoCount}}</div></li>
+                                            <li class="one_item" v-if="servie.checked === true">{{servie.title}}<div class="one_count">X {{inputData.peoCount}}</div></li>
                                         </template>
                                     </ul>
                                 </div>
@@ -440,9 +442,7 @@
                                 <div class="card_code">
                                     <input type="text" placeholder="檢核碼"  class="card_checknum" maxlength="3"  v-model.number="this.inputData.cardCode">
                                     <span class="error_Msg" v-if="!checkCardCode">長度為三碼</span>   
-                                </div>
-
-
+                                </div>                            
                             </div>
 
                         </section>

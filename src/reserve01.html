@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    @@include('layout/header_01.html')
+    <!-- @@include('layout/header_01.html') -->
     <div class="reseve fulid_wrapper ">
         <div class="wrapper">
             <div class="reseve_list">
@@ -92,7 +92,7 @@
                             <img src="./img/reserve_img/reserve_icon05.svg" alt="">
                             <select  v-model="inputData.chefTeam" :disabled="dateClick">
                                 <option  value="" selected disabled>--廚師團隊--</option>
-                                <option v-for="leder in data.chefScheduled" :key="leder.id" :value="leder.team">{{leder.name}}</option>
+                                <option v-for="leder in data.chefScheduled" :key="leder.id" :value="leder.id">{{leder.name}}</option>
                             </select>
                             <span class="warning_title" v-if="vaildTeam">＊欄位尚未填寫</span>
                         </div>
