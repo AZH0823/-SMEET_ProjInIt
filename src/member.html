@@ -11,7 +11,6 @@
   </head>
   <body>
     @@include('layout/header_01.html')
-    @@include('layout/login.html')
     <div class="fulid_wrapper member" id="member">
       <main>
         
@@ -40,7 +39,7 @@
           </ul>
         </nav>
         <!-- 登出測試 -->
-        <button type="button" onclick="logout_test()">登出</button>
+        <!-- <button type="button" onclick="logout_test()">登出</button> -->
         <!-- ======會員中心內容===== -->
         <section class="member_section" v-show="current_tab == 'tab1' ">
           <div class="member_info">
@@ -60,7 +59,7 @@
               <input
                 type="text"
                 id="member_phone"
-                placeholder="請輸入手機號碼"  v-model.trim="member_info.phone"
+                placeholder="請輸入手機號碼" maxlength="10" v-model.trim="member_info.phone"
               />
               <!-- <div class="city_area">
                 <select name="member_city" id="member_city">
@@ -137,16 +136,53 @@
         </section>
         <!-- ======會員中心內容END===== -->
         <!-- ======訂單查詢===== -->
+        <!-- 預約訂單 -->
+        <div class="list_cat green-1">私廚預約訂單</div>
         <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
           <div class="order_list_title font14 gray">
-            <p class="list1">類別</p>
+            <!-- <p class="list1">類別</p> -->
             <p class="list2">訂單日期</p>
             <p class="list3">訂單編號</p>
             <p class="list4">訂單金額</p>
             <p class="list5">訂單狀態</p>
             <div class="list6"></div>
           </div>
-          <div class="order_list_content font16">
+          <template v-for="(item, key) in orderlist">
+            <div class="order_list_content font16">
+              <!-- <p class="list1">{{item.cat}}</p> -->
+              <p class="list2">{{item.date}}</p>
+              <p class="list3">{{item.num}}</p>
+              <p class="list4">NT$<span class="list4_money">{{item.price}}</span></p>
+              <p class="list5">{{item.statue}}</p>
+              <div class="list6">
+                <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
+              </div>
+            </div>
+          </template>
+          <!-- 商城訂單 -->
+          <div class="list_cat2  green-1">商城訂單</div>
+        <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
+          <div class="order_list_title font14 gray">
+            <!-- <p class="list1">類別</p> -->
+            <p class="list2">訂單日期</p>
+            <p class="list3">訂單編號</p>
+            <p class="list4">訂單金額</p>
+            <p class="list5">訂單狀態</p>
+            <div class="list6"></div>
+          </div>
+          <template v-for="(item, key) in orderlist">
+            <div class="order_list_content font16">
+              <!-- <p class="list1">{{item.cat}}</p> -->
+              <p class="list2">{{item.date}}</p>
+              <p class="list3">{{item.num}}</p>
+              <p class="list4">NT$<span class="list4_money">{{item.price}}</span></p>
+              <p class="list5">{{item.statue}}</p>
+              <div class="list6">
+                <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
+              </div>
+            </div>
+          </template>
+          <!-- <div class="order_list_content font16">
             <p class="list1">商城</p>
             <p class="list2">2022/08/31</p>
             <p class="list3">2022123456789</p>
@@ -155,27 +191,7 @@
             <div class="list6">
               <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
             </div>
-          </div>
-          <div class="order_list_content font16">
-            <p class="list1">商城</p>
-            <p class="list2">2022/08/31</p>
-            <p class="list3">2022123456789</p>
-            <p class="list4">NT$<span class="list4_money">5,000</span></p>
-            <p class="list5">訂單成立已付款</p>
-            <div class="list6">
-              <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
-            </div>
-          </div>
-          <div class="order_list_content font16">
-            <p class="list1">商城</p>
-            <p class="list2">2022/08/31</p>
-            <p class="list3">2022123456789</p>
-            <p class="list4">NT$<span class="list4_money">5,000</span></p>
-            <p class="list5">訂單成立已付款</p>
-            <div class="list6">
-              <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
-            </div>
-          </div>
+          </div> -->
         </section>
         <!-- ======訂單查詢結束===== -->
         <!-- ======收藏菜品====== -->
@@ -563,29 +579,13 @@
       //取得會員id
       let member_ID = localStorage.getItem("member_ID");
       //header 會員登入測試
-      let user_icon = document.querySelector('.slide_user');
-      user_icon.addEventListener('click',function(e){
-        // console.log('qqq')
-        e.preventDefault();
-        login_check();
-      })
-      //登出測試
-      function logout_test(){
-        $.ajax({            
-          method: "POST",
-          url: "php/frontpage/logout.php",
-          data:{},            
-          dataType: "text",
-          success: function (response) {
-              alert("登出成功");
-              localStorage.removeItem('member_ID');
-              history.go(0);
-          },
-          error: function(exception) {
-              alert("數據載入失敗: " + exception.status);
-          }
-        });
-      };
+      // let user_icon = document.querySelector('.slide_user');
+      // user_icon.addEventListener('click',function(e){
+      //   // console.log('qqq')
+      //   e.preventDefault();
+      //   login_check();
+      // })
+      
       
 
       //收藏清單
@@ -669,6 +669,37 @@
               pwd_old:"",
               pwd_new:""
             },
+            //訂單
+            orderlist:[
+              {
+                cat:"商城",
+                date:"2022/08/21",
+                num:"1",
+                price:"5,000",
+                statue:"訂單成立已付款"
+              },
+              {
+                cat:"商城",
+                date:"2022/08/31",
+                num:"2",
+                price:"5,000",
+                statue:"訂單成立已付款"
+              },
+              {
+                cat:"商城",
+                date:"2022/08/31",
+                num:"3",
+                price:"5,000",
+                statue:"訂單成立已付款"
+              },
+              {
+                cat:"商城",
+                date:"2022/08/31",
+                num:"4",
+                price:"5,000",
+                statue:"訂單成立已付款"
+              }
+            ],
             // 收藏
             collection:[
               
@@ -677,9 +708,11 @@
         },
         mounted(){
           this.info_show();
+          this.get_order_list();
         },
         computed: {},
         methods:{
+          // ==========================會員中心===========================
           //顯示會員資訊
           info_show(){
             let that = this ;
@@ -830,18 +863,6 @@
 
 
           },
-          //tab
-
-          //愛心點擊後取消收藏(移除陣列資訊)
-          cancel_collect(i){
-            let r = confirm('確定取消收藏');
-            if(r){
-              setTimeout(()=>{
-                this.collection.splice(i,1);
-              },500);
-              console.log(collection_lo);
-            }
-          },
           //眼睛icon
           eye_icon(e){
                     let pwd_type = e.target.previousSibling;
@@ -855,11 +876,49 @@
                         e.target.classList.add('fa-eye-slash');
                         e.target.classList.remove('fa-eye');
                     }
-                },
+          },
+          // ==========================會員中心結束===========================
+          // ==========================訂單===========================
+          //拿到預約訂單資訊
+          get_order_list(){
+            if( member_ID > 0 ){
+            $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_list_order.php",
+                    data: {
+                      member_ID:member_ID,
+                    },
+                    dataType: "json",
+                    success: (response) => {
+                      this.orderlist = response;
+                      
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+              }
+          },
+
+
+          // ==========================訂單結束===========================
+          
+          // ==========================收藏===========================
+          //愛心點擊後取消收藏(移除陣列資訊)
+          cancel_collect(i){
+            let r = confirm('確定取消收藏');
+            if(r){
+              setTimeout(()=>{
+                this.collection.splice(i,1);
+              },500);
+              console.log(collection_lo);
+            }
+          },
+          // ==========================收藏結束===========================
+          
         }
       }).mount('#member');
-
-      //常見問題
+      // ==========================常見問題===========================
       $(function () {
           $(this).siblings().toggleClass("active");
 
@@ -881,7 +940,7 @@
             $(this).children("i:nth-child(3)").addClass("fa-plus")
             }
           });
-
+      // ==========================常見問題結束===========================
     </script>
   </body>
 </html>

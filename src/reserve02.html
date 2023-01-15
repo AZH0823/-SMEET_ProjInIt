@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    @@include('layout/header_01.html')
+    <!-- @@include('layout/header_01.html') -->
     <!-- 流程控制說明 -->
     <!-- checked 控制上方工作流程到哪一個之項目 -->
     <!-- nowPage 控制一個流程細項目打開  -->
@@ -32,7 +32,8 @@
                         <!-- 結帳顯示專區  -->
                         <section class="oder_view" :class="{'d_none':workFlow.step === 3 ||workFlow.step === 5 }">
                             <ul class="checkout_contanier">
-                                <!-- 人員資訊 -->
+                                <!-- 人員資訊 --> 
+                                <!-- <p>{{memberID}}sssss</p>    -->
                                 <li id="order_Info" class="order_detailInfo">
                                     <h6 class="blockTitle detailInfo">餐點明細</h6>
                                     <div class="setName">
@@ -72,7 +73,7 @@
                             <ul class="addorderlist" v-if="workFlow.step >= 2">
                                 <!-- 單點菜品 -->
                                 <div class="addorderlist_title">加購</div>
-                                <template  v-for="(item) in this.APIData.otherDish" :key="item.id">
+                                <template  v-for="(item) in this.APIData_in.otherDish" :key="item.id">
                                     <li class="dish_title" v-if="item.qty > 0"> 
                                         <span>{{item.dishName}}</span><span>X{{item.qty}}</span><span>${{(item.qty*item.price).toLocaleString()}}</span>
                                     </li>
@@ -82,7 +83,7 @@
                                 <!-- 服務 -->
                                 <!--   {id:1,title:'廚具',desc:'盤子、餐具、餐巾(必選)',checked:true,price:300}, -->
                                 <div class="servieslist_title">租借及服務</div>
-                                <template  v-for="(servie) in this.APIData.servies" :key="servie.id">
+                                <template  v-for="(servie) in this.APIData_in.servies" :key="servie.id">
                                     <li class="servies_title" v-if="servie.checked"> 
                                         <span>{{servie.title}}</span><span>X{{this.inputData.peoCount}}</span><span>${{(servie.price*this.inputData.peoCount).toLocaleString()}}</span>
                                     </li>
@@ -108,32 +109,28 @@
                             <!-- 結帳按鈕 -->
                             <button class="next_btn btn" @click="changeStep(1,$event)" ref="comfirm">下一步</button>
                             <button class="prev_btn btn" @click="changeStep(-1,$event)" v-if="this.workFlow.step !=1">返回上一步</button>
+                            <button @click="input">塞入自動測試訂單</button>
 
                         </section>
                         <!-- 選擇套餐 -->
                         <section class="step_flow step1" :class="{'nowpage': workFlow.step === 1}" id="set">
                             <h6 class="blockTitle">1.選擇套餐</h6>
                             <ul class="sets">
-                                <li v-for="set in APIData.sets" :key="set.id" class="setCard" :class="{checked:this.inputData.sets === set.id}">
+                                <li v-for="set in APIData_in.sets" :key="set.id" class="setCard" :class="{checked:this.inputData.sets == set.id}" @click="changeOrederViewImg(set)">
                                     <!-- checked 未新增 -->
-                                    <img :src="set.imgUrl" :alt="set.setName" :title="set.setName" @click="changeOrederViewImg(set)">
+                                    <img :src="set.IMG" :alt="set.setName" :title="set.setName" >
                                     <div class="setName">{{set.setName}}</div>
                                 </li>
                             </ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                             <h6 class="blockTitle">2.選擇套餐內容</h6>
                             <ul class="setdetail">
                                 <!-- v-if="this.inputData.sets === 1 -->
-                                <!-- setsDetail:{
-                                    setA:{
-                                        dish:[ -->
-
                                     <!-- APIData>>sets[0]>>dish>>湯物 -->
-                                    <template v-for="(value,key,idx) in APIData.sets[this.inputData.sets - 1].dish" :key="idx" >
-                                        <!-- {{value}}
-                                        {{index}} -->
+                                    <template v-for="(value,key,idx) in APIData_in.sets[this.inputData.sets - 1].dish" :key="idx" >
+                                        <!-- {{value}} -->
                                         <p class="setkind">{{key}}<span class="error_Msg" v-if="setKind(this.inputData.sets - 1,key)"> ＊尚未正確合乎人數</span></p> 
                                         <template v-for="(itemdetail ,sub_key) in value"  :key="sub_key">
-                                            <li class="stepper_input" :data-set="itemdetail.id" :set-id="idx">
+                                            <li class="stepper_input" :data-set="itemdetail.id" :set-id="itemdetail.id">
                                                 <div class=dish-title>{{itemdetail.dishName}}</div>
                                                 <div class="amoumt" :data-id="itemdetail.id">
                                                     <button class="button sub" @click="setclickCount(itemdetail,'minus',this.inputData.sets - 1)">-</button>
@@ -142,6 +139,7 @@
                                                 </div>
                                             </li> 
                                         </template>
+                                    </template>
 
                                         <!-- <p>{{itemdetail}}</p> -->
                                             <!-- <p class="setkind">{{item.dishType}}{{}}</p>
@@ -154,7 +152,6 @@
                                                 <button class="button add">+</button>
                                             </div>
                                         </li> -->
-                                    </template>
                                 <!-- <p class="setkind">湯物</p>
 
                                 <li class="stepper_input">
@@ -226,13 +223,13 @@
                             <ul class="addOther_detail">
                                 <!-- // 單點菜品 -->
                                 <!-- otherDish:[ -->
-                                <template v-for="(item) in this.APIData.otherDish" :key="item.id">
+                                <template v-for="(item) in this.APIData_in.otherDish" :key="item.id">
                                     <!-- <p>{{item}}</p> -->
                                     <li class="stepper_input">
                                         <div class=dish-title>{{item.dishName}}</div>
                                         <div class="amoumt">
                                             <button class="button sub" @click="otherItemCount(item,'minus')">-</button>
-                                            <input  class="input stepper_valueInput" :v-model="item.qty" :value="item.qty" disabled/>
+                                            <input  class="input stepper_valueInput" :v-model="item.qty" :value="item.qty"/>
                                             <button class="button add" @click="otherItemCount(item,'add')">+</button>
                                         </div>
                                         <div class="price">
@@ -244,81 +241,24 @@
                                   <!-- APIData >> servies -->
                             <h6 class="blockTitle ">4.選擇租借服務</h6>
                             <ul class="addOther_rent">
-                                <li class="rent_service">
-                                    <div class="tableware">
-                                        <p class="serive-title">{{this.APIData.servies[0].title}}</p>
-                                        <span class="aux-title">{{this.APIData.servies[0].desc}}</span>
-                                    </div>
-                                    <div class="checkboxInner">
-
-                                        <input type="checkbox" name="cb" id="table_cb" :checked="this.APIData.servies[0].checked" disabled>
-                                        <label for="table_cb" id="cb_table">
-                                            <svg viewBox="0 0 100 100">
-                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
-                                            </svg>
-                                            <span class="info">每人 {{this.APIData.servies[0].price}}元</span>
-                                        </label>
-                                    </div>
-
-
-                                </li>
-                                <li class="rent_service">
-                                    <div class="utensils">
-                                        <p class="serive-title">{{this.APIData.servies[1].title}}</p>
-                                        <span class="aux-title">{{this.APIData.servies[1].desc}}</span>
-                                    </div>
-                                    <div class="checkboxInner">
-
-                                        <input type="checkbox" name="cb" id="utensils_cb" :checked="this.APIData.servies[1].checked" disabled>
-                                        <label for="utensils_cb" id="utensils_cb">
-                                            <svg viewBox="0 0 100 100">
-                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
-                                            </svg>
-                                            <span class="info">每人 {{this.APIData.servies[1].price}}元</span>
-                                        </label>
-                                    </div>
-
-
-
-                                </li>
-                                <li class="rent_service">
-
-                                    <div class="plate">
-                                        <p class="serive-title">{{this.APIData.servies[2].title}}</p>
-                                        <span class="aux-title">{{this.APIData.servies[2].desc}}</span>
-                                    </div>
-                                    <div class="checkboxInner">
-
-                                        <input type="checkbox" name="cb" id="plate_cb" v-model="this.APIData.servies[2].checked">
-                                        <label for="plate_cb" id="plate_cb">
-                                            <svg viewBox="0 0 100 100">
-                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
-                                            </svg>
-                                            <span class="info">每人 {{this.APIData.servies[2].price}}元</span>
-                                        </label>
-                                    </div>
-
-
-
-                                </li>
-                                <li class="rent_service">
-                                    <div class="waiter">
-                                        <p class="serive-title">{{this.APIData.servies[3].title}}</p>
-                                        <span class="aux-title">{{this.APIData.servies[3].desc}}</span>
-                                    </div>
-                                    <div class="checkboxInner">
-
-                                        <input type="checkbox" name="cb" id="waiter_cb"  v-model="this.APIData.servies[3].checked">
-                                        <label for="waiter_cb" id="waiter_cb">
-                                            <svg viewBox="0 0 100 100">
-                                                <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
-                                            </svg>
-                                            <span class="info">每人 {{this.APIData.servies[3].price}}元</span>
-                                        </label>
-                                    </div>
-
-
-                                </li>
+                                <template v-for="(item) in this.APIData_in.servies" :key="item.id">
+                                     <!-- <p>{{item}}</p> -->
+                                    <li class="rent_service">
+                                        <div class="service_Article">
+                                            <p class="serive_title">{{item.title}}</p>
+                                            <span class="aux_title">{{item.desc}}</span>
+                                        </div>
+                                        <div class="checkboxInner">
+                                            <input type="checkbox" name="cb" :id="item.id" :checked="item.checked" v-model="item.checked"  :disabled="item.title == '廚具' || item.title == '炊具'">
+                                            <label :for="item.id" id="cb_table">
+                                                <svg viewBox="0 0 100 100">
+                                                    <polyline class="check" points="25.5,53.5 39.5,67.5 72.5,34.5 " />
+                                                </svg>
+                                                <span class="info">每人 {{item.price}}元</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </template>
                             </ul>
                         </section>
                         <!-- 確認訂單 -->
@@ -351,12 +291,7 @@
                                     <h6 class="meal_title">名物 私套餐</h6>
                                     
                                     <div class="meal_content font16">
-
-                                        <!-- <template v-for="(value,key,idx) in APIData.sets[this.inputData.sets - 1].dish" :key="idx" >
-                                           
-                                            <p class="setkind">{{key}}<span style="color:red" v-if="setKind(this.inputData.sets - 1,key)"> ＊尚未正確合乎人數</span></p> 
-                                            <template v-for="(itemdetail ,sub_key) in value"  :key="sub_key"> -->
-                                        <template v-for="(value,key,idx) in APIData.sets[this.inputData.sets - 1].dish" :key="idx">
+                                        <template v-for="(value,key,idx) in APIData_in.sets[this.inputData.sets - 1].dish" :key="idx">
                                             <h6 class="dishType meal_cate font16 gray">{{key}}</h6>
                                             <template v-for="(itemDetail) in value" :key="itemDetail.id">
                                                 <!-- {{itemDetail}} -->
@@ -400,7 +335,7 @@
                                 <h4 class="detail_title green-1">單點加購</h4>
                                 <div class="meal_container font16">
                                     <ul class="one_container">
-                                        <template v-for=" item in APIData.otherDish" :key="item.id">
+                                        <template v-for=" item in APIData_in.otherDish" :key="item.id">
                                             <li class="one_item" v-if="item.qty > 0">{{item.dishName}}<div class="one_count">X {{item.qty}}</div>
                                             </li>    
                                         </template>
@@ -416,8 +351,8 @@
                                 <h4 class="detail_title green-1">租借服務</h4>
                                 <div class="meal_container font16">
                                     <ul class="one_container">
-                                        <template  v-for="(servie) in this.APIData.servies" :key="servie.id">
-                                            <li class="one_item">{{servie.title}}<div class="one_count">X {{inputData.peoCount}}</div></li>
+                                        <template  v-for="(servie) in this.APIData_in.servies" :key="servie.id">
+                                            <li class="one_item" v-if="servie.checked === true">{{servie.title}}<div class="one_count">X {{inputData.peoCount}}</div></li>
                                         </template>
                                     </ul>
                                 </div>
@@ -448,8 +383,8 @@
                                 <label for="name">
                                     <h6>姓名</h6>
                                 </label>
-                                <input type="text" id="name" placeholder="請輸入姓名" v-model.trim="this.inputData.name">
-                                <span class="error_Msg">格式錯誤</span>
+                                <input type="text" id="name" placeholder="請輸入姓名" v-model="this.inputData.name">
+                                <span class="error_Msg" v-if="!checkName">請輸入英文或中文名</span>
                             </div>
                             <div class="user_phone grid_confirm">
                                 <label for="phone">
@@ -470,41 +405,44 @@
                                     <h6>地址</h6>
                                 </label>
                             </select class="addr-select">
-                            <input type="text" placeholder="請輸入地址" id="addr" v-model="this.inputData.addr" maxlength="80">
-                            <span v-if="!checkEmail" class="error_Msg">格式錯誤</span>
-                            <!-- <select class="addr">
-                                <option value="" selected disabled>請選擇縣市</option>
-                            </select>
-                            <select class="addr-select">
-                                <option value="" selected disabled>請選擇區域</option> -->
+                            <input type="text" placeholder="請輸入地址" id="addr" v-model="this.inputData.addr" maxlength="120">
+                            <span v-if="!this.inputData.addr" class="error_Msg">格式錯誤</span>
                             </div>
                             <div class="user_othertxt grid_confirm">
                                 <label for="othertxt">
                                     <h6>備註</h6>
                                 </label>
-                                <textarea name="othertxt" id="othertxt" placeholder="其他需求" v-model="this.inputData.note" maxlength="500"></textarea>
+                                <textarea name="othertxt" id="othertxt" placeholder="其他需求" v-model.trim="this.inputData.note" maxlength="500"></textarea>
                             </div>
                             <div class="user_bonus grid_confirm">
                                 <label for="bonus" class="user_bonus">
                                     <h6>使用會員紅利點數折抵訂單金額</h6>
-                                    <div class="bonus_input"><input type="text" id="bonus" v-model.number="this.inputData.point">元</div>
+                                    <div class="bonus_input"><input type="text" id="bonus" v-model.number="this.inputData.point" @blur="checkMemberPoint">元</div>
                                 </label>
                             </div>
                             <h6 class="blockTitle">6.付款資訊<span>已選擇支付方式(VISA、Master、JCB)</span></h6>
                             <div class="user_pay">
-                                <div>
-                                    <input type="number" placeholder="卡號" required class="card_num">
-                                    <input type="number" placeholder="卡號" required class="card_num">
-                                    <input type="number" placeholder="卡號" required class="card_num">
-                                    <input type="number" placeholder="卡號" required class="card_num">
+                                <div class="card_num">
+                                     <template v-for="(item,idx) in cards">
+                                        <!-- <input type="text" :placeholder="'卡號'+(idx+1)" required class="card_num" minlength="1" maxlength="4" @keydown="cardKDCheck($event,idx)" @keyup="cardKUPheck($event,idx)" v-model="item.str" @blur="vaildCard(idx)">     -->
+                                        <input type="text" :placeholder="'卡號'+(idx+1)" required class="card_num" minlength="1" maxlength="4" @keydown="cardKDCheck($event,idx)" @keyup="cardKUPheck($event,idx)" v-model="item.str">  
+                                        <span class="split" v-if="idx !== cards.length - 1">-</span>
+                                     </template>
+                                     <span class="error_Msg" v-if="!checkCard">信用卡格式錯誤</span>        
                                 </div> 
-
-                                <input type="text" placeholder="持卡人姓名" required class="card_name">
-
-                                <input type="number" placeholder="有效日期" required class="card-date">
-
-                                <input type="number" placeholder="檢核碼" required class="card_checknum" min="0" max="999">
-
+                                <div class="card_name">
+                                    <input type="text" placeholder="持卡人姓名" required class="card_name" v-model="inputData.cardName">
+                                    <span class="error_Msg" v-if="!checkCardName">請輸入英文或中文名</span>
+                                    <!-- <p>{{checkName}}</p> -->
+                                </div>
+                                <div class="card_data">
+                                    <input type="text" placeholder="有效日期"  class="card-date" maxlength="4"  v-model.number="this.inputData.cardDate">
+                                    <span class="error_Msg" v-if="!checkCardDate">長度為四碼</span> 
+                                </div>
+                                <div class="card_code">
+                                    <input type="text" placeholder="檢核碼"  class="card_checknum" maxlength="3"  v-model.number="this.inputData.cardCode">
+                                    <span class="error_Msg" v-if="!checkCardCode">長度為三碼</span>   
+                                </div>                            
                             </div>
 
                         </section>
@@ -520,34 +458,12 @@
                 </div>
             </main>
         </div>
-        <button id="getData">拿到資料</button>
     </div>
     @@include('layout/footer.html')
     <script src="./js/vender/Vue/vue.global.js"></script>
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
     <script src="./js/vender/isJS/is.min.js"></script>
     <script src="./js/frontpage/reserveWorkFlow.js" type="module"></script>
-    <script>
-        const getdata =  document.querySelector('#getData');
-        getdata.addEventListener('click',select) 
-        function select(){    
-        $.ajax({            
-            method: "GET",
-            url: "php/frontpage/reserveAPI.php",
-            data:{
-                // id:16,
-            },            
-            dataType: "json",
-            success: function (response) {                
-                // showCate(response);                                
-                console.log(response)
-            },
-            error: function(exception) {
-                alert("數據載入失敗: " + exception.status);
-            }
-        });
-    }
-    </script>
 </body>
 
 </html>

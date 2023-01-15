@@ -88,7 +88,7 @@ let login_app = Vue.createApp({
         eye_icon(e) {
             let pwd_type = e.target.previousSibling;
             // console.log(pwd_type.type);
-            e.stoppropagation;
+            e.stopPropagation();
             if (pwd_type.type == "password") {
                 pwd_type.type = "text";
                 e.target.classList.remove('fa-eye-slash');
@@ -244,3 +244,69 @@ let login_app = Vue.createApp({
     }
 });
 login_app.mount("#login");
+
+// ======會員icon 登入
+// 點擊
+let user_pop = document.querySelector('.user_pop');
+let user_icon = document.querySelector('.slide_user');
+let userpop_log = document.querySelector('.userpop_log');
+user_icon.addEventListener('click',function(e){
+    // console.log('qqq')
+    e.preventDefault();
+    login_check();
+})
+
+// hover
+user_icon.addEventListener('mouseover',function(){
+    //hover 不跳彈窗
+    $.ajax({            
+        method: "POST",
+        url: "php/frontpage/login_check.php",
+        data:{},            
+        dataType: "text",
+        success: function (response) {
+            if(response == ""){
+                //尚未登入->跳出會員登入畫面
+                // login_pop();
+            }else{
+                //已有登入的話 執行.....
+                // 會員icon顯示
+                let user_pop = document.querySelector('.user_pop');
+                user_pop.classList.remove('none');
+            }              
+        },
+        error: function(exception) {
+            alert("數據載入失敗: " + exception.status);
+        }
+    });
+})
+
+user_icon.addEventListener('mouseleave',function(){
+    user_pop.classList.add('none');
+})
+
+
+//登出
+userpop_log.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    $.ajax({            
+        method: "POST",
+        url: "php/frontpage/logout.php",
+        data:{},            
+        dataType: "text",
+        success: function (response) {
+            // alert("登出成功"); 
+            document.querySelector('.logout_pop').classList.remove('none');
+            setTimeout(function(){
+                document.querySelector('.logout_pop').classList.add('none');
+            },2000);
+            localStorage.removeItem('member_ID');
+            // history.go(0); 
+        },
+        error: function(exception) {
+            alert("數據載入失敗: " + exception.status);
+        }
+      });
+    });
+    

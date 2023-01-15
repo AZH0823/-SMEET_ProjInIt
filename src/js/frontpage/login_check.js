@@ -11,7 +11,9 @@ function login_check(){
                 login_pop();
             }else{
                 //已有登入的話 執行.....
-                // history.go(0);
+                // 會員icon顯示
+                let user_pop = document.querySelector('.user_pop');
+                user_pop.classList.remove('none');
             }              
         },
         error: function(exception) {

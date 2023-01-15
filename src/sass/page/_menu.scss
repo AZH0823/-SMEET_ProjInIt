@@ -337,16 +337,8 @@
             
     }
     .owl-carousel{
-        position:relative;
-        .item{
-            width: 277px;
-            height: 376px;
-            
-            img{
-                object-fit: cover;
-            }
-            
-        }
+        
+        
         .owl-dots{
             display: none;
         }
@@ -357,18 +349,14 @@
                 height: 50px;
                 border-radius: 50%;
                 background-color: #fff;
-                position:absolute;
-                top: 175px;
-                left: 0;
+                
             }
             .owl-next{
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
                 background-color: #fff;
-                position:absolute;
-                top: 175px;
-                right: 0;
+                
             }  
         }
     }

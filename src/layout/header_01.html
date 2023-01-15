@@ -8,21 +8,21 @@
             </div>
             <div class="ham_div">
                 <ul class="header_bar">
-                    <li><a href="aboutUs.html" class="black">關於我們</a></li>
-                    <li><a href="chefTeam.html" class="black">私廚陣容</a></li>
-                    <li><a href="news.html" class="black">最新動態</a></li>
-                    <li><a href="menu.html" class="black">到府私廚</a></li>
-                    <li><a href="shopMall.html" class="black">線上商城</a></li>
+                    <li><a href="aboutUs.html" class="black abouttab">關於我們</a></li>
+                    <li><a href="chefTeam.html" class="black cheftab">私廚陣容</a></li>
+                    <li><a href="news.html" class="black newstab">最新動態</a></li>
+                    <li><a href="menu.html" class="black menutab">到府私廚</a></li>
+                    <li><a href="shopMall.html" class="black shoptab">線上商城</a></li>
                 </ul>
                 <!-- <div class="ham_user"> -->
                 <ul class="user_ham">
                     <div class="border_ham">
                         <li class="member_li"><a href="member.html" class="Camel-3 member_open">會員中心</a></li>
                         <li class="member_li"><a href="orderList.html" class="Camel-3 member_open">訂單查詢</a></li>
-                        <li class="member_li"><a href="member.html" class="Camel-3 member_open">收藏菜品</a></li>
-                        <li class="member_li"><a href="member.html" class="Camel-3 member_open">訊息中心<span
-                                    class="msg_signal">3</span></a>
-                        </li>
+                        <li class="member_li"><a href="member.html" class="Camel-3 member_open">收藏菜品<span
+                                    class="msg_signal">3</span></a></li>
+                        <!-- <li class="member_li"><a href="member.html" class="Camel-3 member_open">訊息中心</a>
+                        </li> -->
                         <li class="member_li"><a href="member.html" class="Camel-3 member_open">常見問題</a></li>
                     </div>
                     <li><a href="member.html" class="log_ham green-1">登入</a></li>
@@ -31,13 +31,35 @@
             </div>
             <nav>
                 <ul class="header_user">
-                    <a href="member.html" class="black slide_user"><i class="fa-solid fa-user"></i></a>
+                    <li class="black slide_user user_click"><i class="fa-solid fa-user"></i>
+                        <!-- 會員中心的popup -->
+                        <ul class="user_pop none">
+                            <li class="userpop_li"><a href="member.html" class="black userpop_open">會員中心</a></li>
+                            <li class="userpop_li"><a href="member.html" class="black userpop_open">訂單查詢</a></li>
+                            <li class="userpop_li"><a href="member.html" class="black userpop_open">收藏菜品<span
+                                        class="userpopmsg_signal">3</span></a></li>
+                            <!-- <li class="userpop_li"><a href="member.html" class="black userpop_open">訊息中心</a>
+                            </li> -->
+                            <li class="userpop_li"><a href="member.html" class="black userpop_open">常見問題</a></li>
+                            <li class="userpop_log"><a href="member.html" class="gray userpop_a">登出</a></li>
+                        </ul>
+                    </li>
                     <li class="black slide_cart"><i class="fa-solid fa-cart-shopping"></i></li>
                     <li class="black slide_ham"><i class="fa-solid fa-bars"></i></li>
                     <a href="reserve01.html" class="black reserve_btn">
                         <img src="./img/btn_reserve_img/btn_reserve_c_img.png" alt="">
                     </a>
                 </ul>
+                <!-- 登出成功popup -->
+                <div class="wrapper logout_pop none">
+
+                    <article>
+                        <div class="check_text">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <h6>登出成功</h6>
+                        </div>
+                    </article>
+                </div>
                 <!-- <a href="reseve.html" class="black reserve_pad">
                     <img src="../img/btn_reserve_img/btn_reserve_c_img.png" alt="">
                 </a> -->
@@ -48,6 +70,7 @@
 </div>
 <div class="header_bg fulid_wrapper"></div>
 <div class="header_mg fulid_wrapper"></div>
+@@include('login.html')
 @@include("../cart_pop.html")
 
 <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
