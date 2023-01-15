@@ -126,18 +126,15 @@
     }
 
     //-----------------------------------------線上商城-----------------------------------------//
+
     .index_shop{
         width: 100%;
-        padding: 80px 0 100px;
+        padding: 80px 0 60px;
         background-image: url("../img/index_img/index_hotmenu_bg.jpg");
         position: relative;
         height: 100%;
-        @include pad() {
-            
-        }
         @include mobile() {
             padding: 20px 0 50px;
-
         }
         .swiper-pagination-bullet-active{
             background-color: #898989;
@@ -185,9 +182,8 @@
                 @include mobile() {
                     margin: 0.3%  3%!important;
                 }
-
-
             }
+
             i.fa-chevron-left,i.fa-chevron-right{
                 font-size: 30px;
                 color: #898989;
@@ -425,7 +421,7 @@
             display: flex;
             flex-direction: column;
             @include pad() {
-                width: 78%;
+                width: 100%;
                 padding-left: 0;
                 margin-top: 5px;
             }
@@ -442,16 +438,14 @@
                     text-decoration: none;
                     color: #1d0101;
                     @include pad() {
-                        margin: 0 10%;
+                        padding-left: 5%;
                     }
-                    p{
-                        line-height: 30px;
-                        padding: 15px 0;
-                    }
-                    .news_date{
-                        margin-right: 5%;
-                        margin-left: 5%;
-                        
+                        p{
+                            line-height: 30px;
+                            padding: 15px 0;
+                            @include pad() {
+                                margin: 0 auto;
+                            }
                         }
                     }
 
@@ -480,12 +474,12 @@
                 padding: 0.3px 0;
                 background-color: #1d0101;
                 @include pad() {
-                    margin-left: 15px;
-                    width: 120%;
+                    // margin-left: 15px;
+                    // width: 120%;
                 }
                 @include mobile() {
-                    margin-left: 15px;
-                    width: 120%;
+                    // margin-left: 15px;
+                    // width: 120%;
                 }
             }
             li:hover {
@@ -503,23 +497,38 @@
                 align-self: flex-end;
                 margin-top: 30px;
                 @include pad() {
-                    margin: 5% 25%;
+                    margin: 5% auto;
                 }
                 @include mobile() {
                     margin: 5% 20%;
                 }
             }
             .font18{
-                width: 400px;
+                width: 100%;
                 white-space: nowrap; 
                 overflow: hidden;
                 text-overflow: ellipsis;
+                @include pad() {
+                    width: 90%;
+                }
                 
+                @include mobile() {
+                    width: 70%;
+                }
+            }
+            .font16{
+                width: 25%;
+                @include pad() {
+                    width: 25%;
+                }
+                @include mobile() {
+                }
             }
         }
     }
 
     //-----------------------------------------顧客評價-----------------------------------------//
+
     ._index_evaluation {
         display: flex;
         flex-direction: column;
@@ -551,31 +560,37 @@
         ._index_feeback {
             display: flex;
             justify-content: space-between;
-            margin: 50px 0;
+            // margin: 50px 0;
+            width: 100%;
 
             ._if1,
             ._if2,
             ._if3 {
-                width: 19.96% !important;
-                height: 325.9px;
-                margin-left: 34px;
-                margin-right: 35px !important;
+                width: 22% !important;
+                min-height: 284px;
+                margin: 0 auto;
                 background-image: url("../img/index_img/index_evaluation.png");
                 background-size: cover;
-
-                img {
-                    width: 231px;
+                .if_img{
+                    max-width: 245px;
+                    height: 173px;
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                    }
                 }
+                
 
                 ._if_body {
                     padding-left: 20px;
                     padding-right: 20px;
+                    padding-bottom: 23%;
 
                     ._p16 {
                         font-size: 16px;
                     }
                     ._p14 {
-                        margin-top: 5px;
+                        // margin-top: 5px;
                         font-size: 14px;
                     }
                     ._p12 {
@@ -591,7 +606,7 @@
                             display: inline-block;
                             color: #ddd;
                             overflow: hidden;
-                            font-size: 15px;
+                            font-size: 12px;
 
                             ._full_star,
                             ._full_star2 {
@@ -613,7 +628,7 @@
                             width: 15px;
                             height: 1px;
                             background-color: #E2DCC8;
-                            margin: auto 5px auto 50px;
+                            margin: auto 5px auto 30px;
                         }
                         ._p12 {
                             color: #E2DCC8;
