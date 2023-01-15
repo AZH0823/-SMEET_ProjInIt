@@ -60,14 +60,13 @@ initial-scale=1.0">
                     v-for="(item, i) in filtered_list" 
                     :key="item.Name">
                 
-                        <li class="collect_list">
+                        <a class="collect_list" :href="'./shopMallDetail.html?ID='+ item.ID">
                             <div>
                                 
                                 <div class="product_img">
-                                    <a :href="'./shopMallDetail.html?ID='+ item.ID">
-                                        <img :src="item.IMG[0]" alt="">
-                                    </a>
+                                    <img :src="item.IMG[0]" alt="">
                                     <i class="fa-solid fa-heart"
+                                    @click.prevent
                                     :class="{shopMall_checkHeart: item.heart}" 
                                     @click="collect_heart(item)"
                                     @click="addCollectList(item)"
@@ -80,17 +79,29 @@ initial-scale=1.0">
                                     <button type="button" class="cart_link" href="">
                                         <i class="fa-solid fa-cart-shopping" 
                                         @click="shopCar(item.ID, item.Name, item.Price, item.IMG[0], item.heart, item.qty)"
+                                        @click.prevent
                                         ></i>
                                     </button>
                                 </div>
                             </div>
-                        </li>
+                        </a>
                     </template>
-                    
+                </ul>
             </section>
 
+            <!-- ========== 購物車 加入成功 & 移除成功 燈箱 ========== -->
+            <div class="wrapper overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="shopCartsuccess_popup !== '' ">
+                
+                <article>
+                    <div class="check_text">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h6 >{{shopCartsuccess_popup}}</h6> 
+                    </div>
+                </article>
+            </div>
+
             <!-- ========== 收藏 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="wrapper overlay1" v-if="success_popup !== '' ">
+            <div class="wrapper overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="success_popup !== '' ">
                 
                 <article>
                     <div class="check_text">
@@ -101,9 +112,8 @@ initial-scale=1.0">
             </div>
 
 
-
             <!-- ========== cart 燈箱 ========== -->
-            <div class="wrapper product_pop" id="product_pop" v-if="isShow">
+            <div class="wrapper product_pop" :class="{ product_popNone : isShow == false}" id="product_pop" v-if="isShow">
                 <div class="container">
                     <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG, popupData.heart, popupData.qty)"></i>
                     <div class="img_product">
@@ -174,13 +184,16 @@ initial-scale=1.0">
                     // ========= 點擊加入購物車的資料會帶到這裡 ========= //
                     ShoppingCartList: [],
 
-                    // ========= 將 localStorage的Valu 存到陣列，要跟 ShoppingCartList 比對========= //
-                    cartListlocalStorage: [],
+                    // ========= popUp ========= // 
+
+                    // 控制popUp開關
+                    success_popup:'',
+                    shopCartsuccess_popup:'',
+
+                    // 清空原本popUp資料
+                    success_popup_interval:null,
 
                     // ========= 分頁 ========= // 
-                    // 清空原本分頁資料
-                    success_popup_interval:null,
-                    success_popup:'',
 
                     // 當前分頁狀態
                     current_tab: 8,
@@ -274,6 +287,9 @@ initial-scale=1.0">
                 
                 // ========= 商品data AJAX 傳入 ========= //
                 this.getCate();
+
+                // ========= 重整畫面後Storage資料傳入 ========= //
+                this.getSTitem()
             },
 
             methods: {
@@ -370,48 +386,54 @@ initial-scale=1.0">
                     }
                 },
 
-                dddd(index){
-                    let xxx = localStorage.getItem("shoppingData");
-                    zzz = JSON.parse(xxx);  // 轉型為陣列
-                    // localStorage qty 及 data 存到變數
-                    let localStorageQty = zzz[index].qty;
-                    let localStorageArr = zzz[index];
+                // 重整畫面後Storage資料傳入
+                getSTitem(){
+                    // this.ShoppingCartList.push(JSON.parse(localStorage.getItem("shoppingData")));
                 },
                 
-                
+                // FIXME
                 addShoppingCart(popupData){
-                    // ====== this.ShoppingCartList 跟 localStorage 比對 ====== //
+                
 
-                    // 先推到空陣列，之後才有資料做事
-                    this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData)));
-                    
-                    // ShoppingCartList有東西後再做事
-                    if(this.ShoppingCartList.length > 0){
-                        // 資料推到Storage
-                        localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
-                        
-                        // 拿Storage的資料
-                        let Storage = localStorage.getItem("shoppingData");
-                        StorageArr = JSON.parse(Storage)
-                        console.log(StorageArr);
+                    const addCartListEl =JSON.parse(JSON.stringify(popupData)) 
+                    // const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
 
-                        // 讓每一筆 Storage 都可以比對
-                        for (let i = 0; i < StorageArr.length; i++) {
 
-                            // 將每一筆存入變數
-                            const StorageArrEl = StorageArr[i];
-                            // console.log(StorageArrEl.ID);
-                            // console.log(this.ShoppingCartList[i].ID);
+                    if(this.ShoppingCartList.length !==0){
+                        console.log(`ShoppingCartList 有東西`)
+                        // ID 重複
+                        let result = false;
+                        let idx = null;
 
-                            // 如果 ID 重複，就只增加 QTY //FIXME 
-                            if(this.ShoppingCartList[i].ID === StorageArrEl.ID){
-                                console.log("111");
-                                const sum = this.ShoppingCartList[i].qty += StorageArrEl.qty
-                                console.log(StorageArrEl);
-                                console.log(sum);
+                        for(let i = 0; i < this.ShoppingCartList.length;i++){
+
+                            if(this.ShoppingCartList[i].ID === addCartListEl.ID){
+                                result = true;
+                                idx = i
                             }
+                        }    
+                        if(result){
+                            this.ShoppingCartList[idx].qty += addCartListEl.qty
+                        }else{
+                            this.ShoppingCartList.push(addCartListEl)    
                         }
+                    
+                    }else{
+                        this.ShoppingCartList.push(addCartListEl)
                     }
+
+                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
+
+                    // 控制購物車popUp
+                    if(popupData != ""){
+                        this.shopCartsuccess_popup = '加入購物車成功'
+                    }
+                    // PopOn 消失
+                    clearInterval(this.success_popup_interval)
+                    this.success_popup_interval = setInterval(() => {
+                        this.shopCartsuccess_popup= ''
+                    }, 1000);
+
                     // 關閉購物車
                     this.isShow = false;
                     // 數量回到初始值
