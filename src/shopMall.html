@@ -174,6 +174,9 @@ initial-scale=1.0">
                     // ========= 點擊加入購物車的資料會帶到這裡 ========= //
                     ShoppingCartList: [],
 
+                    // ========= 將 localStorage的Valu 存到陣列，要跟 ShoppingCartList 比對========= //
+                    cartListlocalStorage: [],
+
                     // ========= 分頁 ========= // 
                     // 清空原本分頁資料
                     success_popup_interval:null,
@@ -366,62 +369,49 @@ initial-scale=1.0">
                         this.popupData.qty --;
                     }
                 },
-                
-                // FIXME push data到陣列
-                addShoppingCart(popupData){
-                    
-                    // 存到 Storage
-                    this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData))); // 將popUpData物件 加進 cartList陣列
-                    console.log(this.ShoppingCartList[0]); // 物件
-                    const shoppingCartlist = this.ShoppingCartList[0] // 物件存到變數
-                    console.log(this.ShoppingCartList[0]);
 
-                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList));
-
-                    // 將 Storage的 value 抓下來存到變數
+                dddd(index){
                     let xxx = localStorage.getItem("shoppingData");
-                    // console.log(typeof(xxx)); // string
                     zzz = JSON.parse(xxx);  // 轉型為陣列
-
                     // localStorage qty 及 data 存到變數
-                    let localStorageQty = zzz[0].qty;
-                    let localStorageArr = zzz;
-                    // console.log(localStorageQty); // qty 數量
-                    // console.log(localStorageArr); // 資料格式 ： ID IMG Name Price heart img2 img3 qty
+                    let localStorageQty = zzz[index].qty;
+                    let localStorageArr = zzz[index];
+                },
+                
+                
+                addShoppingCart(popupData){
+                    // ====== this.ShoppingCartList 跟 localStorage 比對 ====== //
+
+                    // 先推到空陣列，之後才有資料做事
+                    this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData)));
                     
-                
-                    //  如果使用者點擊的商品的 ID 跟 Storage 的 ID 一樣，就把 使用者的qty 加到 Storage的 qty
-                    // Storage 的資料形態是陣列，所以要用迴圈把 Key抓出來才能比對
-                
+                    // ShoppingCartList有東西後再做事
+                    if(this.ShoppingCartList.length > 0){
+                        // 資料推到Storage
+                        localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
+                        
+                        // 拿Storage的資料
+                        let Storage = localStorage.getItem("shoppingData");
+                        StorageArr = JSON.parse(Storage)
+                        console.log(StorageArr);
 
-                    for(let i = 0; i < zzz.length; i++){
-                        console.log(zzz[i].ID);
+                        // 讓每一筆 Storage 都可以比對
+                        for (let i = 0; i < StorageArr.length; i++) {
 
-                        if( this.ShoppingCartList.ID !== zzz[i].ID){
-                            console.log("123");
-                            // this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData))); 
+                            // 將每一筆存入變數
+                            const StorageArrEl = StorageArr[i];
+                            // console.log(StorageArrEl.ID);
+                            // console.log(this.ShoppingCartList[i].ID);
+
+                            // 如果 ID 重複，就只增加 QTY //FIXME 
+                            if(this.ShoppingCartList[i].ID === StorageArrEl.ID){
+                                console.log("111");
+                                const sum = this.ShoppingCartList[i].qty += StorageArrEl.qty
+                                console.log(StorageArrEl);
+                                console.log(sum);
+                            }
                         }
                     }
-                    // else popupData.qty + zzz[i].qty
-                    // for(let i = 0; i < this.ShoppingCartList.length; i++){
-                        
-                    //     console.log(this.ShoppingCartList);
-
-                    //     if( cartList[i].length === ){
-                    //         console.log("123");
-                    //         
-                    //     }else if(this.ShoppingCartList[i].length > 0){
-                    //         let qtyResult = this.ShoppingCartList[i].qty += popupData.qty
-                    //         console.log(cartResult);
-                    //         // cartList[i].qty = cartResult;
-                    //     }
-                    // }
-
-                    // console.log(JSON.parse(JSON.stringify(popupData)));
-                    
-                    
-                    
-                    
                     // 關閉購物車
                     this.isShow = false;
                     // 數量回到初始值
@@ -473,6 +463,8 @@ initial-scale=1.0">
         });
 
         const vm = app.mount("#app");
+
+        
 
         </script>
     </body>
