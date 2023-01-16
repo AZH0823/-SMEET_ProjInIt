@@ -25,7 +25,7 @@
           <ul class="font16 Camel-1">
             <template v-for="tab in member_tab">
               <li >
-                <a :class="[{ now: current_tab == tab.id }, tab.member_tab_4 ]" @click="current_tab = tab.id">{{ tab.name }} 
+                <a :class="[{ now: current_tab == tab.id }, tab.member_tab_4 ]" @click="current_tab = tab.id ; tab_page(); ">{{ tab.name }} 
                   <span :id="tab.member_msg">{{ tab.msg_count }}</span>
                 </a>
               </li>
@@ -137,7 +137,7 @@
         <!-- ======會員中心內容END===== -->
         <!-- ======訂單查詢===== -->
         <!-- 預約訂單 -->
-        <div class="list_cat green-1">私廚預約訂單</div>
+        <div class="list_cat green-1" v-show="current_tab == 'tab2' ">私廚預約訂單</div>
         <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
           <div class="order_list_title font14 gray">
             <!-- <p class="list1">類別</p> -->
@@ -155,10 +155,13 @@
               <p class="list4">NT$<span class="list4_money">{{item.price}}</span></p>
               <p class="list5">{{item.statue}}</p>
               <div class="list6">
-                <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
+                <a :href="'orderList_r.html?ID='+ item.num">
+                  <button class="inCart_btn1">查看詳情</button>
+                </a>
               </div>
             </div>
           </template>
+        </section>
           <!-- 商城訂單 -->
           <div class="list_cat2  green-1">商城訂單</div>
         <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
@@ -170,7 +173,7 @@
             <p class="list5">訂單狀態</p>
             <div class="list6"></div>
           </div>
-          <template v-for="(item, key) in orderlist">
+          <template v-for="(item, key) in mall_orderlist">
             <div class="order_list_content font16">
               <!-- <p class="list1">{{item.cat}}</p> -->
               <p class="list2">{{item.date}}</p>
@@ -178,7 +181,9 @@
               <p class="list4">NT$<span class="list4_money">{{item.price}}</span></p>
               <p class="list5">{{item.statue}}</p>
               <div class="list6">
-                <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
+                <a :href="'orderList_m.html?ID='+ item.num">
+                  <button class="inCart_btn1">查看詳情</button>
+                </a> 
               </div>
             </div>
           </template>
@@ -627,29 +632,26 @@
               {
                 id:"tab1",
                 name:"會員中心",
-                
+
               },
               {
                 id:"tab2",
                 name:"訂單查詢",
+
                 
               },
               {
                 id:"tab3",
                 name:"收藏菜品",
+                member_tab_4:"member_tab_4",
+                member_msg:"member_msg",
+                msg_count:3,
                 
               },
               {
                 id:"tab4",
-                name:"訊息中心",
-                member_tab_4:"member_tab_4",
-                member_msg:"member_msg",
-                msg_count:3
-              },
-              {
-                id:"tab5",
                 name:"常見問題",
-                
+
               }
             ],
             // 會員中心-個人資訊
@@ -669,37 +671,10 @@
               pwd_old:"",
               pwd_new:""
             },
-            //訂單
-            orderlist:[
-              {
-                cat:"商城",
-                date:"2022/08/21",
-                num:"1",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              },
-              {
-                cat:"商城",
-                date:"2022/08/31",
-                num:"2",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              },
-              {
-                cat:"商城",
-                date:"2022/08/31",
-                num:"3",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              },
-              {
-                cat:"商城",
-                date:"2022/08/31",
-                num:"4",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              }
-            ],
+            //預約訂單
+            orderlist:[],
+            //商城訂單
+            mall_orderlist:[],
             // 收藏
             collection:[
               
@@ -707,8 +682,12 @@
           }
         },
         mounted(){
-          this.info_show();
-          this.get_order_list();
+          if(member_ID){
+            this.info_show();
+            this.get_order_list();
+            this.get_mallorder_list();
+            this.page();
+          }
         },
         computed: {},
         methods:{
@@ -716,7 +695,7 @@
           //顯示會員資訊
           info_show(){
             let that = this ;
-            if( member_ID > 0 ){
+            if( member_ID ){
               $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_info.php",
@@ -747,26 +726,29 @@
             let phone = this.member_info.phone;
             let addr = this.member_info.addr;
             //修改會員資訊
-            $.ajax({
-                  method: "POST",
-                  url: "php/frontpage/member/member_info_update.php",
-                  data: {
-                    member_ID:member_ID,
-                    name:name,
-                    birthday:birthday,
-                    sex:sex,
-                    phone:phone,
-                    addr:addr
-                  },
-                  dataType: "text",
-                  success: function (response) {
-                    // console.log(response);
-                    alert('修改完成');
-                  },
-                  error: function (exception) {
-                      alert("發生錯誤: " + exception.status);
-                  }
-              });
+            if(member_ID){
+              $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_info_update.php",
+                    data: {
+                      member_ID:member_ID,
+                      name:name,
+                      birthday:birthday,
+                      sex:sex,
+                      phone:phone,
+                      addr:addr
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                      // console.log(response);
+                      alert('修改完成');
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+
+            }
           },
           //修改會員密碼
           pwd_change(){
@@ -775,66 +757,69 @@
             let pwd_new = this.update_pwd.pwd_new;
             let pwd_confirm = document.getElementById('member_pwd_confirm');
             let change = true ;
-            //判斷帳號相等且不為空值
-            if(account !== "" && account == this.member_info.account){
-              $("#member_account").next().removeClass('appear');
-            }else{
-              //如果帳號不等於
-              $("#member_account").next().addClass('appear');
-              change = false ;
-            };
-            //判斷舊密碼相等且不為空值
-            if(pwd_old == this.member_info.pwd && pwd_old !== ""){
-              $('#member_pwd_old').next().next().removeClass('appear');
-            }else{
-              //舊密碼不相等
-              $('#member_pwd_old').next().next().addClass('appear');
-              change = false ;
-
-            };
-            //舊密碼不等於新密碼
-            if(pwd_old !== pwd_new && pwd_new !== ""){
-              $('#member_pwd_new').next().next().removeClass('appear');
-              //判斷密碼長度再8到16
-              if(pwd_new.length <= 16 && pwd_new.length >= 8 ){
+            if(member_ID){
+              //判斷帳號相等且不為空值
+              if(account !== "" && account == this.member_info.account){
+                $("#member_account").next().removeClass('appear');
+              }else{
+                //如果帳號不等於
+                $("#member_account").next().addClass('appear');
+                change = false ;
+              };
+              //判斷舊密碼相等且不為空值
+              if(pwd_old == this.member_info.pwd && pwd_old !== ""){
+                $('#member_pwd_old').next().next().removeClass('appear');
+              }else{
+                //舊密碼不相等
+                $('#member_pwd_old').next().next().addClass('appear');
+                change = false ;
+  
+              };
+              //舊密碼不等於新密碼
+              if(pwd_old !== pwd_new && pwd_new !== ""){
                 $('#member_pwd_new').next().next().removeClass('appear');
+                //判斷密碼長度再8到16
+                if(pwd_new.length <= 16 && pwd_new.length >= 8 ){
+                  $('#member_pwd_new').next().next().removeClass('appear');
+                }else{
+                  $('#member_pwd_new').next().next().addClass('appear');
+                change = false ;
+  
+                };
               }else{
                 $('#member_pwd_new').next().next().addClass('appear');
-              change = false ;
-
+                change = false ;
+  
               };
-            }else{
-              $('#member_pwd_new').next().next().addClass('appear');
-              change = false ;
-
-            };
-            //新密碼等於確認密碼
-            if(pwd_new == pwd_confirm.value && pwd_confirm.value !== ""){
-              $('#member_pwd_confirm').next().next().removeClass('appear');
-            }else{
-              $('#member_pwd_confirm').next().next().addClass('appear');
-              change = false ;
-
-            };
-            if(change){
-              //更改密碼
-              $.ajax({
-                  method: "POST",
-                  url: "php/frontpage/member/member_pwd_update.php",
-                  data: {
-                    member_ID:member_ID,
-                    pwd_new: pwd_new
-                  },
-                  dataType: "text",
-                  success: function (response) {
-                      alert('修改成功');
-                  },
-                  error: function (exception) {
-                      alert("發生錯誤: " + exception.status);
-                  }
-              });
-            }else{
-              return false;
+              //新密碼等於確認密碼
+              if(pwd_new == pwd_confirm.value && pwd_confirm.value !== ""){
+                $('#member_pwd_confirm').next().next().removeClass('appear');
+              }else{
+                $('#member_pwd_confirm').next().next().addClass('appear');
+                change = false ;
+  
+              };
+              if(change){
+                //更改密碼
+                $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_pwd_update.php",
+                    data: {
+                      member_ID:member_ID,
+                      pwd_new: pwd_new
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                        alert('修改成功');
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+              }else{
+                return false;
+  
+              }
 
             }
           },
@@ -845,6 +830,7 @@
             let that = this ;
             // let bonus_member = document.querySelector('.bonus_member')
             //取得會員點數
+            if(member_ID){
               $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_point.php",
@@ -860,6 +846,8 @@
                         alert("發生錯誤: " + exception.status);
                     }
                 });
+
+            }
 
 
           },
@@ -881,7 +869,7 @@
           // ==========================訂單===========================
           //拿到預約訂單資訊
           get_order_list(){
-            if( member_ID > 0 ){
+            if( member_ID ){
             $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_list_order.php",
@@ -899,7 +887,26 @@
                 });
               }
           },
-
+          //拿到商城訂單資訊
+          get_mallorder_list(){
+            if( member_ID ){
+            $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_list_mall.php",
+                    data: {
+                      member_ID:member_ID,
+                    },
+                    dataType: "json",
+                    success: (response) => {
+                      this.mall_orderlist = response;
+                      
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+              }
+          },
 
           // ==========================訂單結束===========================
           
@@ -915,9 +922,22 @@
             }
           },
           // ==========================收藏結束===========================
-          
+          // 分頁紀錄
+          tab_page(){
+            history.pushState(null, null, "#" + this.current_tab);
+
+          },
+          page(){
+            let url = window.location.hash;
+            console.log(url); 
+            if(url){
+              this.current_tab = url.slice(1,5);
+
+            }
+          }
         }
       }).mount('#member');
+
       // ==========================常見問題===========================
       $(function () {
           $(this).siblings().toggleClass("active");

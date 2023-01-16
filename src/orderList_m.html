@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('layout/meta.html', {
+        "title":"私覓SMEET-訂單查詢"
+    })
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+</head>
+<body>
+    @@include('layout/header_01.html')
+    <div class="fulid_wrapper order_list" id="orderList_m">
+        <main>
+            <!-- MEMBER標題 -->
+            <h1 class="green-1 font_family_eng">MEMBER</h1>
+            <!-- 會員中心標題 -->
+            <div class="member_title">
+                <h2 class="green-1 font_bold font_family_tc">訂單查詢</h2>
+            </div>
+            <!-- 回到列表 -->
+            <a class="back font16 gray" @click="go_back">
+                <i class="fa-solid fa-chevron-left"></i>
+                <span >回到列表</span>
+            </a>
+            <!-- 訂單編號 -->
+            <div class="list_number">
+                <div class="list_title">
+                    <h6 class="green-1">訂單編號</h6>
+                    <h6 id="order_ID">{{shop_data.ID}}</h6>
+                </div>
+                <button class="inCart_btn1">再次購買</button>
+            </div>
+            <!-- 上方訂單日期金額進度 -->
+            <div class="list_top">
+                <div class="top_content gray">
+                    <div class="item">訂購日期</div>
+                    <div class="item">訂單金額</div>
+                    <div class="item">支付方式</div>
+                    <div class="item">處理進度</div>
+                </div>
+                <div class="top_content">
+                    <div class="item">{{shop_data.Date}}</div>
+                    <div class="item">NT$<span class="money">{{shop_data.TotalPrice}}</span></div>
+                    <div class="item">{{shop_data.Payment}}</div>
+                    <div class="item">{{shop_data.State}}</div>
+                </div>
+            </div>
+            <!-- 訂單內容明細 -->
+            <!-- 商城訂購 -->
+            <div class="shop_list">
+                <h4 class="detail_title green-1">商城訂購</h4>
+                <div class="meal_container font16" v-for="(item, key) in dish_data">
+                    <div class="item">{{item.type}}</div>
+                    <ul class="one_container">
+                        <li class="one_item">{{item.name}}<div class="one_count">x {{item.qty}}</div></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 訂單資料 -->
+            <div class="list_info">
+                <h4 class="detail_title green-1">訂單資料</h4>
+                
+                    <ul class="detail_info">
+                        
+                        <li class="item">訂購人</li>
+                        <li class="item" >
+                            <div class="detail_list_name" id="detail_name">{{shop_data.Name}} </div>
+                            <div class="detail_list_name" id="detail_phone">{{shop_data.Phone}}</div>
+                            <div class="detail_list_name" id="detail_phone">{{shop_data.Email}}</div>
+                        </li>
+                        <li class="item">地址</li>
+                        <li class="item" id="detail_addr">{{shop_data.Address}}</li>
+                        <!-- <li class="item">餐點明細</li>
+                        <li class="item gray">
+                            <div class="cate">餐別<span id="detail_cate">晚餐</span></div>
+                            <div class="people">人數<span id="detail_people">12人</span></div>
+                        </li> -->
+                    </ul>
+            </div>
+             
+            <!-- 總計 -->
+            <div class="total_container font16">
+                <div class="item">小計</div>
+                <div class="item">NT$<span id="detail_total">{{shop_data.Subtotal}}</span></div>
+                <!-- <div class="item">加購價</div>
+                <div class="item">NT$<span id="detail_total">25,000</span></div> -->
+                <div class="item">紅利點數</div>
+                <div class="item">-NT$<span id="detail_total">{{shop_data.Points}}</span></div>
+                <div class="item">總金額 </div>
+                <div class="item">NT$<span id="detail_total">{{shop_data.TotalPrice}}</span></div>
+            </div>
+            <div class="clear_both"></div>
+        </main>
+        
+    </div>
+    
+    @@include('layout/footer.html')
+    <script src="./js/vender/Vue/vue.global.js"></script>   
+    <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script>
+        const orderList_m = Vue.createApp({
+            data(){
+                return{
+                    shop_data:{
+                    },
+                    dish_data:[{
+
+                    }]
+                }
+                
+            },
+            mounted(){
+                this.get_data();
+            },
+            methods :{
+                //從網址抓ID 接API 渲染畫面
+                // 將 id 以 AJAX方式 傳到 API，API抓資料庫資料，再傳到前台渲染
+                get_data(){
+                    let urlParams = new URLSearchParams(window.location.search);
+                    // console.log(urlParams.get('ID')); 
+                    let mall_id = urlParams.get('ID');
+                    // 抓取訂單資訊
+                    $.ajax({
+                        method: "POST",
+                        url: "php/frontpage/member/mall_order.php",
+                        data: {
+                            mall_id:mall_id,
+                        },
+                        dataType: "json",
+                        success: (response) => {
+                            //把api取到的所有資訊存到reserve_data
+                            // console.log(response);
+                            this.shop_data = response[0] ;
+                            // console.log(this.shop_data);
+                            // 小計
+                            let a = this.shop_data.TotalPrice;
+                            let b = this.shop_data.Points;
+                            let c = a - b ;
+                            this.shop_data.Subtotal = c ;
+                            // 把餐點名稱存到dish_data陣列 
+                            for(let i = 0 ; i < response.length ; i++){
+                                let a = {};
+                                // if(a.type == "")
+                                a.type = response[i].Title.slice(2,5);
+                                a.name = response[i].productName;
+                                a.qty = response[i].qty;
+                                // console.log(a);
+                                this.dish_data[i] = a ;
+                            }
+                            console.log(this.dish_data);
+                        },
+                        error: function (exception) {
+                            alert("發生錯誤: " + exception.status);
+                        }
+                    });
+
+                },
+                // 返回列表
+                go_back(){
+                    history.go(-1); 
+                }
+            }
+        }).mount('#orderList_m');
+    </script>
+</body>
+</html>
