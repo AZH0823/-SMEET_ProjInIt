@@ -199,9 +199,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
     height: 100vh;
-    // background-color: hsla(0, 0%, 0%, .5); 因固定寬1280加了背景色沒辦法延伸畫面，所以取消
+    width: 100vw;
+    position: fixed;
+    overflow: hidden;
     z-index: 10000;
     article{
         display: flex;
@@ -286,11 +287,16 @@
 // 商城菜品結束
 //購物車彈窗
 .product_pop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    background-color: hsla(0, 0%, 0%, .5);
     z-index: 10000;
     .container{
         background-color: #fff;
-        width: 364px;
-        height: 525px;
+        width: 100%;
+        height: 100vh;
         padding: 25px 25px;
         position: fixed;
         display: flex;

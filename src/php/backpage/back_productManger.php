@@ -9,9 +9,8 @@
     FROM smeet.Dish d
     join smeet.DishsType dt
     on d.`type` = dt.ID 
-    where ProductType = '商城冷凍'
-    order by pushisedDate asc
-    limit 4";
+    where ProductType = '商城冷凍' 
+    and `Condition` = 2";
     
 
     //執行
@@ -40,5 +39,6 @@
     echo json_encode($arr); 
     // echo json_encode($data); 
 
-    
+
+
 ?>

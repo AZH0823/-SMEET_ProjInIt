@@ -12,7 +12,7 @@ initial-scale=1.0">
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
     </head>
-    <body>
+    <body class="shop-page">
         <!--         ------  slide_header  ------          -->
         @@include('layout/header_01.html')
 
@@ -302,9 +302,30 @@ initial-scale=1.0">
 
                 // 最新商品data AJAX 傳入
                 this.getLatestProduct();
+
+                // 進商品詳情頁就加資料
+                this.getLocalStorage()
             },
 
             methods: {
+                // 
+
+                // TODO 假設有Storage不是空值就拿資料，空值就不拿資料
+                getLocalStorage(){
+                    
+                    if(this.ShoppingCartList1 !== "" || this.ShoppingCartList2 !== "") {
+                        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                        console.log(LSGetItem);
+                    }
+                    
+                    // if()
+                },
+                
+                // TODO 會員登入狀態是，可insert收藏商品（select檢查有沒有資料，再insert資料）非會員狀態則無法看見愛心icon
+                
+                // TODO 收藏前要先登入會員
+                
+                // TODO 收藏後重整畫面愛心的狀態不能消失（在res 迴圈 item.heart = true）
 
                 // ========= AJAX ========= //
                 // 取得商品清單
@@ -355,7 +376,7 @@ initial-scale=1.0">
                 },
 
                 // ========= AJAX ========= //
-                // 取得商品清單
+                // 取得最新商品清單
                 getLatestProduct(){    
 
                     $.ajax({            
@@ -365,7 +386,7 @@ initial-scale=1.0">
                         dataType: "json",
                         success: (response) =>{
                             if(response != ""){
-                                console.log(response);
+                                // console.log(response);
                                 // 將qty及heart資料帶入，變成新陣列
                                 const adjusted_res = response.map((x) => {
                                     x.heart = false
@@ -388,7 +409,7 @@ initial-scale=1.0">
                                     // 回傳AjaxMealsInfo
                                     this.latestProduct[i].IMG = imgs
                                 }
-                                console.log(this.latestProduct);
+                                // console.log(this.latestProduct);
                                 
                             }                
                         },
@@ -459,13 +480,9 @@ initial-scale=1.0">
                     location.href = './cartDetail.html'
                 },
 
-                // TODO
                 // ========= 商品收藏 ========= //
 
-                
-
-
-                 // 商品愛心收藏及移除（樣式及提醒popUp）\
+                // 商品愛心收藏及移除（樣式及提醒popUp）\
                 
                 collect_heart1(){
                     // 加减爱心
@@ -506,12 +523,6 @@ initial-scale=1.0">
                     this.collect_heart_data_list.shift(this.shopMallDetailInfo);
                 },
                 
-
-
-
-
-
-
 
 
                 // ========= 最新商品 ========= //
