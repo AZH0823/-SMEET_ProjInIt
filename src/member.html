@@ -41,7 +41,7 @@
         <!-- 登出測試 -->
         <!-- <button type="button" onclick="logout_test()">登出</button> -->
         <!-- ======會員中心內容===== -->
-        <section class="member_section" v-show="current_tab == 'tab1' ">
+        <section class="member_section" v-show="current_tab == 'member' ">
           <div class="member_info">
             <h6 class="member_section_title">個人資訊</h6>
             <div id="info">
@@ -137,8 +137,8 @@
         <!-- ======會員中心內容END===== -->
         <!-- ======訂單查詢===== -->
         <!-- 預約訂單 -->
-        <div class="list_cat green-1" v-show="current_tab == 'tab2' ">私廚預約訂單</div>
-        <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
+        <div class="list_cat green-1" v-show="current_tab == 'list' ">私廚預約訂單</div>
+        <section class="order_list_section member_product_section" v-show="current_tab == 'list' ">
           <div class="order_list_title font14 gray">
             <!-- <p class="list1">類別</p> -->
             <p class="list2">訂單日期</p>
@@ -163,8 +163,8 @@
           </template>
         </section>
           <!-- 商城訂單 -->
-          <div class="list_cat2  green-1">商城訂單</div>
-        <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
+          <div class="list_cat2  green-1" v-show="current_tab == 'list'">商城訂單</div>
+        <section class="order_list_section member_product_section" v-show="current_tab == 'list' ">
           <div class="order_list_title font14 gray">
             <!-- <p class="list1">類別</p> -->
             <p class="list2">訂單日期</p>
@@ -200,18 +200,18 @@
         </section>
         <!-- ======訂單查詢結束===== -->
         <!-- ======收藏菜品====== -->
-        <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'tab3' ">
+        <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'collection' ">
           <ul>
             <template v-for="(item, key) in collection" :key="item.name">
               <li class="collect_list">
                 <a>
-                  <div class="product_img">
-                    <img :src=item.img alt="" />
-                    <i class="fa-solid fa-heart " :class="{check_heart :item.check_heart}" @click="cancel_collect(key)"></i>
+                  <div class="product_img"><img :src=item.IMG>
+        
+                    <i class="fa-solid fa-heart " :class="{check_heart :true}" @click="cancel_collect(key)"></i>
                   </div>
                   <div class="product_content green-1">
-                    <h6 class="product_title">{{item.name}}</h6>
-                    <p class="font16">$<span class="product_money">{{item.money}}</span></p>
+                    <h6 class="product_title">{{item.Name}}</h6>
+                    <p class="font16">$<span class="product_money">{{item.Price}}</span></p>
                     <button type="button" class="cart_link" href="">
                       <i class="fa-solid fa-cart-shopping"></i>
                     </button>
@@ -279,7 +279,7 @@
         <!-- ======訊息中心結束====== -->
 
         <!-- ======常見問題====== -->
-        <section class="question_section member_product_section" v-show="current_tab == 'tab4' ">
+        <section class="question_section member_product_section" v-show="current_tab == 'faq' ">
           <ul>
             <h5>預約流程</h5>
             <li class="question_section_li li_1">
@@ -590,58 +590,25 @@
       //   e.preventDefault();
       //   login_check();
       // })
-      
-      
-
-      //收藏清單
-      let collection_lo = [{
-                id:1,
-                name:"黑鮪刺身",
-                img:'img/member_img/member_wish1.jpg',
-                money: 700,
-                check_heart:true
-              },
-              {
-                id:2,
-                name:"黑鮪刺身1",
-                img:'img/member_img/member_wish2.jpg',
-                money: 700,
-                check_heart:true
-              },
-              {
-                id:3,
-                name:"黑鮪刺身2",
-                img:'img/member_img/member_wish1.jpg',
-                money: 700,
-                check_heart:true
-              },              
-              {
-                id:4,
-                name:"黑鮪刺身3",
-                img:'img/member_img/member_wish2.jpg',
-                money: 700,
-                check_heart:true
-              }];
-
       let member = Vue.createApp({
         data(){
           return {
             // tab
-            current_tab:"tab1",
+            current_tab:"member",
             member_tab:[
               {
-                id:"tab1",
+                id:"member",
                 name:"會員中心",
 
               },
               {
-                id:"tab2",
+                id:"list",
                 name:"訂單查詢",
 
                 
               },
               {
-                id:"tab3",
+                id:"collection",
                 name:"收藏菜品",
                 member_tab_4:"member_tab_4",
                 member_msg:"member_msg",
@@ -649,7 +616,7 @@
                 
               },
               {
-                id:"tab4",
+                id:"faq",
                 name:"常見問題",
 
               }
@@ -676,9 +643,7 @@
             //商城訂單
             mall_orderlist:[],
             // 收藏
-            collection:[
-              
-            ],
+            collection:[{}],
           }
         },
         mounted(){
@@ -687,6 +652,7 @@
             this.get_order_list();
             this.get_mallorder_list();
             this.page();
+            this.collection_s();
           }
         },
         computed: {},
@@ -825,7 +791,6 @@
           },
           //取得會員點數
           get_point(){
-            this.collection = collection_lo;
             let member_ID = localStorage.getItem("member_ID");
             let that = this ;
             // let bonus_member = document.querySelector('.bonus_member')
@@ -918,10 +883,48 @@
               setTimeout(()=>{
                 this.collection.splice(i,1);
               },500);
-              console.log(collection_lo);
+            }
+          },
+          // select渲染到畫面上
+          collection_s(){
+            if(member_ID){
+              $.ajax({
+                      method: "POST",
+                      url: "php/frontpage/member/collect_s.php",
+                      data: {
+                        member_ID:member_ID,
+                  
+                      },
+                      dataType: "json",
+                      success:  (response) => {
+                        // console.log(response);
+                        if(response != ""){
+                          this.collection = response ;
+                          // 將三張 img 轉陣列並塞回 data
+                          let xxx = this.collection;
+                          for(let i =0; i < xxx.length; i++){
+
+                            // 將img存到新陣列
+                            let img = this.collection[i].IMG
+                                    
+                            const imgs = img.split(" ");
+                            
+                            // 回傳AjaxMealsInfo
+                            this.collection[i].IMG = imgs[0]
+                            // console.log(this.collection[i].IMG);
+                          }
+                          console.log(this.collection);
+                        }
+                      },
+                      error: function (exception) {
+                          alert("發生錯誤: " + exception.status);
+                      }
+                  });
+
             }
           },
           // ==========================收藏結束===========================
+          
           // 分頁紀錄
           tab_page(){
             history.pushState(null, null, "#" + this.current_tab);
@@ -931,7 +934,7 @@
             let url = window.location.hash;
             // console.log(url); 
             if(url){
-              this.current_tab = url.slice(1,5);
+              this.current_tab = url.slice(1,15);
 
             }
           }
