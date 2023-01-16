@@ -192,11 +192,8 @@ initial-scale=1.0">
 
                     // ========= 點擊購物車的資料會帶到這裡 ========= //
                     // Detail的購物車
-                    ShoppingCartList1: [],
+                    ShoppingCartList: [],
                     
-                    // 最新商品的購物車
-                    ShoppingCartList2: [],
-
                     // ========= popUp ========= // 
 
                     // 控制popUp開關
@@ -312,11 +309,19 @@ initial-scale=1.0">
 
                 // TODO 假設有Storage不是空值就拿資料，空值就不拿資料
                 getLocalStorage(){
-                    
-                    if(this.ShoppingCartList1 !== "" || this.ShoppingCartList2 !== "") {
+                    const local_storage = localStorage.getItem("shoppingData")
+
+                    if(local_storage){
                         const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
-                        console.log(LSGetItem);
+
+                        this.ShoppingCartList = LSGetItem
                     }
+                    
+                    // if(this.ShoppingCartList !== "" || this.ShoppingCartList2 !== "") {
+                    //     const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                    //     // console.log(LSGetItem);
+                        
+                    // }
                     
                     // if()
                 },
@@ -426,33 +431,39 @@ initial-scale=1.0">
                     // const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
 
 
-                    if(this.ShoppingCartList1.length !==0){
+
+                    if(this.ShoppingCartList.length !==0){
                         
                         // ID 重複
                         let result = false;
                         let idx = null;
 
-                        for(let i = 0; i < this.ShoppingCartList1.length;i++){
+                        for(let i = 0; i < this.ShoppingCartList.length;i++){
 
-                            if(this.ShoppingCartList1[i].ID === addCartListEl.ID){
+                            if(this.ShoppingCartList[i].ID === addCartListEl.ID){
                                 result = true;
                                 idx = i
                             }
                         }    
                         if(result){
-                            this.ShoppingCartList1[idx].qty += addCartListEl.qty
+                            console.log('qty');
+                            this.ShoppingCartList[idx].qty += addCartListEl.qty
                         }else{
-                            this.ShoppingCartList1.push(addCartListEl)    
+                            console.log('push');
+
+                            this.ShoppingCartList.push(addCartListEl)    
                         }
                     
                     }else{
-                        this.ShoppingCartList1.push(addCartListEl)
+                    console.log('add');
+
+                        this.ShoppingCartList.push(addCartListEl)
                     }
 
-                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList1))
+                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
 
                     // 控制購物車popUp
-                    if(this.ShoppingCartList1 != ""){
+                    if(this.ShoppingCartList != ""){
                         this.shopCartsuccess_popup = '加入購物車成功'
                     }
                     // PopOn 消失
@@ -581,30 +592,30 @@ initial-scale=1.0">
                     // const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
 
 
-                    if(this.ShoppingCartList2.length !==0){
+                    if(this.ShoppingCartList.length !==0){
                         console.log(`ShoppingCartList 有東西`)
                         // ID 重複
                         let result = false;
                         let idx = null;
 
-                        for(let i = 0; i < this.ShoppingCartList2.length;i++){
+                        for(let i = 0; i < this.ShoppingCartList.length;i++){
 
-                            if(this.ShoppingCartList2[i].ID === addCartListEl.ID){
+                            if(this.ShoppingCartList[i].ID === addCartListEl.ID){
                                 result = true;
                                 idx = i
                             }
                         }    
                         if(result){
-                            this.ShoppingCartList2[idx].qty += addCartListEl.qty
+                            this.ShoppingCartList[idx].qty += addCartListEl.qty
                         }else{
-                            this.ShoppingCartList2.push(addCartListEl)    
+                            this.ShoppingCartList.push(addCartListEl)    
                         }
                     
                     }else{
-                        this.ShoppingCartList2.push(addCartListEl)
+                        this.ShoppingCartList.push(addCartListEl)
                     }
 
-                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList2))
+                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
 
                     // 控制購物車popUp
                     if(popupData != ""){
