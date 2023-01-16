@@ -17,7 +17,7 @@
                         </div>
                         <p class="font14 money">金額</p>
                         <p class="font14 money_cart">$ {{item.Price}}</p>
-                        <i class="fa-regular fa-trash-can"></i>
+                        <i class="fa-regular fa-trash-can" @click=" dealDelete(index)"></i>
                     </div>
                 </li>
                 <!-- <li class="item">
@@ -78,18 +78,20 @@
                     shop_data:[{}],
                 }
             },
-            computed(){
-                this.get_data();
+            watch:{
+                // 抓localstorage資料 渲染
+                change(){
+                    this.shop_data = JSON.parse(localStorage.getItem('shoppingData'));
+                }
             },
             mounted(){
-                this.get_data();
+                
             },
             methods:{
-                // 抓localstorage資料 渲染
                 get_data(){
                     this.shop_data = JSON.parse(localStorage.getItem('shoppingData'));
                     // console.log(a);
-                    console.log(this.shop_data)
+                    console.log(this.shop_data);
                 },
                 //數量加
                 dealPlus(item){
@@ -103,6 +105,11 @@
                         item.qty--;
                     }
                 },
+                //刪除點選到的商品 ->垃圾桶
+                dealDelete(index){
+                    this.shop_data.splice(index,1);
+                },
+    
             }
         }).mount('#cart_pop');
 
