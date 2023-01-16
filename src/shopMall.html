@@ -294,7 +294,7 @@ initial-scale=1.0">
                 this.getCate();
 
                 // ========= 重整畫面後Storage資料傳入 ========= //
-                // this.getSTitem();
+                this.getLocalStorage()
 
             },
 
@@ -385,6 +385,8 @@ initial-scale=1.0">
 
                 // 點擊 X 關閉popUp並清空資料
                 popUp_xClose(ID, Name, Price, IMG, heart, qty){
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
 
                     // 關閉popUp
                     this.isShow = false;
@@ -406,11 +408,16 @@ initial-scale=1.0">
                 },
 
                 // 重整畫面後Storage資料傳入
-                getSTitem(){
-                    // if()....
-                    // this.ShoppingCartList.push(JSON.parse(localStorage.getItem("shoppingData")));
+                getLocalStorage(){
+                    const local_storage = localStorage.getItem("shoppingData")
+
+                    if(local_storage){
+                        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+
+                        this.ShoppingCartList = LSGetItem
+                        console.log(this.ShoppingCartList);
+                    }
                 },
-                
                 // 商品加入購物車
                 addShoppingCart(popupData){
                 
@@ -452,11 +459,14 @@ initial-scale=1.0">
                     clearInterval(this.success_popup_interval)
                     this.success_popup_interval = setInterval(() => {
                         this.shopCartsuccess_popup= ''
+                        let body = document.querySelector('body');
+                        body.style.overflow = "auto";
                     }, 1000);
 
                     // 關閉購物車
                     this.isShow = false;
-                    // this.popupData.qty = 1;
+                    this.popupData.qty = 1;
+                    
                 },
 
                 // ========= 商品收藏 ========= //

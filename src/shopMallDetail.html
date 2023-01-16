@@ -192,7 +192,8 @@ initial-scale=1.0">
 
                     // ========= 點擊購物車的資料會帶到這裡 ========= //
                     // Detail的購物車
-                    ShoppingCartList: [],
+                    ShoppingCartList1: [],
+                    ShoppingCartList2: [],
                     
                     // ========= popUp ========= // 
 
@@ -314,16 +315,8 @@ initial-scale=1.0">
                     if(local_storage){
                         const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
 
-                        this.ShoppingCartList = LSGetItem
+                        this.ShoppingCartList1 = LSGetItem
                     }
-                    
-                    // if(this.ShoppingCartList !== "" || this.ShoppingCartList2 !== "") {
-                    //     const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
-                    //     // console.log(LSGetItem);
-                        
-                    // }
-                    
-                    // if()
                 },
                 
                 // TODO 會員登入狀態是，可insert收藏商品（select檢查有沒有資料，再insert資料）非會員狀態則無法看見愛心icon
@@ -432,35 +425,35 @@ initial-scale=1.0">
 
 
 
-                    if(this.ShoppingCartList.length !==0){
+                    if(this.ShoppingCartList1.length !==0){
                         
                         // ID 重複
                         let result = false;
                         let idx = null;
 
-                        for(let i = 0; i < this.ShoppingCartList.length;i++){
+                        for(let i = 0; i < this.ShoppingCartList1.length;i++){
 
-                            if(this.ShoppingCartList[i].ID === addCartListEl.ID){
+                            if(this.ShoppingCartList1[i].ID === addCartListEl.ID){
                                 result = true;
                                 idx = i
                             }
                         }    
                         if(result){
                             console.log('qty');
-                            this.ShoppingCartList[idx].qty += addCartListEl.qty
+                            this.ShoppingCartList1[idx].qty += addCartListEl.qty
                         }else{
                             console.log('push');
 
-                            this.ShoppingCartList.push(addCartListEl)    
+                            this.ShoppingCartList1.push(addCartListEl)    
                         }
                     
                     }else{
                     console.log('add');
 
-                        this.ShoppingCartList.push(addCartListEl)
+                        this.ShoppingCartList1.push(addCartListEl)
                     }
 
-                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
+                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList1))
 
                     // 控制購物車popUp
                     if(this.ShoppingCartList != ""){
@@ -592,30 +585,30 @@ initial-scale=1.0">
                     // const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
 
 
-                    if(this.ShoppingCartList.length !==0){
+                    if(this.ShoppingCartList2.length !==0){
                         console.log(`ShoppingCartList 有東西`)
                         // ID 重複
                         let result = false;
                         let idx = null;
 
-                        for(let i = 0; i < this.ShoppingCartList.length;i++){
+                        for(let i = 0; i < this.ShoppingCartList2.length;i++){
 
-                            if(this.ShoppingCartList[i].ID === addCartListEl.ID){
+                            if(this.ShoppingCartList2[i].ID === addCartListEl.ID){
                                 result = true;
                                 idx = i
                             }
                         }    
                         if(result){
-                            this.ShoppingCartList[idx].qty += addCartListEl.qty
+                            this.ShoppingCartList2[idx].qty += addCartListEl.qty
                         }else{
-                            this.ShoppingCartList.push(addCartListEl)    
+                            this.ShoppingCartList2.push(addCartListEl)    
                         }
                     
                     }else{
                         this.ShoppingCartList.push(addCartListEl)
                     }
 
-                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
+                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList2))
 
                     // 控制購物車popUp
                     if(popupData != ""){
