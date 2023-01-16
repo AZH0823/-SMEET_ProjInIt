@@ -49,7 +49,6 @@
                 <div class="swiper mySwiper wrapper">
                     <div class="shop_card swiper-wrapper">
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -65,10 +64,8 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -84,10 +81,8 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -103,10 +98,8 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -122,10 +115,8 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -141,10 +132,8 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -160,10 +149,8 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -179,10 +166,8 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                         <div class="swiper-slide">
-                            <ul>
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
@@ -198,7 +183,6 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -381,25 +365,29 @@
     
     <script>
       var swiper = new Swiper(".mySwiper", {
-        // slidesPerView: 4,
-        // spaceBetween: 30,
-        // slidesPerGroup: 4,
-        slidesPerView: 4,
+           
+
+        breakpoints: {
+            1280:{
+                slidesPerView: 4,
                 spaceBetween: 30,
                 slidesPerGroup: 4,
-        breakpoints: {
-          
-
+                centeredSlides: false,
+            }
+            ,
             720: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-                slidesPerGroup: 2,
+                slidesPerView: 3,
+                spaceBetween: 20,
+                slidesPerGroup: 3,
+                centeredSlides: false,
             },
             428: {
-                slidesPerView: 1,
-                spaceBetween: 15,
-                slidesPerGroup: 1,
+                slidesPerView: 2,
+                spaceBetween: 10,
+                slidesPerGroup: 2,
+                centeredSlides: false,
             }
+            
         },
       
         loop: true,
