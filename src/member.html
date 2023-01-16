@@ -238,7 +238,7 @@
         </section>
         <!-- ======收藏菜品結束====== -->
         <!-- ======訊息中心====== -->
-        <section class="message_section member_product_section" v-show="current_tab == 'tab4' ">
+        <!-- <section class="message_section member_product_section" v-show="current_tab == 'tab4' ">
           <ul class="fuild_wrapper">
             <li class="message_content">
               <div class="message_import">
@@ -275,11 +275,11 @@
               <button class="inCart_btn1">傳送</button>
             </div>
           </ul>
-        </section>
+        </section> -->
         <!-- ======訊息中心結束====== -->
 
         <!-- ======常見問題====== -->
-        <section class="question_section member_product_section" v-show="current_tab == 'tab5' ">
+        <section class="question_section member_product_section" v-show="current_tab == 'tab4' ">
           <ul>
             <h5>預約流程</h5>
             <li class="question_section_li li_1">
@@ -929,7 +929,7 @@
           },
           page(){
             let url = window.location.hash;
-            console.log(url); 
+            // console.log(url); 
             if(url){
               this.current_tab = url.slice(1,5);
 
