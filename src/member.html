@@ -207,7 +207,7 @@
                 <a>
                   <div class="product_img"><img :src=item.IMG>
         
-                    <i class="fa-solid fa-heart " :class="{check_heart :true}" @click="cancel_collect(key)"></i>
+                    <i class="fa-solid fa-heart " @click="cancel_collect(key)"></i>
                   </div>
                   <div class="product_content green-1">
                     <h6 class="product_title">{{item.Name}}</h6>
@@ -878,11 +878,32 @@
           // ==========================收藏===========================
           //愛心點擊後取消收藏(移除陣列資訊)
           cancel_collect(i){
-            let r = confirm('確定取消收藏');
-            if(r){
-              setTimeout(()=>{
-                this.collection.splice(i,1);
-              },500);
+            // console.log(i);
+            if(member_ID){
+              let r = confirm('確定取消收藏');
+              // 這個ID是favorite table 的ID
+              let ID = this.collection[i].ID
+              // console.log(ID);
+              if(r){
+                // 刪除資料庫的收藏
+                $.ajax({
+                      method: "POST",
+                      url: "php/frontpage/member/collect_d.php",
+                      data: {
+                        ID:ID,
+                      },
+                      dataType: "text",
+                      success: (response) => {
+                        setTimeout(()=>{
+                          this.collection.splice(i,1);
+                        },500);
+                        console.log('aa')
+                      },
+                      error: function (exception) {
+                          alert("發生錯誤: " + exception.status);
+                      }
+                  });
+              }
             }
           },
           // select渲染到畫面上

@@ -7,11 +7,12 @@
     //---------------------------------------------------
 
        //建立SQL語法-取得會員資訊
-       $sql = "select DishID, Name, Price, IMG, Member_ID
+       $sql = "select f.ID, DishID, Name, Price, IMG, Member_ID
                 from FavoriteLists f
-                    join dish d
+                    join Dish d
                         on f.DishID = d.ID
-                where Member_ID = ?";
+                where Member_ID = ?
+                order by collectionTime desc";
        $statement = getPDO()->prepare($sql);  
        $statement->bindValue(1, $member_ID);  
        $result = $statement->execute();  
@@ -22,6 +23,7 @@
     //    echo json_encode($data);
            foreach($data as $newData){
                 $arr[] = array(
+                    'ID'=>$newData['ID'],
                     'DishID'=>$newData['DishID'],
                     'Name'=>$newData['Name'],
                     'Price'=>$newData['Price'],
