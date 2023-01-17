@@ -61,7 +61,7 @@ initial-scale=1.0">
                     :key="item.Name">
                 
                         <a class="collect_list" :href="'./shopMallDetail.html?ID='+ item.ID">
-                            <div>
+                            <div class="product_list">
                                 
                                 <div class="product_img">
                                     <img :src="item.IMG[0]" alt="">
@@ -90,7 +90,7 @@ initial-scale=1.0">
             </section>
 
             <!-- ========== 購物車 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="wrapper overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="shopCartsuccess_popup !== '' ">
+            <div class="overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="shopCartsuccess_popup !== '' ">
                 
                 <article>
                     <div class="check_text">
@@ -101,7 +101,7 @@ initial-scale=1.0">
             </div>
 
             <!-- ========== 收藏 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="wrapper overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="success_popup !== '' ">
+            <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="success_popup !== '' ">
                 
                 <article>
                     <div class="check_text">
@@ -113,7 +113,7 @@ initial-scale=1.0">
 
 
             <!-- ========== cart 燈箱 ========== -->
-            <div class="wrapper product_pop" 
+            <div class="product_pop" 
             :class="{ product_popNone : isShow == false}" id="product_pop"
             v-if="isShow"
             @click="product_pop_close()"
@@ -334,8 +334,8 @@ initial-scale=1.0">
 
                                     // 回傳AjaxMealsInfo
                                     this.AjaxMealsInfo[i].IMG = imgs
+                                    // console.log(this.AjaxMealsInfo[i].IMG);
                                 }
-                                console.log(this.AjaxMealsInfo);
 
                                 
                             }                
@@ -492,30 +492,35 @@ initial-scale=1.0">
                     if(item.heart == true){
                         item.heart = false;
                         this.success_popup = '移除收藏成功'
-                        let body = document.querySelector('body');
-
-                        // 停止滑動
-                        body.style.overflow = "hidden";
                         this.removeCollectList(item)
+
+                        // 使 scroll 無效
+                        let body = document.querySelector('body');
+                        body.style.overflow = "hidden";
 
                     }else{
                         item.heart = true;
                         this.success_popup = '加入收藏成功'
+                        this.addCollectList(item)
 
-                        // 停止滑動
+                        // 使 scroll 無效
                         let body = document.querySelector('body');
                         body.style.overflow = "hidden";
-                        this.addCollectList(item)
                     }
 
                     // 收藏 & 移除 PopOn 消失
                     clearInterval(this.success_popup_interval)
                     this.success_popup_interval = setInterval(() => {
                         this.success_popup= ''
+
+                        // 一秒後開啟 scroll
+                        let body = document.querySelector('body');
+                        body.style.overflow = "auto";
+                        
                     }, 1000);
 
                     // 收藏增加 LoacalStorage
-                    // console.log(this.collect_heart_data_list);
+                    console.log(this.collect_heart_data_list);
                     localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
 
                 },

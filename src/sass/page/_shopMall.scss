@@ -112,6 +112,9 @@
                 min-width: 145px;
                 min-height: 201px;
             }
+            .product_list{
+                height: 100%;
+            }
             .product_img{
                 height: 65%;
                 width: 100%;
@@ -200,7 +203,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 100vh;
+    // height: 100vh;
     width: 100vw;
     position: fixed;
     overflow: hidden;
