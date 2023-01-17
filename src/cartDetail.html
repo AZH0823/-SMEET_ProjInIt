@@ -65,7 +65,7 @@
                 </div>
                 <!-- 會員紅利 -->
                 <div class="cart_bonus">
-                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"  maxlength="3" v-model.lazy="point" @blur="check_bouns" @keydown="check_bouns" @keyup="check_bouns">{{}}</input>元</h6>
+                    <h6>使用紅利點數折抵訂單金額<input type="text" class="enter_bonus"  maxlength="3" v-model.lazy="point" @blur="check_bouns" @keydown="check_bouns" @keyup="check_bouns" v-if="checkMemberPoint">{{}}</input>元</h6>
                     <div class="cart_bonus_flex">
                         <p class="all_bonus font16 gray">目前累計會員紅利點數<span class="bouns_1" ref="bouns">{{bouns}}</span>點(<span>{{bouns}}</span>元)
                         <p class="all_bonus_pnone" v-if="show">{{msg}}</p>
@@ -458,6 +458,7 @@
                 let that = this ;
 
                 if(member_ID){
+                  
                     this.member_ID = member_ID
                     $.ajax({
                         
@@ -469,6 +470,7 @@
                         dataType: "text",
                         success: function (response) {
                             // console.log(that.bouns);
+                            //取得會員點數並回傳至data的bouns
                             that.bouns = response;
                         },
                         error: function (exception) {
@@ -476,19 +478,24 @@
                         }
                     });
 
+                }else{
+                    location.assign("./index_home.html");
+
+                //    setTimeout(function(){
+                //     window.addEventListener("load", login_pop());
+                //    },100);
+           
+
+                    //跳回首頁
+                    // login_pop();
+                    // window.location.assign("./index_home.html");
+                   
+                    //再跳出登入popon
+                //    window.addEventListener("load", login_pop());
                 }
+                
                 // this.inputShoppingData[0] = shoppingData;
                 // console.log(this.inputShoppingData[0]);
-
-                //取得會員點數
-            
-
-         
-                    //如果顧客直接輸入購物車的網址
-                        // 1. 進到購物車的畫面要先判斷有沒有登入就跳出沒有登入的alert
-                        
-                        // 2. 跳回首頁(location."index_home.html")
-                        // 3. 再跳出登入popon
 
             },
             
@@ -566,12 +573,7 @@
                     else {
                         e.preventDefault();
                     }
-                },
-
-                //確認訂購人資訊的格式
-                  // 1. 姓名 -> 不用檢核格式 , 只要確定不是空值即可
-           
-                
+                },                   
 
                 //點擊收件人的[同訂購人資料]會將上方訂購人的資訊帶到下方的input裡
                 checkOrderValue(){
@@ -618,6 +620,46 @@
                         }
                     }
                 },
+
+                 //確認收件人資訊的格式
+                  // 1. 姓名
+                nameRule(nameStr){
+                    let nameRule = new RegExp('^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$');
+                    return nameRule.test(nameStr);
+                  },
+
+                // 2.phone
+                phoneRule(str){
+                    let phoneRule = new RegExp("^09\\d{8}$");
+                    return phoneRule.test(str);
+                  },
+
+                 // 3.address
+                addrRule(str){
+                    let addrRule = new RegExp('^[\u4e00-\u9fa5 ]$')
+                    return addrRule.test(str);
+                },
+                //電子發票
+                invoiceRule(str){
+                    let invoiceRule = new RegExp('^/[\dA-Z0-9+-\.]{7}$')
+                    return invoiceRule.test(str);
+                },
+                //統一編號格式
+                uniformRule(str){
+                    let uniformRule = new RegExp('/^[0-9]{8}$/');
+                    return uniformRule.test(str);
+                },
+                //檢核紅利點數使用時不能超過商品金額
+                checkMemberPoint(){
+                    if(this.bounsVal > this.cartTotal){
+                        alert(`使用的紅利點數需小於您的商品總金額`)
+                    }
+                },
+
+                //格式驗證
+
+
+
                 // 取得會員資料的總資料,但我只要三筆
                 // (1)name(2)phone (3)address   
                 getMemberInfo(){
@@ -672,6 +714,12 @@
                     }
                 },
             },
+
+            //購物車訂單送出
+            cartDetailAPi(data){
+
+            },
+        
                 
         });
 
@@ -683,5 +731,5 @@
 
         </script>
     </body>
-
+    @@include('layout/footer.html')
 </html>
