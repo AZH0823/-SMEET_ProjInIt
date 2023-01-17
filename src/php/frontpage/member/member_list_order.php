@@ -16,15 +16,19 @@
     //抓出全部且依照順序封裝成一個二維陣列
     $data = $statement->fetchAll();
     // print_r ($data);
-    foreach($data as $newData){
-        $arr[] = array(
-            'cat' => '預約',
-            'date'=>$newData['AppointmentDate'],
-            'num'=>$newData['ID'],
-            'price'=>$newData['TotalPrice'],
-            'statue' => $newData['Condition'],
-    );
-    
+    if(count($data)>0){
+        foreach($data as $newData){
+            $arr[] = array(
+                'cat' => '預約',
+                'date'=>$newData['AppointmentDate'],
+                'num'=>$newData['ID'],
+                'price'=>$newData['TotalPrice'],
+                'statue' => $newData['Condition'],
+        );
+        
+        }
+        echo json_encode ($arr);
+    }else{
+        echo json_encode ("無資料");
     }
-    echo json_encode ($arr);
 ?>
