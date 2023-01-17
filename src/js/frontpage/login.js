@@ -302,6 +302,7 @@ userpop_log.addEventListener('click',function(e){
                 document.querySelector('.logout_pop').classList.add('none');
             },2000);
             localStorage.removeItem('member_ID');
+            // storage.clear();
             // history.go(0); 
         },
         error: function(exception) {

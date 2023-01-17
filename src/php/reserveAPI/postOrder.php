@@ -23,6 +23,8 @@
     $point = $_POST["point"];
     $MemberID = htmlentities( $_POST["MemberID"]);
     $TeamID = $_POST["TeamID"];
+    $Email = $_POST["Email"];
+    $Phone = $_POST["Phone"];
     
     $detailDishies = $_POST["detailDishies"];
     echo $AppointmentDate."<br>";
@@ -35,7 +37,10 @@
     echo $TotalPrice."<br>";
     echo $MemberID."<br>";
     echo $TeamID."<br>";
-
+    echo $Email."<br>";
+    echo $Phone."<br>";
+    echo $AppointmentDate."<br>";
+    
     // 確認當天廚師是否有班表
     $SecltTeamOrders ="
     SELECT T.ID FROM Orders O
@@ -45,11 +50,13 @@
 
     $SecltTeamOrders = getPDO()->prepare($SecltTeamOrders);
     $SecltTeamOrders->bindValue(':AppointmentDate', $AppointmentDate); 
-  
+    
+    // echo $AppointmentDate;
+    
     $result = $SecltTeamOrders -> execute();
     $result = $SecltTeamOrders->fetchAll();
     
-    echo $AppointmentDate."<br>";
+    
     $orderBool = false;
     foreach($result as $index => $row){
         $IDValue=$row["ID"];
@@ -64,10 +71,10 @@
         // 建立訂單總覽
         $insertOrders = "INSERT INTO `Orders`
             ( `AppointmentDate`,`Name`, `Count`, `Condition`, `Scheduled`, `Address`,
-            `SetID`,`TotalPrice`, `notes`, `point`, `MemberID`, `TeamID`)  
+            `SetID`,`TotalPrice`, `notes`, `point`, `MemberID`, `TeamID`,`Email`,`Phone`)  
         VALUES 
             (:AppointmentDate,:Name,:Count,'訂單成立已付款',:Scheduled,:Address
-            ,:SetID,:TotalPrice,:notes,:point,:MemberID,:TeamID)";
+            ,:SetID,:TotalPrice,:notes,:point,:MemberID,:TeamID,:Email,:Phone)";
             // 將include Connection Fuction 給引出
 
             $insertOrders = getPDO()->prepare($insertOrders);
@@ -82,6 +89,8 @@
             $insertOrders->bindValue(':point', $point); 
             $insertOrders->bindValue(':MemberID', $MemberID); 
             $insertOrders->bindValue(':TeamID', $TeamID); 
+            $insertOrders->bindValue(':Email', $Email); 
+            $insertOrders->bindValue(':Phone', $Phone); 
             $result = $insertOrders -> execute();
 
 

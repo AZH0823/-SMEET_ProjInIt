@@ -1,14 +1,13 @@
 <?php
-    $member_ID = $_POST["member_ID"];
+    $member_ID = $_POST["member_ID"] ;
 
     include('../../conectDB/Connection.php');
 
-    //建立SQL
-    $sql = 'select AppointmentDate, d.ID, TotalPrice, `Condition`
-    from Orders o
-        join OrdersDetail d
-        on o.ID = d.ID
-    where o.MemberID = ? ';
+    //建立SQL-預約訂單ORDERS
+    $sql = 'select AppointmentDate, ID, TotalPrice, `Condition`
+    from Orders 
+    where MemberID = ? 
+    order by AppointmentDate desc ';
 
     $statement = getPDO()->prepare($sql);  
     $statement->bindValue(1, $member_ID);  
@@ -19,13 +18,13 @@
     // print_r ($data);
     foreach($data as $newData){
         $arr[] = array(
-            'cat' => '商城',
+            'cat' => '預約',
             'date'=>$newData['AppointmentDate'],
             'num'=>$newData['ID'],
             'price'=>$newData['TotalPrice'],
             'statue' => $newData['Condition'],
     );
-    echo json_encode ($arr);
-
+    
     }
+    echo json_encode ($arr);
 ?>

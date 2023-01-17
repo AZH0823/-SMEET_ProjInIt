@@ -25,7 +25,7 @@
           <ul class="font16 Camel-1">
             <template v-for="tab in member_tab">
               <li >
-                <a :class="[{ now: current_tab == tab.id }, tab.member_tab_4 ]" @click="current_tab = tab.id">{{ tab.name }} 
+                <a :class="[{ now: current_tab == tab.id }, tab.member_tab_4 ]" @click="current_tab = tab.id ; tab_page(); ">{{ tab.name }} 
                   <span :id="tab.member_msg">{{ tab.msg_count }}</span>
                 </a>
               </li>
@@ -41,7 +41,7 @@
         <!-- 登出測試 -->
         <!-- <button type="button" onclick="logout_test()">登出</button> -->
         <!-- ======會員中心內容===== -->
-        <section class="member_section" v-show="current_tab == 'tab1' ">
+        <section class="member_section" v-show="current_tab == 'member' ">
           <div class="member_info">
             <h6 class="member_section_title">個人資訊</h6>
             <div id="info">
@@ -137,8 +137,8 @@
         <!-- ======會員中心內容END===== -->
         <!-- ======訂單查詢===== -->
         <!-- 預約訂單 -->
-        <div class="list_cat green-1">私廚預約訂單</div>
-        <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
+        <div class="list_cat green-1" v-show="current_tab == 'list' ">私廚預約訂單</div>
+        <section class="order_list_section member_product_section" v-show="current_tab == 'list' ">
           <div class="order_list_title font14 gray">
             <!-- <p class="list1">類別</p> -->
             <p class="list2">訂單日期</p>
@@ -155,13 +155,16 @@
               <p class="list4">NT$<span class="list4_money">{{item.price}}</span></p>
               <p class="list5">{{item.statue}}</p>
               <div class="list6">
-                <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
+                <a :href="'orderList_r.html?ID='+ item.num">
+                  <button class="inCart_btn1">查看詳情</button>
+                </a>
               </div>
             </div>
           </template>
+        </section>
           <!-- 商城訂單 -->
-          <div class="list_cat2  green-1">商城訂單</div>
-        <section class="order_list_section member_product_section" v-show="current_tab == 'tab2' ">
+          <div class="list_cat2  green-1" v-show="current_tab == 'list'">商城訂單</div>
+        <section class="order_list_section member_product_section" v-show="current_tab == 'list' ">
           <div class="order_list_title font14 gray">
             <!-- <p class="list1">類別</p> -->
             <p class="list2">訂單日期</p>
@@ -170,7 +173,7 @@
             <p class="list5">訂單狀態</p>
             <div class="list6"></div>
           </div>
-          <template v-for="(item, key) in orderlist">
+          <template v-for="(item, key) in mall_orderlist">
             <div class="order_list_content font16">
               <!-- <p class="list1">{{item.cat}}</p> -->
               <p class="list2">{{item.date}}</p>
@@ -178,7 +181,9 @@
               <p class="list4">NT$<span class="list4_money">{{item.price}}</span></p>
               <p class="list5">{{item.statue}}</p>
               <div class="list6">
-                <button class="inCart_btn1" onclick="location.href='orderList.html';">查看詳情</button>
+                <a :href="'orderList_m.html?ID='+ item.num">
+                  <button class="inCart_btn1">查看詳情</button>
+                </a> 
               </div>
             </div>
           </template>
@@ -195,18 +200,18 @@
         </section>
         <!-- ======訂單查詢結束===== -->
         <!-- ======收藏菜品====== -->
-        <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'tab3' ">
+        <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'collection' ">
           <ul>
             <template v-for="(item, key) in collection" :key="item.name">
               <li class="collect_list">
                 <a>
-                  <div class="product_img">
-                    <img :src=item.img alt="" />
-                    <i class="fa-solid fa-heart " :class="{check_heart :item.check_heart}" @click="cancel_collect(key)"></i>
+                  <div class="product_img"><img :src=item.IMG>
+        
+                    <i class="fa-solid fa-heart " @click="cancel_collect(key)"></i>
                   </div>
                   <div class="product_content green-1">
-                    <h6 class="product_title">{{item.name}}</h6>
-                    <p class="font16">$<span class="product_money">{{item.money}}</span></p>
+                    <h6 class="product_title">{{item.Name}}</h6>
+                    <p class="font16">$<span class="product_money">{{item.Price}}</span></p>
                     <button type="button" class="cart_link" href="">
                       <i class="fa-solid fa-cart-shopping"></i>
                     </button>
@@ -233,7 +238,7 @@
         </section>
         <!-- ======收藏菜品結束====== -->
         <!-- ======訊息中心====== -->
-        <section class="message_section member_product_section" v-show="current_tab == 'tab4' ">
+        <!-- <section class="message_section member_product_section" v-show="current_tab == 'tab4' ">
           <ul class="fuild_wrapper">
             <li class="message_content">
               <div class="message_import">
@@ -270,11 +275,11 @@
               <button class="inCart_btn1">傳送</button>
             </div>
           </ul>
-        </section>
+        </section> -->
         <!-- ======訊息中心結束====== -->
 
         <!-- ======常見問題====== -->
-        <section class="question_section member_product_section" v-show="current_tab == 'tab5' ">
+        <section class="question_section member_product_section" v-show="current_tab == 'faq' ">
           <ul>
             <h5>預約流程</h5>
             <li class="question_section_li li_1">
@@ -585,71 +590,35 @@
       //   e.preventDefault();
       //   login_check();
       // })
-      
-      
-
-      //收藏清單
-      let collection_lo = [{
-                id:1,
-                name:"黑鮪刺身",
-                img:'img/member_img/member_wish1.jpg',
-                money: 700,
-                check_heart:true
-              },
-              {
-                id:2,
-                name:"黑鮪刺身1",
-                img:'img/member_img/member_wish2.jpg',
-                money: 700,
-                check_heart:true
-              },
-              {
-                id:3,
-                name:"黑鮪刺身2",
-                img:'img/member_img/member_wish1.jpg',
-                money: 700,
-                check_heart:true
-              },              
-              {
-                id:4,
-                name:"黑鮪刺身3",
-                img:'img/member_img/member_wish2.jpg',
-                money: 700,
-                check_heart:true
-              }];
-
       let member = Vue.createApp({
         data(){
           return {
             // tab
-            current_tab:"tab1",
+            current_tab:"member",
             member_tab:[
               {
-                id:"tab1",
+                id:"member",
                 name:"會員中心",
-                
+
               },
               {
-                id:"tab2",
+                id:"list",
                 name:"訂單查詢",
+
                 
               },
               {
-                id:"tab3",
+                id:"collection",
                 name:"收藏菜品",
-                
-              },
-              {
-                id:"tab4",
-                name:"訊息中心",
                 member_tab_4:"member_tab_4",
                 member_msg:"member_msg",
-                msg_count:3
+                msg_count:3,
+                
               },
               {
-                id:"tab5",
+                id:"faq",
                 name:"常見問題",
-                
+
               }
             ],
             // 會員中心-個人資訊
@@ -669,46 +638,22 @@
               pwd_old:"",
               pwd_new:""
             },
-            //訂單
-            orderlist:[
-              {
-                cat:"商城",
-                date:"2022/08/21",
-                num:"1",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              },
-              {
-                cat:"商城",
-                date:"2022/08/31",
-                num:"2",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              },
-              {
-                cat:"商城",
-                date:"2022/08/31",
-                num:"3",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              },
-              {
-                cat:"商城",
-                date:"2022/08/31",
-                num:"4",
-                price:"5,000",
-                statue:"訂單成立已付款"
-              }
-            ],
+            //預約訂單
+            orderlist:[],
+            //商城訂單
+            mall_orderlist:[],
             // 收藏
-            collection:[
-              
-            ],
+            collection:[{}],
           }
         },
         mounted(){
-          this.info_show();
-          this.get_order_list();
+          if(member_ID){
+            this.info_show();
+            this.get_order_list();
+            this.get_mallorder_list();
+            this.page();
+            this.collection_s();
+          }
         },
         computed: {},
         methods:{
@@ -716,7 +661,7 @@
           //顯示會員資訊
           info_show(){
             let that = this ;
-            if( member_ID > 0 ){
+            if( member_ID ){
               $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_info.php",
@@ -747,26 +692,29 @@
             let phone = this.member_info.phone;
             let addr = this.member_info.addr;
             //修改會員資訊
-            $.ajax({
-                  method: "POST",
-                  url: "php/frontpage/member/member_info_update.php",
-                  data: {
-                    member_ID:member_ID,
-                    name:name,
-                    birthday:birthday,
-                    sex:sex,
-                    phone:phone,
-                    addr:addr
-                  },
-                  dataType: "text",
-                  success: function (response) {
-                    // console.log(response);
-                    alert('修改完成');
-                  },
-                  error: function (exception) {
-                      alert("發生錯誤: " + exception.status);
-                  }
-              });
+            if(member_ID){
+              $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_info_update.php",
+                    data: {
+                      member_ID:member_ID,
+                      name:name,
+                      birthday:birthday,
+                      sex:sex,
+                      phone:phone,
+                      addr:addr
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                      // console.log(response);
+                      alert('修改完成');
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+
+            }
           },
           //修改會員密碼
           pwd_change(){
@@ -775,76 +723,79 @@
             let pwd_new = this.update_pwd.pwd_new;
             let pwd_confirm = document.getElementById('member_pwd_confirm');
             let change = true ;
-            //判斷帳號相等且不為空值
-            if(account !== "" && account == this.member_info.account){
-              $("#member_account").next().removeClass('appear');
-            }else{
-              //如果帳號不等於
-              $("#member_account").next().addClass('appear');
-              change = false ;
-            };
-            //判斷舊密碼相等且不為空值
-            if(pwd_old == this.member_info.pwd && pwd_old !== ""){
-              $('#member_pwd_old').next().next().removeClass('appear');
-            }else{
-              //舊密碼不相等
-              $('#member_pwd_old').next().next().addClass('appear');
-              change = false ;
-
-            };
-            //舊密碼不等於新密碼
-            if(pwd_old !== pwd_new && pwd_new !== ""){
-              $('#member_pwd_new').next().next().removeClass('appear');
-              //判斷密碼長度再8到16
-              if(pwd_new.length <= 16 && pwd_new.length >= 8 ){
+            if(member_ID){
+              //判斷帳號相等且不為空值
+              if(account !== "" && account == this.member_info.account){
+                $("#member_account").next().removeClass('appear');
+              }else{
+                //如果帳號不等於
+                $("#member_account").next().addClass('appear');
+                change = false ;
+              };
+              //判斷舊密碼相等且不為空值
+              if(pwd_old == this.member_info.pwd && pwd_old !== ""){
+                $('#member_pwd_old').next().next().removeClass('appear');
+              }else{
+                //舊密碼不相等
+                $('#member_pwd_old').next().next().addClass('appear');
+                change = false ;
+  
+              };
+              //舊密碼不等於新密碼
+              if(pwd_old !== pwd_new && pwd_new !== ""){
                 $('#member_pwd_new').next().next().removeClass('appear');
+                //判斷密碼長度再8到16
+                if(pwd_new.length <= 16 && pwd_new.length >= 8 ){
+                  $('#member_pwd_new').next().next().removeClass('appear');
+                }else{
+                  $('#member_pwd_new').next().next().addClass('appear');
+                change = false ;
+  
+                };
               }else{
                 $('#member_pwd_new').next().next().addClass('appear');
-              change = false ;
-
+                change = false ;
+  
               };
-            }else{
-              $('#member_pwd_new').next().next().addClass('appear');
-              change = false ;
-
-            };
-            //新密碼等於確認密碼
-            if(pwd_new == pwd_confirm.value && pwd_confirm.value !== ""){
-              $('#member_pwd_confirm').next().next().removeClass('appear');
-            }else{
-              $('#member_pwd_confirm').next().next().addClass('appear');
-              change = false ;
-
-            };
-            if(change){
-              //更改密碼
-              $.ajax({
-                  method: "POST",
-                  url: "php/frontpage/member/member_pwd_update.php",
-                  data: {
-                    member_ID:member_ID,
-                    pwd_new: pwd_new
-                  },
-                  dataType: "text",
-                  success: function (response) {
-                      alert('修改成功');
-                  },
-                  error: function (exception) {
-                      alert("發生錯誤: " + exception.status);
-                  }
-              });
-            }else{
-              return false;
+              //新密碼等於確認密碼
+              if(pwd_new == pwd_confirm.value && pwd_confirm.value !== ""){
+                $('#member_pwd_confirm').next().next().removeClass('appear');
+              }else{
+                $('#member_pwd_confirm').next().next().addClass('appear');
+                change = false ;
+  
+              };
+              if(change){
+                //更改密碼
+                $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_pwd_update.php",
+                    data: {
+                      member_ID:member_ID,
+                      pwd_new: pwd_new
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                        alert('修改成功');
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+              }else{
+                return false;
+  
+              }
 
             }
           },
           //取得會員點數
           get_point(){
-            this.collection = collection_lo;
             let member_ID = localStorage.getItem("member_ID");
             let that = this ;
             // let bonus_member = document.querySelector('.bonus_member')
             //取得會員點數
+            if(member_ID){
               $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_point.php",
@@ -860,6 +811,8 @@
                         alert("發生錯誤: " + exception.status);
                     }
                 });
+
+            }
 
 
           },
@@ -881,7 +834,7 @@
           // ==========================訂單===========================
           //拿到預約訂單資訊
           get_order_list(){
-            if( member_ID > 0 ){
+            if( member_ID ){
             $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_list_order.php",
@@ -899,25 +852,116 @@
                 });
               }
           },
-
+          //拿到商城訂單資訊
+          get_mallorder_list(){
+            if( member_ID ){
+            $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/member_list_mall.php",
+                    data: {
+                      member_ID:member_ID,
+                    },
+                    dataType: "json",
+                    success: (response) => {
+                      this.mall_orderlist = response;
+                      
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+              }
+          },
 
           // ==========================訂單結束===========================
           
           // ==========================收藏===========================
           //愛心點擊後取消收藏(移除陣列資訊)
           cancel_collect(i){
-            let r = confirm('確定取消收藏');
-            if(r){
-              setTimeout(()=>{
-                this.collection.splice(i,1);
-              },500);
-              console.log(collection_lo);
+            // console.log(i);
+            if(member_ID){
+              let r = confirm('確定取消收藏');
+              // 這個ID是favorite table 的ID
+              let ID = this.collection[i].ID
+              // console.log(ID);
+              if(r){
+                // 刪除資料庫的收藏
+                $.ajax({
+                      method: "POST",
+                      url: "php/frontpage/member/collect_d.php",
+                      data: {
+                        ID:ID,
+                      },
+                      dataType: "text",
+                      success: (response) => {
+                        setTimeout(()=>{
+                          this.collection.splice(i,1);
+                        },500);
+                        console.log('aa')
+                      },
+                      error: function (exception) {
+                          alert("發生錯誤: " + exception.status);
+                      }
+                  });
+              }
+            }
+          },
+          // select渲染到畫面上
+          collection_s(){
+            if(member_ID){
+              $.ajax({
+                      method: "POST",
+                      url: "php/frontpage/member/collect_s.php",
+                      data: {
+                        member_ID:member_ID,
+                  
+                      },
+                      dataType: "json",
+                      success:  (response) => {
+                        // console.log(response);
+                        if(response != ""){
+                          this.collection = response ;
+                          // 將三張 img 轉陣列並塞回 data
+                          let xxx = this.collection;
+                          for(let i =0; i < xxx.length; i++){
+
+                            // 將img存到新陣列
+                            let img = this.collection[i].IMG
+                                    
+                            const imgs = img.split(" ");
+                            
+                            // 回傳AjaxMealsInfo
+                            this.collection[i].IMG = imgs[0]
+                            // console.log(this.collection[i].IMG);
+                          }
+                          console.log(this.collection);
+                        }
+                      },
+                      error: function (exception) {
+                          alert("發生錯誤: " + exception.status);
+                      }
+                  });
+
             }
           },
           // ==========================收藏結束===========================
           
+          // 分頁紀錄
+          tab_page(){
+            history.pushState(null, null, "#" + this.current_tab);
+
+          },
+          page(){
+            let url = window.location.hash;
+            // console.log(url); 
+            if(url){
+              this.current_tab = url.slice(1,15);
+
+            }
+          }
         }
       }).mount('#member');
+
       // ==========================常見問題===========================
       $(function () {
           $(this).siblings().toggleClass("active");
