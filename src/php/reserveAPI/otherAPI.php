@@ -2,11 +2,11 @@
   include ('../conectDB/Connection.php');
   //  撈全部單品資訊
 
-  $SearhDishSql = "SELECT  d.ID as id, d.`Name` as disName,dt.`Name`as dishType, d.Price
+  $SearhDishSql = "SELECT  d.ID AS id, d.`Name` AS disName,dt.`Name`AS dishType, d.Price
   FROM dish  d
-       join DishsType dt
-           on d.`Type` = dt.ID
-   where d.ProductType = '私廚單點' and dt.`Name`= '單品'";
+       JOIN DishsType dt
+           ON d.`Type` = dt.ID
+  WHERE d.ProductType = '私廚單點' AND dt.`Name`= '單品'";
   // 將include Connection Fuction 給引出
   $Searhstatement = getPDO()->prepare($SearhDishSql);
   $Searhstatement -> execute();

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <!-- @@include('layout/header_01.html') -->
+    @@include('layout/header_01.html')
     <!-- 流程控制說明 -->
     <!-- checked 控制上方工作流程到哪一個之項目 -->
     <!-- nowPage 控制一個流程細項目打開  -->
@@ -88,11 +88,6 @@
                                         <span>{{servie.title}}</span><span>X{{this.inputData.peoCount}}</span><span>${{(servie.price*this.inputData.peoCount).toLocaleString()}}</span>
                                     </li>
                                 </template>
-
-                                <!-- <li class="servies_title"><span>餐具</span><span>x 6</span><span>$600</span></li>
-                                <li class="servies_title"><span>炊具</span><span>x 6</span><span>$600</span></li>
-                                <li class="servies_title"><span>餐盤</span><span>x 6</span><span>$600</span></li>
-                                <li class="servies_title"><span>服務人員</span><span>x 6</span><span>$600</span></li> -->
                             </ul>
 
                             <ul class="coupon"  v-if="workFlow.step >= 4">
@@ -140,79 +135,6 @@
                                             </li> 
                                         </template>
                                     </template>
-
-                                        <!-- <p>{{itemdetail}}</p> -->
-                                            <!-- <p class="setkind">{{item.dishType}}{{}}</p>
-                                        <p class="setkind">{{item.dishType}}{{}}</p>
-                                        <li class="stepper_input">
-                                            <div class=dish-title>{{item.dishName}}</div>
-                                            <div class=amoumt :data-id="idx">
-                                                <button class="button sub">-</button>
-                                                <input value="0" class="input stepper_valueInput" min="0" max="12" @click ='orderthisMeal(this.idx)'/>
-                                                <button class="button add">+</button>
-                                            </div>
-                                        </li> -->
-                                <!-- <p class="setkind">湯物</p>
-
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                </li>
-                                <p class="setkind">前菜</p>
-
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                </li>
-                                <p class="setkind">刺身</p>
-
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                </li>
-                                <p class="setkind">主食</p>
-
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                </li>
-                                <p class="setkind">甜點</p>
-
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                </li>
-                                <p class="setkind">飲品</p>
-
-                                <li class="stepper_input">
-                                    <div class=dish-title>燻鮭魚番茄佐優格醬</div>
-                                    <div class=amoumt>
-                                        <button class="button sub">-</button>
-                                        <input value="0" class="input stepper_valueInput" min="0" max="12" />
-                                        <button class="button add">+</button>
-                                    </div>
-                                </li> -->
-
                             </ul>
                         </section>
 
@@ -271,11 +193,6 @@
                                     <div class="item">私廚團隊</div>
                                 </div>
 
-                                <!-- <span>{{inputData.date}}</span>
-                                    </div>
-                                    <div class="cheifTeam">
-                                        <img src="./img/reserve_img/reserve_icon05.svg" alt="">
-                                        <span>團隊廚師長:{{chefTeamName}}</span> -->
                                 <div class="top_content">
                                     <div class="item">{{inputData.date}}</div>
                                     <div class="item"><span class="date">{{displayOrederTime}}</span></div>
@@ -299,33 +216,6 @@
                                                 <p class="item" v-if="itemDetail.qty > 0"><span class="dishQty">X {{itemDetail.qty}}</span>{{itemDetail.dishName}}</p>
                                             </template>
                                         </template>
-                                        <!-- 湯物 -->
-                                        <!-- <h6 class="dishType meal_cate font16 gray">湯物</h6>
-                                        <p class="item">奶香牛肝菌野菇濃湯<span class="dishQty">X 2</span></p>
-                                        <p class="item">石斑海鮮清湯<span class="dishQty">X 2</span></p> -->
-                                        <!-- 前菜 -->
-                                        <!-- <h6 class="dishType meal_cate font16 gray">前菜</h6>
-                                        <p class="item">燻鮭魚番茄佐優格醬<span class="dishQty">X 2</span></p>
-                                        <p class="item">深海魚皮野蔬沙拉佐醋醬<span class="dishQty">X 2</span></p> -->
-                                        <!-- 刺身 -->
-                                        <!-- <h6 class="dishType meal_cate font16 gray">刺身</h6>
-                                        <p class="item">大間本鮪中腹、秋鮭、貝類、牡丹蝦<span class="dishQty">X 2</span></p> -->
-                                        <!-- 主食 -->
-                                        <!-- <h6 class="dishType meal_cate font16 gray">主食</h6>
-                                        <p class="item">嫩煎干貝佐松露菲力<span class="dishQty">X 2</span></p>
-                                        <p class="item">日本小田和牛壽喜燒<span class="dishQty">X 2</span></p>
-                                        <p class="item">龍蝦佐鮑魚海鮮拼盤<span class="dishQty">X 2</span></p> -->
-                                        <!-- 甜點 -->
-                                        <!-- <h6 class="dishType meal_cate font16 gray">甜點</h6>
-                                        <p class="item">抹茶布丁搭配綿密金時紅豆<span class="dishQty">X 2</span></p>
-                                        <p class="item">栗子羊羹<span class="dishQty">X 2</span></p>
-                                        <p class="item">春手毬和菓子<span class="dishQty">X 2</span></p> -->
-                                        <!-- 飲品 -->
-                                        <!-- <h6 class="dishType meal_cate font16 gray">飲品</h6>
-                                        <p class="item">抹茶海鹽奶蓋<span class="dishQty">X 2</span></p>
-                                        <p class="item">烘焙曼巴咖啡<span class="dishQty">X 2</span></p>
-                                        <p class="item">高山金萱茶<span class="dishQty">X 2</span></p>
-                                        <p class="item">檸檬海鹽氣泡飲<span class="dishQty">X 2</span></p> -->
                                     </div>
                                     
                                 </div>
@@ -339,10 +229,6 @@
                                             <li class="one_item" v-if="item.qty > 0">{{item.dishName}}<div class="one_count">X {{item.qty}}</div>
                                             </li>    
                                         </template>
-                                        <!-- <li class="one_item">奶香牛肝菌野菇濃湯<div class="one_count">x 2</div>
-                                        </li>
-                                        <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div>
-                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -436,15 +322,14 @@
                                     <!-- <p>{{checkName}}</p> -->
                                 </div>
                                 <div class="card_data">
-                                    <input type="text" placeholder="有效日期"  class="card-date" maxlength="4"  v-model.number="this.inputData.cardDate">
+                                     <input type="text" placeholder="有效日期"  class="card-date" maxlength="4"  v-model="this.inputData.cardDate" @keydown="cardCodeInput($event)" >
                                     <span class="error_Msg" v-if="!checkCardDate">長度為四碼</span> 
                                 </div>
                                 <div class="card_code">
-                                    <input type="text" placeholder="檢核碼"  class="card_checknum" maxlength="3"  v-model.number="this.inputData.cardCode">
+                                    <input type="text" placeholder="檢核碼"  class="card_checknum" maxlength="3"  v-model="this.inputData.cardCode" @keydown="cardCodeInput($event)">
                                     <span class="error_Msg" v-if="!checkCardCode">長度為三碼</span>   
                                 </div>                            
                             </div>
-
                         </section>
 
                         <section class="step_flow  step5" :class="{'nowpage': workFlow.step === 5}">

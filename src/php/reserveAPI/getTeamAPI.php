@@ -2,7 +2,7 @@
     include ('../conectDB/Connection.php');
 
     //  撈除所有服務
-    $SearhDishSql = "select ID,LederName,team from Teams;";
+    $SearhDishSql = "SELECT ID,LederName,team FROM Teams;";
    
     $Searhstatement = getPDO()->prepare($SearhDishSql);
     $Searhstatement -> execute();

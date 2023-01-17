@@ -3,7 +3,7 @@
 
   //  撈除所有服務
   $SearhDishSql = "SELECT d.id, d.`Name`, d.Price, d.Introduction
-  FROM Dish d
+  FROM dish d
         join DishsType dt
             on d.`Type` = dt.ID
   where type = 11";
