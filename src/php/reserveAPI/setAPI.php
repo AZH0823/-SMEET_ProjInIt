@@ -7,7 +7,7 @@
     
     //  撈全部 Set 套資資訊
     $SearhDishSql = " SELECT  d.ID as id, d.`Name` as disName,d.Price, d.SetID,dt.`Name` as dishType
-    FROM Dish d
+    FROM dish d
         join DishsType dt
             on d.`type` = dt.ID
     where d.ProductType = '私廚單點' and dt.`Name` != '單品'";
