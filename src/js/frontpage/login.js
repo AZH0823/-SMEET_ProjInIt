@@ -256,6 +256,10 @@ user_icon.addEventListener('click',function(e){
     login_check();
 })
 
+
+// 會員登入hover的收藏的右上角紅圈圈數字
+let cart_num = document.getElementById('cart_num');
+
 // hover
 user_icon.addEventListener('mouseover',function(){
     //hover 不跳彈窗
@@ -273,6 +277,28 @@ user_icon.addEventListener('mouseover',function(){
                 // 會員icon顯示
                 let user_pop = document.querySelector('.user_pop');
                 user_pop.classList.remove('none');
+                // ==========在select一次收藏===========
+                $.ajax({            
+                    method: "POST",
+                    url: "php/frontpage/member/collect_s.php",
+                    data:{
+                        member_ID:member_ID,
+                    },            
+                    dataType: "json",
+                    success: function (response) {
+                        if(response == "無資料"){
+                            return;
+                        }else{
+                            // console.log(response.length);
+                            cart_num.classList.remove('none');
+                            cart_num.innerHTML = response.length;
+                        }
+                    },
+                    error: function(exception) {
+                        alert("數據載入失敗: " + exception.status);
+                    }
+                });
+                // ====================================
             }              
         },
         error: function(exception) {

@@ -34,8 +34,8 @@ initial-scale=1.0">
                         <h3>$<span>{{ shopMallDetailInfo.Price }}</span></h3>
                         <i class="fa-solid fa-heart" 
                         :class="{shopMallDetail_checkHeart: shopMallDetailInfo.heart}" 
-                        @click="collect_heart1()"
-                        @click="addCollectList1()"></i> <!-- // TODO -->
+                        @click="detailAddCollectLogin_check()"
+                        ></i> 
                     </div>
                     <!-- 加減數量 -->
                     
@@ -51,7 +51,7 @@ initial-scale=1.0">
                     <!-- 按鈕(加入購物車/立即結帳) -->
                     <div class="btn_add_buy">
                         <button class="inCart_btn2 add" @click="addShoppingCart1(shopMallDetailInfo)">加入購物車</button>
-                        <button class="inCart_btn2 buy" @click="addlocation()" href="./cartDetail.html">立即結帳</button>
+                        <button class="inCart_btn2 buy" @click="addShoppingCart_check" href="./cartDetail.html">立即結帳</button>
                     </div>
                 </div>
             </div>
@@ -81,8 +81,7 @@ initial-scale=1.0">
                                     <img :src="item.IMG[0]" alt="" data-inside="true">
                                     <i class="fa-solid fa-heart"
                                     :class="{shopMall_checkHeart: item.heart}" 
-                                    @click="collect_heart(item)"
-                                    @click="addCollectList(item)"
+                                    @click="addCollectLogin_check(item)"
                                     @click.prevent
                                     data-inside="true"></i>
                                 </div>
@@ -179,8 +178,6 @@ initial-scale=1.0">
                     popupData: {
                         ID: "",
                         IMG: "",
-                        img2: "",
-                        img3: "",
                         Name: "",
                         Price: "",
                         heart: "",
@@ -301,15 +298,17 @@ initial-scale=1.0">
                 // 最新商品data AJAX 傳入
                 this.getLatestProduct();
 
-                // 進商品詳情頁就加資料
-                this.getLocalStorage()
+                // 進商品詳情頁就抓購物車資料
+                this.getCartLocalStorage()
+
+                // 進商品詳情頁就抓收藏商品資料
+                this.getCollectLocalStorage()
             },
 
             methods: {
-                // 
 
-                // TODO 假設有Storage不是空值就拿資料，空值就不拿資料
-                getLocalStorage(){
+                // shoppingData 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
+                getCartLocalStorage(){
                     const local_storage = localStorage.getItem("shoppingData")
 
                     if(local_storage){
@@ -319,13 +318,45 @@ initial-scale=1.0">
                     }
                 },
                 
-                // TODO 會員登入狀態是，可insert收藏商品（select檢查有沒有資料，再insert資料）非會員狀態則無法看見愛心icon
-                
-                // TODO 收藏前要先登入會員
-                
-                // TODO 收藏後重整畫面愛心的狀態不能消失（在res 迴圈 item.heart = true）
+                // shopCollect 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
+                getCollectLocalStorage(){
+                    const local_storage = localStorage.getItem("shopCollect")
 
-                // ========= AJAX ========= //
+                    if(local_storage){
+                        const LSGetItem = JSON.parse(localStorage.getItem("shopCollect")) 
+
+                        this.ShoppingCartList = LSGetItem
+                    }
+                },
+                
+
+                // 立即結帳前檢查是否登入會員，已登入就跳轉畫面到結賬頁面
+                addShoppingCart_check(){    
+                    $.ajax({            
+                        method: "POST",
+                        url: "php/frontpage/login_check.php",
+                        data:{},            
+                        dataType: "text",
+                        success: (response) => {
+                            if(response == ""){
+                                //尚未登入->跳出會員登入畫面
+                                login_pop();
+                            }else{
+                                //已有登入的話 執行.....
+                                // 會員icon顯示
+                                // let user_pop = document.querySelector('.user_pop');
+                                // user_pop.classList.remove('none');
+
+                                this.addlocation();
+                            }              
+                        },
+                        error: function(exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
+
+
                 // 取得商品清單
                 getCate(){    
                     // 將 id 以 AJAX方式 傳到 API，API抓資料庫資料，再傳到前台渲染
@@ -377,31 +408,9 @@ initial-scale=1.0">
                     });
                 },
 
-                // ========= AJAX ========= //
                 // 取得最新商品清單
                 getLatestProduct(){    
 
-                    // $.ajax({
-                    //     method: "GET",
-                    //     url: "./php/frontpage/shopMall_latestProduct.php",
-                    //     dataType: "json",
-                    //     success: (response) => {
-                    //         if (response) {
-                    //             this.latestProduct = response.map(x => {
-                    //                 x.heart = false;
-                    //                 x.qty = 0;
-                    //                 x.IMG = x.IMG.split(" ");
-                    //                 return x;
-                                    
-                    //             });
-                    //             console.log(this.latestProduct.IMG);
-                    //         }
-                    //     },
-                    //     error: function (exception) {
-                    //         alert("數據載入失敗: " + exception.status);
-                    //     }
-                    // });
-                    
                     $.ajax({            
                         method: "GET",
                         url: "./php/frontpage/shopMall_latestProduct.php",
@@ -442,7 +451,7 @@ initial-scale=1.0">
                     });
                 },
 
-                // 加入購物車
+                // 詳情商品加入購物車
                 addShoppingCart1(shopMallDetailInfo){
 
                     const addCartListEl = JSON.parse(JSON.stringify(shopMallDetailInfo)) 
@@ -490,12 +499,12 @@ initial-scale=1.0">
                     }, 1000);
                 },
 
-                // 商品數量加
+                // 詳情商品數量加
                 qtyPlus(){
                     // console.log(qty);
                     this.shopMallDetailInfo.qty ++;
                 },
-                // 商品數量減
+                // 詳情商品數量減
                 qtyMinus(){
                     // console.log(qty);
                     if(this.shopMallDetailInfo.qty > 1){
@@ -510,59 +519,69 @@ initial-scale=1.0">
 
                 // ========= 商品收藏 ========= //
 
-                // 商品愛心收藏及移除（樣式及提醒popUp）\
-                
-                collect_heart1(){
-                    // 加减爱心
-
-
-                    console.log(this.shopMallDetailInfo.heart);
-                    if(this.shopMallDetailInfo.heart == true){
-                        this.shopMallDetailInfo.heart = false;
-                        this.success_popup = '移除收藏成功'
-                        this.removeCollectList1(this.shopMallDetailInf)
-
-                    }else{
-                        this.shopMallDetailInfo.heart = true;
-                        this.success_popup = '加入收藏成功'
-                        this.addCollectList1(this.shopMallDetailInf)
-                    }
-
-                    // // 收藏 & 移除 PopOn 消失
-                    clearInterval(this.success_popup_interval)
-                    this.success_popup_interval = setInterval(() => {
-                        this.success_popup= ''
-                    }, 1000);
-
-                    // // 收藏增加 LoacalStorage
-                    console.log(this.collect_heart_data_list);
-                    // localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
-                },
-
-                // 收藏商品資料加入空陣列
-                addCollectList1(){
+                // 詳情收藏商品資料加入空陣列
+                addCollectList(){
                     // push 到新的陣列以便存到 localStorage
                     this.collect_heart_data_list.push(this.shopMallDetailInfo);
                     console.log(this.shopMallDetailInfo);
                 },
 
-                // 收藏商品資料移除
-                removeCollectList1(){
+                // 詳情收藏商品資料移除
+                removeCollectList(){
                     this.collect_heart_data_list.shift(this.shopMallDetailInfo);
                 },
                 
+                // 詳情加入收藏前檢查是否登入會員
+                detailAddCollectLogin_check(){    
+                    $.ajax({            
+                        method: "POST",
+                        url: "php/frontpage/login_check.php",
+                        data:{},            
+                        dataType: "text",
+                        success:  (response)=>{
+                            if(response == ""){
+                                //尚未登入->跳出會員登入畫面
+                                login_pop();
+                            }else{
+                                //已有登入的話 執行.....
+                                // 會員icon顯示
+                                // let user_pop = document.querySelector('.user_pop');
+                                // user_pop.classList.remove('none');
+                                // 加减爱心
+                                
+                                // 商品收藏樣式 & 加到 Storage
+                                console.log(this.shopMallDetailInfo.heart);
+                                    if(this.shopMallDetailInfo.heart == true){
+                                        this.shopMallDetailInfo.heart = false;
+                                        this.success_popup = '移除收藏成功'
+                                        this.removeCollectList(this.shopMallDetailInf)
 
+                                    }else{
+                                        this.shopMallDetailInfo.heart = true;
+                                        this.success_popup = '加入收藏成功'
+                                        this.addCollectList(this.shopMallDetailInf)
+                                    }
 
-                // ========= 最新商品 ========= //
+                                    // // 收藏 & 移除 PopOn 消失
+                                    clearInterval(this.success_popup_interval)
+                                    this.success_popup_interval = setInterval(() => {
+                                        this.success_popup= ''
+                                    }, 1000);
 
-                // TODO 怎麼觸及燈箱以外的地方，就可以讓燈箱關閉（目前在html結構上加上data-inside=”true“來判斷），但是這樣會報錯
-                // xxx(){
-                //     const target = e.target
+                                    localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
+                            }              
+                        },
+                        error: function(exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
 
-                //     if (!target.matches('[data-inside]')) { 
-                //         this.isShow = false;
-                //     }
-                // },
+                    
+
+                // ================== 最新商品 ================== //
+
+                
 
                 // 點擊卡片購物車 icon 後 顯示 popUp
                 shopCar(ID, Name, Price, IMG, qty){
@@ -577,7 +596,7 @@ initial-scale=1.0">
                     this.popupData.qty = 1;
                 },
 
-                // 點擊 X 關閉popUp並清空資料
+                // 點擊卡片 X 關閉popUp並清空資料
                 popUp_xClose(ID, Name, Price, IMG, heart, qty){
 
                     // 關閉popUp
@@ -586,12 +605,12 @@ initial-scale=1.0">
                     this.popupData.qty = 1;
                 },
 
-                // 商品數量加
+                // 卡片商品數量加
                 popUpPlus(qty){
                     // console.log(qty);
                     this.popupData.qty ++;
                 },
-                // 商品數量減
+                // 卡片商品數量減
                 popUpMinus(qty){
                     // console.log(qty);
                     if(this.popupData.qty > 1){
@@ -600,7 +619,7 @@ initial-scale=1.0">
                 },
 
                 
-                // 加入購物車
+                // 卡片加入購物車
                 addShoppingCart2(popupData){
                     // consloe.log(popupData);
                     // asign 到 LoacalStorage
@@ -611,6 +630,7 @@ initial-scale=1.0">
 
                     if(this.ShoppingCartList.length !==0){
                         console.log(`ShoppingCartList 有東西`)
+                        
                         // ID 重複
                         let result = false;
                         let idx = null;
@@ -652,46 +672,68 @@ initial-scale=1.0">
                 },
 
                 // ========= 商品收藏 ========= //
+                // 卡片加入收藏前檢查是否登入會員
+                addCollectLogin_check(item){    
+                    $.ajax({            
+                        method: "POST",
+                        url: "php/frontpage/login_check.php",
+                        data:{},            
+                        dataType: "text",
+                        success:  (response)=>{
+                            if(response == ""){
+                                //尚未登入->跳出會員登入畫面
+                                login_pop();
+                            }else{
+                                //已有登入的話 執行.....
+                                // 會員icon顯示
+                                // let user_pop = document.querySelector('.user_pop');
+                                // user_pop.classList.remove('none');
+                                // 加减爱心
+                                
+                                // 商品收藏樣式 & 加到 Storage
+                                if(item.heart == true){
+                                    item.heart = false;
+                                    this.success_popup = '移除收藏成功'
+                                    this.removeCollectList(item)
+                                    
+                                    // 使 scroll 無效
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "hidden";
 
-                // 收藏商品資料加入空陣列
-                addCollectList(item){
-                    console.log(item);
-                    // push 到新的陣列以便存到 localStorage
-                    this.collect_heart_data_list.push(item);
+                                }else{
+                                    item.heart = true;
+                                    this.success_popup = '加入收藏成功'
+                                    this.addCollectList(item)
+
+                                    // 使 scroll 無效
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "hidden";
+                                }
+
+                                // 收藏 & 移除 PopOn 消失
+                                clearInterval(this.success_popup_interval)
+                                this.success_popup_interval = setInterval(() => {
+                                    this.success_popup= ''
+
+                                    // 一秒後開啟 scroll
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "auto";
+                                    
+                                }, 1000);
+
+                                // 收藏增加 Loaca  lStorage
+                                // console.log(this.collect_heart_data_list); 
+                                localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
+                                
+                            }              
+                        },
+                        error: function(exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
                 },
 
-                // 收藏商品資料移除
-                removeCollectList(item){
-                    this.collect_heart_data_list.shift(item);
-                },
-
-
-                 // 商品愛心收藏及移除（樣式及提醒popUp）
-                collect_heart(item){
-                    // 加减爱心
-                    console.log(item.heart);
-                    if(item.heart == true){
-                        item.heart = false;
-                        this.success_popup = '移除收藏成功'
-                        this.removeCollectList(item)
-
-                    }else{
-                        item.heart = true;
-                        this.success_popup = '加入收藏成功'
-                        this.addCollectList(item)
-                    }
-
-                    // 收藏 & 移除 PopOn 消失
-                    clearInterval(this.success_popup_interval)
-                    this.success_popup_interval = setInterval(() => {
-                        this.success_popup= ''
-                    }, 1000);
-
-                    // 收藏增加 LoacalStorage
-                    // console.log(this.collect_heart_data_list);
-                    localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
-                },
-
+                
             },
         });
 

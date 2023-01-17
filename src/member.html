@@ -26,7 +26,7 @@
             <template v-for="tab in member_tab">
               <li >
                 <a :class="[{ now: current_tab == tab.id }, tab.member_tab_4 ]" @click="current_tab = tab.id ; tab_page(); ">{{ tab.name }} 
-                  <span :id="tab.member_msg">{{ tab.msg_count }}</span>
+                  <span :id="tab.member_msg" class="none">{{ tab.msg_count }}</span>
                 </a>
               </li>
             </template>
@@ -161,6 +161,11 @@
               </div>
             </div>
           </template>
+          <!-- 沒有訂單 -->
+          <div class="no_list no_list_order none" ref="no_list_order">
+            <i class="fa-solid fa-cart-shopping Camel-1 font18"></i>
+            <p class="no_text Camel-1 font18">你還沒有預約訂單</p>
+          </div>
         </section>
           <!-- 商城訂單 -->
           <div class="list_cat2  green-1" v-show="current_tab == 'list'">商城訂單</div>
@@ -187,6 +192,11 @@
               </div>
             </div>
           </template>
+          <!-- 沒有訂單 -->
+          <div class="no_list no_list_mall none" ref="no_list_mall">
+            <i class="fa-solid fa-cart-shopping Camel-1 font18"></i>
+            <p class="no_text Camel-1 font18">你還沒有商城訂單</p>
+          </div>
           <!-- <div class="order_list_content font16">
             <p class="list1">商城</p>
             <p class="list2">2022/08/31</p>
@@ -203,8 +213,8 @@
         <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'collection' ">
           <ul>
             <template v-for="(item, key) in collection" :key="item.name">
-              <li class="collect_list">
-                <a>
+              <a class="collect_list">
+                <div class="product_list">
                   <div class="product_img"><img :src=item.IMG>
         
                     <i class="fa-solid fa-heart " @click="cancel_collect(key)"></i>
@@ -216,9 +226,10 @@
                       <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                   </div>
-                </a>
-              </li>
+                </div>
+              </a>
             </template>
+            
             <!-- <li class="collect_list">
               <a href="">
                 <div class="product_img">
@@ -235,6 +246,10 @@
               </a>
             </li> -->
           </ul>
+          <div class="no_list no_list_collect none" ref="no_list_collect">
+            <i class="fa-solid fa-cart-shopping Camel-1 font18"></i>
+            <p class="no_text Camel-1 font18">你還沒有收藏</p>
+          </div>
         </section>
         <!-- ======收藏菜品結束====== -->
         <!-- ======訊息中心====== -->
@@ -280,297 +295,22 @@
 
         <!-- ======常見問題====== -->
         <section class="question_section member_product_section" v-show="current_tab == 'faq' ">
-          <ul>
-            <h5>預約流程</h5>
-            <li class="question_section_li li_1">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus "></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為6人</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有提供素食餐點嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>不好意思，目前暫無提供全素食餐點。</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問廚師預約的時段有哪些呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
-                  10-14天內取消預約則退款70% 不足10天則不予退款。
-                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為6人</h6>
-              </div>
-            </li>
-          </ul>
-          <ul>
-            <h5>付款問題</h5>
-            <li class="question_section_li  li_1">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為6人</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有提供素食餐點嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>不好意思，目前暫無提供全素食餐點。</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問廚師預約的時段有哪些呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
-                  10-14天內取消預約則退款70% 不足10天則不予退款。
-                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為６人</h6>
-              </div>
-            </li>
-          </ul>
-          <ul>
-            <h5>租借服務</h5>
-            <li class="question_section_li li_1">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為6人</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有提供素食餐點嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>不好意思，目前暫無提供全素食餐點。</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問廚師預約的時段有哪些呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
-                  10-14天內取消預約則退款70% 不足10天則不予退款。
-                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為６人</h6>
-              </div>
-            </li>
-          </ul>
-          <ul>
-            <h5>退貨問題</h5>
-            <li class="question_section_li li_1">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為6人</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有提供素食餐點嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>不好意思，目前暫無提供全素食餐點。</h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問廚師預約的時段有哪些呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  預約流程中會顯示廚師們可預約的時段，透過行事曆也可以查看目前廚師們的空檔唷！
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問提供租借服務有要加選什麼項目呢？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>
-                  全額退款的最晚取消為當日到府服務的15天前（不含服務當天）
-                  10-14天內取消預約則退款70% 不足10天則不予退款。
-                  （如欲政府發佈之天災狀況不在以上限制，可延期一次）
-                </h6>
-              </div>
-            </li>
-
-            <li class="question_section_li">
-              <div class="question_flex">
-                <i class="fa-solid fa-q"></i>
-                <h6>請問有最低用餐人數嗎？</h6>
-                <i class="fa-solid fa-plus"></i>
-                <!-- <i class="fa-solid fa-minus"></i> -->
-              </div>
-              <div class="question_none">
-                <i class="fa-solid fa-a"></i>
-                <h6>有的，最低廚師預約人數為６人</h6>
-              </div>
-            </li>
+          <ul v-for="(item, key) in qa_title">
+            <h5>{{ item }}</h5>
+            <template v-for="(value, key) in qa[key]">
+              <li class="question_section_li" >
+                <div class="question_flex">
+                  <i class="fa-solid fa-q"></i>
+                  <h6>{{ value.QuestionContent }}</h6>
+                  <i class="fa-solid fa-plus"></i>
+                  <!-- <i class="fa-solid fa-minus "></i> -->
+                </div>
+                <div class="question_none">
+                  <i class="fa-solid fa-a"></i>
+                  <h6>{{ value.AnswerContent }}</h6>
+                </div>
+              </li>
+            </template>
           </ul>
         </section>
         <!-- ======常見問題結束====== -->
@@ -612,7 +352,7 @@
                 name:"收藏菜品",
                 member_tab_4:"member_tab_4",
                 member_msg:"member_msg",
-                msg_count:3,
+                msg_count:"",
                 
               },
               {
@@ -644,6 +384,9 @@
             mall_orderlist:[],
             // 收藏
             collection:[{}],
+            // 常見問題
+            qa:[{}],
+            qa_title:["預約流程", "付款問題","租借服務"]
           }
         },
         mounted(){
@@ -653,6 +396,8 @@
             this.get_mallorder_list();
             this.page();
             this.collection_s();
+            this.collect_num();
+            this.get_QA();
           }
         },
         computed: {},
@@ -843,8 +588,11 @@
                     },
                     dataType: "json",
                     success: (response) => {
+                      if(response == "無資料"){
+                        this.$refs.no_list_order.classList.remove('none');
+                        return;
+                      }
                       this.orderlist = response;
-                      
                     },
                     error: function (exception) {
                         alert("發生錯誤: " + exception.status);
@@ -863,6 +611,10 @@
                     },
                     dataType: "json",
                     success: (response) => {
+                      if(response == "無資料"){
+                        this.$refs.no_list_mall.classList.remove('none');
+                        return;
+                      }
                       this.mall_orderlist = response;
                       
                     },
@@ -897,13 +649,14 @@
                         setTimeout(()=>{
                           this.collection.splice(i,1);
                         },500);
-                        console.log('aa')
+                        // console.log('aa')
+                        this.collect_num();
                       },
                       error: function (exception) {
                           alert("發生錯誤: " + exception.status);
                       }
                   });
-              }
+              };
             }
           },
           // select渲染到畫面上
@@ -919,6 +672,11 @@
                       dataType: "json",
                       success:  (response) => {
                         // console.log(response);
+                        if(response == "無資料"){
+                        this.$refs.no_list_collect.classList.remove('none');
+                        this.collection = [];
+                        return;
+                        }
                         if(response != ""){
                           this.collection = response ;
                           // 將三張 img 轉陣列並塞回 data
@@ -934,7 +692,7 @@
                             this.collection[i].IMG = imgs[0]
                             // console.log(this.collection[i].IMG);
                           }
-                          console.log(this.collection);
+                          // console.log(this.collection);
                         }
                       },
                       error: function (exception) {
@@ -944,8 +702,74 @@
 
             }
           },
+          // 更新收藏菜品的右上角紅圈圈
+          collect_num(){
+            $.ajax({            
+                    method: "POST",
+                    url: "php/frontpage/member/collect_s.php",
+                    data:{
+                        member_ID:member_ID,
+                    },            
+                    dataType: "json",
+                    success:  (response) => {
+                        if(response == "無資料"){
+                            return;
+                        }else{
+                          let member_msg = document.getElementById('member_msg');
+                          // console.log(response.length);
+                          member_msg.classList.remove('none');
+                          // console.log(this.member_tab[2].msg_count);
+                          this.member_tab[2].msg_count = response.length;
+                        }
+                    },
+                    error: function(exception) {
+                        alert("數據載入失敗: " + exception.status);
+                    }
+                });
+          },
           // ==========================收藏結束===========================
-          
+          // ==========================QA===========================
+          get_QA(){
+            $.ajax({            
+                    method: "POST",
+                    url: "php/frontpage/member/qa.php",
+                    data:{
+                        member_ID:member_ID,
+                    },            
+                    dataType: "json",
+                    success:  (response) => {
+                      // this.qa = response;
+                      let reserve = response.filter(function(item){
+                        if(item.Category == "預約流程"){
+                          return item;
+                        };
+                      });
+                      this.qa[0] = reserve ;
+                      let pay = response.filter(function(item){
+                        if(item.Category == "付款問題"){
+                          return item;
+                        };
+                      });
+                      this.qa[1] = pay ;
+                      let rent = response.filter(function(item){
+                        if(item.Category == "租借服務"){
+                          return item;
+                        };
+                      });
+                      this.qa[2] = rent ;
+                      // console.log(this.qa);
+
+                    },
+                    error: function(exception) {
+                        alert("數據載入失敗: " + exception.status);
+                    }
+                });
+          },
+          // 打開QA
+          open(e){
+
+          },
+          // ==========================QA結束===========================
           // 分頁紀錄
           tab_page(){
             history.pushState(null, null, "#" + this.current_tab);
@@ -964,13 +788,13 @@
 
       // ==========================常見問題===========================
       $(function () {
-          $(this).siblings().toggleClass("active");
+        $(this).siblings().toggleClass("active");
 
         $(".question_section_li").on("click",function(e){
           e.preventDefault();
           $(this).find('.question_none').toggleClass("active");
         })
-      });
+      
 
         $(".question_flex").click(function (e) {
           if ($(this).children("i.fa-solid").hasClass("fa-plus")) {
@@ -978,12 +802,13 @@
             $(this).children("i:nth-child(3)").removeClass("fa-plus")
             $(this).children("i:nth-child(3)").addClass("fa-minus")
           }
-            else if($(this).children("i.fa-solid").hasClass("fa-minus")){
-              // console.log(`ttt`);
-              $(this).children("i:nth-child(3)").removeClass("fa-minus")
+          else if($(this).children("i.fa-solid").hasClass("fa-minus")){
+            // console.log(`ttt`);
+            $(this).children("i:nth-child(3)").removeClass("fa-minus")
             $(this).children("i:nth-child(3)").addClass("fa-plus")
-            }
-          });
+          }
+        });
+      });
       // ==========================常見問題結束===========================
     </script>
   </body>
