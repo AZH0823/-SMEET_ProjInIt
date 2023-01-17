@@ -10,7 +10,7 @@
         on o.Set_ID = s.ID 
     join (select OrderID, qty, Type, Name
                 from OrdersDetail o 
-                join dish d 
+                join Dish d 
                 on o.DishID = d.ID ) d
             on o.ID = d.OrderID
     where o.ID = ?';

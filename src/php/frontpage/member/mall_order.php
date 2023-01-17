@@ -9,7 +9,7 @@
             join (select m.MallID, m.qty, d.Price, d.Name as productName, d.Title
                         from MallDetail m
                                 join (select d.ID, t.Name as Title, d.Price, d.Name, d.Type
-                                            from dish d
+                                            from Dish d
                                                 join DishsType t
                                                     on d.Type = t.ID) d
                         on m.DishID = d.ID) d
