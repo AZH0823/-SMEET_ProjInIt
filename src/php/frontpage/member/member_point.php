@@ -13,8 +13,10 @@
     $data = $statement->fetchAll();
     // print_r ($data);
     // echo json_encode($data)
-    foreach($data as $index => $row){
-        echo $row["point"];  //回傳會員點數
- }
+    if(count($data)>0){
+        foreach($data as $index => $row){
+            echo $row["point"];  //回傳會員點數
+        }
 
+    }
 ?>

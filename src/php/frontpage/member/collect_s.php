@@ -21,15 +21,20 @@
        $data = $statement->fetchAll();
         // print_r ($data);
     //    echo json_encode($data);
-           foreach($data as $newData){
-                $arr[] = array(
-                    'ID'=>$newData['ID'],
-                    'DishID'=>$newData['DishID'],
-                    'Name'=>$newData['Name'],
-                    'Price'=>$newData['Price'],
-                    'IMG' => $newData['IMG']
-            );
-        }
-        echo json_encode ($arr);
+    if(count($data)>0){
+        foreach($data as $newData){
+             $arr[] = array(
+                 'ID'=>$newData['ID'],
+                 'DishID'=>$newData['DishID'],
+                 'Name'=>$newData['Name'],
+                 'Price'=>$newData['Price'],
+                 'IMG' => $newData['IMG']
+         );
+     }
+     echo json_encode ($arr);
+
+    }else{
+        echo json_encode ("無資料");
+    }
        
 ?>
