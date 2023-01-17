@@ -649,6 +649,15 @@ section.cart_2_content {
       height: 50px;
       margin-bottom: 15px;
     }
+   
+    .creditcard_1 {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .creditnumber {
+        width: 24%;
+      }
+    }
     .creditcard_2 {
       width: 100%;
       display: flex;
@@ -764,7 +773,7 @@ section.cart_3_content {
     .checkorder_btn {
       font-size: 24px;
       letter-spacing: 0.165em;
-
+      text-decoration: none;
       @include btnGetor(
         480px,
         13.5px,

@@ -172,8 +172,8 @@
                         <h6 class="green-1">訂購人資訊</h6>
                         <!-- checkbox -->
                         <div class="info_check gray">
-                            <input type="checkbox" name="info_check" id="info_check_yes">
-                            <label for="info_check" @click=""> 
+                            <input type="checkbox" name="info_check" id="info_check_yes" @click="getMemberInfo">
+                            <label for="info_check" > 
                                 <!--這裡按了click會帶入會員資料,會員資料是從會員登入後selectDB存在localstorage的陣列-->
                                 <p class="font16">同會員資料</p>
                             </label>
@@ -185,7 +185,7 @@
                         <label for="">手機號碼</label>
                         <input type="text" placeholder="請輸入手機號碼" v-model="orderInfo.phone">
                         <label for="">地址</label>
-                        <input type="text" placeholder="請輸入地址"  v-model="orderInfo.address">
+                        <input type="text" placeholder="請輸入地址"  v-model="orderInfo.addr">
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
                         </select>
@@ -210,9 +210,9 @@
                     </div>
                     <div class="get_content">
                         <label for="">姓名</label>
-                        <input type="text" placeholder="請輸入姓名" v-model="reviInfo.name">
+                        <input type="text" placeholder="請輸入姓名" v-model="orderData.name">
                         <label for="" >手機號碼</label>
-                        <input type="text" placeholder="請輸入手機號碼" v-model="reviInfo.phone"> 
+                        <input type="text" placeholder="請輸入手機號碼" v-model="orderData.phone"> 
                         <label for="" >地址</label>
                         <!-- <select name="member_city" class="member_city">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option>
@@ -220,7 +220,7 @@
                         <select name="member_area" class="member_area">
                             <option value="none" selected="selected" disabled="disabled" hidden="hidden">請選擇區域</option>
                         </select> -->
-                        <input type="text" class="member_addr" placeholder="請輸入地址" v-model="reviInfo.address">
+                        <input type="text" class="member_addr" placeholder="請輸入地址" v-model="orderData.addr">
                     </div>
                 </div>
                 <!-- 配送/發票 -->
@@ -233,6 +233,7 @@
                         <option value="晚">晚上(18點-21點)</option>
                     </select>
                     <label for="invoice">發票及載具</label>
+                    <!--這裡綁定v-model並且設定一個空的data是為了將後續的option的value放進去,並使用v-if達到控制選項的目的-->
                     <select name="invoice" id="invoice" value="不使用載具-索取紙本發票" v-model="selectedOption">
                         <!--當選擇紙本時其他兩個option要反灰,其他兩個option一樣-->
                         <option :value="option.value" v-for="option in options">{{option.text}}</option>
@@ -251,11 +252,16 @@
                     <h6 class="green-1">付款資訊<span class="font14 gray title_pay">已選擇支付方式(VISA、Master、JCB)</span></h6>
                 </div>
                 <div class="creditcard_pay">
-                    <input type="text" placeholder="卡號">
+                    <div  class="creditcard_1">
+                        <input type="text" placeholder="卡號"  minlength="1" maxlength="4" class="creditnumber"   @keyup="checkCreditCard($event)" >
+                        <input type="text"  minlength="1" maxlength="4"  class="creditnumber"  @keydown="inputCreditCard($event)" @keyup="checkCreditCard($event)" >
+                        <input type="text"  minlength="1" maxlength="4"  class="creditnumber"  @keydown="inputCreditCard($event)" @keyup="checkCreditCard($event)" >
+                        <input type="text"  minlength="1" maxlength="4"  class="creditnumber" @keydown="inputCreditCard($event)" @keyup="checkCreditCard($event)" >
+                     </div>
                     <input type="text" placeholder="持卡人姓名">
                     <div class="creditcard_2">
                         <input type="text" class="creditcard_date" placeholder="有效日期(MM/YY)">
-                    <input type="text" class="creditcard_cvc" placeholder="檢核碼">
+                        <input type="text" class="creditcard_cvc" placeholder="檢核碼">
                     </div>
                     
                 </div>
@@ -280,11 +286,11 @@
             <section class="cart_3_content" v-if="process.step ===3 ">
                     <div class="cart_content cart_none" class="{'cart_open' : process.step === 3 }">
                     <i class="fa-solid fa-check"></i>
-                    <h3>訂單已完成(訂單編號：202212345678) </h3>
+                    <h3>訂單已完成(訂單編號：{{}}) </h3>
                     </div>
                     <div class="btn_flex">
-                        <button class="checkorder_btn">查詢訂單</button>
-                        <button class="checkorder_btn">繼續購物</button>
+                        <a href="./member.html" class="checkorder_btn">查詢訂單</a>
+                        <a href="./shopMall.html" class="checkorder_btn">繼續購物</a>
                     </div>
             </section>
             <!-- 步驟3完成訂單畫面結束=========== -->
@@ -292,9 +298,12 @@
 
         <!-- @@include('layout/footer.html') -->
         <script src="./js/vender/Vue/vue.global.js"></script>
-        <!-- <script src="https://unpkg.com/vue@next" defer></script> -->
+        <script src="./js/vender/isJS/is.min.js"></script>
+        <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+     
 
         <script>
+   
              const app = Vue.createApp({
             
                 data() {
@@ -306,46 +315,46 @@
                             step:1,
                         },
                         //商品list的內->這裡寫死,但之後應該要接從購物車傳進來的值,這裡已經被inputShoppingData的陣列取代,不再使用
-                        product_list : [
+                        // product_list : [
                         
-                        {
-                            id:'1',
-                            product_name:'黑鮪刺身',
-                            img_url:'img/atcart_img/atcart_addp.jpg',
-                            price:'700',
-                            count:'2'
-                        },
-                        {
-                            id:'2',
-                            product_name:'北海道海膽壽司',
-                            img_url:'img/atcart_img/Rectangle1.jpg',
-                            price:'750',
-                            count:'1'
-                        },
-                        {
-                            id:'3',
-                            product_name:'大黑鮪生魚片',
-                            img_url:'img/atcart_img/Rectangle2.jpg',
-                            // url:'./aboutUs.html',
-                            price:'650',
-                            count:'5'
-                        },
-                        {
-                            id:'4',
-                            product_name:'北海道松葉蟹蒸蛋',
-                            img_url:'img/atcart_img/atcart_addp.jpg',
-                            price:'700',
-                            count:'3'
-                        },
+                        // {
+                        //     id:'1',
+                        //     product_name:'黑鮪刺身',
+                        //     img_url:'img/atcart_img/atcart_addp.jpg',
+                        //     price:'700',
+                        //     count:'2'
+                        // },
+                        // {
+                        //     id:'2',
+                        //     product_name:'北海道海膽壽司',
+                        //     img_url:'img/atcart_img/Rectangle1.jpg',
+                        //     price:'750',
+                        //     count:'1'
+                        // },
+                        // {
+                        //     id:'3',
+                        //     product_name:'大黑鮪生魚片',
+                        //     img_url:'img/atcart_img/Rectangle2.jpg',
+                        //     // url:'./aboutUs.html',
+                        //     price:'650',
+                        //     count:'5'
+                        // },
+                        // {
+                        //     id:'4',
+                        //     product_name:'北海道松葉蟹蒸蛋',
+                        //     img_url:'img/atcart_img/atcart_addp.jpg',
+                        //     price:'700',
+                        //     count:'3'
+                        // },
             
 
-                        ],
+                        // ],
 
                         //回傳point的空字串
                         point:'',
 
                         //回傳7-11門市的名稱,目前先將7-11取貨功能取消[沒有使用]
-                        shop:'',
+                        // shop:'',
 
                         //回傳紅利點數的金額,
                         //讓input限制最高只能輸入紅利點數的上限 
@@ -356,6 +365,30 @@
                         msg:'*紅利點數折抵必須小於或等於您目前的會員點數',
                         show: false,
                    
+                         //訂購人的資料用get方法
+                        //訂購人資訊
+                        orderInfo : {                
+                                name: "",
+                                phone:"",
+                                addr:"", 
+                            },
+                    
+
+                        //收件人資訊 
+                   
+                        //商城購物車訂單資料,之後要和inputShoppingData的資料一起insert至DB
+                        //同收件人資訊
+                        orderData :{ 
+
+                            
+                                name: "",
+                                phone:"",
+                                addr:"",
+                                deliveryTime:"",
+                                invoice:"",
+                            
+                        },
+
 
                         //商城傳回的資料
                         inputShoppingData : [
@@ -372,15 +405,6 @@
                             },
                         ],
 
-                        //訂購人的資料用get方法
-                        //訂購人資訊
-                        orderInfo : [
-                            {
-                                name: "",
-                                phone:"",
-                                address:"", 
-                            },
-                        ],
                         
                         
 
@@ -388,18 +412,6 @@
                         // 2. 再用陣列轉字串的方式放到這裡
                         // 3. 再寫一個methods放@click到同會員資料的check後填入memberInfo的資料
 
-
-
-                        //收件人資訊
-                        reviInfo : [
-                            {
-                                name: "",
-                                phone:"",
-                                address:"",
-                                deliveryTime:"",
-                                invoice:"",
-                            },
-                        ],
 
                         //同意接受服務條款的v-if
                         agree:true,
@@ -421,7 +433,10 @@
                             },
 
                         ],
-                   
+                        //存取localstorage的member_ID先設定為空值,之後可以在vue中使用
+                        member_ID:"",
+                         
+                    
                        
                     }
                 },
@@ -440,12 +455,11 @@
             mounted() {
                 //抓取localStorage的memberID
                 let member_ID = localStorage.getItem("member_ID");
-                // this.inputShoppingData[0] = shoppingData;
-                // console.log(this.inputShoppingData[0]);
                 let that = this ;
 
-                //取得會員點數
-                $.ajax({
+                if(member_ID){
+                    this.member_ID = member_ID
+                    $.ajax({
                         
                         method: "POST",
                         url: "php/frontpage/member/member_point.php",
@@ -461,6 +475,13 @@
                             alert("發生錯誤: " + exception.status);
                         }
                     });
+
+                }
+                // this.inputShoppingData[0] = shoppingData;
+                // console.log(this.inputShoppingData[0]);
+
+                //取得會員點數
+            
 
          
                     //如果顧客直接輸入購物車的網址
@@ -554,30 +575,111 @@
 
                 //點擊收件人的[同訂購人資料]會將上方訂購人的資訊帶到下方的input裡
                 checkOrderValue(){
-                    if(this.reviInfo.name && this.reviInfo.phone && this.reviInfo.address){
-                        this.reviInfo.name = "";
-                        this.reviInfo.phone="";
-                        this.reviInfo.address = "";
+                    if(this.orderData.name && this.orderData.phone && this.orderData.addr){
+                        this.orderData.name = "";
+                        this.orderData.phone="";
+                        this.orderData.addr = "";
                     }else{
-                        this.reviInfo.name = this.orderInfo.name;
-                        this.reviInfo.phone = this.orderInfo.phone;
-                        this.reviInfo.address =this.orderInfo.address;
+                        this.orderData.name = this.orderInfo.name;
+                        this.orderData.phone = this.orderInfo.phone;
+                        this.orderData.addr =this.orderInfo.addr;
                     }
                 },
-                changeOption(){
-                    if(this.selectedOption === 'disabled'){
+               //輸入卡號@keydown不能輸入非數字外的資料
+               inputCreditCard(e){
+                // console.log(idx);
+                if((e.which >= 48 && e.which <= 57) || e.which == 8){
+            
+                if((e.target.value.length == 0 && e.which == 8)){
+                    // console.log(e.target.previousElementSibling.previousElementSibling);
+                    // if(idx=== 0)return
+                    const previous_el = e.target.previousElementSibling;
+                    // console.log(previous_el);
+                    if(previous_el == null)return
+                    // console.log(previous_el);
+                    previous_el.focus();
+                }
+              }else{
+                e.preventDefault();
+              }
+               },
 
+               ///輸入卡號@keyup檢查輸入的字是否為非數字若為非數字才取代為空字串,
+               //並且輸入完四個數字後會自動跳往下一個input欄位
+
+               checkCreditCard(e){
+                // console.log(`ttt`);
+                    let str = (e.target.value).replace(/\D/g, "");
+                    e.target.value = str;
+                    if(str.length == 4){
+                    let next_el = e.target.nextElementSibling;
+                    if(next_el != null){
+                        next_el.focus();
+                        }
                     }
-
+                },
+                // 取得會員資料的總資料,但我只要三筆
+                // (1)name(2)phone (3)address   
+                getMemberInfo(){
+                  //this.member_ID 是用this指向data的member_ID的值之後,
+                  //設定一個較member_ID參數進gerMemberInfo function使用
+                    let member_ID = this.member_ID;
+                    // 這裡的this才是function的this 
+                    const that = this
+                    // console.log(member_ID);
+                    if(member_ID){
+                        $.ajax({
+                         
+                        method: "POST",
+                        url: "php/frontpage/member/member_info.php",
+                        data :{
+                            member_ID:member_ID,
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            // console.log(response[0]);
+                        
+                            // for(let [c,d] of Object.entries(response[0])){
+                            // console.log(`${c}: ${d}`);
+                            // this.orderInfo[c] = d;
+                        //    console.log(response[0].name);
+                        // console.log(response);
+                         if((that.orderInfo.name && that.orderInfo.phone && that.orderInfo.addr) === ""){
+                           
+                             //設定一個obj
+                             let obj = {
+                                 'name':response[0].name,
+                                 'phone':response[0].phone,
+                                 'addr':response[0].addr,
+ 
+                             }
+                             that.orderInfo = obj;  
+                             // console.log( that.orderInfo);
+                         }else{
+                            that.orderInfo.name = "",
+                            that.orderInfo.phone ="",
+                            that.orderInfo.addr = ""
+                         }
+                        },
+                    
+                        error: function (exception) {
+                            alert("發生錯誤: " + exception.status);
+                        },
+                    })
+                    }
+                    else{
+                        alert("未登入會員");
+                    }
                 },
             },
                 
         });
 
             
-      
+     
 
-        app.mount("#cart_detail");
+
+        app.mount("#cart_detail")
 
         </script>
     </body>
