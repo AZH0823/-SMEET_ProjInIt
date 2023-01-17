@@ -288,15 +288,40 @@ initial-scale=1.0">
 
             mounted() {
                 
-                // ========= 商品data AJAX 傳入 ========= //
+                // 主要商品data AJAX 傳入
                 this.getCate();
 
-                // ========= 重整畫面後Storage資料傳入 ========= //
-                this.getLocalStorage()
+                // 進商品詳情頁就抓購物車資料
+                this.getCartLocalStorage()
+
+                // 進商品詳情頁就抓收藏商品資料
+                this.getCollectLocalStorage()
 
             },
 
             methods: {
+
+                // shoppingData 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
+                getCartLocalStorage(){
+                    const local_storage = localStorage.getItem("shoppingData")
+
+                    if(local_storage){
+                        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+
+                        this.ShoppingCartList = LSGetItem
+                    }
+                },
+
+                // shopCollect 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
+                getCollectLocalStorage(){
+                    const local_storage = localStorage.getItem("shopCollect")
+
+                    if(local_storage){
+                        const LSGetItem = JSON.parse(localStorage.getItem("shopCollect")) 
+
+                        this.ShoppingCartList = LSGetItem
+                    }
+                },
                 // ========= AJAX ========= //
                 
                 // 加入收藏前檢查是否登入會員
@@ -466,20 +491,6 @@ initial-scale=1.0">
                         this.popupData.qty --;
                     }
                 },
-
-                // 重整畫面後Storage資料傳入
-                getLocalStorage(){
-                    const local_storage = localStorage.getItem("shoppingData")
-
-                    if(local_storage){
-                        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
-
-                        this.ShoppingCartList = LSGetItem
-                        console.log(this.ShoppingCartList);
-                    }
-                },
-
-
 
                 // 商品加入購物車
                 addShoppingCart(popupData){
