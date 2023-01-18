@@ -51,7 +51,7 @@
             <div class="shop_list">
                 <h4 class="detail_title green-1">商城訂購</h4>
                 <div class="meal_container font16" v-for="(item, key) in dish_data">
-                    <div class="item">{{item.type}}</div>
+                    <div class="item none">{{item.type}}</div>
                     <ul class="one_container">
                         <li class="one_item">{{item.name}}<div class="one_count">x {{item.qty}}</div></li>
                     </ul>
@@ -81,14 +81,14 @@
              
             <!-- 總計 -->
             <div class="total_container font16">
-                <div class="item">小計</div>
-                <div class="item">NT$<span id="detail_total">{{shop_data.Subtotal}}</span></div>
-                <!-- <div class="item">加購價</div>
-                <div class="item">NT$<span id="detail_total">25,000</span></div> -->
-                <div class="item">紅利點數</div>
-                <div class="item">-NT$<span id="detail_total">{{shop_data.Points}}</span></div>
-                <div class="item">總金額 </div>
-                <div class="item">NT$<span id="detail_total">{{shop_data.TotalPrice}}</span></div>
+                <div class="item_m">小計</div>
+                <div class="item_m">NT$<span id="detail_total">{{shop_data.Subtotal}}</span></div>
+                <!-- <div class="item_m">加購價</div>
+                <div class="item_m">NT$<span id="detail_total">25,000</span></div> -->
+                <div class="item_m">紅利點數</div>
+                <div class="item_m">-NT$<span id="detail_total">{{shop_data.Points}}</span></div>
+                <div class="item_m">總金額 </div>
+                <div class="item_m">NT$<span id="detail_total">{{shop_data.TotalPrice}}</span></div>
             </div>
             <div class="clear_both"></div>
         </main>
@@ -107,6 +107,7 @@
                     dish_data:[{
 
                     }]
+                    
                 }
                 
             },
