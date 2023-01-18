@@ -174,13 +174,16 @@
             align-items: center;
             margin: 30px auto 0;
             .swiper-slide{
-                width: 20.5% !important;
-                margin: 2.5% !important;
+                width: 25% !important;
+                padding: 2.5% !important;
                 @include pad() {
-                    margin: 2.7% !important;
+                    width: 33% !important;
+                    padding: 2.7% !important;
                 }
                 @include mobile() {
-                    margin: 0.3%  3%!important;
+                    width: 48% !important;
+                    padding-left: 9% !important;
+                    padding-right: 5% !important;
                 }
             }
 
@@ -530,8 +533,9 @@
     //-----------------------------------------顧客評價-----------------------------------------//
 
     ._index_evaluation {
-        display: flex;
-        flex-direction: column;
+        // display: flex;
+        // flex-direction: column;
+        overflow: hidden;
         @include pad() {
 
             overflow: hidden;
@@ -558,22 +562,28 @@
         }
 
         ._index_feeback {
-            display: flex;
-            justify-content: space-between;
-            // margin: 50px 0;
             width: 100%;
+            margin: 0 20px;
 
             ._if1,
             ._if2,
             ._if3 {
-                width: 22% !important;
-                min-height: 284px;
+                width: 22.5% !important;
+                min-height: 363px;
                 margin: 0 auto;
                 background-image: url("../img/index_img/index_evaluation.png");
                 background-size: cover;
+                margin-right: 30px;
+
+                @include pad() {
+
+                }
+                @include mobile() {
+                }
+
                 .if_img{
                     max-width: 245px;
-                    height: 173px;
+                    height: 100%;
                     overflow: hidden;
                     img {
                         width: 100%;
@@ -582,9 +592,7 @@
                 
 
                 ._if_body {
-                    padding-left: 20px;
-                    padding-right: 20px;
-                    padding-bottom: 23%;
+                    padding: 10%;
 
                     ._p16 {
                         font-size: 16px;
