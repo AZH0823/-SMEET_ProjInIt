@@ -1,6 +1,6 @@
 <?php
-    $member_ID = $_POST['member_ID'] ;
-    $dish_ID = $_POST['dish_ID'] =;
+    $member_ID = $_POST['member_ID'] =2;
+    $dish_ID = $_POST['dish_ID'] =50;
     
     include('../../conectDB/Connection.php');
 

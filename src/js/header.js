@@ -103,11 +103,6 @@ $("#ham_bg").on("click", function () {
 })
 function ham_pop() {
     let ham_bg = document.getElementById('ham_bg');
-    // let login = document.getElementById('login');
-    // let body = document.querySelector('body');
-    //打開popup
-    // console.log("sss");
-
 
     ham_bg.classList.toggle("hide");
     ham_bg.classList.toggle("n_none");
@@ -122,31 +117,19 @@ let indexham_body = document.querySelector('body');
 // console.log(ham_body);
 $(".indexslide_ham").on("click", function () {
     // console.log("qwert");
-    indexham_body.style.overflow = "auto";
+    if ($("body").hasClass("ham_body")) {
+        $("body").removeClass("ham_body")
+        indexham_body.style.overflow = "auto";
+    }
+    else {
+        $("body").addClass("ham_body")
+        indexham_body.style.overflow = "hidden";
+    }
 
     $(".indexheader_bar").toggleClass("--on");
     $(".indexuser_ham").toggleClass("--on");
     $("#indexham_bg").toggleClass("indexhide");
     $("#indexham_bg").toggleClass("indexn_none");
-    // let indexhamSlide = $(".indexslide_ham");
-    // console.log(e.target)
-    // if (e.target === indexhamSlide[0] || e.target == "ii_ham") {
-    //     console.log(e.target.style.overflow);
-    //     if (e.target.style.overflow == "auto") {
-    //         indexham_body.style.overflow = "hidden";
-    //     } else {
-    //         $(indexhamSlide).removeAttr("overflow", "hidden");
-    //         // indexham_body.style.overflow = "";
-    //     }
-    // }
-    // if(e.target){
-
-    // }
-
-    // if ("") "xxx" else{"xxx"}; 
-
-})
-$("indexslide_ham").on("click", function () {
 
 })
 //index頁燈箱點擊收合
@@ -157,4 +140,12 @@ $("#indexham_bg").on("click", function () {
     $("#indexham_bg").toggleClass("indexhide");
     $("#indexham_bg").toggleClass("indexn_none");
     indexham_body.style.overflow = "auto";
+    if ($("body").hasClass("ham_body")) {
+        $("body").removeClass("ham_body")
+        indexham_body.style.overflow = "auto";
+    }
+    else {
+        $("body").addClass("ham_body")
+        indexham_body.style.overflow = "hidden";
+    }
 })
