@@ -4,13 +4,16 @@
     include('../../conectDB/Connection.php');
 
     //建立SQL-商城訂單MALLORDERS
-    $sql = 'select o.ID, AppointmentDate, o.Name, Count, `Condition`, Scheduled, o.Address, Date, TotalPrice, notes, o.point, Email, Phone, SetPrice, SetName, qty, Type, d.Name
+    $sql = 'select o.ID, AppointmentDate, o.Name, Count, `Condition`, Scheduled, o.Address, Date, TotalPrice, notes, o.point, Email, Phone, SetPrice, SetName, qty, Type, d.Name, TypeName
     from Orders o
     join Sets s
-        on o.Set_ID = s.ID 
-    join (select OrderID, qty, Type, Name
+        on o.SetID = s.ID 
+    join (select OrderID, qty, Type, Name, d.TypeName
                 from OrdersDetail o 
-                join Dish d 
+                join (SELECT t.Name as TypeName, Type, d.Name , d.ID
+							FROM dish d
+								join DishsType t
+									on d.Type = t.ID) d 
                 on o.DishID = d.ID ) d
             on o.ID = d.OrderID
     where o.ID = ?';
@@ -41,7 +44,8 @@
             'SetName' => $newData['SetName'],
             'qty' => $newData['qty'],
             'Type' => $newData['Type'],
-            'dishName' => $newData['17']
+            'dishName' => $newData['17'],
+            'TypeName' => $newData['TypeName'],
         );
     
     }

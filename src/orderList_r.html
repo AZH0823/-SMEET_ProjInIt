@@ -52,17 +52,16 @@
                 <h4 class="detail_title green-1">私廚預約</h4>
                 <div class="meal_container">
                     <h6 class="meal_title">{{reserve_data.SetName}}</h6>
-                    <div class="meal_cate font16 gray">
-                        <!-- <p class="item" v-for="(item, key) in dish_data">{{item.type}}</p> -->
-                        <p class="item">湯物</p>
-                        <p class="item">前菜</p>
-                        <p class="item">刺身</p>
-                        <p class="item">主食</p>
-                        <p class="item">甜點</p>
-                        <p class="item">飲品</p>
+                    <div class="meal_cate font16" v-for="(item, key) in dish_title">
+                        <p class="item gray">{{item}}</p>
+                        <div class="meal_content font16">
+                            <template  v-for="(value, index) in dish_data[key]">
+                                <p class="item item2">{{value.dishName}} <span class="item_qty gray">x {{value.qty}}</span></p>
+                            </template>
+                        </div>
                     </div>
-                    <div class="meal_content font16">
-                        <p class="item" v-for="(item, key) in dish_data">{{item.name}} <span class="item_qty gray">x{{item.qty}}</span></p>
+                    <!-- <div class="meal_content font16">
+                        <p class="item" v-for="(item, key) in dish_data">{{item.name}} <span class="item_qty gray">x{{item.qty}}</span></p> -->
                         <!-- 湯物 -->
                         <!-- <p class="item">奶香牛肝菌野菇濃湯</p>
                         <p class="item">石斑海鮮清湯</p> -->
@@ -84,17 +83,25 @@
                         <p class="item">烘焙曼巴咖啡</p>
                         <p class="item">高山金萱茶</p>
                         <p class="item">檸檬海鹽氣泡飲</p> -->
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
             <!-- 單點加購 -->
             <div class="list_one">
                 <h4 class="detail_title green-1">單點加購</h4>
-                <div class="meal_container font16">
-                    <ul class="one_container">
-                        <li class="one_item" v-for="(item, key) in one_dish">{{item.name}}<div class="one_count">x {{item.qty}}</div></li>
-                        <!-- <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li> -->
-                    </ul>
+                <div class="meal_container">
+                    <div class="meal_cate2 font16" v-for="(item, key) in one_dish_title">
+                        <p class="item gray">{{item}}</p>
+                        <div class="meal_content font16">
+                            <template  v-for="(value, index) in one_dish[key]">
+                                <p class="item item2">{{value.dishName}} <span class="item_qty gray">x {{value.qty}}</span></p>
+                            </template>
+                        </div>
+                    </div>
+                    <!-- <ul class="one_container"> -->
+                        <!-- <li class="one_item" v-for="(item, key) in one_dish">{{item.name}}<div class="one_count">x {{item.qty}}</div></li> -->
+                        <!-- <li class="one_item">北海道松葉蟹蒸蛋<div class="one_count">x 2</div></li>
+                    </ul> -->
                 </div>
             </div>
             <!-- 訂單資料 -->
@@ -121,14 +128,14 @@
              
             <!-- 總計 -->
             <div class="total_container font16">
-                <div class="item">小計</div>
-                <div class="item">NT$<span id="detail_total">{{reserve_data.Subtotal}}</span></div>
-                <div class="item">加購價</div>
-                <div class="item">NT$<span id="detail_total">25,000</span></div>
-                <div class="item">紅利點數</div>
-                <div class="item">-NT$<span id="detail_total">{{reserve_data.point}}</span></div>
-                <div class="item">總金額 </div>
-                <div class="item">NT$<span id="detail_total">{{reserve_data.TotalPrice}}</span></div>
+                <div class="item_r">小計</div>
+                <div class="item_r">NT$<span id="detail_total">{{reserve_data.Subtotal}}</span></div>
+                <div class="item_r">加購價</div>
+                <div class="item_r">NT$<span id="detail_total">25,000</span></div>
+                <div class="item_r">紅利點數</div>
+                <div class="item_r">-NT$<span id="detail_total">{{reserve_data.point}}</span></div>
+                <div class="item_r">總金額 </div>
+                <div class="item_r">NT$<span id="detail_total">{{reserve_data.TotalPrice}}</span></div>
             </div>
             <div class="clear_both"></div>
         </main>
@@ -147,7 +154,9 @@
                     },
                     dish_data:[{
                     }],
-                    one_dish:[{}]
+                    one_dish:[{}],
+                    dish_title:["湯物", "前菜", "刺身", "主食", "甜點", "飲品"],
+                    one_dish_title:["單點", "服務"],
                 }
                 
             },
@@ -174,34 +183,34 @@
                         success: (response) => {
                             //把api取到的所有資訊存到reserve_data
                             this.reserve_data = response[0] ;
-                            // console.log(this.reserve_data);
                             let c = this.reserve_data.Count;
                             let p = this.reserve_data.SetPrice
                             // 小計
                             this.reserve_data.Subtotal = c * p;
+                            // console.log(response);
                             
-                            // 把餐點名稱存到dish_data陣列 
-                            for(let i = 0 ; i < response.length ; i++){
-                                let a = {};
-                                a.type = response[i].Type;
-                                a.name = response[i].dishName;
-                                a.qty = response[i].qty;
-                                // console.log(a);
-                                if( a.type !== 7){
-                                    //dish_data套餐 Type 1-6 
-                                    this.dish_data[i] = a ;
-                                }else{
-
-                                    //處理單點陣列
-                                    let len = this.dish_data.length;
-                                    this.one_dish[i-len]= a;
-
-                                }
+                            // 把餐點名稱存到dish_data陣列================ 
+                            for(let i = 0 ; i < 6 ; i++){
+                                let a$ = response.filter(function(item, index){
+                                return (item.Type == i+1);
+                                });
+                                this.dish_data[i] = a$;
                             }
-                            
-                            // console.log(b);
-                            // console.log(response.length);
-                            console.log(this.one_dish);
+
+                            // 把單點+服務存到one_dish陣列================ 
+                            let b1 = response.filter(function(item, index){
+                                return (item.Type == 7);
+                            });
+                            this.one_dish[0] = b1 ;
+
+                            let b2 = response.filter(function(item, index){
+                                return (item.Type == 11);
+                            });
+                            this.one_dish[1] = b2 ;
+
+                            // console.log(a1);
+                            console.log(this.dish_data);
+                            // console.log(this.one_dish);
                         },
                         error: function (exception) {
                             alert("發生錯誤: " + exception.status);

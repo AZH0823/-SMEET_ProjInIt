@@ -88,7 +88,7 @@
                   <p class="font16">我願意收到最新優惠消息</p>
                 </label>
               </div>
-
+              <div class="add_bonus red">第一次完整輸入會員資料贈送紅利點數500點</div>
               <button type="button" id="btn_info" class="inCart_btn2" @click="info_change">
                 確認修改
               </button>
@@ -211,12 +211,12 @@
         <!-- ======收藏菜品====== -->
         <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'collection' ">
           <ul>
-            <template v-for="(item, key) in collection" :key="item.name">
-              <a class="collect_list" :href="'./shopMallDetail.html?ID='+ item.ID">
+            <template v-for="(item, key) in collection" :key="item.name" >
+              <a class="collect_list"   :href="'./shopMallDetail.html?ID='+ item.DishID">
                 <div class="product_list">
                   <div class="product_img"><img :src=item.IMG>
         
-                    <i class="fa-solid fa-heart " @click="cancel_collect(key)"></i>
+                    <i class="fa-solid fa-heart " @click="cancel_collect(key)" @click.prevent></i>
                   </div>
                   <div class="product_content green-1">
                     <h6 class="product_title">{{item.Name}}</h6>
@@ -640,6 +640,7 @@
             if(member_ID){
               let r = confirm('確定取消收藏');
               // 這個ID是favorite table 的ID
+            
               let ID = this.collection[i].ID
               // console.log(ID);
               if(r){
@@ -659,12 +660,13 @@
                         this.collect_num();
                       },
                       error: function (exception) {
-                          alert("發生錯誤: " + exception.status);
+                        alert("發生錯誤: " + exception.status);
                       }
-                  });
-              };
-            }
-          },
+                    });
+                    this.collect_num();
+                  };
+                }
+              },
           // select渲染到畫面上
           collection_s(){
             if(member_ID){
