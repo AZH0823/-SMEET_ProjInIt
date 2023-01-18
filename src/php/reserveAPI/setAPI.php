@@ -20,15 +20,7 @@
 
  
     $searchData = $Searhstatement -> fetchAll();
-    // var_dump($searchData)
     
-   
-    // while($assoc = $Searhstatement->fetch_assoc()){
-    //     $arr[] = array(
-    //         'disName' => $assoc['disName'],
-    //         'SetID'=> $assoc['SetID']
-    //     );
-    // }
     $arr=array();
     foreach($searchData as $newData){
         $arr[] = array(
