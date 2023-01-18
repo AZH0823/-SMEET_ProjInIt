@@ -1,4 +1,25 @@
 /*------------------- index_header -------------------*/
+
+
+.indexn_none#indexham_bg {
+    display: none;
+
+    // z-index: 100;
+    // display: blo;
+}
+
+.indexhide#indexham_bg {
+    background-color: rgba(0, 0, 0, 0.155);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 200;
+    display: block;
+    height: 100vh;
+}
+
 .wrap_header {
     // display: none;
     background-image: url("../img/index_img/index_head_banner.jpg");
@@ -7,7 +28,8 @@
     height: 100vh;
 
     background-repeat: no-repeat;
-    overflow: hidden;
+    // overflow: hidden;
+    position: relative;
 
     @include mobile () {
         background-image: url("../img/index_img/index_head_banner_rwd.jpg");
@@ -24,7 +46,7 @@
             justify-content: center;
             height: 80px;
             z-index: 222;
-            position: fixed;
+            // position: fixed;
             right: 0;
             left: 0;
 
@@ -36,7 +58,7 @@
                 // display: none;
                 width: 50%;
                 z-index: 225;
-                position: fixed;
+                // position: fixed;
 
                 // display: block;
                 @include pad() {
@@ -65,10 +87,11 @@
                         flex-direction: column;
                         background-color: $green-1;
                         position: absolute;
-                        top: 60%;
+                        top: 6%;
                         right: -360px;
                         margin: 0 auto;
                         transition: 1s;
+                        position: fixed;
                         // transform: translateX(100%);
                     }
 
@@ -128,11 +151,13 @@
                         display: block;
                         background-color: $green-1;
                         position: absolute;
-                        top: 450%;
+                        top: 42%;
                         right: -360px;
                         margin: 0 auto;
                         width: 50%;
                         transition: 1s;
+                        position: fixed;
+
 
                     }
 
@@ -255,8 +280,8 @@
 
             /*----------- 『 Icon 人頭 購物車 漢堡線』 ----------*/
             .indexheader_user {
-                position: fixed;
-                // position: absolute;
+                // position: fixed;
+                position: absolute;
                 top: 0;
                 right: 0;
                 // padding-right: 10px 0;
@@ -266,6 +291,8 @@
                     justify-content: flex-end;
                     flex-wrap: wrap;
                     width: 99.9%;
+                    position: fixed;
+                    z-index: 200;
 
                 }
 
@@ -411,11 +438,35 @@
 /*------------------- slide_header -------------------*/
 body {
     box-sizing: border-box;
+    // overflow: hidden;
+}
+
+.n_none#ham_bg {
+    display: none;
+
+    // z-index: 100;
+    // display: blo;
+}
+
+.hide#ham_bg {
+    background-color: rgba(0, 0, 0, 0.155);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 200;
+    display: block;
+    height: 100vh;
 }
 
 .slide_header {
     // display: none;
     height: 10%;
+    position: relative;
+
+
+
 
     // @include mobile {
     //     width: 100%;
@@ -563,6 +614,7 @@ body {
 
                 .user_ham {
                     display: none;
+                    transition: none;
 
 
                     @include pad() {
@@ -961,3 +1013,11 @@ body {
 .shop-page .header_bar li:nth-child(5) a {
     border-bottom: 1px solid #000;
 }
+
+// .headerHam_active {
+//     right: -360px !important;
+// }
+
+// .bg_gray {
+//     background-color: #B91646;
+// }
