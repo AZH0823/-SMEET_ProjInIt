@@ -6,7 +6,7 @@
   FROM dish  d
        JOIN DishsType dt
            ON d.`Type` = dt.ID
-  WHERE d.ProductType = '私廚單點' AND dt.`Name`= '單品'";
+  WHERE d.ProductType = '私廚單點' AND dt.`Name`= '單品' AND d.Condition ='1' ";
   // 將include Connection Fuction 給引出
   $Searhstatement = getPDO()->prepare($SearhDishSql);
   $Searhstatement -> execute();

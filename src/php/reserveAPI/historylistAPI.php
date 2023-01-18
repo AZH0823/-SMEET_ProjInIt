@@ -7,7 +7,7 @@
     
     $date = $decoded['date'];
     // if(empty($date))return
-
+    // if(isset($date))return
     // echo $date;
     $historySQL ="SELECT O.ID as OrderID,O.AppointmentDate,T.team as teams, T.ID as TeamID FROM 
     Orders O join Teams T  

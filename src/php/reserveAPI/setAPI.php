@@ -10,7 +10,7 @@
     FROM dish d
         join DishsType dt
             on d.`type` = dt.ID
-    where d.ProductType = '私廚單點' and dt.`Name` != '單品'";
+    where d.ProductType = '私廚單點' and dt.`Name` != '單品'  AND d.Condition ='1'";
     // 將include Connection Fuction 給引出
     $Searhstatement = getPDO()->prepare($SearhDishSql);
 
@@ -20,15 +20,7 @@
 
  
     $searchData = $Searhstatement -> fetchAll();
-    // var_dump($searchData)
     
-   
-    // while($assoc = $Searhstatement->fetch_assoc()){
-    //     $arr[] = array(
-    //         'disName' => $assoc['disName'],
-    //         'SetID'=> $assoc['SetID']
-    //     );
-    // }
     $arr=array();
     foreach($searchData as $newData){
         $arr[] = array(

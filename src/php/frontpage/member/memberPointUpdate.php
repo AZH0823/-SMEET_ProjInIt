@@ -1,22 +1,24 @@
 <?php
     include ('../../conectDB/Connection.php');
 
-    $afterPoint = $_POST['afterPoint'];
+    $afterPoint = $_POST['point'];
     $memberID = $_POST['memberID'];
 
-    $updateMemberPointSql = "UPDATE Member
+    echo $afterPoint."<br>";
+    // echo $memberID."<br>";
+    $updateMemberPointSql = "UPDATE Member 
     SET point = :afterPoint
-    WHERE ID=':memberID'";
+    WHERE ID = :memberID ";
 
     $updatePointstatement = getPDO()->prepare($updateMemberPointSql);
     $updatePointstatement->bindValue(':afterPoint', $afterPoint);
     $updatePointstatement->bindValue(':memberID', $memberID);
     $updatePointstatement -> execute();
-
+    
     $searchData = $updatePointstatement -> fetchAll();
-    print_r($searchData)
+    // print_r($searchData);
 ?>
 
-UPDATE Member
+<!-- UPDATE Member
 SET point= 300
-WHERE ID=10;
+WHERE ID=10; -->
