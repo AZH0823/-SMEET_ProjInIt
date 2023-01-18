@@ -1,196 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>QA管理</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- ============== 缺搜尋BAR ============== -->
     <div class="back_contactUs fulid_wrapper">
-        <div class="backwrapper">
-            <header>
-                @@include('layout/back_header.html')
-            </header>
+      <div class="backwrapper">
+        <header>@@include('layout/back_header.html')</header>
 
-            <div class="container">
-                <main class="right_content">
-                    <section class="section1">
-                        <!-- form -->
-                        <div class="back_from">
-                            <h4 class="h4 green-1">聯絡我們</h4>
-                            <div class="back_from_wrapper">
-    
-                                    <!-- row-1 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">電子信箱</div>
-                                    <div class="grid_item">日期</div>
-                                    <div class="grid_item">建議事項</div>
-                                    <div class="grid_item">內容</div>
-                                    <div class="grid_item">回覆狀態</div>
-                                </div>
+        <div class="container">
+          <main class="right_content">
+            <section class="section1">
+              <!-- form -->
+              <div class="back_from">
+                <h4 class="h4 green-1">聯絡我們</h4>
+                <div class="back_from_wrapper">
+                  <!-- row-1 -->
+                  <div class="grid_container">
+                    <div class="grid_item">電子信箱</div>
+                    <div class="grid_item">日期</div>
+                    <div class="grid_item">建議事項</div>
+                    <div class="grid_item">內容</div>
+                    <div class="grid_item">回覆狀態</div>
+                  </div>
 
-                                <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">合作</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">未回覆</div>
-                                </div>
+                  <!-- row-2 -->
+                  <div class="grid_container" v-for="contact in Contactlist" >
+                    <div class="grid_item checked">
+                        <!-- a10109990@g... -->
+                        {{contact.Email}}
+                    </div>
+                    <div class="grid_item">
+                        <!-- 2022/01/13 -->
+                        {{contact.ReleaseDate}}
+                    </div>
+                    <div class="grid_item">
+                        <!-- 合作 -->
+                        {{contact.Category}}
+                    </div>
+                    <div class="grid_item">
+                        <!-- 第一次體驗感覺很有尊榮... -->
+                        {{contact.SuggesContent}}
+                    </div>
+                    <div class="grid_item gray">
+                        <!-- 未回覆 -->
+                        {{contact.Condition}}
+                    </div>
+                  </div>
+                <!-- wrapper -->
+              </div>
+              <!-- back_from -->
 
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">付款</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">未回覆</div>
-                                </div>
-
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">租借</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">未回覆</div>
-                                </div>
-
-                                <!-- row-5 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">商城</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">已回覆</div>
-                                </div>
-
-                                <!-- row-6 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">商城</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">已回覆</div>
-                                </div>
-
-                                <!-- row-7 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">合作</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">已回覆</div>
-                                </div>
-                                
-                                <!-- row-8 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">合作</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">未回覆</div>
-                                </div>
-
-                                <!-- row-9 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">合作</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">未回覆</div>
-                                </div>
-
-                                <!-- row-10 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">a10109990@g...</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">合作</div>
-                                    <div class="grid_item">第一次體驗感覺很有尊榮...</div>
-                                    <div class="grid_item gray">未回覆</div>
-                                </div>
-                            </div><!-- wrapper -->
-                        </div><!-- back_from -->
-                        
-                        <!-- 頁碼-->
-                        <div class="page">
-                            <ul class="page_ul">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            </ul>
-                        </div>
-                    </section><!-- section1 -->
-                </main>
-                @@include('layout/back_footer.html')
-            </div><!-- container -->
+              <!-- 頁碼-->
+              <div class="page">
+                <ul class="page_ul">
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                </ul>
+              </div>
+            </section>
+            <!-- section1 -->
+          </main>
+          @@include('layout/back_footer.html')
         </div>
+        <!-- container -->
+      </div>
 
-        <div class="section_contactus">
-            <div class="contactus_top">
-                <h6>訊息回覆</h6>
-            </div>
-            <div class="contactus_mail">
-                <h6>電子信箱 : a1235990@gmail.com</h6>
-            </div>
-            <div class="contactus_date">
-                <h6>日期：2022/01/13</h6>
-            </div>
-            <div class="contactus_name_phone">
-                <h6>
-                    姓名：11342
-                </h6>
-                <h6>
-                    電話：0929993124
-                </h6>
-            </div>
-            <div class="contactus_type">
-                <h6>建議事項：合作</h6>
-            </div>
-            <div class="contactus_content">
-                <h6>您的建議</h6>
-                <p>
-                    Hi 私覓您好！<br>我是HoSha主理人Yumi，我們團隊一直非常喜歡貴品牌，希望與貴品牌有合作的機會！我們<br>是於2022年創立的和服品牌-HoSha，主要的販售日本古典文藝相關，很希望能與貴品<br>牌合作到府服務的廚師穿搭及道具租借。期待收到回覆，謝謝🙏🙏<br>HoSha 官網↓<br>https://www.hosha.com/<br>by Yumi
-                </p>
-                <textarea placeholder="HoSha您好！不好意思，我們暫不考慮貴司合作類別，感謝您的來信 by Eric"></textarea>
-                <button class="contactus_content_btn">儲存</button>
-            </div>
-
+      <div class="section_contactus">
+        <div class="contactus_top">
+          <h6>訊息回覆</h6>
         </div>
+        <div class="contactus_mail">
+          <h6>電子信箱 : a1235990@gmail.com</h6>
+        </div>
+        <div class="contactus_date">
+          <h6>日期：2022/01/13</h6>
+        </div>
+        <div class="contactus_name_phone">
+          <h6>姓名：11342</h6>
+          <h6>電話：0929993124</h6>
+        </div>
+        <div class="contactus_type">
+          <h6>建議事項：合作</h6>
+        </div>
+        <div class="contactus_content">
+          <h6>您的建議</h6>
+          <p>
+            Hi 私覓您好！<br />我是HoSha主理人Yumi，我們團隊一直非常喜歡貴品牌，希望與貴品牌有合作的機會！我們<br />是於2022年創立的和服品牌-HoSha，主要的販售日本古典文藝相關，很希望能與貴品<br />牌合作到府服務的廚師穿搭及道具租借。期待收到回覆，謝謝🙏🙏<br />HoSha
+            官網↓<br />https://www.hosha.com/<br />by Yumi
+          </p>
+          <textarea
+            placeholder="HoSha您好！不好意思，我們暫不考慮貴司合作類別，感謝您的來信 by Eric"
+          ></textarea>
+          <button class="contactus_content_btn">儲存</button>
+        </div>
+      </div>
     </div>
-
-    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
+    <script src="./js/vender/Vue/vue.global.js"></script>
+    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+    <!-- JQ -->
     <script
-        type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><!-- icon_cdn -->
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <!-- icon_cdn -->
     <script
-        nomodule="nomodule"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+      nomodule="nomodule"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <!-- icon_cdn -->
+    <script src="./js/back_page/back_nav/back_nav.js"></script>
+    <!-- 導覽列 -->
     <script>
-        const switchBtn = document.querySelectorAll(".switch_btn");
-        const sliderContent = document.querySelectorAll(".slider_content");
-        // console.log(switchBtn);
+      const switchBtn = document.querySelectorAll(".switch_btn");
+      const sliderContent = document.querySelectorAll(".slider_content");
+      // console.log(switchBtn);
 
-        for(let i=0; i < switchBtn.length; i++){
-            // console.log(i)
-            switchBtn[i].addEventListener("click", function(){
-                console.log(this.checked); // ture /false
-                console.log(i); 
-                console.log(this)
+      for (let i = 0; i < switchBtn.length; i++) {
+        // console.log(i)
+        switchBtn[i].addEventListener("click", function () {
+          console.log(this.checked); // ture /false
+          console.log(i);
+          console.log(this);
 
-                if (this.checked == true) {
-
-                    $(this).closest("label").find(".slider_content").text('啟用');
-                } else{
-                    $(this).closest("label").find(".slider_content").text('停權');
-                }
-            });
-        }
+          if (this.checked == true) {
+            $(this).closest("label").find(".slider_content").text("啟用");
+          } else {
+            $(this).closest("label").find(".slider_content").text("停權");
+          }
+        });
+      }
     </script>
-</body>
+    <script>
+      let app1 = Vue.createApp({
+        data() {
+          return {
+            Contactlist: [],
+          };
+        },
+        created() {
+          this.contactrender();
+        },
+        methods: {
+          contactrender() {
+            let _this = this;
+
+            $.ajax({
+              method: "POST",
+              url: "php/frontpage/back_contactus.php",
+              data: {},
+
+              dataType: "json",
+              success: function (response) {
+                // console.log(response);
+                response.forEach((element) => {
+                  console.log(element);
+                    element.ReleaseDate = element.ReleaseDate.substr(0,10)
+                    if(element.Condition == 1){
+                        element.Condition = "未回覆"
+                    }
+                    else{
+                        element.Condition = "已回覆"
+                    }
+                    if(
+                        element.SuggesContent.length <= 10){
+                        _this.Contactlist.push(element);
+
+                        }else{
+                        element.SuggesContent = element.SuggesContent.substr(0,11) +'...'
+                        _this.Contactlist.push(element);
+                        }   
+                   
+                   
+                    
+                    
+                  
+                });
+              },
+              error: function (exception) {
+                alert("發生錯誤: " + exception.status);
+              },
+            });
+          },
+        },
+      });
+      app1.mount(".container");
+    </script>
+  </body>
 </html>

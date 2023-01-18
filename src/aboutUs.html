@@ -1,263 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>關於我們</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
-</head>
-<body>
-    @@include('layout/header_01.html')
-    
-    <!-- banner -->
-    @@include('layout/banner.html',{
-        "title":"ABOUT",
-        "src":"./img/about_img/about_headbanner.jpg"
-      })
-    
-    <!-- about -->
-    <div class="about">
+  </head>
+  <body>
+    <div class="app1">
+      @@include('layout/header_01.html')
+
+      <!-- banner -->
+      @@include('layout/banner.html',{ "title":"ABOUT",
+      "src":"./img/about_img/about_headbanner.jpg" })
+
+      <!-- about -->
+      <div class="about">
         <div class="about_title">
-            <h2 class="green-1 font_family_tc font_bold">關於私覓</h2>
-            <div class="border"></div>
+          <h2 class="green-1 font_family_tc font_bold">關於私覓</h2>
+          <div class="border"></div>
         </div>
         <div class="about_content">
-            <div class="part1">
-                <div class="part1_img">
-                    <img src="./img/about_img/about_beginning.jpg">
-                </div>
-                <div class="part1_info">
-                    <h2 class="font_family_eng green-1 font_bold">01</h2>
-                    <h4 class="font_family_tc font_bold green-1">理念起源</h4>
-                    <div class="text1">
-                        <h6>追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。</h6>
-                        <div class="text2">
-                            <h6 class="text_white">
-                                追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。
-                            </h6>
-                        </div>
-                    </div>
-                </div>
+          <div class="part1">
+            <div class="part1_img">
+              <img src="./img/about_img/about_beginning.jpg" />
             </div>
-            <div class="part2">
-                <div class="part2_img">
-                    <img src="./img/about_img/about_brandstory.jpg">
+            <div class="part1_info">
+              <h2 class="font_family_eng green-1 font_bold">01</h2>
+              <h4 class="font_family_tc font_bold green-1">理念起源</h4>
+              <div class="text1">
+                <h6>
+                  追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。
+                </h6>
+                <div class="text2">
+                  <h6 class="text_white">
+                    追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。
+                  </h6>
                 </div>
-                <div class="part2_info">
-                    <h2 class="font_family_eng green-1 font_bold">02</h2>
-                    <h4 class="font_family_tc font_bold green-1">品牌理念</h4>
-                    <div class="text1">
-                        <h6>成為妳疲倦日常的那雙手，為妳下廚。『私覓』到府私廚，貫徹日式「款待」的心境，導入匠心傾心的服務態度，您可以在此時此刻將平日的辛勞與煩惱放下，讓您能在幸福與溫暖中度過這段專屬時刻
-                        </h6>
-                        <div class="text2">
-                            <h6 class="text_white">
-                                成為妳疲倦日常的那雙手，為妳下廚。『私覓』到府私廚，貫徹日式「款待」的心境，導入匠心傾心的服務態度，您可以在此時此刻將平日的辛勞與煩惱放下，讓您能在幸福與溫暖中度過這段專屬時刻
-                            </h6>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-            <div class="part3">
-                <div class="part3_img">
-                    <img src="./img/about_img/about_ourjob.jpg">
-                </div>
-                <div class="part3_info">
-                    <h2 class="font_family_eng green-1 font_bold">03</h2>
-                    <h4 class="font_family_tc font_bold green-1">職人匠心</h4>
-                    <div class="text1">
-                        <h6>追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。</h6>
-                        <div class="text2">
-                            <h6 class="text_white">
-                                追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。
-                            </h6>
-                        </div>
-                    </div>
-                </div>  
+          </div>
+          <div class="part2">
+            <div class="part2_img">
+              <img src="./img/about_img/about_brandstory.jpg" />
             </div>
-        </div>     
-    </div> 
-    <!-- serve -->
-    <div class="serve">
+            <div class="part2_info">
+              <h2 class="font_family_eng green-1 font_bold">02</h2>
+              <h4 class="font_family_tc font_bold green-1">品牌理念</h4>
+              <div class="text1">
+                <h6>
+                  成為妳疲倦日常的那雙手，為妳下廚。『私覓』到府私廚，貫徹日式「款待」的心境，導入匠心傾心的服務態度，您可以在此時此刻將平日的辛勞與煩惱放下，讓您能在幸福與溫暖中度過這段專屬時刻
+                </h6>
+                <div class="text2">
+                  <h6 class="text_white">
+                    成為妳疲倦日常的那雙手，為妳下廚。『私覓』到府私廚，貫徹日式「款待」的心境，導入匠心傾心的服務態度，您可以在此時此刻將平日的辛勞與煩惱放下，讓您能在幸福與溫暖中度過這段專屬時刻
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="part3">
+            <div class="part3_img">
+              <img src="./img/about_img/about_ourjob.jpg" />
+            </div>
+            <div class="part3_info">
+              <h2 class="font_family_eng green-1 font_bold">03</h2>
+              <h4 class="font_family_tc font_bold green-1">職人匠心</h4>
+              <div class="text1">
+                <h6>
+                  追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。
+                </h6>
+                <div class="text2">
+                  <h6 class="text_white">
+                    追溯至1989年，現今『私覓』主理人與多位摯友於日本東京時，在一場日本料理私廚派對，每一份獨特、專注並為客人專屬服務的精緻美食深深打動了所有人，創立了『私覓』，讓年少回憶中的美好獻給每位體驗日料到府私廚的您們。
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- serve -->
+      <div class="serve">
         <div class="serve_title">
-            <h2 class="green-1 font_family_tc font_bold">專業服務</h2>
-            <div class="border"></div>
+          <h2 class="green-1 font_family_tc font_bold">專業服務</h2>
+          <div class="border"></div>
         </div>
         <div class="serve_grid">
-            <div class="reserve">
-                <h4><a href="reserve01.html">到府預約</a></h4>
-            </div>
-            <div class="shopmall">
-                <h4><a href="shopMall.html">線上商城</a></h4>
-            </div>
-            <div class="menu_grid">
-                <h4><a href="menu.html">日式餚膳</a></h4>
-            </div>
-            <div class="team">
-                <h4><a href="chefTeam.html">私廚陣容</a></h4>
-            </div>
+          <div class="reserve">
+            <h4><a href="reserve01.html">到府預約</a></h4>
+          </div>
+          <div class="shopmall">
+            <h4><a href="shopMall.html">線上商城</a></h4>
+          </div>
+          <div class="menu_grid">
+            <h4><a href="menu.html">日式餚膳</a></h4>
+          </div>
+          <div class="team">
+            <h4><a href="chefTeam.html">私廚陣容</a></h4>
+          </div>
         </div>
-    </div>
-    <!-- contact -->
-    <div class="contact">
+      </div>
+      <!-- contact -->
+      <div class="contact">
         <div class="contact_title">
-            <h2 class="green-1 font_family_tc font_bold">聯繫我們</h2>
-            <div class="border"></div>
+          <h2 class="green-1 font_family_tc font_bold">聯繫我們</h2>
+          <div class="border"></div>
         </div>
-        
+
         <div class="name_email_wrapper">
-            <div class="yourname">
-                <p class="font16">您的姓名</p>
-                <input type="text" placeholder="請填寫姓名">
-            </div>
-            <div class="yourphone">
-                <p class="font16">您的電話</p>
-                <input type="text" placeholder="請填寫電話">
-            </div>
-            <div class="youremail">
-                <p class="font16">您的E-mail</p>
-                <input type="text" placeholder="請填寫E-mail">
-            </div>
-            <div class="suggest_type">
-                <p class="font16">建議事項</p>
-                <select name="" class="type_option">
-                    <option value="">建議事項</option>
-                    <option value="">預約</option>
-                    <option value="">付款</option>
-                    <option value="">租借</option>
-                    <option value="">商城</option>
-                    <option value="">合作</option>
-                    <option value="">其他</option>
-                </select>
-            </div>
+          <div class="yourname">
+            <p class="font16">您的姓名</p>
+            <input
+              type="text"
+              placeholder="請填寫姓名"
+              id="contact_name"
+              value=""
+              required
+            />
+          </div>
+          <div class="yourphone">
+            <p class="font16">您的電話</p>
+            <input type="text" placeholder="請填寫電話" id="contact_phone" required/>
+          </div>
+          <div class="youremail">
+            <p class="font16">您的E-mail</p>
+            <input type="text" placeholder="請填寫E-mail" id="contact_mail" required />
+          </div>
+          <div class="suggest_type">
+            <p class="font16">建議事項</p>
+            <select name="" class="type_option" id="contact_type" required>
+              <option value="建議事項">建議事項</option>
+              <option value="預約">預約</option>
+              <option value="付款">付款</option>
+              <option value="租借">租借</option>
+              <option value="商城">商城</option>
+              <option value="合成">合作</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
 
-            <div class="subject_message_submit_wrapper">
-                <p class="font16 text">您的建議</p>
-                <textarea type="text" cols="30" rows="10"
-                placeholder="請填寫建議事項"></textarea>
-                <div class="btn_view">
-                    <p>送出</p>
-                    <span>
-                        <p>→</p>
-                    </span>
-                </div>
+          <div class="subject_message_submit_wrapper">
+            <p class="font16 text">您的建議</p>
+            <textarea
+              type="text"
+              cols="30"
+              rows="10"
+              placeholder="請填寫建議事項"
+              id="contact_text"
+              required
+            ></textarea>
+            <div class="btn_view" id="contact_btn" @click="aboutajax()">
+              <p>送出</p>
+              <span>
+                <p>→</p>
+              </span>
             </div>
+          </div>
         </div>
-
-    </div>
-    <!-- google-maps -->
-    <div class="google-maps">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12965.837849861573!2d139.7175983!3d35.6656871!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb07770ca3dffe3d!2sJINBO%20MINAMI%20AOYAMA!5e0!3m2!1szh-TW!2stw!4v1671393498492!5m2!1szh-TW!2stw" width="100%" height="251" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    <!-- QA -->
-    <div class="qanda">
+      </div>
+      <!-- google-maps -->
+      <div class="google-maps">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12965.837849861573!2d139.7175983!3d35.6656871!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb07770ca3dffe3d!2sJINBO%20MINAMI%20AOYAMA!5e0!3m2!1szh-TW!2stw!4v1671393498492!5m2!1szh-TW!2stw"
+          width="100%"
+          height="251"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <!-- QA -->
+      <div class="qanda">
         <div class="qa_title">
-            <h2 class="green-1 font_family_tc font_bold">常見問題</h2>
-            <div class="border"></div>
+          <h2 class="green-1 font_family_tc font_bold">常見問題</h2>
+          <div class="border"></div>
         </div>
-        
+
         <div class="accordion">
-            <div class="container">
-                <div class="label">
-                    <i class="fa-solid fa-q"></i>
-                    <h6>請問有最低用餐人數嗎？</h6>
-                    </div>
-                <div class="content">
-                    <i class="fa-solid fa-a"></i>
-                    <h6>沒有！一個人也可以享有專屬私廚服務唷</h6>
-                </div>
+          <div class="container" 
+          v-for="qa in QAlist" 
+          :key="index"
+          @click="accordion">
+            <div class="label">
+              <i class="fa-solid fa-q"></i>
+              <h6>
+                <!-- 請問有最低用餐人數？ -->
+                {{qa.QuestionContent}}
+              </h6>
             </div>
-            <div class="container">
-                <div class="label">
-                    <i class="fa-solid fa-q"></i>
-                    <h6>請問有提供素食餐點嗎？</h6>
-                    </div>
-                <div class="content">
-                    <i class="fa-solid fa-a"></i>
-                    <h6>沒有！一個人也可以享有專屬私廚服務唷</h6>
-                </div>
+            <div class="content">
+              <i class="fa-solid fa-a"></i>
+              <h6>
+                <!-- 沒有！一個人也可以享有專屬私廚服務唷 -->
+                {{qa.AnswerContent}}
+              </h6>
             </div>
-            <div class="container">
-                <div class="label">
-                    <i class="fa-solid fa-q"></i>
-                    <h6>請問廚師預約的時段有哪些呢？</h6>
-                    </div>
-                <div class="content">
-                    <i class="fa-solid fa-a"></i>
-                    <h6>沒有！一個人也可以享有專屬私廚服務唷</h6>
-                </div>
-            </div>
-            <div class="container">
-                <div class="label">
-                    <i class="fa-solid fa-q"></i>
-                    <h6>請問如果臨時時間不行可以取消嗎？</h6>
-                    </div>
-                <div class="content">
-                    <i class="fa-solid fa-a"></i>
-                    <h6>沒有！一個人也可以享有專屬私廚服務唷</h6>
-                </div>
-            </div>
-            <div class="container">
-                <div class="label">
-                    <i class="fa-solid fa-q"></i>
-                    <h6>請問如何挑選適合自己的廚師？</h6>
-                    </div>
-                <div class="content">
-                    <i class="fa-solid fa-a"></i>
-                    <h6>沒有！一個人也可以享有專屬私廚服務唷</h6>
-                </div>
-            </div>
-            <!-- <div class="container">
-                <div class="label">Q 請問有提供素食餐點嗎？</div>
-                <div class="content">A 沒有！一個人也可以享有專屬私廚服務唷</div>
-            </div>
-            
-            <div class="container">
-                <div class="label">Q 請問廚師預約的時段有哪些呢？</div>
-                <div class="content">A 沒有！一個人也可以享有專屬私廚服務唷</div>
-            </div>
-            
-            <div class="container">
-                <div class="label">Q 請問如果臨時時間不行可以取消嗎？</div>
-                <div class="content">A 沒有！一個人也可以享有專屬私廚服務唷</div>
-            </div>
-            
-            <div class="container">
-                <div class="label">Q 請問如何挑選適合自己的廚師？</div>
-                <div class="content">A 沒有！一個人也可以享有專屬私廚服務唷</div>
-            </div> -->
+          </div>
         </div>
-        
-        
-        
+      </div>
+
+      @@include('layout/serve.html') @@include('layout/footer.html')
     </div>
-
-
-    @@include('layout/serve.html')
-    @@include('layout/footer.html')
-    <script src="./js/vender/calender/aboutus.js" type="text/javascript"></script>
+    <script src="./js/vender/Vue/vue.global.js"></script>
+    <!-- <script
+      src="./js/vender/calender/aboutus.js"
+      type="text/javascript"
+    ></script> -->
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+
     <script>
-        function aboutajax(){
+      let app1 = Vue.createApp({
+        data() {
+          return {
+            QAlist: [],
+          };
+        },
+        created() {
+          this.qarender();
+        },
+        methods: {
+          accordion() {
+            const accordion = document.getElementsByClassName("container");
+
+            for (let i = 0; i < accordion.length; i++) {
+              accordion[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+              });
+            }
             
-            console.log(1)
+          },
+
+          aboutajax() {
+            let contact_name = document.getElementById("contact_name");
+            let contact_phone = document.getElementById("contact_phone");
+            let contact_mail = document.getElementById("contact_mail");
+            let contact_type = document.getElementById("contact_type");
+            let contact_text = document.getElementById("contact_text");
+            let btn = document.getElementById("contact_btn");
+
             $.ajax({
-                    method: "POST",
-                    url: "php/frontpage/aboutus.php",
-                    
-                    dataType: "text", 
-                    success: function (response) {
-                        console.log(response)
-                    },
-                    error: function (exception) {
-                        alert("發生錯誤: " + exception.status);
-                    }
+              method: "POST",
+              url: "php/frontpage/aboutus_contact.php",
+              data: {
+                Name: contact_name.value,
+                Phone: contact_phone.value,
+                Mail: contact_mail.value,
+                Category: contact_type.value,
+                SuggesContent: contact_text.value,
+              },
+
+              dataType: "text",
+              success: function (response) {
+                console.log(response);
+              },
+              error: function (exception) {
+                alert("發生錯誤: " + exception.status);
+              },
+            });
+          },
+          qarender() {
+            let _this = this;
+
+            $.ajax({
+              method: "POST",
+              url: "php/frontpage/aboutus_qa.php",
+              data: {},
+
+              dataType: "json",
+              success: function (response) {
+                // console.log(response);
+                response.forEach((element) => {
+                  // console.log(element);
+                  _this.QAlist.push(element);
+
                 });
-        }
+              },
+              error: function (exception) {
+                alert("發生錯誤: " + exception.status);
+              },
+            });
+            // console.log(this.QAlist);
+          },
+        },
+      });
+      app1.mount(".app1");
+
+      //   let contact_name = document.getElementById("contact_name");
+      //   let contact_phone = document.getElementById("contact_phone");
+      //   let contact_mail = document.getElementById("contact_mail");
+      //   let contact_type = document.getElementById("contact_type");
+      //   let contact_text = document.getElementById("contact_text");
+      //   let btn = document.getElementById("contact_btn");
+
+      //   btn.addEventListener("click", function () {
+      //     console.log(
+      //       contact_name.value,
+      //       contact_phone.value,
+      //       contact_mail.value,
+      //       contact_type.value,
+      //       contact_text.value
+      //     );
+      //     aboutajax();
+      //   });
+
+      //   function aboutajax() {
+      //     console.log(1);
+      //     console.log(contact_name);
+
+      //     $.ajax({
+      //       method: "POST",
+      //       url: "php/frontpage/aboutus.php",
+      //       data: {
+      //         Name: contact_name.value,
+      //         Phone: contact_phone.value,
+      //         Mail: contact_mail.value,
+      //         Category: contact_type.value,
+      //         SuggesContent: contact_text.value,
+      //       },
+
+      //       dataType: "json",
+      //       success: function (response) {
+      //         console.log(response);
+      //       },
+      //       error: function (exception) {
+      //         alert("發生錯誤: " + exception.status);
+      //       },
+      //     });
+      //   }
     </script>
-</body>
+  </body>
 </html>
