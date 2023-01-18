@@ -1,3 +1,5 @@
+//取得會員id
+let member_ID = localStorage.getItem("member_ID");
 let login_app = Vue.createApp({
     data() {
         return {

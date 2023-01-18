@@ -13,12 +13,11 @@
     @@include('layout/header_01.html')
     <div class="fulid_wrapper member" id="member">
       <main>
-        
         <!-- MEMBER標題 -->
-        <h1 class="green-1 font_family_eng">MEMBER</h1>
+        <h1 class="green-1 font_family_eng" >MEMBER</h1>
         <!-- 會員中心標題 -->
         <div class="member_title">
-          <h2 class="green-1 font_bold font_family_tc">會員中心</h2>
+          <h2 class="green-1 font_bold font_family_tc" >會員中心</h2>
         </div>
         <!-- tabbbbbbbbbb -->
         <nav class="member_tab">
@@ -213,7 +212,7 @@
         <section class="collect_section member_product_section" id="member_collect" v-show="current_tab == 'collection' ">
           <ul>
             <template v-for="(item, key) in collection" :key="item.name">
-              <a class="collect_list">
+              <a class="collect_list" :href="'./shopMallDetail.html?ID='+ item.ID">
                 <div class="product_list">
                   <div class="product_img"><img :src=item.IMG>
         
@@ -223,7 +222,7 @@
                     <h6 class="product_title">{{item.Name}}</h6>
                     <p class="font16">$<span class="product_money">{{item.Price}}</span></p>
                     <button type="button" class="cart_link" href="">
-                      <i class="fa-solid fa-cart-shopping"></i>
+                      <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                     </button>
                   </div>
                 </div>
@@ -322,7 +321,7 @@
     <script src="js/frontpage/login_check.js"></script>
     <script>
       //取得會員id
-      let member_ID = localStorage.getItem("member_ID");
+      // let member_ID = localStorage.getItem("member_ID");
       //header 會員登入測試
       // let user_icon = document.querySelector('.slide_user');
       // user_icon.addEventListener('click',function(e){
@@ -389,15 +388,22 @@
             qa_title:["預約流程", "付款問題","租借服務"]
           }
         },
+        created(){
+          window.addEventListener("popstate", function () {
+            // 第二步，加上 tab_active 函式
+            member.page();
+            // console.log('aaa');
+          });
+        },
         mounted(){
           if(member_ID){
             this.info_show();
             this.get_order_list();
             this.get_mallorder_list();
-            this.page();
             this.collection_s();
             this.collect_num();
             this.get_QA();
+            this.page();
           }
         },
         computed: {},
@@ -773,14 +779,13 @@
           // 分頁紀錄
           tab_page(){
             history.pushState(null, null, "#" + this.current_tab);
-
           },
           page(){
             let url = window.location.hash;
             // console.log(url); 
             if(url){
               this.current_tab = url.slice(1,15);
-
+              // console.log("page:"+this.current_tab);
             }
           }
         }
