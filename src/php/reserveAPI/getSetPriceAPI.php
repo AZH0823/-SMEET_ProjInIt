@@ -2,7 +2,7 @@
  include ('../conectDB/Connection.php');
 
  //  撈除所有服務
- $SearhDishSql = "Select ID,SetName,SetPrice,IMG from Sets";
+ $SearhDishSql = "SELECT ID,SetName,SetPrice,IMG FROM Sets";
 
  $Searhstatement = getPDO()->prepare($SearhDishSql);
  $Searhstatement -> execute();

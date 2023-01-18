@@ -37,13 +37,14 @@ div.back_feedback {
                                 text-align: center;
                                 align-items: center;
                                 grid-template: repeat(1, 1fr) / repeat(3, 1fr) 250px 1fr 1fr;
-
+                                border-bottom: 0.5px solid #ccc;
+                                
                                 &:first-child {
                                     background-color: $Camel-3;
                                 }
-                                .grid_item:nth-child( n + 1){
-                                    border-bottom: .5px solid #ccc; // 加底线
-                                }
+                                // .grid_item:nth-child( n + 1){
+                                //     border-bottom: .5px solid #ccc; // 加底线
+                                // }
 
                                 // Popup點擊hover
                                 .checked:hover{

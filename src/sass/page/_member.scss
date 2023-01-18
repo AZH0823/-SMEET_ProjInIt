@@ -260,7 +260,7 @@
   }
   .list_cat2{
     padding:15px 10px;
-    margin-top: 50px;
+    // margin-top: 50px;
   }
   .member_product_section {
     border-top: 1px solid #000;
@@ -320,9 +320,21 @@
       }
     }
     .order_list_content:last-child {
-      margin-bottom: 200px;
+      margin-bottom: 100px;
     }
-
+    // 沒有訂單
+    .no_list{
+      margin: 50px auto;
+      i.fa-cart-shopping{
+        text-align: center;
+        display: block;
+      }
+      p.no_text{
+        text-align: center;
+        padding: 0;
+        margin-top: 15px;
+      }
+    }
     @media screen and (max-width: 920px) {
       .list1 {
         display: none;
@@ -362,24 +374,37 @@
         padding: 20px 0 20px 10px;
       }
     }
+    
   }
   // ======================訂單查詢結束
   // ======================收藏菜品
   .collect_section {
-    padding: 50px 0;
+    padding: 35px 0;
     border-bottom: 0 solid #000;
     @include mobile() {
       padding: 25px 0;
     }
+    // 沒有訂單
+    .no_list{
+      margin: 50px auto;
+      i.fa-cart-shopping{
+        text-align: center;
+        display: block;
+      }
+      p.no_text{
+        text-align: center;
+        padding: 0;
+        margin-top: 15px;
+      }
+    }  
     ul {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
       grid-auto-rows: 1fr;
       grid-row-gap: 20px;
       grid-column-gap: 20px;
       margin: 0 auto 60px;
 
-      margin-bottom: 60px;
       @include pad() {
         grid-template-columns: repeat(auto-fill, minmax(173px, 1fr));
         grid-row-gap: 10px;
@@ -396,52 +421,53 @@
         grid-column-gap: 10px;
       }
       // 商城card
-      li.collect_list {
+      .collect_list {
+        text-decoration: none;
+        display: block;
         margin: 0 auto;
         // min-width: 256px;
-        width: 256px;
-        height: 350px;
+        width: 100%;
+        min-height: 350px;
         border: 1px solid #898989;
-        @include pad() {
-          width: 180px;
-          height: 247px;
+        cursor: pointer;
+        
+        @include pad(){
+          min-width: 180px;
+          min-height: 247px ;
         }
-        @include mobile() {
-          width: 176px;
-          height: 245px;
+        @include mobile(){
+            min-width: 150px;
+            min-height: 235px;
         }
-        @media screen and (max-width: 375px) {
-          width: 150px;
-          height: 211px;
+        @media screen and (max-width:375px){
+            min-width: 145px;
+            min-height: 201px;
         }
-        a {
-          text-decoration: none;
+        .product_list {
+          // text-decoration: none;
           display: block;
           height: 100%;
+          width: 100%;
         }
         .product_img {
-          height: 229px;
+          height: 65%;
           width: 100%;
           position: relative;
-
-          @include pad() {
-            height: 163px;
-          }
-          @include mobile() {
-            height: 160px;
-          }
-          @media screen and (max-width: 375px) {
+          overflow: hidden;
+          @include mobile(){
+            height: 60%;
           }
           img {
             width: 100%;
-
-            //   -o-object-fit: cover;
+            height: 100%;
+            display: block;
+            -o-object-fit: cover;
             object-fit: cover;
           }
           i {
             background: #fff;
             border-radius: 50%;
-            color: #ccc;
+            color: $red;
             font-size: 14px;
             display: block;
             width: 29px;
@@ -450,27 +476,32 @@
             position: absolute;
             top: 12px;
             right: 12px;
+            cursor: pointer;
             &:hover {
-              color: $red;
+              color: lighten($red, 10);
               border: 0;
             }
           }
+          
         }
         .product_content {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
           padding: 14px 20px 20px;
+          align-items: center;
           @include pad() {
             padding: 8px 15px 3px;
           }
-
+          @include mobile(){
+            padding: 6px 10px 4px;
+          }
           h6.product_title {
             width: 100%;
             height: 60px;
             @include pad() {
               font-size: 16px;
-              height: 40px;
+              // height: 50px;
             }
           }
           p {
@@ -687,13 +718,11 @@
       h5 {
         padding: 7% 0 2% 2%;
         @extend .green-1;
-        width: 80%;
+        width: 100%;
+        border-bottom: 1px solid #000;
         @include mobile {
           font-size: 16px;
         }
-      }
-      .li_1{
-        border-top: 1px solid #000;
       }
       li.question_section_li {
         display: flex;

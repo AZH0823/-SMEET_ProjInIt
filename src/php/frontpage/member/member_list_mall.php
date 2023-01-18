@@ -3,32 +3,35 @@
 
     include('../../conectDB/Connection.php');
 
-    //建立SQL-預約訂單ORDERS
-    $sql = 'select AppointmentDate, ID, TotalPrice, `Condition`
-    from Orders 
-    where MemberID = ? 
-    order by AppointmentDate desc ';
+    //建立SQL-商城訂單MALLORDERS
+    $sql = 'select CAST(Date AS DATE) as Date, ID, TotalPrice, State
+    from MallOrders
+        where MemberID = ?
+        order by Date desc';
 
     $statement = getPDO()->prepare($sql);  
     $statement->bindValue(1, $member_ID);  
-    $result = $statement->execute();  
-    
+    $result = $statement->execute();
+
     //抓出全部且依照順序封裝成一個二維陣列
     $data = $statement->fetchAll();
-    // print_r ($data);
+    
     if(count($data)>0){
         foreach($data as $newData){
             $arr[] = array(
-                'cat' => '預約',
-                'date'=>$newData['AppointmentDate'],
+                'cat' => '商城',
+                'date'=>$newData['Date'],
                 'num'=>$newData['ID'],
                 'price'=>$newData['TotalPrice'],
-                'statue' => $newData['Condition'],
-        );
+                'statue' => $newData['State'],
+            );
         
         }
         echo json_encode ($arr);
+
     }else{
         echo json_encode ("無資料");
     }
+    
+    
 ?>

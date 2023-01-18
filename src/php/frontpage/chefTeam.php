@@ -32,8 +32,6 @@
     }
 
 
-    // 回傳json
-    echo json_encode($arr); 
-    // // echo json_encode($data);      
+    echo json_encode($arr);      
 
 ?>

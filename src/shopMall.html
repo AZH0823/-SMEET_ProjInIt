@@ -13,7 +13,7 @@ initial-scale=1.0">
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
     </head>
 
-    <body class="shop-page">
+    <body class="shop-page" >
         <!--         ------  slide_header  ------          -->
         @@include('layout/header_01.html')
 
@@ -60,18 +60,17 @@ initial-scale=1.0">
                     v-for="(item, i) in filtered_list" 
                     :key="item.Name">
                 
-                        <li class="collect_list">
-                            <div>
+                        <a class="collect_list" :href="'./shopMallDetail.html?ID='+ item.ID">
+                            <div class="product_list">
                                 
                                 <div class="product_img">
-                                    <a :href="'./shopMallDetail.html?ID='+ item.ID">
-                                        <img :src="item.IMG[0]" alt="">
-                                    </a>
+                                    <img :src="item.IMG[0]" alt="">
                                     <i class="fa-solid fa-heart"
                                     :class="{shopMall_checkHeart: item.heart}" 
-                                    @click="collect_heart(item)"
-                                    @click="addCollectList(item)"
+                                    @click="addCollectLogin_check(item)"
+                                    @click.prevent
                                     ></i>
+                                    
                                 </div>
                                 <div class="product_content green-1">
                                     
@@ -80,17 +79,29 @@ initial-scale=1.0">
                                     <button type="button" class="cart_link" href="">
                                         <i class="fa-solid fa-cart-shopping" 
                                         @click="shopCar(item.ID, item.Name, item.Price, item.IMG[0], item.heart, item.qty)"
+                                        @click.prevent
                                         ></i>
                                     </button>
                                 </div>
                             </div>
-                        </li>
+                        </a>
                     </template>
-                    
+                </ul>
             </section>
 
+            <!-- ========== 購物車 加入成功 & 移除成功 燈箱 ========== -->
+            <div class="overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="shopCartsuccess_popup !== '' ">
+                
+                <article>
+                    <div class="check_text">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h6 >{{shopCartsuccess_popup}}</h6> 
+                    </div>
+                </article>
+            </div>
+
             <!-- ========== 收藏 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="wrapper overlay1" v-if="success_popup !== '' ">
+            <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="success_popup !== '' ">
                 
                 <article>
                     <div class="check_text">
@@ -101,10 +112,13 @@ initial-scale=1.0">
             </div>
 
 
-
             <!-- ========== cart 燈箱 ========== -->
-            <div class="wrapper product_pop" id="product_pop" v-if="isShow">
-                <div class="container">
+            <div class="product_pop" 
+            :class="{ product_popNone : isShow == false}" id="product_pop"
+            v-if="isShow"
+            @click="product_pop_close()"
+            >
+                <div class="container" id="product_pop_container" @click.stop>
                     <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG, popupData.heart, popupData.qty)"></i>
                     <div class="img_product">
                         <img :src="popupData.IMG" alt="">
@@ -160,8 +174,6 @@ initial-scale=1.0">
                     popupData: {
                         ID: "",
                         IMG: "",
-                        img2: "",
-                        img3: "",
                         Name: "",
                         Price: "",
                         heart: "",
@@ -174,10 +186,17 @@ initial-scale=1.0">
                     // ========= 點擊加入購物車的資料會帶到這裡 ========= //
                     ShoppingCartList: [],
 
-                    // ========= 分頁 ========= // 
-                    // 清空原本分頁資料
-                    success_popup_interval:null,
+                    // ========= popUp ========= // 
+
+                    // 控制popUp開關
                     success_popup:'',
+                    shopCartsuccess_popup:'',
+
+                    // 清空原本popUp資料
+                    success_popup_interval:null,
+
+
+                    // ========= 分頁 ========= // 
 
                     // 當前分頁狀態
                     current_tab: 8,
@@ -269,12 +288,103 @@ initial-scale=1.0">
 
             mounted() {
                 
-                // ========= 商品data AJAX 傳入 ========= //
+                // 主要商品data AJAX 傳入
                 this.getCate();
+
+                // 進商品詳情頁就抓購物車資料
+                this.getCartLocalStorage()
+
+                // 進商品詳情頁就抓收藏商品資料
+                this.getCollectLocalStorage()
+
             },
 
             methods: {
+
+                // shoppingData 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
+                getCartLocalStorage(){
+                    const local_storage = localStorage.getItem("shoppingData")
+
+                    if(local_storage){
+                        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+
+                        this.ShoppingCartList = LSGetItem
+                    }
+                },
+
+                // shopCollect 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
+                getCollectLocalStorage(){
+                    const local_storage = localStorage.getItem("shopCollect")
+
+                    if(local_storage){
+                        const LSGetItem = JSON.parse(localStorage.getItem("shopCollect")) 
+
+                        this.ShoppingCartList = LSGetItem
+                    }
+                },
                 // ========= AJAX ========= //
+                
+                // 加入收藏前檢查是否登入會員
+                addCollectLogin_check(item){    
+                    $.ajax({            
+                        method: "POST",
+                        url: "php/frontpage/login_check.php",
+                        data:{},            
+                        dataType: "text",
+                        success:  (response)=>{
+                            if(response == ""){
+                                //尚未登入->跳出會員登入畫面
+                                login_pop();
+                            }else{
+                                //已有登入的話 執行.....
+                                // 會員icon顯示
+                                // let user_pop = document.querySelector('.user_pop');
+                                // user_pop.classList.remove('none');
+                                // 加减爱心
+                                
+                                // 商品收藏樣式 & 加到 Storage
+                                if(item.heart == true){
+                                    item.heart = false;
+                                    this.success_popup = '移除收藏成功'
+                                    this.removeCollectList(item)
+                                    
+                                    // 使 scroll 無效
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "hidden";
+
+                                }else{
+                                    item.heart = true;
+                                    this.success_popup = '加入收藏成功'
+                                    this.addCollectList(item)
+
+                                    // 使 scroll 無效
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "hidden";
+                                }
+
+                                // 收藏 & 移除 PopOn 消失
+                                clearInterval(this.success_popup_interval)
+                                this.success_popup_interval = setInterval(() => {
+                                    this.success_popup= ''
+
+                                    // 一秒後開啟 scroll
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "auto";
+                                    
+                                }, 1000);
+
+                                // 收藏增加 Loaca  lStorage
+                                // console.log(this.collect_heart_data_list); 
+                                localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
+                                
+                            }              
+                        },
+                        error: function(exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
+
 
                 // 取得商品清單
                 getCate(){    
@@ -309,8 +419,8 @@ initial-scale=1.0">
 
                                     // 回傳AjaxMealsInfo
                                     this.AjaxMealsInfo[i].IMG = imgs
+                                    // console.log(this.AjaxMealsInfo[i].IMG);
                                 }
-                                console.log(this.AjaxMealsInfo);
 
                                 
                             }                
@@ -323,31 +433,46 @@ initial-scale=1.0">
 
                 // ========= 購物車行為 ========= //
 
-                // TODO 怎麼觸及燈箱以外的地方，就可以讓燈箱關閉（目前在html結構上加上data-inside=”true“來判斷），但是這樣會報錯
-                // xxx(){
-                //     const target = e.target
 
-                //     if (!target.matches('[data-inside]')) { 
-                //         this.isShow = false;
-                //     }
-                // },
+                // 點擊非卡片區域關掉商品 popUp
+                bodyHidden(){
+                    // 關掉 overflow
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
+                },
+                
+                // 點擊 container 關掉 popUp
+                product_pop_close(){
+                    this.isShow = false;
 
+                    // 關掉 overflow
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
+                },
 
                 // 點擊卡片購物車 icon 後 顯示 popUp
                 shopCar(ID, Name, Price, IMG, qty){
                     // 開啟popUp
                     this.isShow = true;
-                    // console.log(ID, Name, Price, IMG, heart, qty);
+                    let body = document.querySelector('body');
+                    body.style.overflow = "hidden";
 
+
+                    // 將 Mealinfo 的資料賦值到 popUpData
                     this.popupData.Name = Name
                     this.popupData.ID = ID
                     this.popupData.Price = Price
                     this.popupData.IMG = IMG
                     this.popupData.qty = 1 // 預設值 1
+
                 },
+
 
                 // 點擊 X 關閉popUp並清空資料
                 popUp_xClose(ID, Name, Price, IMG, heart, qty){
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
+
                     // 關閉popUp
                     this.isShow = false;
                     // 清空資料
@@ -366,66 +491,55 @@ initial-scale=1.0">
                         this.popupData.qty --;
                     }
                 },
-                
-                // FIXME push data到陣列
+
+                // 商品加入購物車
                 addShoppingCart(popupData){
-                    
-                    // 存到 Storage
-                    this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData))); // 將popUpData物件 加進 cartList陣列
-                    console.log(this.ShoppingCartList[0]); // 物件
-                    const shoppingCartlist = this.ShoppingCartList[0] // 物件存到變數
-                    console.log(this.ShoppingCartList[0]);
-
-                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList));
-
-                    // 將 Storage的 value 抓下來存到變數
-                    let xxx = localStorage.getItem("shoppingData");
-                    // console.log(typeof(xxx)); // string
-                    zzz = JSON.parse(xxx);  // 轉型為陣列
-
-                    // localStorage qty 及 data 存到變數
-                    let localStorageQty = zzz[0].qty;
-                    let localStorageArr = zzz;
-                    // console.log(localStorageQty); // qty 數量
-                    // console.log(localStorageArr); // 資料格式 ： ID IMG Name Price heart img2 img3 qty
-                    
-                
-                    //  如果使用者點擊的商品的 ID 跟 Storage 的 ID 一樣，就把 使用者的qty 加到 Storage的 qty
-                    // Storage 的資料形態是陣列，所以要用迴圈把 Key抓出來才能比對
                 
 
-                    for(let i = 0; i < zzz.length; i++){
-                        console.log(zzz[i].ID);
+                    const addCartListEl =JSON.parse(JSON.stringify(popupData)) 
+                    // const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
 
-                        if( this.ShoppingCartList.ID !== zzz[i].ID){
-                            console.log("123");
-                            // this.ShoppingCartList.push(JSON.parse(JSON.stringify(popupData))); 
+
+                    if(this.ShoppingCartList.length !==0){
+                        // ID 重複
+                        let result = false;
+                        let idx = null;
+
+                        for(let i = 0; i < this.ShoppingCartList.length;i++){
+
+                            if(this.ShoppingCartList[i].ID === addCartListEl.ID){
+                                result = true;
+                                idx = i
+                            }
+                        }    
+                        if(result){
+                            this.ShoppingCartList[idx].qty += addCartListEl.qty
+                        }else{
+                            this.ShoppingCartList.push(addCartListEl)    
                         }
+                    
+                    }else{
+                        this.ShoppingCartList.push(addCartListEl)
                     }
-                    // else popupData.qty + zzz[i].qty
-                    // for(let i = 0; i < this.ShoppingCartList.length; i++){
-                        
-                    //     console.log(this.ShoppingCartList);
 
-                    //     if( cartList[i].length === ){
-                    //         console.log("123");
-                    //         
-                    //     }else if(this.ShoppingCartList[i].length > 0){
-                    //         let qtyResult = this.ShoppingCartList[i].qty += popupData.qty
-                    //         console.log(cartResult);
-                    //         // cartList[i].qty = cartResult;
-                    //     }
-                    // }
+                    localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
 
-                    // console.log(JSON.parse(JSON.stringify(popupData)));
-                    
-                    
-                    
-                    
+                    // 控制購物車popUp
+                    if(popupData != ""){
+                        this.shopCartsuccess_popup = '加入購物車成功'
+                    }
+                    // PopOn 消失
+                    clearInterval(this.success_popup_interval)
+                    this.success_popup_interval = setInterval(() => {
+                        this.shopCartsuccess_popup= ''
+                        let body = document.querySelector('body');
+                        body.style.overflow = "auto";
+                    }, 1000);
+
                     // 關閉購物車
                     this.isShow = false;
-                    // 數量回到初始值
                     this.popupData.qty = 1;
+                    
                 },
 
                 // ========= 商品收藏 ========= //
@@ -435,6 +549,7 @@ initial-scale=1.0">
                     console.log(item);
                     // push 到新的陣列以便存到 localStorage
                     this.collect_heart_data_list.push(item);
+                    // console.log(this.collect_heart_data_list);
                 },
 
                 // 收藏商品資料移除
@@ -445,34 +560,52 @@ initial-scale=1.0">
 
                 // 商品愛心收藏及移除（樣式及提醒popUp）
                 collect_heart(item){
+
                     // 加减爱心
                     console.log(item.heart);
                     if(item.heart == true){
                         item.heart = false;
                         this.success_popup = '移除收藏成功'
                         this.removeCollectList(item)
+                        
+                        // 使 scroll 無效
+                        let body = document.querySelector('body');
+                        body.style.overflow = "hidden";
 
                     }else{
                         item.heart = true;
                         this.success_popup = '加入收藏成功'
                         this.addCollectList(item)
+
+                        // 使 scroll 無效
+                        let body = document.querySelector('body');
+                        body.style.overflow = "hidden";
                     }
 
                     // 收藏 & 移除 PopOn 消失
                     clearInterval(this.success_popup_interval)
                     this.success_popup_interval = setInterval(() => {
                         this.success_popup= ''
+
+                        // 一秒後開啟 scroll
+                        let body = document.querySelector('body');
+                        body.style.overflow = "auto";
+                        
                     }, 1000);
 
-                    // 收藏增加 LoacalStorage
-                    // console.log(this.collect_heart_data_list);
+                    // 收藏增加 Loaca  lStorage
+                    // console.log(this.collect_heart_data_list); 
                     localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
+
                 },
+                
 
             },
         });
 
         const vm = app.mount("#app");
+
+        
 
         </script>
     </body>

@@ -77,7 +77,8 @@
 
                         <div class="form-input" id="order_date" >
                             <img src="./img/reserve_img/reserve_icon03.svg" alt="">
-                            <input type="date" id="start" :min="nowDate" :max="getMaxDate"  v-model="inputData.date"  @change="dateHandler">
+                            <!-- :min="nowDate" :max="getMaxDate" -->
+                            <input type="date" id="start"   v-model="inputData.date"  @change="dateHandler">
                             <span class="warning_title" v-if="vaildDate">＊欄位尚未填寫</span>
                         </div>
                         <div class="form-input" id="perofTime">
@@ -92,19 +93,10 @@
                             <img src="./img/reserve_img/reserve_icon05.svg" alt="">
                             <select  v-model="inputData.chefTeam" :disabled="dateClick">
                                 <option  value="" selected disabled>--廚師團隊--</option>
-                                <option v-for="leder in data.chefScheduled" :key="leder.id" :value="leder.team">{{leder.name}}</option>
+                                <option v-for="leder in data.chefScheduled" :key="leder.id" :value="leder.id">{{leder.name}}</option>
                             </select>
                             <span class="warning_title" v-if="vaildTeam">＊欄位尚未填寫</span>
                         </div>
-
-                        <!-- 測試用先別管 -->
-                        <!-- <ul>
-                            <li v-for="(member, key) in inputData"> 項目:{{key}} / 使用者選填的:{{member}}</li>
-                        </ul> -->
-                        <!-- 測試用先別管 -->
-
-                        
-
                         <button class="next_btn" @click="vaildDataLists($event)">下一步</button>
                     </div>
                 </div>
@@ -117,18 +109,13 @@
          const app = Vue.createApp({
             data() {
                 return {
+                    //存放API 回來的資料
                     data:{
                         // 套餐資料
                         sets:[
-                            {id:1,setName:'名物 私套餐'},
-                            {id:2,setName:'極上 會席套餐'},
-                            {id:3,setName:'苑 春堂套餐'}
                         ],
                         // 廚師團隊
                         chefTeam:[
-                            // {id:1,team:'A',name:'麗燕山'},
-                            // {id:2,team:'B',name:'吳寶劍'},
-                            // {id:3,team:'C',name:'陳平安'}
                         ],
                         // 預定時間
                         oderTime:[
@@ -136,7 +123,7 @@
                             {id:2,txt:'下午茶',time:'11:00-14:00'},
                             {id:3,txt:'晚餐',time:'18:00-21:00'},
                         ] , 
-                        
+                        historylist:[],
                         // 可預約的廚師團隊
                         chefScheduled:[]
                     },
@@ -149,29 +136,39 @@
                         date: '', // 預約日期
                         orderTime:"", // 預約時段
                         chefTeam:"", //廚師團隊
-                    },
 
-                    // 由後臺撈回來的單日歷史訂單(目前先全撈資料,方便做測試)
-                    historylist:[
-                        {id:1,date:'2022-12-31',teams:'A'},
-                        {id:2,date:'2022-12-31',teams:'B'},
-                        {id:3,date:'2022-12-30',teams:'C'},
-                        {id:4,date:'2023-01-11',teams:'B'},
-                        {id:5,date:'2023-01-11',teams:'C'},
-                        {id:6,date:'2023-01-12',teams:'A'},
-                        {id:7,date:'2023-01-13',teams:'B'},
-                        {id:8,date:'2023-01-13',teams:'A'},
-                        {id:9,date:'2023-01-14',teams:'A'},
-                        {id:10,date:'2023-01-14',teams:'B'},
-                        {id:11,date:'2023-01-14',teams:'C'},
-                    ]
-                    
+                        detailDishList:[
+
+                        ],
+                        member:{
+                        }, 
+                        // 預約資料
+                        name:'',
+                        phone:'',
+                        email:'',
+                        addr:'',
+                        note:'',
+                        point:0,
+
+                        // 信用卡
+                        cardName:'',
+                        cardDate:'',
+                        cardCode:'',
+
+                        // 信用卡連號
+                        cards:[
+                            {},
+                            {},
+                            {},
+                            {}
+                        ],
+                    },
                 };
             },
             computed:{
                 // 取得當天日期
                 nowDate(){
-                    let nowDate = new Date().toISOString().slice(0,10)
+                    let nowDate = new Date().toISOString().slice(0,10);
                     return nowDate
                 },
                 // 取得近兩個月的日期
@@ -189,60 +186,23 @@
                     }
                 },
 
-                // 當使用者按下日期重新渲染團隊
-                dateHandler(){
-                    let isOrderTeam = []
-                    // console.log(this.inputData.date)
-                    // 每當觸發日期有改變就去後台撈單日資料
-                    // historylist 以後要去後台撈歷史訂單的資料
-                    let filterItems = this.historylist.filter((historyOneDay)=>{
-                        // console.log(historyOneDay)
-                        if(historyOneDay.date === this.inputData.date){
-                            // 今天有訂單的話，把有訂單的團隊給記錄起來
-                            isOrderTeam.push(historyOneDay.teams)
-                            return historyOneDay 
-                        }
-                    })
-                
-                    // console.log(filterItems.length)
-                    // 假若有訂單的話
-                    if(filterItems.length> 0 && filterItems.length < 3){   
-                        this.data.chefScheduled = this.data.chefTeam.filter(el=>{
-                            // Object.values(el)[1]:團隊編號
-                            // isOrderTeam : 歷史訂單團隊編號
-            
-                            if(!isOrderTeam.includes(Object.values(el)[1])){
-                                return el
-                            }
-                        })
-                    }else if(filterItems.length ===3){
-                        this.data.chefScheduled=[]
-                        this.inputData.chefTeam =''
-                        alert(`今天預約已滿`)
-                    }else{
-                        // 不用修改下拉選單團隊資料
-                        this.data.chefScheduled = this.data.chefTeam
-                    }
-                             
-                },
-                 // 尚未填寫
                 vaildAgress(){
-                    return this.inputData.agress ==="" || this.inputData.agress == false
+                    return this.inputData.agress ==="" || this.inputData.agress == false;
                 } ,
                 vaildSets(){
-                    return this.inputData.sets ===""
+                    return this.inputData.sets ==="";
                 },
                 vaildPeo(){
-                    return this.inputData.peoCount ===""
+                    return this.inputData.peoCount ==="";
                 },
                 vaildDate(){
-                    return this.inputData.date ===""
+                    return this.inputData.date ==="";
                 },
                 vaildTime(){
-                    return this.inputData.orderTime ===""
+                    return this.inputData.orderTime ==="";
                 },
                 vaildTeam(){
-                    return this.inputData.chefTeam ===""
+                    return this.inputData.chefTeam ==="";
                 }
                
 
@@ -255,137 +215,183 @@
                 //     }
                 // }
             },
-            methods:{
-                //API拿資料
-                getTeam(){
-                    fetch('php/reserveAPI/getTeamAPI.php')
-                    .then(response =>{
-                        return  response.json()
-                    })
-                    .then( datalist =>{
-                        datalist.forEach(data=>{
-                            this.data.chefTeam.push(data)
-                        })
-                    }).catch(err=>{
-                        console.log(err)
-                    })
-                },
-
-                // 驗證使用者下拉選單
-                vaildDataLists(e){
-                    // console.log(this.inputData)
-
-                    let vaildResult = []
-                    let errMsg = ''
-                    for (const [key, value] of Object.entries(this.inputData)) {
-                        // console.log(`${key}: ${value}`);
-
-                        
-                        switch(key){
-                            case 'agress':
-                                if(value === '' || value === false){
-                                    // alert(`尚未確認預約須知`)
-                                    errMsg +=`尚未確認預約須知\n`
-                                    vaildResult.push(false)
-                                }else{
-                                    vaildResult.push(true)
-                                }
-                                break;
-                            case 'sets':
-                                if(value === '' || value === false){
-                                    // alert(`套餐未選擇`)
-                                    errMsg +=`套餐未選擇\n`
-                                    vaildResult.push(false)
-                                }else{
-                                    vaildResult.push(true)
-                                }
-                            break;
-                            case 'peoCount':
-                                if(value === '' || value === false){
-                                    // alert(`人數未選擇`)
-                                    errMsg +=`人數未選擇\n`
-                                    vaildResult.push(false)
-                                }else{
-                                    vaildResult.push(true)
-                                }
-                            break;
-                            case 'date':
-                                if(value === '' || value === false){
-                                    // alert(`預約日期未選擇`)
-                                    errMsg +=`預約日期未選擇\n`
-                                    vaildResult.push(false)
-                                }else{
-                                        vaildResult.push(true)
-                                }
-                            break;
-                            case 'orderTime':
-                                if(value === '' || value === false){
-                                    // alert(`預約時段未選擇`)
-                                    errMsg +=`預約時段未選擇\n`
-                                    vaildResult.push(false)
-                                }else{
-                                        vaildResult.push(true)
-                                }
-                            break;
-                            case 'chefTeam':
-                                if(value === '' || value === false){
-                                    // alert(`尚未選擇預約團隊`)
-                                    errMsg +=`尚未選擇預約團隊`
-                                    vaildResult.push(false)
-                                }else{
-                                    vaildResult.push(true)
-                                }
-                            break;
-                        }
-
-                        // if(!vaildResult) break;
-                        // if(value === '' || value === false){
-                            //     alert(`${key} : 請填選資料`)
-                            //     break;
-                            // }
-                            
-                        }
-                        if(errMsg.length !== 0) alert(errMsg)
-
-                    // 使用者六個項目有一個沒有就停止以下動作
-                    if(vaildResult.includes(false))return
-
-                    this.sentToNextPage();
-
-                    // for(let good in this.inputData){
-                    //     console.log(good)
-                    //     console.log(this.inputDat.good)
-                    // }
-                    // this.saveLocalStroage()
-                },
-                saveLocalStroage(){
-                    // console.log(`儲存使用者資訊`)
-                    localStorage.setItem('reseverOrder',JSON.stringify(this.inputData))
-                },
-                sentToNextPage(){
-                    let c  = confirm(`確認送出資料嗎?`)
-                    if(c){
-                        // 送出表單前儲存資訊
-                        this.saveLocalStroage();
-                        // console.log(`切換頁面並將資料送出`)
-                        location.href = 'reserve02.html';
+            methods:{    
+              dateHandler(){
+                // 當使用者按下日期重新渲染團隊
+                // 清空放API回來的訂單資料
+                this.data.historylist = [];  
+                // 每當觸發日期有改變就去去DB拿資料撈單日資料
+                this.historylistAPI();                                
+              },
+              //API拿資料 Start
+              getSetPriceAPI(){
+                fetch('php/reserveAPI/getSetPriceAPI.php')
+                .then(response =>{
+                    return response.json()
+                })
+                .then( data =>{
+                    for(let i = 0;i < data.length;i++){ 
+                          this.data.sets.push(data[i])
+                    } 
+                }).catch(err=>{
+                    console.log(err)
+                })
+              },
+              historylistAPI(){
+                fetch("php/reserveAPI/historylistAPI.php", {
+                    method: "POST",
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({
+                        date:this.inputData.date,
+                      })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    this.data.historylist = [];
+                    if(data !== null){
+                      this.data.historylist = data;
                     }
-                },
-               
+                    // filter Data 
+                    this.filterTeam();
+                  });
+              },
+              getTeam(){
+                  fetch('php/reserveAPI/getTeamAPI.php')
+                  .then(response =>{
+                      return  response.json();
+                  })
+                  .then( datalist =>{
+                      datalist.forEach(data=>{
+                          this.data.chefTeam.push(data);
+                      })
+                  }).catch(err=>{
+                      console.log(err);
+                  })
+              },
+              //API拿資料 End
+              // 驗證使用者下拉選單
+              vaildDataLists(e){
+                  let vaildResult = [];
+                  let errMsg = '';
+                  for (const [key, value] of Object.entries(this.inputData)) {
+                    switch(key){
+                        case 'agress':
+                            if(value === '' || value === false){
+                                // alert(`尚未確認預約須知`)
+                                errMsg +=`尚未確認預約須知\n`;
+                                vaildResult.push(false);
+                            }else{
+                                vaildResult.push(true);
+                            }
+                            break;
+                        case 'sets':
+                            if(value === '' || value === false){
+                                // alert(`套餐未選擇`)
+                                errMsg +=`套餐未選擇\n`
+                                vaildResult.push(false);
+                            }else{
+                                vaildResult.push(true);
+                            }
+                        break;
+                        case 'peoCount':
+                            if(value === '' || value === false){
+                                // alert(`人數未選擇`)
+                                errMsg +=`人數未選擇\n`;
+                                vaildResult.push(false);
+                            }else{
+                                vaildResult.push(true);
+                            }
+                        break;
+                        case 'date':
+                            if(value === '' || value === false){
+                                // alert(`預約日期未選擇`)
+                                errMsg +=`預約日期未選擇\n`;
+                                vaildResult.push(false);
+                            }else{
+                                    vaildResult.push(true);
+                            }
+                        break;
+                        case 'orderTime':
+                            if(value === '' || value === false){
+                                // alert(`預約時段未選擇`)
+                                errMsg +=`預約時段未選擇\n`;
+                                vaildResult.push(false);
+                            }else{
+                                    vaildResult.push(true);
+                            }
+                        break;
+                        case 'chefTeam':
+                            if(value === '' || value === false){
+                                // alert(`尚未選擇預約團隊`)
+                                errMsg +=`尚未選擇預約團隊`;
+                                vaildResult.push(false);
+                            }else{
+                                vaildResult.push(true);
+                            }
+                        break;
+                    }
+
+                      // if(!vaildResult) break;
+                      // if(value === '' || value === false){
+                          //     alert(`${key} : 請填選資料`)
+                          //     break;
+                          // }
+                          
+                      }
+                  if(errMsg.length !== 0) alert(errMsg);
+
+                  // 使用者六個項目有一個沒有就停止以下動作
+                  if(vaildResult.includes(false))return;
+                  this.sentToNextPage();
+              },
+              saveLocalStroage(){
+                  // console.log(`儲存使用者資訊`)
+                  localStorage.setItem('reseverOrder',JSON.stringify(this.inputData));
+              },
+              sentToNextPage(){
+                  let c  = confirm(`確認送出資料嗎?`);
+                  if(c){
+                      // 送出表單前儲存資訊
+                      this.saveLocalStroage();
+                      // console.log(`切換頁面並將資料送出`)
+                      location.href = 'reserve02.html';
+                  }
+              },
+              filterTeam(){
+                const filterItems = this.data.historylist;
+                this.chefScheduled = []
+                // 當日只有2組團隊提供服務
+                if(filterItems.length > 0 && filterItems.length < 3){ 
+                    let d = []; //存放有歷史訂單的團隊名稱
+                    filterItems.forEach(el=>{d.push(el.TeamID)});
+                    // 把沒有預約的團隊給挑出來放入 data.chefScheduled 給團隊下拉選單渲覽畫面
+                    this.data.chefScheduled = this.data.chefTeam.filter(el=>{                         
+                        if(!d.includes(el.id)){
+                            return el;
+                        }                          
+                    })
+                // 當日預約額滿
+                }else if(filterItems.length ===3){
+                    alert(`今天預約已滿`);
+                }else{
+                  //當日所有團隊都有空 
+                  this.data.chefScheduled = this.data.chefTeam;
+                }
+              },
+              
             },
             mounted(){
                 // 這邊之後要放入API
-                // 要取得團隊名稱, 時段, 
-
                 // localStroe 放入 
-                let LS = JSON.parse(localStorage.getItem('reseverOrder'))
+                let LS = JSON.parse(localStorage.getItem('reseverOrder'));
                 if(LS !== null){
-                    this.inputData  = LS
+                    this.inputData  = LS;
                 }
-
-                this.getTeam()
+                this.getTeam();
+                this.getSetPriceAPI();
             }
-            
         });
         app.mount("#reseve_detail");
     </script>
