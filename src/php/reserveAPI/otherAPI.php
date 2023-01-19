@@ -3,7 +3,7 @@
   //  撈全部單品資訊
 
   $SearhDishSql = "SELECT  d.ID AS id, d.`Name` AS disName,dt.`Name`AS dishType, d.Price
-  FROM dish  d
+  FROM Dish  d
        JOIN DishsType dt
            ON d.`Type` = dt.ID
   WHERE d.ProductType = '私廚單點' AND dt.`Name`= '單品' AND d.Condition ='1' ";
