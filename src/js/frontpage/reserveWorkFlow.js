@@ -1,3 +1,4 @@
+console.log(is.error(new Error()))
 const RootComponent  = {
     data(){
         return{
@@ -498,7 +499,7 @@ const RootComponent  = {
                                 case 'cards':
                                     let cardString = this.inputData.cards.map(card=>card.str).reduce((a,b)=>a+b,"")
                                     if(is.creditCard(cardString)){
-                                        console.log('信用卡號驗證成功')
+                                        // console.log('信用卡號驗證成功')
                                         this.inputData.cardNumber = cardString;
                                         vaild.push(true);
                                     }else{
@@ -619,13 +620,13 @@ const RootComponent  = {
                 }
             }
             // 算出總金額給
-            totalPrice = (this.APIData_in.sets[setID].price) * this.inputData.peoCount;
+            totalPrice = parseInt((this.APIData_in.sets[setID].price) * this.inputData.peoCount);
             // 撈出使用者單點項目細節
             this.APIData_in.otherDish.forEach(dish => {
                 if(dish.qty > 0){
                     this.inputData.detailDishList.push(dish)
                     // 單點金額
-                    totalPrice += dish.price * dish.qty;
+                    totalPrice += parseInt(dish.price) *parseInt(dish.qty);
                 }
             });
             // 將使用者確認清單的服務放在 otherServies
@@ -635,7 +636,7 @@ const RootComponent  = {
                     serve.qty = this.inputData.peoCount
                     this.inputData.detailDishList.push(serve)
                     // 服務金額
-                    totalPrice += serve.price * serve.qty;
+                    totalPrice += parseInt(serve.price) * parseInt(serve.qty);
                 }
             });
 
@@ -646,7 +647,7 @@ const RootComponent  = {
                 }
             })
             this.inputData.Scheduled = OrderTime.txt; // 午餐,下午茶,晚餐
-            this.inputData.TotalPrice = totalPrice;
+            this.inputData.TotalPrice = parseInt(totalPrice);
         },
         // 清空使用者選擇
         resetDataInput(){
@@ -768,7 +769,7 @@ const RootComponent  = {
             
             // 套餐金額
             let setPrice = {...this.APIData_in.sets.find(el=>el.id===this.inputData.sets)}.price;
-            let setTotal = count * setPrice;
+            let setTotal = parseInt(count) * parseInt(setPrice);
             
             // 單點金額
             let otherDish = 0;
@@ -794,13 +795,13 @@ const RootComponent  = {
                 // 計算服務
                 otherServies = this.APIData_in.servies.map(serve=>{
                     if(serve.checked === true){
-                        return serve.price;
+                        return parseInt(serve.price);
                     }else return 0
                 }).reduce((a,b)=>a+b,0)
-                otherServies = otherServies * count;
+                otherServies = otherServies * parseInt(count);
             }
            
-            return `${(setTotal + otherDish + otherServies - point).toLocaleString()}`;
+            return `${(parseInt(setTotal) + parseInt(otherDish) + parseInt(otherServies) - parseInt(point)).toLocaleString()}`;
         },
         // oder_view end
 
@@ -826,18 +827,18 @@ const RootComponent  = {
             let otherDish = this.APIData_in.otherDish.map(item=>{
                 // console.log(item.qty, item.price)
                  if(item.qty > 0){
-                    return item.qty * item.price;
+                    return parseInt(item.qty) * parseInt(item.price) ;
                  }else return 0;
             }).reduce((a,b)=>a+b,0)
             
             let otherServies = this.APIData_in.servies.map(serve=>{
                 if(serve.checked === true){
                     // console.log(serve.title)
-                    return serve.price;
+                    return parseInt(serve.price);
                 }else return 0
             }).reduce((a,b)=>a+b,0)
             
-            otherServies = otherServies * this.inputData.peoCount
+            otherServies = parseInt(otherServies) * parseInt(this.inputData.peoCount);
             return ( otherDish + otherServies ).toLocaleString()
         },
 
