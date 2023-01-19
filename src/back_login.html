@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>back_login</title>
+</head>
+<body>
+    <div class="fulid_wrapper back_login" id="login_bg">
+        <div class="container  " id="login"> 
+            <!-- 註冊登入tab -->
+            <div class="login_tab font16 Camel-1" ref="tab">
+                <div class="tab_line"ref="tab2">會員登入</div>
+            </div>
+        
+            <!-- =========會員登入表單============ -->
+            <div action="" class="login_enter" ref="enter_tab">
+                <input type="text" name="" id="login_account" placeholder="請輸入信箱"@blur="checkEmail" v-model="user_enter.account">
+                <p class="text_no">*請填寫正確的帳號或密碼</p>
+                <div class="login_pwd">
+                    <input type="password" name="" id="login_pwd" placeholder="請輸入密碼" minlength="8" maxlength="16"  @blur="check_pwd" v-model="user_enter.pwd">
+                    <i class="fa-regular fa-eye-slash font12 gray" @click="eye_icon"></i>
+                    <p class="text_no">*請填寫正確的帳號或密碼</p>
+
+                </div>
+                <button type="submit" class="btn_login font18" @click="login_ajax">會員登入</button>
+                <a class="btn_forget" @click="forget">忘記密碼？</a>
+            </div>
+            <!-- 或 -->
+            <div class="login_or" ref="or">
+                <p class="font16 gray">或</p>
+            </div>
+            <!-- 第三方 -->
+            <button type="button" class="btn_three font18 " ref="three">
+                <!-- <i class="fa-brands fa-line"></i> -->
+                使用LINE快速登入
+            </button>
+
+            <!-- ==========忘記密碼畫面============= -->
+            <div class="login_forget  " ref="forget">
+                <h6>忘記密碼</h6>
+                <div class="forget" action="">
+                    <input type="text" placeholder="請輸入電子信箱">
+                    <button class="inCart_btn1">傳送驗證碼</button>
+                    <input type="text" placeholder="請輸入驗證碼">
+                    <button class="inCart_btn1">驗證</button>
+                </div>
+
+                <div class="login_back login_tab font16 Camel-1">
+                    <div class="back_add tab_add" @click="add_tab">註冊會員</div>
+                    <div class="back_enter tab_enter" @click="enter_tab">會員登入</div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 會員註冊{{user_add}} -->
+        <!-- 會員登入{{user_enter}} -->
+    </div>
+<!--     
+    <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script src="js/vender/Vue/vue.global.js"></script>
+    <script src="js/frontpage/login.js"></script>
+    <script src="js/frontpage/login_check.js"></script> -->
+
+</body>
+</html>
