@@ -1,6 +1,6 @@
 <?php
     $member_ID = $_POST['member_ID'] ;
-    $dish_ID = $_POST['dish_ID'] =;
+    $dish_ID = $_POST['dish_ID'];
     
     include('../../conectDB/Connection.php');
 
