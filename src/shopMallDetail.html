@@ -158,7 +158,7 @@ initial-scale=1.0">
         $(function () {
 
             $(".slide_ham").on("click", function () {
-                console.log("qwert");
+                // console.log("qwert");
                 $(".header_bar").toggleClass("-on")
                 $(".user_ham").toggleClass("-on")
             })
@@ -302,9 +302,6 @@ initial-scale=1.0">
                 this.getCartLocalStorage()
 
                 
-                // 详情收藏渲染
-                this.selectCollections1();
-                
                 // 進商品詳情頁就抓收藏商品資料
                 // this.getCollectLocalStorage();
             },
@@ -406,6 +403,7 @@ initial-scale=1.0">
                                 // 將調整過的 IMG 陣列回傳至 shopMallDetailInfo
                                 this.shopMallDetailInfo.IMG = adjusted_IMG;
                             }                
+                            this.selectCollections1()
                         },
                         error: function(exception) {
                             alert("數據載入失敗: " + exception.status);
@@ -466,7 +464,7 @@ initial-scale=1.0">
                 addShoppingCart1(shopMallDetailInfo){
 
                     const addCartListEl = JSON.parse(JSON.stringify(shopMallDetailInfo)) 
-                    console.log(addCartListEl.IMG[0]);
+                    // console.log(addCartListEl.IMG[0]);
 
                     let obj = addCartListEl
                     obj.IMG = addCartListEl.IMG[0]
@@ -585,7 +583,7 @@ initial-scale=1.0">
                     const member_ID =localStorage.getItem("member_ID");
                     const dish_ID = shopMallDetailInfo.ID ;
                     
-                    console.log(member_ID);
+                    // console.log(member_ID);
                     $.ajax({            
                         method: "POST",
                         url: "php/frontpage/login_check.php",
@@ -756,7 +754,7 @@ initial-scale=1.0">
                     }else{
                         this.ShoppingCartList.push(addCartListEl)
                     }
-                    console.log(this.ShoppingCartList);
+                    // console.log(this.ShoppingCartList);
 
                     localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
 
@@ -791,7 +789,7 @@ initial-scale=1.0">
                 selectCollections2(){    
                     const member_ID =localStorage.getItem("member_ID");
                     
-                    console.log(this.latestProduct);
+                    // console.log(this.latestProduct);
 
                     $.ajax({            
                         method: "POST",
@@ -802,17 +800,17 @@ initial-scale=1.0">
                         dataType: "text",
                         success: (response) => {
                             const adjusted_resp = JSON.parse(response)
-                            console.log(adjusted_resp);
+                            // console.log(adjusted_resp);
                             
                             for (let index = 0; index < adjusted_resp.length; index++) {
                                 const element = adjusted_resp[index];
                                 const id = element.DishID
-                                console.log(id);
+                                // console.log(id);
 
                                 
                                 for (let i = 0; i < this.latestProduct.length; i++) {
                                     const element = this.latestProduct[i];
-                                    console.log(element);
+                                    // console.log(element);
                                     const latestProductID = element.ID;
 
                                     if(id === latestProductID){
@@ -831,7 +829,7 @@ initial-scale=1.0">
                 addCollectLogin_check(item){
                     // 宣告 dish_ID
                     const dish_ID = item.ID
-                    console.log(dish_ID);
+                    // console.log(dish_ID);
                     $.ajax({            
                         method: "POST",
                         url: "php/frontpage/login_check.php",
