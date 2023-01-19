@@ -172,7 +172,7 @@
                         <div class="item">-NT$<span id="detail_total">{{orderData.point}}</span></div>
                         <div class="item">總金額
                         </div>
-                        <div class="item">NT$<span id="detail_total">{{detailTotal}}</span></div>
+                        <div class="item">NT$<span id="detail_total">{{orderData.detailTotal}}</span></div>
                     </div>
 
                     <!-- 訂購人資訊 -->
@@ -778,6 +778,7 @@
                             dataType: "text",
                             success: function (response) {
                                 that.response = response;
+                                console.log();
                             },
                             error: function (exception) {
                                 alert("發生錯誤: " + exception.status);
