@@ -1,3 +1,4 @@
+console.log(is.error(new Error()))
 const RootComponent  = {
     data(){
         return{
@@ -5,13 +6,6 @@ const RootComponent  = {
             workFlow:{
                 step:1,
             },
-            // cardname:'',
-            cards:[
-                {},
-                {},
-                {},
-                {}
-            ],
             // 使用者訂單建立
             inputData:{
                 // step 1 user Data
@@ -45,7 +39,7 @@ const RootComponent  = {
                 cardDate:'',
                 cardCode:'',
 
-                cards123:[
+                cards:[
                     {},
                     {},
                     {},
@@ -105,15 +99,15 @@ const RootComponent  = {
             this.inputData.addr ='新北勢測試區';
             this.inputData.note ='我想打我自己';
          
-            this.inputData.point = 12;
+            this.inputData.point = 2;
             this.inputData.cardName ='無哈果';
             this.inputData.cardDate ='0823';
             this.inputData.cardCode ='123' ;
 
-            this.cards[0].str = '1234';
-            this.cards[1].str = '4567';
-            this.cards[2].str = '7891';
-            this.cards[3].str = '0012';
+            this.inputData.cards[0].str = '4401';
+            this.inputData.cards[1].str = '4567';
+            this.inputData.cards[2].str = '7891';
+            this.inputData.cards[3].str = '0012';
             this.inputData.detailDishies=[
                 //  套餐Price  =  0
                 //  qty 變數要確認
@@ -172,6 +166,7 @@ const RootComponent  = {
                 },
                 dataType: "text",
                 success: function (res) {
+                // console.log(`會員資料`,res)
                   const merberPoint = res;
                   that.APIData_in["member"].point = merberPoint;
                   that.APIData_in["member"].id = _id;
@@ -284,6 +279,28 @@ const RootComponent  = {
                 console.log(err);
             })
         },
+        // 刷新會員點數
+        updateMemberPoint(){
+            const _that = this;
+            let _updatePoint = parseInt(this.APIData_in.member.point) - parseInt(this.inputData.point);
+            console.log(`現在:${this.APIData_in.member.id}會員,點數為:${_updatePoint}` )
+            $.ajax({
+                method: "POST",
+                url: "php/frontpage/member/memberPointUpdate.php",
+                data: {
+                    point:_updatePoint,
+                    memberID :_that.APIData_in.member.id
+                },
+                dataType: "text",
+                success: function (response) {
+
+                },
+                error: function (exception) {
+                    alert("發生錯誤: " + exception.status);
+                }
+            });
+
+        },
         //post 訂單送出
         postoderAPI(data){
             let userInput = data
@@ -311,18 +328,27 @@ const RootComponent  = {
                 },
                 dataType: "text",
                 success: function (response) {
-                    if(response === 'ErorderBulidFailor'){
-                        alert('訂單有問題') ;
+                    if(response === 'orderBulidFail'){
+                        alert('訂單有問題,請聯繫管理員');
+                        document.location.href="reserve01.html";
+                        // localStorage.removeItem('reseverOrder');
                     }else if(response ==='sameOrder'){
-                        alert('訂單有重複');
+                        // alert('訂單有重複，請重新下單');
+                        _this.workFlow.step += 1 ;
                         // document.location.href="reserve01.html";
                         // localStorage.removeItem('reseverOrder');
                     }else{
-                        console.log(`訂單編號為: ${response}`);
+                        // console.log(`訂單編號為: ${response}`);
+                        _this.workFlow.step += 1 ;
+                        _this.APIData_in.orderID = response;
+                        _this.updateMemberPoint();
                     }
+                    localStorage.removeItem('reseverOrder');
                 },
                 error: function (exception) {
                     alert("發生錯誤: " + exception.status);
+                    document.location.href="reserve01.html";
+                    localStorage.removeItem('reseverOrder');
                 }
             });
 
@@ -376,6 +402,7 @@ const RootComponent  = {
                 if(btn.className.includes('next_btn')){
                     // 模擬會員登錄
                     const member_ID = localStorage.getItem("member_ID");
+                    // console.log(member_ID)
                     // 未登入 
                     if(member_ID === null){
                         login_pop();
@@ -401,7 +428,7 @@ const RootComponent  = {
                     // 模擬會員登錄
                     let c = confirm('是否要送出訂單');
                     if(c){
-                        console.log(`檢驗格式`);
+                        // console.log(`檢驗格式`);
                         // if(LS!=null & )
                         //name phone email addr note point 
                         // 信用卡 cardName cardDate cardCode
@@ -412,88 +439,116 @@ const RootComponent  = {
 
                         // 檢驗所有第四流程 填寫資料的表格
                         for (const [key, value] of Object.entries(this.inputData)) {
+                            // console.log(key)
                             switch(key) {
                                 case 'name':
-                                    if(value.trim().length !== 0){
-                                        // console.log('驗證成功')
-                                        vaild.push(true)
+                                    if(value.trim().length !== 0 && this.nameRule(this.inputData.name)){
+                                        // console.log('姓名驗證成功')
+                                        this.inputData.name = this.inputData.name.trim();
+                                        vaild.push(true);
                                     }else{
                                         // console.log('驗證失敗')
-                                        vaild.push(false)
+                                        alertMsg +=`姓名請輸入英文或中文，請修正\n`;
+                                        vaild.push(false);
                                     }
                                     break;
                                 case 'phone':
-                                    if(value.trim().length === 10){
-                                        // console.log('驗證成功')
-                                        vaild.push(true)
+                                    if(this.phoneRule(this.inputData.phone)){
+                                        vaild.push(true);
+                                        // console.log('手機驗證成功')
                                     }else{
                                         // console.log('驗證失敗')
-                                        
+                                        alertMsg +=`不符合手機格式，請修正\n`;
+                                        vaild.push(false);
                                     }
                                     break;
                                 case 'email':
-                                    if(value.trim().length > 1){
-                                        vaild.push(true)
-                                        // console.log('驗證成功')
+                                    if(this.emailRule(this.inputData.email)){
+                                        // console.log('Email驗證成功')
+                                        vaild.push(true);
                                     }else{
                                         // console.log('驗證失敗')
-                                        
+                                        alertMsg +=`不符合信箱格式，請修正\n`;
+                                        vaild.push(false);                                   
                                     }
                                     break;
                                 case 'addr':
                                     if(value.trim().length > 0){
-                                        vaild.push(true)
-                                        // console.log('驗證成功')
+                                        // console.log('地址驗證成功')
+                                        vaild.push(true);
                                     }else{
+                                        alertMsg +=`地址不得為空值，請修正\n`;
+                                        vaild.push(false);   
                                         // console.log('驗證失敗')
                                     }
                                     break;
                                 case 'note':
-                                    
+                                    this.inputData.note = this.inputData.note.trim();
                                     break;
                                 case 'point':
-                                    if(value !== null || value !== undefined){
-                                        // console.log('驗證成功')
-                                        vaild.push(true)
+                                    if((value !== null || value !== undefined) &&
+                                       (parseInt(this.inputData.point) <= parseInt(this.APIData_in.member.point)) ){
+                                        // console.log('點數驗證成功')
+                                        vaild.push(true);
                                     }else{
                                         // console.log('驗證失敗')
+                                        alertMsg +=`您點紅利點數輸入有誤，請修正\n`;
+                                        vaild.push(false);
                                     }
                                     break;
+                                case 'cards':
+                                    let cardString = this.inputData.cards.map(card=>card.str).reduce((a,b)=>a+b,"")
+                                    if(is.creditCard(cardString)){
+                                        // console.log('信用卡號驗證成功')
+                                        this.inputData.cardNumber = cardString;
+                                        vaild.push(true);
+                                    }else{
+                                        alertMsg +=`信用卡卡號格式'有誤，請修正\n`;
+                                        vaild.push(false);
+                                    }
+                                    break;    
                                 case 'cardName':
-                                    if(value.trim().length > 0){
-                                        // console.log('驗證成功')
-                                        vaild.push(true)
+                                    if(value.trim().length > 0 && this.nameRule(this.inputData.cardName)){
+                                        // console.log('信用卡名稱驗證成功')
+                                        this.inputData.cardName = this.inputData.cardName.trim();
+                                        vaild.push(true);
                                     }else{
                                         // console.log('驗證失敗')
+                                        alertMsg +=`信用卡姓名輸入英文或中文，請修正\n`;
+                                        vaild.push(false);
                                     }
                                     break;
                                 case 'cardDate':
                                     if(value.trim().length == 4){
-                                        // console.log('驗證成功')
-                                        vaild.push(true)
+                                        // console.log('信用卡日期驗證成功')
+                                        vaild.push(true);
                                     }else{
+                                        alertMsg +=`信用卡有效日期不符合格式，請修正\n`;
                                         // console.log('驗證失敗')
                                     }
                                     break;
                                 
                                 case 'cardCode':
                                     if(value.trim().length == 3){
-                                        // console.log('驗證成功')
-                                        vaild.push(true)
+                                        // console.log('信用卡安全碼驗證成功')
+                                        vaild.push(true);
                                     }else{
                                         // console.log('驗證失敗')
+                                        alertMsg +=`信用卡不符合檢核碼格式，請修正\n`;
                                     }
                                     break;
                             }
                             // console.log(this.inputData.key)
                         }
-
-                        let vaildResult = vaild.find(res=>!res)
+                        
+                        let vaildResult = vaild.find(res=>!res) || true;
+                        
                         if(!vaildResult){
-                                // 驗證符合的話, 將訂單所有資訊傳到後端
+                            alert(alertMsg);
+                        }else{
+                              // 驗證符合的話, 將訂單所有資訊傳到後端
+                              // 扣除開會員的點數
                                 this.postoderAPI(this.inputData)
-                                // 扣除開會員的點數
-
                         }
                     }
                 }else{
@@ -565,13 +620,13 @@ const RootComponent  = {
                 }
             }
             // 算出總金額給
-            totalPrice = (this.APIData_in.sets[setID].price) * this.inputData.peoCount;
+            totalPrice = parseInt((this.APIData_in.sets[setID].price) * this.inputData.peoCount);
             // 撈出使用者單點項目細節
             this.APIData_in.otherDish.forEach(dish => {
                 if(dish.qty > 0){
                     this.inputData.detailDishList.push(dish)
                     // 單點金額
-                    totalPrice += dish.price * dish.qty;
+                    totalPrice += parseInt(dish.price) *parseInt(dish.qty);
                 }
             });
             // 將使用者確認清單的服務放在 otherServies
@@ -581,7 +636,7 @@ const RootComponent  = {
                     serve.qty = this.inputData.peoCount
                     this.inputData.detailDishList.push(serve)
                     // 服務金額
-                    totalPrice += serve.price * serve.qty;
+                    totalPrice += parseInt(serve.price) * parseInt(serve.qty);
                 }
             });
 
@@ -592,7 +647,7 @@ const RootComponent  = {
                 }
             })
             this.inputData.Scheduled = OrderTime.txt; // 午餐,下午茶,晚餐
-            this.inputData.TotalPrice = totalPrice;
+            this.inputData.TotalPrice = parseInt(totalPrice);
         },
         // 清空使用者選擇
         resetDataInput(){
@@ -634,28 +689,27 @@ const RootComponent  = {
             return emailRule.test(str);
         },
         creditCardRule(){
-            let cardNumString = this.cards
+            let cardNumString = this.inputData.cards
             .map(cardStr=>cardStr.str)
             .reduce((a,b)=>a + b);
-            
+           
+            // console.log(cardNumString)
             return is.creditCard(cardNumString);
         },
         lengthRule(inputData,vaildlength){
             return inputData.length === vaildlength;
         },
         checkMemberPoint(){
-            if(parseInt(this.APIData_in.member.point) <= parseInt(this.inputData.point)){
+            if(parseInt(this.inputData.point) > parseInt(this.APIData_in.member.point)){
                 this.inputData.point = 0;
                 alert('您剩餘的紅利為: '+ this.APIData_in.member.point+ '點,請重新輸入');
             }
         },
-        
-   
 
         // 信用卡UX 程式1
         cardKDCheck(e,idx){
             // console.log(`keydown`)
-            if((e.which >= 48 && e.which <= 57) || e.which == 8 || (e.which >= 96 && e.which < 105)){
+            if((e.which >= 48 && e.which <= 57) ||  (e.which >= 8 && e.which <=9) || (e.which >= 96 && e.which < 105)){
                 if((e.target.value.length == 0 && e.which == 8)){
                     if(idx=== 0)return
                     const previous_el = e.target.previousElementSibling.previousElementSibling;
@@ -698,7 +752,7 @@ const RootComponent  = {
             let setPrice = {...this.APIData_in.sets.find(el=>el.id==this.inputData.sets)}.price;
             let setPeo = this.inputData.peoCount;
 
-            return `$ ${(setPrice * setPeo).toLocaleString()}`;
+            return `${(setPrice * setPeo).toLocaleString()}`;
         },
         // 回饋點數折抵
         pointDiscount(){
@@ -715,7 +769,7 @@ const RootComponent  = {
             
             // 套餐金額
             let setPrice = {...this.APIData_in.sets.find(el=>el.id===this.inputData.sets)}.price;
-            let setTotal = count * setPrice;
+            let setTotal = parseInt(count) * parseInt(setPrice);
             
             // 單點金額
             let otherDish = 0;
@@ -741,13 +795,13 @@ const RootComponent  = {
                 // 計算服務
                 otherServies = this.APIData_in.servies.map(serve=>{
                     if(serve.checked === true){
-                        return serve.price;
+                        return parseInt(serve.price);
                     }else return 0
                 }).reduce((a,b)=>a+b,0)
-                otherServies = otherServies * count;
+                otherServies = otherServies * parseInt(count);
             }
            
-            return `$ ${(setTotal + otherDish + otherServies - point).toLocaleString()}`;
+            return `${(parseInt(setTotal) + parseInt(otherDish) + parseInt(otherServies) - parseInt(point)).toLocaleString()}`;
         },
         // oder_view end
 
@@ -773,18 +827,18 @@ const RootComponent  = {
             let otherDish = this.APIData_in.otherDish.map(item=>{
                 // console.log(item.qty, item.price)
                  if(item.qty > 0){
-                    return item.qty * item.price;
+                    return parseInt(item.qty) * parseInt(item.price) ;
                  }else return 0;
             }).reduce((a,b)=>a+b,0)
             
             let otherServies = this.APIData_in.servies.map(serve=>{
                 if(serve.checked === true){
                     // console.log(serve.title)
-                    return serve.price;
+                    return parseInt(serve.price);
                 }else return 0
             }).reduce((a,b)=>a+b,0)
             
-            otherServies = otherServies * this.inputData.peoCount
+            otherServies = parseInt(otherServies) * parseInt(this.inputData.peoCount);
             return ( otherDish + otherServies ).toLocaleString()
         },
 

@@ -1482,6 +1482,18 @@
                     text-decoration: none;
                 }
             }
+            .same_container{
+                display: flex;
+                text-align: center;
+                flex-direction: column;
+                align-items: center;
+                &>h3{
+                    margin: 20px;
+                }
+                &>a{
+                    text-decoration: none;
+                }
+            }
         }
 
     }
