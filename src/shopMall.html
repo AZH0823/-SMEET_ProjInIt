@@ -294,12 +294,10 @@ initial-scale=1.0">
                 // 進商品詳情頁就抓購物車資料
                 this.getCartLocalStorage()
 
-                // 進商品詳情頁就抓收藏商品資料
-                this.getCollectLocalStorage()
-
             },
 
             methods: {
+                // ========== 共用區 ========== //
 
                 // shoppingData 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
                 getCartLocalStorage(){
@@ -312,16 +310,6 @@ initial-scale=1.0">
                     }
                 },
 
-                // shopCollect 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
-                getCollectLocalStorage(){
-                    const local_storage = localStorage.getItem("shopCollect")
-
-                    if(local_storage){
-                        const LSGetItem = JSON.parse(localStorage.getItem("shopCollect")) 
-
-                        this.ShoppingCartList = LSGetItem
-                    }
-                },
                 // ========= AJAX ========= //
                 
                 // 加入收藏前檢查是否登入會員
@@ -338,17 +326,16 @@ initial-scale=1.0">
                             }else{
                                 //已有登入的話 執行.....
                                 // 會員icon顯示
-                                // let user_pop = document.querySelector('.user_pop');
-                                // user_pop.classList.remove('none');
-                                // 加减爱心
+                                let user_pop = document.querySelector('.user_pop');
+                                user_pop.classList.remove('none');
                                 
                                 // 商品收藏樣式 & 加到 Storage
                                 if(item.heart == true){
                                     item.heart = false;
                                     this.success_popup = '移除收藏成功'
                                     this.removeCollectList(item)
-                                    
-                                    // 使 scroll 無效
+
+                                    // overfloat: hidden
                                     let body = document.querySelector('body');
                                     body.style.overflow = "hidden";
 
@@ -357,7 +344,7 @@ initial-scale=1.0">
                                     this.success_popup = '加入收藏成功'
                                     this.addCollectList(item)
 
-                                    // 使 scroll 無效
+                                    // overfloat: hidden
                                     let body = document.querySelector('body');
                                     body.style.overflow = "hidden";
                                 }
@@ -368,6 +355,7 @@ initial-scale=1.0">
                                     this.success_popup= ''
 
                                     // 一秒後開啟 scroll
+                                    // overfloat: auto
                                     let body = document.querySelector('body');
                                     body.style.overflow = "auto";
                                     
@@ -432,20 +420,12 @@ initial-scale=1.0">
                 },
 
                 // ========= 購物車行為 ========= //
-
-
-                // 點擊非卡片區域關掉商品 popUp
-                bodyHidden(){
-                    // 關掉 overflow
-                    let body = document.querySelector('body');
-                    body.style.overflow = "auto";
-                },
                 
                 // 點擊 container 關掉 popUp
                 product_pop_close(){
                     this.isShow = false;
 
-                    // 關掉 overflow
+                    // overfloat: auto
                     let body = document.querySelector('body');
                     body.style.overflow = "auto";
                 },
@@ -454,9 +434,10 @@ initial-scale=1.0">
                 shopCar(ID, Name, Price, IMG, qty){
                     // 開啟popUp
                     this.isShow = true;
+
+                    // FIXME 第二個點擊就會失效 overfloat: hidden
                     let body = document.querySelector('body');
                     body.style.overflow = "hidden";
-
 
                     // 將 Mealinfo 的資料賦值到 popUpData
                     this.popupData.Name = Name
@@ -464,14 +445,15 @@ initial-scale=1.0">
                     this.popupData.Price = Price
                     this.popupData.IMG = IMG
                     this.popupData.qty = 1 // 預設值 1
-
                 },
-
 
                 // 點擊 X 關閉popUp並清空資料
                 popUp_xClose(ID, Name, Price, IMG, heart, qty){
+
+                    // overfloat: auto
                     let body = document.querySelector('body');
                     body.style.overflow = "auto";
+                    
 
                     // 關閉popUp
                     this.isShow = false;
@@ -527,13 +509,18 @@ initial-scale=1.0">
                     // 控制購物車popUp
                     if(popupData != ""){
                         this.shopCartsuccess_popup = '加入購物車成功'
+                        // overfloat: hidden
+                        let body = document.querySelector('body');
+                        body.style.overflow = "hidden";
                     }
                     // PopOn 消失
                     clearInterval(this.success_popup_interval)
                     this.success_popup_interval = setInterval(() => {
                         this.shopCartsuccess_popup= ''
+                        // overfloat: auto
                         let body = document.querySelector('body');
                         body.style.overflow = "auto";
+
                     }, 1000);
 
                     // 關閉購物車
@@ -556,7 +543,7 @@ initial-scale=1.0">
                 removeCollectList(item){
                     this.collect_heart_data_list.shift(item);
                 },
-
+                
 
                 // 商品愛心收藏及移除（樣式及提醒popUp）
                 collect_heart(item){
