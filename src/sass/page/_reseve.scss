@@ -139,11 +139,12 @@
                         margin-right: 10px;
                     }
                 }
-
+              
                 select,
                 input[type="date"] {
                     cursor: pointer;
-                    padding-left: 5%;
+                    padding: 0 20px 0 5%;
+                    
                     color: $green-1;
                     background-color: $Camel-3;
                     flex-basis: calc(100% - 50px);
@@ -152,6 +153,11 @@
                     border-bottom: 1px solid rgb(155, 155, 155);
                     outline: 0;
                     // padding-right: 5%;
+                }
+                select{
+                    
+                    border-right: 20px #F9F4EC solid;
+                    // border-right:55px solid transparent
                 }
 
             }

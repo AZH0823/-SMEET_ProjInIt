@@ -1,23 +1,51 @@
-.banner{
-    margin-bottom: 20px;
-    h1{
-        margin-left: 80px;
-        color: #0f3d3e;
-    }
-    
-    img{
-        width: 100%;
-    }
-}
 
 .menu_tap{
-    .tab_container{
+    .tab_container {
+        display: flex;
+        justify-content: center;
         width: 37%;
-        padding-bottom: 50px;
-        @include pad{
-            width: 70%;
+        align-items: center;
+        padding: 5% 0 2% 0;
+        @include pad {
+          width: 70%;
         }
-    }
+        @include mobile {
+          width: 90%;
+        }
+        li {
+          border-left: 1px solid #000;
+          padding-left: 5%;
+          padding-right: 5%;
+          &:last-child {
+            border-right: 1px solid #000;
+            // padding-right: 5%;
+          }
+      
+          @include pad {
+            font-size: 20px;
+          }
+      
+          @media all and (max-width: 375px) {
+            font-size: 14px;
+          }
+          div {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: $green-1;
+      
+            h4 {
+              @media all and (max-width: 375px) {
+                font-size: 14px;
+              }
+            }
+            span {
+              margin: 0 auto;
+            }
+            
+          }
+        }
+      }
     
 }
 

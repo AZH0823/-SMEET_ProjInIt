@@ -283,7 +283,7 @@ const RootComponent  = {
         updateMemberPoint(){
             const _that = this;
             let _updatePoint = parseInt(this.APIData_in.member.point) - parseInt(this.inputData.point);
-            console.log(`現在:${this.APIData_in.member.id}會員,點數為:${_updatePoint}` )
+            // console.log(`現在:${this.APIData_in.member.id}會員,點數為:${_updatePoint}` )
             $.ajax({
                 method: "POST",
                 url: "php/frontpage/member/memberPointUpdate.php",
@@ -428,20 +428,18 @@ const RootComponent  = {
                     // 模擬會員登錄
                     let c = confirm('是否要送出訂單');
                     if(c){
-                        // console.log(`檢驗格式`);
-                        // if(LS!=null & )
                         //name phone email addr note point 
                         // 信用卡 cardName cardDate cardCode
-                        // 驗證未寫完  先寫後端
-                        
+                      
                         let alertMsg = ''; // 記錄錯誤內容
                         let vaild = [];    // 紀錄驗證True or False
 
                         // 檢驗所有第四流程 填寫資料的表格
                         for (const [key, value] of Object.entries(this.inputData)) {
-                            // console.log(key)
+                           
                             switch(key) {
                                 case 'name':
+                                    // console.log(key)
                                     if(value.trim().length !== 0 && this.nameRule(this.inputData.name)){
                                         // console.log('姓名驗證成功')
                                         this.inputData.name = this.inputData.name.trim();
@@ -453,6 +451,7 @@ const RootComponent  = {
                                     }
                                     break;
                                 case 'phone':
+                                    // console.log(key)
                                     if(this.phoneRule(this.inputData.phone)){
                                         vaild.push(true);
                                         // console.log('手機驗證成功')
@@ -463,6 +462,7 @@ const RootComponent  = {
                                     }
                                     break;
                                 case 'email':
+                                    // console.log(key)
                                     if(this.emailRule(this.inputData.email)){
                                         // console.log('Email驗證成功')
                                         vaild.push(true);
@@ -473,6 +473,7 @@ const RootComponent  = {
                                     }
                                     break;
                                 case 'addr':
+                                    // console.log(key)
                                     if(value.trim().length > 0){
                                         // console.log('地址驗證成功')
                                         vaild.push(true);
@@ -483,9 +484,11 @@ const RootComponent  = {
                                     }
                                     break;
                                 case 'note':
+                                    // console.log(key)
                                     this.inputData.note = this.inputData.note.trim();
                                     break;
                                 case 'point':
+                                    // console.log(key)
                                     if((value !== null || value !== undefined) &&
                                        (parseInt(this.inputData.point) <= parseInt(this.APIData_in.member.point)) ){
                                         // console.log('點數驗證成功')
@@ -497,6 +500,7 @@ const RootComponent  = {
                                     }
                                     break;
                                 case 'cards':
+                                    // console.log(key)
                                     let cardString = this.inputData.cards.map(card=>card.str).reduce((a,b)=>a+b,"")
                                     if(is.creditCard(cardString)){
                                         // console.log('信用卡號驗證成功')
@@ -508,6 +512,7 @@ const RootComponent  = {
                                     }
                                     break;    
                                 case 'cardName':
+                                    // console.log(key)
                                     if(value.trim().length > 0 && this.nameRule(this.inputData.cardName)){
                                         // console.log('信用卡名稱驗證成功')
                                         this.inputData.cardName = this.inputData.cardName.trim();
@@ -519,21 +524,25 @@ const RootComponent  = {
                                     }
                                     break;
                                 case 'cardDate':
+                                    // console.log(key)
                                     if(value.trim().length == 4){
                                         // console.log('信用卡日期驗證成功')
                                         vaild.push(true);
                                     }else{
                                         alertMsg +=`信用卡有效日期不符合格式，請修正\n`;
+                                        vaild.push(false);
                                         // console.log('驗證失敗')
                                     }
                                     break;
                                 
                                 case 'cardCode':
+                                    // console.log(key)
                                     if(value.trim().length == 3){
                                         // console.log('信用卡安全碼驗證成功')
                                         vaild.push(true);
                                     }else{
                                         // console.log('驗證失敗')
+                                        vaild.push(false);
                                         alertMsg +=`信用卡不符合檢核碼格式，請修正\n`;
                                     }
                                     break;
@@ -541,14 +550,16 @@ const RootComponent  = {
                             // console.log(this.inputData.key)
                         }
                         
-                        let vaildResult = vaild.find(res=>!res) || true;
-                        
+                        let vaildResult = vaild.find(res=>res == false);
+                        if(vaildResult === undefined) vaildResult = true;
+
                         if(!vaildResult){
                             alert(alertMsg);
                         }else{
-                              // 驗證符合的話, 將訂單所有資訊傳到後端
-                              // 扣除開會員的點數
-                                this.postoderAPI(this.inputData)
+                            // 驗證符合的話, 將訂單所有資訊傳到後端
+                            // console.log(`送出訂單`)
+                            // 扣除開會員的點數
+                            this.postoderAPI(this.inputData)
                         }
                     }
                 }else{

@@ -4,7 +4,7 @@
     $afterPoint = $_POST['point'];
     $memberID = $_POST['memberID'];
 
-    echo $afterPoint."<br>";
+    // echo $afterPoint."<br>";
     // echo $memberID."<br>";
     $updateMemberPointSql = "UPDATE Member 
     SET point = :afterPoint
@@ -18,7 +18,3 @@
     $searchData = $updatePointstatement -> fetchAll();
     // print_r($searchData);
 ?>
-
-<!-- UPDATE Member
-SET point= 300
-WHERE ID=10; -->

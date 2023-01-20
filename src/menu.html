@@ -1,169 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>到府私廚</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    
-    
-</head>
-<body>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    />
+  </head>
+  <body>
     @@include('layout/header_01.html')
     <!-- banner -->
-    @@include('layout/banner.html',{
-        "title":"MENU",
-        "src":"./img/menu_img/menu_headbanner.jpg"
-      })
+    @@include('layout/banner.html',{ "title":"MENU",
+    "src":"./img/menu_img/menu_headbanner.jpg" })
     <!-- <div class="banner">
         <h1>MENU</h1>
         <img src="./img/menu_img/menu_headbanner.jpg">
     </div> -->
     <!-- tab -->
     <div class="menu_tap">
-        <ul>
-            <div class="wrapper tab_container">
-            <li>
-                <a href="">
-                <h4>私廚菜單</h4>
-                <span>menu</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                <h4>單點加購</h4>
-                <span>A la carte</span>
-                </a>
-            </li>
+      <ul>
+        <div class="wrapper tab_container">
+          <li>
+            <div class="">
+              <h4>私廚菜單</h4>
+              <span>menu</span>
             </div>
-        </ul>
-    </div> 
+          </li>
+          <li>
+            <div>
+              <h4>單點加購</h4>
+              <span>A la carte</span>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
     <!-- menu -->
-    
+
     <div class="menu">
-        
-        <div class="menu_content">
-            <div class="part1">
-                <div class="part1_img">
-                    <img src="./img/menu_img/menu_reserve01.jpg">
-                </div>
-                <div class="part1_info">
-                    <h2 class="font_family_eng green-1 font_bold">01</h2>
-                    <h4 class="font_family_tc font_bold green-1">名物 私套餐</h4>
-                    <div class="text1">
-                        <h6>私覓帶你窺視日式廚藝的精妙，彷如遊歷日本美食之旅」為概念，匯集各式具代表性的料理，如壽司、生魚片、海鮮、天婦羅等，提供在優雅的日式氛圍中自在品嘗道地精緻和食。</h6>
-                        <div class="text2">
-                            <h6 class="text_white">
-                                私覓帶你窺視日式廚藝的精妙，彷如遊歷日本美食之旅」為概念，匯集各式具代表性的料理，如壽司、生魚片、海鮮、天婦羅等，提供在優雅的日式氛圍中自在品嘗道地精緻和食。
-                            </h6>
-                        </div>
-                    </div>
-                    <div class="btn_view">
-                        <p>菜單詳情</p>
-                        <span>
-                            <p>view</p>
-                        </span>
-                    </div>
-                </div>
-                
+      <div class="menu_content">
+        <div class="part1">
+          <div class="part1_img">
+            <img src="./img/menu_img/menu_reserve01.jpg" />
+          </div>
+          <div class="part1_info">
+            <h2 class="font_family_eng green-1 font_bold">01</h2>
+            <h4 class="font_family_tc font_bold green-1">名物 私套餐</h4>
+            <div class="text1">
+              <h6>
+                私覓帶你窺視日式廚藝的精妙，彷如遊歷日本美食之旅」為概念，匯集各式具代表性的料理，如壽司、生魚片、海鮮、天婦羅等，提供在優雅的日式氛圍中自在品嘗道地精緻和食。
+              </h6>
+              <div class="text2">
+                <h6 class="text_white">
+                  私覓帶你窺視日式廚藝的精妙，彷如遊歷日本美食之旅」為概念，匯集各式具代表性的料理，如壽司、生魚片、海鮮、天婦羅等，提供在優雅的日式氛圍中自在品嘗道地精緻和食。
+                </h6>
+              </div>
             </div>
-            <div class="part2">
-                <div class="part2_img">
-                    <img src="./img/menu_img/menu_reserve02.jpg">
-                </div>
-                <div class="part2_info">
-                    <h2 class="font_family_eng green-1 font_bold">02</h2>
-                    <h4 class="font_family_tc font_bold green-1">極上 會席套餐</h4>
-                    <div class="text1">
-                        <h6>以日式料亭的細膩手藝，一刀、一握、一杓為您烹調，體驗「先付、造身、壽司、揚物、烤物、炊合、食事」等演繹的12類主題、感受來自和風的料理與溫度
-                        </h6>
-                        <div class="text2">
-                            <h6 class="text_white">
-                                以日式料亭的細膩手藝，一刀、一握、一杓為您烹調，體驗「先付、造身、壽司、揚物、烤物、炊合、食事」等演繹的12類主題、感受來自和風的料理與溫度
-                            </h6>
-                        </div>
-                    </div>
-                    <div class="btn_view">
-                        <p>菜單詳情</p>
-                        <span>
-                            <p>view</p>
-                        </span>
-                    </div>
-                </div>
+            <div class="btn_view">
+              <p>菜單詳情</p>
+              <span>
+                <p>view</p>
+              </span>
             </div>
-            <div class="part3">
-                <div class="part3_img">
-                    <img src="./img/menu_img/menu_reserve03.jpg">
-                </div>
-                <div class="part3_info">
-                    <h2 class="font_family_eng green-1 font_bold">03</h2>
-                    <h4 class="font_family_tc font_bold green-1">苑 春堂套餐</h4>
-                    <div class="text1">
-                        <h6>苑 春堂喻意春日裡的花園，如日式庭院般的百盤。彷如聽見富士山河間那潺潺的流水聲，從鮮嫩多汁的富山白蝦，並搭配濃郁的抹茶香與鮮香干貝，感受到府私廚的浪漫</h6>
-                        <div class="text2">
-                            <h6 class="text_white">
-                                苑 春堂喻意春日裡的花園，如日式庭院般的百盤。彷如聽見富士山河間那潺潺的流水聲，從鮮嫩多汁的富山白蝦，並搭配濃郁的抹茶香與鮮香干貝，感受到府私廚的浪漫
-                            </h6>
-                        </div>
-                    </div>
-                    <div class="btn_view">
-                        <p>菜單詳情</p>
-                        <span>
-                            <p>view</p>
-                        </span>
-                    </div>
-                </div>  
+          </div>
+        </div>
+        <div class="part2">
+          <div class="part2_img">
+            <img src="./img/menu_img/menu_reserve02.jpg" />
+          </div>
+          <div class="part2_info">
+            <h2 class="font_family_eng green-1 font_bold">02</h2>
+            <h4 class="font_family_tc font_bold green-1">極上 會席套餐</h4>
+            <div class="text1">
+              <h6>
+                以日式料亭的細膩手藝，一刀、一握、一杓為您烹調，體驗「先付、造身、壽司、揚物、烤物、炊合、食事」等演繹的12類主題、感受來自和風的料理與溫度
+              </h6>
+              <div class="text2">
+                <h6 class="text_white">
+                  以日式料亭的細膩手藝，一刀、一握、一杓為您烹調，體驗「先付、造身、壽司、揚物、烤物、炊合、食事」等演繹的12類主題、感受來自和風的料理與溫度
+                </h6>
+              </div>
             </div>
-        </div>     
-    </div> 
+            <div class="btn_view">
+              <p>菜單詳情</p>
+              <span>
+                <p>view</p>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="part3">
+          <div class="part3_img">
+            <img src="./img/menu_img/menu_reserve03.jpg" />
+          </div>
+          <div class="part3_info">
+            <h2 class="font_family_eng green-1 font_bold">03</h2>
+            <h4 class="font_family_tc font_bold green-1">苑 春堂套餐</h4>
+            <div class="text1">
+              <h6>
+                苑
+                春堂喻意春日裡的花園，如日式庭院般的百盤。彷如聽見富士山河間那潺潺的流水聲，從鮮嫩多汁的富山白蝦，並搭配濃郁的抹茶香與鮮香干貝，感受到府私廚的浪漫
+              </h6>
+              <div class="text2">
+                <h6 class="text_white">
+                  苑
+                  春堂喻意春日裡的花園，如日式庭院般的百盤。彷如聽見富士山河間那潺潺的流水聲，從鮮嫩多汁的富山白蝦，並搭配濃郁的抹茶香與鮮香干貝，感受到府私廚的浪漫
+                </h6>
+              </div>
+            </div>
+            <div class="btn_view">
+              <p>菜單詳情</p>
+              <span>
+                <p>view</p>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- add -->
     <div class="add">
-        <div class="add_title">
-            <h2 class="font_family_tc font_bold green-1">單點加購</h2>
-            <p class="border"></p>
-        </div>
-        <div class="owl-carousel owl-theme">
-            <div class="item"><img src="./img/menu_img/menu_add01.png"></div>
-            <div class="item"><img src="./img/menu_img/menu_add02.jpg"></div>
-            <div class="item"><img src="./img/menu_img/menu_add.jpg"></div>
-            <div class="item"><img src="./img/menu_img/menu_add04.jpg"></div>
-            <div class="item"><img src="./img/menu_img/menu_add05.png"></div>
-        </div>
-        
-        <div class="btn_view">
-            <p>菜單詳情</p>
-            <span>
-                <p>view</p>
-            </span>
-        </div>
-    </div>
-    @@include('layout/serve.html')
-    @@include('layout/footer.html')
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+      <div class="add_title">
+        <h2 class="font_family_tc font_bold green-1">單點加購</h2>
+        <p class="border"></p>
+      </div>
+      <div class="owl-carousel owl-theme">
+        <div class="item"><img src="./img/menu_img/menu_add01.png" /></div>
+        <div class="item"><img src="./img/menu_img/menu_add02.jpg" /></div>
+        <div class="item"><img src="./img/menu_img/menu_add.jpg" /></div>
+        <div class="item"><img src="./img/menu_img/menu_add04.jpg" /></div>
+        <div class="item"><img src="./img/menu_img/menu_add05.png" /></div>
+      </div>
 
-<script>
-    $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        responsive:{
-            0:{
-                items:1.5,
-                center: true
-            },
-            600:{
-                items:3.5,
-                center: true
-            },
-            1000:{
-                items:5
-            }
-        }
-    })
-</script>
+      <div class="btn_view">
+        <p>菜單詳情</p>
+        <span>
+          <p>view</p>
+        </span>
+      </div>
+    </div>
+    @@include('layout/serve.html') @@include('layout/footer.html')
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+  <script>
+    $(".owl-carousel").owlCarousel({
+      loop: true,
+      margin: 10,
+      responsive: {
+        0: {
+          items: 1.5,
+          center: true,
+        },
+        600: {
+          items: 3.5,
+          center: true,
+        },
+        1000: {
+          items: 5,
+        },
+      },
+    });
+  </script>
 </html>

@@ -275,12 +275,16 @@ initial-scale=1.0">
             computed: {
                 // ========= 原本菜單陣列依照curren_tab過濾 ========= //
                 filtered_list(){
-                    const filtered =  this.AjaxMealsInfo.filter((post) => {
-                    // console.log(this.current_tab);
-                    // console.log(post.Type);
-                    // console.log(this.current_tab === post.Type);
-                    return this.current_tab === post.Type
+                    let filtered =  this.AjaxMealsInfo.filter((post) => {
+
+                        // console.log(this.current_tab);
+                        // console.log(post.Type);
+                        // console.log(this.current_tab == post.Type);
+                        
+                        return parseInt(this.current_tab) == parseInt(post.Type);
+
                         // return  post.title.toLowerCase().includes(this.keyword.toLowerCase());
+                        
                     });
                     return filtered
                 }
@@ -319,12 +323,11 @@ initial-scale=1.0">
 
                 // ========= AJAX ========= //
                 
-                // TODO
                 // 最新收藏商品 愛心渲染
                 selectCollections(){    
                     const member_ID =localStorage.getItem("member_ID");
                     
-                    console.log(this.latestProduct);
+                    
                     
                     $.ajax({            
                         method: "POST",
@@ -335,17 +338,17 @@ initial-scale=1.0">
                         dataType: "text",
                         success: (response) => {
                             const adjusted_resp = JSON.parse(response)
-                            console.log(adjusted_resp);
+                            // console.log(adjusted_resp);
                             
                             for (let index = 0; index < adjusted_resp.length; index++) {
                                 const element = adjusted_resp[index];
                                 const id = element.DishID
-                                console.log(id);
+                                // console.log(id);
 
                                 
                                 for (let i = 0; i < this.AjaxMealsInfo.length; i++) {
                                     const element = this.AjaxMealsInfo[i];
-                                    console.log(element);
+                                    // console.log(element);
                                     const AjaxMealsInfoID = element.ID;
 
                                     if(id === AjaxMealsInfoID){
@@ -369,7 +372,7 @@ initial-scale=1.0">
                     const member_ID =localStorage.getItem("member_ID");
                     const dish_ID = item.ID ;
                     
-                    console.log(member_ID);
+                    // console.log(member_ID);
                     $.ajax({            
                         method: "POST",
                         url: "php/frontpage/login_check.php",
@@ -445,7 +448,7 @@ initial-scale=1.0">
                                 
                                 
 
-                                // // 收藏 & 移除 PopOn 消失
+                                // 收藏 & 移除 PopOn 消失
                                 clearInterval(this.success_popup_interval)
                                 this.success_popup_interval = setInterval(() => {
                                     this.success_popup= ''
@@ -496,8 +499,9 @@ initial-scale=1.0">
                                     this.AjaxMealsInfo[i].IMG = imgs
                                     // console.log(this.AjaxMealsInfo[i].IMG);
                                 }
+                                // console.log("123");
+                                // console.log(this.AjaxMealsInfo);
                                 
-                                // TODO
                                 this.selectCollections();
                             }                
                         },
@@ -523,7 +527,7 @@ initial-scale=1.0">
                     // 開啟popUp
                     this.isShow = true;
 
-                    // FIXME 第二個點擊就會失效 overfloat: hidden
+                    // overfloat: hidden
                     let body = document.querySelector('body');
                     body.style.overflow = "hidden";
 
@@ -621,23 +625,23 @@ initial-scale=1.0">
 
                 // 收藏商品資料加入空陣列
                 addCollectList(item){
-                    console.log(item);
+                    // console.log(item);
                     // push 到新的陣列以便存到 localStorage
                     this.collect_heart_data_list.push(item);
                     // console.log(this.collect_heart_data_list);
                 },
 
-                // 收藏商品資料移除
+            //     // 收藏商品資料移除
                 removeCollectList(item){
                     this.collect_heart_data_list.shift(item);
                 },
                 
 
-                // 商品愛心收藏及移除（樣式及提醒popUp）
+            //     // 商品愛心收藏及移除（樣式及提醒popUp）
                 collect_heart(item){
 
                     // 加减爱心
-                    console.log(item.heart);
+                    // console.log(item.heart);
                     if(item.heart == true){
                         item.heart = false;
                         this.success_popup = '移除收藏成功'
