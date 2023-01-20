@@ -16,7 +16,7 @@
                 @@include('layout/back_header.html')
             </header>
 
-            <div class="container"><!-- test -->
+            <div class="container" id="oderList"><!-- test -->
                 <main class="right_content">
                     <section class="section1">
                         <!-- form -->
@@ -35,7 +35,6 @@
                             </div>
 
                             <div class="back_from_wrapper">
-    
                                     <!-- row-1 -->
                                 <div class="grid_container">
                                     <div class="grid_item">訂單編號</div>
@@ -45,143 +44,26 @@
                                     <div class="grid_item">預約人數</div>
                                     <div class="grid_item">訂單狀態</div>
                                 </div>
-
-                                <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">6位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-5 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-6 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-7 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 
-                                <!-- row-8 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
+                                <template v-for="item in this.apiData">
+                                    <div class="grid_container">
+                                        <div class="grid_item checked" @click="ClickOrderDetail(item.ID)">TGD{{item.ID}}</div>
+                                        <div class="grid_item">{{item.AppointmentDate}}</div>
+                                        <div class="grid_item">{{item.MemberID}}</div>
+                                        <div class="grid_item">$ {{item.TotalPrice.toLocaleString()}} 元</div>
+                                        <div class="grid_item">{{item.Count}}位</div>
+                                        <div class="grid_item">
+                                            <select name="" id="" @change="UpadteCondition(item,$event)">
+                                                <!--  v-model="item.Condition" -->
+                                                <option value="" disabled>訂單成立未付款</option>
+                                                <option value="訂單成立已付款" :selected="item.Condition =='訂單成立已付款'">訂單成立已付款</option>
+                                                <option value="已完成售後服務" :selected="item.Condition =='已完成售後服務'">已完成售後服務</option>
+                                                <option value="訂單封存" :selected="item.Condition =='訂單封存'">訂單封存</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <!-- row-9 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
+                                </template>
+                              
                                 <!-- row-10 -->
                                 <div class="grid_container">
                                     <div class="grid_item checked">TG1311279</div>
@@ -211,6 +93,97 @@
                             </ul>
                         </div>
                     </section><!-- section1 -->
+
+                    <div class="popContainer" :class="{'none' : popOnMsg.display === true}">
+                        <div class="feedback_top">
+                            <h6>訂單明細</h6>
+                        </div>
+                        <div class="order_contaniner">
+                            <div class="contaniner_top">
+                                <p class="font14">訂單編號 :<span></span></p> 
+                                <p class="font14">訂單類別 :<span class="red">預約</span></p> 
+                                <p class="font14">時間 :<span>2023/01/13 午餐時段</span></p> 
+                                <p class="font14">人數 :<span>12人</span></p> 
+                                <p class="font14">廚師長 :<span>立雁杉</span></p> 
+                            </div>
+                            <div class="contaniner">
+                                <h6>苑 春堂套餐</h6>
+                                <ul class="contaniner_detail">
+                                    <li class="detail_title header"><p class="font14">類型</p><p class="font14">品名</p><p class="font14">數量</p></li>
+                                    
+                                    
+                                    <li class="type_kind">
+                                        <p class="type_title">湯物</p>
+                                        <ol class="dish_list">
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">燻鮭魚番茄濃湯</p><p class="font14">x3</p></li>
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">燻鮭魚番茄濃湯</p><p class="font14">x3</p></li>
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">燻鮭魚番茄濃湯</p><p class="font14">x3</p></li>
+                                        </ol>
+                                    </li>                                    
+
+                                    <li class="type_kind">
+                                        <p class="type_title">前菜</p>
+                                        <ol class="dish_list">
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">鳟魚卵干貝卷</p><p class="font14">x3</p></li>
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">大閘蟹握壽司</p><p class="font14">x3</p></li>
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">大閘蟹握壽司</p><p class="font14">x3</p></li>
+                                        </ol>
+                                    </li>
+
+                                    <li class="type_kind">
+                                        <p class="type_title">單點</p>
+                                        <ol class="dish_list">
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">燻鮭魚番茄濃湯</p><p class="font14">x3</p></li>
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">燻鮭魚番茄濃湯</p><p class="font14">x3</p></li>
+                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">燻鮭魚番茄濃湯</p><p class="font14">x3</p></li>
+                                        </ol>
+                                    </li>
+                                    
+                                    <!-- 總計金額 -->
+                                    <li class="total_price">
+                                        <ol class="detail_title total">
+                                            <li class="detail_dish col2"><p class="font14">小計</p><p class="font14">$25,000</p></li>
+                                            <li class="detail_dish col2"><p class="font14 ">回饋點數</p><p class="font14">-$1,000</p></li>
+                                        </ol>
+                                        <div class="detail_title"><p class="font14">Total</p><p class="font14 price">$ 26,000</p></ㄎ>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="contaniner_info">
+                                <h6>訂單明細 <span class="edit"><i class="fa-solid fa-pen-to-square"></i></span></h6>
+                                <!-- 訂購人姓名 -->
+                                <div class="info_input">
+                                    <label for="order_name" class="orderL name">訂購人</label>
+                                    <input type="text" id="order_name" value="許皓文 " disabled/>
+                                    
+                                </div>
+
+                                <!-- 訂購人電話 -->
+                                <div class="info_input">
+                                    <label for="order_phone" class="orderL phone">聯繫電話</label>
+                                    <input type="text" id="order_phone" value="0919225578" disabled/>
+                                </div>
+
+                                <!-- 訂購人Email -->
+                                <div class="info_input">
+                                    <label for="order_email" class="orderL mail">E-mail</label>
+                                    <input type="text" id="order_email" value="hsuhaowen_charming@gmail.com" disabled/>
+                                </div>
+
+                                <!-- 訂購人Adrr -->
+                                <div class="info_input">
+                                    <label for="order_addr" class="orderL addr">地址</label>
+                                    <input type="text" id="order_addr"value="台北市中山區南京東路二段219號4F" disabled/>
+                                </div>
+
+                                <div class="info_input dir_col">
+                                    <label for="order_note" class="orderL addr">備註</label>
+                                    <textarea name="" id="order_note" value="其他需求備註……" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </main>
                 @@include('layout/back_footer.html')
             </div><!-- container -->
@@ -224,7 +197,77 @@
     <script
         nomodule="nomodule"
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+    <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+    <script src="js//vender/Vue/vue.global.js"></script>
+    <script>
+        
+    const app = Vue.createApp({
+      data() {
+        
+          return {
+          
+            apiData:[
+                
+            ],
+            popOnMsg:{
+                display:true,
+            },
+            abc:'11',
+          };
+        },
+        computed:{
+
+        },
+        methods:{
+            // 取得所有訂單資料
+            getOrderListData(){
+                fetch('php/backpage/getOrderListData.php')
+                .then(response =>{
+                    return  response.json()
+                })
+                .then( datalist =>{
+                  datalist.forEach(el => {
+                    this.apiData.push(el)
+                  });
+                }).catch(err=>{
+                    console.log(err)
+                })
+                
+            },
+            getOrderOneData(id){
+                console.log(id)
+            },
+            updateOrderCondition(){
+
+            },
+
+
+            UpadteCondition(item,e){
+                // 更新Vue Data
+                const c = confirm(`請問要更改訂單狀態嗎?`)
+                if(c){
+                    item.Condition = e.target.value
+                }
+                // 更新DB資料 Ajax
+            },
+            ClickOrderDetail(id){
+                console.log(id)
+                // 把資料帶去給PopMsg
+            }
+        },
+
+        watch:{
+
+        },
+
+        mounted(){
+            this.getOrderListData();
+        }
+      });
+      app.mount("#oderList");
+  
+   
+    </script>
 
 </body>
 </html>
