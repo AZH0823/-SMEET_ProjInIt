@@ -114,7 +114,7 @@
                             <div class="item">-NT$<span id="detail_total">{{orderData.Points}}</span></div>
                             <div class="item">總金額
                             </div>
-                            <div class="item">NT$<span id="detail_total" >{{orderData.detailTotal}}</span></div>
+                            <div class="item">NT$<span id="detail_total">{{orderData.detailTotal}}</span></div>
                         </div>
                         <!-- 下一步按鈕 -->
                         <div class="next_btn btn" @click="changePage(1);toTop()">下一步</div>
@@ -186,7 +186,8 @@
                                     type="checkbox"
                                     name="info_check"
                                     id="info_check_yes"
-                                    @click="getMemberInfo">
+                                    @click.prevent="getMemberInfo"
+                                    @click="clearInputData">
                                 <label for="info_check">
                                     <!--這裡按了click會帶入會員資料,會員資料是從會員登入後selectDB存在localstorage的陣列-->
                                     <p class="font16">同會員資料</p>
@@ -219,7 +220,8 @@
                                     type="checkbox"
                                     name="info_check"
                                     id="info_check_yes"
-                                    @click="checkOrderValue">
+                                    @click="checkOrderValue"
+                                  :class="{'disabled': (this.orderInfo.name && this.orderInfo.phone && this.orderInfo.addr ) =='' }">
                                 <label for="info_check">
                                     <p class="font16">同訂購人資料</p>
                                 </label>
@@ -444,7 +446,7 @@
                                 }
                             ],
                             //取得訂單編號ID
-                            response: ""
+                            response: "" 
                         }
                     },
 
@@ -486,13 +488,13 @@
                             });
 
                         } else {
+                            //如果沒有抓到membe_ID就踢回首頁
                             location.assign("./index_home.html");
 
                             // setTimeout(function(){     window.addEventListener("load", login_pop());
                             // },100); 跳回首頁 login_pop(); window.location.assign("./index_home.html");
                             // 再跳出登入popon    window.addEventListener("load", login_pop());
                         }
-
                         // this.inputShoppingData[0] = shoppingData;
                         // console.log(this.inputShoppingData[0]);
 
@@ -509,7 +511,7 @@
                                     .inputShoppingData[i]
                                     .qty;
                             }
-                            return cartTotal;
+                            return parseInt(cartTotal);
                         },
 
                         //總金額=小計+加價購(要再刪掉)-紅利點數
@@ -517,9 +519,7 @@
                             let detailTotal = 0;
                             // console.log(this.cartTotal - this.orderData.Points)
                             this.orderData.detailTotal = this.cartTotal - this.orderData.Points;
-                           
-                           
-                            return detailTotal;
+                            return parseInt(detailTotal);
 
                         }
                     },
@@ -582,14 +582,14 @@
 
                         //點擊收件人的[同訂購人資料]會將上方訂購人的資訊帶到下方的input裡
                         checkOrderValue() {
-                            if (this.orderData.name && this.orderData.phone && this.orderData.addr) {
+                            if ((this.orderData.name && this.orderData.phone && this.orderData.addr)!=="" ) {
                                 this.orderData.name = "";
                                 this.orderData.phone = "";
                                 this.orderData.addr = "";
-                            } else {
+                            } else{
                                 this.orderData.name = this.orderInfo.name;
-                                this.orderData.phone = this.orderInfo.phone;
-                                this.orderData.addr = this.orderInfo.addr;
+                                this.orderData.phone =this.orderInfo.phone;
+                                this.orderData.addr  = this.orderInfo.addr;
                             }
                         },
                         //輸入卡號@keydown不能輸入非數字外的資料
@@ -684,6 +684,8 @@
                             // this.member_ID 是用this指向data的member_ID的值之後, 設定一個較member_ID參數進gerMemberInfo
                             // function使用
                             let member_ID = this.member_ID;
+                            let orderDataObj = this.orderData;
+                            // console.log(orderDataObj);
                             // 這裡的this才是function的this
                             const that = this
                             // console.log(member_ID);
@@ -710,14 +712,17 @@
                                                 'addr': response[0].addr,
                                                 'Email':response[0].account,
                                             }
+
                                             that.orderInfo = obj;
                                             that.orderData.Email = response[0].account;
                                             // console.log( that.orderInfo);
-                                        } else {
+                                        } else if((that.orderInfo) !== ""){
                                             that.orderInfo.name = "",
                                             that.orderInfo.phone = "",
                                             that.orderInfo.addr = ""
-                                        }
+                               
+                                        } 
+                                       
                                     },
 
                                     error: function (exception) {
@@ -728,14 +733,25 @@
                                 alert("未登入會員");
                             }
                         },
-                          //購物車訂單送出
+                          
+                        //再按一次同會員資料會確定訂購人的input及收件人資訊的Input有無資料,當同時兩個都有資料及會一次清除
+                        //若其中一方沒有資料則不會觸發這個function
+
+                        clearInputData() {
+                           let obj = this.orderInfo;
+                           console.log(obj);
+
+                        },
+                        
+                        //購物車訂單送出
                     //所有orderData的資料放進購物車明細,包含商城的data
                     cartDetailAPI() {
-                        console.log(`ttt`);
+                        // console.log(`ttt`);
                         // if()
                         let that = this;
                         let member_ID = this.member_ID;
-
+                        
+                        //驗證    
                         // if(!nameRule(that.orderData.name)){
                         //     alert('name wrong')
                         //     return false;
@@ -778,7 +794,7 @@
                             dataType: "text",
                             success: function (response) {
                                 that.response = response;
-                                console.log();
+                                // console.log();
                             },
                             error: function (exception) {
                                 alert("發生錯誤: " + exception.status);
