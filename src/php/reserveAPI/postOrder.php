@@ -38,7 +38,7 @@
     where O.AppointmentDate is null";
 
     $SecltTeamOrders = getPDO()->prepare($SecltTeamOrders);
-    $SecltTeamOrders->bindValue(':AppointmentDate', $AppointmentDate); 
+    $SecltTeamOrders-> bindValue(':AppointmentDate', $AppointmentDate); 
     
     // echo $AppointmentDate;
     
