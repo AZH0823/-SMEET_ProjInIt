@@ -32,6 +32,8 @@ div.back_mall_productManger {
                         }
 
                         .back_from_wrapper {
+                            height: 550px;
+                            overflow-y: scroll;
                             .grid_container {
                                 margin: 0 auto;
                                 border: 1px solid #ccc;

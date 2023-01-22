@@ -38,7 +38,7 @@
     where O.AppointmentDate is null";
 
     $SecltTeamOrders = getPDO()->prepare($SecltTeamOrders);
-    $SecltTeamOrders->bindValue(':AppointmentDate', $AppointmentDate); 
+    $SecltTeamOrders-> bindValue(':AppointmentDate', $AppointmentDate); 
     
     // echo $AppointmentDate;
     
@@ -140,20 +140,5 @@
     }else{
         echo "sameOrder";
     }
-   
-   
-    
 
-    
-        
-        
-//     $SearhDishSql = "INSERT INTO `Orders`
-// 	( `AppointmentDate`, `Name`, `Count`, `Condition`, `Scheduled`, `Address`, `Date`,
-// 	 `TotalPrice`, `notes`, `point`, `MemberID`, `TeamID`)  
-// VALUES 
-//     ('2022-12-26','test',6,'訂單成立未付款','午餐','100台北市中正區同安街48巷1號',curdate()
-//     ,12800,'不吃辣',20,1,1)";
-//     // 將include Connection Fuction 給引出
-//     $Searhstatement = getPDO()->prepare($SearhDishSql);
-//     $Searhstatement -> execute();
 ?>
