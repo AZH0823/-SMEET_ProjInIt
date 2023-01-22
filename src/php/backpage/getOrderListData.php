@@ -67,14 +67,6 @@
          
       );}
     echo json_encode($arr); 
-
-//     <!-- SELECT * FROM OrdersDetail O
-// JOIN (SELECT d.ID, d.`Name`as DishName ,dt.`Name` as DTName 
-// 	  FROM Dish d JOIN DishsType dt
-//       ON d.Type = dt.ID) as D
-// ON O.DishID = D.ID 
-// where O.OrderID = 1 AND D.`DTName` != '商城甜品';
-//  -->
   }
   
 ?>

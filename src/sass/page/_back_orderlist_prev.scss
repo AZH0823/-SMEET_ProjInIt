@@ -167,6 +167,10 @@ div.back_orderlist_prev {
                         border-bottom:1px solid #ccc;
                         border-top:1px solid #ccc;
                     }
+                    .contaniner_info>h6{
+                        display: flex;
+                        justify-content: space-between;
+                    }
                 }
                 .close_btn{
                     position: absolute;
@@ -178,7 +182,6 @@ div.back_orderlist_prev {
                 }
                 .contaniner_detail{
                     padding: 20px 20px 40px 20px;
-    
                 }
                 // 訂單明細
                 .detail_title{
@@ -210,7 +213,7 @@ div.back_orderlist_prev {
                     }
                     .dish_list{
                         flex-grow: 1;
-                        margin-left: 23%;
+                        margin-left: 22%;
                     }
                     .detail_dish{
                         display: grid;
@@ -241,6 +244,13 @@ div.back_orderlist_prev {
                 
                 .edit i,.close_btn{
                     cursor: pointer;
+                }
+                .edit.checked{
+                    color:red;
+                    cursor: pointer;
+                }
+                .edit.checked:hover{
+                    text-decoration:underline;
                 }
                 // 訂單明細
                 .info_input{
