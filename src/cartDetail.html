@@ -169,7 +169,7 @@
                         <!-- <div class="item">加購價</div> <div class="item">NT$<span
                         id="detail_total">250</span></div> -->
                         <div class="item">紅利點數</div>
-                        <div class="item">-NT$<span id="detail_total">{{orderData.point}}</span></div>
+                        <div class="item">-NT$<span id="detail_total">{{orderData.Points}}</span></div>
                         <div class="item">總金額
                         </div>
                         <div class="item">NT$<span id="detail_total">{{orderData.detailTotal}}</span></div>
@@ -183,24 +183,26 @@
                             <!-- checkbox -->
                             <div class="info_check gray">
                                 <input
+                                    v-model="firstchecked"
+                                   :checked="firstchecked"
                                     type="checkbox"
                                     name="info_check"
                                     id="info_check_yes"
-                                    @click.prevent="getMemberInfo"
-                                    @click="clearInputData">
+                                    @click="clickClear()"
+                                >
                                 <label for="info_check">
                                     <!--這裡按了click會帶入會員資料,會員資料是從會員登入後selectDB存在localstorage的陣列-->
                                     <p class="font16">同會員資料</p>
                                 </label>
                             </div>
                         </div>
-                        <div class="buy_content">
+                        <div class="buy_content"  >
                             <label for="">姓名</label>
-                            <input type="text" placeholder="請輸入姓名" v-model="orderInfo.name">
+                            <input type="text" placeholder="請輸入姓名" v-model="orderInfo.name" :disabled="firstchecked == true">
                             <label for="">手機號碼</label>
-                            <input type="text" placeholder="請輸入手機號碼" v-model="orderInfo.phone">
+                            <input type="text" placeholder="請輸入手機號碼" v-model="orderInfo.phone" :disabled="firstchecked == true">
                             <label for="">地址</label>
-                            <input type="text" placeholder="請輸入地址" v-model="orderInfo.addr">
+                            <input type="text" placeholder="請輸入地址" v-model="orderInfo.addr" :disabled="firstchecked == true">
                             <!-- <select name="member_city" class="member_city"> <option value="none"
                             selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option> </select>
                             <select name="member_area" class="member_area"> <option value="none"
@@ -217,11 +219,13 @@
                             <!-- checkbox -->
                             <div class="info_check gray">
                                 <input
+                                    v-model="secondchecked"
                                     type="checkbox"
                                     name="info_check"
                                     id="info_check_yes"
                                     @click="checkOrderValue"
-                                  :class="{'disabled': (this.orderInfo.name && this.orderInfo.phone && this.orderInfo.addr ) =='' }">
+                                    :disabled="firstchecked == false"
+                                   >
                                 <label for="info_check">
                                     <p class="font16">同訂購人資料</p>
                                 </label>
@@ -229,9 +233,9 @@
                         </div>
                         <div class="get_content">
                             <label for="">姓名</label>
-                            <input type="text" placeholder="請輸入姓名" v-model="orderData.name">
+                            <input type="text" placeholder="請輸入姓名" v-model="orderData.name" :disabled="secondchecked == true">
                             <label for="">手機號碼</label>
-                            <input type="text" placeholder="請輸入手機號碼" v-model="orderData.phone">
+                            <input type="text" placeholder="請輸入手機號碼" v-model="orderData.phone" :disabled="secondchecked == true">
                             <label for="">地址</label>
                             <!-- <select name="member_city" class="member_city"> <option value="none"
                             selected="selected" disabled="disabled" hidden="hidden">請選擇縣市</option> </select>
@@ -242,7 +246,8 @@
                                 type="text"
                                 class="member_addr"
                                 placeholder="請輸入地址"
-                                v-model="orderData.addr">
+                                v-model="orderData.addr"
+                                :disabled="secondchecked == true">
                         </div>
                     </div>
                     <!-- 配送/發票 -->
@@ -362,7 +367,7 @@
             <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
 
             <script>
-
+             
                 const app = Vue.createApp({
 
                     data() {
@@ -408,7 +413,7 @@
                                 invoice: "",
                                 uniform:"",
                                 detailTotal:"",
-                                Points: "0",
+                                Points: 0,
                                 Email:"",
                                 member_ID: ""
                             },
@@ -446,7 +451,12 @@
                                 }
                             ],
                             //取得訂單編號ID
-                            response: "" 
+                            response: "" ,
+
+                            //綁定勾選狀態
+                            firstchecked : false,
+                            secondchecked :"",
+                           
                         }
                     },
 
@@ -505,11 +515,11 @@
                         cartTotal() {
                             let cartTotal = 0;
                             for (let i in this.inputShoppingData) {
-                                cartTotal += this
+                                cartTotal += parseInt(this
                                     .inputShoppingData[i]
-                                    .Price * this
+                                    .Price) * parseInt(this
                                     .inputShoppingData[i]
-                                    .qty;
+                                    .qty);
                             }
                             return parseInt(cartTotal);
                         },
@@ -518,13 +528,10 @@
                         detailTotal() {
                             let detailTotal = 0;
                             // console.log(this.cartTotal - this.orderData.Points)
-                            this.orderData.detailTotal = this.cartTotal - this.orderData.Points;
+                            this.orderData.detailTotal = parseInt(this.cartTotal) - parseInt(this.orderData.Points);
                             return parseInt(detailTotal);
-
                         }
                     },
-
-                    watch: {},
                     methods: {
                         //換下一步
                         changePage(val) {
@@ -555,23 +562,19 @@
                         },
                         //當keyup/keydown的時候觸發的blur事件會 判斷輸入的數字是否大於會員本身的紅利點數
                         check_bouns(e) {
-
                             //設定當輸入英文字母時會取代為空字串
                             let str = (e.target.value).replace(/\D/g, "");
-                            e.target.value = str;
+                            if(str == ""){
+                                str = 0 ;
+                            }
+                            e.target.value = parseInt(str);   
+                           
                             //取得目前會員點數的金額
-                            let bounsVal = e
-                                .path[1]
-                                .nextElementSibling
-                                .children[0]
-                                .firstElementChild
-                                .innerText;
-                            // console.log(bounsVal);
-                            //
-                            if (parseInt(e.target.value) > bounsVal) {
+                            let member_bouns = parseInt(this.bouns);
+                            if (parseInt(e.target.value) > member_bouns) {
                                 this.show = true;
                                 // console.log(bounsVal);
-                                e.target.value = bounsVal
+                                e.target.value = member_bouns;
                             } else if ((e.which >= 48 && e.which <= 57) || e.which == 8) {
                                 // console.log(`ttt`);
                             } else {
@@ -684,8 +687,6 @@
                             // this.member_ID 是用this指向data的member_ID的值之後, 設定一個較member_ID參數進gerMemberInfo
                             // function使用
                             let member_ID = this.member_ID;
-                            let orderDataObj = this.orderData;
-                            // console.log(orderDataObj);
                             // 這裡的this才是function的this
                             const that = this
                             // console.log(member_ID);
@@ -738,11 +739,27 @@
                         //若其中一方沒有資料則不會觸發這個function
 
                         clearInputData() {
-                           let obj = this.orderInfo;
-                           console.log(obj);
-
+                            // console.log(this.orderData.name);
+                            // console.log(this.orderData.phone);
+                            // console.log(this.orderData.addr);
+                           if((this.orderData.name && this.orderData.phone && this.orderData.addr)  !== ""){
+                            this.orderData.name = "",
+                            this.orderData.phone = "",
+                            this.orderData.addr = "",
+                            this.secondchecked = false;
+                           }
                         },
+                        //執行順序
+                        async clickClear(){
+                            await this.getMemberInfo();
+                            this.clearInputData(); 
+                        },
+
+                        //change ckeckbox的勾選狀態
+                      
                         
+                  
+
                         //購物車訂單送出
                     //所有orderData的資料放進購物車明細,包含商城的data
                     cartDetailAPI() {
@@ -789,7 +806,7 @@
                                 MemberID: that.orderData.member_ID,
                                 name:that.orderData.name,
                                 phone:that.orderData.phone,
-                                uniform:that.orderData.uniform
+                                // uniform:that.orderData.uniform
                             },
                             dataType: "text",
                             success: function (response) {
