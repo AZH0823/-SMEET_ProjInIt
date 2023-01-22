@@ -57,6 +57,9 @@ div.back_chefstManger {
           }
 
           .back_from_wrapper {
+            height: 350px;
+            overflow-y: scroll;
+            margin-bottom: 15px;
             .grid_container {
               margin: 0 auto;
               display: grid;

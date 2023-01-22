@@ -29,6 +29,8 @@
                         }
 
                         .back_from_wrapper {
+                            height: 280px;
+                            overflow-y: scroll;
                             .grid_container {
                                 display: grid;
                                 margin: 0 auto;

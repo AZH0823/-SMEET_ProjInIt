@@ -5,15 +5,15 @@
 
 
     //建立SQL語法
-    $sql = "SELECT d.ID, `Type`, d.Name,`Price`, `IMG`, `shopPoint`, `Introduction`, `Condition`, `pushisedDate`, `ProductType`
+    $sql = " SELECT d.ID, `Type`, d.Name,`Price`, `IMG`, `shopPoint`, `Introduction`, `Condition`, `pushisedDate`, `ProductType`
     FROM smeet.Dish d
     join smeet.DishsType dt
     on d.`type` = dt.ID 
-    where ProductType = '商城冷凍' 
-    and `Condition` = 2";
+    where ProductType = '商城冷凍'";
     
 
     //執行
+    
     $statement = getPDO()->prepare($sql); 
     $statement->execute();
     $data = $statement->fetchAll();
