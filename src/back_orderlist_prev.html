@@ -24,14 +24,14 @@
 
                             <div class="back_fromTitle">
                                 <h4 class="h4 green-1">預約訂單管理</h4>
-                                <div class="search">
+                                <!-- <div class="search">
                                     <div class="search_container_item">
                                         <input type="text" placeholder="訂單查詢..."/>
                                     </div>
                                     <div class="search_container_item">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="back_from_wrapper">
@@ -54,9 +54,7 @@
                                         <div class="grid_item">{{item.Count}}位</div>
                                         <div class="grid_item ">
                                             <!-- v-model.lazy="item.Condition -->
-                                            <p>{{item.Condition}}</p>
-
-
+                                            <!-- <p>{{item.Condition}}</p> -->
                                             <select @change="UpadteCondition(item,$event)" class="selectInput">
                                                 <!-- <select name="" id="" @change="UpadteCondition(item,$event,this.value)" class="selectInput" :vaule="item.Condition" ref="xxx"></select> -->
                                                 <!--  v-model="item.Condition" -->    
@@ -92,19 +90,19 @@
                         </div><!-- back_from -->
                         
                         <!-- 頁碼-->
-                        <div class="page">
+                        <!-- <div class="page">
                             <ul class="page_ul">
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
                             <li><a href="#">4</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </section>
                     <!-- section1 -->
                     <!-- popInMsg -->
-                    <div class="Pop_All"  @click="closePopOnOther" 
-                    v-if="popOnMsg.display ==true" 
+                    <div class="Pop_All"  @click="closePopOnOther" style="display: none;" ref = ""
+                    v-if="popOnMsg.display ==true" :style="popOnMsg.display ?'display:block':'display: none'"
                      ref="popWindow">
                         <div class="popContainer" @click.stop>
                           
@@ -140,44 +138,48 @@
                                              <!-- 總計金額 -->
                                              <li class="total_price">
                                                  <ol class="detail_title total">
-                                                     <li class="detail_dish col2"><p class="font14">小計</p><p class="font14">${{(popOnMsg.TotalPrice).toLocaleString()}}</p></li>
+                                                     <li class="detail_dish col2"><p class="font14"> 小計</p><p class="font14">$ {{(popOnMsg.TotalPrice).toLocaleString()}}</p></li>
                                                      <li class="detail_dish col2" v-if="popOnMsg.point > 0"><p class="font14 ">回饋點數</p><p class="font14" >-${{(popOnMsg.point).toLocaleString() }}</p></li>
                                                  </ol>
                                                  <div class="detail_title"><p class="font14">Total</p><p class="font14 price">$ {{(popOnMsg.TotalPrice - popOnMsg.point).toLocaleString()}}</p></ㄎ>
                                              </li>
                                          </ul>
                                      </div>
+                                     
                                      <div class="contaniner_info">
-                                         <h6>訂單明細 <span class="edit" @click="popEdit(item,$event)"><i class="fa-solid fa-pen-to-square"></i></span></h6>
+                                         <h6>訂單明細 <span class="edit"
+                                            :class="[popOnMsg.isEdit ? 'checked' : '']"
+                                             @click="popEditIcon()"><span><i class="fa-solid fa-pen-to-square"></i></span><span v-if="popOnMsg.isEdit == true">正在編輯中</span></span></h6>
                                          <!-- 訂購人姓名 -->
                                          <div class="info_input">
                                              <label for="order_name" class="orderL name">訂購人</label>
-                                             <input type="text" id="order_name" v-model="popOnMsg.Name" :disabled="!popOnMsg.isEdit"/>
+                                             <input type="text" id="order_name" ref="order_name" :value="popOnMsg.Name" :disabled="!popOnMsg.isEdit"/>
                                              
                                          </div>
          
                                          <!-- 訂購人電話 -->
                                          <div class="info_input">
                                              <label for="order_phone" class="orderL phone">聯繫電話</label>
-                                             <input type="text" id="order_phone"   v-model="popOnMsg.Phone"  :disabled="!popOnMsg.isEdit"/>
+                                             <input type="text" id="order_phone" ref="order_phone" maxlength="10"   :value="popOnMsg.Phone"  :disabled="!popOnMsg.isEdit"/>
                                          </div>
          
                                          <!-- 訂購人Email -->
                                          <div class="info_input">
                                              <label for="order_email" class="orderL mail">E-mail</label>
-                                             <input type="text" id="order_email"   v-model="popOnMsg.Email"  :disabled="!popOnMsg.isEdit"/>
+                                             <input type="text" id="order_email" ref="order_email"   :value="popOnMsg.Email"  :disabled="!popOnMsg.isEdit"/>
                                          </div>
          
                                          <!-- 訂購人Adrr -->
                                          <div class="info_input">
                                              <label for="order_addr" class="orderL addr">地址</label>
-                                             <input type="text" id="order_addr" v-model="popOnMsg.Address"  :disabled="!popOnMsg.isEdit"/>
+                                             <input type="text" id="order_addr" ref="order_addr" :value="popOnMsg.Address"  :disabled="!popOnMsg.isEdit"/>
                                          </div>
          
                                          <div class="info_input dir_col">
                                              <label for="order_note" class="orderL note">備註</label>
-                                             <textarea name="" id="order_note"  v-model="popOnMsg.note"  :disabled="!popOnMsg.isEdit"></textarea>
+                                             <textarea name="" id="order_note" ref="order_note"  :value="popOnMsg.notes"  :disabled="!popOnMsg.isEdit"></textarea>
                                          </div>
+                                         <div class="save_btn" style="margin: 10px auto;" @click="popSave">儲存</div>
                                      </div>
                                  </div>
                              </div>
@@ -223,6 +225,8 @@
 
         },
         methods:{
+
+            // API Start
             // 取得所有訂單資料
             getOrderListData(){
                 fetch('php/backpage/getOrderListData.php')
@@ -262,25 +266,80 @@
                     _this.$nextTick(function () {  
                         _this.OrderDetail = {...obj}
                     });
-                    console.log( _this.OrderDetail)
+                    // console.log( _this.OrderDetail)
                 }).catch(err=>{
                     console.log(err)
                 })
             },
+
+            // 改變訂單狀態
             updateOrderCondition(id,Condition){
-                console.log(id,Condition)
+                // console.log(id,Condition)
+                $.ajax({
+                    method: "POST",
+                    url: "php/backpage/updateOrderCondition.php",
+                    data: {
+                        Msg:'updateCondition',
+                        ID:id,
+                        Condition:Condition
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                        if(response =="Y"){
+                            console.log(response)
+                        }
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
             },
 
+            // 改變訂單明細
+            UpadteOrderInfo(popMsg){
+                console.log(popMsg)
+                console.log(popMsg.OrderId,popMsg.Name,popMsg.Phone,popMsg.Email,popMsg.Address,popMsg.notes)
+                $.ajax({
+                    method: "POST",
+                    url: "php/backpage/updateOrderCondition.php",
+                    data: {
+                        Msg:'updateInfo',
+                        ID: popMsg.OrderId,
+                        Name: popMsg.Name,
+                        Phone: popMsg.Phone,
+                        Email:popMsg.Email,
+                        Address:popMsg.Address,
+                        notes:popMsg.notes
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                        console.log(response)
 
+                        // 將訂單新資料放回來Vue API
+                        if(response =='Y'){
+                            
+                            
+                        }
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+            },
+
+            // API End
+
+
+            // Vue Methods
             UpadteCondition(item,e){
                 if(!confirm("請問是否要更換訂單狀態嗎?")){
                     e.target.value = item.Condition
                 }else{
                     item.Condition = e.target.value
+                     // 更新DB資料 Ajax
+                     this.updateOrderCondition(item.ID,item.Condition)
                 }
                
-                // 更新DB資料 Ajax
-                this.updateOrderCondition(item.ID,item.Condition)
             },
 
             ClickOrderDetail(item){
@@ -302,7 +361,7 @@
                 this.popOnMsg.Address = data.Address;
                 this.popOnMsg.notes = data.notes;
                 this.popOnMsg.LederName = data.LederName;
-                
+
                 // 把資料帶去給PopMsg
                 this.getOrderOneData(item.ID);
             },
@@ -312,27 +371,62 @@
                 this.popOnMsg.display= false;
                 let body = document.querySelector('body');
                 body.style.overflow = "auto";
-                
+                this.popOnMsg.isEdit = false;
             },
             closePopOn(){
                 this.popOnMsg.display = false
                 let body = document.querySelector('body');
                 body.style.overflow = "auto";
-                
+                this.popOnMsg.isEdit = false;               
             },
-            popEdit(item,e){
-                console.log('item',item)
-                console.log('event',e)
-                console.log(`aa`)
-                if(this.popOnMsg.isEdit){
-                    this.popOnMsg.isEdit = !this.popOnMsg.isEdit
-                    // 編輯訂單資訊
-                    if(window.confirm('確定修改嗎?')){
+            popEditIcon(){
+                this.popOnMsg.isEdit = !this.popOnMsg.isEdit
+            },
+            popSave(){
+                const nowPopValue = {
+                    Name:this.$refs.order_name.value,
+                    Phone:this.$refs.order_phone.value,
+                    Email:this.$refs.order_email.value,
+                    Address:this.$refs.order_addr.value,
+                    notes:this.$refs.order_note.value,
+                };
 
+                
+                if(this.popOnMsg.isEdit){
+                    // 編輯訂單資訊
+                    if(window.confirm('確定修改訂單資訊嗎?')){
+                        // console.log(`cc`)
+                        // console.log(nowPopValue.Phone)
+                        this.popOnMsg.Name = nowPopValue.Name;
+                        this.popOnMsg.Phone = nowPopValue.Phone;
+                        this.popOnMsg.Email = nowPopValue.Email;
+                        this.popOnMsg.Address = nowPopValue.Address;
+                        this.popOnMsg.notes = nowPopValue.notes;
+
+                        this.popOnMsg.isEdit = false;
+                        this.UpadteOrderInfo(this.popOnMsg);
+
+                        // console.log(`更新API 資料`)
+                        const _id =  this.popOnMsg.OrderId
+                        
+                        // 更新VueData 資料
+                        this.apiData.forEach((data)=>{
+                            console.log(data)
+                            if(_id == data.ID){
+                                data.Name = nowPopValue.Name;
+                                data.Phone = nowPopValue.Phone;
+                                data.Email = nowPopValue.Email;
+                                data.Address = nowPopValue.Address;
+                                data.notes = nowPopValue.notes;
+                            }
+                        })
+
+                    }else{
+                        
                     }
                 }else{
-                    this.popOnMsg.isEdit = !this.popOnMsg.isEdit
-                }
+                        alert('沒有資料有修改過')
+                    }
                 
             }
            
