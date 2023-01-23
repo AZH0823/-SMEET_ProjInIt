@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>動態管理</title>
 </head>
+
 <body>
     <div class="back_news fulid_wrapper">
         <div class="backwrapper">
@@ -15,7 +17,8 @@
                 @@include('layout/back_header.html')
             </header>
 
-            <div class="container"><!-- test -->
+            <div class="container">
+                <!-- test -->
                 <main class="right_content">
                     <section class="section1">
                         <!-- form -->
@@ -26,7 +29,7 @@
                                 <div class="search">
                                     <div class="insert_btn" style="color: #898989;">新增</div>
                                     <div class="search_container_item">
-                                        <input type="text" placeholder="動態查詢..."/>
+                                        <input type="text" placeholder="動態查詢..." />
                                     </div>
                                     <div class="search_container_item">
                                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -34,10 +37,10 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="back_from_wrapper">
-    
-                                    <!-- row-1 -->
+
+                                <!-- row-1 -->
                                 <div class="grid_container">
                                     <div class="grid_item">公告類型</div>
                                     <div class="grid_item">公告日期</div>
@@ -47,11 +50,23 @@
                                     <div class="grid_item">操作</div>
                                 </div>
                                 <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">最新動態</div>
-                                    <div class="grid_item">2022/11/25</div>
-                                    <div class="grid_item">冬季暖心</div>
-                                    <div class="grid_item">鮟鱇魚富含膠原蛋白且低...</div>
+                                <div class="grid_container" v-for="News in BackNewsList" :key="index">
+                                    <div class="grid_item">
+                                        <!-- 最新動態 -->
+                                        {{News.Category}}
+                                    </div>
+                                    <div class="grid_item">
+                                        <!-- 2022/11/25 -->
+                                        {{News.Date}}
+                                    </div>
+                                    <div class="grid_item">
+                                        <!-- 冬季暖心 -->
+                                        {{News.Title}}
+                                    </div>
+                                    <div class="grid_item">
+                                        <!-- 鮟鱇魚富含膠原蛋白且低... -->
+                                        {{News.Article}}
+                                    </div>
                                     <div class="grid_item">
                                         <label class="switch">
                                             <input type="checkbox" class="switch_btn" checked>
@@ -61,9 +76,9 @@
                                     </div>
                                     <div class="grid_item checked">查看</div>
                                 </div>
-                                
+
                                 <!-- row-3 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -76,10 +91,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-    
+                                </div> -->
+
                                 <!-- row-4 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -92,10 +107,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-                                
+                                </div> -->
+
                                 <!-- row-5 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -108,10 +123,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-                                
+                                </div> -->
+
                                 <!-- row-6 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -124,10 +139,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-                                
+                                </div> -->
+
                                 <!-- row-6 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -140,10 +155,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-                                
+                                </div> -->
+
                                 <!-- row-7 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -156,10 +171,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-    
+                                </div> -->
+
                                 <!-- row-8 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -172,10 +187,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-    
+                                </div> -->
+
                                 <!-- row-9 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -188,10 +203,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-    
+                                </div> -->
+
                                 <!-- row-10 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -204,10 +219,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-                                
+                                </div> -->
+
                                 <!-- row-11 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -220,10 +235,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
-    
+                                </div> -->
+
                                 <!-- row-12 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -236,10 +251,10 @@
                                         </label>
                                     </div>
                                     <div class="grid_item checked">查看</div>
-                                </div>
+                                </div> -->
                             </div><!-- wrapper -->
                         </div><!-- back_from -->
-                        
+
                         <!-- 頁碼-->
                         <!-- <div class="page">
                             <ul class="page_ul">
@@ -253,11 +268,11 @@
                 </main>
                 @@include('layout/back_footer.html')
             </div><!-- container -->
-            
+
         </div>
         <!-- wrapper -->
 
-        
+
         <div class="section_news">
             <div class="news_top">
                 <p>新增動態</p>
@@ -272,8 +287,8 @@
             </div>
             <div class="news_date">
                 <p>上架日期：</p>
-                <input  id="datepicker" placeholder="2022/01/13">
-                <input  placeholder="16：00">
+                <input id="datepicker" placeholder="2022/01/13">
+                <input placeholder="16：00">
             </div>
             <div class="news_title">
                 <p>動態標題：</p>
@@ -284,8 +299,8 @@
                     <span>圖片：</span>
                     <input type="file" onchange="openFile(event)">
                     <img id="output" height="200" style="display:none">
-                    
-                </label>    
+
+                </label>
             </div>
             <div class="news_content">
                 <h6>內容：</h6>
@@ -294,65 +309,101 @@
                 <p>(0/300)</p>
                 <button class="news_content_btn">儲存</button>
             </div>
-        
+
         </div>
-        
+
     </div>
 
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
-    <script
-        type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><!-- icon_cdn -->
-    <script
-        nomodule="nomodule"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
-    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <!-- icon_cdn -->
+    <script nomodule="nomodule" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- icon_cdn -->
+    <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+
     <script>
         const switchBtn = document.querySelectorAll(".switch_btn");
         const sliderContent = document.querySelectorAll(".slider_content");
         // console.log(switchBtn);
 
-        for(let i=0; i < switchBtn.length; i++){
+        for (let i = 0; i < switchBtn.length; i++) {
             // console.log(i)
-            switchBtn[i].addEventListener("click", function(){
+            switchBtn[i].addEventListener("click", function () {
                 console.log(this.checked); // ture /false
-                console.log(i); 
+                console.log(i);
                 console.log(this)
 
                 if (this.checked == true) {
 
                     $(this).closest("label").find(".slider_content").text('啟用');
-                } else{
+                } else {
                     $(this).closest("label").find(".slider_content").text('停權');
                 }
             });
         }
-        
+
     </script>
 
     <!-- 日期選擇器 -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $( "#datepicker" ).datepicker();
-        } );
+        let app1 = Vue.createApp({
+            data() {
+                return {
+                    BackNewsList: [],
+                };
+            },
+            created() {
+                this.newsrender();
+            },
+            methods: {
+                newsrender() {
+                    let _this = this;
+
+                    $.ajax({
+                        method: "POST",
+                        url: "php/frontpage/back_news.php",
+                        data: {},
+
+                        dataType: "json",
+                        success: function (response) {
+                            // console.log(response);
+                            response.forEach((element) => { //每個資料的名字
+                                element.Date = element.Date.substr(0, 10);
+                                _this.BackNewsList.push(element);
+                            });
+                        },
+                        error: function (exception) {
+                            alert("發生錯誤: " + exception.status);
+                        },
+                    });
+
+                },
+            },
+        });
+        app1.mount(".app1");
+    </script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
     </script>
 
     <!-- 縮圖預覽 -->
     <script>
-        function openFile(event){
+        function openFile(event) {
             var input = event.target; //取得上傳檔案
             var reader = new FileReader(); //建立FileReader物件
 
             reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
 
-            reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+            reader.onload = function () { //FileReader取得上傳檔案後執行以下內容
                 var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
                 $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
             };
         }
     </script>
 </body>
+
 </html>

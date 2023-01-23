@@ -149,3 +149,4 @@ $("#indexham_bg").on("click", function () {
         indexham_body.style.overflow = "hidden";
     }
 })
+

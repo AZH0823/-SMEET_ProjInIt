@@ -240,7 +240,7 @@
 
           dataType: "json",
           success: function (response) {
-            console.log(response);
+            // console.log(response);
             response.forEach((element) => { //每個資料的名字
               element.Date = element.Date.substr(0, 10);
               _this.NewsList.push(element);
