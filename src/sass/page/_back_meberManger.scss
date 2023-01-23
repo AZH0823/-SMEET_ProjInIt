@@ -5,6 +5,7 @@
 
         header {
             display: flex;
+            height: 100vh;
         }
 
         .container {
@@ -42,11 +43,8 @@
                         
 
                         div.back_from_wrapper {
-                            // TODO 讓查閱可以hover~ 現在
-                            // &:first-child:last-child :hover{
-                            //     cursor: pointer;
-                            //     color: #ccc;
-                            // }
+                            height: 550px;
+                            overflow-y: scroll;
                             .grid_container {
                                 margin: 0 auto;
                                 display: grid;

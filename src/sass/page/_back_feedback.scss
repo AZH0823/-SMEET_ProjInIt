@@ -6,6 +6,7 @@ div.back_feedback {
 
         header {
             display: flex;
+            height: 100vh;
         }
 
         .container {
@@ -29,6 +30,8 @@ div.back_feedback {
                         }
 
                         .back_from_wrapper {
+                            height: 550px;
+                            overflow-y: scroll;
                             .grid_container {
                                 margin: 0 auto;
                                 // border: 1px solid #ccc;

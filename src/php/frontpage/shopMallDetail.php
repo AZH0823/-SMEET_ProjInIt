@@ -6,8 +6,8 @@
 
     //建立SQL語法
     $sql = "SELECT d.ID, `Type`, d.Name,`Price`, `IMG`, `shopPoint`, `Introduction`, `Condition`, `ProductType`
-    FROM smeet.Dish d
-    join smeet.DishsType dt
+    FROM Dish d
+    join DishsType dt
     on d.`type` = dt.ID 
     where ProductType = '商城冷凍' AND d.ID = ?";
     

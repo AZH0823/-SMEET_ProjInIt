@@ -5,6 +5,7 @@ div.back_contactUs {
 
         header {
             display: flex;
+            height: 100vh;
         }
 
         div.container {
@@ -27,6 +28,8 @@ div.back_contactUs {
                         }
 
                         div.back_from_wrapper {
+                            height: 550px;
+                            overflow-y: scroll;
                             div.grid_container {
                                 margin: 0 auto;
                                 display: grid;

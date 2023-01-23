@@ -275,15 +275,26 @@ initial-scale=1.0">
             computed: {
                 // ========= 原本菜單陣列依照curren_tab過濾 ========= //
                 filtered_list(){
-                    const filtered =  this.AjaxMealsInfo.filter((post) => {
-                    // console.log(this.current_tab);
-                    // console.log(post.Type);
-                    // console.log(this.current_tab === post.Type);
-                    return this.current_tab === post.Type
+                    let filtered =  this.AjaxMealsInfo.filter((post) => {
+
+                        // console.log(this.current_tab);
+                        // console.log(post.Type);
+                        // console.log(this.current_tab == post.Type);
+                        
+                        return parseInt(this.current_tab) == parseInt(post.Type);
+
                         // return  post.title.toLowerCase().includes(this.keyword.toLowerCase());
+                        
                     });
                     return filtered
                 }
+            },
+            created(){
+                window.addEventListener("popstate", function () {
+                    // 第二步，加上 tab_active 函式
+                    member.page();
+                    // console.log('aaa');
+                });
             },
 
             mounted() {
@@ -294,12 +305,10 @@ initial-scale=1.0">
                 // 進商品詳情頁就抓購物車資料
                 this.getCartLocalStorage()
 
-                // 進商品詳情頁就抓收藏商品資料
-                this.getCollectLocalStorage()
-
             },
 
             methods: {
+                // ========== 共用區 ========== //
 
                 // shoppingData 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
                 getCartLocalStorage(){
@@ -312,20 +321,58 @@ initial-scale=1.0">
                     }
                 },
 
-                // shopCollect 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
-                getCollectLocalStorage(){
-                    const local_storage = localStorage.getItem("shopCollect")
-
-                    if(local_storage){
-                        const LSGetItem = JSON.parse(localStorage.getItem("shopCollect")) 
-
-                        this.ShoppingCartList = LSGetItem
-                    }
-                },
                 // ========= AJAX ========= //
+                
+                // 最新收藏商品 愛心渲染
+                selectCollections(){    
+                    const member_ID =localStorage.getItem("member_ID");
+                    
+                    
+                    
+                    $.ajax({            
+                        method: "POST",
+                        url: "php/frontpage/member/collect_s.php",
+                        data:{
+                            member_ID
+                        },            
+                        dataType: "text",
+                        success: (response) => {
+                            const adjusted_resp = JSON.parse(response)
+                            // console.log(adjusted_resp);
+                            
+                            for (let index = 0; index < adjusted_resp.length; index++) {
+                                const element = adjusted_resp[index];
+                                const id = element.DishID
+                                // console.log(id);
+
+                                
+                                for (let i = 0; i < this.AjaxMealsInfo.length; i++) {
+                                    const element = this.AjaxMealsInfo[i];
+                                    // console.log(element);
+                                    const AjaxMealsInfoID = element.ID;
+
+                                    if(id === AjaxMealsInfoID){
+                                        this.AjaxMealsInfo[i].heart = true;
+                                    }
+                                }
+                            }
+                        },
+                        error: function(exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
+
+
+
                 
                 // 加入收藏前檢查是否登入會員
                 addCollectLogin_check(item){    
+
+                    const member_ID =localStorage.getItem("member_ID");
+                    const dish_ID = item.ID ;
+                    
+                    // console.log(member_ID);
                     $.ajax({            
                         method: "POST",
                         url: "php/frontpage/login_check.php",
@@ -335,48 +382,79 @@ initial-scale=1.0">
                             if(response == ""){
                                 //尚未登入->跳出會員登入畫面
                                 login_pop();
+                                item.heart = false;
                             }else{
                                 //已有登入的話 執行.....
                                 // 會員icon顯示
-                                // let user_pop = document.querySelector('.user_pop');
-                                // user_pop.classList.remove('none');
-                                // 加减爱心
+                                let user_pop = document.querySelector('.user_pop');
+                                user_pop.classList.remove('none');
                                 
-                                // 商品收藏樣式 & 加到 Storage
-                                if(item.heart == true){
-                                    item.heart = false;
-                                    this.success_popup = '移除收藏成功'
-                                    this.removeCollectList(item)
-                                    
-                                    // 使 scroll 無效
-                                    let body = document.querySelector('body');
-                                    body.style.overflow = "hidden";
-
-                                }else{
+                                // 如果收藏成功就insert資料
+                                if(item.heart == false){
                                     item.heart = true;
-                                    this.success_popup = '加入收藏成功'
-                                    this.addCollectList(item)
+                                    
+                                    // insert收藏 
+                                    $.ajax({            
+                                        method: "POST",
+                                        url: "php/frontpage/member/collect_i.php",
+                                        data:{
+                                            member_ID, // 這個變數的宣告在 login.js
+                                            dish_ID
+                                        },            
+                                        dataType: "text",
+                                        success: (response)=> {
 
-                                    // 使 scroll 無效
-                                    let body = document.querySelector('body');
-                                    body.style.overflow = "hidden";
+                                            // 加入收藏 popUp
+                                            this.success_popup = '加入收藏成功'
+                                            // 
+                                            let body = document.querySelector('body');
+                                            body.style.overflow = "hidden";
+                                        },
+                                        error: function(exception) {
+                                            alert("數據載入失敗: " + exception.status);
+                                        }
+                                    });
+
+                                }else if(item.heart == true){
+                                    
+                                    item.heart = false;
+                                    
+                                    // 移除 Data
+                                    this.removeCollectList(this.item)
+
+
+                                    // delete收藏
+                                    $.ajax({            
+                                        method: "POST",
+                                        url: "php/frontpage/member/collect_d.php",
+                                        data:{
+                                            member_ID: member_ID, // 這個變數的宣告在 login.js
+                                            dish_ID: dish_ID
+                                        },            
+                                        dataType: "text",
+                                        success: (response)=> {
+                                            // 移除收藏 popUp
+                                            this.success_popup = '移除收藏成功'
+                                            let body = document.querySelector('body');
+                                            body.style.overflow = "hidden";
+                                            
+                                        },
+                                        error: function(exception) {
+                                            alert("數據載入失敗: " + exception.status);
+                                        }
+                                    });
                                 }
+                                    
+                                
+                                
 
                                 // 收藏 & 移除 PopOn 消失
                                 clearInterval(this.success_popup_interval)
                                 this.success_popup_interval = setInterval(() => {
                                     this.success_popup= ''
-
-                                    // 一秒後開啟 scroll
                                     let body = document.querySelector('body');
                                     body.style.overflow = "auto";
-                                    
                                 }, 1000);
-
-                                // 收藏增加 Loaca  lStorage
-                                // console.log(this.collect_heart_data_list); 
-                                localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
-                                
                             }              
                         },
                         error: function(exception) {
@@ -421,8 +499,10 @@ initial-scale=1.0">
                                     this.AjaxMealsInfo[i].IMG = imgs
                                     // console.log(this.AjaxMealsInfo[i].IMG);
                                 }
-
+                                // console.log("123");
+                                // console.log(this.AjaxMealsInfo);
                                 
+                                this.selectCollections();
                             }                
                         },
                         error: (exception)=> {
@@ -432,20 +512,12 @@ initial-scale=1.0">
                 },
 
                 // ========= 購物車行為 ========= //
-
-
-                // 點擊非卡片區域關掉商品 popUp
-                bodyHidden(){
-                    // 關掉 overflow
-                    let body = document.querySelector('body');
-                    body.style.overflow = "auto";
-                },
                 
                 // 點擊 container 關掉 popUp
                 product_pop_close(){
                     this.isShow = false;
 
-                    // 關掉 overflow
+                    // overfloat: auto
                     let body = document.querySelector('body');
                     body.style.overflow = "auto";
                 },
@@ -454,9 +526,10 @@ initial-scale=1.0">
                 shopCar(ID, Name, Price, IMG, qty){
                     // 開啟popUp
                     this.isShow = true;
+
+                    // overfloat: hidden
                     let body = document.querySelector('body');
                     body.style.overflow = "hidden";
-
 
                     // 將 Mealinfo 的資料賦值到 popUpData
                     this.popupData.Name = Name
@@ -464,14 +537,15 @@ initial-scale=1.0">
                     this.popupData.Price = Price
                     this.popupData.IMG = IMG
                     this.popupData.qty = 1 // 預設值 1
-
                 },
-
 
                 // 點擊 X 關閉popUp並清空資料
                 popUp_xClose(ID, Name, Price, IMG, heart, qty){
+
+                    // overfloat: auto
                     let body = document.querySelector('body');
                     body.style.overflow = "auto";
+                    
 
                     // 關閉popUp
                     this.isShow = false;
@@ -527,13 +601,18 @@ initial-scale=1.0">
                     // 控制購物車popUp
                     if(popupData != ""){
                         this.shopCartsuccess_popup = '加入購物車成功'
+                        // overfloat: hidden
+                        let body = document.querySelector('body');
+                        body.style.overflow = "hidden";
                     }
                     // PopOn 消失
                     clearInterval(this.success_popup_interval)
                     this.success_popup_interval = setInterval(() => {
                         this.shopCartsuccess_popup= ''
+                        // overfloat: auto
                         let body = document.querySelector('body');
                         body.style.overflow = "auto";
+
                     }, 1000);
 
                     // 關閉購物車
@@ -546,23 +625,23 @@ initial-scale=1.0">
 
                 // 收藏商品資料加入空陣列
                 addCollectList(item){
-                    console.log(item);
+                    // console.log(item);
                     // push 到新的陣列以便存到 localStorage
                     this.collect_heart_data_list.push(item);
                     // console.log(this.collect_heart_data_list);
                 },
 
-                // 收藏商品資料移除
+            //     // 收藏商品資料移除
                 removeCollectList(item){
                     this.collect_heart_data_list.shift(item);
                 },
+                
 
-
-                // 商品愛心收藏及移除（樣式及提醒popUp）
+            //     // 商品愛心收藏及移除（樣式及提醒popUp）
                 collect_heart(item){
 
                     // 加减爱心
-                    console.log(item.heart);
+                    // console.log(item.heart);
                     if(item.heart == true){
                         item.heart = false;
                         this.success_popup = '移除收藏成功'
@@ -598,7 +677,19 @@ initial-scale=1.0">
                     localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
 
                 },
-                
+
+                // 分頁紀錄
+                tab_page(){
+                    history.pushState(null, null, "#" + this.current_tab);
+                },
+                page(){
+                    let url = window.location.hash;
+                    // console.log(url); 
+                    if(url){
+                    this.current_tab = url.slice(1,15);
+                    // console.log("page:"+this.current_tab);
+                    }
+                }
 
             },
         });

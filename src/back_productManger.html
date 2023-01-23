@@ -15,12 +15,19 @@
                 @@include('layout/back_header.html')
             </header>
 
-            <div class="container">
+            <div class="container" id="app">
                 <main class="right_content">
                     <section class="section1">
                         <!-- form -->
                         <div class="back_from">
-                            <h4 class="h4 green-1">商城商品上架</h4>
+
+                            <div class="title">
+                                <h4 class="h4 green-1">商城商品上架</h4>
+                                <div class="insert_btn font16">
+                                    <p class="font16" @click="shopCar()">新增</p>
+                                </div>
+                            </div>
+                            
                             <div class="back_from_wrapper">
     
                                     <!-- row-1 -->
@@ -29,124 +36,26 @@
                                     <div class="grid_item">分類</div>
                                     <div class="grid_item">品名</div>
                                     <div class="grid_item">售價</div>
-                                    <div class="grid_item">庫存</div>
                                     <div class="grid_item">狀態</div>
                                 </div>
 
                                 <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">25</div>
+                                <div class="grid_container" v-for="item in product" :key="item.ID">
+                                    <div class="grid_item checked">{{ item.ID }}</div>
+                                    <div class="grid_item">{{ item.Type }}</div>
+                                    <div class="grid_item">{{ item.Name }}</div>
+                                    <div class="grid_item">{{ item.Price }}</div>
                                     <div class="grid_item">
                                         <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">25</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">5</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-5 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">25</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-6 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">2</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-7 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">6</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-8 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">13</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
+                                            <input type="checkbox" class="switch_btn" :checked="currentState" v-model="item.Condition" :value="item.Condition">
+                                            <span class="slider"  @click="switchToggle(item, $even)"></span>
+                                            <p class="slider_content"> 上架 </p>
                                         </label>
                                     </div>
                                 </div>
 
                                 <!-- row-9 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item checked">S001</div>
                                     <div class="grid_item">湯品</div>
                                     <div class="grid_item">手沖牛肉湯</div>
@@ -159,95 +68,82 @@
                                             <p class="slider_content">上架</p>
                                         </label>
                                     </div>
-                                </div>
-
-                                <!-- row-10 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <div class="grid_item">15</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
+                                </div> -->
                             </div><!-- wrapper -->
                         </div><!-- back_from -->
                         
                         <!-- 頁碼-->
-                        <div class="page">
+                        <!-- <div class="page">
                             <ul class="page_ul">
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
                             <li><a href="#">4</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </section><!-- section1 -->
+                    <div class="product_wrapper fulid_wrapper" v-if="isShow" @click="product_pop_close">
+                        <div class="section_products" @click.stop>
+                            <div class="product_top">
+                                <p>新增商品</p>
+                            </div>
+                            <div class="product_main">
+                                <div class="product_name">
+                                    <h6>商品名稱：<input placeholder="春手毬和菓子(6/25)"></h6>
+                                    
+                                </div>
+                                <div class="product_type">
+                                    <h6>商品分類：<select name="" id="" @change="UpadteCondition()">
+                                        <option value="商城主食" :selected="product.Type == '商城主食' ">商城主食</option>
+                                        <option value="商城湯品" :selected="product.Type == '商城湯品' ">商城湯品</option>
+                                        <option value="商城甜品" :selected="product.Type == '商城主食' ">商城甜品</option>
+                                    </select></h6>
+                                    
+                                </div>
+                                <div class="product_number">
+                                    <h6>商品編號：<input placeholder="S001"></h6>
+                                    
+                                </div>
+                                <div class="product_price">
+                                    <h6>建議售價：<input placeholder="$700"></h6>
+                                </div>
+                                <div class="product_shopkp">
+                                    <h6>重點敘述：</h6>
+                                    <textarea placeholder="消費滿$1200即享免運。私覓最鮮甜美食，從親至漁港、農村選料，讓妳在家也能感受頂級日式料亭的華美手藝。"></textarea>
+                                </div>
+                                <div class="product_intro">
+                                    <h6>詳情簡介：</h6>
+                                    <textarea></textarea>
+                                </div>
+                                <div class="product_pic">
+                                    <label type="button" class="btn">
+                                        <span>圖片：</span>
+                                        <input type="file" onchange="openFile(event)">
+                                        <img id="output" height="200" style="display:none">
+                                    </label>    
+                    </label>    
+                                    </label>    
+                                </div>
+                                <!-- <div class="product_trans">
+                                    <h6>配送方式：</h6>
+                                    <h6>白貓宅配 ○</h6>
+                                    <h6>超商取貨 ●</h6>
+                                </div> -->
+                                <button class="product_content_btn" type="submit">儲存</button>
+                
+                            </div>
+                        </div>
+                    </div>
+                    
+
                 </main>
                 @@include('layout/back_footer.html')
             </div><!-- container -->
         </div>
-        <div class="section_products">
-            <div class="product_top">
-                <p>新增商品</p>
-            </div>
-            <div class="product_main">
-                <div class="product_name">
-                    <h6>商品名稱：<input placeholder="春手毬和菓子         (6/25)"></h6>
-                    
-                </div>
-                <div class="product_type">
-                    <h6>商品分類：<select name="" id="">
-                        <option value="">商城主食（預設）</option>
-                        <option value="">商城湯品</option>
-                        <option value="">商城甜品</option>
-                    </select></h6>
-                    
-                </div>
-                <div class="product_number">
-                    <h6>商品編號：<input placeholder="S001"></h6>
-                    
-                </div>
-                <div class="product_price">
-                    <h6>建議售價：<input placeholder="$700"></h6>
-                    <h6>售價：<input placeholder="$650"></h6>
-                </div>
-                <div class="product_shopkp">
-                    <h6>購物重點：</h6>
-                    <textarea placeholder="消費滿$1200即享免運。私覓最鮮甜美食，從親至漁港、農村選料，讓妳在家也能感受頂級日式料亭的華美手藝。"></textarea>
-                </div>
-                <div class="product_stock">
-                    <h6>現有庫存：<input placeholder="5"></h6>
-                </div>
-                <div class="product_intro">
-                    <h6>詳情簡介：</h6>
-                    <textarea></textarea>
-                </div>
-                <div class="product_pic">
-                    <label type="button" class="btn">
-                        <span>圖片：</span>
-                        <input type="file" onchange="openFile(event)">
-                        <img id="output" height="200" style="display:none">
-                    </label>    
-                </div>
-                <div class="product_trans">
-                    <h6>配送方式：</h6>
-                    <h6>白貓宅配 ○</h6>
-                    <h6>超商取貨 ●</h6>
-                </div>
-                <button class="product_content_btn">儲存</button>
-
-            </div>
-        </div>
+        
         
     </div>
-
+    <script src="./js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
     <script
         type="module"
@@ -257,28 +153,30 @@
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
         <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
     <script>
+
+        
         const switchBtn = document.querySelectorAll(".switch_btn");
         const sliderContent = document.querySelectorAll(".slider_content");
         // console.log(switchBtn);
 
         for(let i=0; i < switchBtn.length; i++){
-            // console.log(i)
+            console.log(i)
             switchBtn[i].addEventListener("click", function(){
                 console.log(this.checked); // ture /false
-                console.log(i); 
-                console.log(this)
+                // console.log(i); 
+                // console.log(this)
 
                 if (this.checked == true) {
-
+                    console.log("111");
                     $(this).closest("label").find(".slider_content").text('上架');
                 } else{
+                    console.log("222");
                     $(this).closest("label").find(".slider_content").text('下架');
                 }
             });
         }
-    </script>
-    <!-- 縮圖預覽 -->
-    <script>
+
+
         function openFile(event){
             var input = event.target; //取得上傳檔案
             var reader = new FileReader(); //建立FileReader物件
@@ -290,6 +188,167 @@
                 $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
             };
         }
+
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    abc: "test",
+
+                    // 接Ajax的產品資料
+                    product: [],
+
+                    // popUp的資料, insert 到資料庫
+                    popupData: {
+                        ID: '',
+                        Type: '',
+                        Name: '',
+                        Price: '',
+                        shopPoint: '',
+                        Introduction: '',
+                        IMG: ''
+                    },
+
+                    // 當前 Switch 狀態
+                    currentState: true,
+
+                    // 控制燈箱
+                    isShow: false,
+                }
+            },
+            computed: {
+                // isActive() {
+                //     console.log(this.currentState);
+                //     // return this.currentState;
+                // },
+                // checkedValue: {
+                //     get() {
+                //         return this.currentState
+                //     },
+                //     set(newValue) {
+                //         this.currentState = newValue;
+                //     }
+                // }
+                
+            },
+            created() {
+                this.getCate();
+            },
+            mounted() {
+
+                
+            },
+            methods: {
+
+                // 取得商品清單
+                getCate(){    
+                    $.ajax({            
+
+                        method: "GET",
+                        url: "./php/backpage/back_productManger.php",
+                        data:{},
+                        dataType: "json",
+                        success: (response)=> {
+                            if(response != ""){
+                                
+                                for (let i = 0; i < response.length; i++) {
+                                    const element = response[i];
+                                    
+                                    // 修改 Type 值
+                                    if(response[i].Type == 8 ){
+                                        response[i].Type = "主食"
+                                    }
+                                    else if(response[i].Type == 9 ){
+                                        response[i].Type = "湯品"
+                                    }
+                                    else if(response[i].Type == 10 ){
+                                        response[i].Type = "甜品"
+                                    };
+                                    
+                                    // if(response[i].Condition == 1){
+                                    //     response[i].Condition = "上架"
+                                    // }
+
+                                    // 將資料存到 Data
+                                    this.product = response;
+                                }   
+                            }                
+                        },
+                        error: (exception)=> {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
+
+                // switch update status
+
+                // FIXME 改變樣式，將 Condition的值存到一個變數回傳資料庫
+                switchToggle(item, even){
+                    // console.log(e.target.value);
+                    console.log(item);
+                    // console.log(item);
+                    // const c = confirm("請問要更改訂單狀態嗎")
+                    // if(c){
+                    //     item.Condition = e.target.value;
+                    // }
+                    
+                    
+                    // 修改資料庫資料
+                    $.ajax({            
+                        method: "GET",
+
+                        // TODO update API 尚未完成
+                        url: "./php/backpage/back_productManger.php",
+                        data:{},
+                        dataType: "json",
+                        success: (response)=> {
+                            if(response != ""){
+                                
+                            }                
+                        },
+                        error: (exception)=> {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
+
+                 // 點擊卡片購物車 icon 後 顯示 popUp
+                shopCar(){
+                    // 開啟popUp
+                    this.isShow = true;
+
+                    // overfloat: hidden
+                    let body = document.querySelector('body');
+                    body.style.overflow = "hidden";
+
+                    // 將 Mealinfo 的資料賦值到 popUpData
+                    this.popupData.ID = this.product.ID
+                    this.popupData.Name = this.product.Name
+                    this.popupData.Price = this.product.Price
+                    this.popupData.IMG = this.product.IMG
+                },
+                // 點擊 container 關掉 popUp
+                product_pop_close(){
+                    this.isShow = false;
+
+                    // overfloat: auto
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
+                },
+
+                // 
+                UpadteCondition(    ){
+                // 更新Vue Data
+                const c = confirm(`請問要更改訂單狀態嗎?`)
+                if(c){
+                    this.product.Condition = e.target.value
+                }
+                // 更新DB資料 Ajax
+            },
+            },
+
+        });
+        const vm = app.mount("#app");
     </script>
 </body>
 </html>

@@ -11,12 +11,12 @@
 <body>
     <!-- ============== 缺搜尋BAR ============== -->
     <div class="back_orderlist_prev fulid_wrapper">
-        <div class="backwrapper">
+        <div class="backwrapper" id="oderList" >
             <header>
                 @@include('layout/back_header.html')
             </header>
 
-            <div class="container"><!-- test -->
+            <div class="container" ><!-- test -->
                 <main class="right_content">
                     <section class="section1">
                         <!-- form -->
@@ -24,18 +24,17 @@
 
                             <div class="back_fromTitle">
                                 <h4 class="h4 green-1">預約訂單管理</h4>
-                                <div class="search">
+                                <!-- <div class="search">
                                     <div class="search_container_item">
                                         <input type="text" placeholder="訂單查詢..."/>
                                     </div>
                                     <div class="search_container_item">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="back_from_wrapper">
-    
                                     <!-- row-1 -->
                                 <div class="grid_container">
                                     <div class="grid_item">訂單編號</div>
@@ -45,145 +44,34 @@
                                     <div class="grid_item">預約人數</div>
                                     <div class="grid_item">訂單狀態</div>
                                 </div>
-
-                                <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">6位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-5 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-6 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- row-7 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 
-                                <!-- row-8 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
+                                <template v-for="item in this.apiData" :key="item.ID">
+                                    <div class="grid_container" >
+                                        <div class="grid_item checked"  @click.stop="ClickOrderDetail(item)" id="grid_item">TGD{{item.ID}}</div>
+                                        <div class="grid_item">{{item.AppointmentDate}}</div>
+                                        <div class="grid_item">{{item.MemberID}}</div>
+                                        <div class="grid_item">$ {{item.TotalPrice.toLocaleString()}} 元</div>
+                                        <div class="grid_item">{{item.Count}}位</div>
+                                        <div class="grid_item ">
+                                            <!-- v-model.lazy="item.Condition -->
+                                            <!-- <p>{{item.Condition}}</p> -->
+                                            <select @change="UpadteCondition(item,$event)" class="selectInput">
+                                                <!-- <select name="" id="" @change="UpadteCondition(item,$event,this.value)" class="selectInput" :vaule="item.Condition" ref="xxx"></select> -->
+                                                <!--  v-model="item.Condition" -->    
+                                                <option disabled>訂單成立未付款</option>
+                                                <option value='訂單成立已付款'  :selected="item.Condition =='訂單成立已付款'">訂單成立已付款</option>
+                                                <option value='已完成售後服務'  :selected="item.Condition =='已完成售後服務'">已完成售後服務</option>
+                                                <option value='訂單封存'       :selected="item.Condition =='訂單封存'" >訂單封存</option>
+                                                <!-- <option    " >訂單成立已付款</option>
+                                                <option :selected="item.Condition ==='已完成售後服務'" >已完成售後服務</option>
+                                                <option :selected="item.Condition ==='訂單封存'">訂單封存</option> -->
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <!-- row-9 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311279</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">13389</div>
-                                    <div class="grid_item">$13,000</div>
-                                    <div class="grid_item">2位</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">已完成售後服務</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-
+                                </template>
+                              
                                 <!-- row-10 -->
-                                <div class="grid_container">
+                                <!-- <div class="grid_container">
                                     <div class="grid_item checked">TG1311279</div>
                                     <div class="grid_item">2022/01/13</div>
                                     <div class="grid_item">13389</div>
@@ -197,20 +85,106 @@
                                             <option value="">訂單封存</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                             </div><!-- wrapper -->
                         </div><!-- back_from -->
                         
                         <!-- 頁碼-->
-                        <div class="page">
+                        <!-- <div class="page">
                             <ul class="page_ul">
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
                             <li><a href="#">4</a></li>
                             </ul>
-                        </div>
-                    </section><!-- section1 -->
+                        </div> -->
+                    </section>
+                    <!-- section1 -->
+                    <!-- popInMsg -->
+                    <div class="Pop_All"  @click="closePopOnOther" style="display: none;" ref = ""
+                    v-if="popOnMsg.display ==true" :style="popOnMsg.display ?'display:block':'display: none'"
+                     ref="popWindow">
+                        <div class="popContainer" @click.stop>
+                          
+                                 <div class="feedback_top">
+                                     <h6>訂單明細</h6>
+                                     <button @click="closePopOn" class="close_btn" id="toggler-btn">X</button>
+                                 </div>
+                                 <div class="order_contaniner">
+                                     <div class="contaniner_top">
+                                         <p class="font14">訂單編號 :<span>{{popOnMsg.OrderId}}</span></p> 
+                                         <p class="font14">訂單類別 :<span class="red">私廚預約</span></p> 
+                                         <p class="font14">時間 :<span>{{popOnMsg.AppointmentDate}} {{popOnMsg.Scheduled}}時段</span></p> 
+                                         <p class="font14">人數 :<span>{{popOnMsg.Count}}人</span></p> 
+                                         <p class="font14">廚師長 :<span>{{popOnMsg.LederName}}</span></p> 
+                                     </div>
+                                     <div class="contaniner">
+                                         <h6>苑 春堂套餐</h6>
+                                         <ul class="contaniner_detail">
+                                             <li class="detail_title header"><p class="font14">類型</p><p class="font14">品名</p><p class="font14">數量</p></li>
+                                             
+                                             <template v-for="(item,dishTypeName,idx) in OrderDetail" :key = idx>
+                                                <li class="type_kind">
+                                                    <p class="type_title">{{dishTypeName}}</p>
+                                                        <ol class="dish_list">
+                                                            <template v-for="(itemdt,d) in item" :key ="itemdt.DishID">
+                                                            <li class="detail_dish"><p class="font14"></p><p class="font14 dish_name">{{itemdt.DishName}}</p><p class="font14">X{{itemdt.qty}}</p></li>
+                                                            </template>
+                                                        </ol>
+                                                    
+                                                </li>                    
+                                             </template>
+                                             
+                                             <!-- 總計金額 -->
+                                             <li class="total_price">
+                                                 <ol class="detail_title total">
+                                                     <li class="detail_dish col2"><p class="font14"> 小計</p><p class="font14">$ {{(popOnMsg.TotalPrice).toLocaleString()}}</p></li>
+                                                     <li class="detail_dish col2" v-if="popOnMsg.point > 0"><p class="font14 ">回饋點數</p><p class="font14" >-${{(popOnMsg.point).toLocaleString() }}</p></li>
+                                                 </ol>
+                                                 <div class="detail_title"><p class="font14">Total</p><p class="font14 price">$ {{(popOnMsg.TotalPrice - popOnMsg.point).toLocaleString()}}</p></ㄎ>
+                                             </li>
+                                         </ul>
+                                     </div>
+                                     
+                                     <div class="contaniner_info">
+                                         <h6>訂單明細 <span class="edit"
+                                            :class="[popOnMsg.isEdit ? 'checked' : '']"
+                                             @click="popEditIcon()"><span><i class="fa-solid fa-pen-to-square"></i></span><span v-if="popOnMsg.isEdit == true">正在編輯中</span></span></h6>
+                                         <!-- 訂購人姓名 -->
+                                         <div class="info_input">
+                                             <label for="order_name" class="orderL name">訂購人</label>
+                                             <input type="text" id="order_name" ref="order_name" :value="popOnMsg.Name" :disabled="!popOnMsg.isEdit"/>
+                                             
+                                         </div>
+         
+                                         <!-- 訂購人電話 -->
+                                         <div class="info_input">
+                                             <label for="order_phone" class="orderL phone">聯繫電話</label>
+                                             <input type="text" id="order_phone" ref="order_phone" maxlength="10"   :value="popOnMsg.Phone"  :disabled="!popOnMsg.isEdit"/>
+                                         </div>
+         
+                                         <!-- 訂購人Email -->
+                                         <div class="info_input">
+                                             <label for="order_email" class="orderL mail">E-mail</label>
+                                             <input type="text" id="order_email" ref="order_email"   :value="popOnMsg.Email"  :disabled="!popOnMsg.isEdit"/>
+                                         </div>
+         
+                                         <!-- 訂購人Adrr -->
+                                         <div class="info_input">
+                                             <label for="order_addr" class="orderL addr">地址</label>
+                                             <input type="text" id="order_addr" ref="order_addr" :value="popOnMsg.Address"  :disabled="!popOnMsg.isEdit"/>
+                                         </div>
+         
+                                         <div class="info_input dir_col">
+                                             <label for="order_note" class="orderL note">備註</label>
+                                             <textarea name="" id="order_note" ref="order_note"  :value="popOnMsg.notes"  :disabled="!popOnMsg.isEdit"></textarea>
+                                         </div>
+                                         <div class="save_btn" style="margin: 10px auto;" @click="popSave">儲存</div>
+                                     </div>
+                                 </div>
+                             </div>
+                          
+                         </div>
                 </main>
                 @@include('layout/back_footer.html')
             </div><!-- container -->
@@ -220,11 +194,263 @@
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
     <script
         type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><!-- icon_cdn -->
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <!-- icon_cdn -->
     <script
         nomodule="nomodule"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <!-- icon_cdn -->
+    <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+    <script src="js//vender/Vue/vue.global.js"></script>
+    <script>
+        
+    const app = Vue.createApp({
+      data() {
+        
+          return {
+            OrderDetail:[],
+            apiData:[
+                
+            ],
+            popOnMsg:{
+                isEdit:false,
+                display:false,
+                OrderId:'',   
+                Name:'',             
+            },
+            abc:'11',
+          };
+        },
+        computed:{
+
+        },
+        methods:{
+
+            // API Start
+            // 取得所有訂單資料
+            getOrderListData(){
+                fetch('php/backpage/getOrderListData.php')
+                .then(response =>{
+                    return  response.json()
+                })
+                .then( datalist =>{
+                  datalist.forEach(el => {
+                    this.apiData.push(el)
+                  });
+                }).catch(err=>{
+                    console.log(err)
+                })
+                
+            },
+
+            // 取得一筆資料
+            getOrderOneData(id){
+                const _this = this;
+               fetch(`php/backpage/getOrderListData.php?ID=${id}`)
+                .then(response =>{
+                    return  response.json()
+                })
+                .then( datalist =>{
+                    // console.log(datalist)
+                    _this.OrderDetail = [];
+                    let obj = []
+                    datalist.forEach(data=>{
+                        // 照種類排序 前菜 > 刺身 > 主食 > 甜點 > 飲品 > 單品 > 服務
+
+                        if(!obj.hasOwnProperty(`${data.DtName}`)){
+                            obj[data.DtName] = []
+                        }
+                        obj[data.DtName].push(data)
+                    })
+                    // 待 Dom 元素渲染在將物件賦予 ApiData => OrderDetail 
+                    _this.$nextTick(function () {  
+                        _this.OrderDetail = {...obj}
+                    });
+                    // console.log( _this.OrderDetail)
+                }).catch(err=>{
+                    console.log(err)
+                })
+            },
+
+            // 改變訂單狀態
+            updateOrderCondition(id,Condition){
+                // console.log(id,Condition)
+                $.ajax({
+                    method: "POST",
+                    url: "php/backpage/updateOrderCondition.php",
+                    data: {
+                        Msg:'updateCondition',
+                        ID:id,
+                        Condition:Condition
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                        if(response =="Y"){
+                            console.log(response)
+                        }
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+            },
+
+            // 改變訂單明細
+            UpadteOrderInfo(popMsg){
+                console.log(popMsg)
+                console.log(popMsg.OrderId,popMsg.Name,popMsg.Phone,popMsg.Email,popMsg.Address,popMsg.notes)
+                $.ajax({
+                    method: "POST",
+                    url: "php/backpage/updateOrderCondition.php",
+                    data: {
+                        Msg:'updateInfo',
+                        ID: popMsg.OrderId,
+                        Name: popMsg.Name,
+                        Phone: popMsg.Phone,
+                        Email:popMsg.Email,
+                        Address:popMsg.Address,
+                        notes:popMsg.notes
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                        console.log(response)
+
+                        // 將訂單新資料放回來Vue API
+                        if(response =='Y'){
+                            
+                            
+                        }
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+            },
+
+            // API End
+
+
+            // Vue Methods
+            UpadteCondition(item,e){
+                if(!confirm("請問是否要更換訂單狀態嗎?")){
+                    e.target.value = item.Condition
+                }else{
+                    item.Condition = e.target.value
+                     // 更新DB資料 Ajax
+                     this.updateOrderCondition(item.ID,item.Condition)
+                }
+               
+            },
+
+            ClickOrderDetail(item){
+                const data = JSON.parse(JSON.stringify(item));
+                // console.log(data);
+                this.popOnMsg.display = true;
+                document.querySelector('body').style.overflow = "hidden"
+                
+                this.popOnMsg.OrderId = data.ID;
+                this.popOnMsg.AppointmentDate = data.AppointmentDate;
+                this.popOnMsg.TotalPrice = data.TotalPrice;
+                this.popOnMsg.Count = data.Count;
+                this.popOnMsg.Scheduled = data.Scheduled;
+                this.popOnMsg.point = data.point;
+
+                this.popOnMsg.Name = data.Name;
+                this.popOnMsg.Phone = data.Phone;
+                this.popOnMsg.Email = data.Email;
+                this.popOnMsg.Address = data.Address;
+                this.popOnMsg.notes = data.notes;
+                this.popOnMsg.LederName = data.LederName;
+
+                // 把資料帶去給PopMsg
+                this.getOrderOneData(item.ID);
+            },
+
+            closePopOnOther(){
+                console.log(`sss`)
+                this.popOnMsg.display= false;
+                let body = document.querySelector('body');
+                body.style.overflow = "auto";
+                this.popOnMsg.isEdit = false;
+            },
+            closePopOn(){
+                this.popOnMsg.display = false
+                let body = document.querySelector('body');
+                body.style.overflow = "auto";
+                this.popOnMsg.isEdit = false;               
+            },
+            popEditIcon(){
+                this.popOnMsg.isEdit = !this.popOnMsg.isEdit
+            },
+            popSave(){
+                const nowPopValue = {
+                    Name:this.$refs.order_name.value,
+                    Phone:this.$refs.order_phone.value,
+                    Email:this.$refs.order_email.value,
+                    Address:this.$refs.order_addr.value,
+                    notes:this.$refs.order_note.value,
+                };
+
+                
+                if(this.popOnMsg.isEdit){
+                    // 編輯訂單資訊
+                    if(window.confirm('確定修改訂單資訊嗎?')){
+                        // console.log(`cc`)
+                        // console.log(nowPopValue.Phone)
+                        this.popOnMsg.Name = nowPopValue.Name;
+                        this.popOnMsg.Phone = nowPopValue.Phone;
+                        this.popOnMsg.Email = nowPopValue.Email;
+                        this.popOnMsg.Address = nowPopValue.Address;
+                        this.popOnMsg.notes = nowPopValue.notes;
+
+                        this.popOnMsg.isEdit = false;
+                        this.UpadteOrderInfo(this.popOnMsg);
+
+                        // console.log(`更新API 資料`)
+                        const _id =  this.popOnMsg.OrderId
+                        
+                        // 更新VueData 資料
+                        this.apiData.forEach((data)=>{
+                            console.log(data)
+                            if(_id == data.ID){
+                                data.Name = nowPopValue.Name;
+                                data.Phone = nowPopValue.Phone;
+                                data.Email = nowPopValue.Email;
+                                data.Address = nowPopValue.Address;
+                                data.notes = nowPopValue.notes;
+                            }
+                        })
+
+                    }else{
+                        
+                    }
+                }else{
+                        alert('沒有資料有修改過')
+                    }
+                
+            }
+           
+        },
+        
+        watch:{
+
+        },
+        mounted(){
+            this.getOrderListData();
+            
+        },
+        updated(){
+            // d_none
+            // this.$refs.pop.classList.remove('d_none')
+            // console.log('update',this.$refs.pop.classList)
+          //console.log(this.mytext);
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+      });
+      app.mount("#oderList");
+  
+   
+    </script>
 
 </body>
 </html>

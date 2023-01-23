@@ -5,6 +5,7 @@
     
             header {
                 display: flex;
+                height: 100vh;
             }
     
             .container {
@@ -44,6 +45,8 @@
                             }
     
                             .back_from_wrapper {
+                                height: 550px;
+                                overflow-y: scroll; 
                                 .grid_container {
                                     margin: 0 auto;
                                     display: grid;

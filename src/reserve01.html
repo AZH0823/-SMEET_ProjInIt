@@ -78,7 +78,7 @@
                         <div class="form-input" id="order_date" >
                             <img src="./img/reserve_img/reserve_icon03.svg" alt="">
                             <!-- :min="nowDate" :max="getMaxDate" -->
-                            <input type="date" id="start"   v-model="inputData.date"  @change="dateHandler">
+                            <input type="date" id="start" :min="nowDate" :max="getMaxDate"  v-model="inputData.date"  @change="dateHandler">
                             <span class="warning_title" v-if="vaildDate">＊欄位尚未填寫</span>
                         </div>
                         <div class="form-input" id="perofTime">
@@ -92,7 +92,7 @@
                         <div class="form-input" id="cheif_team">
                             <img src="./img/reserve_img/reserve_icon05.svg" alt="">
                             <select  v-model="inputData.chefTeam" :disabled="dateClick">
-                                <option  value="" selected disabled>--廚師團隊--</option>
+                                <option  selected disabled>--廚師團隊--</option>
                                 <option v-for="leder in data.chefScheduled" :key="leder.id" :value="leder.id">{{leder.name}}</option>
                             </select>
                             <span class="warning_title" v-if="vaildTeam">＊欄位尚未填寫</span>
@@ -154,7 +154,7 @@
                         cardName:'',
                         cardDate:'',
                         cardCode:'',
-
+                        cardNumer:'',
                         // 信用卡連號
                         cards:[
                             {},
@@ -219,7 +219,8 @@
               dateHandler(){
                 // 當使用者按下日期重新渲染團隊
                 // 清空放API回來的訂單資料
-                this.data.historylist = [];  
+                this.data.historylist = [];
+                this.chefScheduled = [];
                 // 每當觸發日期有改變就去去DB拿資料撈單日資料
                 this.historylistAPI();                                
               },
@@ -244,17 +245,18 @@
                       'Content-Type': 'application/json'
                     },
                     body:JSON.stringify({
-                        date:this.inputData.date,
+                        date: this.inputData.date,
                       })
                   })
                   .then(response => response.json())
                   .then(data => {
-                    this.data.historylist = [];
+                 
                     if(data !== null){
                       this.data.historylist = data;
                     }
-                    // filter Data 
+                    // filter Data
                     this.filterTeam();
+                    
                   });
               },
               getTeam(){
@@ -265,7 +267,12 @@
                   .then( datalist =>{
                       datalist.forEach(data=>{
                           this.data.chefTeam.push(data);
-                      })
+                          if(this.inputData.date !==""){
+                              this.historylistAPI();
+                            }
+                        })
+                       
+                        console.log(this.data.chefTeam)
                   }).catch(err=>{
                       console.log(err);
                   })
@@ -360,18 +367,26 @@
                   }
               },
               filterTeam(){
+                this.data.chefScheduled = []
                 const filterItems = this.data.historylist;
-                this.chefScheduled = []
+                // console.log(`歷史訂單`,filterItems)
                 // 當日只有2組團隊提供服務
                 if(filterItems.length > 0 && filterItems.length < 3){ 
                     let d = []; //存放有歷史訂單的團隊名稱
-                    filterItems.forEach(el=>{d.push(el.TeamID)});
+                   
+                    filterItems.forEach(el=>{d.push(el.TeamID)});           
+                
+                    // console.log(`aaa`)
                     // 把沒有預約的團隊給挑出來放入 data.chefScheduled 給團隊下拉選單渲覽畫面
-                    this.data.chefScheduled = this.data.chefTeam.filter(el=>{                         
+                    this.data.chefScheduled = this.data.chefTeam.filter(el=>{    
+                        // console.log(`el`,el.id)                 
+                        // console.log(`d`,d)
                         if(!d.includes(el.id)){
                             return el;
                         }                          
                     })
+                    // console.log(this.data.chefScheduled)
+                    
                 // 當日預約額滿
                 }else if(filterItems.length ===3){
                     alert(`今天預約已滿`);
@@ -385,15 +400,20 @@
             mounted(){
                 // 這邊之後要放入API
                 // localStroe 放入 
+                // if(LS === null){
+                //     this.getTeam();
+                // }
+                    
                 let LS = JSON.parse(localStorage.getItem('reseverOrder'));
                 if(LS !== null){
                     this.inputData  = LS;
+                    //this.historylistAPI()
                 }
                 this.getTeam();
                 this.getSetPriceAPI();
-            }
+            },
         });
-        app.mount("#reseve_detail");
+        const vm = app.mount("#reseve_detail");
     </script>
 
 </body>
