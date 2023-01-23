@@ -1,5 +1,8 @@
 /*------------------- index_header -------------------*/
 
+// #indexforslide.hide {
+//     display: none;
+// }
 
 .indexn_none#indexham_bg {
     display: none;
@@ -58,6 +61,7 @@
                 // display: none;
                 width: 50%;
                 z-index: 225;
+                // height: 100vh;
                 // position: fixed;
 
                 // display: block;
@@ -151,7 +155,7 @@
                         display: block;
                         background-color: $green-1;
                         position: absolute;
-                        top: 42%;
+                        top: 40%;
                         right: -360px;
                         margin: 0 auto;
                         width: 50%;
@@ -1021,3 +1025,15 @@ body {
 // .bg_gray {
 //     background-color: #B91646;
 // }
+
+
+#slideforindex,
+#indexforslide {
+    opacity: 1;
+    transition: opacity 1s;
+
+    &.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

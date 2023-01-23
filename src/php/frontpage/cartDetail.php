@@ -9,7 +9,7 @@
     $MemberID = $_POST["MemberID"];
     $Name = $_POST["name"];
     $Phone = $_POST["phone"];
-    $Uniform = $_POST["uniform"];
+    // $Uniform = $_POST["uniform"];
     
     
 
@@ -18,10 +18,10 @@
     (`Date`,`State`,
     `Payment`, `TotalPrice`,     
     `Points`,`Invoice`,`Email`,`Delivery`,
-    `Address`,`MemberID`,`Name`,`Phone`,`Uniform`)
+    `Address`,`MemberID`,`Name`,`Phone`)
     values(now(),"訂單成立已付款","信用卡",
     ?,?,?,?,
-    "宅配",?,?,?,?,?)';
+    "宅配",?,?,?,?)';
 
 
     // echo $TotalPrice."<br>";
@@ -44,7 +44,7 @@
     $statement->bindValue(6, $MemberID);  
     $statement->bindValue(7, $Name);  
     $statement->bindValue(8, $Phone);  
-    $statement->bindValue(9, $Uniform);  
+    // $statement->bindValue(9, $Uniform);  
     $result = $statement->execute();
     //lastInsertId是insert資料後取得最新的一筆id的編號
     $OrderID = $dbn ->lastInsertId();

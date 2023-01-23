@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    @@include('layout/meta.html', { "title": "私覓SMEET-最新動態", })
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      />
+      <link rel="stylesheet" href="./css/style.css" />
+      <title>最新動態</title>
+    </head>
 
-<head>
-  @@include('layout/meta.html', { "title": "私覓SMEET-最新動態", })
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-</head>
-<!DOCTYPE html>
-<html lang="en">
+    <body>
+      @@include('layout/header_01.html')
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <title>最新動態</title>
-</head>
+      <!-- Navigation-->
+      @@include('layout/banner.html',{ "title":"NEWS",
+      "src":"./img/news_img/news_headbanner.jpg" })
 
-<body>
-  @@include('layout/header_01.html')
-
-  <!-- Navigation-->
-  @@include('layout/banner.html',{
-  "title":"NEWS",
-  "src":"./img/news_img/news_headbanner.jpg"
-  })
-
-  <!-- banner component 
+      <!-- banner component 
       <div class="banner">
         <div class="wrapper">
           <h1 class="green-1 font_family_eng">NEWS</h1>
@@ -37,29 +39,30 @@
         </div>
       </div> -->
 
-  <!-- tab -->
-  <ul>
-    <div class="wrapper tab_container" id="tab_change">
-      <li id="all" @click="changeTab(1)">
-        <a href="">
-          <h4>最新動態</h4>
-          <span>all</span>
-        </a>
-      </li>
-      <li id="ft" @click="changeTab(1)">
-        <a href="">
-          <h4>聯名限定</h4>
-          <span>ft.</span>
-        </a>
-      </li>
-      <li id="sales" @click="changeTab(1)">
-        <a href="">
-          <h4>限時優惠</h4>
-          <span>sales</span>
-        </a>
-      </li>
-    </div>
-  </ul>
+      <!-- tab -->
+      <main id="news">
+        <ul>
+          <div class="wrapper tab_container" id="tab_change">
+            <li id="all" @click="changeTab(1)">
+              <a href="">
+                <h4>最新動態</h4>
+                <span>all</span>
+              </a>
+            </li>
+            <li id="ft" @click="changeTab(1)">
+              <a href="">
+                <h4>聯名限定</h4>
+                <span>ft.</span>
+              </a>
+            </li>
+            <li id="sales" @click="changeTab(1)">
+              <a href="">
+                <h4>限時優惠</h4>
+                <span>sales</span>
+              </a>
+            </li>
+          </div>
+        </ul>
 
   <!-- search-->
   <div class="wrapper search_container">
@@ -74,28 +77,40 @@
   </div>
 
   <!-- content-->
-  <div class="content wrapper">
-    <div class="content_grid">
-      <div class="content_grid_item" v-if="tabID === 1">
-        <a href="./newsDetail.html"></a>
-        <div class="content_hidden">
-          <span class="item_mark font12 Camel-3">最新動態</span>
-          <img src="./img/news_img/news_post1.jpg" alt="" />
+  <div class="app1">
+    <div class="content wrapper">
+      <div class="content_grid">
+        <div class="content_grid_item" v-for="News in NewsList" :key="index">
+          <a href="./newsDetail.html"></a>
+          <div class="content_hidden">
+            <span class="item_mark font12 Camel-3">
+              <!-- 最新動態 -->
+              {{News.Category}}
+            </span>
+            <img :src="News.IMG" alt="" />
+
+          </div>
+          <div class="text">
+            <p class="font12">
+              <!-- 2022/11/25 -->
+              {{News.Date}}
+            </p>
+            <h6 class="green-1">
+              <!-- 冬季暖心 -->
+              {{News.Title}}
+            </h6>
+            <p class="news_item">
+              <!-- 鮟鱇魚富含膠原蛋白且低脂肪熱量，味道
+              鮮甜淡雅，是健康又美味的海水魚 -->
+              {{News.Article}}
+            </p>
+          </div>
+          <button class="btn_more">
+            <a href="./newsDetail.html">more</a>
+            <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+          </button>
         </div>
-        <div class="text">
-          <p class="font12">2022/11/25</p>
-          <h6 class="green-1">冬季暖心</h6>
-          <p class="news_item">
-            鮟鱇魚富含膠原蛋白且低脂肪熱量，味道
-            鮮甜淡雅，是健康又美味的海水魚
-          </p>
-        </div>
-        <button class="btn_more">
-          <a href="./newsDetail.html">more</a>
-          <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
-        </button>
-      </div>
-      <div class="content_grid_item" v-if="tabID === 2">
+        <!-- <div class="content_grid_item" >
         <div class="content_hidden">
           <span class="item_mark font12 Camel-3 diff">聯名限定</span>
           <img src="./img/news_img/news_post2.jpg" alt="" />
@@ -185,6 +200,7 @@
           <a href="./newsDetail.html">more</a>
           <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
         </button>
+      </div> -->
       </div>
     </div>
   </div>
@@ -198,51 +214,89 @@
       <li><a href="#" class="Camel-3 font_light">4</a></li>
     </ul>
   </div>
-  <button id="news_btn">回傳資料</button>
+  <!-- <button id="news_btn">回傳資料</button> -->
   @@include('layout/serve.html')
   @@include('layout/footer.html')
 </body>
 
 <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
-<script>
-  $("#news_btn").click(function () {
-    // console.log("aaa");
-    news_ajax() //在這邊回傳
-  })
-
-  function news_ajax() {
-    // console.log("www");
-    $.ajax({
-      method: "get",
-      url: "php/frontpage/news.php",
-      dataType: "text",
-      success: function (response) {
-        console.log(response);
-      },
-      error: function (exception) {
-        alert("發生錯誤: " + exception.status);
-      }
-    })
-  }
-
-  $(function () {
-    var len = 50; // 超過50個字以"..."取代
-    $(".news_item").each(function (i) {
-      // console.log($(this).text());
-      if ($(this).text().length > len) {
-        $(this).attr("title", $(this).text());
-        var text =
-          $(this)
-            .text()
-            .substring(0, len - 1) + "...";
-        $(this).text(text);
-      }
-    });
-  });
-</script>
-
 <script src="./js/vender/Vue/vue.global.js"></script>
+
 <script>
+  let app1 = Vue.createApp({
+    data() {
+      return {
+        NewsList: [],
+      };
+    },
+    created() {
+      this.newsrender();
+    },
+    methods: {
+      newsrender() {
+        let _this = this;
+
+        $.ajax({
+          method: "POST",
+          url: "php/frontpage/news.php",
+          data: {},
+
+          dataType: "json",
+          success: function (response) {
+            console.log(response);
+            response.forEach((element) => { //每個資料的名字
+              element.Date = element.Date.substr(0, 10);
+              _this.NewsList.push(element);
+            });
+          },
+          error: function (exception) {
+            alert("發生錯誤: " + exception.status);
+          },
+        });
+
+      },
+    },
+  });
+  app1.mount(".app1");
+</script>
+<script>
+  // $("#news_btn").click(function () {
+  //   // console.log("aaa");
+  //   news_ajax() //在這邊回傳
+  // })
+
+  // function news_ajax() {
+  //   // console.log("www");
+  //   $.ajax({
+  //     method: "get",
+  //     url: "php/frontpage/news.php",
+  //     dataType: "text",
+  //     success: function (response) {
+  //       console.log(response);
+  //     },
+  //     error: function (exception) {
+  //       alert("發生錯誤: " + exception.status);
+  //     }
+  //   })
+  // }
+
+      $(function () {
+        var len = 50; // 超過50個字以"..."取代
+        $(".news_item").each(function (i) {
+          // console.log($(this).text());
+          if ($(this).text().length > len) {
+            $(this).attr("title", $(this).text());
+            var text =
+              $(this)
+                .text()
+                .substring(0, len - 1) + "...";
+            $(this).text(text);
+          }
+        });
+      });
+    </script>
+
+<!-- <script>
 
 
   const app = Vue.createApp({
@@ -255,26 +309,60 @@
           }
         ],
 
-        //回傳tab的id
-        tabID: {
-          id: 1,
-        }
+            //回傳tab的id
+            tabID: {
+              id: 1,
+            },
 
-      }
+            search: "",
+          };
+        },
 
-    },
+        methods: {
+          //切換頁籤
+          changeTab(val) {
+            this.tabID += val;
+          },
 
-    methods: {
-      //切換頁籤
-      changeTab(val) {
-        this.tabID += val;
+          //從資料庫取得所有news的資訊
+          newsAPI() {
+            // console.log("www");
+            $.ajax({
+              method: "get",
+              url: "php/frontpage/news.php",
+              dataType: "text",
+              success: function (response) {
+                console.log(response);
+              },
+              error: function (exception) {
+                alert("發生錯誤: " + exception.status);
+              },
+            });
+          },
+        },
 
-      }
-    }
-  });
+        //search的API
+        keyWordAPI() {
+          let that = this;
+          $.ajax({
+            method: "POST",
+            url: "php/frontpage/keyWord.php",
+            data: {
+              Search: that.search,
+            },
+            dataType: "text",
+            success: function (response) {
+              console.log(`ttt`);
+            },
+            error: function (exception) {
+              console.log("發生錯誤: " + exception.status);
+            },
+          });
+        },
+      });
 
   app.mount("#tab_change");
-</script>
+</script> -->
 
 </html>
 

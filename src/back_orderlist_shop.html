@@ -1,199 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>商城訂單管理</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- ============== 缺搜尋BAR ============== -->
     <div class="back_orderlist_shop fulid_wrapper">
-        <div class="backwrapper">
-            <header>
-                @@include('layout/back_header.html')
-            </header>
+      <div class="backwrapper" id="orderShop">
+        <header>@@include('layout/back_header.html')</header>
 
-            <div class="container">
-                <main class="right_content">
-                    <section class="section1">
-                        <!-- form -->
-                        <div class="back_from">
-                            
-                            <div class="back_fromTitle">
-                                <h4 class="h4 green-1">商城訂單管理</h4>
-                                <div class="search">
-                                    <div class="search_container_item">
-                                        <input type="text" placeholder="訂單查詢..."/>
-                                    </div>
-                                    <div class="search_container_item">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="container">
+          <main class="right_content">
+            <section class="section1">
+              <!-- form -->
+              <div class="back_from">
+                <div class="back_fromTitle">
+                  <h4 class="h4 green-1">商城訂單管理</h4>
+                  <div class="search">
+                    <div class="search_container_item">
+                      <input type="text" placeholder="訂單查詢..." />
+                    </div>
+                    <div class="search_container_item">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                  </div>
+                </div>
 
-                            <div class="back_from_wrapper">
-    
-                                    <!-- row-1 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">訂單編號</div>
-                                    <div class="grid_item">日期</div>
-                                    <div class="grid_item">會員編號</div>
-                                    <div class="grid_item">金額</div>
-                                    <div class="grid_item">取貨方式</div>
-                                    <div class="grid_item">訂單狀態</div>
-                                </div>
+                <div class="back_from_wrapper">
+                  <!-- row-1 -->
+                  <div class="grid_container">
+                    <div class="grid_item">訂單編號</div>
+                    <div class="grid_item">日期</div>
+                    <div class="grid_item">會員編號</div>
+                    <div class="grid_item">金額</div>
+                    <div class="grid_item">取貨方式</div>
+                    <div class="grid_item">訂單狀態</div>
+                  </div>
 
-                                <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
+                  <!-- row-2 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
 
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
+                  <!-- row-3 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
 
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
+                  <!-- row-4 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
 
-                                <!-- row-5 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
+                  <!-- row-5 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
 
-                                <!-- row-6 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
+                  <!-- row-6 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
 
-                                <!-- row-7 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <!-- row-8 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
+                  <!-- row-7 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
 
-                                <!-- row-9 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
+                  <!-- row-8 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
 
-                                <!-- row-10 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">TG1311215</div>
-                                    <div class="grid_item">2022/01/13</div>
-                                    <div class="grid_item">11342</div>
-                                    <div class="grid_item">$12,000</div>
-                                    <div class="grid_item">白貓宅配</div>
-                                    <div class="grid_item">
-                                        <select name="" id="">
-                                            <option value="">訂單成立未付款</option>
-                                            <option value="">訂單成立已付款</option>
-                                            <option value="">訂單封存</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div><!-- wrapper -->
-                        </div><!-- back_from -->
-                        
-                        <!-- 頁碼-->
-                        <!-- <div class="page">
+                  <!-- row-9 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- row-10 -->
+                  <div class="grid_container">
+                    <div class="grid_item checked">TG1311215</div>
+                    <div class="grid_item">2022/01/13</div>
+                    <div class="grid_item">11342</div>
+                    <div class="grid_item">$12,000</div>
+                    <div class="grid_item">白貓宅配</div>
+                    <div class="grid_item">
+                      <select name="" id="">
+                        <option value="">訂單成立未付款</option>
+                        <option value="">訂單成立已付款</option>
+                        <option value="">訂單封存</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- wrapper -->
+              </div>
+              <!-- back_from -->
+
+              <!-- 頁碼-->
+              <!-- <div class="page">
                             <ul class="page_ul">
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
@@ -201,220 +202,272 @@
                             <li><a href="#">4</a></li>
                             </ul>
                         </div> -->
-                    </section><!-- section1 -->
+            </section>
+            <!-- section1 -->
 
+            <!-- 燈箱 -->
+            <div class="backShopOderList_container fulid_wrapper none">
+              <div class="wrapper">
+                <header class="oderList_header">
+                  <h4 class="title font16">訂單明細</h4>
+                  <span class="popUpClose" id="x_Close"
+                    ><i class="fa-solid fa-xmark"></i
+                  ></span>
+                </header>
+                <div class="infoType">
+                  <p class="font16">
+                    訂單類別&emsp;:&emsp;<span class="font16 red">商城</span>
+                  </p>
+                  <p class="font16">
+                    訂單編號&emsp;:&emsp;<span class="font16">TG1311215</span>
+                  </p>
+                </div>
 
-
-                    <!-- 燈箱 -->
-                    <div class="backShopOderList_container fulid_wrapper none">
-                        
-                        <div class="wrapper">
-
-                            <header class="oderList_header">
-                                <h4 class="title font16">訂單明細</h4>
-                                <span class="popUpClose" id="x_Close"><i class="fa-solid fa-xmark"></i></span>
-                            </header>
-                            <div class="infoType">
-                                <p class="font16">訂單類別&emsp;:&emsp;<span class="font16 red">商城</span></p>
-                                <p class="font16">訂單編號&emsp;:&emsp;<span class="font16">TG1311215</span></p>
-                            </div>
-
-                            <article class="meal_wrap">
-                                <div class="meal_container">
-
-                                    <!-- 標題 -->
-                                    <div class="infoContent_title">
-                                        <p class="item font14">類型</p>
-                                        <p class="item font14">品名</p>
-                                        <p class="item font14">數量</p>
-                                        <p class="item font14">小計</p>
-                                    </div>
-
-
-                                    <!-- 餐點 -->
-                                    <div class="meal_cate">
-
-                                        <!-- 餐點類型 -->
-                                        <p class="item gray font12">湯物</p>
-
-                                        <!-- 餐點品名 -->
-                                        <div class="meal_content font16">
-                                            <p class="item gray font12">燻鮭魚番茄濃湯</p>
-                                            <p class="item gray font12">京都雪藏干貝湯</p>
-                                        </div>
-
-                                        <!-- 餐點數量 -->
-                                        <div class="meal_qty">
-                                            <p class="item gray font12">x 3</p>
-                                            <p class="item gray font12">x 3</p>
-                                        </div>
-
-                                        <!-- 餐點金額 -->
-                                        <div class="meal_sum">
-                                            <p class="item gray font12">$&thinsp;320</p>
-                                            <p class="item gray font12">$&thinsp;1320</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- 餐點 -->
-                                    <div class="meal_cate">
-
-                                        <!-- 餐點類型 -->
-                                        <p class="item gray font12">主食</p>
-
-                                        <!-- 餐點品名 -->
-                                        <div class="meal_content">
-                                            <p class="item gray font12">嫩肩松坂豬佐松露蕈菇</p>
-                                            <p class="item gray font12">富士山和風菓茶</p>
-                                        </div>
-
-                                        <!-- 餐點數量 -->
-                                        <div class="meal_qty">
-                                            <p class="item gray font12">x 3</p>
-                                            <p class="item gray font12">x 3</p>
-                                        </div>
-
-                                        <!-- 餐點金額 -->
-                                        <div class="meal_sum">
-                                            <p class="item gray font12">$&thinsp;11200</p>
-                                            <p class="item gray font12">$&thinsp;15000</p>
-                                        </div>
-
-                                    </div>
-
-                                    <!-- 餐點 -->
-                                    <div class="meal_cate">
-
-                                        <!-- 餐點類型 -->
-                                        <p class="item gray font12">甜品</p>
-
-                                        <!-- 餐點品名 -->
-                                        <div class="meal_content font16">
-                                            <p class="item gray font12">富士山和風菓茶</p>
-                                            <p class="item gray font12">日暈雙月奶蓋</p>
-                                        </div>
-
-                                        <!-- 餐點數量 -->
-                                        <div class="meal_qty">
-                                            <p class="item gray font12">x 3</p>
-                                            <p class="item gray font12">x 3</p>
-                                        </div>
-
-                                        <!-- 餐點金額 -->
-                                        <div class="meal_sum">
-                                            <p class="item gray font12">$&thinsp;2500</p>
-                                            <p class="item gray font12">$&thinsp;1500</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- 回餽點數 -->
-                                    <div class="meal_point">
-
-                                        <!-- 佔位 -->
-                                        <p class="item"></p>
-
-                                        <!-- 回餽點數 name -->
-                                        <div class="point_content font16">
-                                            <p class="item gray font12">回餽點數</p>
-                                        </div>
-
-                                        <!-- 佔位 -->
-                                        <p class="item"></p>
-
-                                        <!-- 點數金額 -->
-                                        <div class="point_sum">
-                                            <p class="item gray font12">$&thinsp;100</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="meal_total">
-                                        <!-- total name -->
-                                        <div class="point_content font16">
-                                            <p class="item gray font12">Total</p>
-                                        </div>
-
-                                        <!-- 佔位 -->
-                                        <p class="item"></p>
-
-                                        <!-- 佔位 -->
-                                        <p class="item"></p>
-
-                                        <!-- total金額 -->
-                                        <div class="point_sum">
-                                            <p class="item gray font12">$&thinsp;76543</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- 訂單資訊 -->
-                                <div class="orderInfo">
-                                    <div class="orderInfo_title">
-                                        <p>訂單資訊</p>
-                                    </div>
-
-                                    <div class="orderInfo_container">
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">訂購人</div>
-                                            <input class="item_content green-2 font14" type="text" value="聯繫電話">
-                                        </div>
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">聯繫電話</div>
-                                            <input class="item_content green-2 font14" type="text" value="0919225578">
-                                        </div>
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">E-mail</div>
-                                            <input class="item_content green-2 font14" type="text" value="hsuhaowen_charming@gmail.com">
-                                        </div>
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">地址</div>
-                                            <input class="item_content green-2 font14" type="text" value="台北市中山區南京東路二段219號4F">
-                                        </div>
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">配送方式</div>
-                                            <p class="item_content green-2 font14">超商取貨（7-11）</p>
-                                        </div>
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">取貨門市</div>
-                                            <p class="item_content green-2 font14">幸福門市</p>
-                                        </div>
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">發票載具</div>
-                                            <p class="item_content green-2 font14">/ FG2D8Z</p>
-                                        </div>
-
-
-                                        <div class="item_group">
-                                            <div class="item_title green-2 font14">付款方式</div>
-                                            <p class="item_content green-2 font14">信用卡一次付清</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
+                <article class="meal_wrap">
+                  <div class="meal_container">
+                    <!-- 標題 -->
+                    <div class="infoContent_title">
+                      <p class="item font14">類型</p>
+                      <p class="item font14">品名</p>
+                      <p class="item font14">數量</p>
+                      <p class="item font14">小計</p>
                     </div>
-                </main>
-                @@include('layout/back_footer.html')
-            </div><!-- container -->
+
+                    <!-- 餐點 -->
+                    <div class="meal_cate">
+                      <!-- 餐點類型 -->
+                      <p class="item gray font12">湯物</p>
+
+                      <!-- 餐點品名 -->
+                      <div class="meal_content font16">
+                        <p class="item gray font12">燻鮭魚番茄濃湯</p>
+                        <p class="item gray font12">京都雪藏干貝湯</p>
+                      </div>
+
+                      <!-- 餐點數量 -->
+                      <div class="meal_qty">
+                        <p class="item gray font12">x 3</p>
+                        <p class="item gray font12">x 3</p>
+                      </div>
+
+                      <!-- 餐點金額 -->
+                      <div class="meal_sum">
+                        <p class="item gray font12">$&thinsp;320</p>
+                        <p class="item gray font12">$&thinsp;1320</p>
+                      </div>
+                    </div>
+
+                    <!-- 餐點 -->
+                    <div class="meal_cate">
+                      <!-- 餐點類型 -->
+                      <p class="item gray font12">主食</p>
+
+                      <!-- 餐點品名 -->
+                      <div class="meal_content">
+                        <p class="item gray font12">嫩肩松坂豬佐松露蕈菇</p>
+                        <p class="item gray font12">富士山和風菓茶</p>
+                      </div>
+
+                      <!-- 餐點數量 -->
+                      <div class="meal_qty">
+                        <p class="item gray font12">x 3</p>
+                        <p class="item gray font12">x 3</p>
+                      </div>
+
+                      <!-- 餐點金額 -->
+                      <div class="meal_sum">
+                        <p class="item gray font12">$&thinsp;11200</p>
+                        <p class="item gray font12">$&thinsp;15000</p>
+                      </div>
+                    </div>
+
+                    <!-- 餐點 -->
+                    <div class="meal_cate">
+                      <!-- 餐點類型 -->
+                      <p class="item gray font12">甜品</p>
+
+                      <!-- 餐點品名 -->
+                      <div class="meal_content font16">
+                        <p class="item gray font12">富士山和風菓茶</p>
+                        <p class="item gray font12">日暈雙月奶蓋</p>
+                      </div>
+
+                      <!-- 餐點數量 -->
+                      <div class="meal_qty">
+                        <p class="item gray font12">x 3</p>
+                        <p class="item gray font12">x 3</p>
+                      </div>
+
+                      <!-- 餐點金額 -->
+                      <div class="meal_sum">
+                        <p class="item gray font12">$&thinsp;2500</p>
+                        <p class="item gray font12">$&thinsp;1500</p>
+                      </div>
+                    </div>
+
+                    <!-- 回餽點數 -->
+                    <div class="meal_point">
+                      <!-- 佔位 -->
+                      <p class="item"></p>
+
+                      <!-- 回餽點數 name -->
+                      <div class="point_content font16">
+                        <p class="item gray font12">回餽點數</p>
+                      </div>
+
+                      <!-- 佔位 -->
+                      <p class="item"></p>
+
+                      <!-- 點數金額 -->
+                      <div class="point_sum">
+                        <p class="item gray font12">$&thinsp;100</p>
+                      </div>
+                    </div>
+
+                    <div class="meal_total">
+                      <!-- total name -->
+                      <div class="point_content font16">
+                        <p class="item gray font12">Total</p>
+                      </div>
+
+                      <!-- 佔位 -->
+                      <p class="item"></p>
+
+                      <!-- 佔位 -->
+                      <p class="item"></p>
+
+                      <!-- total金額 -->
+                      <div class="point_sum">
+                        <p class="item gray font12">$&thinsp;76543</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 訂單資訊 -->
+                  <div class="orderInfo">
+                    <div class="orderInfo_title">
+                      <p>訂單資訊</p>
+                    </div>
+
+                    <div class="orderInfo_container">
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">訂購人</div>
+                        <input
+                          class="item_content green-2 font14"
+                          type="text"
+                          value="聯繫電話"
+                        />
+                      </div>
+
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">聯繫電話</div>
+                        <input
+                          class="item_content green-2 font14"
+                          type="text"
+                          value="0919225578"
+                        />
+                      </div>
+
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">E-mail</div>
+                        <input
+                          class="item_content green-2 font14"
+                          type="text"
+                          value="hsuhaowen_charming@gmail.com"
+                        />
+                      </div>
+
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">地址</div>
+                        <input
+                          class="item_content green-2 font14"
+                          type="text"
+                          value="台北市中山區南京東路二段219號4F"
+                        />
+                      </div>
+
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">配送方式</div>
+                        <p class="item_content green-2 font14">
+                          超商取貨（7-11）
+                        </p>
+                      </div>
+
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">取貨門市</div>
+                        <p class="item_content green-2 font14">幸福門市</p>
+                      </div>
+
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">發票載具</div>
+                        <p class="item_content green-2 font14">/ FG2D8Z</p>
+                      </div>
+
+                      <div class="item_group">
+                        <div class="item_title green-2 font14">付款方式</div>
+                        <p class="item_content green-2 font14">
+                          信用卡一次付清
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </main>
+          @@include('layout/back_footer.html')
         </div>
+        <!-- container -->
+      </div>
     </div>
 
-    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
+    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+    <!-- JQ -->
     <script
-        type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><!-- icon_cdn -->
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <!-- icon_cdn -->
     <script
-        nomodule="nomodule"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+      nomodule="nomodule"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <!-- icon_cdn -->
+    <script src="./js/back_page/back_nav/back_nav.js"></script>
+    <!-- 導覽列 -->
+    <script src="js/vender/Vue/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            apiData:[],
+            shopDetail:[],
+          };
+        },
+        computed: {},
+        methods:{
+            getAllMallOrderData(){
+                fetch('php/backpage/getAllMallOrderData.php')
+                .then(response =>{
+                    return  response.json()
+                })
+                .then( datalist =>{
+                  datalist.forEach(el => {
+                    this.apiData.push(el)
+                  });
+                }).catch(err=>{
+                    console.log(err)
+                })
+            }
 
-</body>
+        },
+        mounted(){
+
+        },
+
+      });
+
+      app.mount("#orderShop");
+    </script>
+  </body>
 </html>
