@@ -74,28 +74,40 @@
   </div>
 
   <!-- content-->
-  <div class="content wrapper">
-    <div class="content_grid">
-      <div class="content_grid_item" v-if="tabID === 1">
-        <a href="./newsDetail.html"></a>
-        <div class="content_hidden">
-          <span class="item_mark font12 Camel-3">最新動態</span>
-          <img src="./img/news_img/news_post1.jpg" alt="" />
+  <div class="app1">
+    <div class="content wrapper">
+      <div class="content_grid">
+        <div class="content_grid_item" v-for="News in NewsList" :key="index">
+          <a href="./newsDetail.html"></a>
+          <div class="content_hidden">
+            <span class="item_mark font12 Camel-3">
+              <!-- 最新動態 -->
+              {{News.Category}}
+            </span>
+            <img :src="News.IMG" alt="" />
+
+          </div>
+          <div class="text">
+            <p class="font12">
+              <!-- 2022/11/25 -->
+              {{News.Date}}
+            </p>
+            <h6 class="green-1">
+              <!-- 冬季暖心 -->
+              {{News.Title}}
+            </h6>
+            <p class="news_item">
+              <!-- 鮟鱇魚富含膠原蛋白且低脂肪熱量，味道
+              鮮甜淡雅，是健康又美味的海水魚 -->
+              {{News.Article}}
+            </p>
+          </div>
+          <button class="btn_more">
+            <a href="./newsDetail.html">more</a>
+            <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
+          </button>
         </div>
-        <div class="text">
-          <p class="font12">2022/11/25</p>
-          <h6 class="green-1">冬季暖心</h6>
-          <p class="news_item">
-            鮟鱇魚富含膠原蛋白且低脂肪熱量，味道
-            鮮甜淡雅，是健康又美味的海水魚
-          </p>
-        </div>
-        <button class="btn_more">
-          <a href="./newsDetail.html">more</a>
-          <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
-        </button>
-      </div>
-      <div class="content_grid_item" v-if="tabID === 2">
+        <!-- <div class="content_grid_item" >
         <div class="content_hidden">
           <span class="item_mark font12 Camel-3 diff">聯名限定</span>
           <img src="./img/news_img/news_post2.jpg" alt="" />
@@ -185,6 +197,7 @@
           <a href="./newsDetail.html">more</a>
           <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
         </button>
+      </div> -->
       </div>
     </div>
   </div>
@@ -198,32 +211,71 @@
       <li><a href="#" class="Camel-3 font_light">4</a></li>
     </ul>
   </div>
-  <button id="news_btn">回傳資料</button>
+  <!-- <button id="news_btn">回傳資料</button> -->
   @@include('layout/serve.html')
   @@include('layout/footer.html')
 </body>
 
 <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
-<script>
-  $("#news_btn").click(function () {
-    // console.log("aaa");
-    news_ajax() //在這邊回傳
-  })
+<script src="./js/vender/Vue/vue.global.js"></script>
 
-  function news_ajax() {
-    // console.log("www");
-    $.ajax({
-      method: "get",
-      url: "php/frontpage/news.php",
-      dataType: "text",
-      success: function (response) {
-        console.log(response);
+<script>
+  let app1 = Vue.createApp({
+    data() {
+      return {
+        NewsList: [],
+      };
+    },
+    created() {
+      this.newsrender();
+    },
+    methods: {
+      newsrender() {
+        let _this = this;
+
+        $.ajax({
+          method: "POST",
+          url: "php/frontpage/news.php",
+          data: {},
+
+          dataType: "json",
+          success: function (response) {
+            console.log(response);
+            response.forEach((element) => { //每個資料的名字
+              element.Date = element.Date.substr(0, 10);
+              _this.NewsList.push(element);
+            });
+          },
+          error: function (exception) {
+            alert("發生錯誤: " + exception.status);
+          },
+        });
+
       },
-      error: function (exception) {
-        alert("發生錯誤: " + exception.status);
-      }
-    })
-  }
+    },
+  });
+  app1.mount(".app1");
+</script>
+<script>
+  // $("#news_btn").click(function () {
+  //   // console.log("aaa");
+  //   news_ajax() //在這邊回傳
+  // })
+
+  // function news_ajax() {
+  //   // console.log("www");
+  //   $.ajax({
+  //     method: "get",
+  //     url: "php/frontpage/news.php",
+  //     dataType: "text",
+  //     success: function (response) {
+  //       console.log(response);
+  //     },
+  //     error: function (exception) {
+  //       alert("發生錯誤: " + exception.status);
+  //     }
+  //   })
+  // }
 
   $(function () {
     var len = 50; // 超過50個字以"..."取代
@@ -241,8 +293,7 @@
   });
 </script>
 
-<script src="./js/vender/Vue/vue.global.js"></script>
-<script>
+<!-- <script>
 
 
   const app = Vue.createApp({
@@ -274,7 +325,7 @@
   });
 
   app.mount("#tab_change");
-</script>
+</script> -->
 
 </html>
 
