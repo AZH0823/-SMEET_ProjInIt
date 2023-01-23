@@ -441,13 +441,20 @@
                     text-decoration: none;
                     color: #1d0101;
                     @include pad() {
-                        padding-left: 5%;
+                        padding-left: 3%;
+                    }
+                    @include mobile(){
+                        padding-left: 0;
                     }
                         p{
                             line-height: 30px;
-                            padding: 15px 0;
+                            padding: 15px 20px;
                             @include pad() {
                                 margin: 0 auto;
+                                padding: 15px 10px;
+                            }
+                            @include mobile(){
+                                padding: 15px 0;
                             }
                         }
                     }

@@ -179,7 +179,7 @@
                                              <label for="order_note" class="orderL note">備註</label>
                                              <textarea name="" id="order_note" ref="order_note"  :value="popOnMsg.notes"  :disabled="!popOnMsg.isEdit"></textarea>
                                          </div>
-                                         <div class="save_btn" style="margin: 10px auto;" @click="popSave">儲存</div>
+                                         <div class="save_btn" style="margin: 10px auto;" @click="popSave" v-if="popOnMsg.isEdit">儲存</div>
                                      </div>
                                  </div>
                              </div>
@@ -297,8 +297,8 @@
 
             // 改變訂單明細
             UpadteOrderInfo(popMsg){
-                console.log(popMsg)
-                console.log(popMsg.OrderId,popMsg.Name,popMsg.Phone,popMsg.Email,popMsg.Address,popMsg.notes)
+                // console.log(popMsg)
+                // console.log(popMsg.OrderId,popMsg.Name,popMsg.Phone,popMsg.Email,popMsg.Address,popMsg.notes)
                 $.ajax({
                     method: "POST",
                     url: "php/backpage/updateOrderCondition.php",
@@ -313,12 +313,14 @@
                     },
                     dataType: "text",
                     success: function (response) {
-                        console.log(response)
+                        // console.log(response)
 
                         // 將訂單新資料放回來Vue API
                         if(response =='Y'){
+                            // console.log(`UpadteOrderInfo Sucessful`);
                             
-                            
+                        }else{
+                            console.log(`其他錯誤`);
                         }
                     },
                     error: function (exception) {
