@@ -3,8 +3,7 @@
 
     
     //建立SQL
-    $sql = "SELECT * FROM QA
-    WHERE `Category` ='預約流程' and `Condition` = 1 ";
+    $sql = "SELECT * FROM QA";
 
 
     // $sql = "INSERT INTO Contact (ReleaseDate,Name, Phone, Email, Category, SuggesContent, Condition)value (now(),'{$Name}','{$Phone}','{$Mail}','{$Category}','{$SuggesContent}',1)";
