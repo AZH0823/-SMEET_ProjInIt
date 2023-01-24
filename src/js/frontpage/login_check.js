@@ -14,6 +14,8 @@ function login_check(){
                 // 會員icon顯示
                 let user_pop = document.querySelector('.user_pop');
                 user_pop.classList.remove('none');
+                // 手機版登入變登出
+                log_ham.innerHTML = "登出";
             }              
         },
         error: function(exception) {

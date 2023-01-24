@@ -1,22 +1,18 @@
-.about_banner{
-    
-    h1{
-        margin-left: 80px;
-        color: #0f3d3e;
-        @include pad {
-            margin-left: 27px;
-        }   
+.anchor {
+    position: fixed;
+    right: 0;
+    top: 200px;
+    a {
+        display: block;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 14px;
+        color: #000;
+        margin-bottom: 10px;
     }
     
-    img{
-        width: 100%;
-        height: 320px;
-        object-fit: cover;
-        @include pad {
-            width: 100%;
-            height: 200px;
-        }
-    }
 }
 
 .about {

@@ -45,7 +45,7 @@
                     </div>
                     <div class="grid_item">
                         <!-- 第一次體驗感覺很有尊榮... -->
-                        {{contact.SuggesContent}}
+                        {{contact.SuggestContent}}
                     </div>
                     <div class="grid_item gray">
                         <!-- 未回覆 -->
@@ -118,26 +118,7 @@
     <!-- icon_cdn -->
     <script src="./js/back_page/back_nav/back_nav.js"></script>
     <!-- 導覽列 -->
-    <script>
-      const switchBtn = document.querySelectorAll(".switch_btn");
-      const sliderContent = document.querySelectorAll(".slider_content");
-      // console.log(switchBtn);
 
-      for (let i = 0; i < switchBtn.length; i++) {
-        // console.log(i)
-        switchBtn[i].addEventListener("click", function () {
-          console.log(this.checked); // ture /false
-          console.log(i);
-          console.log(this);
-
-          if (this.checked == true) {
-            $(this).closest("label").find(".slider_content").text("啟用");
-          } else {
-            $(this).closest("label").find(".slider_content").text("停權");
-          }
-        });
-      }
-    </script>
     <script>
       let app1 = Vue.createApp({
         data() {
@@ -161,7 +142,7 @@
               success: function (response) {
                 // console.log(response);
                 response.forEach((element) => {
-                  console.log(element);
+                  // console.log(element);
                     element.ReleaseDate = element.ReleaseDate.substr(0,10)
                     if(element.Condition == 1){
                         element.Condition = "未回覆"
@@ -170,18 +151,13 @@
                         element.Condition = "已回覆"
                     }
                     if(
-                        element.SuggesContent.length <= 10){
+                        element.SuggestContent.length <= 10){
                         _this.Contactlist.push(element);
 
                         }else{
-                        element.SuggesContent = element.SuggesContent.substr(0,11) +'...'
+                        element.SuggestContent = element.SuggestContent.substr(0,11) +'...'
                         _this.Contactlist.push(element);
                         }   
-                   
-                   
-                    
-                    
-                  
                 });
               },
               error: function (exception) {

@@ -42,7 +42,7 @@
     // 單筆訂單明細
 
     $OderListDetailSQL ="SELECT O.OrderID,DishID,DishName,DTName,qty,price FROM OrdersDetail O
-    JOIN (SELECT d.ID ,D.`Type`, d.`Name`as DishName ,dt.`Name` as DTName 
+    JOIN (SELECT d.ID ,d.`Type`, d.`Name`as DishName ,dt.`Name` as DTName 
         FROM Dish d JOIN DishsType dt
           ON d.Type = dt.ID) as D
     ON O.DishID = D.ID 
@@ -54,7 +54,7 @@
     $Searhstatement -> execute();
 
     $result = $Searhstatement -> fetchAll();
-
+    // echo json_encode($result);
     $arr=array();
     foreach($result as $newData){
       $arr[] = array(

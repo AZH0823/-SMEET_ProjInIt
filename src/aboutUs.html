@@ -12,15 +12,21 @@
     />
   </head>
   <body>
-    <div class="app1">
-      @@include('layout/header_01.html')
-
-      <!-- banner -->
-      @@include('layout/banner.html',{ "title":"ABOUT",
+    @@include('layout/header_01.html')
+    @@include('layout/banner.html',{ "title":"ABOUT",
       "src":"./img/about_img/about_headbanner.jpg" })
+    <div class="app1">
 
+      <!-- anchor -->
+      <div class="anchor">
+        <a href="#about">關於私覓</a>
+        <a href="#serve">專業服務</a>
+        <a href="#contact">聯絡我們</a>
+        <a href="#google-maps">服務據點</a>
+        <a href="#qanda">常見問題</a>
+      </div>
       <!-- about -->
-      <div class="about">
+      <div class="about" id="about">
         <div class="about_title">
           <h2 class="green-1 font_family_tc font_bold">關於私覓</h2>
           <div class="border"></div>
@@ -86,7 +92,7 @@
         </div>
       </div>
       <!-- serve -->
-      <div class="serve">
+      <div class="serve" id="serve">
         <div class="serve_title">
           <h2 class="green-1 font_family_tc font_bold">專業服務</h2>
           <div class="border"></div>
@@ -107,7 +113,7 @@
         </div>
       </div>
       <!-- contact -->
-      <div class="contact">
+      <div class="contact" id="contact">
         <div class="contact_title">
           <h2 class="green-1 font_family_tc font_bold">聯繫我們</h2>
           <div class="border"></div>
@@ -165,7 +171,7 @@
         </div>
       </div>
       <!-- google-maps -->
-      <div class="google-maps">
+      <div class="google-maps" id="google-maps">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12965.837849861573!2d139.7175983!3d35.6656871!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb07770ca3dffe3d!2sJINBO%20MINAMI%20AOYAMA!5e0!3m2!1szh-TW!2stw!4v1671393498492!5m2!1szh-TW!2stw"
           width="100%"
@@ -209,10 +215,6 @@
       @@include('layout/serve.html') @@include('layout/footer.html')
     </div>
     <script src="./js/vender/Vue/vue.global.js"></script>
-    <!-- <script
-      src="./js/vender/calender/aboutus.js"
-      type="text/javascript"
-    ></script> -->
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
 
     <script>
@@ -236,7 +238,6 @@
             }
             
           },
-
           aboutajax() {
             let contact_name = document.getElementById("contact_name");
             let contact_phone = document.getElementById("contact_phone");
@@ -253,7 +254,7 @@
                 Phone: contact_phone.value,
                 Mail: contact_mail.value,
                 Category: contact_type.value,
-                SuggesContent: contact_text.value,
+                SuggestContent: contact_text.value,
               },
 
               dataType: "text",
@@ -261,7 +262,7 @@
                 console.log(response);
               },
               error: function (exception) {
-                alert("發生錯誤: " + exception.status);
+                alert("傳送成功: " + exception.status);
               },
             });
           },

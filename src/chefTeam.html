@@ -29,36 +29,38 @@
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
-            <div class="fulid_wrapper">
-                <div class="_chef_tab ">
+            <div class="fulid_wrapper app1">
+                <div class="_chef_tab" 
+                v-for="(item, index) in chef_tab"
+                :key="index"
+                >
                     <!------------------------- 廚師長1 ------------------------->
                     <input id="chef1" type="radio" name="chef" checked="checked"/>
-                    <label for="chef1">立雁杉廚師長</label>
-                    <div class="_chef_content">
+
+                    <label for="chef1">
+                        <!-- 立雁杉廚師長 -->
+                        {{item.LederName}}
+                    </label>
+                    
+                    <div class="_chef_content " v-if="chef_data === 'chef1'">
                         <div class="_chef_line"></div>
                         <div class="_chef_top">
                             <div class="part1">
                                 <div class="part1_img">
-                                    <img src="./img/chefteam_img/chef.png">
+                                    <!-- <img src="./img/chefteam_img/chef1.png"> -->
+                                    <img :src="item.IMG" alt=""/>
+                                    
                                 </div>
                                 <div class="part1_info">
                                     <h2 class="font_family_eng green-1 font_bold">01</h2>
                                     <h4 class="font_family_tc font_bold green-1">立雁杉 廚師長</h4>
                                     <div class="text1">
                                         <h6>
-                                            人稱，平成末的日式料理專家<br>
-                                            在冷熱料理中輕鬆切換，變化中不失和諧感<br>
-                                            經典懷石風味的割烹料理彷如露天寫生一般<br>
-                                            充滿藝術的氣息，一口一口的念念不忘，<br>
-                                            打斷你對日式料理的初想，給你獨一無二的念想
+                                            {{item.LederProfile}}
                                         </h6>
                                         <div class="text2">
                                             <h6 class="text_white">
-                                                人稱，平成末的日式料理專家<br>
-                                                在冷熱料理中輕鬆切換，變化中不失和諧感<br>
-                                                經典懷石風味的割烹料理彷如露天寫生一般<br>
-                                                充滿藝術的氣息，一口一口的念念不忘，<br>
-                                                打斷你對日式料理的初想，給你獨一無二的念想
+                                                {{item.LederProfile}}
                                             </h6>
                                         </div>
                                     </div>
@@ -68,14 +70,18 @@
                         </div>
                         <div class="_chef_bottom">
                             <div class="_chef_grid">
+                               <template  v-for="cheiflist in item.member"> 
                                 <div class="_chef_grid_1">
+                                    <!-- v-for="cheiflist in item.member" -->
                                     <div class="content_hidden">
                                         <img src="img/chefteam_img/cf1.png" alt=""/>
+                                        
                                     </div>
                                     <p>
                                         立雁山&nbsp廚師長
                                     </p>
                                 </div>
+                            </template>
                                 <div class="_chef_grid_2">
                                     <div class="content_hidden">
                                         <img src="img/chefteam_img/cf2.png" alt=""/>
@@ -138,7 +144,7 @@
 
                     </div>
                     <!------------------------- 廚師長2 ------------------------->
-                    <input id="chef2" type="radio" name="chef"/>
+                    <!-- <input id="chef2" type="radio" name="chef"/>
                     <label for="chef2">菜雨停廚師長</label>
                     <div class="_chef_content">
                         <div class="_chef_line"></div>
@@ -176,7 +182,7 @@
                             <div class="_chef_grid">
                                 <div class="_chef_grid_1">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf9.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf9.png" alt=""/>
                                     </div>
                                     <p>
                                         菜雨停&nbsp廚師長
@@ -184,7 +190,7 @@
                                 </div>
                                 <div class="_chef_grid_2">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf10.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf10.png" alt=""/>
                                     </div>
                                     <p>
                                         陳品鞍&nbsp副主廚
@@ -192,7 +198,7 @@
                                 </div>
                                 <div class="_chef_grid_3">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf11.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf11.png" alt=""/>
                                     </div>
                                     <p>
                                         戴秀軒&nbsp副主廚
@@ -200,7 +206,7 @@
                                 </div>
                                 <div class="_chef_grid_4">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf12.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf12.png" alt=""/>
                                     </div>
                                     <p>
                                         初原菌&nbsp冷盤廚師
@@ -208,7 +214,7 @@
                                 </div>
                                 <div class="_chef_grid_5">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf13.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf13.png" alt=""/>
                                     </div>
                                     <p>
                                         陳一璇&nbsp甜點師
@@ -216,7 +222,7 @@
                                 </div>
                                 <div class="_chef_grid_6">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf14.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf14.png" alt=""/>
                                     </div>
                                     <p>
                                         陳幼榕&nbsp行政主廚
@@ -224,7 +230,7 @@
                                 </div>
                                 <div class="_chef_grid_7">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf15.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf15.png" alt=""/>
                                     </div>
                                     <p>
                                         蔡漢頤&nbsp幫廚
@@ -232,7 +238,7 @@
                                 </div>
                                 <div class="_chef_grid_8">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf16.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf16.png" alt=""/>
                                     </div>
                                     <p>
                                         許皓文&nbsp幫廚
@@ -242,9 +248,9 @@
 
                         </div>
 
-                    </div>
+                    </div> -->
                     <!------------------------- 廚師長3 ------------------------->
-                    <input id="chef3" type="radio" name="chef"/>
+                    <!-- <input id="chef3" type="radio" name="chef"/>
                     <label for="chef3">吳薦痣廚師長</label>
                     <div class="_chef_content">
                         <div class="_chef_line"></div>
@@ -282,7 +288,7 @@
                             <div class="_chef_grid">
                                 <div class="_chef_grid_1">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf17.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf17.png" alt=""/>
                                     </div>
                                     <p>
                                         吳薦痣&nbsp廚師長
@@ -290,7 +296,7 @@
                                 </div>
                                 <div class="_chef_grid_2">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf18.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf18.png" alt=""/>
                                     </div>
                                     <p>
                                         盧顴骨&nbsp副主廚
@@ -298,7 +304,7 @@
                                 </div>
                                 <div class="_chef_grid_3">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf19.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf19.png" alt=""/>
                                     </div>
                                     <p>
                                         陳品猿&nbsp副主廚
@@ -306,7 +312,7 @@
                                 </div>
                                 <div class="_chef_grid_4">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf20.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf20.png" alt=""/>
                                     </div>
                                     <p>
                                         張勝劫&nbsp冷盤廚師
@@ -314,7 +320,7 @@
                                 </div>
                                 <div class="_chef_grid_5">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf21.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf21.png" alt=""/>
                                     </div>
                                     <p>
                                         鍋子寧&nbsp甜點師
@@ -322,7 +328,7 @@
                                 </div>
                                 <div class="_chef_grid_6">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf22.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf22.png" alt=""/>
                                     </div>
                                     <p>
                                         張恩瓶&nbsp行政主廚
@@ -330,7 +336,7 @@
                                 </div>
                                 <div class="_chef_grid_7">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf23.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf23.png" alt=""/>
                                     </div>
                                     <p>
                                         楊子融&nbsp幫廚
@@ -338,7 +344,7 @@
                                 </div>
                                 <div class="_chef_grid_8">
                                     <div class="content_hidden">
-                                        <img src="img/chefteam_img/cf24.jpg" alt=""/>
+                                        <img src="img/chefteam_img/cf24.png " alt=""/>
                                     </div>
                                     <p>
                                         董怡軍&nbsp幫廚
@@ -348,16 +354,14 @@
 
                         </div>
 
-                    </div>
+                    </div> -->
         </div>
         @@include('layout/serve.html') @@include('layout/footer.html')
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
         </script>
-
         <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
         <script>
             var swiper = new Swiper(".mySwiper", {
               loop: true,
@@ -372,8 +376,117 @@
                 disableOnInteraction: false,
               }
             });
-          
-          </script>
+        </script>
+        <script>
+            
+
+      //---------------------ajax---------------------//
+      
+      let app1 = Vue.createApp({
+
+        data(){
+            return{
+                current_tab:"chef",
+                chef_tab:[],
+                chef_data:'chef1'
+            };
+        },
+        
+        mounted(){
+            this.chefrender();
+            // this.log1();
+        },
+
+        methods:{
+
+            chefrender(){
+                this.chef_tab=[];
+                let _this = this;
+                $.ajax({
+                    method:"POST/GET",
+                    url:"php/fronx`tpage/chefteam.php",
+                    data:{},
+                    dataType:"json",
+                    success:function(response){
+                        //更新html內容
+                        // $("#result").html(response);
+                        // console.log(response);
+                        response.forEach(element => {
+                            _this.chef_tab.push(element);
+                        });
+                        console.log(_this.chef_tab);
+                    },
+                    error:function(exception){
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+            },
+            // chefrender(){
+            //     console.log("aaa")
+            // },
+
+            // 換至內容
+            isChecked(e) {
+                if (e) {
+                    this.chef_data = e.target.value
+                }
+            },
+
+        },
+
+    });
+    app1.mount(".app1");
+
+
+
+
+                
+
+
+            //---------------tab---------------//
+        //   let member = Vue.createApp({
+        //     data(){
+        //       return {
+        //         // tab
+        //         current_tab:"chefs",
+        //         member_tab:[
+
+        //           {
+        //             team_id:"1",
+        //             name:"立雁山",
+        //                 img:"",
+        //                 desc:'',
+        //                 member:[
+        //                     {name:'',job:'',title:'',img:''}
+        //                 ]
+        //           },
+
+        //           {
+        //            team_id:"2",
+        //             name:"菜雨停",
+        //                 img:"",
+        //                 desc:'',
+        //                 member:[
+        //                     {name:'',job:'',title:'',img:''}
+        //                 ]
+        //           },
+
+        //           {
+        //             team_id:"3",
+        //             name:"吳薦痣",
+        //                 img:"",
+        //                 desc:'',
+        //                 member:[
+        //                     {name:'',job:'',title:'',img:''}
+        //                 ]
+        //           }
+
+        //         ]}
+        //     }   
+        // }).mount('#chefs');
+             
+        
+        </script>
 
     </body>
 </html>

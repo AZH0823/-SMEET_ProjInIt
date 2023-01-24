@@ -3,12 +3,12 @@ $(function () {
         let slideforindex = document.getElementById("slideforindex");
         let indexforslide = document.getElementById("indexforslide");
         let scrollVal = $(this).scrollTop();
-        console.log(scrollVal);
+        // console.log(scrollVal);
         // $("span.qScrollTop").text(scrollVal);
         //160的高度 加class的時候
-        console.log(slideforindex);
-        if ((scrollVal >= 850)) {
-            console.log("aaa");
+        // console.log(slideforindex);
+        if ((scrollVal >= window.innerHeight)) { //這個函式同螢幕高度
+            // console.log("aaa");
             $("#slideforindex").removeClass("slide_index")
             // slideforindex.style.display = "block";
             // indexforslide.style.display = "none";
@@ -18,7 +18,7 @@ $(function () {
             // indexforslide.classList.add('hide')
         }
         else {
-            console.log("www");
+            // console.log("www");
             $("#slideforindex").addClass("slide_index")
             // slideforindex.style.display = "none";
             // indexforslide.style.display = "flex";

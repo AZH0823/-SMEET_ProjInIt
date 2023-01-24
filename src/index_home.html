@@ -550,6 +550,25 @@
         slidesPerView: 'auto',
         slidesPerGroup: 1,
       });
+
+      //---------------------ajax---------------------//
+
+
+      $.ajax({
+        method:"POST",
+        url:"php/frontpage/chef.php",
+        data:{},
+        dataType:"text",
+        success:function(response){
+            //更新html內容
+            $("#result").html(response);
+        },
+        error:function(exception){
+            alert("發生錯誤: " + exception.status);
+        }
+      });
+
+
       
     </script>
 

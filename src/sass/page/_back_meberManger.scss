@@ -158,13 +158,22 @@
                                 background-color: #F9F4EC;
                                 margin: 39px 0 25px 21px;
                                 border: 1px solid #000;
+                                cursor: pointer;
 
+                                &:hover{
+                                    background-color: darken(#F9F4EC,10);
+                                }
                                 a {
                                     display: block;
                                     text-decoration: none;
                                     text-align: center;
                                     color: #000;
+                                    cursor: pointer;
                                 }
+                            }
+                            .-on{
+                                border-radius: 50%;
+                                background-color: darken(#F9F4EC,10);
                             }
                         }
                     }
