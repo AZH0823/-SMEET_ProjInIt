@@ -165,6 +165,20 @@ let login_app = Vue.createApp({
                         login_bg.classList.add('none');
                         body.style.overflow = "auto";
                         get_Member_ID();
+                        // 手機版登入變登出
+                        log_ham.innerHTML = "登出";
+                        member_li_1.addEventListener('click',function(){
+                            location.href="member.html#member";
+                        })
+                        member_li_2.addEventListener('click',function(){
+                            location.href="member.html#list";
+                        })
+                        member_li_3.addEventListener('click',function(){
+                            location.href="member.html#collection";
+                        })
+                        member_li_4.addEventListener('click',function(){
+                            location.href="member.html#faq";
+                        })
                         // history.go(0);
                     } else {
                         account.nextElementSibling.classList.add('appear');
@@ -246,22 +260,110 @@ let login_app = Vue.createApp({
     }
 });
 login_app.mount("#login");
-
 // ======會員icon 登入
 // 點擊
+// 網頁版部分
 let user_pop = document.querySelector('.user_pop');
 let user_icon = document.querySelector('.slide_user');
 let userpop_log = document.querySelector('.userpop_log');
+
+// 手機板部分
+let member_li = document.querySelectorAll('.member_li');  //陣列
+let log_ham = document.querySelector('.log_ham'); //手機的登出登入
+let slide_ham = document.querySelector('.slide_ham'); //手機的漢堡
+
+// 手機板的會員登出
+let member_li_1 = document.querySelector('.member_li_1');
+let member_li_2 = document.querySelector('.member_li_2');
+let member_li_3 = document.querySelector('.member_li_3');
+let member_li_4 = document.querySelector('.member_li_4');
+
+// 會員中心的icon點擊
 user_icon.addEventListener('click',function(e){
     // console.log('qqq')
     // e.preventDefault();
     login_check();
 })
-
+// 手機的漢堡線點擊  但不跳彈窗
+slide_ham.addEventListener('click',function(e){
+    // console.log('qqq')
+    // e.preventDefault();
+    // login_check();
+    $.ajax({            
+        method: "POST",
+        url: "php/frontpage/login_check.php",
+        data:{},            
+        dataType: "text",
+        success: function (response) {
+            if(response == ""){
+                // 尚未登入
+                // 取消點擊會員中心的連結 跳出會員登入視窗
+                member_li_1.addEventListener('click',function(){
+                    login_pop();
+                })
+                member_li_2.addEventListener('click',function(){
+                    login_pop();
+                })
+                member_li_3.addEventListener('click',function(){
+                    login_pop();
+                })
+                member_li_4.addEventListener('click',function(){
+                    login_pop();
+                })
+            }else{
+                // 已有登入的話 執行.....
+                // 會員icon顯示
+                let user_pop = document.querySelector('.user_pop');
+                user_pop.classList.remove('none');
+                // 手機版登入變登出
+                log_ham.innerHTML = "登出";
+                // 可以點擊會員中心的連結
+                member_li_1.addEventListener('click',function(){
+                    location.href="member.html#member";
+                })
+                member_li_2.addEventListener('click',function(){
+                    location.href="member.html#list";
+                })
+                member_li_3.addEventListener('click',function(){
+                    location.href="member.html#collection";
+                })
+                member_li_4.addEventListener('click',function(){
+                    location.href="member.html#faq";
+                })
+                // ==========在select一次收藏===========
+                $.ajax({            
+                    method: "POST",
+                    url: "php/frontpage/member/collect_s.php",
+                    data:{
+                        member_ID:member_ID,
+                    },            
+                    dataType: "json",
+                    success: function (response) {
+                        if(response == "無資料"){
+                            return;
+                        }else{
+                            // console.log(response.length);
+                            cart_num.classList.remove('none');
+                            cart_num.innerHTML = response.length;
+                            cart_num_ham.classList.remove('none');
+                            cart_num_ham.innerHTML = response.length;
+                        }
+                    },
+                    error: function(exception) {
+                        alert("數據載入失敗: " + exception.status);
+                    }
+                });
+            }              
+        },
+        error: function(exception) {
+            alert("數據載入失敗: " + exception.status);
+        }
+    });
+})
 
 // 會員登入hover的收藏的右上角紅圈圈數字
 let cart_num = document.getElementById('cart_num');
-
+let cart_num_ham = document.getElementById('cart_num_ham');
 // hover
 user_icon.addEventListener('mouseover',function(){
     //hover 不跳彈窗
@@ -294,6 +396,8 @@ user_icon.addEventListener('mouseover',function(){
                             // console.log(response.length);
                             cart_num.classList.remove('none');
                             cart_num.innerHTML = response.length;
+                            cart_num_ham.classList.remove('none');
+                            cart_num_ham.innerHTML = response.length;
                         }
                     },
                     error: function(exception) {
@@ -315,6 +419,7 @@ user_icon.addEventListener('mouseleave',function(){
 
 
 //登出
+//電腦版
 userpop_log.addEventListener('click',function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -330,6 +435,7 @@ userpop_log.addEventListener('click',function(e){
                 document.querySelector('.logout_pop').classList.add('none');
             },2000);
             localStorage.removeItem('member_ID');
+            log_ham.innerHTML = "登入";
             // localStorage.clear();
             location=location;
         },
@@ -338,4 +444,35 @@ userpop_log.addEventListener('click',function(e){
         }
       });
     });
+// 手機板登入登出
+log_ham.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    // 登入
+    if(log_ham.innerHTML == "登入"){
+        login_pop();
+    }else{
+        // 登出
+        $.ajax({            
+            method: "POST",
+            url: "php/frontpage/logout.php",
+            data:{},            
+            dataType: "text",
+            success: function (response) {
+                // alert("登出成功"); 
+                document.querySelector('.logout_pop').classList.remove('none');
+                setTimeout(function(){
+                    document.querySelector('.logout_pop').classList.add('none');
+                },2000);
+                localStorage.removeItem('member_ID');
+                log_ham.innerHTML = "登入";
+                // localStorage.clear();
+                location=location;
+            },
+            error: function(exception) {
+                alert("數據載入失敗: " + exception.status);
+            }
+        });
+    }
     
+});

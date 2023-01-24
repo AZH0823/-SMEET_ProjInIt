@@ -4,18 +4,18 @@
     include('../../conectDB/Connection.php');
 
     //建立SQL-商城訂單MALLORDERS
-    $sql = 'select o.ID, AppointmentDate, o.Name, Count, `Condition`, Scheduled, o.Address, Date, TotalPrice, notes, o.point, Email, Phone, SetPrice, SetName, qty, Type, d.Name, TypeName
+    $sql = 'select o.ID, AppointmentDate, o.`Name`, Count, `Condition`, Scheduled, o.Address, `Date`, TotalPrice, notes, o.`point`, Email, Phone, SetPrice, SetName, qty, `Type`, c.`Name`, TypeName
     from Orders o
     join Sets s
         on o.SetID = s.ID 
-    join (select OrderID, qty, Type, Name, d.TypeName
+    join (select OrderID, qty, `Type`, `Name`, a.TypeName
                 from OrdersDetail o 
-                join (SELECT t.Name as TypeName, Type, d.Name , d.ID
-							FROM dish d
+                join (SELECT t.`Name` as TypeName, `Type`, d.`Name` , d.ID
+							FROM Dish d
 								join DishsType t
-									on d.Type = t.ID) d 
-                on o.DishID = d.ID ) d
-            on o.ID = d.OrderID
+									on d.`Type` = t.ID) a
+                on o.DishID = a.ID ) c
+            on o.ID = c.OrderID
     where o.ID = ?';
 
     $statement = getPDO()->prepare($sql);  

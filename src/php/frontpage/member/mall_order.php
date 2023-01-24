@@ -4,17 +4,19 @@
     include('../../conectDB/Connection.php');
 
     //建立SQL-商城訂單MALLORDERS
-    $sql = 'select m.ID, CAST(Date AS DATE) as Date, State, Payment, TotalPrice, Points, Invoice, Email, Delivery, Address, m.Name, Phone, qty, Price, productName, Title
-            from MallOrders m
-            join (select m.MallID, m.qty, d.Price, d.Name as productName, d.Title
-                        from MallDetail m
-                                join (select d.ID, t.Name as Title, d.Price, d.Name, d.Type
-                                            from Dish d
-                                                join DishsType t
-                                                    on d.Type = t.ID) d
-                        on m.DishID = d.ID) d
-                on m.ID = d.MallID
-                where m.ID = ?';
+    $sql = 'SELECT q.`ID`, CAST(q.`Date` AS DATE) as `Date`, `State`, 
+    `Payment`, TotalPrice, Points, Invoice, Email, Delivery, `Address`, 
+    q.`Name`, Phone, c.qty, c.Price, c.productName, c.Title
+    FROM MallOrders q
+    join (SELECT m.MallID, m.qty, a.Price, a.`Name` as productName, a.Title
+                FROM MallDetail m
+                        join (SELECT d.ID, t.`Name` as Title, d.Price, d.`Name`, d.`Type`
+                                    FROM Dish d
+                                        join DishsType t
+                                            on d.`Type` = t.ID) a
+                on m.DishID = a.ID) c
+        on q.ID = c.MallID
+        WHERE q.`ID` = ?';
 
     $statement = getPDO()->prepare($sql);  
     $statement->bindValue(1, $mall_id);  
