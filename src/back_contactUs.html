@@ -45,7 +45,7 @@
                     </div>
                     <div class="grid_item">
                         <!-- 第一次體驗感覺很有尊榮... -->
-                        {{contact.SuggesContent}}
+                        {{contact.SuggestContent}}
                     </div>
                     <div class="grid_item gray">
                         <!-- 未回覆 -->
@@ -170,11 +170,11 @@
                         element.Condition = "已回覆"
                     }
                     if(
-                        element.SuggesContent.length <= 10){
+                        element.SuggestContent.length <= 10){
                         _this.Contactlist.push(element);
 
                         }else{
-                        element.SuggesContent = element.SuggesContent.substr(0,11) +'...'
+                        element.SuggestContent = element.SuggestContent.substr(0,11) +'...'
                         _this.Contactlist.push(element);
                         }   
                    
