@@ -47,10 +47,6 @@ div.back_productManger {
                                     background-color: $Camel-3;
                                 }
 
-                                // .grid_item:nth-child( n + 1){
-                                //     border-bottom: .5px solid #ccc; // 加底线
-                                // }
-
                                 // Popup點擊hover
                                 .checked:hover{
                                     cursor: pointer;
@@ -215,8 +211,8 @@ div.back_productManger {
                     }
                 }
                 .product_shopkp{
-                    display: flex;
                     textarea{
+                        resize: none;
                         width: 500px;
                         height: 100px;
                         outline: none;
@@ -226,6 +222,7 @@ div.back_productManger {
                 }
                 .product_intro{
                     textarea{
+                        resize: none;
                         width: 600px;
                         height: 140px;
                         outline: none;
