@@ -7,7 +7,7 @@ $(function () {
         // $("span.qScrollTop").text(scrollVal);
         //160的高度 加class的時候
         // console.log(slideforindex);
-        if ((scrollVal >= 850)) {
+        if ((scrollVal >= window.innerHeight)) { //這個函式同螢幕高度
             // console.log("aaa");
             $("#slideforindex").removeClass("slide_index")
             // slideforindex.style.display = "block";

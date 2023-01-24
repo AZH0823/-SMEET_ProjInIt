@@ -54,29 +54,17 @@ $(function () {
     })
 })
 
-$(document).mouseup(function (e) {
-    let _con = $('.ham_div'); // 就是你不希望被點到的 div
-    if (!_con.is(e.target) && _con.has(e.target).length === 0) {
-        // $('#header_bar').removeClass('.-on');
-        // console.log("www");
-    }
-});
+// $(document).mouseup(function (e) {
+//     let _con = $('.ham_div'); // 就是你不希望被點到的 div
+//     if (!_con.is(e.target) && _con.has(e.target).length === 0) {
+//     }
+// });
 
 
 $(".ham_div").click(function () {
     $(body).toggleClass(".slideoverflow");
 });
 
-let my_block = document.getElementById("logo_block");
-
-window.addEventListener("scroll", function () {
-
-    //console.log( my_block.getBoundingClientRect().top );
-    // if (my_block.getBoundingClientRect().top <= 0) {
-    //     // my_block.addClass("slide_header");
-    //     // console.log('hi');
-    // }
-});
 
 // slide頁漢堡點擊收合
 let ham_body = document.querySelector('body');

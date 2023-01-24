@@ -37,48 +37,49 @@
                                 </div>
                             </div>
 
+                            <div class="app2">
+                                <div class="back_from_wrapper">
 
-                            <div class="back_from_wrapper">
+                                    <!-- row-1 -->
+                                    <div class="grid_container">
+                                        <div class="grid_item">公告類型</div>
+                                        <div class="grid_item">公告日期</div>
+                                        <div class="grid_item">公告主題</div>
+                                        <div class="grid_item">內文</div>
+                                        <div class="grid_item">狀態</div>
+                                        <div class="grid_item">操作</div>
+                                    </div>
+                                    <!-- row-2 -->
 
-                                <!-- row-1 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">公告類型</div>
-                                    <div class="grid_item">公告日期</div>
-                                    <div class="grid_item">公告主題</div>
-                                    <div class="grid_item">內文</div>
-                                    <div class="grid_item">狀態</div>
-                                    <div class="grid_item">操作</div>
-                                </div>
-                                <!-- row-2 -->
-                                <div class="grid_container" v-for="News in BackNewsList" :key="index">
-                                    <div class="grid_item">
-                                        <!-- 最新動態 -->
-                                        {{News.Category}}
+                                    <div class="grid_container" v-for="News in this.BackNewsList" :key="index">
+                                        <div class="grid_item">
+                                            <!-- 最新動態 -->
+                                            {{News.Category}}
+                                        </div>
+                                        <div class="grid_item">
+                                            <!-- 2022/11/25 -->
+                                            {{News.Date}}
+                                        </div>
+                                        <div class="grid_item">
+                                            <!-- 冬季暖心 -->
+                                            {{News.Title}}
+                                        </div>
+                                        <div class="grid_item">
+                                            <!-- 鮟鱇魚富含膠原蛋白且低... -->
+                                            {{News.Article}}
+                                        </div>
+                                        <div class="grid_item">
+                                            <label class="switch">
+                                                <input type="checkbox" class="switch_btn" checked>
+                                                <span class="slider"></span>
+                                                <p class="slider_content">上架</p>
+                                            </label>
+                                        </div>
+                                        <div class="grid_item checked">查看</div>
                                     </div>
-                                    <div class="grid_item">
-                                        <!-- 2022/11/25 -->
-                                        {{News.Date}}
-                                    </div>
-                                    <div class="grid_item">
-                                        <!-- 冬季暖心 -->
-                                        {{News.Title}}
-                                    </div>
-                                    <div class="grid_item">
-                                        <!-- 鮟鱇魚富含膠原蛋白且低... -->
-                                        {{News.Article}}
-                                    </div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查看</div>
-                                </div>
 
-                                <!-- row-3 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-3 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -93,8 +94,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-4 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-4 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -109,8 +110,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-5 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-5 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -125,8 +126,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-6 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-6 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -141,8 +142,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-6 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-6 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -157,8 +158,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-7 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-7 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -173,8 +174,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-8 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-8 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -189,8 +190,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-9 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-9 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -205,8 +206,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-10 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-10 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -221,8 +222,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-11 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-11 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -237,8 +238,8 @@
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
 
-                                <!-- row-12 -->
-                                <!-- <div class="grid_container">
+                                    <!-- row-12 -->
+                                    <!-- <div class="grid_container">
                                     <div class="grid_item">最新動態</div>
                                     <div class="grid_item">2022/11/25</div>
                                     <div class="grid_item">冬季暖心</div>
@@ -252,7 +253,8 @@
                                     </div>
                                     <div class="grid_item checked">查看</div>
                                 </div> -->
-                            </div><!-- wrapper -->
+                                </div><!-- wrapper -->
+                            </div><!-- app2 -->
                         </div><!-- back_from -->
 
                         <!-- 頁碼-->
@@ -313,7 +315,7 @@
         </div>
 
     </div>
-
+    <script src="./js/vender/Vue/vue.global.prod.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <!-- icon_cdn -->
@@ -348,7 +350,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        let app1 = Vue.createApp({
+        let app2 = Vue.createApp({
             data() {
                 return {
                     BackNewsList: [],
@@ -363,7 +365,7 @@
 
                     $.ajax({
                         method: "POST",
-                        url: "php/frontpage/back_news.php",
+                        url: "php/backpage/back_news.php",
                         data: {},
 
                         dataType: "json",
@@ -371,7 +373,16 @@
                             // console.log(response);
                             response.forEach((element) => { //每個資料的名字
                                 element.Date = element.Date.substr(0, 10);
+                                element.Article = element.Article.substr(0, 12);
                                 _this.BackNewsList.push(element);
+                                if (
+                                    element.Article.length <= 10) {
+                                    _this.BackNewsList.push(element);
+
+                                } else {
+                                    element.Article = element.Article.substr(0, 11) + '...'
+                                    _this.BackNewsList.push(element);
+                                }
                             });
                         },
                         error: function (exception) {
@@ -382,7 +393,7 @@
                 },
             },
         });
-        app1.mount(".app1");
+        app2.mount(".app2");
     </script>
     <script>
         $(function () {
