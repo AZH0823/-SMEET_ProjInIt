@@ -1,6 +1,6 @@
 <?php
 
-    include("../conectDB/Connection.php");// FIXME 连结修正
+    include("../conectDB/Connection.php");
     //---------------------------------------------------
 
 
@@ -9,11 +9,8 @@
     FROM Dish d
     join DishsType dt
     on d.`type` = dt.ID 
-    where ProductType = '商城冷凍'";
-    
-
-    
-
+    where ProductType = '商城冷凍'
+    and d.`Condition` = 1";
 
     //執行
     $statement = getPDO()->prepare($sql); 

@@ -5,14 +5,14 @@
 
 
     //建立SQL語法
-    $sql = "SELECT d.ID, `Type`, d.Name,`Price`, `IMG`, `shopPoint`, `Introduction`, `Condition`, `ProductType`
+    $sql = "SELECT d.ID, d.`Type`, d.Name,`Price`, `IMG`, `shopPoint`, `Introduction`, `Condition`, `ProductType`
     FROM Dish d
     join DishsType dt
-    on d.`type` = dt.ID 
-    where ProductType = '商城冷凍' AND d.ID = ?";
+    on d.`Type` = dt.ID 
+    where d.ProductType = '商城冷凍' AND d.ID = ?";
     
 
-    $ProductID = $_GET["ID"];
+    $ProductID = $_POST["ID"];
 
     // echo $ProductID;
 
