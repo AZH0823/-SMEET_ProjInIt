@@ -47,7 +47,7 @@
                                 
                                 <template v-for="item in this.apiData" :key="item.ID">
                                     <div class="grid_container" >
-                                        <div class="grid_item checked"  @click.stop="ClickOrderDetail(item)" id="grid_item">TGD{{item.ID}}</div>
+                                        <div class="grid_item checked"  @click.stop="ClickOrderDetail(item)" id="grid_item">{{item.ID}}</div>
                                         <div class="grid_item">{{item.AppointmentDate}}</div>
                                         <div class="grid_item">{{item.MemberID}}</div>
                                         <div class="grid_item">$ {{item.TotalPrice.toLocaleString()}} 元</div>
