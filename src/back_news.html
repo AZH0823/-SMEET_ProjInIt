@@ -374,7 +374,8 @@
                             response.forEach((element) => { //每個資料的名字
                                 element.Date = element.Date.substr(0, 10);
                                 element.Article = element.Article.substr(0, 12);
-                                _this.BackNewsList.push(element);
+                                // _this.BackNewsList.push(element); 改在下面push
+                                // console.log(_this.BackNewsList);
                                 if (
                                     element.Article.length <= 10) {
                                     _this.BackNewsList.push(element);
@@ -383,12 +384,15 @@
                                     element.Article = element.Article.substr(0, 11) + '...'
                                     _this.BackNewsList.push(element);
                                 }
+                                // console.log(_this.BackNewsList);
+
                             });
                         },
                         error: function (exception) {
                             alert("發生錯誤: " + exception.status);
                         },
                     });
+
 
                 },
             },
