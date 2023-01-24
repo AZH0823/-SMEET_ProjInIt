@@ -46,23 +46,25 @@
                   </div>
 
                   <!-- row-2 -->
-                  <div class="grid_container">
-                    <div class="grid_item checked">TG1311215</div>
-                    <div class="grid_item">2022/01/13</div>
-                    <div class="grid_item">11342</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">白貓宅配</div>
-                    <div class="grid_item">
-                      <select name="" id="">
-                        <option value="">訂單成立未付款</option>
-                        <option value="">訂單成立已付款</option>
-                        <option value="">訂單封存</option>
-                      </select>
+                  <template v-for="item in this.apiData" :key="item.ID">
+                    <div class="grid_container">
+                      <div class="grid_item checked">{{item.ID}}</div>
+                      <div class="grid_item">{{item.Date}}</div>
+                      <div class="grid_item">{{item.MemberID}}</div>
+                      <div class="grid_item">{{item.TotalPrice}}</div>
+                      <div class="grid_item">{{item.Delivery}}</div>
+                      <div class="grid_item">
+                        <select name="" id="">
+                          <option value="">訂單成立未付款</option>
+                          <option value="">訂單成立已付款</option>
+                          <option value="">訂單封存</option>
+                        </select>
+                      </div>
                     </div>
-                  </div>
+                  </template>
 
                   <!-- row-3 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -75,10 +77,10 @@
                         <option value="">訂單封存</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-4 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -91,10 +93,10 @@
                         <option value="">訂單封存</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-5 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -107,10 +109,10 @@
                         <option value="">訂單封存</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-6 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -123,10 +125,10 @@
                         <option value="">訂單封存</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-7 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -139,10 +141,10 @@
                         <option value="">訂單封存</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-8 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -155,10 +157,10 @@
                         <option value="">訂單封存</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-9 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -171,10 +173,10 @@
                         <option value="">訂單封存</option>
                       </select>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-10 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item checked">TG1311215</div>
                     <div class="grid_item">2022/01/13</div>
                     <div class="grid_item">11342</div>
@@ -188,7 +190,7 @@
                       </select>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!-- wrapper -->
               </div>
               <!-- back_from -->
@@ -206,7 +208,7 @@
             <!-- section1 -->
 
             <!-- 燈箱 -->
-            <div class="backShopOderList_container fulid_wrapper none">
+            <div class="backShopOderList_container fulid_wrapper">
               <div class="wrapper">
                 <header class="oderList_header">
                   <h4 class="title font16">訂單明細</h4>
@@ -219,7 +221,7 @@
                     訂單類別&emsp;:&emsp;<span class="font16 red">商城</span>
                   </p>
                   <p class="font16">
-                    訂單編號&emsp;:&emsp;<span class="font16">TG1311215</span>
+                    訂單編號{{item.ID}}<span class="font16">TG1311215</span>
                   </p>
                 </div>
 
@@ -355,7 +357,7 @@
                         <input
                           class="item_content green-2 font14"
                           type="text"
-                          value="聯繫電話"
+                          value=""
                         />
                       </div>
 
@@ -446,6 +448,8 @@
         },
         computed: {},
         methods:{
+
+          //取全部的資料
             getAllMallOrderData(){
                 fetch('php/backpage/getAllMallOrderData.php')
                 .then(response =>{
@@ -453,16 +457,34 @@
                 })
                 .then( datalist =>{
                   datalist.forEach(el => {
-                    this.apiData.push(el)
+                    el.Date = el.Date.substring(0, 10);
+                    // console.log(el.Date.substring(0, 10))
+                    this.apiData.push(el);
                   });
                 }).catch(err=>{
                     console.log(err)
                 })
-            }
+            },
 
+
+            //取得一筆資料
+            // getMallOneData(ID){
+            //   const that = this; 
+            //   fetch(`php/backpage/getAllMallOrderData.php?ID=${ID}`)
+            //   .then(response => {
+            //     return  response.json()
+            //   })
+            //   .then( datalist => {
+            //     // that.shopDetail = [];
+            //     // let obj = []
+            //     datalist.forEach(data=>{
+            //       this.shopDetail.push(el);
+            //     })
+            //   })
+            // }
         },
         mounted(){
-
+          this.getAllMallOrderData();
         },
 
       });
