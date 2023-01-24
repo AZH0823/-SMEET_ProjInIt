@@ -149,18 +149,20 @@
           top: 0;
           width: 100%;
           height: 100%;
+          z-index: 999;
           background-color: rgba(0, 0, 0, 0.5);
+          overflow: auto;
           .div_pop {
-            background: #ffffff;
-            width: 29%;
-            margin: 12% auto;
-            overflow: auto;
-            .div_top {
-              color: #ffffff;
-            }
+            display: block;
+            width: 45%;
+            margin: 0 auto;
+            
             .div_content {
-              height: 750px;
-            }
+              margin: 0 auto;
+              display: block;	
+              
+          }
+            
           }
         }
       }
