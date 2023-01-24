@@ -4,9 +4,9 @@
     $afterPoint = $_POST['afterPoint'];
     $memberID = $_POST['memberID'];
 
-    $updateMemberPointSql = "UPDATE Member
+    $updateMemberPointSql = "UPDATE Member 
     SET point = :afterPoint
-    WHERE ID=':memberID'";
+    WHERE ID = :memberID ";
 
     $updatePointstatement = getPDO()->prepare($updateMemberPointSql);
     $updatePointstatement->bindValue(':afterPoint', $afterPoint);
@@ -17,6 +17,3 @@
     print_r($searchData)
 ?>
 
-UPDATE Member
-SET point= 300
-WHERE ID=10;

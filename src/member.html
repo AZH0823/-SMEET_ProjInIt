@@ -88,7 +88,7 @@
                   <p class="font16">我願意收到最新優惠消息</p>
                 </label>
               </div>
-              <div class="add_bonus red">第一次完整輸入會員資料贈送紅利點數500點</div>
+              <div class="add_bonus red" ref="add_bonus">第一次完整輸入會員資料贈送紅利點數500點</div>
               <button type="button" id="btn_info" class="inCart_btn2" @click="info_change">
                 確認修改
               </button>
@@ -313,7 +313,19 @@
           </ul>
         </section>
         <!-- ======常見問題結束====== -->
+        <!-- =========================================== -->
+        <div class="updateOK_pop none" ref="updateOK">
+
+          <article>
+              <div class="check_text">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <h6>修改完成</h6>
+              </div>
+          </article>
+        </div>
       </main>
+      <!-- 修改完成popup -->
+      
       @@include('layout/footer.html')
     </div>
     <script src="js/vender/Vue/vue.global.js"></script>
@@ -390,21 +402,41 @@
         },
         created(){
           window.addEventListener("popstate", function () {
-            // 第二步，加上 tab_active 函式
             member.page();
             // console.log('aaa');
           });
         },
         mounted(){
-          if(member_ID){
-            this.info_show();
-            this.get_order_list();
-            this.get_mallorder_list();
-            this.collection_s();
-            this.collect_num();
-            this.get_QA();
-            this.page();
-          }
+          // 先檢查有沒有登入 沒有踢回上一頁
+          $.ajax({            
+              method: "POST",
+              url: "php/frontpage/login_check.php",
+              data:{},            
+              dataType: "text",
+              success: (response) => {
+                  if(response == ""){
+                      //尚未登入->跳出會員登入畫面
+                      location.href = "index_home.html"
+                  }else{
+                      //已有登入的話 執行.....
+
+                      if(member_ID){
+                        this.info_show();
+                        this.get_order_list();
+                        this.get_mallorder_list();
+                        this.collection_s();
+                        this.collect_num();
+                        this.get_QA();
+                        this.page();
+                        this.get_once();
+                      }
+                  }              
+              },
+              error: function(exception) {
+                  alert("數據載入失敗: " + exception.status);
+              }
+          });
+          
         },
         computed: {},
         methods:{
@@ -434,6 +466,35 @@
             }
             
           },
+          // 判斷如果有拿過會員點數的話 隱藏訊息
+          get_once(){
+            if( member_ID ){
+              let that = this ;
+            $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/member/point_once.php",
+                    data: {
+                      member_ID:member_ID,
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                      // 已經拿過點數
+                      // console.log("response"+response);
+                      if(response == "Y"){
+                        that.$refs.add_bonus.classList.add('none');
+                        return ; 
+                        // 沒有拿過點數
+                      }
+                      else if(response == "N"){
+                        return ; 
+                      }
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+              }
+          },
           //會員中心-個人資訊 確認修改按鈕按下
           info_change(){
             let that = this ;
@@ -444,28 +505,91 @@
             let addr = this.member_info.addr;
             //修改會員資訊
             if(member_ID){
-              $.ajax({
+              // 如果會員資料都不為空
+              if(name !== "" && birthday !== "" && sex !== "" && phone !== "" && addr !== "" ){
+                // console.log('aaa');
+                $.ajax({
                     method: "POST",
-                    url: "php/frontpage/member/member_info_update.php",
+                    url: "php/frontpage/member/point_once.php",
                     data: {
                       member_ID:member_ID,
-                      name:name,
-                      birthday:birthday,
-                      sex:sex,
-                      phone:phone,
-                      addr:addr
                     },
                     dataType: "text",
                     success: function (response) {
-                      // console.log(response);
-                      alert('修改完成');
+                      // 已經拿過點數
+                      // console.log("response"+response);
+                      if(response == "Y"){
+                        // 修改資料
+                        that.change_member_info();
+                        // console.log("有拿到Y");
+                        // 沒有拿過點數
+                      }
+                      else if(response == "N"){
+                        // console.log("有拿到N");
+                        let afterPoint = 500;
+                        $.ajax({
+                              method: "POST",
+                              url: "php/frontpage/member/memberPointUpdate.php",
+                              data: {
+                                memberID:member_ID,
+                                afterPoint: afterPoint
+                              },
+                              dataType: "text",
+                              success: function (response) {
+                                  //修改資料  
+                                console.log('500');
+                                that.change_member_info();
+                                that.$refs.add_bonus.classList.add('none');
+                                that.get_point();
+                              },
+                              error: function (exception) {
+                                  alert("發生錯誤: " + exception.status);
+                              }
+                          });
+                      }
                     },
                     error: function (exception) {
                         alert("發生錯誤: " + exception.status);
                     }
                 });
-
+              }else{
+                this.change_member_info();
+              }
             }
+          },
+          // 修改會員資料的ajax
+          change_member_info(){
+            let that = this ;
+            let name = this.member_info.name;
+            let birthday = this.member_info.birthday;
+            let sex = this.member_info.sex;
+            let phone = this.member_info.phone;
+            let addr = this.member_info.addr;
+            $.ajax({
+                            method: "POST",
+                            url: "php/frontpage/member/member_info_update.php",
+                            data: {
+                              member_ID:member_ID,
+                              name:name,
+                              birthday:birthday,
+                              sex:sex,
+                              phone:phone,
+                              addr:addr
+                            },
+                            dataType: "text",
+                            success: function (response) {
+                              // console.log(response);
+                              // alert('修改完成');
+                              // 修改完成popup
+                              that.$refs.updateOK.classList.remove('none');
+                              setTimeout(function(){
+                                  that.$refs.updateOK.classList.add('none');
+                              },2000);
+                            },
+                            error: function (exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });
           },
           //修改會員密碼
           pwd_change(){
@@ -518,6 +642,7 @@
               };
               if(change){
                 //更改密碼
+                let that = this ;
                 $.ajax({
                     method: "POST",
                     url: "php/frontpage/member/member_pwd_update.php",
@@ -527,8 +652,13 @@
                     },
                     dataType: "text",
                     success: function (response) {
-                        alert('修改成功');
-                    },
+                        // alert('修改成功');
+                        // 修改完成popup
+                        that.$refs.updateOK.classList.remove('none');
+                              setTimeout(function(){
+                                  that.$refs.updateOK.classList.add('none');
+                              },2000);
+                      },
                     error: function (exception) {
                         alert("發生錯誤: " + exception.status);
                     }
@@ -638,12 +768,12 @@
           cancel_collect(i){
             // console.log(i);
             if(member_ID){
-              let r = confirm('確定取消收藏');
+              // let r = confirm('確定取消收藏');
               // 這個ID是favorite table 的ID
             
               let ID = this.collection[i].ID
               // console.log(ID);
-              if(r){
+              // if(r){
                 // 刪除資料庫的收藏
                 $.ajax({
                       method: "POST",
@@ -665,7 +795,7 @@
                     });
                     this.collect_num();
                   };
-                }
+                // }
               },
           // select渲染到畫面上
           collection_s(){

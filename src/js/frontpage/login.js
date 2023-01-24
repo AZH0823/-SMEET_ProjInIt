@@ -254,7 +254,7 @@ let user_icon = document.querySelector('.slide_user');
 let userpop_log = document.querySelector('.userpop_log');
 user_icon.addEventListener('click',function(e){
     // console.log('qqq')
-    e.preventDefault();
+    // e.preventDefault();
     login_check();
 })
 
@@ -330,8 +330,8 @@ userpop_log.addEventListener('click',function(e){
                 document.querySelector('.logout_pop').classList.add('none');
             },2000);
             localStorage.removeItem('member_ID');
-            // storage.clear();
-            // history.go(0); 
+            // localStorage.clear();
+            location=location;
         },
         error: function(exception) {
             alert("數據載入失敗: " + exception.status);

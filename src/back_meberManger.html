@@ -9,7 +9,7 @@
     <title>會員管理</title>
 </head>
 <body>
-    <div class="meberManger_back fulid_wrapper">
+    <div class="meberManger_back fulid_wrapper" id="member_back">
         <div class="backwrapper">
             <header>
                 @@include('layout/back_header.html')
@@ -24,9 +24,9 @@
                                 <h4 class="h4 green-1">會員管理</h4>
                                 <div class="search">
                                     <div class="search_container_item">
-                                        <input type="text" placeholder="會員查詢..."/>
+                                        <input type="text" placeholder="會員查詢..." @keyup="search" ref="search_name"/>
                                     </div>
-                                    <div class="search_container_item">
+                                    <div class="search_container_item" @click="search">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </div>
                                 </div>
@@ -43,311 +43,106 @@
                                     <div class="grid_item">執行</div>
                                 </div>
                                 <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1311215</div>
-                                    <div class="grid_item">立雁杉</div>
-                                    <div class="grid_item">120點</div>
+                                <div class="grid_container" v-for="(item,key) in info" > 
+                                    <div class="grid_item">{{item.ID}}</div>
+                                    <div class="grid_item">{{item.Name}}</div>
+                                    <div class="grid_item">{{item.point}}點</div>
                                     <div class="grid_item">
                                         <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
+                                            <input type="checkbox" class="switch_btn" checked @click="switch_member">
                                             <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
+                                            <p class="slider_content" >啟用</p>
                                         </label>
                                     </div>
-                                    <div class="grid_item checked">查閱</div>
+                                    <div class="grid_item checked" @click="open_popup" :value="item.ID">查閱</div>
                                 </div>
                                 
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1311279</div>
-                                    <div class="grid_item">李羽庭</div>
-                                    <div class="grid_item">20點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-    
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">131224</div>
-                                    <div class="grid_item">張佳琦</div>
-                                    <div class="grid_item">140點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-                                
-                                <!-- row-5 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1314131</div>
-                                    <div class="grid_item">蔡恕君</div>
-                                    <div class="grid_item">250點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-                                
-                                <!-- row-6 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1314131</div>
-                                    <div class="grid_item">蔡恕君</div>
-                                    <div class="grid_item">250點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-                                
-                                <!-- row-6 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1336</div>
-                                    <div class="grid_item">李一庭</div>
-                                    <div class="grid_item">120點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-                                
-                                <!-- row-7 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1318431</div>
-                                    <div class="grid_item">吳健稚</div>
-                                    <div class="grid_item">1200點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-    
-                                <!-- row-8 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1313311</div>
-                                    <div class="grid_item">陳午安</div>
-                                    <div class="grid_item">10點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-    
-                                <!-- row-9 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1313315</div>
-                                    <div class="grid_item">倪宛安</div>
-                                    <div class="grid_item">120點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-    
-                                <!-- row-10 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1313315</div>
-                                    <div class="grid_item">倪宛安</div>
-                                    <div class="grid_item">120點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-                                
-                                <!-- row-11 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1312456</div>
-                                    <div class="grid_item">郝早安</div>
-                                    <div class="grid_item">100點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">啟用</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
-    
-                                <!-- row-12 -->
-                                <div class="grid_container">
-                                    <div class="grid_item">1312456</div>
-                                    <div class="grid_item">夏舞好</div>
-                                    <div class="grid_item">50點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">停權</p>
-                                        </label>
-                                    </div>
-                                    <div class="grid_item checked">查閱</div>
-                                </div>
+                               
                             </div><!-- wrapper -->
                         </div><!-- back_from -->
                         
                         <!-- 頁碼-->
-                        <div class="page">
+                        <div id="paginator_block" class="page">
+                            <the-paginator class="page_ul" :total-items=page.total_items items-per-page="10" :current-page=current_page  ></the-paginator>
+                        </div>
+                        <!-- <div class="page">
                             <ul class="page_ul">
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
                             <li><a href="#">4</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </section><!-- section1 -->
-                        <!-- 會員明細 -->
-    <div class="memberDetail_list" >
-        <h3 class="font16">會員詳細資料</h3>
-        <!-- section-1 -->
-        <main>
-            <div class="listWrapper">
-                <div class="member_title font16 gray">
-                    <div class="member_item">會員編號：</div>
-                    <div class="member_item">會員信箱：</div>
-                    <div class="member_item">姓名：</div>
-                    <div class="member_item">性別：</div>
-                    <div class="member_item">手機：</div>
-                    <div class="member_item">地址：</div>
-                    <div class="member_item">多元登錄：</div>
-                    <div class="member_item">回饋點數：</div>
-                    <div class="member_item">收藏清單：</div>
-                </div>
-                <div class="member_content">
-                    <p class="member_item font16 gray">5478123</p>
-                    <p class="member_item font16 gray">d4070707@gmail.com</p>
-                    <p class="member_item font16 gray">caicai</p>
-                    <p class="member_item font16 gray">男</p>
-                    <p class="member_item font16 gray">0912223589</p>
-                    <p class="member_item font16 gray">新北市板橋區文化路二段200巷200弄200號40樓</p>
-                    <label for="line_checkbox" class="line_item font16 gray">
-                        <input type="checkbox" class="line_checkbox" id="line_checkbox">
-                        line
-                    </label>
-                    <label for="" class="point_item font16 gray" id="point_item">
-                        <input type="text" value="20" class="pointText font16 gray" id="pointText">
-                        點
-                        <img src="./img/back_page/memberDetail.png" alt="" class="pointEdit" id="pointEdit">
-                    </label>
-                </div>
-            </div><!-- wrapper -->
-        
-            <div class="grid_wrapper ">
-                <!-- row-1 -->
-                <div class="grid_container font14">
-                    <div class="grid_item">商品編號</div>
-                    <div class="grid_item">會員編號</div>
-                    <div class="grid_item">分類</div>
-                    <div class="grid_item">品名</div>
-                    <div class="grid_item">收藏時間</div>
-                </div>
-                <!-- row-2 -->
-                <div class="grid_container font14">
-                    <div class="grid_item">S001</div>
-                    <div class="grid_item">湯品</div>
-                    <div class="grid_item">手沖牛肉湯</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">2022/12/12</div>
-                </div>
-                
-                <div class="grid_container font14">
-                    <div class="grid_item">S001</div>
-                    <div class="grid_item">湯品</div>
-                    <div class="grid_item">手沖牛肉湯</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">2022/12/12</div>
-                </div>
-
-                <div class="grid_container font14">
-                    <div class="grid_item">S001</div>
-                    <div class="grid_item">湯品</div>
-                    <div class="grid_item">手沖牛肉湯</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">2022/12/12</div>
-                </div>
-
-                <div class="grid_container font14">
-                    <div class="grid_item">S001</div>
-                    <div class="grid_item">湯品</div>
-                    <div class="grid_item">手沖牛肉湯</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">2022/12/12</div>
-                </div>
-
-                <div class="grid_container font14">
-                    <div class="grid_item">S001</div>
-                    <div class="grid_item">湯品</div>
-                    <div class="grid_item">手沖牛肉湯</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">2022/12/12</div>
-                </div>
-
-                <div class="grid_container font14">
-                    <div class="grid_item">S001</div>
-                    <div class="grid_item">湯品</div>
-                    <div class="grid_item">手沖牛肉湯</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">2022/12/12</div>
-                </div>
-
-                <div class="grid_container font14">
-                    <div class="grid_item">S001</div>
-                    <div class="grid_item">湯品</div>
-                    <div class="grid_item">手沖牛肉湯</div>
-                    <div class="grid_item">$12,000</div>
-                    <div class="grid_item">2022/12/12</div>
-                </div>
-            </div>
-            <div class="save_btn" style="margin: 40px 0px 20px;">儲存</div>
-        </main>
-    </div>
                 </main>
+                
                 @@include('layout/back_footer.html')
             </div><!-- container -->
             
         </div><!-- wrapper -->
+        <!-- 會員明細 -->
+        <div class="memberDetail_wrapper none" ref="member_popup" @click="close_popup">
+            <div class="memberDetail_list" @click.stop>
+                <h3 class="font16">會員詳細資料</h3>
+                <!-- section-1 -->
+                <main>
+                        <div class="listWrapper">
+                            <div class="member_title font16 gray">
+                                <div class="member_item">會員編號：</div>
+                                <div class="member_item">會員信箱：</div>
+                                <div class="member_item">姓名：</div>
+                                <div class="member_item">性別：</div>
+                                <div class="member_item">手機：</div>
+                                <div class="member_item">地址：</div>
+                                <div class="member_item">多元登錄：</div>
+                                <div class="member_item">回饋點數：</div>
+                                <div class="member_item">收藏清單：</div>
+                            </div>
+                            <div class="member_content">
+                                <p class="member_item font16 gray">{{info_favo.ID}}</p>
+                                <p class="member_item font16 gray">{{info_favo.Email}}</p>
+                                <p class="member_item font16 gray">{{info_favo.Name}}</p>
+                                <p class="member_item font16 gray">{{info_favo.Sex}}</p>
+                                <p class="member_item font16 gray">{{info_favo.Phone}}</p>
+                                <p class="member_item font16 gray">{{info_favo.Address}}</p>
+                                <label for="line_checkbox" class="line_item font16 gray">
+                                    <input type="checkbox" class="line_checkbox" id="line_checkbox">
+                                    Google
+                                </label>
+                                <label for="" class="point_item font16 gray" id="point_item">
+                                    <input type="text" :value="info_favo.point" class="pointText font16 gray" id="pointText">
+                                    點
+                                    <img src="./img/back_page/memberDetail.png" alt="" class="pointEdit" id="pointEdit">
+                                </label>
+                            </div>
+                        </div><!-- wrapper -->
+                
+                        <div class="grid_wrapper ">
+                            <!-- row-1 -->
+                            <div class="grid_container font14">
+                                <div class="grid_item">商品編號</div>
+                                <!-- <div class="grid_item">會員編號</div> -->
+                                <div class="grid_item">分類</div>
+                                <div class="grid_item">品名</div>
+                                <div class="grid_item">收藏時間</div>
+                            </div>
+                            <!-- row-2 -->
+                            <div class="grid_container font14" v-for="(value, key) in favo">
+                                <div class="grid_item">{{value.DishID}}</div>
+                                <div class="grid_item">{{value.TypeName}}</div>
+                                <div class="grid_item">{{value.DishName}}</div>
+                                <!-- <div class="grid_item">$12,000</div> -->
+                                <div class="grid_item">{{value.collectionTime}}</div>
+                            </div>
+                        </div>
+                    <div class="save_btn" style="margin: 40px 0px 20px;" @click="save">儲存</div>
+                </main>
+            </div>
+        </div>
     </div>
-
     
-
+    
+    <script src="js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
     <script
         type="module"
@@ -358,27 +153,178 @@
         <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
     
     <script>
-        const switchBtn = document.querySelectorAll(".switch_btn");
-        const sliderContent = document.querySelectorAll(".slider_content");
-        // console.log(switchBtn);
-
-        for(let i=0; i < switchBtn.length; i++){
-            // console.log(i)
-            switchBtn[i].addEventListener("click", function(){
-                console.log(this.checked); // ture /false
-                console.log(i); 
-                console.log(this)
-
-                if (this.checked == true) {
-
-                    $(this).closest("label").find(".slider_content").text('啟用');
-                } else{
-                    $(this).closest("label").find(".slider_content").text('停權');
-                }
-            });
-        }
         
+        let member_back = Vue.createApp({
+            data() {
+                return {
+                    info:[{}],
+                    favo:[{}],
+                    info_favo:{},
+                    page:{
+                        total_items : "",
+                        items_per_page : "10",
+                        current_page : ""
+                    }
+                }
+            },
+            mounted() {
+                this.get_info();
+                // this.get_favo();
+            },
+            methods: {
+                // 取得會員資料 加進data info
+                get_info(){
+                    $.ajax({
+                        method: "POST",
+                        url: "php/backpage/back_member_s.php",
+                        data: {},
+                        dataType: "json",
+                        success: (response) => {
+                            // console.log("member");
+                            // console.log(response);
+                            this.info = response ;
+                            this.page.total_items = response.length ;
+
+                            // console.log(this.page.total_items);
+                        },
+                        error: function (exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                    
+                },
+                //取得收藏清單 加進data favo
+                get_favo(){
+                    $.ajax({
+                        method: "POST",
+                        url: "php/backpage/back_member_f.php",
+                        data: {
+                            member_ID:member_ID
+                        },
+                        dataType: "json",
+                        success: (response) => {
+                            if(response == "無資料"){
+                                return;
+                            }else{
+                                // console.log("favo");
+                                // console.log(response);
+                                this.favo = response ;
+                            }
+                        },
+                        error: function (exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+
+                },
+                // 打開彈窗 
+                open_popup(e){
+                    let member_ID = e.target.getAttribute("value");
+                    // console.log(member_ID);
+                    // 從資料庫找收藏清單
+                    $.ajax({
+                        method: "POST",
+                        url: "php/backpage/back_member_f.php",
+                        data: {
+                            member_ID:member_ID
+                        },
+                        dataType: "json",
+                        success: (response) => {
+                            if(response == "無資料"){
+                                this.favo = [];
+                                // return;
+                            }else{
+                                // console.log("favo");
+                                // console.log(response);
+                                this.favo = response ;
+                                
+                            }
+                        },
+                        error: function (exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                    // console.log(this.info[member_ID]);
+                    this.info_favo = this.info[member_ID - 1];
+                    this.$refs.member_popup.classList.remove('none');
+                    document.querySelector('body').style.overflow = "hidden";
+                },
+                // 關掉彈窗
+                close_popup(){
+                    this.$refs.member_popup.classList.add('none');
+                    document.querySelector('body').style.overflow = "auto";
+                },
+                switch_member(e){
+                    if( e.target.checked == true){
+                        e.target.nextElementSibling.nextElementSibling.innerHTML = "啟用";
+                    }else{
+                        e.target.nextElementSibling.nextElementSibling.innerHTML = "停權";
+                    }
+                },
+                save(){
+                    let memberID = this.info_favo.ID
+                    let afterPoint = document.getElementById('pointText').value;
+                    // console.log(afterPoint);
+                    $.ajax({
+                        method: "POST",
+                        url: "php/frontpage/member/memberPointUpdate.php",
+                        data: {
+                            memberID:memberID,
+                            afterPoint:afterPoint
+                        },
+                        dataType: "text",
+                        success: (response) => {
+                            this.get_info();
+                            this.$refs.member_popup.classList.add('none');
+                            document.querySelector('body').style.overflow = "auto";
+                        },
+                        error: function (exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
+                // 會員名稱關鍵字查詢
+                search(){
+                    let search_name = this.$refs.search_name.value;
+                    console.log(search_name);
+                    if(this.$refs.search_name.value == ""){
+                        this.get_info();
+                    }else{
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/back_member_search.php",
+                            data: {
+                                search_name:search_name
+                            },
+                            dataType: "json",
+                            success: (response) => {
+                                if(response == "無資料"){
+                                    this.info = [];
+                                    // return;
+                                }else{
+                                    // console.log(response);
+                                    this.info = response ;
+                                    
+                                }
+                            },
+                            error: function (exception) {
+                                alert("數據載入失敗: " + exception.status);
+                            }
+                        });
+                    }
+                    
+                },
+                page_click(){
+                    // this.page.current_page = 2;
+                    console.log('aaa')
+                }
+            }
+        }).mount('#member_back');
     </script>
-    
+    <script type="module">
+        import ThePaginator from "./js/back_page/ThePaginator_member.js";
+
+        Vue.createApp({}).component("ThePaginator", ThePaginator).mount("#paginator_block");
+    </script>
 </body>
 </html>
