@@ -30,18 +30,18 @@
                 </div>
             </div>
             <div class="fulid_wrapper app1">
-                <div class="_chef_tab " 
+                <div class="_chef_tab" 
                 v-for="(item, index) in chef_tab"
                 :key="index"
                 >
                     <!------------------------- 廚師長1 ------------------------->
-                    <input id="chef1" type="radio" name="chef" checked="checked"
-                    
-                    />
+                    <input id="chef1" type="radio" name="chef" checked="checked"/>
+
                     <label for="chef1">
                         <!-- 立雁杉廚師長 -->
                         {{item.LederName}}
                     </label>
+                    
                     <div class="_chef_content " v-if="chef_data === 'chef1'">
                         <div class="_chef_line"></div>
                         <div class="_chef_top">
@@ -390,22 +390,22 @@
                 chef_tab:[],
                 chef_data:'chef1'
             };
-            
         },
-        created(){
+        
+        mounted(){
             this.chefrender();
-            this.log1();
+            // this.log1();
         },
+
         methods:{
+
             chefrender(){
                 this.chef_tab=[];
                 let _this = this;
                 $.ajax({
-                    method:"POST",
-                    url:"php/frontpage/chefteam.php",
-                    data:{
-
-                    },
+                    method:"POST/GET",
+                    url:"php/fronx`tpage/chefteam.php",
+                    data:{},
                     dataType:"json",
                     success:function(response){
                         //更新html內容
@@ -421,45 +421,24 @@
                     }
                 });
             },
+            // chefrender(){
+            //     console.log("aaa")
+            // },
 
+            // 換至內容
             isChecked(e) {
                 if (e) {
                     this.chef_data = e.target.value
                 }
-            }
+            },
 
-            // chefrender(){
-            //     this.chef_tab=[];
-            //     let _this = this;
-            //     $.ajax({
-            //         method:"POST",
-            //         url:"php/frontpage/chefteam.php",
-            //         data:{},
-            //         dataType:"json",
-            //         success:function(response){
-            //             //更新html內容
-            //             // $("#result").html(response);
-            //             // console.log(response);
-            //             response.forEach(element => {
-            //                 _this.chef_tab.push(element);
-            //             });
-            //             console.log(_this.chef_tab);
-            //         },
-            //         error:function(exception){
-            //             alert("發生錯誤: " + exception.status);
-            //         }
-            //     });
-            // },
-            // log1(){
-            //     console.log("aaa")
-            // }
         },
 
     });
     app1.mount(".app1");
 
 
-        //---------------POST---------------//
+
 
                 
 
@@ -471,28 +450,37 @@
         //         // tab
         //         current_tab:"chefs",
         //         member_tab:[
-        //           {
 
+        //           {
         //             team_id:"1",
         //             name:"立雁山",
-                        // img:"",
-                        // desc:'',
-                        // member:[
-                        //     {name:'',job:'',title:'',img:''}
-                        // ]
-
+        //                 img:"",
+        //                 desc:'',
+        //                 member:[
+        //                     {name:'',job:'',title:'',img:''}
+        //                 ]
         //           },
+
         //           {
-        //             id:"9",
+        //            team_id:"2",
         //             name:"菜雨停",
-
-                    
+        //                 img:"",
+        //                 desc:'',
+        //                 member:[
+        //                     {name:'',job:'',title:'',img:''}
+        //                 ]
         //           },
+
         //           {
-        //             id:"17",
+        //             team_id:"3",
         //             name:"吳薦痣",
-                    
+        //                 img:"",
+        //                 desc:'',
+        //                 member:[
+        //                     {name:'',job:'',title:'',img:''}
+        //                 ]
         //           }
+
         //         ]}
         //     }   
         // }).mount('#chefs');
