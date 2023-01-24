@@ -221,7 +221,7 @@
                     訂單類別&emsp;:&emsp;<span class="font16 red">商城</span>
                   </p>
                   <p class="font16">
-                    訂單編號{{item.ID}}<span class="font16">TG1311215</span>
+                    訂單編號<span class="font16">TG1311215</span>
                   </p>
                 </div>
 
@@ -423,19 +423,7 @@
       </div>
     </div>
 
-    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
-    <!-- JQ -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <!-- icon_cdn -->
-    <script
-      nomodule="nomodule"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-    <!-- icon_cdn -->
-    <script src="./js/back_page/back_nav/back_nav.js"></script>
+    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>    
     <!-- 導覽列 -->
     <script src="js/vender/Vue/vue.global.js"></script>
     <script>
@@ -468,21 +456,43 @@
 
 
             //取得一筆資料
-            // getMallOneData(ID){
-            //   const that = this; 
-            //   fetch(`php/backpage/getAllMallOrderData.php?ID=${ID}`)
-            //   .then(response => {
-            //     return  response.json()
-            //   })
-            //   .then( datalist => {
-            //     // that.shopDetail = [];
-            //     // let obj = []
-            //     datalist.forEach(data=>{
-            //       this.shopDetail.push(el);
-            //     })
-            //   })
-            // }
-        },
+            getMallOneData(id){
+              const that = this; 
+              fetch(`php/backpage/getAllMallOrderData.php?ID=${id}`)
+              .then(response => {
+                return  response.json()
+              })
+              .then( datalist => {
+                that.shopDetail = [];
+                // let obj = []
+                datalist.forEach(data=>{
+                  this.shopDetail.push(el);
+                })
+
+                that.$nextTick(function(){
+                  that.shopDetail = {...obj}
+                });
+
+              }).catch(err=>{
+                    console.log(err)
+                })
+            },
+            
+            //click展開popon
+            ClickMallDetail(item){
+              const data = JSON.parse(JSON.stringify(item))
+              console.log(data);
+            }
+
+          
+        
+          },
+
+
+
+
+
+
         mounted(){
           this.getAllMallOrderData();
         },
