@@ -11,12 +11,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
   </head>
-  <body>
-    @@include('layout/header_01.html')
-    @@include('layout/banner.html',{ "title":"ABOUT",
-      "src":"./img/about_img/about_headbanner.jpg" })
+  <body class="about-page">
+    @@include('layout/header_01.html') @@include('layout/banner.html',{
+    "title":"ABOUT", "src":"./img/about_img/about_headbanner.jpg" })
     <div class="app1">
-
       <!-- anchor -->
       <div class="anchor">
         <a href="#about">關於私覓</a>
@@ -132,11 +130,21 @@
           </div>
           <div class="yourphone">
             <p class="font16">您的電話</p>
-            <input type="text" placeholder="請填寫電話" id="contact_phone" required/>
+            <input
+              type="text"
+              placeholder="請填寫電話"
+              id="contact_phone"
+              required
+            />
           </div>
           <div class="youremail">
             <p class="font16">您的E-mail</p>
-            <input type="text" placeholder="請填寫E-mail" id="contact_mail" required />
+            <input
+              type="text"
+              placeholder="請填寫E-mail"
+              id="contact_mail"
+              required
+            />
           </div>
           <div class="suggest_type">
             <p class="font16">建議事項</p>
@@ -190,10 +198,12 @@
         </div>
 
         <div class="accordion">
-          <div class="container" 
-          v-for="qa in QAlist" 
-          :key="index"
-          @click="accordion">
+          <div
+            class="container"
+            v-for="qa in QAlist"
+            :key="index"
+            @click="accordion"
+          >
             <div class="label">
               <i class="fa-solid fa-q"></i>
               <h6>
@@ -214,8 +224,13 @@
 
       @@include('layout/serve.html') @@include('layout/footer.html')
     </div>
-    <script src="./js/vender/Vue/vue.global.js"></script>
+
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/vender/Vue/vue.global.js"></script>
+    <script src="js/frontpage/cart_pop.js"></script>
+    <script src="js/frontpage/login.js"></script>
+    <script src="js/frontpage/login_check.js"></script>
 
     <script>
       let app1 = Vue.createApp({
@@ -236,7 +251,6 @@
                 this.classList.toggle("active");
               });
             }
-            
           },
           aboutajax() {
             let contact_name = document.getElementById("contact_name");
@@ -280,7 +294,6 @@
                 response.forEach((element) => {
                   // console.log(element);
                   _this.QAlist.push(element);
-
                 });
               },
               error: function (exception) {

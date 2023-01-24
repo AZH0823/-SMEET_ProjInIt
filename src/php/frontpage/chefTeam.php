@@ -4,11 +4,11 @@
     //建立SQL
     $sql = "SELECT * FROM TEAMS";
 
-    $sql = "SELECT t.ID, `LederName`, `LederProfile`, t.IMG
-    FROM smeet.Teams t
-    join smeet.Chefs c
-    on t.ID = c.ID 
-    ";
+    // $sql = "SELECT t.ID, `LederName`, `LederProfile`, t.IMG
+    // FROM smeet.Teams t
+    // join smeet.Chefs c
+    // on t.ID = c.ID 
+    // ";
 
 
 
