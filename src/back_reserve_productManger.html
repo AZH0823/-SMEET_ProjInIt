@@ -13,19 +13,19 @@
 <body>
     <!-- ============== 缺搜尋BAR ============== -->
     <div class="back_reserve_productManger fulid_wrapper">
-        <div class="backwrapper">
+        <div class="backwrapper"  id="reserve_producetManger">
             <header>
                 @@include('layout/back_header.html')
             </header>
 
-            <div class="container">
+            <div class="container" >
                 <main class="right_content">
                     <section class="section1">
                         <!-- form -->
                         <div class="back_from">
                             <h4 class="h4 green-1">私廚商品上架</h4>
                             <div class="back_from_wrapper">
-                                    <!-- row-1 -->
+                                <!-- row-1 -->
                                 <div class="grid_container">
                                     <div class="grid_item">商品編號</div>
                                     <div class="grid_item">分類</div>
@@ -34,70 +34,80 @@
                                     <!-- <div class="grid_item">庫存</div> -->
                                     <div class="grid_item">狀態</div>
                                 </div>
-
-                                <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">SM001</div>
-                                    <div class="grid_item">私廚菜單</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <!-- <div class="grid_item">25</div> -->
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
+                                <template v-for="set in APIdata.sets">
+                                        <template v-for="(itemList,dishType) in set.dish">
+                                            <template v-for="(dish) in itemList">
+                                                <div class="grid_container"> 
+                                                    <div class="grid_item checked">{{dish.id}}</div>
+                                                    <div class="grid_item">{{set.setName}}-{{dishType}}</div>
+                                                    <div class="grid_item">{{dish.dishName}}</div>
+                                                    <div class="grid_item">{{dish.price}}</div>
+                                                    <div class="grid_item">
+                                                        <label class="switch">
+                                                            <input type="checkbox" class="switch_btn" checked>
+                                                            <span class="slider"></span>
+                                                            <p class="slider_content">上架</p>
+                                                        </label>
+                                                    </div> 
+                                                </div>
+                                            </template>
+                                        </template>
+                                </template>
+                                <!-- 渲染單品 -->
+                                <template v-for="item in APIdata.other" :key="item.id">
+                                    <!-- <p>{{item}}</p> -->
+                                    <div class="grid_container" :data-id="item.id">
+                                        <div class="grid_item checked">{{item.id}}</div>
+                                        <div class="grid_item">{{item.dishType}}</div>
+                                        <div class="grid_item">{{item.dishName}}</div>
+                                        <div class="grid_item">${{item.price}}</div>
+                                       
+                                        <div class="grid_item">
+                                            <label class="switch">
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1">
+                                                <span class="slider"></span>
+                                                <p class="slider_content" v-if="item.Condition === 1">上架</p>
+                                                <p class="slider_content" v-if="item.Condition === 0">下架</p>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">單品</div>
-                                    <div class="grid_item">蛤蠣煮物院雞湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <!-- <div class="grid_item">25</div> -->
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
+                                </template>
+                                
+                                <!-- 服務 -->
+                                <template v-for="item in APIdata.serve" :key="item.id">
+                                    <!-- <p>{{item}}</p> -->
+                                    <div class="grid_container" :data-id="item.id">
+                                        <div class="grid_item checked">{{item.id}}</div>
+                                        <div class="grid_item">{{item.dishType}}</div>
+                                        <div class="grid_item">{{item.dishName}}</div>
+                                        <div class="grid_item">${{item.price}}</div>
+                                       
+                                        <div class="grid_item">
+                                            <label class="switch">
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1">
+                                                <span class="slider"></span>
+                                                <p class="slider_content" v-if="item.Condition === 1">上架</p>
+                                                <p class="slider_content" v-if="item.Condition === 0">下架</p>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
+                                </template>
 
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">單品</div>
-                                    <div class="grid_item">日暈雙月奶蓋</div>
-                                    <div class="grid_item">$280</div>
-                                    <!-- <div class="grid_item">5</div> -->
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-5 -->
-                                <div class="grid_container">
+                                <!-- template backup -->
+                                <!-- <div class="grid_container">
                                     <div class="grid_item checked">S001</div>
                                     <div class="grid_item">湯品</div>
                                     <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
+                                    <div class="grid_item">$280</div> -->
                                     <!-- <div class="grid_item">25</div> -->
-                                    <div class="grid_item">
+                                    <!-- <div class="grid_item">
                                         <label class="switch">
                                             <input type="checkbox" class="switch_btn" checked>
                                             <span class="slider"></span>
                                             <p class="slider_content">上架</p>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 
                             </div><!-- wrapper -->
@@ -117,7 +127,7 @@
                 @@include('layout/back_footer.html')
             </div><!-- container -->
         </div>
-        <div class="section_reserve" id="reserve_producetManger">
+        <div class="section_reserve">
             <div class="reserve_top">
                 <p>新增私廚菜單</p>
             </div>
@@ -147,12 +157,14 @@
         </div>
     </div>
         <script src="js/vender/Vue/vue.global.js"></script>
+        <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
         <script>
             const app = Vue.createApp({
             data() {
                 return {
                     APIdata:{
                     },
+                    CC:'aaa',
                 };
                 },
                 computed:{
@@ -169,11 +181,18 @@
                             // 將套餐資訊放入APIData (圖片,售價,ID...)
                             // console.log(data)
                             data.forEach(el => {
-                                console.log(el)
-                                if(this.APIdata.hasOwnProperty(`set${el.id}`)){
-                                    this.APIdata[`set${el.id}`] = {}
+                                // console.log(el)
+                                if(!this.APIdata.hasOwnProperty(`sets`)){
+                                        this.APIdata.sets = {};
                                 }
-                                this.APIdata[`set${el.id}`] = el 
+                                if(this.APIdata.sets.hasOwnProperty(`set${el.id}`)){
+                                    this.APIdata[`set${el.id}`] = {};
+                                }
+
+                                this.APIdata.sets[`set${el.id}`] = el; 
+                                // _this.$nextTick(function () {  
+                                //     _this.OrderDetail = {...obj}
+                                // });
                             });
                             this.getSetdishDetail();
                         }).catch(err=>{
@@ -183,7 +202,7 @@
 
                     // 取得套餐內商品資訊 及 服務資訊
                     getSetdishDetail(){
-                        fetch('php/reserveAPI/setAPI.php')
+                        fetch('php/backpage/back_setAPI.php')
                         .then(function(response) {
                             return response.json();
                         })
@@ -193,20 +212,22 @@
                                 // 單品 
                                 if(data.SetID === null && data.dishType =="服務"){
                                     // this.APIdata.other
+                                    // console.log(data)
                                     if(this.APIdata.serve == undefined){
                                         this.APIdata.serve =[];
                                     }
                                     this.APIdata.serve.push(data);
                                 }else{
                                      // 塞A,B,C 套餐資訊
-                                    if(!this.APIdata[`set${data.SetID}`].hasOwnProperty(`dish`)){
-                                        this.APIdata[`set${data.SetID}`][`dish`] = {};
+                                   
+                                    if(!this.APIdata.sets[`set${data.SetID}`].hasOwnProperty(`dish`)){
+                                        this.APIdata.sets[`set${data.SetID}`][`dish`] = {};
                                     }
                                     // console.log(data.dishType)
-                                    if(!this.APIdata[`set${data.SetID}`].dish.hasOwnProperty(`${data.dishType}`)){
-                                        this.APIdata[`set${data.SetID}`].dish[`${data.dishType}`] =[];
+                                    if(!this.APIdata.sets[`set${data.SetID}`].dish.hasOwnProperty(`${data.dishType}`)){
+                                        this.APIdata.sets[`set${data.SetID}`].dish[`${data.dishType}`] =[];
                                     }
-                                    this.APIdata[`set${data.SetID}`].dish[`${data.dishType}`].push(data);
+                                    this.APIdata.sets[`set${data.SetID}`].dish[`${data.dishType}`].push(data);
                                 }
                                
                             })
@@ -222,28 +243,30 @@
 
                      // 取得單點商品資訊
                     getOtherDish(){
-                        fetch('php/reserveAPI/otherAPI.php')
+                        fetch('php/backpage/back_getOtherdish.php')
                             .then(response =>{
                                 return  response.json();
                             })
                             .then( data =>{
-                                console.log(data)
+                                const _this = this
+                                // console.log(data)
+                                let temp = []
                                 if(this.APIdata.other == undefined){
                                         this.APIdata.other =[];
                                 }
                                 data.forEach((data_el)=>{  
-                                    console.log(data_el.price)
+                                    // console.log(data_el.price)
                                     let obj={
                                         id:data_el.id,
                                         dishName:data_el.disName,
                                         dishType:data_el.dishType,
                                         price:data_el.price,
-                                        qty:0
+                                        Condition:data_el.Condition
                                     }
-                                    this.APIdata.other.push(obj);
+                                    temp.push(obj);
                                    
-                                })
-                                 
+                                })  
+                                 _this.APIdata.other = temp
                                    
                             }).catch(err=>{
                                 console.log(err)

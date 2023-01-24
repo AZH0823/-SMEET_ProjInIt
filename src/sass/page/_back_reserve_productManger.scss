@@ -37,9 +37,9 @@ div.back_reserve_productManger {
                                 width: 100%;
                                 text-align: center;
                                 align-items: center;
-                                grid-template: repeat(1, 1fr) / minmax(110px, 120px) minmax(max-content, 100px) minmax(max-content, 1fr) minmax(max-content, 100px) 1fr;
+                                // grid-template: repeat(1, 1fr) / minmax(110px, 120px) minmax(max-content, 100px) minmax(max-content, 1fr) minmax(max-content, 100px) 1fr;
                                 border-bottom: 0.5px solid #ccc;
-
+                                grid-template-columns: 80px 2fr 2fr 80px 2fr;
                                 &:first-child {
                                     background-color: $Camel-3;
                                 }
