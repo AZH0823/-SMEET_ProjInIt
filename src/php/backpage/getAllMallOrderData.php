@@ -33,34 +33,34 @@
         );}
 
         echo json_encode($arr);  
-    // }else{
+    }else{
 
-    //     $MallListDetail ="select * from MallDetail as M
-    //     join (SELECT d.ID ,D.`Type`, d.`Name`as DishName ,dt.`Name` as DTName 
-    //             FROM Dish d JOIN DishsType dt
-    //               ON d.Type = dt.ID
-    //                order by dt.ID asc) as B
-    //         on M.DishID = B.ID
-    //         having MallID = :getID ;";
+        $MallListDetail ="select * from MallDetail as M
+        join (SELECT d.ID ,D.`Type`, d.`Name`as DishName ,dt.`Name` as DTName 
+                FROM Dish d JOIN DishsType dt
+                  ON d.Type = dt.ID
+                   order by dt.ID asc) as B
+            on M.DishID = B.ID
+            having MallID = :getID ;";
 
-    //     $Searhstatement = getPDO()->prepare($MallListDetail);
-    //     $Searhstatement -> bindValue(':getID',$getID); 
-    //     $Searhstatement -> execute();
+        $Searhstatement = getPDO()->prepare($MallListDetail);
+        $Searhstatement -> bindValue(':getID',$getID); 
+        $Searhstatement -> execute();
 
-    //     $result = $Searhstatement -> fetchAll();
-    //     echo json_encode($result); 
-    //     $arr=array();
-    //     foreach($result as $newData){
-    //     $arr[] = array(
-    //         'ID'=>$newData['ID'],
-    //         'MallID'=>$newData['MallID'],
-    //         'DishName'=>$newData['DishName'],
-    //         'DtName'=>$newData['DTName'],
-    //         'qty'=>$newData['qty'],
-    //         'price'=>$newData['price']
+        $result = $Searhstatement -> fetchAll();
+        echo json_encode($result); 
+        $arr=array();
+        foreach($result as $newData){
+        $arr[] = array(
+            'ID'=>$newData['ID'],
+            'MallID'=>$newData['MallID'],
+            'DishName'=>$newData['DishName'],
+            'DtName'=>$newData['DTName'],
+            'qty'=>$newData['qty'],
+            'price'=>$newData['price']
             
-    //     );}
-    //         echo json_encode($arr); 
+        );}
+            echo json_encode($arr); 
     }
 
 

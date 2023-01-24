@@ -6,8 +6,6 @@
         <link rel="icon" href="./img/index_img/logo2-03 1.ico" type="image/x-icon"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-        <script src="./js/vender/calender/calender.js"></script>
-        <script src="./js/vender/calender/index.global.js"></script>
     </head>
     <body>
         @@include('layout/header_index.html')
@@ -41,149 +39,158 @@
             </div>
 
             <!--------------------------- 線上商城 --------------------------->
-            <div class="fulid_wrapper index_shop ">
+            <div class="fulid_wrapper index_shop" id="app">
                 <div class="_index_reserve">
                     <h2 class="font_bold font_family_tc green-1">線上商城</h2>
                     <div class="_index_line"></div>
                 </div>
                 <div class="swiper mySwiper wrapper">
                     <div class="shop_card swiper-wrapper">
-                        <div class="swiper-slide">
+                        <template 
+                        v-for="(item, index) in shop_card" 
+                        :key="item.Name">
+                        
+                            <div class="swiper-slide">
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
-                                            <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <img :src="item.IMG[0]" alt=""/>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
-                                            <h6 class="product_title">黑鮪刺身1</h6>
+                                            <h6 class="product_title">{{item.Name}}</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <i class="fa-solid fa-cart-shopping" 
+                                                @click="shopCar(item.ID, item.Name, item.Price, item.IMG[0], item.heart, item.qty)"
+                                                @click.prevent
+                                                ></i>
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
-                        <div class="swiper-slide">
+                            </div>
+                        
+                            <div class="swiper-slide">
                                 <li class="collect_list">
-                                    <a href="shopMallDetail.html">
+                                    <a :href="'./shopMallDetail.html?ID='+ item.ID">
                                         <div class="product_img">
                                             <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
                                             <h6 class="product_title">黑鮪刺身2</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
-                        <div class="swiper-slide">
+                            </div>
+                            <div class="swiper-slide">
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
                                             <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
                                             <h6 class="product_title">黑鮪刺身3</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
-                        <div class="swiper-slide">
+                            </div>
+                            <div class="swiper-slide">
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
                                             <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
                                             <h6 class="product_title">黑鮪刺身4</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
-                        <div class="swiper-slide">
+                            </div>
+                            <div class="swiper-slide">
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
                                             <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
                                             <h6 class="product_title">黑鮪刺身5</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
-                        <div class="swiper-slide">
+                            </div>
+                            <div class="swiper-slide">
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
                                             <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
                                             <h6 class="product_title">黑鮪刺身6</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
-                        <div class="swiper-slide">
+                            </div>
+                            <div class="swiper-slide">
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
                                             <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
                                             <h6 class="product_title">黑鮪刺身7</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
-                        <div class="swiper-slide">
+                            </div>
+                            <div class="swiper-slide">
                                 <li class="collect_list">
                                     <a href="shopMallDetail.html">
                                         <div class="product_img">
                                             <img src="img/member_img/member_wish1.jpg" alt=""/>
-                                            <i class="fa-solid fa-heart"></i>
+                                            <!-- <i class="fa-solid fa-heart"></i> -->
                                         </div>
                                         <div class="product_content green-1">
                                             <h6 class="product_title">黑鮪刺身8</h6>
                                             <p class="font16">$<span class="product_money">700</span></p>
                                             <button type="button" class="cart_link" href="">
-                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <!-- <i class="fa-solid fa-cart-shopping"></i> -->
                                             </button>
                                         </div>
                                     </a>
                                 </li>
-                        </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
                 <!-- <div class="swiper-pagination"></div> -->
@@ -514,13 +521,35 @@
         </div>
     </div> 
     @@include('layout/serve.html') @@include('layout/footer.html')
+    <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/index_header.js"></script>
+    <script src="js/vender/Vue/vue.global.js"></script>
+    <script src="js/frontpage/cart_pop.js"></script>
+    <script src="js/frontpage/login.js"></script>
+    <script src="js/frontpage/login_check.js"></script>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js" integrity="sha512-ZHauUc/vByS6JUz/Hl1o8s2kd4QJVLAbkz8clgjtbKUJT+AG1c735aMtVLJftKQYo+LD62QryvoNa+uqy+rCHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Initialize Swiper -->
-    
-    <script>
 
+    <!-- Vue -->
+    <script src="./js/vender/Vue/vue.global.js"></script>
+    <!-- Jquery -->
+    <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
+    <!-- Calender -->
+    <script src="./js/vender/calender/calender.js"></script>
+    <script src="./js/vender/calender/index.global.js"></script>
+    <!-- 頁面動畫 -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <!-- Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <script>
         //---------------------菜品評價---------------------//
       var swiper = new Swiper(".mySwiper", {
         breakpoints: {
@@ -553,29 +582,111 @@
 
       //---------------------ajax---------------------//
 
+    //   $.ajax({
+    //     method:"GET",
+    //     url:"php/frontpage/index_shop.php",
+    //     data:{},
+    //     dataType:"text",
+    //     success:function(response){
+    //         //更新html內容
+    //         $("#result").html(response);
+    //     },
+    //     error:function(exception){
+    //         alert("發生錯誤: " + exception.status);
+    //     }
+    //   });
 
-      $.ajax({
-        method:"POST",
-        url:"php/frontpage/chef.php",
-        data:{},
-        dataType:"text",
-        success:function(response){
-            //更新html內容
-            $("#result").html(response);
+    // -------------------------------------商城------------------------------------- //
+    
+    const app = Vue.createApp({
+        data(){
+            return{
+                popupData: {
+                    ID: "",
+                    IMG: "",
+                    Name: "",
+                    Price: "",
+                    heart: "",
+                    qty: "",
+                },      
+                MealsInfo: [],
+                AjaxMealsInfo: [],
+            };
         },
-        error:function(exception){
-            alert("發生錯誤: " + exception.status);
-        }
-      });
 
+        created(){
+            window.addEventListener("popstate", function () {
+                // 第二步，加上 tab_active 函式
+                member.page();
+                // console.log('aaa');
+            });
+        },
 
-      
+        mounted(){
+            // 主要商品data AJAX 傳入
+            this.getCate();
+            this.log1()
+        },
+
+        methods:{
+            
+            log1(){
+                console.log('aaa')
+            },
+
+            getCate(){    
+
+                    $.ajax({            
+
+                        method: "GET",
+                        url: "./php/frontpage/index_shop.php",
+                        data:{},
+                        dataType: "json",
+                        success: (response)=> {
+                            if(response != ""){
+                                // console.log(response);
+
+                                // 將qty及heart資料帶入，變成新陣列
+                                const adjusted_res = response.map((x) => {
+                                    x.heart = false
+                                    x.qty = 0  // 預設值: 在消費者行為前為 0
+                                    return x
+                                });
+                                // 調整後的data 回傳到 AjaxMealsInfo 陣列
+                                this.AjaxMealsInfo = adjusted_res;
+                                // console.log(this.AjaxMealsInfo);
+                                    
+                                // 將三張 img 轉陣列並塞回 data
+                                let xxx = this.AjaxMealsInfo;
+                                for(let i =0; i < xxx.length; i++){
+
+                                    // 將img存到新陣列
+                                    let img = this.AjaxMealsInfo[i].IMG
+                                        
+                                    const imgs = img.split(" ");
+
+                                    // 回傳AjaxMealsInfo
+                                    this.AjaxMealsInfo[i].IMG = imgs
+                                    // console.log(this.AjaxMealsInfo[i].IMG);
+                                }
+                                // console.log("123");
+                                // console.log(this.AjaxMealsInfo);
+                                    
+                                // this.selectCollections();
+                            }                
+                        },
+                        error: (exception)=> {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                }
+
+            },
+
+    });
+    const vm = app.mount('#app')
+
     </script>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 </body>
 </html>
