@@ -30,19 +30,19 @@
                 </div>
             </div>
             <div class="fulid_wrapper app1">
-                <div class="_chef_tab" 
+                    <div class="_chef_tab" 
                 v-for="(item, index) in chef_tab"
                 :key="index"
                 >
                     <!------------------------- 廚師長1 ------------------------->
-                    <input id="chef1" type="radio" name="chef" checked="checked"/>
-
+                    <input id="chef1" type="radio" name="chef" checked="checked"
+                    
+                    />
                     <label for="chef1">
                         <!-- 立雁杉廚師長 -->
                         {{item.LederName}}
                     </label>
-                    
-                    <div class="_chef_content " v-if="chef_data === 'chef1'">
+                    <div class="_chef_content">
                         <div class="_chef_line"></div>
                         <div class="_chef_top">
                             <div class="part1">
@@ -143,6 +143,8 @@
                         </div>
 
                     </div>
+                
+
                     <!------------------------- 廚師長2 ------------------------->
                     <!-- <input id="chef2" type="radio" name="chef"/>
                     <label for="chef2">菜雨停廚師長</label>
@@ -355,8 +357,15 @@
                         </div>
 
                     </div> -->
-        </div>
+                </div>
+                
         @@include('layout/serve.html') @@include('layout/footer.html')
+        <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+        <script src="js/header.js"></script> 
+        <script src="js/vender/Vue/vue.global.js"></script>
+        <script src="js/frontpage/cart_pop.js"></script>
+        <script src="js/frontpage/login.js"></script>
+        <script src="js/frontpage/login_check.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
@@ -403,8 +412,8 @@
                 this.chef_tab=[];
                 let _this = this;
                 $.ajax({
-                    method:"POST/GET",
-                    url:"php/fronx`tpage/chefteam.php",
+                    method:"GET",
+                    url:"php/frontpage/chefTeam.php",
                     data:{},
                     dataType:"json",
                     success:function(response){

@@ -1,267 +1,294 @@
 div.back_orderlist_shop {
-    div.backwrapper {
-        display: flex;
-        position: relative;
-        gap: 7%;
+  div.backwrapper {
+    display: flex;
+    position: relative;
+    gap: 7%;
 
-        header {
-            display: flex;
-        }
-
-        div.container {
-            display: flex;
-            flex-direction: column;
-            width: 73%;
-
-            main.right_content {
-                margin-bottom: 50px;
-                width: 100%;
-
-                section.section1 {
-                    margin-top: 100px;
-
-                    div.back_from {
-                        width: 100%;
-
-                        .back_fromTitle {
-                            display: flex;
-                            justify-content: space-between;
-                            margin-bottom: 30px; // 🙆🏻 後台統一30px
-
-                            .search {
-                                display: flex;
-                                justify-content: flex-end;
-                                align-items: center;
-
-                                .search_container_item {
-                                    margin-right: 10px;
-
-                                    input {
-                                        padding: 6px;
-                                    }
-                                }
-                            }
-                        }
-
-                        div.back_from_wrapper {
-                            height: 550px;
-                            overflow-y: scroll;
-                            div.grid_container {
-                                margin: 0 auto;
-                                display: grid;
-                                width: 100%;
-                                text-align: center;
-                                align-items: center;
-                                grid-template: repeat(1, 1fr) / repeat(5, 1fr) 155.5px;
-                                border-bottom: 0.5px solid #ccc;
-
-                                &:first-child {
-                                    background-color: $Camel-3;
-                                }
-
-                                // .grid_item:nth-child( n + 1){
-                                //     border-bottom: .5px solid #ccc; // 加底线
-                                // }
-
-                                // Popup點擊hover
-                                .checked:hover {
-                                    cursor: pointer;
-                                    color: #ccc;
-                                }
-
-                                div.grid_item {
-                                    padding: 20px;
-                                }
-                            }
-                        }
-
-                    }
-
-
-                    // 頁簽
-                    .page {
-                        .page_ul {
-                            position: unset; // 取消原本的属性
-                            display: flex;
-                            justify-content: center;
-
-                            li {
-                                line-height: 30.5px;
-                                margin-left: 12px;
-                                width: 33px;
-                                height: 33px;
-                                border-radius: 50%;
-                                background-color: #F9F4EC;
-                                margin: 39px 0 25px 21px;
-                                border: 1px solid #000;
-
-                                a {
-                                    display: block;
-                                    text-decoration: none;
-                                    text-align: center;
-                                    color: #000;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    header {
+      display: flex;
     }
+
+    div.container {
+      display: flex;
+      flex-direction: column;
+      width: 73%;
+
+      main.right_content {
+        margin-bottom: 50px;
+        width: 100%;
+
+        section.section1 {
+          margin-top: 100px;
+
+          div.back_from {
+            width: 100%;
+
+            .back_fromTitle {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 30px; // 🙆🏻 後台統一30px
+
+              .search {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                .search_container_item {
+                  margin-right: 10px;
+
+                  input {
+                    padding: 6px;
+                  }
+                }
+              }
+            }
+
+            div.back_from_wrapper {
+              height: 550px;
+              overflow-y: scroll;
+              div.grid_container {
+                margin: 0 auto;
+                display: grid;
+                width: 100%;
+                text-align: center;
+                align-items: center;
+                grid-template: repeat(1, 1fr) / repeat(5, 1fr) 155.5px;
+                border-bottom: 0.5px solid #ccc;
+
+                &:first-child {
+                  background-color: $Camel-3;
+                }
+
+                // .grid_item:nth-child( n + 1){
+                //     border-bottom: .5px solid #ccc; // 加底线
+                // }
+
+                // Popup點擊hover
+                .checked:hover {
+                  cursor: pointer;
+                  color: #ccc;
+                }
+
+                div.grid_item {
+                  padding: 20px;
+                }
+              }
+            }
+          }
+
+          // 頁簽
+          .page {
+            .page_ul {
+              position: unset; // 取消原本的属性
+              display: flex;
+              justify-content: center;
+
+              li {
+                line-height: 30.5px;
+                margin-left: 12px;
+                width: 33px;
+                height: 33px;
+                border-radius: 50%;
+                background-color: #f9f4ec;
+                margin: 39px 0 25px 21px;
+                border: 1px solid #000;
+
+                a {
+                  display: block;
+                  text-decoration: none;
+                  text-align: center;
+                  color: #000;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .backShopOderList_container {
-    outline: auto;
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.155);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    overflow: hidden;
-    z-index: 10000;
+  outline: auto;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.155);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  overflow: hidden;
+  z-index: 10000;
 
-    .wrapper {
-        background-color: white;
-        box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+  .wrapper {
+    background-color: white;
+    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 650px;
+    height: 90vh;
+    scroll-behavior: auto;
+    overflow-y: auto;
+
+    // 明細標題
+    .oderList_header {
+      background-color: $Camel-3;
+      display: flex;
+      justify-content: center;
+      position: relative;
+
+      .title {
+        margin: 5px 0px;
+      }
+
+      .popUpClose {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        max-width: 520px;
-
-        // 明細標題
-        .oderList_header {
-            background-color: $Camel-3;
-            display: flex;
-            justify-content: center;
-            position: relative;
-
-            .title {
-                margin: 5px 0px;
-            }
-
-            .popUpClose {
-                position: absolute;
-                right: 5%;
-                top: 20%;
-            }
-        }
-
-        // 餐點類別
-        .infoType {
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            border-bottom: .5px solid black;
-            padding: 10px 0px;
-            margin-bottom: 20px;
-            width: 90%;
-
-            p {
-                display: flex;
-            }
-        }
-
-        .meal_wrap {
-
-            max-height: 650px;
-            overflow-y: scroll;
-
-            // 餐點明細
-            .meal_container {
-                
-                width: 90%;
-                margin: 0 auto;
-                padding-bottom: 30px;
-                border-bottom: .5px solid #000;
-
-                .infoContent_title {
-                    text-align: start;
-                    display: grid;
-                    grid-template: repeat(1, 1fr)/ minmax(max-content, 80px) minmax(max-content, 250px) 1fr 1fr;
-                    margin-bottom: 25px;
-
-                    p.item {
-                        margin-left: 10%;
-                    }
-                }
-
-                // 餐點
-                .meal_cate {
-                    display: grid;
-                    width: 100%;
-                    grid-template: repeat(1, 1fr)/ minmax(max-content, 80px) minmax(max-content, 250px) 1fr 1fr;
-
-                    p.item {
-                        text-align: start;
-                        margin-left: 10%;
-                        margin-bottom: 10px;
-                    }
-                }
-
-                // 回饋點數
-                .meal_point {
-                    display: grid;
-                    width: 100%;
-                    grid-template: repeat(1, 1fr)/ minmax(max-content, 80px) minmax(max-content, 250px) 1fr 1fr;
-                    border-top: .5px solid #000;
-                    border-bottom: .5px solid #000;
-                    margin-bottom: 10px;
-
-                    p.item {
-                        text-align: start;
-                        margin: 10px 0 10px 10%;
-                    }
-                }
-
-                // 餐點 total
-                .meal_total {
-                    display: grid;
-                    width: 100%;
-                    grid-template: repeat(1, 1fr)/ minmax(max-content, 80px) minmax(max-content, 250px) 1fr 1fr;
-
-                    p.item {
-                        text-align: start;
-                        margin-left: 10%;
-                        margin-bottom: 10px;
-                    }
-                }
-            }
-
-            // 訂單資訊
-            .orderInfo {
-                margin: 0 auto;
-                width: 90%;
-
-                .orderInfo_title {
-                    p {
-                        margin: 10px 0 30px 10px;
-                    }
-                }
-
-                .orderInfo_container {
-                    padding-bottom: 30px;
-                    .item_group {
-                        margin-left: 10px;
-                        display: grid;
-                        grid-template: repeat(1, 1fr)/ minmax(max-content, 20%) minmax(max-content, 1fr);
-                        margin-bottom: 10px;
-
-                        .item_content {
-                            font-family: Noto Sans TCserif;
-                            border: .5px solid #ccc;
-                            border-radius: 2.5px;
-                            padding: 6px;
-                            font-size: 14px;
-                        }
-                    }
-                }
-            }
-        }
+        right: 5%;
+        top: 20%;
+      }
     }
+
+    // 餐點類別
+    .infoType {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 0.5px solid black;
+      padding: 10px 0px;
+      margin-bottom: 20px;
+      width: 90%;
+
+      p {
+        display: flex;
+      }
+    }
+
+    .meal_wrap {
+      max-height: 650px;
+      // height: 90vh;
+      // scroll-behavior: auto;
+      // overflow-y: auto;
+
+      // 餐點明細
+      .meal_container {
+        width: 90%;
+        margin: 0 auto;
+        padding-bottom: 30px;
+        border-bottom: 0.5px solid #000;
+
+        .infoContent_title {
+          text-align: start;
+          display: grid;
+          grid-template:
+            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
+              max-content,
+              250px
+            )
+            1fr 1fr;
+          margin-bottom: 25px;
+
+          p.item {
+            margin-left: 10%;
+          }
+        }
+
+        // 餐點
+        .meal_cate {
+          display: grid;
+          width: 100%;
+          grid-template:
+            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
+              max-content,
+              250px
+            )
+            1fr 1fr;
+
+          p.item {
+            text-align: start;
+            margin-left: 10%;
+            margin-bottom: 10px;
+          }
+        }
+
+        // 回饋點數
+        .meal_point {
+          display: grid;
+          width: 100%;
+          grid-template:
+            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
+              max-content,
+              250px
+            )
+            1fr 1fr;
+          border-top: 0.5px solid #000;
+          border-bottom: 0.5px solid #000;
+          margin-bottom: 10px;
+
+          p.item {
+            text-align: start;
+            margin: 10px 0 10px 10%;
+          }
+        }
+
+        // 餐點 total
+        .meal_total {
+          display: grid;
+          width: 100%;
+          grid-template:
+            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
+              max-content,
+              250px
+            )
+            1fr 1fr;
+
+          p.item {
+            text-align: start;
+            margin-left: 10%;
+            margin-bottom: 10px;
+          }
+        }
+      }
+
+      // 訂單資訊
+      .orderInfo {
+        margin: 0 auto;
+        width: 90%;
+
+        .orderInfo_title {
+          p {
+            margin: 10px 0 30px 10px;
+          }
+        }
+
+        .orderInfo_container {
+          padding-bottom: 30px;
+          .item_group {
+            margin-left: 10px;
+            display: grid;
+            grid-template: repeat(1, 1fr) / minmax(max-content, 20%) minmax(
+                max-content,
+                1fr
+              );
+            margin-bottom: 10px;
+
+            .item_content {
+              font-family: Noto Sans TCserif;
+              border: 0.5px solid #ccc;
+              border-radius: 2.5px;
+              padding: 6px;
+              font-size: 14px;
+              // background-color: none;
+              // color: gray;
+              // cursor: not-allowed;
+            }
+          }
+        }
+      }
+    }
+  }
 }
