@@ -32,23 +32,20 @@
                                     <div class="grid_item">狀態</div>
                                 </div>
                                 <template v-for="set in APIdata.sets">
-                                        <template v-for="(itemList,dishType) in set.dish">
-                                            <template v-for="(dish) in itemList">
                                                 <div class="grid_container"> 
-                                                    <div class="grid_item checked">{{dish.id}}</div>
-                                                    <div class="grid_item">{{set.setName}}-{{dishType}}</div>
-                                                    <div class="grid_item">{{dish.dishName}}</div>
-                                                    <div class="grid_item">{{dish.price}}</div>
-                                                    <div class="grid_item">
+                                                    <div class="grid_item">Set{{set.id}}</div>
+                                                    <div class="grid_item">私廚套餐</div>
+                                                    <div class="grid_item">{{set.setName}}</div>
+                                                    <div class="grid_item">{{set.price}}</div>
+                                                    <div class="grid_item checked">查看/編輯</div>
+                                                    <!-- <div class="grid_item">
                                                         <label class="switch">
                                                             <input type="checkbox" class="switch_btn" checked>
                                                             <span class="slider"></span>
                                                             <p class="slider_content">上架</p>
                                                         </label>
-                                                    </div> 
+                                                    </div>  -->
                                                 </div>
-                                            </template>
-                                        </template>
                                 </template>
                                 <!-- 渲染單品 -->
                                 <template v-for="item in APIdata.other" :key="item.id">
@@ -61,7 +58,7 @@
                                        
                                         <div class="grid_item">
                                             <label class="switch">
-                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1">
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click= changeCondtion(item,$event)>
                                                 <span class="slider"></span>
                                                 <p class="slider_content" v-if="item.Condition === 1">上架</p>
                                                 <p class="slider_content" v-if="item.Condition === 0">下架</p>
@@ -81,7 +78,7 @@
                                        
                                         <div class="grid_item">
                                             <label class="switch">
-                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1">
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click= changeCondtion(item,$event)>
                                                 <span class="slider"></span>
                                                 <p class="slider_content" v-if="item.Condition === 1">上架</p>
                                                 <p class="slider_content" v-if="item.Condition === 0">下架</p>
@@ -269,7 +266,47 @@
                                 console.log(err)
                             })
                     },
+
+
+                    // 單品及服務Condition Update
+                    updateOrderDishCondition(item){
+                        // console.log(item)
+                        
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/updateOrderDishCondition.php",
+                            data: {
+                                ID:item.id,
+                                Condition:item.Condition
+                            },
+                            dataType: "text",
+                            success: function (response) {
+                                console.log(response)
+                            },
+                            error: function (exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });
+                    },
                     // api end
+
+                    // 單品,服務物品上下架
+                    changeCondtion(dish,e){
+                        // console.log(e);
+                        if(window.confirm('是否要更商品狀態?')){
+                            if(dish.Condition ==1){
+                                dish.Condition = 0;
+                            }else{
+                                dish.Condition = 1;
+                            } 
+                            // updata  Condition API
+                            this.updateOrderDishCondition(dish);
+                        }else{
+                            // console.log(e.target.checked)
+                            // console.log(dish.Condition)
+                            e.target.checked = dish.Condition
+                        }
+                    }
                 },
 
                 watch:{

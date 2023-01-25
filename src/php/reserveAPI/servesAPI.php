@@ -6,7 +6,7 @@
   FROM Dish d
         join DishsType dt
             on d.`Type` = dt.ID
-  where type = 11";
+  where type = 11 and `Condition` = 1";
 
   $Searhstatement = getPDO()->prepare($SearhDishSql);
   $Searhstatement -> execute();
