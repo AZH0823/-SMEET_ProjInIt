@@ -69,7 +69,7 @@ div.back_productManger {
                                             height: 0;
 
                                             &:checked+.slider {
-                                                background-color: red;
+                                                background-color: green;
                                             }
 
                                             &:checked+.slider:before {
@@ -79,6 +79,7 @@ div.back_productManger {
                                             }
                                         }
 
+
                                         .slider {
                                             position: absolute;
                                             cursor: pointer;
@@ -86,7 +87,7 @@ div.back_productManger {
                                             left: 0;
                                             right: 0;
                                             bottom: 0;
-                                            background-color: green;
+                                            background-color: red;
                                             transition: .4s;
                                             transition: .4s;
                                             border-radius: 34px;

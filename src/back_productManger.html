@@ -50,9 +50,10 @@
                                     <div class="grid_item">{{ item.Price }}</div>
                                     <div class="grid_item">
                                         <label class="switch">
-                                            <input type="checkbox" class="switch_btn" :checked="currentState" v-model="item.Condition" :value="item.Condition">
-                                            <span class="slider"  @click="switchToggle(item)"></span>
-                                            <p class="slider_content"> 上架 </p>
+                                            <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click="switchToggle(item, $event)">
+                                            <span class="slider"></span>
+                                            <p class="slider_content" v-if="item.Condition === 1">上架</p>
+                                            <p class="slider_content" v-if="item.Condition === 0">下架</p>
                                         </label>
                                     </div>
                                 </div>
@@ -150,24 +151,6 @@
         <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
     <script>
 
-        // 導覽列滑動效果
-        const switchBtn = document.querySelectorAll(".switch_btn");
-        const sliderContent = document.querySelectorAll(".slider_content");
-        for(let i=0; i < switchBtn.length; i++){
-            console.log(i)
-            switchBtn[i].addEventListener("click", function(){
-                console.log(this.checked); // ture /false
-                // console.log(i); 
-                // console.log(this)
-
-                if (this.checked == true) {
-                    $(this).closest("label").find(".slider_content").text('上架');
-                } else{
-                    $(this).closest("label").find(".slider_content").text('下架');
-                }
-            });
-        }
-
 
         // fileReader
         function openFile(event){
@@ -187,6 +170,11 @@
         const app = Vue.createApp({
             data() {
                 return {
+
+                    text:{
+                        put_on: '上架',
+                        put_down: '下架'
+                    },
 
                     // 接Ajax的產品資料
                     product: [],
@@ -247,10 +235,10 @@
                         dataType: "json",
                         success: (response)=> {
                             if(response != ""){
-                                
+                                console.log(response);
                                 for (let i = 0; i < response.length; i++) {
                                     const element = response[i];
-                                    
+                                    // console.log(element.Condition);
                                     // 修改 Type 值
                                     if(response[i].Type == 8 ){
                                         response[i].Type = "主食"
@@ -261,8 +249,10 @@
                                     else if(response[i].Type == 10 ){
                                         response[i].Type = "甜品"
                                     };
-
+                                    
+                                
                                 }   
+                                
                                 // 將資料存到 Vue.Data
                                 this.product = response;
                             }                
@@ -274,35 +264,46 @@
                 },
 
 
-
-                // switch update status
-                // FIXME 改變樣式，將 Condition的值存到一個變數回傳資料庫
-
-                switchToggle(item){
-
-                    const c = confirm(`請問要更改訂單狀態嗎?`)
-
-                    const dish_ID = item.ID
+                updateOrderDishCondition(dish){
+                    console.log(dish);
                     // 修改資料庫資料
                     $.ajax({            
-                        method: "GET",
+                        method: "POST",
                         // TODO update API 尚未完成
-                        url: "./php/backpage/back_productManger.php",
+                        url: "./php/backpage/back_productManger_u.php",
                         data:{
-                            dish_ID
+                            dish_ID : dish.ID,
+                            dish_Condition : dish.Condition
                         },
-                        dataType: "json",
+                        dataType: "text",
                         success: (response)=> {
-                            if(response != ""){
-
-                                
-
-                            }                
+                            console.log(response)
                         },
                         error: (exception)=> {
                             alert("數據載入失敗: " + exception.status);
                         }
                     });
+                },
+                
+
+                // switch update status
+                // FIXME 改變樣式，將 Condition的值存到一個變數回傳資料庫
+
+                switchToggle(dish, e){
+                    if(window.confirm('是否要更商品狀態?')){
+                        if(dish.Condition ==1){
+                            dish.Condition = 0;
+                        }else{
+                            dish.Condition = 1;
+                        } 
+                        // updata  Condition API
+                        this.updateOrderDishCondition(dish);
+                    }else{
+                        // console.log(e.target.checked)
+                        // console.log(dish.Condition)
+                        e.target.checked = dish.Condition
+                    }
+                    
                 },
 
 
