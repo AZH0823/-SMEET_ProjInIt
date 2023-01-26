@@ -2,8 +2,7 @@
 
     include("../conectDB/Connection.php");
     //---------------------------------------------------
-
-
+    
     //建立SQL語法
     $sql = " SELECT d.ID, `Type`, d.Name,`Price`, `IMG`, `shopPoint`, `Introduction`, `Condition`, `pushisedDate`, `ProductType`
     FROM smeet.Dish d
@@ -37,7 +36,6 @@
 
     //回傳json
     echo json_encode($arr); 
-    // echo json_encode($data); 
 
 
 

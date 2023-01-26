@@ -70,7 +70,14 @@
 
             @media all and (max-width: 922px) {
                 flex-direction: column;
+            }
 
+            @include pad() {
+                width: 70%;
+            }
+
+            @include mobile() {
+                width: 80%;
             }
 
 

@@ -317,12 +317,6 @@
     </div>
     <script src="./js/vender/Vue/vue.global.prod.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <!-- icon_cdn -->
-    <script nomodule="nomodule" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <!-- icon_cdn -->
-    <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
-
     <script>
         const switchBtn = document.querySelectorAll(".switch_btn");
         const sliderContent = document.querySelectorAll(".slider_content");
@@ -374,7 +368,8 @@
                             response.forEach((element) => { //每個資料的名字
                                 element.Date = element.Date.substr(0, 10);
                                 element.Article = element.Article.substr(0, 12);
-                                _this.BackNewsList.push(element);
+                                // _this.BackNewsList.push(element); 改在下面push
+                                // console.log(_this.BackNewsList);
                                 if (
                                     element.Article.length <= 10) {
                                     _this.BackNewsList.push(element);
@@ -383,12 +378,15 @@
                                     element.Article = element.Article.substr(0, 11) + '...'
                                     _this.BackNewsList.push(element);
                                 }
+                                // console.log(_this.BackNewsList);
+
                             });
                         },
                         error: function (exception) {
                             alert("發生錯誤: " + exception.status);
                         },
                     });
+
 
                 },
             },
