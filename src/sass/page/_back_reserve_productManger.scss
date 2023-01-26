@@ -56,6 +56,7 @@ div.back_reserve_productManger {
                                 .checked:hover{
                                     cursor: pointer;
                                     color: #ccc;
+                                    text-decoration: underline;
                                 }
                                 
                                 .grid_item {
@@ -185,11 +186,12 @@ div.back_reserve_productManger {
         .pop_contaniner{
             width: 400px;
             padding: 20px 30px;
+            padding-left: 75px;
             label{
                 margin-right: 20px;
             }
             &>div{
-                margin: 20px 0px;
+                margin: 20px 0px; 
             }
             .section_reserve_btn{
                 display: block;

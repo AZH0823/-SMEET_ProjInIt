@@ -1,4 +1,3 @@
-console.log(is.error(new Error()))
 const RootComponent  = {
     data(){
         return{
@@ -255,7 +254,8 @@ const RootComponent  = {
                 data.forEach((servie,idx)=>{                  
                     // init checked = false
                     // 第1,2 為必填對象故 強制True
-                    if(idx >= 0 && idx <= 1 ){
+                    // console.log(servie)
+                    if(servie.id >= 84 && servie.id <= 85 ){
                         servie.checked = true;   
                     }else servie.checked = false;
                     
