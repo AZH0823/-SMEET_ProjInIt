@@ -528,6 +528,8 @@
             }
             .font16{
                 width: 25%;
+                font-size: 12px;
+                white-space:nowrap;
                 @include pad() {
                     width: 25%;
                 }

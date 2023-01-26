@@ -22,21 +22,14 @@
     foreach($data as $newData){
         $arr[] = array(
             'ID'=>$newData['ID'],
-            'Type' => $newData['Type'],
             'Name'=> $newData['Name'],
             'Price'=> $newData['Price'],
             'IMG'=> $newData['IMG'],
-            'shopPoint'=> $newData['shopPoint'],
-            'Introduction'=> $newData['Introduction'],
-            'Condition'=> $newData['Condition'],
-            'ProductType'=> $newData['ProductType'],
         );
     }
-
-
+    
     //回傳json
-    echo json_encode($arr); 
-    // echo json_encode($data); 
+    echo json_encode($arr);
 
     
 ?>
