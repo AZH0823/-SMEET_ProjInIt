@@ -6,7 +6,7 @@
     //  $SearhDishSql = " SELECT * FROM `Dish` where id = ? ";
     
     //  撈全部 Set 套資資訊
-    $SearhDishSql = " SELECT  d.ID as id, d.`Name` as disName,d.Price, d.SetID,dt.`Name` as dishType, d.Condition
+    $SearhDishSql = " SELECT  d.ID as id, d.`Name` as disName,d.Price, d.SetID, d.Introduction, dt.`Name` as dishType, d.Condition
     FROM Dish d
         join DishsType dt
             on d.`type` = dt.ID
@@ -29,7 +29,8 @@
                     'price'=> $newData['Price'],
                     'SetID'=> $newData['SetID'],
                     'dishType'=>$newData['dishType'],
-                    'Condition'=>$newData['Condition']
+                    'Condition'=>$newData['Condition'],
+                    'Introduction'=>$newData['Introduction']
         );
     }
 
