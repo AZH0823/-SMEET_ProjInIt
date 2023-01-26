@@ -12,20 +12,23 @@
 </head>
 <body>
     <!-- ============== 缺搜尋BAR ============== -->
-    <div class="back_reserve_productManger fulid_wrapper">
-        <div class="backwrapper">
+    <div class="back_reserve_productManger fulid_wrapper" id="reserve_producetManger">
+        <div class="backwrapper"  >
             <header>
                 @@include('layout/back_header.html')
             </header>
 
-            <div class="container">
+            <div class="container" >
                 <main class="right_content">
                     <section class="section1">
                         <!-- form -->
-                        <div class="back_from">
-                            <h4 class="h4 green-1">私廚商品上架</h4>
-                            <div class="back_from_wrapper">
-                                    <!-- row-1 -->
+                        <div class="back_from" >
+                            <div class="back_from_title">
+                                <h4 class="h4 green-1">私廚商品上架</h4>
+                                <button class="insert_btn" @click="popOnInsert">新增 菜品/服務</button>
+                            </div>
+                            <div class="back_from_wrapper" ref="data_wrapper">
+                                <!-- row-1 -->
                                 <div class="grid_container">
                                     <div class="grid_item">商品編號</div>
                                     <div class="grid_item">分類</div>
@@ -34,72 +37,61 @@
                                     <!-- <div class="grid_item">庫存</div> -->
                                     <div class="grid_item">狀態</div>
                                 </div>
-
-                                <!-- row-2 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">SM001</div>
-                                    <div class="grid_item">私廚菜單</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <!-- <div class="grid_item">25</div> -->
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
+                                <template v-for="set in APIdata.sets">
+                                                <div class="grid_container"> 
+                                                    <div class="grid_item">Set{{set.id}}</div>
+                                                    <div class="grid_item">私廚套餐</div>
+                                                    <div class="grid_item">{{set.setName}}</div>
+                                                    <div class="grid_item">{{set.price}}</div>
+                                                    <div class="grid_item checked">查看/編輯</div>
+                                                    <!-- <div class="grid_item">
+                                                        <label class="switch">
+                                                            <input type="checkbox" class="switch_btn" checked>
+                                                            <span class="slider"></span>
+                                                            <p class="slider_content">上架</p>
+                                                        </label>
+                                                    </div>  -->
+                                                </div>
+                                </template>
+                                <!-- 渲染單品 -->
+                                <template v-for="item in APIdata.other" :key="item.id">
+                                    <!-- <p>{{item}}</p> -->
+                                    <div class="grid_container" :data-id="item.id">
+                                        <div class="grid_item checked" @click="popOnEdit(item)">{{item.id}}</div>
+                                        <div class="grid_item">{{item.dishType}}</div>
+                                        <div class="grid_item">{{item.dishName}}</div>
+                                        <div class="grid_item">${{item.price}}</div>
+                                       
+                                        <div class="grid_item">
+                                            <label class="switch">
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click= changeCondtion(item,$event)>
+                                                <span class="slider"></span>
+                                                <p class="slider_content" v-if="item.Condition === 1">上架</p>
+                                                <p class="slider_content" v-if="item.Condition === 0">下架</p>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <!-- row-3 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">單品</div>
-                                    <div class="grid_item">蛤蠣煮物院雞湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <!-- <div class="grid_item">25</div> -->
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-4 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">單品</div>
-                                    <div class="grid_item">日暈雙月奶蓋</div>
-                                    <div class="grid_item">$280</div>
-                                    <!-- <div class="grid_item">5</div> -->
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <!-- row-5 -->
-                                <div class="grid_container">
-                                    <div class="grid_item checked">S001</div>
-                                    <div class="grid_item">湯品</div>
-                                    <div class="grid_item">手沖牛肉湯</div>
-                                    <div class="grid_item">$280</div>
-                                    <!-- <div class="grid_item">25</div> -->
-                                    <div class="grid_item">
-                                        <label class="switch">
-                                            <input type="checkbox" class="switch_btn" checked>
-                                            <span class="slider"></span>
-                                            <p class="slider_content">上架</p>
-                                        </label>
-                                    </div>
-                                </div>
-
+                                </template>
                                 
+                                <!-- 服務 -->
+                                <template v-for="item in APIdata.serve" :key="item.id">
+                                    <!-- <p>{{item}}</p> -->
+                                    <div class="grid_container" :data-id="item.id">
+                                        <div class="grid_item checked" @click="popOnEdit(item)">{{item.id}}</div>
+                                        <div class="grid_item">{{item.dishType}}</div>
+                                        <div class="grid_item">{{item.dishName}}</div>
+                                        <div class="grid_item">${{item.price}}</div>
+                                       
+                                        <div class="grid_item">
+                                            <label class="switch">
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click= changeCondtion(item,$event)>
+                                                <span class="slider"></span>
+                                                <p class="slider_content" v-if="item.Condition === 1">上架</p>
+                                                <p class="slider_content" v-if="item.Condition === 0">下架</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </template>                               
                             </div><!-- wrapper -->
                         </div><!-- back_from -->
                         
@@ -115,9 +107,68 @@
                     </section><!-- section1 -->
                 </main>
                 @@include('layout/back_footer.html')
-            </div><!-- container -->
+            </div><!-- container --> 
+            
         </div>
-        <div class="section_reserve" id="reserve_producetManger">
+        <div @click="closePopOn" class="area" :class="[popOnMsg.isEdit ? 'popAllarea':'',popOnInsertMsg.isAdd ? 'popAllarea':'']">
+            <div class="pop sevse_dish" v-if="popOnInsertMsg.isAdd == true" @click.stop style="display: none;" :style="popOnInsertMsg.isAdd ?'display:block':'display: none'">  
+                <div class="reserve_top">
+                    <p>新增私廚單品或服務</p>
+                </div>          
+                <div class="pop_contaniner">
+                    <div class="input">
+                        <label for="_name">品名:</label><input type="text" id="_name" v-model="popOnInsertMsg.dishName" ref="i_DishName">
+                    </div>
+                    <div class="input">
+                        <label :for="popOnMsg.id">商品種類:</label>
+                        <select :name="popOnMsg.id" :id="popOnMsg.id" v-model.number="popOnInsertMsg.Type" ref="i_Type">
+                            <!-- dish Type -->
+                            <option value="7" selected>單品</option>
+                            <option value="11">服務</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input">
+                        <label for="_no">編號:</label><input type="text" id="_no" v-model="popOnInsertMsg.id" disabled>
+                    </div>
+                    <div class="input" v-if="popOnInsertMsg.Type == 11 ">
+                        <label for="_intro">簡介:</label><input type="text" id="_intro" v-model="popOnInsertMsg.intro">
+                    </div>
+                    <div class="input">
+                        <label for="_price">價格:</label><input id="_price" v-model.number ="popOnInsertMsg.price"  type="number" ref="i_Price">
+                    </div>
+                    <button class="section_reserve_btn" @click="clickSaveToInsert()" v-if = "popOnInsertMsg.id !== 'undefined'">儲存</button>
+                </div>
+            </div>
+            <div class="pop sevse_dish" v-if="popOnMsg.isEdit == true" @click.stop style="display: none;" :style="popOnMsg.isEdit ?'display:block':'display: none'">  
+                <div class="reserve_top">
+                    <p>新增私廚單品或服務</p>
+                </div>          
+                <div class="pop_contaniner">
+                    <div class="input">
+                        <label for="_name">品名:</label><input type="text" id="_name" :value="popOnMsg.dishName" ref="os_DishName">
+                    </div>
+                    <div class="input">
+                        <label :for="popOnMsg.id">狀態:</label>
+                        <select :name="popOnMsg.id" :id="popOnMsg.id" :value="popOnMsg.Condition" ref="os_Condtion">
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input">
+                        <label for="_no">編號:</label><input type="text" id="_no" :value="popOnMsg.id" disabled>
+                    </div>
+                    <div class="input">
+                        <label for="_price">價格:</label><input id="_price" :value ="popOnMsg.price"  type="number" ref="os_Price">
+                    </div>
+                    <button class="section_reserve_btn" @click="clickSaveToUpdate(popOnMsg)">儲存</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- <div class="section_reserve">
             <div class="reserve_top">
                 <p>新增私廚菜單</p>
             </div>
@@ -144,15 +195,28 @@
                 </ul>
             </div>
             <button class="section_reserve_btn">儲存</button>
-        </div>
+        </div> -->
     </div>
         <script src="js/vender/Vue/vue.global.js"></script>
+        <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
         <script>
             const app = Vue.createApp({
             data() {
                 return {
                     APIdata:{
                     },
+                    popOnMsg:{
+                        isEdit:false,
+                    },
+                    popOnInsertMsg:{
+                        // dishName Type id price
+                        isAdd:false,
+                        intro:'',
+                        id:"",
+                        dishName:"",
+                        price:300,
+                        Type:7,
+                    }
                 };
                 },
                 computed:{
@@ -169,11 +233,18 @@
                             // 將套餐資訊放入APIData (圖片,售價,ID...)
                             // console.log(data)
                             data.forEach(el => {
-                                console.log(el)
-                                if(this.APIdata.hasOwnProperty(`set${el.id}`)){
-                                    this.APIdata[`set${el.id}`] = {}
+                                // console.log(el)
+                                if(!this.APIdata.hasOwnProperty(`sets`)){
+                                        this.APIdata.sets = {};
                                 }
-                                this.APIdata[`set${el.id}`] = el 
+                                if(this.APIdata.sets.hasOwnProperty(`set${el.id}`)){
+                                    this.APIdata[`set${el.id}`] = {};
+                                }
+
+                                this.APIdata.sets[`set${el.id}`] = el; 
+                                // _this.$nextTick(function () {  
+                                //     _this.OrderDetail = {...obj}
+                                // });
                             });
                             this.getSetdishDetail();
                         }).catch(err=>{
@@ -183,7 +254,7 @@
 
                     // 取得套餐內商品資訊 及 服務資訊
                     getSetdishDetail(){
-                        fetch('php/reserveAPI/setAPI.php')
+                        fetch('php/backpage/back_setAPI.php')
                         .then(function(response) {
                             return response.json();
                         })
@@ -193,28 +264,26 @@
                                 // 單品 
                                 if(data.SetID === null && data.dishType =="服務"){
                                     // this.APIdata.other
+                                    // console.log(data)
                                     if(this.APIdata.serve == undefined){
                                         this.APIdata.serve =[];
                                     }
                                     this.APIdata.serve.push(data);
                                 }else{
                                      // 塞A,B,C 套餐資訊
-                                    if(!this.APIdata[`set${data.SetID}`].hasOwnProperty(`dish`)){
-                                        this.APIdata[`set${data.SetID}`][`dish`] = {};
+                                   
+                                    if(!this.APIdata.sets[`set${data.SetID}`].hasOwnProperty(`dish`)){
+                                        this.APIdata.sets[`set${data.SetID}`][`dish`] = {};
                                     }
                                     // console.log(data.dishType)
-                                    if(!this.APIdata[`set${data.SetID}`].dish.hasOwnProperty(`${data.dishType}`)){
-                                        this.APIdata[`set${data.SetID}`].dish[`${data.dishType}`] =[];
+                                    if(!this.APIdata.sets[`set${data.SetID}`].dish.hasOwnProperty(`${data.dishType}`)){
+                                        this.APIdata.sets[`set${data.SetID}`].dish[`${data.dishType}`] =[];
                                     }
-                                    this.APIdata[`set${data.SetID}`].dish[`${data.dishType}`].push(data);
+                                    this.APIdata.sets[`set${data.SetID}`].dish[`${data.dishType}`].push(data);
                                 }
                                
                             })
                             
-                            // console.log(this.APIdata.set1.dish)
-                            // console.log(this.APIdata.set2.dish)
-                            // console.log(this.APIdata.set3.dish)
-
                         }).catch(error=>{
                             console.log(error)
                         });
@@ -222,48 +291,242 @@
 
                      // 取得單點商品資訊
                     getOtherDish(){
-                        fetch('php/reserveAPI/otherAPI.php')
+                        fetch('php/backpage/back_getOtherdish.php')
                             .then(response =>{
                                 return  response.json();
                             })
                             .then( data =>{
-                                console.log(data)
+                                const _this = this
+                                // console.log(data)
+                                let temp = []
                                 if(this.APIdata.other == undefined){
                                         this.APIdata.other =[];
                                 }
                                 data.forEach((data_el)=>{  
-                                    console.log(data_el.price)
+                                    // console.log(data_el.price)
                                     let obj={
                                         id:data_el.id,
                                         dishName:data_el.disName,
                                         dishType:data_el.dishType,
                                         price:data_el.price,
-                                        qty:0
+                                        Condition:data_el.Condition
                                     }
-                                    this.APIdata.other.push(obj);
+                                    temp.push(obj);
                                    
-                                })
-                                 
+                                })  
+                                 _this.APIdata.other = temp
                                    
                             }).catch(err=>{
                                 console.log(err)
                             })
                     },
+
+
+                    // 單品及服務Condition Update
+                    updateOrderDishCondition(item){
+                        // console.log(item)
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/updateOrderDishCondition.php",
+                            data: {
+                                MSG:"",
+                                ID:item.id,
+                                Condition:item.Condition
+                            },
+                            dataType: "text",
+                            success: function (response) {
+                                // console.log(response)
+                            },
+                            error: function (exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });
+                    },
+
+                    updateOrderDishDetial(msg,item){
+                        const _this = this;
+                        // console.log('msg',msg)
+                        // console.log('item',item)
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/updateOrderDishCondition.php",
+                            data: {
+                                MSG:msg,
+                                ID:item.id,
+                                Name:item.dishName,
+                                Condition:item.Condition,
+                                price:item.price
+                            },
+                            dataType: "text",
+                            success: function (response) {
+                
+                                if(response ='sucessful'){
+                                    // 改變 Vue 塞回原本API資料內
+                                    // console.log(`aa`)
+                                    for(key in _this.APIdata){ 
+                                        if(key === "other" || key === "serve"){
+                                            // console.log(key,_this.APIdata[key]);
+                                            _this.APIdata[key].forEach((el)=>{
+                                                if(el.id === item.id){
+                                                    el.dishName = item.dishName
+                                                    el.price =item.price
+                                                    el.Condition = item.Condition
+                                                }
+                                            })
+                                        }
+                                    }
+                                    alert(`資料更新成功`)
+                                }
+                            },
+                            error: function (exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });
+                    },
+
+                    // 新增一筆服務或單品
+                    insertDish(item){
+                        // console.log(item.intro)
+                        const _this = this;
+                        let introStr = item.intro ==undefined ? null : item.intro.trim()
+                      
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/insertOrderDish.php",
+                            data: {
+                                MSG:'oneData',
+                                dishName:item.dishName,
+                                price:item.price,
+                                Type:item.Type,
+                                Introduction: introStr
+                            },
+                            dataType: "text",
+                            success: function (response) {
+                                // console.log(response);
+                                if(!isNaN(response)){
+                                    // console.log(`新筆餐點ID為: ${response}`)
+                                    _this.popOnInsertMsg.id = parseInt(response);
+                                    
+                                    // 將資料料塞回APIdata
+                                    let temp={
+                                        Condition:1,
+                                        Introduction:introStr,
+                                        SetID:null,
+                                        dishName:item.dishName,
+                                        id: parseInt(response),
+                                        price:item.price
+                                    }
+                                    if(item.Type == 7){
+                                        // 單品
+                                        temp.dishType = "單品";
+                                        _this.APIdata.other.push(temp)
+                                        // console.log( 'other',_this.APIdata.other)
+                                    }else{
+                                        // 服務
+                                        temp.dishType = "服務";
+                                        _this.APIdata.serve.push(temp)
+                                        // console.log( 'serve',_this.APIdata.serve)
+                                    }
+                                    // console.log("整理好的物件",temp)
+                                    alert(`${item.dishName}資料更新成功`)
+
+                                }
+                            },
+                            error: function (exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });
+                    },
                     // api end
-                },
 
-                watch:{
+                    // 單品,服務物品上下架
+                    changeCondtion(dish,e){
+                        // console.log(e);
+                        if(window.confirm('是否要更商品狀態?')){
+                            if(dish.Condition ==1){
+                                dish.Condition = 0;
+                            }else{
+                                dish.Condition = 1;
+                            } 
+                            // updata  Condition API
+                            this.updateOrderDishCondition(dish);
+                        }else{
+                            e.target.checked = dish.Condition
+                        }
+                    },
+                   
+                    // 新增單品及服務
+                    popOnInsert(){
+                        this.popOnInsertMsg={};
+                        this.popOnInsertMsg.isAdd = true;
+                        
+                        document.querySelector('body').style.overflow = "hidden"
+                    },
+                    // 編輯單品及服務
+                    popOnEdit(item){
+                        this.popOnMsg={};
+                        this.popOnMsg.isEdit= true;
+                        
+                        document.querySelector('body').style.overflow = "hidden"
+                         
+                        this.popOnMsg.id = item.id;
+                        this.popOnMsg.dishName = item.dishName;
 
-                },
+                        this.popOnMsg.price = item.price;
+                        this.popOnMsg.Condition = item.Condition;
+                    },
+                    closePopOn(){
+                        this.popOnMsg.isEdit = false;
+                        this.popOnInsertMsg.isAdd = false;
+                        document.querySelector('body').style.overflow = "auto";    
+                    },
+                    clickSaveToInsert(){
+                        
+                        if(window.confirm('有想要更新此筆資料嗎?') ){
+                            if(this.popOnInsertMsg.dishName.trim().length > 0){
+                                this.insertDish(this.popOnInsertMsg);
+                            }else{
+                                alert('請輸入品項名,種類,價格皆不得為空值');
+                            }
+                            
+                        }else{
+                            this.popOnInsertMsg.id="";
+                            this.popOnInsertMsg.dishName="";
+                            this.popOnInsertMsg.Type=7;
+                            this.popOnInsertMsg.price =300;
+      
+                        }
+                    },
+                    clickSaveToUpdate(item){
+                        //  console.log('beforeValue',item);
+                        if(window.confirm('有想要更新此筆資料嗎?')){
+                            
+                            this.popOnMsg.id = item.id;
 
-                components:{
+                            this.popOnMsg.dishName = this.$refs.os_DishName.value;
+                            this.popOnMsg.price = parseInt(this.$refs.os_Price.value);
+                            this.popOnMsg.Condition = parseInt(this.$refs.os_Condtion.value) ;
 
+                            
+                            // Ajax 更新資料庫
+                            this.updateOrderDishDetial('DishDetailUpdate',this.popOnMsg);
+                        }else{
+                            // 不儲存就回到原來參數
+                            this.$refs.os_DishName.value =  item.dishName;
+                            this.$refs.os_Condtion.value = item.Condition;
+                            this.$refs.os_Price.value = item.price;
+
+                        }                        
+                    }
+                
                 },
 
                 mounted(){
                     this.getSetPrice();
                     this.getOtherDish();
                     // this.getSetdishDetail();
+
+                  
                 }
             });
             app.mount("#reserve_producetManger");
