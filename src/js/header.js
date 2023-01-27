@@ -66,10 +66,6 @@ $(function () {
     })
 })
 
-document.getElementsByClassName("indexslide_ham").onclick = function () {
-    document.getElementsByClassName("icon_x").setAttribute("disabled", "disabled");
-};
-
 // index頁漢堡點擊收合
 let indexham_body = document.querySelector('body');
 // console.log(ham_body);
@@ -121,7 +117,6 @@ $(".slide_ham").on("click", function () {
     if ($("body").hasClass("slideham_body")) {
         $("body").removeClass("slideham_body")
         slideham_body.style.overflow = "auto";
-        slideham_body.style.overflow = "auto";
     }
     else {
         $("body").addClass("slideham_body")
@@ -149,7 +144,6 @@ $("#ham_bg").on("click", function () {
     if ($("body").hasClass("slideham_body")) {
         $("body").removeClass("slideham_body")
         slideham_body.style.overflow = "auto";
-
     }
     else {
         //如果加入slideham_body時會有屬性
@@ -159,7 +153,6 @@ $("#ham_bg").on("click", function () {
 })
 
 //漢堡與購物車的開關判斷
-
 
 // $(function () {
 
