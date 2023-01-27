@@ -3,11 +3,10 @@
     include("../conectDB/Connection.php");
 
     //建立sql語法
-    $sql = "SELECT `date`, `Article`, `Condition`
-    FROM News
-    where `Condition` = 1
-    
-    limit 5";
+
+    //取預約日 若當天滿3組則顯示灰色 未滿3則顯示可選擇
+
+    $sql = "SELECT `AppointmentDate`, `TeamID` FROM Order";
 
     $statement = getPDO()->prepare($sql);
 

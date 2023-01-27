@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
       dayMaxEvents: true, 
       events: [
         {
-          title: 'already reserve',
+          title: '可預約',
           start: '2022-12-01',
-          display:'background'
+          // display:'background'
         }
       ]   
     });

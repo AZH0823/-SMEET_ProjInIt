@@ -368,8 +368,9 @@
         background-position: center;
         padding-top: 55px;
         padding-bottom: 100px;
+        overflow: hidden;
         .wrapper{
-            padding: 0 105px;
+            padding: 0 5%;
             @include pad() {
                 padding: 0 25px;
             }
@@ -519,21 +520,25 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 @include pad() {
+                    font-size: 16px;
                     width: 90%;
                 }
                 
                 @include mobile() {
+                    font-size: 14px;
+
                     width: 70%;
                 }
             }
             .font16{
                 width: 25%;
-                font-size: 12px;
+                font-size: 14px;
                 white-space:nowrap;
                 @include pad() {
                     width: 25%;
                 }
                 @include mobile() {
+                    font-size: 12px;
                 }
             }
         }
@@ -545,6 +550,10 @@
         // display: flex;
         // flex-direction: column;
         overflow: hidden;
+        .mySwiper2{
+            overflow: hidden;
+        }
+        
         @include pad() {
 
             overflow: hidden;
