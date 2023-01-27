@@ -48,16 +48,15 @@
                   <!-- row-2 -->
                   <template v-for="item in this.apiData" :key="item.ID">
                     <div class="grid_container">
-                      <div class="grid_item checked">{{item.ID}}</div>
+                      <div class="grid_item checked" @click="ClickMallDetail(item)">{{item.ID}}</div>
                       <div class="grid_item">{{item.Date}}</div>
                       <div class="grid_item">{{item.MemberID}}</div>
                       <div class="grid_item">{{item.TotalPrice}}</div>
                       <div class="grid_item">{{item.Delivery}}</div>
                       <div class="grid_item">
-                        <select name="" id="">
-                          <option value="">訂單成立未付款</option>
-                          <option value="">訂單成立已付款</option>
-                          <option value="">訂單封存</option>
+                        <select name="" id="" @change="updataStatus(item,$event)">
+                          <option value="訂單成立已付款" :selected="item.status == '訂單成立已付款'">訂單成立已付款</option>
+                          <option value="訂單封存" :selected="item.status == '訂單封存'">訂單封存</option>
                         </select>
                       </div>
                     </div>
@@ -208,20 +207,21 @@
             <!-- section1 -->
 
             <!-- 燈箱 -->
-            <div class="backShopOderList_container fulid_wrapper">
+            <div class="backShopOderList_container fulid_wrapper" @click="closePopOn" style="display: none;"  
+            v-if="popOnOpen.display ==true" :style="popOnOpen.display ?'display:block':'display: none'"  ref="popWindow">
               <div class="wrapper">
-                <header class="oderList_header">
+                <header class="oderList_header" @click.stop>
                   <h4 class="title font16">訂單明細</h4>
                   <span class="popUpClose" id="x_Close"
-                    ><i class="fa-solid fa-xmark"></i
+                    ><i class="fa-solid fa-xmark" @click="closePopOn_X"></i
                   ></span>
                 </header>
-                <div class="infoType">
+                <div class="infoType" >
                   <p class="font16">
                     訂單類別&emsp;:&emsp;<span class="font16 red">商城</span>
                   </p>
-                  <p class="font16">
-                    訂單編號<span class="font16">TG1311215</span>
+                  <p class="font16" >
+                    訂單編號：<span class="font16">{{popOnOpen.ID}}</span>
                   </p>
                 </div>
 
@@ -232,89 +232,109 @@
                       <p class="item font14">類型</p>
                       <p class="item font14">品名</p>
                       <p class="item font14">數量</p>
-                      <p class="item font14">小計</p>
+                      <p class="item font14">單價</p>
                     </div>
 
                     <!-- 餐點 -->
+                  <template v-for="(item,d) in shopDetail" :key="item.DtName">
                     <div class="meal_cate">
                       <!-- 餐點類型 -->
-                      <p class="item gray font12">湯物</p>
-
+                      <p class="item gray font12">{{item.DtName}}</p>
                       <!-- 餐點品名 -->
-                      <div class="meal_content font16">
-                        <p class="item gray font12">燻鮭魚番茄濃湯</p>
-                        <p class="item gray font12">京都雪藏干貝湯</p>
+                        <div class="meal_content font16">
+                          <p class="item gray font12">{{item.DishName}}</p>
+                          <!-- <p class="item gray font12">京都雪藏干貝湯</p> -->
+                        </div>
+                        <!-- 餐點數量 -->
+                        <div class="meal_qty">
+                          <p class="item gray font12">{{item.qty}}</p>
+                          <!-- <p class="item gray font12">x 3</p> -->
+                        </div>
+                        <!-- 餐點金額 -->
+                        <div class="meal_sum">
+                          <p class="item gray font12">${{item.price}}</p>
+                          <!-- <p class="item gray font12">$&thinsp;1320</p> -->
+                        </div>
                       </div>
+                        
+            
 
-                      <!-- 餐點數量 -->
-                      <div class="meal_qty">
-                        <p class="item gray font12">x 3</p>
-                        <p class="item gray font12">x 3</p>
-                      </div>
+                  </template>
 
-                      <!-- 餐點金額 -->
-                      <div class="meal_sum">
-                        <p class="item gray font12">$&thinsp;320</p>
-                        <p class="item gray font12">$&thinsp;1320</p>
-                      </div>
-                    </div>
-
-                    <!-- 餐點 -->
-                    <div class="meal_cate">
+                <!--餐點-->
+                    <!-- <div class="meal_cate"> -->
                       <!-- 餐點類型 -->
-                      <p class="item gray font12">主食</p>
+                      <!-- <p class="item gray font12">主食</p> -->
 
                       <!-- 餐點品名 -->
-                      <div class="meal_content">
+                      <!-- <div class="meal_content">
                         <p class="item gray font12">嫩肩松坂豬佐松露蕈菇</p>
                         <p class="item gray font12">富士山和風菓茶</p>
-                      </div>
+                      </div> -->
 
                       <!-- 餐點數量 -->
-                      <div class="meal_qty">
+                      <!-- <div class="meal_qty">
                         <p class="item gray font12">x 3</p>
                         <p class="item gray font12">x 3</p>
-                      </div>
+                      </div> -->
 
                       <!-- 餐點金額 -->
-                      <div class="meal_sum">
+                      <!-- <div class="meal_sum">
                         <p class="item gray font12">$&thinsp;11200</p>
                         <p class="item gray font12">$&thinsp;15000</p>
                       </div>
-                    </div>
+                    </div> -->
 
                     <!-- 餐點 -->
-                    <div class="meal_cate">
+                    <!-- <div class="meal_cate"> -->
                       <!-- 餐點類型 -->
-                      <p class="item gray font12">甜品</p>
+                      <!-- <p class="item gray font12">甜品</p> -->
 
                       <!-- 餐點品名 -->
-                      <div class="meal_content font16">
+                      <!-- <div class="meal_content font16">
                         <p class="item gray font12">富士山和風菓茶</p>
                         <p class="item gray font12">日暈雙月奶蓋</p>
-                      </div>
+                      </div> -->
 
                       <!-- 餐點數量 -->
-                      <div class="meal_qty">
+                      <!-- <div class="meal_qty">
                         <p class="item gray font12">x 3</p>
                         <p class="item gray font12">x 3</p>
-                      </div>
+                      </div> -->
 
                       <!-- 餐點金額 -->
-                      <div class="meal_sum">
+                      <!-- <div class="meal_sum">
                         <p class="item gray font12">$&thinsp;2500</p>
                         <p class="item gray font12">$&thinsp;1500</p>
                       </div>
-                    </div>
+                    </div> -->
 
-                    <!-- 回餽點數 -->
+                    <!-- 小計 -->
+                    <div class="meal_price">
+                      <!-- 佔位 -->
+                      <p class="item"></p>
+
+                      <!-- 小計 name -->
+                      <div class="point_content font16">
+                        <p class="item gray font12">小計</p>
+                      </div>
+
+                      <!-- 佔位 -->
+                      <p class="item"></p>
+
+                      <!-- 金額 -->
+                      <div class="point_sum">
+                        <p class="item gray font12">${{popOnOpen.TotalPrice}}</p>
+                      </div>
+                    </div>
+                    <!-- 回饋點數 -->
                     <div class="meal_point">
                       <!-- 佔位 -->
                       <p class="item"></p>
 
-                      <!-- 回餽點數 name -->
+                      <!-- 回饋點數 name -->
                       <div class="point_content font16">
-                        <p class="item gray font12">回餽點數</p>
+                        <p class="item gray font12">回饋點數</p>
                       </div>
 
                       <!-- 佔位 -->
@@ -322,7 +342,7 @@
 
                       <!-- 點數金額 -->
                       <div class="point_sum">
-                        <p class="item gray font12">$&thinsp;100</p>
+                        <p class="item gray font12">-${{popOnOpen.Points}}</p>
                       </div>
                     </div>
 
@@ -340,7 +360,7 @@
 
                       <!-- total金額 -->
                       <div class="point_sum">
-                        <p class="item gray font12">$&thinsp;76543</p>
+                        <p class="item gray font12">${{popOnOpen.TotalPrice - popOnOpen.Points}}</p>
                       </div>
                     </div>
                   </div>
@@ -348,16 +368,21 @@
                   <!-- 訂單資訊 -->
                   <div class="orderInfo">
                     <div class="orderInfo_title">
-                      <p>訂單資訊</p>
+                      <h6>訂單資訊</h6>
+                      <span class="edit"
+                        :class="[popOnOpen.isEdit ? 'checked' : '']"
+                        @click="iconOpen()"><span><i class="fa-solid fa-pen-to-square"></i></span><span v-if="popOnOpen.isEdit == true">正在編輯中</span>
                     </div>
 
-                    <div class="orderInfo_container">
+                    <div class="orderInfo_container" >
                       <div class="item_group">
                         <div class="item_title green-2 font14">訂購人</div>
                         <input
                           class="item_content green-2 font14"
                           type="text"
-                          value=""
+                          :value="popOnOpen.Name"
+                          :disabled="!popOnOpen.isEdit"
+                          ref="orderName"
                         />
                       </div>
 
@@ -366,7 +391,9 @@
                         <input
                           class="item_content green-2 font14"
                           type="text"
-                          value="0919225578"
+                          :value="popOnOpen.Phone"
+                          :disabled="!popOnOpen.isEdit"
+                          ref="orderPhone"
                         />
                       </div>
 
@@ -375,7 +402,9 @@
                         <input
                           class="item_content green-2 font14"
                           type="text"
-                          value="hsuhaowen_charming@gmail.com"
+                          :value="popOnOpen.Email"
+                          :disabled="!popOnOpen.isEdit"
+                          ref="orderEmail"
                         />
                       </div>
 
@@ -384,33 +413,35 @@
                         <input
                           class="item_content green-2 font14"
                           type="text"
-                          value="台北市中山區南京東路二段219號4F"
+                          :value="popOnOpen.Address"
+                          :disabled="!popOnOpen.isEdit"
+                          ref="orderAddress"
                         />
                       </div>
 
                       <div class="item_group">
                         <div class="item_title green-2 font14">配送方式</div>
                         <p class="item_content green-2 font14">
-                          超商取貨（7-11）
+                          {{popOnOpen.Delivery}}
                         </p>
                       </div>
 
-                      <div class="item_group">
+                      <!-- <div class="item_group">
                         <div class="item_title green-2 font14">取貨門市</div>
                         <p class="item_content green-2 font14">幸福門市</p>
-                      </div>
+                      </div> -->
 
                       <div class="item_group">
                         <div class="item_title green-2 font14">發票載具</div>
-                        <p class="item_content green-2 font14">/ FG2D8Z</p>
+                        <p class="item_content green-2 font14">{{popOnOpen.Invoice}}</p>
                       </div>
 
                       <div class="item_group">
                         <div class="item_title green-2 font14">付款方式</div>
                         <p class="item_content green-2 font14">
-                          信用卡一次付清
-                        </p>
+                          {{popOnOpen.Payment}}</p>
                       </div>
+                      <div class="save_btn" style="margin: 10px auto;" @click="storageBtn" v-if="popOnOpen.isEdit">儲存</div>
                     </div>
                   </div>
                 </article>
@@ -432,6 +463,13 @@
           return {
             apiData:[],
             shopDetail:[],
+
+            popOnOpen:{
+              
+                isEdit:false,
+                display:false,  
+                Name:'',             
+            },
           };
         },
         computed: {},
@@ -458,32 +496,189 @@
             //取得一筆資料
             getMallOneData(id){
               const that = this; 
+              // console.log(id);
               fetch(`php/backpage/getAllMallOrderData.php?ID=${id}`)
               .then(response => {
+                // console.log(response.json());
                 return  response.json()
               })
               .then( datalist => {
                 that.shopDetail = [];
-                // let obj = []
                 datalist.forEach(data=>{
-                  this.shopDetail.push(el);
+                  this.shopDetail.push(data);
                 })
-
                 that.$nextTick(function(){
-                  that.shopDetail = {...obj}
+                  that.shopDetail = {...that.shopDetail}
                 });
-
+              
               }).catch(err=>{
                     console.log(err)
                 })
             },
+
+            //送出編輯order訂單的API
+            updateMallData(popOnOpen){
+              // console.log(popOnOpen.ID,popOnOpen.Phone,popOnOpen.Email,popOnOpen.Address,popOnOpen.Name);
+              const that = this;
+              $.ajax({
+                  method:"POST",
+                  url: "php/backpage/updateMallData.php",
+                  data : {
+                    ID:popOnOpen.ID,
+                    Phone:popOnOpen.Phone,
+                    Email:popOnOpen.Email,
+                    Address:popOnOpen.Address,
+                    Name:popOnOpen.Name
+                  },
+                  dataType:"text",
+                  success:function(response){
+                    if(response == 'Y'){
+        
+                    }else{
+                      console.log(`其他錯誤`);
+                    }
+                  },
+                  error: function(exception){
+                    alert("發生錯誤:" +exception.status);
+                  }
+
+              });
+
+            },
+
+            updataStateAPI(id,State){
+              // console.log(id,State);
+              $.ajax({
+                method:"POST",
+                url:"php/backpage/updateMallData.php",
+                data : {
+                  Msg:'update',
+                  ID:id,
+                  State:State
+                },
+                dataType:"text",
+                success:function(response){
+                  if(response == 'Y'){
+
+                  }else{
+                    console.log(`其他錯誤`);
+                  } 
+                },
+                error: function(exception){
+                    alert("發生錯誤:" +exception.status);
+                  }
+              })
+            },
+
+
+            updataStatus(item,e){
+              if(!confirm("是否更換訂單狀態?")){
+                // console.log(e.target.value);
+                e.target.value = item.State
+              }else{
+                item.State = e.target.value
+                this.updataStateAPI(item.ID,item.State)
+                // console.log(item.ID);
+              }
+            },
             
             //click展開popon
             ClickMallDetail(item){
-              const data = JSON.parse(JSON.stringify(item))
-              console.log(data);
-            }
+              const data =JSON.parse(JSON.stringify(item))
+              this.popOnOpen = {}
+              // console.log(data);
+              // console.log(item.ID);
+              this.popOnOpen.display = true;
+              // console.log(this.popOnOpen);
+                document.querySelector('body').style.overflow = "hidden"
+                this.popOnOpen.TotalPrice = data.TotalPrice;
+                this.popOnOpen.Points = data.Points;
+                this.popOnOpen.Address = data.Address;
+                this.popOnOpen.Name = data.Name;
+                this.popOnOpen.Email = data.Email;
+                this.popOnOpen.Phone = data.Phone;
+                this.popOnOpen.Delivery = data.Delivery;
+                this.popOnOpen.Invoice = data.Invoice;
+                this.popOnOpen.Payment = data.Payment;
+                this.popOnOpen.ID = data.ID;
+                // console.log(this.popOnOpen.ID);
+              // console.log(data.ID);
+                this.getMallOneData(data.ID);
+              
+       
+               
+            },
 
+            //點popon的其他地方會關掉
+            closePopOn(){
+              // console.log(event.target);
+              // console.log(this.$refs.popWindow);
+              if(event.target !== this.$refs.popWindow)return;
+              this.popOnOpen.display= false;
+                let body = document.querySelector('body');
+                body.style.overflow = "auto";
+                this.popOnOpen.isEdit = false;
+            },
+
+            //點popon的X(button)會關掉
+            closePopOn_X(){
+              this.popOnOpen.display = false
+                let body = document.querySelector('body');
+                body.style.overflow = "auto";
+                this.popOnOpen.isEdit = false;  
+            },
+
+            //點擊編輯中可以修改Input標籤內容
+            iconOpen(){
+              //將所有的popOnOpen的isEdit狀態改為true
+              this.popOnOpen.isEdit = !this.popOnOpen.isEdit
+            },
+           
+            storageBtn(){
+              const newOrderValue = {
+                Name:this.$refs.orderName.value,
+                Phone:this.$refs.orderPhone.value,
+                Email:this.$refs.orderEmail.value,
+                Address:this.$refs.orderAddress.value,
+              }
+
+              if(this.popOnOpen.isEdit){
+                if(window.confirm('確定修改訂單資訊嗎?')){
+
+                  // console.log(newOrderValue.Name);
+                  this.popOnOpen.Name = newOrderValue.Name;
+                  this.popOnOpen.Phone = newOrderValue.Phone;
+                  this.popOnOpen.Email = newOrderValue.Email;
+                  this.popOnOpen.Address = newOrderValue.Address;
+
+                  this.popOnOpen.isEdit = false;
+                  //將編輯後的this.popOnOpen資料帶去updateMallData
+                  this.updateMallData(this.popOnOpen);
+                
+                  //更新API資料是指在外一層的data
+                  const newID = this.popOnOpen.ID;
+                  // console.log(newID);
+
+                  this.apiData.forEach((data)=>{
+                    //data指向所有在vue中data的值
+                    // console.log(data);
+                      if(newID == data.ID){
+                        data.Name = newOrderValue.Name;
+                        data.Phone = newOrderValue.Phone;
+                        data.Email = newOrderValue.Email;
+                        data.Address = newOrderValue.Address;
+                      }
+
+
+                  })
+
+                }else{
+
+                }
+              }else{
+                alert(`資料未修改`)
+              }
+            },
           
         
           },
