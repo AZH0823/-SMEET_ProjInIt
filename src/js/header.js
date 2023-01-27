@@ -60,43 +60,37 @@ $(function () {
 //     }
 // });
 
-
-$(".ham_div").click(function () {
-    $("body").toggleClass(".slideoverflow");
-});
-
-
 // slide頁漢堡點擊收合
-let ham_body = document.querySelector('body');
-// console.log(ham_body);
-$(".slide_ham").on("click", function () {
-    // console.log("qwert");
-    $(".header_bar").toggleClass("-on");
-    $(".user_ham").toggleClass("-on");
-    $("#ham_bg").toggleClass("hide");
-    $("#ham_bg").toggleClass("n_none");
-    ham_body.style.overflow = "hidden";
+// let ham_body = document.querySelector('body');
+// // console.log(ham_body);
+// $(".slide_ham").on("click", function () {
+//     // console.log("qwert");
+//     $(".header_bar").toggleClass("-on");
+//     $(".user_ham").toggleClass("-on");
+//     $("#ham_bg").toggleClass("hide");
+//     $("#ham_bg").toggleClass("n_none");
+//     ham_body.style.overflow = "hidden";
 
 
-})
+// })
 //slide頁燈箱點擊收合
 
-$("#ham_bg").on("click", function () {
-    $(".header_bar").toggleClass("-on");
-    $(".user_ham").toggleClass("-on");
-    $("#ham_bg").toggleClass("hide");
-    $("#ham_bg").toggleClass("n_none");
-    ham_body.style.overflow = "auto";
+// $("#ham_bg").on("click", function () {
+//     $(".header_bar").toggleClass("-on");
+//     $(".user_ham").toggleClass("-on");
+//     $("#ham_bg").toggleClass("hide");
+//     $("#ham_bg").toggleClass("n_none");
+//     ham_body.style.overflow = "auto";
 
-})
-function ham_pop() {
-    let ham_bg = document.getElementById('ham_bg');
+// })
+// function ham_pop() {
+//     let ham_bg = document.getElementById('ham_bg');
 
-    ham_bg.classList.toggle("hide");
-    ham_bg.classList.toggle("n_none");
-    $(".header_bar").toggleClass("-on")
-    $(".user_ham").toggleClass("-on")
-}
+//     ham_bg.classList.toggle("hide");
+//     ham_bg.classList.toggle("n_none");
+//     $(".header_bar").toggleClass("-on")
+//     $(".user_ham").toggleClass("-on")
+// }
 
 
 
@@ -137,4 +131,53 @@ $("#indexham_bg").on("click", function () {
         indexham_body.style.overflow = "hidden";
     }
 })
+
+// $(".ham_div").click(function () {
+//     $("body").toggleClass(".slideoverflow");
+//     console.log("aaa");
+// });
+
+// slide頁漢堡點擊收合
+let slideham_body = document.querySelector('body');
+// console.log(ham_body);
+$(".slide_ham").on("click", function () {
+    // console.log("qwert");
+    if ($("body").hasClass("slideham_body")) {
+        $("body").removeClass("slideham_body")
+        slideham_body.style.overflow = "auto";
+    }
+    else {
+        $("body").addClass("slideham_body")
+        slideham_body.style.overflow = "hidden";
+    }
+
+    $(".header_bar").toggleClass("-on");
+    $(".user_ham").toggleClass("-on");
+    $("#ham_bg").toggleClass("hide");
+    $("#ham_bg").toggleClass("n_none");
+
+})
+//slide頁燈箱點擊收合
+//點擊背景時
+$("#ham_bg").on("click", function () {
+    //漢堡的div會執行關閉動作
+    $(".header_bar").toggleClass("-on");
+    $(".user_ham").toggleClass("-on");
+    //同時bg會加入hide或n_none的css屬性
+    $("#ham_bg").toggleClass("hide");
+    $("#ham_bg").toggleClass("n_none");
+    //宣告的body會加入以下屬性
+    slideham_body.style.overflow = "auto";
+    //如果有slideham_body或移除時會有屬性
+    if ($("body").hasClass("slideham_body")) {
+        $("body").removeClass("slideham_body")
+        slideham_body.style.overflow = "auto";
+    }
+    else {
+        //如果加入slideham_body時會有屬性
+        $("body").addClass("slideham_body")
+        slideham_body.style.overflow = "hidden";
+    }
+})
+
 

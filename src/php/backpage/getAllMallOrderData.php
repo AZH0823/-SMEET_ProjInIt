@@ -27,6 +27,7 @@
         'Phone'=> $newData['Phone'],
         'Email'=> $newData['Email'],
         'Address'=> $newData['Address'],
+        'Payment' =>$newData['Payment'],
         // 'qty'=> $newData['qty'],
         // 'price'=> $newData['price'],
         // 'DishID'=>$newData['DishID'],
@@ -41,14 +42,14 @@
                   ON d.Type = dt.ID
                    order by dt.ID asc) as B
             on M.DishID = B.ID
-            having MallID = :getID ;";
+            having MallID = :getID;";
 
         $Searhstatement = getPDO()->prepare($MallListDetail);
         $Searhstatement -> bindValue(':getID',$getID); 
         $Searhstatement -> execute();
 
         $result = $Searhstatement -> fetchAll();
-        echo json_encode($result); 
+        // echo json_encode($result); 
         $arr=array();
         foreach($result as $newData){
         $arr[] = array(

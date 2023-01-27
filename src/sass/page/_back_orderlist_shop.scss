@@ -150,145 +150,151 @@ div.back_orderlist_shop {
         position: absolute;
         right: 5%;
         top: 20%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  // 餐點類別
+  .infoType {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.5px solid black;
+    padding: 10px 0px;
+    margin-bottom: 20px;
+    width: 90%;
+
+    p {
+      display: flex;
+    }
+  }
+
+  .meal_wrap {
+    max-height: 650px;
+    // height: 90vh;
+    // scroll-behavior: auto;
+    // overflow-y: auto;
+
+    // 餐點明細
+    .meal_container {
+      width: 90%;
+      margin: 0 auto;
+      padding-bottom: 30px;
+      border-bottom: 0.5px solid #000;
+
+      .infoContent_title {
+        text-align: start;
+        display: grid;
+        grid-template:
+          repeat(1, 1fr) / minmax(max-content, 80px) minmax(max-content, 250px)
+          1fr 1fr;
+        margin-bottom: 25px;
+
+        p.item {
+          margin-left: 10%;
+        }
+      }
+
+      // 餐點
+      .meal_cate {
+        display: grid;
+        width: 100%;
+        grid-template:
+          repeat(1, 1fr) / minmax(max-content, 80px) minmax(max-content, 250px)
+          1fr 1fr;
+
+        p.item {
+          text-align: start;
+          margin-left: 10%;
+          margin-bottom: 10px;
+        }
+      }
+
+      //小計
+      .meal_price {
+        display: grid;
+        width: 100%;
+        grid-template:
+          repeat(1, 1fr) / minmax(max-content, 80px) minmax(max-content, 250px)
+          1fr 1fr;
+        border-top: 0.5px solid #000;
+        p.item {
+          text-align: start;
+          margin: 10px 0 0 10%;
+        }
+      }
+
+      // 回饋點數
+      .meal_point {
+        display: grid;
+        width: 100%;
+        grid-template:
+          repeat(1, 1fr) / minmax(max-content, 80px) minmax(max-content, 250px)
+          1fr 1fr;
+        border-bottom: 0.5px solid #000;
+        margin-bottom: 10px;
+
+        p.item {
+          text-align: start;
+          margin: 10px 0 10px 10%;
+        }
+      }
+
+      // 餐點 total
+      .meal_total {
+        display: grid;
+        width: 100%;
+        grid-template:
+          repeat(1, 1fr) / minmax(max-content, 80px) minmax(max-content, 250px)
+          1fr 1fr;
+
+        p.item {
+          text-align: start;
+          margin-left: 10%;
+          margin-bottom: 10px;
+        }
       }
     }
 
-    // 餐點類別
-    .infoType {
+    // 訂單資訊
+    .orderInfo {
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      border-bottom: 0.5px solid black;
-      padding: 10px 0px;
-      margin-bottom: 20px;
       width: 90%;
 
-      p {
+      .orderInfo_title {
         display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin: 5% 0 3% 0;
       }
     }
 
-    .meal_wrap {
-      max-height: 650px;
-      // height: 90vh;
-      // scroll-behavior: auto;
-      // overflow-y: auto;
+    .orderInfo_container {
+      padding-bottom: 30px;
+      .item_group {
+        margin-left: 10px;
+        display: grid;
+        grid-template: repeat(1, 1fr) / minmax(max-content, 20%) minmax(
+            max-content,
+            1fr
+          );
+        margin-bottom: 10px;
+        align-items: baseline;
 
-      // 餐點明細
-      .meal_container {
-        width: 90%;
-        margin: 0 auto;
-        padding-bottom: 30px;
-        border-bottom: 0.5px solid #000;
-
-        .infoContent_title {
-          text-align: start;
-          display: grid;
-          grid-template:
-            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
-              max-content,
-              250px
-            )
-            1fr 1fr;
-          margin-bottom: 25px;
-
-          p.item {
-            margin-left: 10%;
-          }
-        }
-
-        // 餐點
-        .meal_cate {
-          display: grid;
-          width: 100%;
-          grid-template:
-            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
-              max-content,
-              250px
-            )
-            1fr 1fr;
-
-          p.item {
-            text-align: start;
-            margin-left: 10%;
-            margin-bottom: 10px;
-          }
-        }
-
-        // 回饋點數
-        .meal_point {
-          display: grid;
-          width: 100%;
-          grid-template:
-            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
-              max-content,
-              250px
-            )
-            1fr 1fr;
-          border-top: 0.5px solid #000;
-          border-bottom: 0.5px solid #000;
-          margin-bottom: 10px;
-
-          p.item {
-            text-align: start;
-            margin: 10px 0 10px 10%;
-          }
-        }
-
-        // 餐點 total
-        .meal_total {
-          display: grid;
-          width: 100%;
-          grid-template:
-            repeat(1, 1fr) / minmax(max-content, 80px) minmax(
-              max-content,
-              250px
-            )
-            1fr 1fr;
-
-          p.item {
-            text-align: start;
-            margin-left: 10%;
-            margin-bottom: 10px;
-          }
-        }
-      }
-
-      // 訂單資訊
-      .orderInfo {
-        margin: 0 auto;
-        width: 90%;
-
-        .orderInfo_title {
-          p {
-            margin: 10px 0 30px 10px;
-          }
-        }
-
-        .orderInfo_container {
-          padding-bottom: 30px;
-          .item_group {
-            margin-left: 10px;
-            display: grid;
-            grid-template: repeat(1, 1fr) / minmax(max-content, 20%) minmax(
-                max-content,
-                1fr
-              );
-            margin-bottom: 10px;
-
-            .item_content {
-              font-family: Noto Sans TCserif;
-              border: 0.5px solid #ccc;
-              border-radius: 2.5px;
-              padding: 6px;
-              font-size: 14px;
-              // background-color: none;
-              // color: gray;
-              // cursor: not-allowed;
-            }
-          }
+        .item_content {
+          font-family: Noto Sans TCserif;
+          // border: 0.5px solid #ccc;
+          // border-radius: 2.5px;
+          padding: 6px;
+          font-size: 14px;
         }
       }
     }
   }
+}
+
+.edit.checked {
+  color: red;
+  cursor: pointer;
 }
