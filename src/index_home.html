@@ -495,8 +495,9 @@
 
         data(){
 
-            // ----------- 商城 ----------- //
             return{
+
+            // ----------- 商城 ----------- //
                 popupData: {
                     ID: "",
                     IMG: "",
@@ -508,10 +509,13 @@
                 MealsInfo: [],
                 AjaxMealsInfo: [],
 
-
-            // ----------- 消息 ----------- //
+                // ----------- 消息 ----------- //
                 NewsList: [],
+            
+                // ----------- Calender ----------- //
+
             };
+
         },
 
         created(){
@@ -592,11 +596,17 @@
                     method: "POST",
                     url: "php/frontpage/index_news.php",
                     data: {},
-
                     dataType: "json",
                     success: function (response) {
-                        console.log(response);
+                        // console.log(response);
                         response.forEach(element => {
+
+                            if(element.date){
+                                // console.log('before',element.date)
+                                let temp = element.date.substr(0, 10)
+                                // console.log('after',temp)
+                                element.date  = temp
+                            }
                             _this.NewsList.push(element);
                         });
                     },
