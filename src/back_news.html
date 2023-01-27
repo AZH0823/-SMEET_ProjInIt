@@ -27,7 +27,7 @@
                             <div class="back_fromTitle">
                                 <h4 class="h4 green-1">所有動態管理</h4>
                                 <div class="search">
-                                    <div class="insert_btn" style="color: #898989;">新增</div>
+                                    <div class="insert_btn" style="color: #898989;" @click="openPop()">新增</div>
                                     <div class="search_container_item">
                                         <input type="text" placeholder="動態查詢..." />
                                     </div>
@@ -70,9 +70,11 @@
                                         </div>
                                         <div class="grid_item">
                                             <label class="switch">
-                                                <input type="checkbox" class="switch_btn" checked>
+                                                <input type="checkbox" class="switch_btn"
+                                                    :checked="News.Condition === 1" @click="switchToggle(News, $event)">
                                                 <span class="slider"></span>
-                                                <p class="slider_content">上架</p>
+                                                <p class="slider_content" v-if="News.Condition === 1">上架</p>
+                                                <p class="slider_content" v-if="News.Condition === 0">下架</p>
                                             </label>
                                         </div>
                                         <div class="grid_item checked">查看</div>
@@ -275,43 +277,54 @@
         <!-- wrapper -->
 
 
-        <div class="section_news">
-            <div class="news_top">
-                <p>新增動態</p>
-            </div>
-            <div class="news_type">
-                <p>公告類型：</p>
-                <select name="" id="">
-                    <option value="">最新動態（預設）</option>
-                    <option value="">聯名限定</option>
-                    <option value="">限時優惠</option>
-                </select>
-            </div>
-            <div class="news_date">
-                <p>上架日期：</p>
-                <input id="datepicker" placeholder="2022/01/13">
-                <input placeholder="16：00">
-            </div>
-            <div class="news_title">
-                <p>動態標題：</p>
-                <input placeholder="秋季限定料理        （6/25）">
-            </div>
-            <div class="news_pic">
-                <label type="button" class="btn">
-                    <span>圖片：</span>
-                    <input type="file" onchange="openFile(event)">
-                    <img id="output" height="200" style="display:none">
+        <div class="section_news" v-if="isShow" @click="product_pop_close">
+            <div class="section_news" @click.stop>
+                <div class="news_top">
+                    <p>新增動態</p>
+                </div>
+                <div class="news_type">
+                    <p>公告類型：</p>
+                    <select name="" id="" @change="UpadteCondition()" v-model="popupData.Category" required>
+                        <option value="">最新動態（預設）</option>
+                        <option value="">聯名限定</option>
+                        <option value="">限時優惠</option>
+                    </select>
+                </div>
+                <div class="news_date">
+                    <p>上架日期：</p>
+                    <input id="datepicker" placeholder="2022/01/13" v-model.number="popupData.Price" required>
+                    <!-- <input placeholder="16：00"> -->
+                </div>
+                <div class="news_title">
+                    <p>動態標題：</p>
+                    <input placeholder="秋季限定料理        （6/25）" v-model="popupData.Title" required>
+                </div>
+                <div class="news_pic">
+                    <label type="button" class="btn">
+                        <span>圖片：</span>
+                        <input type="file" onchange="openFile(event)" name="News_IMG">
+                        <img id="output" height="200" style="display:none">
 
-                </label>
-            </div>
-            <div class="news_content">
-                <h6>內容：</h6>
-                <textarea>私覓主理人與多位摯友於1989年參加一場私廚派對，於派對中享用的鮮美食材仍深刻於心，多年後再度憶起來當年的感動，私覓主理人與專業團隊共同開發秋寄限定料理，希望再次複刻最初的感動。以鰹魚為食，輔以柑橘類的柚子醬『ポン酢』調味，再加一點梅子提味，提升整體的層次感。秋天的味蕾－松茸ごはん（松茸飯）」，使用昆布高湯，並將松茸與其他像是銀杏果等食材一同放進炊飯器煮。而秋天更不能錯過柿子、水梨，私覓嚴選千葉縣水梨，於前菜至主食期望帶給預約私覓的顧客，能和私覓主理人一同回到1989年的秋天，體驗這份私藏的心意。
+                    </label>
+                </div>
+                <div class="news_content">
+                    <h6>內容：</h6>
+                    <textarea v-model.trim="popupData.Article">私覓主理人與多位摯友於1989年參加一場私廚派對，於派對中享用的鮮美食材仍深刻於心，多年後再度憶起來當年的感動，私覓主理人與專業團隊共同開發秋寄限定料理，希望再次複刻最初的感動。以鰹魚為食，輔以柑橘類的柚子醬『ポン酢』調味，再加一點梅子提味，提升整體的層次感。秋天的味蕾－松茸ごはん（松茸飯）」，使用昆布高湯，並將松茸與其他像是銀杏果等食材一同放進炊飯器煮。而秋天更不能錯過柿子、水梨，私覓嚴選千葉縣水梨，於前菜至主食期望帶給預約私覓的顧客，能和私覓主理人一同回到1989年的秋天，體驗這份私藏的心意。
                 </textarea>
-                <p>(0/300)</p>
-                <button class="news_content_btn">儲存</button>
+                    <p>(0/300)</p>
+                    <button class="news_content_btn" @click="doSubmit()">儲存</button>
+                </div>
             </div>
+        </div>
+        <!-- ========== 加入動態成功 & 移除動態成功 燈箱 ========== -->
+        <div class="overlay5" :class="{ product_popNone : success_popup ==''}" v-if="success_popup !== '' ">
 
+            <article>
+                <div class="check_text">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h6>{{success_popup}}</h6>
+                </div>
+            </article>
         </div>
 
     </div>
@@ -348,7 +361,55 @@
             data() {
                 return {
                     BackNewsList: [],
+
+                    text: {
+                        put_on: '上架',
+                        put_down: '下架'
+                    },
+
+                    // 接Ajax的產品資料
+                    product: [],
+
+                    // popUp的資料, insert 到資料庫
+                    popupData: {
+                        // ID: '', 資料庫設定是autoID
+                        Category: '最新動態',
+                        Date: "",
+                        Title: "",
+                        Article: "",
+                        IMG: "",
+                        pushisedDate: Date.now()
+                    },
+
+                    // 當前 Switch 狀態
+                    currentState: true,
+
+                    // ========= popUp ========= // 
+
+                    // 控制燈箱
+                    isShow: false,
+
+                    // 控制popUp開關
+                    success_popup: '',
+
+                    // 清空原本popUp資料
+                    success_popup_interval: null,
                 };
+            },
+            watch: {
+
+            },
+            computed: {
+
+            },
+            created() {
+
+                // 取得現有商品資料
+                this.getCate();
+            },
+            mounted() {
+
+
             },
             created() {
                 this.newsrender();
@@ -386,9 +447,199 @@
                             alert("發生錯誤: " + exception.status);
                         },
                     });
+                },
+
+                updateOrderNewsCondition(News) {
+                    // console.log(news);
+                    // 修改資料庫資料
+                    $.ajax({
+                        method: "POST",
+                        // TODO update API 尚未完成
+                        url: "./php/backpage/back_news_u.php",
+                        data: {
+                            News_ID: News.ID,
+                            News_Condition: News.Condition
+                        },
+                        dataType: "text",
+                        success: (response) => {
+                            console.log(response)
+                        },
+                        error: (exception) => {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+                },
+
+                switchToggle(News, e) {
+                    if (window.confirm('是否要更商品狀態?')) {
+                        if (News.Condition == 1) {
+                            News.Condition = 0;
+                        } else {
+                            News.Condition = 1;
+                        }
+                        // updata  Condition API
+                        this.updateOrderNewsCondition(News);
+                    } else {
+                        // console.log(e.target.checked)
+                        // console.log(dish.Condition)
+                        e.target.checked = News.Condition
+                    }
+
+                },
+
+                // 點擊 insert 打開 popUp
+                openPop() {
+                    // 開啟popUp
+                    this.isShow = true;
+
+                    // overfloat: hidden
+                    let body = document.querySelector('body');
+                    body.style.overflow = "hidden";
 
 
                 },
+
+                // FIXME Insert 資料 
+                doSubmit() {
+
+                    // 判斷資料格式是否正確
+                    if (this.popupData.Category == '') {
+                        alert("請填寫[動態分類]");
+                        return false;
+                    }
+                    if (this.popupData.Title == '') {
+                        alert("請填寫[動態標題]");
+                        return false;
+                    }
+                    // else if(this.popupData.Price !== typeof(Number)){
+                    //     alert("請填寫[商品售價]正確格式");
+                    //     return false;
+                    // }
+
+                    // console.log(e.which);
+                    // // 0 ~ 9 之間對應數值為 48 ~ 57 , 8 為 回車鍵
+
+                    // if((e.which >= 48 && e.which <= 57) || e.which == 8){
+                    // if(e.target.value.length == 0 && e.which == 8){
+                    //     let previous_el = this.previousElementSibling;
+                    //     console.log(previous_el);
+                    //     previous_el.focus();
+                    // }
+                    // }else{
+                    // e.preventDefault();
+                    // }
+
+
+
+                    if (this.popupData.Date == '') {
+                        alert("請填寫[刊登時間]");
+                        return false;
+                    }
+                    if (this.popupData.Article == '') {
+                        alert("請填寫[動態內文]");
+                        return false;
+                    }
+                    if (this.popupData.IMG == '') {
+                        alert("請加入[動態配圖]");
+                        return false;
+                    }
+
+
+                    // 處理 news_Category 資料格式
+                    if (this.popupData.Category == "最新動態") {
+                        this.popupData.Category = 8
+                        const News_Category = this.popupData.Category;
+                    }
+                    else if (this.popupData.Category == "限時優惠") {
+                        this.popupData.Category = 9
+                        const News_Category = this.popupData.Category;
+                    }
+                    else if (this.popupData.Category == "聯名限定") {
+                        this.popupData.Category = 10
+                        const News_Category = this.popupData.Category;
+                    };
+
+                    // 宣告變數
+                    const News_Category = this.popupData.Category;
+                    const News_Date = this.popupData.Date;
+                    const News_Title = this.popupData.Title;
+                    const News_Article = this.popupData.Article;
+
+                    // FIXME How to send and get the IMG ？
+                    const News_IMG = this.popupData.IMG;
+
+                    // console.log(dish_Type);
+                    // console.log(dish_Name);
+                    // console.log(dish_Price);
+                    // console.log(dish_ShopPoint);
+                    // console.log(dish_Introduction);
+
+                    $.ajax({
+                        method: "POST",
+                        url: "php/backpage/back_news_p.php",
+                        data: {
+                            News_Category,
+                            News_Date,
+                            News_Title,
+                            News_Article,
+                            News_IMG,
+                        },
+                        dataType: "text",
+                        success: (response) => {
+                            // 加入商品成功 popUp
+                            this.success_popup = '新增動態成功'
+                            let body = document.querySelector('body');
+                            body.style.overflow = "hidden";
+
+                            // PopOn 消失
+                            clearInterval(this.success_popup_interval)
+                            this.success_popup_interval = setInterval(() => {
+                                this.success_popup = ''
+                                // overfloat: auto
+                                let body = document.querySelector('body');
+                                body.style.overflow = "auto";
+                            }, 1000);
+                        },
+                        error: function (exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
+
+                    // 清空popupData資料
+                    this.popupData = {
+                        Category: '最新動態',
+                        Date: "",
+                        Title: "",
+                        Article: "",
+                        IMG: "",
+                        pushisedDate: Date.now()
+                    },
+                        // 關閉popUp
+                        this.isShow = false;
+                },
+
+
+                // 點擊 container 關掉 popUp
+                product_pop_close() {
+                    this.isShow = false;
+
+                    // overfloat: auto
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
+
+                    // 清空資料
+                    this.popupData = {
+                        // ID: '', 資料庫設定是autoID
+                        Category: '最新動態',
+                        Date: "",
+                        Title: "",
+                        Article: "",
+                        IMG: "",
+                        pushisedDate: Date.now()
+                    }
+                },
+
+
             },
         });
         app2.mount(".app2");
