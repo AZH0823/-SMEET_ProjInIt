@@ -87,14 +87,14 @@
                 <!-- <div class="indexham_user"> -->
                 <ul class="indexuser_ham">
                     <div class="indexborder_ham">
-                        <li class="indexmember_li"><a href="member.html" class="Camel-3 indexmember_open">會員中心</a></li>
-                        <li class="indexmember_li"><a href="member.html#list" class="Camel-3 indexmember_open">訂單查詢</a>
+                        <li class="indexmember_li"><a class="Camel-3 indexmember_open member_li_1_index">會員中心</a></li>
+                        <li class="indexmember_li"><a class="Camel-3 indexmember_open member_li_2_index">訂單查詢</a>
                         </li>
-                        <li class="indexmember_li"><a href="member.html#collection"
-                                class="Camel-3 indexmember_open">收藏菜品</a></li>
-                        <li class="indexmember_li"><a href="member.html" class="Camel-3 indexmember_open"> <span
-                                    class="indexmsg_signal">3</span> 訊息中心</a></li>
-                        <li class="indexmember_li"><a href="member.html#faq" class="Camel-3 indexmember_open">常見問題</a>
+                        <li class="indexmember_li"><a 
+                                class="Camel-3 indexmember_open member_li_3_index"><span
+                                class="indexmsg_signal" id="cart_num_ham_index">3</span>收藏菜品</a></li>
+                        <!-- <li class="indexmember_li"><a href="member.html" class="Camel-3 indexmember_open">  訊息中心</a></li> -->
+                        <li class="indexmember_li"><a class="Camel-3 indexmember_open member_li_4_index">常見問題</a>
                         </li>
                     </div>
                     <li><a href="member.html" class="indexlog_ham green-1">登入</a></li>
@@ -108,6 +108,17 @@
                 <a href="reserve01.html" class="black indexreserve_btn">
                     <img src="./img/btn_reserve_img/btn_reserve_c_img.png" alt="">
                 </a>
+                <!-- 會員中心的popup -->
+                <ul class="user_pop_index none">
+                    <li class="userpop_li"><a href="member.html#member" class="black userpop_open">會員中心</a></li>
+                    <li class="userpop_li"><a href="member.html#list" class="black userpop_open">訂單查詢</a></li>
+                    <li class="userpop_li"><a href="member.html#collection" class="black userpop_open">收藏菜品<span
+                                class="userpopmsg_signal none" id="cart_num_index">3</span></a></li>
+                    <!-- <li class="userpop_li"><a href="member.html" class="black userpop_open">訊息中心</a>
+                    </li> -->
+                    <li class="userpop_li"><a href="member.html#faq" class="black userpop_open">常見問題</a></li>
+                    <li class="userpop_log userpop_log_index"><a href="member.html" class="gray userpop_a">登出</a></li>
+                </ul>
             </ul>
         </header>
 
@@ -123,7 +134,17 @@
             <span class="guide_line"></span>
         </nav>
 
+    </ul>
+        <!-- 登出成功popup -->
+        <div class="logout_pop logout_pop_index none">
 
+            <article>
+                <div class="check_text">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h6>登出成功</h6>
+                </div>
+            </article>
+        </div>
     </div>
 </div>
 @@include('login.html')
