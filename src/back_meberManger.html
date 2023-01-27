@@ -38,23 +38,23 @@
                                 <div class="grid_container">
                                     <div class="grid_item">會員編號</div>
                                     <div class="grid_item">姓名</div>
+                                    <div class="grid_item">性別</div>
                                     <div class="grid_item">回饋點數</div>
-                                    <div class="grid_item">會員狀態</div>
                                     <div class="grid_item">執行</div>
                                 </div>
                                 <!-- row-2 -->
-                                <div class="grid_container" v-for="(item,key) in info" > 
-                                    <div class="grid_item">{{item.ID}}</div>
-                                    <div class="grid_item">{{item.Name}}</div>
-                                    <div class="grid_item">{{item.point}}點</div>
-                                    <div class="grid_item">
-                                        <label class="switch">
+                                <div class="grid_container click_hover" v-for="(item,key) in info" :value="item.ID" @click="open_popup"> 
+                                    <div class="grid_item" >{{item.ID}}</div>
+                                    <div class="grid_item" >{{item.Name}}</div>
+                                    <div class="grid_item" >{{item.Sex}}</div>
+                                    <div class="grid_item" >{{item.point}}點
+                                        <!-- <label class="switch">
                                             <input type="checkbox" class="switch_btn" checked @click="switch_member">
                                             <span class="slider"></span>
                                             <p class="slider_content" >啟用</p>
-                                        </label>
+                                        </label> -->
                                     </div>
-                                    <div class="grid_item checked" @click="open_popup" :value="item.ID">查閱</div>
+                                    <div class="grid_item checked">查閱</div>
                                 </div>
                                 
                                
@@ -63,7 +63,9 @@
                         
                         <!-- 頁碼-->
                         <div id="paginator_block" class="page">
-                            <the-paginator class="page_ul" :total-items=page.total_items items-per-page="10" :current-page=current_page  ></the-paginator>
+                            <the-paginator class="page_ul" :total-items=page.total_items 
+                            items-per-page="10" :current-page=page.current_page 
+                            @emit-pages="page_click" ></the-paginator>
                         </div>
                         <!-- <div class="page">
                             <ul class="page_ul">
@@ -109,11 +111,12 @@
                                     <input type="checkbox" class="line_checkbox" id="line_checkbox">
                                     Google
                                 </label>
-                                <label for="" class="point_item font16 gray" id="point_item">
+                                <p class="member_item font16 gray">{{info_favo.point}}點</p>
+                                <!-- <label for="" class="point_item font16 gray" id="point_item">
                                     <input type="text" :value="info_favo.point" class="pointText font16 gray" id="pointText">
                                     點
                                     <img src="./img/back_page/memberDetail.png" alt="" class="pointEdit" id="pointEdit">
-                                </label>
+                                </label> -->
                             </div>
                         </div><!-- wrapper -->
                 
@@ -135,7 +138,7 @@
                                 <div class="grid_item">{{value.collectionTime}}</div>
                             </div>
                         </div>
-                    <div class="save_btn" style="margin: 40px 0px 20px;" @click="save">儲存</div>
+                    <div class="save_btn" style="margin: 40px 0px 20px;" @click="close_popup">關閉</div>
                 </main>
             </div>
         </div>
@@ -144,6 +147,11 @@
     
     <script src="js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
+    <script type="module">
+        import ThePaginator from "./js/back_page/ThePaginator_member.js";
+
+        Vue.createApp({}).component("ThePaginator", ThePaginator).mount("#paginator_block");
+    </script>
     <script>
         
         let member_back = Vue.createApp({
@@ -153,8 +161,11 @@
                     favo:[{}],
                     info_favo:{},
                     page:{
+                        // 總數
                         total_items : "",
-                        items_per_page : "10",
+                        // 一頁有幾筆
+                        items_per_page : "",
+                        // 當前頁面
                         current_page : ""
                     }
                 }
@@ -166,18 +177,22 @@
             methods: {
                 // 取得會員資料 加進data info
                 get_info(){
+                    let page = 1 ;
                     $.ajax({
                         method: "POST",
                         url: "php/backpage/back_member_s.php",
-                        data: {},
+                        data: {
+                            page:page
+                        },
                         dataType: "json",
                         success: (response) => {
                             // console.log("member");
-                            // console.log(response);
-                            this.info = response ;
-                            this.page.total_items = response.length ;
-
-                            // console.log(this.page.total_items);
+                            console.log(response);
+                            this.info = response[1] ;
+                            this.page.total_items = response[0][0];
+                            this.page.items_per_page = response[0][1];
+                            this.page.current_page = page ;
+                            console.log(this.page);
                         },
                         error: function (exception) {
                             alert("數據載入失敗: " + exception.status);
@@ -211,7 +226,7 @@
                 },
                 // 打開彈窗 
                 open_popup(e){
-                    let member_ID = e.target.getAttribute("value");
+                    let member_ID = e.target.parentNode.getAttribute("value");
                     // console.log(member_ID);
                     // 從資料庫找收藏清單
                     $.ajax({
@@ -255,25 +270,29 @@
                 },
                 save(){
                     let memberID = this.info_favo.ID
-                    let afterPoint = document.getElementById('pointText').value;
-                    // console.log(afterPoint);
-                    $.ajax({
-                        method: "POST",
-                        url: "php/frontpage/member/memberPointUpdate.php",
-                        data: {
-                            memberID:memberID,
-                            afterPoint:afterPoint
-                        },
-                        dataType: "text",
-                        success: (response) => {
-                            this.get_info();
-                            this.$refs.member_popup.classList.add('none');
-                            document.querySelector('body').style.overflow = "auto";
-                        },
-                        error: function (exception) {
-                            alert("數據載入失敗: " + exception.status);
-                        }
-                    });
+                    let point = document.getElementById('pointText').value;
+                    // console.log(point);
+                    let r = confirm('確定要儲存嗎？');
+                    if(r){
+                        $.ajax({
+                            method: "POST",
+                            url: "php/frontpage/member/memberPointUpdate.php",
+                            data: {
+                                memberID:memberID,
+                                point:point
+                            },
+                            dataType: "text",
+                            success: (response) => {
+                                this.get_info();
+                                this.$refs.member_popup.classList.add('none');
+                                document.querySelector('body').style.overflow = "auto";
+                            },
+                            error: function (exception) {
+                                alert("數據載入失敗: " + exception.status);
+                            }
+                        });
+
+                    }
                 },
                 // 會員名稱關鍵字查詢
                 search(){
@@ -306,17 +325,34 @@
                     }
                     
                 },
+                // 頁碼切換
                 page_click(){
-                    // this.page.current_page = 2;
-                    console.log('aaa')
+                    // console.log(page);
+                    console.log("aaa");
+                    // $.ajax({
+                    //     method: "POST",
+                    //     url: "php/backpage/back_member_s.php",
+                    //     data: {
+                    //         page:page
+                    //     },
+                    //     dataType: "json",
+                    //     success: (response) => {
+                    //         // console.log("member");
+                    //         console.log(response);
+                    //         this.info = response[1] ;
+                    //         // this.page.total_items = response[0][0];
+                    //         // this.page.items_per_page = response[0][1];
+                    //         // this.page.current_page = page ;
+                    //         // console.log(this.page);
+                    //     },
+                    //     error: function (exception) {
+                    //         alert("數據載入失敗: " + exception.status);
+                    //     }
+                    // });
                 }
             }
         }).mount('#member_back');
     </script>
-    <script type="module">
-        import ThePaginator from "./js/back_page/ThePaginator_member.js";
-
-        Vue.createApp({}).component("ThePaginator", ThePaginator).mount("#paginator_block");
-    </script>
+    
 </body>
 </html>

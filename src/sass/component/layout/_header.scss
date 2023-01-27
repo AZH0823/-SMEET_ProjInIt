@@ -290,7 +290,6 @@
                 right: 0;
                 // padding-right: 10px 0;
                 display: flex;
-
                 @include pad() {
                     justify-content: flex-end;
                     flex-wrap: wrap;
@@ -1036,4 +1035,50 @@ body {
         opacity: 0;
         pointer-events: none;
     }
+}
+
+// 首頁的會員hover 網頁版
+.user_pop_index {
+    background-color: #fff;
+    width: 150px;
+    position: absolute;
+    border: .5px solid $green-1;
+    padding: 20px 30px 10px 30px;
+    top: 62px;
+    right: 46px;
+
+    .userpop_li {
+        padding: 0 0px 10px;
+        text-align: center;
+
+        .userpop_open {
+            position: relative;
+
+            .userpopmsg_signal {
+                font-size: 14px;
+                position: absolute;
+                top: -5px;
+                right: -15px;
+                background-color: #B91646;
+                display: block;
+                line-height: 18px;
+                width: 18px;
+                border-radius: 50%;
+                color: #fff;
+            }
+        }
+    }
+
+    .userpop_log {
+        text-align: center;
+        display: block;
+        border-top: .5px solid rgb(195, 195, 195);
+        padding: 10px 10px 10px 10px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+
 }

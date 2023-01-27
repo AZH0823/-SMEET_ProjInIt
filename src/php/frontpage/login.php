@@ -9,7 +9,7 @@
        //---------------------------------------------------
 
        //建立SQL語法
-       $sql = "SELECT * FROM Member where Email = ? and Password = ? " ;
+       $sql = "SELECT * FROM Member where Email = ? and `Password` = ? " ;
 
        $statement = getPDO()->prepare($sql);  
        $statement->bindValue(1, $account);  

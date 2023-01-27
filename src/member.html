@@ -297,16 +297,15 @@
           <ul v-for="(item, key) in qa_title">
             <h5>{{ item }}</h5>
             <template v-for="(value, key) in qa[key]">
-              <li class="question_section_li" >
-                <div class="question_flex">
-                  <i class="fa-solid fa-q"></i>
-                  <h6>{{ value.QuestionContent }}</h6>
-                  <i class="fa-solid fa-plus"></i>
-                  <!-- <i class="fa-solid fa-minus "></i> -->
+              <li class="question_section_li" @click="open_QA" :value="value.ID">
+                <div class="question_flex" :value="value.ID">
+                  <i class="fa-solid fa-q" :value="value.ID"></i>
+                  <h6 :value="value.ID">{{ value.QuestionContent }} </h6>
+                  <i class="fa-solid fa-plus" :value="value.ID"></i>
                 </div>
-                <div class="question_none">
-                  <i class="fa-solid fa-a"></i>
-                  <h6>{{ value.AnswerContent }}</h6>
+                <div class="question_none" :value="value.ID">
+                  <i class="fa-solid fa-a" :value="value.ID"></i>
+                  <h6 :value="value.ID">{{ value.AnswerContent }}</h6>
                 </div>
               </li>
             </template>
@@ -907,8 +906,19 @@
                 });
           },
           // 打開QA
-          open(e){
-
+          open_QA(e){
+            let a = e.target.getAttribute("value") - 1;
+            let li = document.querySelectorAll('.question_section_li');
+            // console.log(li[a].firstChild.lastChild);
+            li[a].firstChild.nextSibling.classList.toggle('active');
+            if(li[a].firstChild.lastChild.classList.contains('fa-plus')){
+              li[a].firstChild.lastChild.classList.remove('fa-plus');
+              li[a].firstChild.lastChild.classList.add('fa-minus');
+            }
+            else if(li[a].firstChild.lastChild.classList.contains('fa-minus')){
+              li[a].firstChild.lastChild.classList.add('fa-plus');
+              li[a].firstChild.lastChild.classList.remove('fa-minus');
+            }
           },
           // ==========================QA結束===========================
           // 分頁紀錄
@@ -922,34 +932,10 @@
               this.current_tab = url.slice(1,15);
               // console.log("page:"+this.current_tab);
             }
-          }
+          },
+          
         }
       }).mount('#member');
-
-      // ==========================常見問題===========================
-      $(function () {
-        $(this).siblings().toggleClass("active");
-
-        $(".question_section_li").on("click",function(e){
-          e.preventDefault();
-          $(this).find('.question_none').toggleClass("active");
-        })
-      
-
-        $(".question_flex").click(function (e) {
-          if ($(this).children("i.fa-solid").hasClass("fa-plus")) {
-            // console.log(this);
-            $(this).children("i:nth-child(3)").removeClass("fa-plus")
-            $(this).children("i:nth-child(3)").addClass("fa-minus")
-          }
-          else if($(this).children("i.fa-solid").hasClass("fa-minus")){
-            // console.log(`ttt`);
-            $(this).children("i:nth-child(3)").removeClass("fa-minus")
-            $(this).children("i:nth-child(3)").addClass("fa-plus")
-          }
-        });
-      });
-      // ==========================常見問題結束===========================
     </script>
   </body>
 </html>
