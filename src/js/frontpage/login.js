@@ -491,3 +491,22 @@ log_ham.addEventListener('click',function(e){
     }
     
 });
+
+// 購物車有商品就會渲染紅色 QTY
+window.addEventListener('DOMContentLoaded', (event) => {
+    function ShoppingCartQty(){
+        let car_num = document.getElementById('car_num');
+        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+        // console.log(LSGetItem);
+    
+        // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+        if(LSGetItem == ""){
+            return;
+        }else{
+            car_num.classList.remove('none');
+            car_num.innerHTML = LSGetItem.length;
+        }
+    };
+    ShoppingCartQty();
+});
+

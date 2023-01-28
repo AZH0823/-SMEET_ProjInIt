@@ -827,6 +827,22 @@ body {
                 margin: 30% 0;
                 padding: 10px;
                 cursor: pointer;
+                .fa-cart-shopping{
+                    .carpopmsg_signal{
+                        font-family: Noto Serif TC;
+                        font-size: 14px;
+                        position: absolute;
+                        top: 38px;
+                        right: 56px;
+                        background-color: #B91646;
+                        display: block;
+                        line-height: 18px;
+                        width: 16px;
+                        border-radius: 50%;
+                        color: #fff;
+                        text-align: center;
+                    }
+                }
 
                 @include pad() {
                     font-size: 15px;

@@ -90,7 +90,7 @@ initial-scale=1.0">
             </section>
 
             <!-- ========== 購物車 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="shopCartsuccess_popup !== '' ">
+            <div class="overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="isShow2">
                 
                 <article>
                     <div class="check_text">
@@ -101,7 +101,7 @@ initial-scale=1.0">
             </div>
 
             <!-- ========== 收藏 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="success_popup !== '' ">
+            <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="isShow2">
                 
                 <article>
                     <div class="check_text">
@@ -172,7 +172,8 @@ initial-scale=1.0">
                 return{
                     // ========= popUp ========= //
                     // 控制卡片 popup 開關
-                    isShow:false, 
+                    isShow: false, 
+                    isShow2: false, 
 
                     // 燈箱資料，資料源自 AjaxMealsInfo
                     popupData: {
@@ -275,6 +276,19 @@ initial-scale=1.0">
                     AjaxMealsInfo: [],
                 };
             },
+            watch: {
+                ShoppingCartList: function(){
+                    let car_num = document.getElementById('car_num');
+
+                    // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                    if(this.ShoppingCartList == ""){
+                        return;
+                    }else{
+                        car_num.classList.remove('none');
+                        car_num.innerHTML = this.ShoppingCartList.length;
+                    }
+                },
+            },
 
             computed: {
                 // ========= 原本菜單陣列依照curren_tab過濾 ========= //
@@ -293,14 +307,7 @@ initial-scale=1.0">
                     return filtered
                 }
             },
-            // TODO 上一頁可直接切換Tab
-            created(){
-                window.addEventListener("popstate", function () {
-                    // 第二步，加上 tab_active 函式
-                    member.page();
-                    // console.log('aaa');
-                });
-            },
+        
 
             mounted() {
                 
@@ -308,7 +315,7 @@ initial-scale=1.0">
                 this.getCate();
 
                 // 進商品詳情頁就抓購物車資料
-                this.getCartLocalStorage()
+                this.getCartLocalStorage();
 
             },
 
@@ -330,7 +337,7 @@ initial-scale=1.0">
                 
                 // 最新收藏商品 愛心渲染
                 selectCollections(){    
-                    const member_ID =localStorage.getItem("member_ID");
+                    const member_ID = localStorage.getItem("member_ID");
                     
                     $.ajax({            
                         method: "POST",
@@ -383,10 +390,6 @@ initial-scale=1.0">
                                 login_pop();
                                 item.heart = false;
                             }else{
-                                //已有登入的話 執行.....
-                                // 會員icon顯示
-                                let user_pop = document.querySelector('.user_pop');
-                                user_pop.classList.remove('none');
                                 
                                 // 如果收藏成功就insert資料
                                 if(item.heart == false){
@@ -405,7 +408,8 @@ initial-scale=1.0">
 
                                             // 加入收藏 popUp
                                             this.success_popup = '加入收藏成功'
-                                            // 
+                                            this.isShow2 = true;
+                                            
                                             let body = document.querySelector('body');
                                             body.style.overflow = "hidden";
                                         },
@@ -433,7 +437,8 @@ initial-scale=1.0">
                                         dataType: "text",
                                         success: (response)=> {
                                             // 移除收藏 popUp
-                                            this.success_popup = '移除收藏成功'
+                                            this.success_popup = '移除收藏成功';
+                                            this.isShow2 = true;
                                             let body = document.querySelector('body');
                                             body.style.overflow = "hidden";
                                             
@@ -562,6 +567,9 @@ initial-scale=1.0">
                         this.popupData.qty --;
                     }
                 },
+    
+
+                
 
                 // 商品加入購物車
                 addShoppingCart(popupData){
@@ -645,6 +653,7 @@ initial-scale=1.0">
                     if(item.heart == true){
                         item.heart = false;
                         this.success_popup = '移除收藏成功'
+                        this.isShow2 = true;
                         this.removeCollectList(item)
                         
                         // 使 scroll 無效
@@ -654,6 +663,7 @@ initial-scale=1.0">
                     }else{
                         item.heart = true;
                         this.success_popup = '加入收藏成功'
+                        this.isShow2 = true;
                         this.addCollectList(item)
 
                         // 使 scroll 無效
@@ -678,18 +688,6 @@ initial-scale=1.0">
 
                 },
 
-                // 分頁紀錄
-                // tab_page(){
-                //     history.pushState(null, null, "#" + this.current_tab);
-                // },
-                // page(){
-                //     let url = window.location.hash;
-                //     // console.log(url); 
-                //     if(url){
-                //     this.current_tab = url.slice(1,15);
-                //     // console.log("page:"+this.current_tab);
-                //     }
-                // }
 
             },
         });
