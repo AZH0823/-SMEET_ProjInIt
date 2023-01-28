@@ -35,7 +35,7 @@
   $dbn =  getPDO();
 
 
-    $statement = $dbn  -> prepare($cartDetail);
+    $statement = $dbn -> prepare($cartDetail);
     $statement->bindValue(1, $TotalPrice);  
     $statement->bindValue(2, $Points);  
     $statement->bindValue(3, $Invoice);  
@@ -47,7 +47,7 @@
     // $statement->bindValue(9, $Uniform);  
     $result = $statement->execute();
     //lastInsertId是insert資料後取得最新的一筆id的編號
-    $OrderID = $dbn ->lastInsertId();
+    $OrderID = $dbn->lastInsertId();
     echo  $OrderID;
  
 

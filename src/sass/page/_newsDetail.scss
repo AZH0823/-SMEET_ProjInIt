@@ -1,171 +1,176 @@
 .fuild_wrapper {
-    .news_detail {
-      h1 {
-        margin: 15% 0 6% 7%;
-
-        @include pad{
-          margin:15% 0 6% 4%;
-        }
-  
-        @include mobile {
-          margin: 8% 0px 5% 8%;
-        }
-      }
-    }
-  
-    .news_detail_h3 {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 0px 0 6% 10%;
-      width: 80%;
-      position: relative;
+  .news_detail {
+    h1 {
+      margin: 15% 0 6% 7%;
 
       @include pad {
-        margin: 0px 0 10% 10%;
+        margin: 15% 0 6% 4%;
       }
-  
+
       @include mobile {
-        flex-direction: column;
-        width: unset;
-        margin: unset;
+        margin: 8% 0px 5% 8%;
       }
-  
-      h3::before {
-        content: "";
-        background-color: black;
-        position: absolute;
-        width: 1104px;
-        height: 1px;
-        top: 90px;
-        right: -46px;
+    }
+  }
 
-        @include pad{
-          width: 666px;
-          right: -45px;
+  .news_detail_h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 0 6% 10%;
+    width: 80%;
+    position: relative;
+
+    @include pad {
+      margin: 0px 0 10% 10%;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      width: unset;
+      margin: unset;
+    }
+
+    h3::before {
+      content: "";
+      background-color: black;
+      position: absolute;
+      width: 1104px;
+      height: 1px;
+      top: 90px;
+      right: -46px;
+
+      @include pad {
+        width: 666px;
+        right: -45px;
+      }
+
+      @include mobile {
+        background-color: #bababa;
+        width: 365px;
+        right: 30px;
+      }
+
+      @media screen and (max-width: 375px) {
+        width: 331px;
+        right: 23px;
+      }
+    }
+  }
+  .news_detail_tiem {
+    text-align: center;
+    height: 331px;
+    @include pad {
+      height: 200px;
+    }
+    @include mobile {
+      height: 110px;
+    }
+
+    img {
+      height: 100%;
+
+      @include mobile {
+        margin: 50px 0 20px 0;
+      }
+
+      @media all and (max-width: 375px) {
+        height: 100px;
+      }
+    }
+  }
+
+  .news_detail_container {
+    margin: 0 auto;
+
+    h4 {
+      padding: 5% 15% 10% 14%;
+      letter-spacing: 0.2em;
+      text-indent: 2em;
+
+      @include pad {
+        padding: 5% 6% 10% 6%;
+      }
+      @include mobile {
+        padding: 18% 8% 15% 8%;
+        font-size: 16px;
+      }
+      &::first-letter {
+        font-size: 72px;
+        @include pad {
+          font-size: 64px;
         }
-  
+
         @include mobile {
-          background-color: #bababa;
-          width: 365px;
-          right: 30px;
-        }
-  
-        @media screen and (max-width:375px) {
-          width: 331px; 
-          right: 23px;
+          font-size: unset;
         }
       }
     }
-    .news_detail_tiem {
-      text-align: center;
-      height: 331px;
-      @include pad{
-        height: 200px;
-      }
-      @include mobile{
-        height: 110px;
-      }
-      
+  }
+  .btn_view {
+    margin-left: 71%;
+    display: flex;
+    @extend .font18;
+    font-weight: 1000;
+    position: relative;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    color: #000;
 
-      img {
-        height: 100%;
-  
-        @include mobile {
-          margin: 50px 0 20px 0;
-        }
-  
-        @media all and (max-width : 375px){
-          height: 100px;
-          
-        }
-      }
+    @include pad {
+      margin-left: 60%;
     }
-  
-    .news_detail_container {
-      margin: 0 auto;
-  
-      h4 {
-        padding: 5% 15% 10% 14%;
-        letter-spacing: 0.2em;
-        text-indent:2em;
 
-        @include pad{
-          padding: 5% 6% 10% 6%;
-        }
-        @include mobile {
-          padding: 18% 8% 15% 8%;
-          font-size: 16px;
-        }
-        &::first-letter {
-          font-size: 72px;
-          @include pad{
-            font-size: 64px;
-          }
-
-          @include mobile {
-            font-size: unset;
-          }
-        }
-      }
+    @include mobile {
+      margin-left: 20%;
+      margin-top: 10%;
     }
-    .btn_view {
-      margin-left: 71%;
-      display: flex;
-      @extend .font18;
-      font-weight: 1000;
+
+    &::after {
+      display: block;
+      content: "";
+      width: 180px;
+      height: 0.5px;
+      background-color: #000;
+
+      position: absolute;
+      top: 30px;
+      left: 0px;
+
+      z-index: 1;
+    }
+
+    p {
       position: relative;
-      text-decoration: none;
-      color: #000;
+      margin-right: 50px;
+      position: relative;
+    }
 
-      @include pad{
-        margin-left: 60%;
-      }
+    span {
+      border-radius: 50%;
+      height: 70px;
+      @include btnGetor(
+        70px,
+        0px,
+        10px,
+        black,
+        $Camel-3,
+        null,
+        transparent,
+        null,
+        0.5px
+      );
+      border: 0.5px solid #000;
+      position: absolute;
+      top: -16px;
+      left: 165px;
 
-      @include mobile{
-        margin-left: 20%;
-        margin-top: 10%;
-      }
-  
-      &::after {
-          display: block;
-          content: "";
-          width: 180px;
-          height: .5px;
-          background-color: #000;
-  
-          position: absolute;
-          top: 30px;
-          left: 0px;
-  
-          z-index: 1;
-      }
-  
       p {
-          position: relative;
-          margin-right: 50px;
-          position: relative;
-  
-  
+        position: absolute;
+        top: 19px;
+        left: 15px;
       }
-  
-  
-      span {
-          border-radius: 50%;
-          height: 70px;
-          @include btnGetor(70px, 0px, 10px,
-              black, $Camel-3, null, transparent, null, .5px);
-          border: .5px solid #000;
-          position: absolute;
-          top: -16px;
-          left: 165px;
-  
-          p {
-              position: absolute;
-              top: 19px;
-              left: 15px;
-          }
-      }
+    }
   }
-  }
-  
+}
