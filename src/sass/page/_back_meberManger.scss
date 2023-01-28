@@ -40,8 +40,13 @@
                                 }
                             }
                         }
-                        
-
+                        // 整個hover
+                        .click_hover{
+                            cursor: pointer;
+                            &:hover{
+                                color: #ccc;
+                            }
+                        }
                         div.back_from_wrapper {
                             height: 550px;
                             overflow-y: scroll;

@@ -52,9 +52,24 @@
             <div class="login_or" ref="or">
                 <p class="font16 gray">或</p>
             </div>
-            <!-- 第三方 -->
-            <button type="button" class="btn_three font18 " ref="three">
-                <!-- <i class="fa-brands fa-line"></i> -->
+            <!-- 第三方GOOGLE -->
+            <!-- <div
+                id="g_id_onload"
+                data-client_id="559185697006-3p27f7jmn1dh15u89uigetihv8tkeqh5.apps.googleusercontent.com"
+                data-login_uri="https://localhost"
+                data-auto_prompt="false"
+            ></div>
+            <div
+                class="g_id_signin"
+                data-type="standard"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left"
+            ></div> -->
+            <button type="button" class="btn_three font18 " ref="three"> 
+                 <i class="fa-brands fa-line"></i>
                 使用LINE快速登入
             </button>
             <!-- =========註冊成功畫面=============== -->
@@ -87,5 +102,11 @@
         <!-- 會員註冊{{user_add}} -->
         <!-- 會員登入{{user_enter}} -->
     </div>
-    
 
+    <!-- email -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <!-- google api -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+    </script>

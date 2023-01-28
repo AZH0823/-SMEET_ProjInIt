@@ -1,24 +1,30 @@
 .back_login {
-    background-color: rgba(0, 0, 0, 0.155);
     height: 100vh;
     width: 100vw;
     position: fixed;
     overflow: hidden;
     z-index: 10000;
     top: 0;
+    background-image: url(../img/landpage_img/back_login.jpg);
+    background-position:center center;
+    background-size: cover;
+
+    
     .container{
         background-color: #fff;
         width: 470px;
-        height: 525px;
-        padding: 40px 50px;
+        height: 350px;
+        padding: 0 50px;
         position: fixed;
         top: 0;
         bottom: 0;
         right: 0;
         left: 0;
         margin: auto;
-        box-shadow: 0 0 10px rgba(146, 146, 146, .5);
-
+        box-shadow: 0 0 10px rgba( 0, 0, 0, .5);
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 2px;
+        
         // border: 1px solid #000;
         @include mobile() {
             width: 325px;
@@ -60,53 +66,31 @@
         }
 
         //所有表單
-        .login_add,
         .login_enter {
             input {
-                border-top: 0px;
-                border-left: 0px;
-                border-right: 0px;
-                border-bottom: 1px solid #000;
+                border: 0px;
                 width: 100%;
-                line-height: 30px;
+                line-height: 40px;
                 // margin-top: 10px;
                 margin-bottom: 20px;
                 letter-spacing: 1px;
                 outline: 0;
-
+                border-radius: 2px;
+                padding-left: 12px;
+                background-color: rgba(255, 255, 255, 0.95);
             }
 
             #login_pwd_again {
                 margin-bottom: 5px
             }
 
-            .login_news {
-                display: flex;
-                margin-top: 5px;
-                align-items: center;
-
-                input {
-                    width: 20px;
-                    margin-top: 1px;
-                    margin-bottom: 0;
-                    background-color: #000;
-                    color: #fff;
-                }
-
-                p.font14 {
-                    @include mobile() {
-                        font-size: 12px;
-                    }
-                }
-            }
-
             .login_pwd {
                 position: relative;
-
+                margin-top: 20px;
                 i {
                     position: absolute;
-                    top: 9px;
-                    right: 0px;
+                    top: 15px;
+                    right: 12px;
                     cursor: pointer;
                 }
             }
@@ -123,19 +107,19 @@
 
         // 登入表單
         .login_enter {
-            margin-top: 50px;
+            margin-top: 66px;
         }
 
         // 全部按鈕
-        .btn_login,
-        .btn_three {
+        .btn_login{
             width: 100%;
             background-color: $red;
             border: 0;
             color: #fff;
             line-height: 45px;
             cursor: pointer;
-            margin: 15px 0;
+            margin: 30px 0;
+            border-radius: 2px;
 
             @include mobile() {
                 line-height: 30px;
@@ -143,306 +127,9 @@
                 margin: 10px 0;
             }
         }
-
-        // 立即加入按鈕
-        .btn_login {
-            margin-top: 25px;
-        }
-
-        // 用LINE快速登入 按鈕
-        .btn_three {
-            background-color: #5BC431;
-
-            i {
-                color: #5BC431;
-                background-color: #fff;
-            }
-        }
-
-        // 或
-        .login_or {
-            p {
-                text-align: center;
-                position: relative;
-
-                &::before,
-                &::after {
-                    content: "";
-                    width: 43%;
-                    height: 1px;
-                    background-color: #898989;
-                    display: block;
-                    position: absolute;
-
-                }
-
-                &::before {
-                    top: 13px;
-                    left: 0px;
-                }
-
-                &::after {
-                    top: 13px;
-                    right: 0px;
-                }
-            }
-        }
-
-        // 會員註冊成功畫面
-        .login_success {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-
-            .yes {
-                font-size: 56px;
-                color: $green-3;
-                margin-bottom: 5%;
-            }
-
-            .inCart_btn2 {
-                line-height: 48px;
-                padding: 0;
-                margin-top: 35%;
-                margin-bottom: 10%;
-            }
-
-        }
-
-        //忘記密碼畫面
-        .login_forget {
-            text-align: center;
-            height: 90%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin: 20px auto;
-        }
-
-        .forget {
-            text-align: right;
-
-            input {
-                border-top: 0px;
-                border-left: 0px;
-                border-right: 0px;
-                border-bottom: 1px solid #000;
-                width: 100%;
-                line-height: 30px;
-                // margin-top: 10px;
-                margin-bottom: 20px;
-                letter-spacing: 1px;
-                outline: 0;
-
-            }
-        }
-
-        // .inCart_btn1 {
-        //     &:hover {
-        //     color: #FFF;
-        //     background-color: darken($green-1,5);
-        //     }
-        // }
-
     }
-
     .none {
         display: none !important;
     }
 }
 
-
-// ------- slide cart ------- //
-
-
-.cart {
-    .cart_container {
-        background-color: #fff;
-        height: 100vh;
-        width: 390px;
-        position: fixed;
-        top: 0px;
-        right: -100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        transition: 1s;
-        z-index: 222;
-
-        @include mobile() {
-            width: 360px;
-        }
-
-        .fa-xmark,
-        .icon_x {
-            font-size: 46px;
-            color: #898989;
-            margin-top: 5%;
-            margin-right: 15px;
-            display: block;
-            text-align: right;
-            cursor: pointer;
-            transition: 1s;
-
-            @include mobile() {
-                margin-top: 1%;
-            }
-        }
-
-        .cart_content {
-            width: 100%;
-            height: 80%;
-            border-top: 1px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 20px 20px;
-            flex-wrap: wrap;
-            overflow: auto;
-
-            @include mobile() {
-                padding: 15px 15px;
-            }
-
-            .item {
-                display: flex;
-                margin-bottom: 12px;
-                height: 131px;
-                border-bottom: 1px solid #000;
-
-                img {
-                    width: 146px;
-                }
-
-                .content {
-                    display: flex;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    padding-left: 10px;
-                    padding-right: 3px;
-
-                    .title,
-                    i {
-                        width: 100%;
-                        height: 36%;
-                        line-height: 1.5;
-                        margin-bottom: 3px;
-                    }
-
-                    .count,
-                    .plus_minus,
-                    .money,
-                    .money_cart {
-                        width: 50%;
-                        line-height: 26px;
-
-                    }
-
-                    .plus_minus {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        font-size: 16px;
-
-                        @include mobile() {
-                            font-size: 14px;
-                        }
-
-                        .minus i,
-                        .plus i {
-                            font-size: 12px;
-                            display: block;
-                            border: 1px solid #000;
-                            width: 18px;
-                            line-height: 16px;
-                            text-align: center;
-                            border-radius: 50%;
-                            cursor: pointer;
-
-                            @include mobile() {
-                                font-size: 10px;
-                                width: 16px;
-                                line-height: 14px;
-                            }
-                        }
-
-                        .minus i {
-                            color: #b9b9b9;
-                            border: 1px solid #b9b9b9;
-                        }
-
-                        .plus i {
-                            color: #616161;
-                            border: 1px solid #616161;
-                        }
-                    }
-
-                    .money_cart {
-                        text-align: right;
-                    }
-                    .trash{
-                        display: flex;
-                        justify-content: flex-end;
-                        width: 100%;
-                    }
-                    i.fa-trash-can {
-                        text-align: right;
-                        line-height: 26px;
-                        cursor: pointer;
-                        width: 10%;
-                    }
-                }
-
-
-
-            }
-        }
-
-        .btn {
-            width: 100%;
-            padding: 15px 20px;
-
-            button.checkout_btn {
-                width: 100%;
-
-                &:hover {
-                    color: #fff;
-                    background-color: lighten($green-1, 10);
-                }
-
-                a {
-                    text-decoration: none;
-                    color: $Camel-3;
-                }
-            }
-        }
-
-
-    }
-
-    
-}
-.cart_bg{
-    background-color: rgba(0, 0, 0, 0.155);
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    overflow: hidden;
-    z-index: 221;
-    top: 0;
-    transition: 1s;
-}
-.-carton {
-    transition: 1s;
-    right: 0 !important;
-    
-}
-
-.-closeon {
-    transition-delay: 200s, 4ms;
-    right: -100% !important;
-    
-}
-.none {
-    display: none !important;
-}

@@ -179,6 +179,21 @@ let login_app = Vue.createApp({
                         member_li_4.addEventListener('click',function(){
                             location.href="member.html#faq";
                         })
+                        // 首頁的手機板變登出
+                        indexlog_ham.innerHTML = "登出";
+                        // 可以點擊會員中心的連結
+                        member_li_1_index.addEventListener('click',function(){
+                            location.href="member.html#member";
+                        })
+                        member_li_2_index.addEventListener('click',function(){
+                            location.href="member.html#list";
+                        })
+                        member_li_3_index.addEventListener('click',function(){
+                            location.href="member.html#collection";
+                        })
+                        member_li_4_index.addEventListener('click',function(){
+                            location.href="member.html#faq";
+                        })
                         // history.go(0);
                     } else {
                         account.nextElementSibling.classList.add('appear');
@@ -476,3 +491,22 @@ log_ham.addEventListener('click',function(e){
     }
     
 });
+
+// 購物車有商品就會渲染紅色 QTY
+window.addEventListener('DOMContentLoaded', (event) => {
+    function ShoppingCartQty(){
+        let car_num = document.getElementById('car_num');
+        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+        // console.log(LSGetItem);
+    
+        // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+        if(LSGetItem == ""){
+            return;
+        }else{
+            car_num.classList.remove('none');
+            car_num.innerHTML = LSGetItem.length;
+        }
+    };
+    ShoppingCartQty();
+});
+

@@ -207,6 +207,7 @@
                                                 <option value="0">下架</option>
                                             </select>
                                             <span @click="clickSetDishDetail(dish)">
+                                                <!-- @click="clickSetDishDetail(dish) -->
                                                 <img src="img/back_page/memberDetail.png" alt="" class="pointEdit" id="pointEdit">
                                             </span>
                                         </h6>
@@ -227,6 +228,7 @@
             const app = Vue.createApp({
             data() {
                 return {
+
                     APIdata:{
                     },
                     popOnMsg:{
@@ -252,6 +254,7 @@
                 },
                 methods:{
                     // api start
+                   
                     getSetPrice(){
                         fetch('php/reserveAPI/getSetPriceAPI.php')
                         .then(response =>{
@@ -348,7 +351,25 @@
                                 console.log(err)
                             })
                     },
+                    // 取的食物種類編號,insert 資料會需要
+                    getDishTypeInfo(){
+                        const _this = this;
+                    
+                        fetch('php/backpage/back_getDishType.php')
+                            .then(response =>{
+                                return  response.json();
+                            })
+                            .then( data =>{
 
+                                if(!_this.APIdata.hasOwnProperty('DishType')){
+                                    _this.APIdata.DishType = []
+                                }
+                                _this.APIdata.DishType.push(...data)
+                                   
+                            }).catch(err=>{
+                                console.log(err)
+                            })
+                    },
 
                     // 單品及服務Condition Update
                     updateOrderDishCondition(item){
@@ -412,29 +433,29 @@
                             }
                         });
                     },
-                    updateSetDatail(updatePopDetailData){
+                    updateSetDatail(filterdata){
                         // console.log(updatePopDetailData)
                         const _this = this;
-                        
-                        // 整理狀態有改變的單品(isEdit === true)
-                        let filterdata = []; 
-                        for(let key in updatePopDetailData.dish){
-                            // get value isEdit is true 的單品
-                            let temp = updatePopDetailData.dish[key].filter(el=>el.isEdit)
-                            filterdata.push(...temp);
-                        }
+                        console.log(filterdata)
+                        // // 整理狀態有改變的單品(isEdit === true)
+                        // let filterdata = []; 
+                        // for(let key in updatePopDetailData.dish){
+                        //     // get value isEdit is true 的單品
+                        //     let temp = updatePopDetailData.dish[key].filter(el=>el.isEdit)
+                        //     filterdata.push(...temp);
+                        // }
                         
                         if(filterdata.length == 0){
                             filterdata='NoSetDishIsEditData';    
                         }
-                        // console.log(data)
+                        // // console.log(data)
                         $.ajax({
                             method: "POST",
                             url: "php/backpage/updateSetDatail.php",
                             data: {
-                                ID:parseInt(updatePopDetailData.id),
-                                SetName:updatePopDetailData.setName,
-                                SetPrice:parseInt(updatePopDetailData.price),
+                                ID:parseInt(_this.popOnSetDetail.id),
+                                SetName:_this.popOnSetDetail.setName,
+                                SetPrice:parseInt(_this.popOnSetDetail.price),
                                 DishData:filterdata
                                 // IMG:updatePopDetailData.IMG
                             },
@@ -446,8 +467,8 @@
                                     _this.popOnSetDetail.setName = _this.$refs.setName.value;
                                     _this.popOnSetDetail.price = _this.$refs.setPrice.value;
                                     // 更新APIData
-                                    _this.APIdata.sets[`set${updatePopDetailData.id}`].setName = updatePopDetailData.setName;
-                                    _this.APIdata.sets[`set${updatePopDetailData.id}`].price = updatePopDetailData.price;
+                                    _this.APIdata.sets[`set${_this.popOnSetDetail.id}`].setName = _this.popOnSetDetail.setName;
+                                    _this.APIdata.sets[`set${_this.popOnSetDetail.id}`].price = _this.popOnSetDetail.price;
                                     
                                     for(const key in _this.popOnSetDetail.dish){
                                         _this.popOnSetDetail.dish[key].forEach((el)=>{
@@ -469,9 +490,28 @@
                         });
 
                     },
-                    // 新多筆套餐餐點
-                    insertNewSetDatail(){
-                        console.log(`多筆新增套餐資料`)
+                    // 新單多筆筆套餐餐點
+                    insertNewSetDatail(insertList){
+                        // console.log(`ajax`,insertList)
+                        const _this = this;
+                        if(insertList.length == 0 ){
+                            insertList = 'NoSetDishIsUpdateSData'
+                        }
+                        console.log(insertList)
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/insertNewSetDatail.php",
+                            data: {
+                                data:insertList
+                            },
+                            dataType: "text",
+                            success: function (response) {     
+                                _this.getSetPrice();                  
+                            },
+                            error: function (exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });
                     },
                     // 新增一筆服務或單品
                     insertDish(item){
@@ -543,7 +583,7 @@
                             e.target.checked = dish.Condition
                         }
                     },
-                   
+                    
                     // 新增單品及服務
                     popOnInsert(){
                         this.popOnInsertMsg={};
@@ -633,6 +673,8 @@
                                 _dish.isEdit = false
                             })
                         } 
+
+                        this.getNowDishMax();
                         // console.log( this.popOnSetDetail)
                         // isDisplay:false,
                         // isEdit:false,
@@ -655,21 +697,34 @@
                                 // this.popOnSetDetail = this.$refs.setIMG.value
 
                                 // 單品資訊有要更改資套餐菜品
+                                let upateDishDetailList = []
+                                let insertDishDetailList = []
                                 for(const key in this.popOnSetDetail.dish){
                                     this.popOnSetDetail.dish[key].forEach((el)=>{
-                                        if(el.isEdit && el.id !== ""){
+                                        if(el.isEdit && el.id <= this.APIdata.nowPKnum){
                                             // :ref="'name_' + dish.id">  品名
                                             // :ref="'condition_' + dish.id"> 上下架
                                             
                                             el.Condition = this.$refs[`condition_${el.id}`][0].value;
                                             el.dishName = this.$refs[`name_${el.id}`][0].value;
+
+                                            upateDishDetailList.push(el)
+                                        }else if(el.isEdit && el.id > this.APIdata.nowPKnum){
+                                            el.Condition = this.$refs[`condition_${el.id}`][0].value;
+                                            el.dishName = this.$refs[`name_${el.id}`][0].value;
+
+                                            insertDishDetailList.push(el)
+                                            console.log(`upadate`,el)
                                         }
                                     })                                  
                                 }
-
+                                
+                                this.insertNewSetDatail(insertDishDetailList);
+                                this.updateSetDatail(upateDishDetailList);
+                                // console.log(`insert 的資料:`,insertDishDetailList)
+                                // console.log(`update 的資料:`,upateDishDetailList)
                                 // API update
-                                this.insertNewSetDatail();
-                                this.updateSetDatail(this.popOnSetDetail);                        
+                                // this.updateSetDatail(this.popOnSetDetail);                        
                             }else{
                                 // 帶回之前的值
                                 this.$refs.setName.value = this.popOnSetDetail.setName;
@@ -678,11 +733,15 @@
                                 // 帶回之前菜品的值
                                 for(const key in this.popOnSetDetail.dish){
                                     this.popOnSetDetail.dish[key].forEach((el)=>{
-                                        if(el.isEdit){
+                                        if(el.isEdit && el.id <= this.APIdata.nowPKnum){
                                             //    :ref="'name_' + dish.id">  品名
                                             //    :ref="'condition_' + dish.id"> 上下架
                                             this.$refs[`condition_${el.id}`][0].value = el.Condition;
                                             this.$refs[`name_${el.id}`][0].value = el.dishName;
+                                        }else if(el.isEdit && el.id > this.APIdata.nowPKnum){
+
+                                            this.$refs[`condition_${el.id}`][0].value = el.Condition;
+                                            this.$refs[`name_${el.id}`][0].value =  el.dishName;
                                         }
                                     })                                  
                                 }
@@ -713,15 +772,63 @@
                             _dish.isEdit = false;
                         }
                     },
+                    
+                    getNowDishMax(){
+                        const _this = this
+                        $.ajax({
+                                method: "POST",
+                                url: "php/backpage/back_getDishMaxPKValue.php",
+                                data: {},
+                                dataType: "text",
+                                success: function (res) {
+                                         
+                                    if(!_this.APIdata.hasOwnProperty('nowPKnum')){
+                                        _this.APIdata.nowPKnum = parseInt(res) 
+                                        console.log('現在最大ID為:',_this.APIdata.nowPKnum) 
+                                    }else{
+                                        _this.APIdata.nowPKnum = parseInt(res)                                
+                                        console.log('第二次以後,現在最大ID為:',_this.APIdata.nowPKnum) 
+                                    }
+                                },
+                                error: function (exception) {
+                                    alert("發生錯誤: " + exception.status);
+                                }
+                        });    
 
+
+                    },
                     // 點擊套餐菜色新增 " + " ICON圖示
                     clickInsertSetDish(type,setID){
                         if(this.popOnSetDetail.isEdit){
                             console.log('this is:',type)
+                            this.getNowDishMax(type,setID)
                             if(window.confirm(`想要新增一筆資料在${type}嗎?`)){
                                 console.log(`append Data in ${type},setID:${setID}`)
-                                // this.popOnSetDetail.
+                                let _typeID;
+                                this.APIdata.DishType.forEach((el)=>{
+                                    console.log(el)
+                                    if(el.dishTypeName == type){
+                                        _typeID = el.dishTypeID
+                                    }
+                                })
+
+                                if(!this.APIdata.hasOwnProperty('maxPKnum')){
+                                    this.APIdata.maxPKnum = parseInt(this.APIdata.nowPKnum);
+                                }
                                 
+                                let obj = {
+                                    Condition:0,
+                                    Introduction:null,
+                                    SetID:setID,
+                                    dishName:"",
+                                    dishType:`${type}`,
+                                    dishTypeID:_typeID,
+                                    id: parseInt(this.APIdata.maxPKnum)+ 1,
+                                    isEdit:true,
+                                    price:0,
+                                };
+                                this.APIdata.maxPKnum++;
+                                this.popOnSetDetail.dish[type].push(obj)
                             }
                         }
                     }
@@ -731,9 +838,8 @@
                 mounted(){
                     this.getSetPrice();
                     this.getOtherDish();
+                    this.getDishTypeInfo();
                     // this.getSetdishDetail();
-
-                  
                 }
             });
             app.mount("#reserve_producetManger");

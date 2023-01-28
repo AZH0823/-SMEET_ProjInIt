@@ -77,22 +77,22 @@
                             </div>
                             <div class="product_main">
                                 <div class="product_name">
-                                    <h6>商品名稱：<input placeholder="春手毬和菓子(6/25)" v-model="popupData.Name" required></h6>
+                                    <h6>商品名稱：<input placeholder="春手毬和菓子(6/25)" v-model="popupData.Name" required ref="Name"></h6>
                                     
                                 </div>
                                 <div class="product_type">
-                                    <h6>商品分類：<select name="" id="" @change="UpadteCondition()" v-model="popupData.Type" required>
+                                    <h6>商品分類：<select name="" id="" v-model="popupData.Type" required>
                                         <option value="商城主食">商城主食</option>
                                         <option value="商城湯品">商城湯品</option>
                                         <option value="商城甜品">商城甜品</option>
                                     </select></h6>
                                 </div>
                                 <div class="product_price">
-                                    <h6>建議售價：<input placeholder="$700" v-model.number="popupData.Price" required></h6>
+                                    <h6>建議售價：<input placeholder="$700" v-model.number="popupData.Price" required ref="Price"></h6>
                                 </div>
                                 <div class="product_shopkp">
                                     <h6>重點敘述：</h6>
-                                    <textarea v-model.trim="popupData.ShopPoint" placeholder="你可以在這邊輸入有關產品的重點介紹..." maxlength="500" required></textarea>
+                                    <textarea v-model.trim="popupData.ShopPoint" placeholder="你可以在這邊輸入有關產品的重點介紹..." maxlength="500" required ref="Price"></textarea>
                                 </div>
                                 <div class="product_intro">
                                     <h6>詳情簡介：</h6>
@@ -100,13 +100,14 @@
                                 </div>
                                 <div class="product_pic">
                                     <label type="button" class="btn">
-                                        <span>圖片：</span>
-                                        <input type="file" 
-                                        multiple
-                                        onchange="openFile(event)" name="dish_IMG">
-                                        <img id="output" height="200" style="display:none">
-                                    </label>    
-                    </label>    
+                                        <span>請選擇3張圖片：</span>
+                                        <div class="pic_item">
+                                            <div class="inputwrap">
+                                                <input type="file" id="ProductImage" multiple @change="changeImage($event)">
+                                                <input type="text" id="imageLoader" disabled="" :placeholder="loadedImage ? loadedImage.name : 'Please choose the file'">
+                                            </div>
+                                            <img id="output" v-if="ImageResult" :src="ImageResult" :alt="popupData.name">
+                                        </div>
                                     </label>    
                                 </div>
                                 <!-- <div class="product_trans">
@@ -114,7 +115,7 @@
                                     <h6>白貓宅配 ○</h6>
                                     <h6>超商取貨 ●</h6>
                                 </div> -->
-                                <button class="product_content_btn" type="submit" @click="doSubmit()">儲存</button>
+                                <button class="product_content_btn" @click="doSubmit">儲存</button>
                 
                             </div>
                         </div>
@@ -152,31 +153,20 @@
     <script>
 
 
-        // fileReader
-        function openFile(event){
-            var input = event.target; //取得上傳檔案
-            var reader = new FileReader(); //建立FileReader物件
-
-            reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
-
-            reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
-                var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
-                $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
-            };
-        }
-
 
         // Vue
         const app = Vue.createApp({
             data() {
                 return {
+                    // IMG 判断是否存取
+                    loadedImage: null,
+                    ImageResult: null,
+                    imgData:[],
 
-                    text:{
-                        put_on: '上架',
-                        put_down: '下架'
-                    },
+                    // 照片測試資料
+                    imgData2: "./img/shopmall_img/shopmall_product13.jpg ./img/shopmall_img/shopmall_product14.jpg ./img/shopmall_img/shopmall_product15.jpg",
 
-                    // 接Ajax的產品資料
+                    // Ajax的產品資料
                     product: [],
 
                     // popUp的資料, insert 到資料庫
@@ -187,12 +177,9 @@
                         Price: "",
                         ShopPoint: "",
                         Introduction: "",
-                        IMG: "",
+                        IMG: null,
                         pushisedDate: Date.now()
                     },
-
-                    // 當前 Switch 狀態
-                    currentState: true,
 
                     // ========= popUp ========= // 
 
@@ -218,12 +205,14 @@
 
                 // 取得現有商品資料
                 this.getCate();
+
             },
             mounted() {
                 
                 
             },
             methods: {
+
 
                 // 取得商品清單
                 getCate(){    
@@ -249,8 +238,6 @@
                                     else if(response[i].Type == 10 ){
                                         response[i].Type = "甜品"
                                     };
-                                    
-                                
                                 }   
                                 
                                 // 將資料存到 Vue.Data
@@ -269,7 +256,6 @@
                     // 修改資料庫資料
                     $.ajax({            
                         method: "POST",
-                        // TODO update API 尚未完成
                         url: "./php/backpage/back_productManger_u.php",
                         data:{
                             dish_ID : dish.ID,
@@ -287,7 +273,6 @@
                 
 
                 // switch update status
-                // FIXME 改變樣式，將 Condition的值存到一個變數回傳資料庫
 
                 switchToggle(dish, e){
                     if(window.confirm('是否要更商品狀態?')){
@@ -318,49 +303,97 @@
 
                     
                 },
-
-
-
-                // FIXME Insert 資料 
-                doSubmit(){
+                
+                // 圖片預覽 & 封裝圖片
+                changeImage(e) {
                     
+                    let that = this
+                    
+
+                    let files = e.target.files;
+                    // console.log(files);
+
+                    // 將圖片封裝到imgData
+                    // for (let i = 0; i < files.length; i++) {
+                        // console.log(files[i]);
+
+                        // that.imgData.push(files[i]);
+                        // console.log(that.imgData);
+                    // }
+                    
+                    that.loadedImage = e.target.files[0]
+                    
+                    let reader = new FileReader()
+                    reader.onload = function (e) {
+                        that.ImageResult = e.target.result;
+                    }
+                    // 圖片預覽
+                    reader.readAsDataURL(e.target.files[0]);
+                },
+
+                doSubmit(){
+                    // FIXME 無法存圖片到物件
+                    // this.createIMG();
+                    this.FormData();
+                },
+
+                // createIMG(){
+
+                    // TODO 
                     // 判斷資料格式是否正確
-                    if (this.popupData.Name == '') {
-                        alert("請填寫[商品名稱]");
-                        return false;
-                    }
-                    if (this.popupData.Price == '') {
-                        alert("請填寫[商品售價]");
-                        return false;
-                    }
+                    // if (this.imgData.length < 2 && this.imgData.length > 3) {
+                    //     alert("請上傳正確[照片數量]");
+                    //     return false;
+                    // }
+
+                    // let formData = new FormData();
+                    // formData.append("dish_IMG", this.imgData);
+                    // console.log(formData);
+                    
+
+                //     $.ajax({            
+                //         method: "POST",
+                //         url: "php/backpage/back_productManger_i_IMG.php",
+                //         data:{
+                //             dish_IMG,
+                //         },            
+
+                //         dataType: "text",
+                //         success: (response)=> {
+                //             console.log("圖片上傳成功")
+                //         },
+                //         error: function(exception) {
+                //             alert("數據載入失敗: " + exception.status);
+                //         }
+                //     });
+                // },
+                // 新增商品資訊
+                FormData(){
+                    // 判斷資料格式是否正確
+                    // if (this.popupData.Name == '') {
+                    //     alert("請填寫[商品名稱]");
+                    //     return false;
+                    // }
+                    // if (this.popupData.Price == '') {
+                    //     alert("請填寫[商品售價]");
+                    //     return false;
+                    // }
+
+                    // FIXME 如何判斷正確格式
                     // else if(this.popupData.Price !== typeof(Number)){
                     //     alert("請填寫[商品售價]正確格式");
                     //     return false;
                     // }
 
-                    // console.log(e.which);
-                        // // 0 ~ 9 之間對應數值為 48 ~ 57 , 8 為 回車鍵
 
-                        // if((e.which >= 48 && e.which <= 57) || e.which == 8){
-                        // if(e.target.value.length == 0 && e.which == 8){
-                        //     let previous_el = this.previousElementSibling;
-                        //     console.log(previous_el);
-                        //     previous_el.focus();
-                        // }
-                        // }else{
-                        // e.preventDefault();
-                        // }
-                    
-
-
-                    if (this.popupData.ShopPoint == '') {
-                        alert("請填寫[商品重點敘述]");
-                        return false;
-                    }    
-                    if (this.popupData.Introduction == '') {
-                        alert("請填寫[商品詳細敘述]");
-                        return false;
-                    }    
+                    // if (this.popupData.ShopPoint == '') {
+                    //     alert("請填寫[商品重點敘述]");
+                    //     return false;
+                    // }    
+                    // if (this.popupData.Introduction == '') {
+                    //     alert("請填寫[商品詳細敘述]");
+                    //     return false;
+                    // }    
                     
 
                     // 處理 dish_Type 資料格式
@@ -381,15 +414,14 @@
                     const dish_Type = this.popupData.Type;
                     const dish_Name = this.popupData.Name;
                     const dish_Price = this.popupData.Price;
+                    const dish_IMG = this.imgData2; // 照片測試資料
                     const dish_ShopPoint = this.popupData.ShopPoint;
                     const dish_Introduction = this.popupData.Introduction; 
 
-                    // FIXME How to send and get the IMG ？
-                    const dish_IMG = this.popupData.IMG;
-                    
-                    // console.log(dish_Type);
+                    // console.log(dish_Type); 
                     // console.log(dish_Name);
                     // console.log(dish_Price);
+                    // console.log(dish_IMG); // 照片測試資料
                     // console.log(dish_ShopPoint);
                     // console.log(dish_Introduction);
 
@@ -400,12 +432,15 @@
                             dish_Type,
                             dish_Name,
                             dish_Price,
+                            dish_IMG, // 照片測試資料
+                            dish_Name,
                             dish_ShopPoint,
-                            dish_Introduction,
-                            dish_IMG,
+                            dish_Introduction
                         },            
                         dataType: "text",
                         success: (response)=> {
+
+                            
                             // 加入商品成功 popUp
                             this.success_popup = '新增商品成功'
                             let body = document.querySelector('body');
@@ -425,7 +460,7 @@
                         }
                     });
 
-                    // 清空popupData資料
+                    清空popupData資料
                     this.popupData = {
                         Type: '商城主食',
                         Name: "",
@@ -433,7 +468,6 @@
                         ShopPoint: "",
                         Introduction: "",
                         IMG: "",
-                        pushisedDate: Date.now()
                     },
                     // 關閉popUp
                     this.isShow = false;
