@@ -38,7 +38,7 @@
                     
                     <!------------------------- 廚師長1 ------------------------->
                     <input id="chef1" type="radio" name="chef" checked="checked" />
-                    <label for="chef1">
+                    <label for="chef1" @click="currentTab = index" :class="{active: currentTab === index}">
                         <!-- 立雁杉廚師長 -->
                         {{item.LederName}}
                     </label>
@@ -401,23 +401,18 @@
                         return {
 
                             //----- 廚師長 -----//
-                            current_tab: "chef",
-                            chef_tab: [
-
-                            ]
-
-
-                            ,
-                            chef_data: 'chef1',
-
-                            chef_tab_all: [],
-
+                            chef_tab: [],
+                            
+                            // chef_data: 'chef1',
+                            // chef_tab_all: [],    
 
                             //----- 廚師團隊 -----//
                             chef_bottom: [],
                             
-
                         };
+                        todo:[
+                          
+                        ]
                     },
 
                     mounted() {
@@ -452,7 +447,6 @@
 
                                             _this.chef_tab[2] = element;
                                         };
-                                        // _this.chef_tab.push(element);
                                     });
                                     _this.$nextTick(function () {
 
@@ -461,6 +455,7 @@
                                         _this.chef_tab[0].team = [];
                                         _this.chef_tab[1].team = [];
                                         _this.chef_tab[2].team = [];
+
                                         $.ajax({
                                             method: "GET",
                                             url: "php/frontpage/chefs.php",
@@ -481,7 +476,6 @@
                                                     }
                                                     // _this.chef_bottom.push(element);
 
-
                                                 });
                                             },
                                             error: function (exception) {
@@ -498,70 +492,10 @@
                                 },
 
                             });
-
                         },
-
-                        // 換至內容
-                        isChecked(e) {
-                            if (e) {
-                                this.chef_data = e.target.value
-                            }
-                        },
-
-
                     },
-
                 });
                 app1.mount(".app1");
-
-
-
-
-
-
-
-            //---------------tab---------------//
-        //   let member = Vue.createApp({
-        //     data(){
-        //       return {
-        //         // tab
-        //         current_tab:"chefs",
-        //         member_tab:[
-
-        //           {
-        //             team_id:"1",
-        //             name:"立雁山",
-        //                 img:"",
-        //                 desc:'',
-        //                 member:[
-        //                     {name:'',job:'',title:'',img:''}
-        //                 ]
-        //           },
-
-        //           {
-        //            team_id:"2",
-        //             name:"菜雨停",
-        //                 img:"",
-        //                 desc:'',
-        //                 member:[
-        //                     {name:'',job:'',title:'',img:''}
-        //                 ]
-        //           },
-
-        //           {
-        //             team_id:"3",
-        //             name:"吳薦痣",
-        //                 img:"",
-        //                 desc:'',
-        //                 member:[
-        //                     {name:'',job:'',title:'',img:''}
-        //                 ]
-        //           }
-
-        //         ]}
-        //     }
-        // }).mount('#chefs');
-
 
             </script>
 

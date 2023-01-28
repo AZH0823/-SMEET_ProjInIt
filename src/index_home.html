@@ -109,7 +109,7 @@
                         <div class="_index_news_right" > 
                             <ul v-for="News in NewsList" :key="index">
                                 <li>
-                                    <a class="_news_table" href="">
+                                    <a class="_news_table">
                                         <p class="font16 news_date red">
                                             <!-- 2022.11.08 -->
                                             {{News.date}}
@@ -442,6 +442,7 @@
      <script>
         
         //---------------------菜品評價---------------------//
+
     //   var swiper = new Swiper(".mySwiper", {
     //     breakpoints: {
     //         slidesPerGroup: 4,
@@ -489,7 +490,7 @@
 
 
 
-    // -------------------------------------------------------------------------- //
+    // -----------------------------------Vue--------------------------------------- //
     
     const app = Vue.createApp({
 
