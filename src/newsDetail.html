@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="news_detail_tiem">
-        <img :src="NewsList.IMG" alt="" />
+        <img :src="NewsList.TIMG" alt="" />
       </div>
       <div class="news_detail_container">
         <main class="wrapper">
@@ -67,7 +67,7 @@
               IMG: "",
               Date: "",
               ID: "",
-              // TIMG: "",
+              TIMG: "",
             },
           ],
         };
@@ -103,7 +103,7 @@
                   IMG: response[0].IMG,
                   Date: response[0].Date,
                   ID: response[0].ID,
-                  // TIMG: respone[0].TIMG,
+                  TIMG: response[0].TIMG,
                 };
                 that.NewsList = obj;
               });

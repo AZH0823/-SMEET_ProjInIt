@@ -24,7 +24,8 @@
                 'Date'=>$newData['Date'],
                 'ID'=>$newData['ID'],
                 'IMG'=>$newData['IMG'],
-                'Title'=>$newData['Title']
+                'Title'=>$newData['Title'],
+                'TIMG' =>$newData['TIMG']
             );}
 
         echo json_encode($arr); //更改成json格式
@@ -46,8 +47,8 @@
                 'Date'=>$newData['Date'],
                 'ID'=>$newData['ID'],
                 'IMG'=>$newData['IMG'],
-                'Title'=>$newData['Title']
-                // 'TIMG' =>$newData['TIMG']
+                'Title'=>$newData['Title'],
+                'TIMG' =>$newData['TIMG']
 
             );}
 
