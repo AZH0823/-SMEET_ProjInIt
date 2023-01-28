@@ -255,7 +255,7 @@ const RootComponent  = {
                     // init checked = false
                     // 第1,2 為必填對象故 強制True
                     // console.log(servie)
-                    if(servie.id >= 84 && servie.id <= 85 ){
+                    if(servie.title === '廚具' || servie.title === "炊具"){
                         servie.checked = true;   
                     }else servie.checked = false;
                     

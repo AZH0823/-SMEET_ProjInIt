@@ -183,7 +183,7 @@ div.back_productManger {
             box-shadow: 0 0 10px rgba(146, 146, 146, 1);
             overflow-y: scroll;
             input{
-                width: 160px;
+                width: 150px;
                 height: 33px;
             }
             select{
@@ -233,14 +233,29 @@ div.back_productManger {
                 }
                 .product_pic{
                     height: 200px;
+                    .btn{
+                        .pic_item{
+                            display: flex;
+                            flex-direction: column;
+                            .inputwrap{
+                                display: flex;
+                                align-items: baseline;
+                            }
+                            #output{
+                                width: 150px;
+                            }
+                        }
+                        
+                    }
+                    
                 }
                 .product_trans{
                     display: flex; 
                 }
                 .product_content_btn{
-                    width: 85px;
-                    height: 27px;
-                    margin: 20px 270px;
+                    display: block;
+                    width: 100px;
+                    margin: 0 auto 30px;
                 }
             }
         }

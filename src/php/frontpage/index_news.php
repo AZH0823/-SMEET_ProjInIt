@@ -3,9 +3,10 @@
     include("../conectDB/Connection.php");
 
     //建立sql語法
-    $sql = "SELECT `ID`, `date`, `Article`, `Condition`
+    $sql = "SELECT `date`, `Article`, `Condition`
     FROM News
     where `Condition` = 1
+    
     limit 5";
 
     $statement = getPDO()->prepare($sql);
