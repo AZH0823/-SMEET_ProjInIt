@@ -204,3 +204,4 @@ indexslide_ham.addEventListener('click',function(e){
         }
     });
 })
+

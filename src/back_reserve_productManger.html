@@ -196,27 +196,24 @@
                 </div>
                 <div class="reserve_type">
                     <ul>
-                       
-                            <template v-for="(dishList,typeName) in popOnSetDetail.dish">
-                                <li>種類：{{typeName}} <span class="addItem" @click="clickInsertSetDish(typeName,popOnSetDetail['id'])">+</span></li>
-                                <template v-for="(dish) in dishList" :key="dish.id" :disabled = "!dish.isEdit">
-                                    <div class="type_content">
-                                        <h6 class="number">編號：<input :value="dish.id" disabled></h6>
-                                        <h6 class="name">品名：<input :value="dish.dishName" :disabled = "!dish.isEdit" :ref="'name_' + dish.id"> 
-                                            <select name="" id="" :value="dish.Condition" :disabled = "!dish.isEdit" :ref="'condition_' + dish.id">
-                                                <option value="1">上架</option>
-                                                <option value="0">下架</option>
-                                            </select>
-                                            <span @click="clickSetDishDetail(dish)">
-                                                <!-- @click="clickSetDishDetail(dish) -->
-                                                <img src="img/back_page/memberDetail.png" alt="" class="pointEdit" id="pointEdit">
-                                            </span>
-                                        </h6>
-                                    </div>
-                                </template>
-                            </template> 
-                      
-                       
+                        <template v-for="(dishList,typeName) in popOnSetDetail.dish">
+                            <li>種類：{{typeName}} <span class="addItem" @click="clickInsertSetDish(typeName,popOnSetDetail['id'])">+</span></li>
+                            <template v-for="(dish) in dishList" :key="dish.id" :disabled = "!dish.isEdit">
+                                <div class="type_content">
+                                    <h6 class="number">編號：<input :value="dish.id" disabled></h6>
+                                    <h6 class="name">品名：<input :value="dish.dishName" :disabled = "!dish.isEdit" :ref="'name_' + dish.id"> 
+                                        <select name="" id="" :value="dish.Condition" :disabled = "!dish.isEdit" :ref="'condition_' + dish.id">
+                                            <option value="1">上架</option>
+                                            <option value="0">下架</option>
+                                        </select>
+                                        <span @click="clickSetDishDetail(dish)">
+                                            <!-- @click="clickSetDishDetail(dish) -->
+                                            <img src="img/back_page/memberDetail.png" alt="" class="pointEdit" id="pointEdit">
+                                        </span>
+                                    </h6>
+                                </div>
+                            </template>
+                        </template> 
                     </ul>
                 </div>
             </div>
@@ -344,10 +341,10 @@
                                         Condition:data_el.Condition
                                     }
                                     temp.push(obj);
-                                   
+                                
                                 })  
                                  _this.APIdata.other = temp
-                                   
+                                
                             }).catch(err=>{
                                 console.log(err)
                             })
@@ -434,6 +431,7 @@
                             }
                         });
                     },
+                    
                     updateSetDatail(filterdata){
                         // console.log(updatePopDetailData)
                         const _this = this;
@@ -548,7 +546,7 @@
                         // console.log(item.intro)
                         const _this = this;
                         let introStr = item.intro ==undefined ? null : item.intro.trim()
-                      
+                    
                         $.ajax({
                             method: "POST",
                             url: "php/backpage/insertOrderDish.php",
@@ -605,7 +603,7 @@
                                 data: {},
                                 dataType: "text",
                                 success: function (res) {
-                                         
+                                
                                     if(!_this.APIdata.hasOwnProperty('nowPKnum')){
                                         _this.APIdata.nowPKnum = parseInt(res) 
                                         // console.log('現在最大ID為:',_this.APIdata.nowPKnum) 
@@ -650,7 +648,7 @@
                         this.popOnMsg.isEdit= true;
                         
                         document.querySelector('body').style.overflow = "hidden"
-                         
+                        
                         this.popOnMsg.id = item.id;
                         this.popOnMsg.dishName = item.dishName;
 
@@ -793,7 +791,7 @@
                                 this.insertNewSetDatail(insertDishDetailList);
                                 // 編輯菜品
                                 this.updateSetDatail(upateDishDetailList);
-                                                 
+                                
                             }else{
                                 // 帶回之前的值
                                 this.$refs.setName.value = this.popOnSetDetail.setName;
