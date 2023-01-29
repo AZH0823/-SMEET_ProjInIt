@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
-    <link rel="stylesheet" href="./css/style.css">
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>QA管理</title>
   </head>
   <body>
@@ -44,21 +45,29 @@
                   </div>
 
                   <!-- row-2 -->
-                  <div class="grid_container" v-for="qa in QAlist">
-                    <div class="grid_item">
-                        {{qa.ID}}
-                    </div>
-                    <div class="grid_item">
-                        {{qa.Category}}
-                    </div>
-                    <div class="grid_item">
-                        {{qa.QuestionContent}}
-                    </div>
+                  <div
+                    class="grid_container"
+                    v-for="QA in this.BackQAList"
+                    :key="index"
+                  >
+                    <div class="grid_item">{{QA.ID}}</div>
+                    <div class="grid_item">{{QA.Category}}</div>
+                    <div class="grid_item">{{QA.QuestionContent}}</div>
                     <div class="grid_item">
                       <label class="switch">
-                        <input type="checkbox" class="switch_btn" checked />
+                        <input
+                          type="checkbox"
+                          class="switch_btn"
+                          :checked="QA.Condition === 1"
+                          @click="switchToggle(QA, $event)"
+                        />
                         <span class="slider"></span>
-                        <p class="slider_content">上架</p>
+                        <p class="slider_content" v-if="QA.Condition === 1">
+                          上架
+                        </p>
+                        <p class="slider_content" v-if="QA.Condition === 0">
+                          下架
+                        </p>
                       </label>
                     </div>
                     <div class="grid_item checked">查閱</div>
@@ -67,16 +76,6 @@
                 <!-- wrapper -->
               </div>
               <!-- back_from -->
-
-              <!-- 頁碼-->
-              <!-- <div class="page">
-                            <ul class="page_ul">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            </ul>
-                        </div> -->
             </section>
             <!-- section1 -->
           </main>
@@ -140,7 +139,7 @@
       let app1 = Vue.createApp({
         data() {
           return {
-            QAlist: [],
+            BackQAList: [],
           };
         },
         created() {
@@ -160,14 +159,53 @@
                 // console.log(response);
                 response.forEach((element) => {
                   // console.log(element);
-                  _this.QAlist.push(element);
+                  _this.BackQAList.push(element);
                 });
               },
               error: function (exception) {
                 alert("發生錯誤: " + exception.status);
               },
             });
-            console.log(this.QAlist);
+            console.log(this.BackQAList);
+          },
+          
+          updateQACondition(QA) {
+            // console.log(QA);
+            $.ajax({
+              method: "POST",
+              
+              url: "./php/backpage/back_common_update.php",
+
+              data: {
+                QA_ID: QA.ID,
+                QA_Condition: QA.Condition,
+              },
+
+              dataType: "text",
+
+              success: (response) => {
+                console.log(response);
+              },
+
+              error: (exception) => {
+                alert("數據載入失敗: " + exception.status);
+              },
+            });
+          },
+
+          switchToggle(QA, e) {
+            if (window.confirm("是否要更商品狀態?")) {
+              if (QA.Condition == 1) {
+                QA.Condition = 0;
+              } else {
+                QA.Condition = 1;
+              }
+              this.updateQACondition(QA);
+            } else {
+              // console.log(e.target.checked)
+              // console.log(dish.Condition)
+              e.target.checked = QA.Condition;
+            }
           },
         },
       });
