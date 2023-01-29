@@ -109,7 +109,7 @@
     }
     // 步驟1中間區塊主要內容
     .cart_product {
-      padding: 20px 0 40px;
+      padding: 40px 0 20px;
       border-bottom: 1px solid #000;
       h6 {
         @include pad() {
@@ -147,6 +147,18 @@
       .item5 {
         padding: 0 7px;
         text-align: center;
+      }
+      .cart_product_nolist {
+        margin: 100px auto;
+        i.fa-cart-shopping {
+          text-align: center;
+          display: block;
+        }
+        p.no_text {
+          text-align: center;
+          padding: 0;
+          margin-top: 15px;
+        }
       }
 
       .item1 {
@@ -371,13 +383,24 @@
     @include mobile() {
       width: 100%;
     }
+    .item .spanMinus {
+      margin-left: 40px;
+      @include mobile() {
+        margin-left: 65%;
+      }
+      @media screen and (max-width: 375px) {
+        margin-left: 55%;
+      }
+    }
     .item {
       &:nth-child(5),
       &:nth-child(6) {
-      
         padding-top: 8%;
         padding-bottom: 10px;
         border-top: 1px solid #000;
+        @media screen and (max-width: 375px) {
+          padding-top: 4%;
+        }
       }
       // &:nth-child(even) {
       //   text-align: right;
@@ -650,7 +673,7 @@ section.cart_2_content {
       height: 50px;
       margin-bottom: 15px;
     }
-   
+
     .creditcard_1 {
       width: 100%;
       display: flex;
@@ -820,4 +843,70 @@ section.cart_3_content {
 .disabled {
   background-color: $Camel-3;
   pointer-events: none;
+}
+
+.overlay_pop {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.155);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // height: 100vh;
+  width: 100vw;
+  position: fixed;
+  overflow: hidden;
+  z-index: 10000;
+  article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 400px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .check_text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      margin: 0 auto;
+      width: 90%;
+      .fa-circle-check {
+        color: $green-2;
+      }
+      p {
+        @extend .font14;
+        display: inline-block;
+        text-align: center;
+      }
+      .btn_cart {
+        margin: 25px 25px 0 25px;
+        @extend .font12;
+        font-weight: 1000;
+        @include btnGetor(
+          110px,
+          10px,
+          10px,
+          black,
+          $Camel-3,
+          black,
+          white,
+          #8b8b8b,
+          0.5px
+        );
+      }
+    }
+  }
+}
+
+.product_popNone {
+  display: none;
 }

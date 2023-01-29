@@ -30,12 +30,17 @@
                         <p class="item4">小計</p>
                         <p class="item5"></p>
                     </div>
+                       <!-- 沒有訂單 -->
+                    <div class="cart_product_nolist none " ref="no_list_Cart" >
+                        <i class="fa-solid fa-cart-shopping Camel-1 font18"></i>
+                        <p class="no_text Camel-1 font18">購物車目前尚無商品</p>
+                    </div>
                     <!-- 商品list -->
-
                     <div
                         class="product_detail"
                         v-for="(item, i) in inputShoppingData"
-                        :key="this.inputShoppingData[i]">
+                        :key="this.inputShoppingData[i]"
+                        v-show="noneList">
                         <div class="item1 green-1">
                             <div class="item1_img">
                                 <img :src="item.IMG" alt="">
@@ -61,7 +66,7 @@
 
                         </div>
                         <div class="item5">
-                            <i class="fa-regular fa-trash-can" @click="dealDelete(index)"></i>
+                            <i class="fa-regular fa-trash-can" @click="dealDeletePop"></i>
                         </div>
                     </div>
 
@@ -110,14 +115,14 @@
                             <div class="item">NT$<span id="detail_total">{{cartTotal}}</span></div>
                             <!-- <div class="item">加購價</div> <div class="item">NT$<span
                             id="detail_total">250</span></div> -->
-                            <div class="item">紅利點數</div>
-                            <div class="item">-NT$<span id="detail_total">{{orderData.Points}}</span></div>
+                            <div class="item">紅利點數<span class="spanMinus">-</span></div>
+                            <div class="item">NT$<span id="detail_total">{{orderData.Points}}</span></div>
                             <div class="item">總金額
                             </div>
-                            <div class="item">NT$<span id="detail_total">{{orderData.detailTotal}}</span></div>
+                            <div class="item">NT$<span id="detail_total" >{{orderData.detailTotal}}</span></div>
                         </div>
                         <!-- 下一步按鈕 -->
-                        <div class="next_btn btn" @click="changePage(1);toTop()">下一步</div>
+                        <div class="next_btn btn" @click="changePage(1,$event);toTop();">下一步</div>
                     </div>
                 </section>
                 <!-- 步驟1中間區塊主要內容結束=========== -->
@@ -299,33 +304,37 @@
                                 minlength="1"
                                 maxlength="4"
                                 class="creditnumber"
-                                @keyup="checkCreditCard($event)">
+                                @keyup="checkCreditCard($event)"
+                                v-model="orderData.cards[0]">
                             <input
                                 type="text"
                                 minlength="1"
                                 maxlength="4"
                                 class="creditnumber"
                                 @keydown="inputCreditCard($event)"
-                                @keyup="checkCreditCard($event)">
+                                @keyup="checkCreditCard($event)"
+                                v-model="orderData.cards[1]">
                             <input
                                 type="text"
                                 minlength="1"
                                 maxlength="4"
                                 class="creditnumber"
                                 @keydown="inputCreditCard($event)"
-                                @keyup="checkCreditCard($event)">
+                                @keyup="checkCreditCard($event)"
+                                v-model="orderData.cards[2]">
                             <input
                                 type="text"
                                 minlength="1"
                                 maxlength="4"
                                 class="creditnumber"
                                 @keydown="inputCreditCard($event)"
-                                @keyup="checkCreditCard($event)">
+                                @keyup="checkCreditCard($event)"
+                                v-model="orderData.cards[3]">
                         </div>
-                        <input type="text" placeholder="持卡人姓名">
+                        <input type="text" placeholder="持卡人姓名" v-model="orderData.cardName">
                         <div class="creditcard_2">
-                            <input type="text" class="creditcard_date" placeholder="有效日期(MM/YY)">
-                            <input type="text" class="creditcard_cvc" placeholder="檢核碼">
+                            <input type="text" class="creditcard_date" placeholder="有效日期(MM/YY)" v-model="orderData.cardDate">
+                            <input type="text" class="creditcard_cvc" placeholder="檢核碼" v-model="orderData.cardCode">
                         </div>
 
                     </div>
@@ -339,9 +348,9 @@
                     </div>
                     <div class="cart_product_btn">
                         <!-- 下一步按鈕 -->
-                        <div class="next_btn" @click="changePage(1);cartDetailAPI()">下一步</div>
+                        <div class="next_btn" @click="changePage(1,$event);cartDetailAPI()">下一步</div>
                         <!-- 上一步按鈕 -->
-                        <div class="prev_btn btn" @click="changePage(-1);toTop()">返回上一步</div>
+                        <div class="prev_btn btn" @click="changePage(-1,$event);toTop()">返回上一步</div>
                     </div>
                     <div class="clear_both"></div>
                 </section>
@@ -359,6 +368,33 @@
                     </div>
                 </section>
                 <!-- 步驟3完成訂單畫面結束=========== -->
+
+                  <!-- ========== 購物車 確認移除商品燈箱 ========== -->
+            <div class="overlay_pop"   v-if="isShowPop">
+                
+                <article>
+                    <div class="check_text">
+                        <p>請問您確定要刪除這項商品嗎？</p> 
+                        <div>
+                            <button class="btn_cart" @click="Deletesure">確定</button>
+                            <button class="btn_cart" @click="cancelCart">取消</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+                <!-- ========== 購物車 確認移除商品燈箱 ========== -->
+                <div class="overlay_pop"  v-if="isShowCart">
+                
+                    <article>
+                        <div class="check_text">
+                            <p>你的購物車沒有商品唷~</p> 
+                            <div>
+                                <button class="btn_cart" @click="goIndexHome">來去逛逛</button>
+                               
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </main>
 
             <!-- @@include('layout/footer.html') -->
@@ -420,19 +456,26 @@
                                 detailTotal:"",
                                 Points: 0,
                                 Email:"",
-                                member_ID: ""
+                                member_ID: "",
+                                cardName:'',
+                                cardDate:'',
+                                cardCode:'',
+
+                                cards:[
+                                        {},
+                                        {},
+                                        {},
+                                        {}
+                                    ],
                             },
 
                             //商城傳回的資料
                             inputShoppingData: [
-
                                 {
-                                    ID: '',
-                                    Name: '',
-                                    IMG: '',
-                                    Price: '',
-                                    qty: '',
-                                    // heart:'', img2:'', img3:'',
+                                    ID:"",
+                                    type:"",
+                                    qty:"",
+                                    price:"",
                                 }
                             ],
 
@@ -461,57 +504,44 @@
                             //綁定勾選狀態
                             firstchecked : false,
                             secondchecked :"",
-                           
+                            //控制購物車沒有商品的圖片開關
+                            noneList:false,   
+                            appearList:true,
+
+                            //控制刪除商品的Popon
+                            isShowPop:false,
+
+                            //購物車沒有東西按下一步會跳燈箱
+                            isShowCart:false,
                         }
                     },
 
                     //生命週期
-                    created() {
+                    // created() {
+                    //     this.inputShoppingData = [];
+                    //     let shoppingData = localStorage.getItem("shoppingData");
+                    //     // console.log(shoppingData);
+                    //     if (shoppingData) {
+                    //         this.inputShoppingData = JSON.parse(shoppingData); 
+                    //         return this.inputShoppingData;
+                    //     }
+                    // },
+
+                    mounted() {
+                        this.$nextTick(() => {
+                        this.inputShoppingData = [];
                         let shoppingData = localStorage.getItem("shoppingData");
                         // console.log(shoppingData);
                         if (shoppingData) {
-                            this.inputShoppingData = JSON.parse(shoppingData);
-                            // console.log(this.inputShoppingData);
-                        }
-
-                    },
-
-                    mounted() {
-                        //抓取localStorage的memberID
-                        let member_ID = localStorage.getItem("member_ID");
-                        this.orderData.member_ID = member_ID;
-                        let that = this;
-
-                        if (member_ID) {
-
-                            this.member_ID = member_ID
-                            $.ajax({
-
-                                method: "POST",
-                                url: "php/frontpage/member/member_point.php",
-                                data: {
-                                    member_ID: member_ID
-                                },
-                                dataType: "text",
-                                success: function (response) {
-                                    // console.log(that.bouns); 取得會員點數並回傳至data的bouns
-                                    that.bouns = response;
-                                },
-                                error: function (exception) {
-                                    alert("發生錯誤: " + exception.status);
-                                }
-                            });
-
-                        } else {
-                            //如果沒有抓到membe_ID就踢回首頁
-                            location.assign("./index_home.html");
-
-                            // setTimeout(function(){     window.addEventListener("load", login_pop());
-                            // },100); 跳回首頁 login_pop(); window.location.assign("./index_home.html");
-                            // 再跳出登入popon    window.addEventListener("load", login_pop());
-                        }
-                        // this.inputShoppingData[0] = shoppingData;
-                        // console.log(this.inputShoppingData[0]);
+                            
+                            this.inputShoppingData = JSON.parse(shoppingData); 
+                            return this.inputShoppingData;
+                         }
+                        });
+                        this.getMemberIDinfo();
+                        this.getMallData();
+                        
+                  
 
                     },
 
@@ -519,6 +549,9 @@
                         //小計的所有金額
                         cartTotal() {
                             let cartTotal = 0;
+                            if(this.inputShoppingData.length == 0){
+                                return parseInt(cartTotal);
+                            }
                             for (let i in this.inputShoppingData) {
                                 cartTotal += parseInt(this
                                     .inputShoppingData[i]
@@ -532,37 +565,79 @@
                         //總金額=小計+加價購(要再刪掉)-紅利點數
                         detailTotal() {
                             let detailTotal = 0;
+                            if(this.inputShoppingData.length == 0){
+                                return parseInt(detailTotal);
+                            }
                             // console.log(this.cartTotal - this.orderData.Points)
                             this.orderData.detailTotal = parseInt(this.cartTotal) - parseInt(this.orderData.Points);
-                            return parseInt(detailTotal);
-                        }
+                            return this.orderData.detailTotal;
+                        },
+                     
                     },
                     methods: {
-                        //換下一步
-                        changePage(val) {
-                            this.process.step += val;
+                          //控制流程
+                        changePage(val,e) {
+                            if(this.inputShoppingData.length == 0){
+                                this.isShowCart = true;
+                            }else{
+                                this.process.step += val;
+                            }
                         },
 
                         //數量加
                         dealPlus(item) {
                             // console.log(item);
                             item.qty++;
+                            // console.log(item.qty);
+                            // localStorage.setItem("shoppingData", JSON.stringify(item));
+                           
                         },
                         //數量減
                         dealMinus(item) {
                             // console.log(item);
                             if (item.qty > 1) {
                                 item.qty--;
+                                // localStorage.setItem("items", JSON.stringify(items));
                             }
                         },
-                        //刪除點選到的商品 ->垃圾桶
+                        //點擊垃圾桶會跳出popon
+                        dealDeletePop(){
+                            this.isShowPop = true
+                        },
+
+                        //執行順序
+                        async Deletesure(){
+                            await this.dealDelete();                            
+                            this.reLoad();
+                        },
+                        //點擊燈箱的確定後會逐一刪除購物車的內容
                         dealDelete(index) {
-                            this
-                                .inputShoppingData
-                                .splice(index, 1);
-                        },            
+                            // let that = JSON.parse(localStorage.getItem("shoppingData"));
+                            this.isShowPop = false;
+                            this.inputShoppingData.splice(index, 1);
+                            localStorage.setItem("shoppingData", JSON.stringify(this.inputShoppingData));
+                            // if(this.inputShoppingData.length == 0){
+                            // localStorage.removeItem("shoppingData");
+                            // } 
+                        },     
+                        
+                        //重整畫面
+                        reLoad(){
+                            if(this.inputShoppingData.length == 0){
+                            history.go();
+                            }
+                        },
+                        //點選垃圾桶後的取消按鈕會將燈箱關掉
+                        cancelCart(){
+                            this.isShowPop = false;
+                        },
+                        //點選來去逛逛的按鈕會回到首頁
+                        goIndexHome(){
+                            window.location.replace("http://localhost/SMEET_ProjInIt/dist/index_home.html");
+                        },
                         //按下一步或上一步會回到最上方
                         toTop() {
+                            if(this.inputShoppingData.length == 0)return
                             window.scrollTo({top: 0, behavior: "smooth"})
                         },
                         //當keyup/keydown的時候觸發的blur事件會 判斷輸入的數字是否大於會員本身的紅利點數
@@ -587,6 +662,55 @@
                             }
 
                         },
+                        //取得會員資料的memberID
+                        getMemberIDinfo(){
+                            //抓取localStorage的memberID
+                            let member_ID = localStorage.getItem("member_ID");
+                            this.orderData.member_ID = member_ID;
+                            let that = this;
+
+                            if (member_ID) {
+
+                                this.member_ID = member_ID
+                                $.ajax({
+
+                                    method: "POST",
+                                    url: "php/frontpage/member/member_point.php",
+                                    data: {
+                                        member_ID: member_ID
+                                    },
+                                    dataType: "text",
+                                    success: function (response) {
+                                        // console.log(that.bouns); 取得會員點數並回傳至data的bouns
+                                        that.bouns = response;
+                                    },
+                                    error: function (exception) {
+                                        alert("發生錯誤: " + exception.status);
+                                    }
+                                });
+
+                            } else {
+                                //如果沒有抓到membe_ID就踢回首頁
+                                location.assign("./index_home.html");
+
+                            }
+                            },
+
+                        //判斷進購物車時有沒有抓取商城的data
+                        getMallData(){
+                            let shoppingData = localStorage.getItem("shoppingData");
+                            if (!shoppingData) {
+                                this.$nextTick(() => {
+                                this.$refs.no_list_Cart.classList.remove("none");
+                                this.noneList = false;
+                                });
+                            }else{
+                                this.noneList = true;
+                                }
+                            
+                        },
+
+                       
 
                         //點擊收件人的[同訂購人資料]會將上方訂購人的資訊帶到下方的input裡
                         checkOrderValue() {
@@ -649,7 +773,7 @@
 
                         // 3.address
                         addrRule(str) {
-                            let addrRule = new RegExp('^[\u4e00-\u9fa5 ]$')
+                            let addrRule = new RegExp('^[\u4e00-\u9fa5A-Za-z0-9]$')
                             return addrRule.test(str);
                         },
                         //電子發票
@@ -664,7 +788,7 @@
                         },
                         //檢核紅利點數使用時不能超過商品金額
                         checkMemberPoint() {
-                            console.log(`ttt`);
+                            // console.log(`ttt`);
                             if (this.bounsVal > this.cartTotal) {
                                 alert(`使用的紅利點數需小於您的商品總金額`)
                             }
@@ -759,73 +883,117 @@
                             await this.getMemberInfo();
                             this.clearInputData(); 
                         },
-
+                    
                         //change ckeckbox的勾選狀態
                       
                         
                   
 
                         //購物車訂單送出
-                    //所有orderData的資料放進購物車明細,包含商城的data
-                    cartDetailAPI() {
-                        // console.log(`ttt`);
-                        // if()
-                        let that = this;
-                        let member_ID = this.member_ID;
-                        
-                        //驗證    
-                        // if(!nameRule(that.orderData.name)){
-                        //     alert('name wrong')
-                        //     return false;
-                        // }
+                        //所有orderData的資料放進購物車明細,包含商城的data
+                        cartDetailAPI() {
+                            let that = this;
+                            let member_ID = this.member_ID;
+                            
+                            let check = confirm('確認要送出訂單');
 
-                        // if(!phoneRule(that.orderData.Phone)){
-                        //     alert('phone wrong')
-                        //     return false;
-                        // }
+                            //驗證    
+                          
+                            if(check){
+                                // console.log(`ttt`);
+                                for(const [key, value]of Object.entries(this.orderData)) {
+                                    // console.log(this.orderData);
+                                    switch(key) {
+                                    
+                                        case 'name':
+                                        // console.log(key);
+                                            if(value.trim().length !== 0 && this.nameRule(this.orderData.name)){
+                                               this.orderData.name = this.orderData.name.trim();
+                                            }else{
+                                               alert(`姓名請輸入英文或中文，請修正`);
+                                               return;
+                                            }
+                                            break;
+                                        case 'phone':
+                                            console.log(key);
+                                            if(this.phoneRule(this.orderData.phone)){
+                                                console.log(`驗證成功`);
+                                            }else{
+                                                alert(`驗證失敗`);
+                                                return;
+                                            }
+                                            break;
+                                        case 'addr':
+                                            console.log(key)
+                                            if(value.trim().length > 0 && this.addrRule(this.orderData.addr)){
+                                                console.log('地址驗證成功');
+                                             
+                                            }else{
+                                                alert('驗證失敗');
+                                                return;
 
-                        // if(!addrRule(that.orderData.addr)){
-                        //     alert('address wrong')
-                        //     return false;
-                        // }
+                                            }
+                                            break;
+                                        case 'invoice':
+                                            console.log(key);
+                                            if(value.trim().length > 0 && this.invoiceRule(this.orderData.invoice)){
+                                                console.log(`電子發票驗證成功`);
+                                            }else{
+                                                alert(`驗證失敗`);
+                                                return;
+                                            }
+                                            break;
+                                        case 'uniformRule':
+                                            console.log(key);
+                                            if(value.trim().length > 0 && this.uniformRule(this.orderData.uniform)){
+                                                console.log(`統一發票驗證成功`);
+                                            }else{
+                                                console.log(`驗證失敗`);
+                                            }
+                                            break;
+                                    }   
+                                
+                                }
+                            
 
-                        // if(!invoiceRule(that.orderData.invoice)){
-                        //     alert('invoice wrong')
-                        //     return false;
-                        // }
 
-                        // if(!uniformRule(that.orderData.uniform)){
-                        //     alert('uniform wrong')
-                        //     return false;
-                        // }
 
-                        $.ajax({
-                            method: "POST",
-                            url: "php/frontpage/cartDetail.php",
-                            data: {
-                                TotalPrice:that.orderData.detailTotal,
-                                Points:that.orderData.Points,
-                                invoice:that.orderData.invoice,
-                                Email:that.orderData.Email,
-                                addr:that.orderData.addr,
-                                MemberID: that.orderData.member_ID,
-                                name:that.orderData.name,
-                                phone:that.orderData.phone,
-                                // uniform:that.orderData.uniform
-                            },
-                            dataType: "text",
-                            success: function (response) {
-                                that.response = response;
-                                // console.log();
-                            },
-                            error: function (exception) {
-                                alert("發生錯誤: " + exception.status);
+                                $.ajax({
+                                    method: "POST",
+                                    url: "php/frontpage/cartDetail.php",
+                                    data: {
+                                        TotalPrice:that.orderData.detailTotal,
+                                        Points:that.orderData.Points,
+                                        invoice:that.orderData.invoice,
+                                        Email:that.orderData.Email,
+                                        addr:that.orderData.addr,
+                                        MemberID: that.orderData.member_ID,
+                                        name:that.orderData.name,
+                                        phone:that.orderData.phone,
+                                        shopMallData:that.inputShoppingData,
+    
+                                        // uniform:that.orderData.uniform
+                                    },
+                                    dataType: "text",
+                                    success: function (response) {
+                                        that.response = response;
+                                        // console.log();
+                                    },
+                                    error: function (exception) {
+                                        alert("發生錯誤: " + exception.status);
+                                    }
+                                });
+                                localStorage.removeItem("shoppingData");
                             }
-                        })
-                    }
-                    },
 
-                  
+
+                        }
+                      
+                    }
+                
+                    
+                
+                
                 });
 
                 app.mount("#cart_detail")
