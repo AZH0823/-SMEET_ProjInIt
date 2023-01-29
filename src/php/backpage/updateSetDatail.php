@@ -66,13 +66,13 @@
                         `Name` = :Name,
                         `Condition` = :Condition,
                         `pushisedDate` = NOW() 
-                    WHERE ID = :ID;";
+                    WHERE ID = :Dish_ID;";
 
 
                     $UpdateDishConditionStatement = getPDO()->prepare($UpdateDishSQL);
                     $UpdateDishConditionStatement -> bindValue(":Name",$Name); 
                     $UpdateDishConditionStatement -> bindValue(":Condition",$Condition); 
-                    $UpdateDishConditionStatement -> bindValue(":ID",$Dish_ID); 
+                    $UpdateDishConditionStatement -> bindValue(":Dish_ID",$Dish_ID); 
                     $UpdateDishConditionStatement -> execute();
                     $UpdateDishConditionResult = $UpdateDishConditionStatement -> fetchAll();
                 }

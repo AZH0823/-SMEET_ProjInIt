@@ -291,6 +291,10 @@ div.back_reserve_productManger {
             .setDeatailIMG{
                 display: block;
                 margin: 10px auto;
+                width: 450px;
+                height: 320px;
+                object-fit: cover;
+                
             }
         }
         .reserve_type{
