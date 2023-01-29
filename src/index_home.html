@@ -109,7 +109,7 @@
                         <div class="_index_news_right" > 
                             <ul v-for="News in NewsList" :key="index">
                                 <li>
-                                    <a class="_news_table" href="">
+                                    <a class="_news_table" :href="'newsDetail.html.html?ID='+ News.ID">
                                         <p class="font16 news_date red">
                                             <!-- 2022.11.08 -->
                                             {{News.date}}
@@ -442,6 +442,7 @@
      <script>
         
         //---------------------菜品評價---------------------//
+
     //   var swiper = new Swiper(".mySwiper", {
     //     breakpoints: {
     //         slidesPerGroup: 4,
@@ -466,30 +467,12 @@
       
       //---------------------顧客評價輪播---------------------//
       
-      var swiper = new Swiper(".mySwiper2", {
-        slidesPerView: 'auto',
-        slidesPerGroup: 1,
-      });
-
-      //---------------------ajax---------------------//
-
-    //   $.ajax({
-    //     method:"GET",
-    //     url:"php/frontpage/index_shop.php",
-    //     data:{},
-    //     dataType:"text",
-    //     success:function(response){
-    //         //更新html內容
-    //         $("#result").html(response);
-    //     },
-    //     error:function(exception){
-    //         alert("發生錯誤: " + exception.status);
-    //     }
+    //   var swiper = new Swiper(".mySwiper2", {
+    //     slidesPerView: 'auto',
+    //     slidesPerGroup: 1,
     //   });
 
-
-
-    // -------------------------------------------------------------------------- //
+    // -----------------------------------Vue--------------------------------------- //
     
     const app = Vue.createApp({
 
@@ -619,6 +602,24 @@
     });
     const vm = app.mount('#app')
 
+
+
+
+    //---------------------ajax---------------------//
+
+    //   $.ajax({
+    //     method:"GET",
+    //     url:"php/frontpage/index_shop.php",
+    //     data:{},
+    //     dataType:"text",
+    //     success:function(response){
+    //         //更新html內容
+    //         $("#result").html(response);
+    //     },
+    //     error:function(exception){
+    //         alert("發生錯誤: " + exception.status);
+    //     }
+    //   });
 </script> 
 
 </body>

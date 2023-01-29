@@ -235,7 +235,7 @@ div.back_orderlist_prev {
                 // 總金額
                 .detail_dish.col2{
                     grid-column: 2/4;
-                    color: red;
+                    color: $red;
                     display: grid;
                     grid-template-columns: 2fr 1fr;
                     
@@ -245,7 +245,7 @@ div.back_orderlist_prev {
                     cursor: pointer;
                 }
                 .edit.checked{
-                    color:red;
+                    color:$red;
                     cursor: pointer;
                 }
                 .edit.checked:hover{

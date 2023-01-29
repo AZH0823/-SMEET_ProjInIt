@@ -44,7 +44,7 @@
 
                                 <!-- row-2 -->
                                 <div class="grid_container" v-for="item in product" :key="item.ID">
-                                    <div class="grid_item checked">{{ item.ID }}</div>
+                                    <div class="grid_item checked" @click="popOnEdit(item)">{{ item.ID }}</div>
                                     <div class="grid_item">{{ item.Type }}</div>
                                     <div class="grid_item">{{ item.Name }}</div>
                                     <div class="grid_item">{{ item.Price }}</div>
@@ -70,6 +70,7 @@
                             </ul>
                         </div> -->
                     </section><!-- section1 -->
+
                     <div class="product_wrapper fulid_wrapper" v-if="isShow" @click="product_pop_close">
                         <div class="section_products" @click.stop>
                             <div class="product_top">
@@ -121,7 +122,34 @@
                         </div>
                     </div>
 
-
+                    <!-- ========== 編輯商品 popup ========== -->
+                    <div @click="closePopOn" class="area" :class="[popOnMsg.isEdit ? 'popAllarea':'']">
+                        <div class="pop sevse_dish" v-if="popOnMsg.isEdit == true" @click.stop style="display: none;" :style="popOnMsg.isEdit ?'display:block':'display: none'">  
+                            <div class="reserve_top"  @click.stop>
+                                <p>新增私廚單品或服務</p>
+                            </div>          
+                            <div class="pop_contaniner">
+                                <div class="input">
+                                    <label for="_name">品名:</label><input type="text" id="_name" :value="popOnMsg.Name" ref="os_DishName">
+                                </div>
+                                <div class="input">
+                                    <label :for="popOnMsg.ID">狀態:</label>
+                                    <select :name="popOnMsg.ID" :id="popOnMsg.ID" :value="popOnMsg.Condition" ref="os_Condtion">
+                                        <option value="1">上架</option>
+                                        <option value="0">下架</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="input">
+                                    <label for="_no">編號:</label><input type="text" id="_no" :value="popOnMsg.ID" disabled>
+                                </div>
+                                <div class="input">
+                                    <label for="_price">價格:</label><input id="_price" :value ="popOnMsg.Price"  type="number" ref="os_Price">
+                                </div>
+                                <button class="section_reserve_btn" @click="clickSaveToUpdate(popOnMsg)">儲存</button>
+                            </div>
+                        </div>
+                    </div>
                     <!-- ========== 加入商品成功 & 移除商品成功 燈箱 ========== -->
                     <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="success_popup !== '' ">
                         
@@ -132,8 +160,6 @@
                             </div>
                         </article>
                     </div>
-                    
-
                 </main>
                 @@include('layout/back_footer.html')
             </div><!-- container -->
@@ -143,17 +169,8 @@
     </div>
     <script src="./js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
-    <script
-        type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><!-- icon_cdn -->
-    <script
-        nomodule="nomodule"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+
     <script>
-
-
-
         // Vue
         const app = Vue.createApp({
             data() {
@@ -189,8 +206,17 @@
                     // 控制popUp開關
                     success_popup:'',
 
-                    // 清空原本popUp資料
+                    // 加入成功popup
                     success_popup_interval:null,
+
+                    // 編輯popup
+                    popOnMsg:{
+                        isEdit:false,
+                    },
+                    popOnSetDetail:{
+                        isDisplay:false,
+                        isEdit:false,
+                    }
                 }
             },
             watch: {
@@ -212,8 +238,7 @@
                 
             },
             methods: {
-
-
+                
                 // 取得商品清單
                 getCate(){    
                     $.ajax({            
@@ -250,6 +275,104 @@
                     });
                 },
 
+
+                // 商品編輯
+                popOnEdit(item){
+                        this.popOnMsg={};
+                        this.popOnMsg.isEdit= true;
+                        
+                        document.querySelector('body').style.overflow = "hidden"
+                        
+                        this.popOnMsg.ID = item.ID;
+                        this.popOnMsg.Name = item.Name;
+                        this.popOnMsg.Price = item.Price;
+                        this.popOnMsg.Condition = item.Condition;
+                    },
+
+                    closePopOn(){
+                        this.popOnMsg.isEdit = false;
+                        document.querySelector('body').style.overflow = "auto";   
+                    },
+
+                    // 商品Pop 儲存點擊
+                    clickSaveToUpdate(item){
+                        //  console.log('beforeValue',item);
+                        if(window.confirm('有想要更新此筆資料嗎?')){
+                            
+                            this.popOnMsg.ID = item.ID;
+                            this.popOnMsg.Name = this.$refs.os_DishName.value;
+                            this.popOnMsg.Price = parseInt(this.$refs.os_Price.value);
+                            this.popOnMsg.Condition = parseInt(this.$refs.os_Condtion.value) ;
+
+                            
+                            // Ajax 更新資料庫
+                            this.updateOrderDishDetial('DishDetailUpdate',this.popOnMsg);
+                        }else{
+                            // 不儲存就回到原來參數
+                            this.$refs.os_DishName.value =  item.dishName;
+                            this.$refs.os_Condtion.value = item.Condition;
+                            this.$refs.os_Price.value = item.price;
+                        }      
+
+                    },
+
+                    // 商品更新
+                    updateOrderDishDetial(msg,item){
+                        const _this = this;
+                        // console.log(msg, item);
+                        // console.log('msg',msg)
+                        // console.log('item',item)
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/back_productManger_info_u.php",
+                            data: {
+                                MSG: msg,
+                                ID: item.ID,
+                                Name: item.Name,
+                                Condition: item.Condition,
+                                price: item.Price
+                            },
+                            dataType: "text",
+                            success: function (response) {
+                
+                                if(response ='sucessful'){
+                                    // 改變 Vue 塞回原本API資料內
+                                    // console.log(`aa`)
+                                    for(key in _this.APIdata){ 
+                                        if(key === "other" || key === "serve"){
+                                            // console.log(key,_this.APIdata[key]);
+                                            _this.APIdata[key].forEach((el)=>{
+                                                if(el.ID === item.ID){
+                                                    el.Name = item.Name
+                                                    el.Price =item.Price
+                                                    el.Condition = item.Condition
+                                                }
+                                            })
+                                        }
+                                    }
+
+                                    // 加入商品成功 popUp
+                                    _this.success_popup = '更新商品成功'
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "hidden";
+
+                                    // PopOn 消失
+                                    clearInterval(_this.success_popup_interval)
+                                    _this.success_popup_interval = setInterval(() => {
+                                        _this.success_popup= ''
+                                        // overfloat: auto
+                                        let body = document.querySelector('body');
+                                        body.style.overflow = "auto";
+                                    }, 1000);
+
+                                    _this.popOnMsg.isEdit = false;      
+                                }
+                            },
+                            error: function (exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });
+                    },
 
                 updateOrderDishCondition(dish){
                     console.log(dish);
@@ -460,7 +583,7 @@
                         }
                     });
 
-                    清空popupData資料
+                    // 清空popupData資料
                     this.popupData = {
                         Type: '商城主食',
                         Name: "",

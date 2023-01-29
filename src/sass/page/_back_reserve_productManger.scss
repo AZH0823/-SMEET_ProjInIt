@@ -203,7 +203,6 @@ div.back_reserve_productManger {
                 height: 27px;
                 margin: 0 auto;
             }
-          
         }
         .reserve_top{
             height: 45px;
@@ -291,6 +290,10 @@ div.back_reserve_productManger {
             .setDeatailIMG{
                 display: block;
                 margin: 10px auto;
+                width: 450px;
+                height: 320px;
+                object-fit: cover;
+                
             }
         }
         .reserve_type{
