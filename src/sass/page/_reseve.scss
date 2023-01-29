@@ -123,6 +123,10 @@
                 
                 top: 20%;
                 right: 7.5%;
+                @media screen and (max-width:540px) { 
+                    top: -80%;
+                    right: 37.5%;
+                }
             }
             .form-input {
                 display: flex;
@@ -1481,6 +1485,9 @@
                 text-align: center;
                 flex-direction: column;
                 align-items: center;
+                padding-top: 75px;
+                border-top: 1px solid;
+                
                 &>h5{
                     margin: 20px;
                 }
@@ -1493,6 +1500,8 @@
                 text-align: center;
                 flex-direction: column;
                 align-items: center;
+                padding-top: 75px;
+                border-top: 1px solid;
                 &>h3{
                     margin: 20px;
                 }
