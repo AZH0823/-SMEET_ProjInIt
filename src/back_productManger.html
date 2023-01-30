@@ -82,7 +82,7 @@
                         </div> -->
                     </section><!-- section1 -->
 
-                    <div class="product_wrapper fulid_wrapper" v-if="isShow" @click="product_pop_close">
+                    <div class="product_wrapper fulid_wrapper" v-if="isShow" @click="product_pop_close" :key="popupData.ID">
                         <div class="section_products" @click.stop>
                             <div class="product_top">
                                 <p>新增商品</p>
@@ -198,7 +198,6 @@
 
                     // popUp的資料, insert 到資料庫
                     popupData: {
-                        // ID: '', 資料庫設定是autoID
                         Type: '商城主食',
                         Name: "",
                         Price: "",
@@ -437,8 +436,6 @@
                     let files = e.target.files;
                     // console.log(files);
 
-                    
-                    
                     // 存取圖片提示
                     that.loadedImage = e.target.files[0]
                     
@@ -455,34 +452,37 @@
                 insertImg(){ 
                     let _this = this;
                     let imgLists = [];
-
+                    
                     // 取的上傳團片的圖聘資料內容
                     let files = _this.$refs.SetIMGInput.files;
                     // console.log(files);
 
-                    // 將圖片封裝到imgData
-                    for (let i = 0; i < files.length; i++) {
-                        // console.log(files[i]);
-                        imgLists.push(files[i]);  // imgLists == [{FILE}, {FILE}, {FILE}];
-                        // console.log(imgLists); 
-                    }
+                    // // 將圖片封裝到imgData
+                    // for (let i = 0; i < files.length; i++) {
+                    //     // console.log(files[i]);
+                    //     imgLists.push(files[i]);  // imgLists == [{FILE}, {FILE}, {FILE}];
+                    //     // console.log(imgLists); 
+                    // }
 
                     // 更新上傳圖片
                     if(files !==undefined && files !== null){
-                        let formData = new FormData();
-                        formData.append('ProductImage',files);
-                        formData.append('ID',parseInt(_this.popupData.ID));
+                        let formData =  new FormData();
+                        // for (let i = 0; i < imgLists.length; i++) {
+                        //     formData.append('ProductImage' + i, imgLists[i]);
+                        // }
+                        console.log(files[0]);
+                        formData.append('ProductImage', files[0]);
                         // console.log(formData);
-                        console.log('update SetID: ',formData.getAll('ProductImage'))
                         $.ajax({            
                             method: "POST",
                             url: "php/backpage/back_productManger_i_IMG.php",
-                            data: formData,
+                            data: 
+                                formData,
                             // 告訴jQuery不要去處理發送的資料
                             processData : false, 
                             // 告訴jQuery不要去設定Content-Type請求頭
                             contentType : false,   
-                            dataType: "text",
+                            dataType: "json",
                             success: function (response) {
                                 console.log(response);
                             },
@@ -661,10 +661,10 @@
 
                 // 會員名稱關鍵字查詢
                 search(){
-                    let search_name = this.$refs.search_name.value;
-                    console.log(search_name);
+                    let search_name = this.$refs.search_name.value.trim();
+                    // console.log(search_name);
                     if(this.$refs.search_name.value == ""){
-                        this.getCate();
+                        return;
                     }else{
                         $.ajax({
                             method: "POST",

@@ -1,6 +1,14 @@
 <?php
+  
     include ('../conectDB/Connection.php');
     
+    
+    $dest = '/Applications/XAMPP/xamppfiles/htdocs/smeet_project_new/dist/img/test_img/'. $_FILES['ProductImage']['name'];
+    move_uploaded_file($file, $dest);
+
+    
+
+    /*
     if ($_FILES['ProductImage']['error'] === UPLOAD_ERR_OK){
         // echo '檔案名稱: ' . $_FILES['ProductImage']['name'] . '<br/>';
         // echo '檔案類型: ' . $_FILES['ProductImage']['type'] . '<br/>';
@@ -11,13 +19,14 @@
         $dest = '../../img/reserve_img/' . $_FILES['ProductImage']['name'];
         
         # 將檔案移至指定位置
+        $dest = '/Applications/XAMPP/xamppfiles/htdocs/smeet_project_new/dist/img/test_img/'. $_FILES['ProductImage']['name'];
         move_uploaded_file($file, $dest);
-        $updateDest = $dest = 'img/reserve_img/' . $_FILES['ProductImage']['name'];
+        
         $SetID = $_POST['ID'];
 
         // echo $SetID;
         // 建立SQL
-        $UpdateSetsSQL = "UPDATE `Sets` 
+        $UpdateSetsSQL = "UPDATE `Dish` 
         SET  IMG = :IMG
         WHERE ID = :ID";
 
@@ -31,6 +40,7 @@
       } else {
         echo '錯誤代碼：' . $_FILES['ProductImage']['error'] . '<br/>';
       }
+      */
 
 
 ?>
