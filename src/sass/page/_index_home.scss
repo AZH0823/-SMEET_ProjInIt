@@ -513,6 +513,9 @@
                 @include mobile() {
                     margin: 5% 20%;
                 }
+                a{
+                    text-decoration: none;
+                }
             }
             .font18{
                 width: 100%;
