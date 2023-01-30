@@ -3,7 +3,7 @@
     include("../conectDB/Connection.php");
     
     //建立SQL
-    $sql = "SELECT `ID`, `LederName`,`LederProfile`,`Condition`
+    $sql = "SELECT `ID`, `LederName`,`LederProfile`
     FROM TEAMS";
 
     $statement = getPDO()->prepare($sql);  

@@ -25,7 +25,17 @@
                         <div class="back_from" >
                             <div class="back_from_title">
                                 <h4 class="h4 green-1">私廚商品上架</h4>
-                                <button class="insert_btn" @click="popOnInsert">新增 菜品/服務</button>
+                                <div class="dishFunction">
+                                    <button class="insert_btn" @click="popOnInsert">新增 菜品/服務</button>
+                                    <div class="search">
+                                        <div class="search_container_item">
+                                          <input type="text" placeholder="商品名查詢" @keydown="search" ref="search_name"/>
+                                          <i class="fa-solid fa-magnifying-glass"  @click="search"></i>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                               
                             </div>
                             <div class="back_from_wrapper" ref="data_wrapper">
                                 <!-- row-1 -->
@@ -444,7 +454,6 @@
                         if(filterdata.length == 0){
                             filterdata='NoSetDishIsEditData';    
                         }
-
 
                          // 更新上傳圖片
                          if(files !==undefined && files !== null){
@@ -910,8 +919,50 @@
                                 this.popOnSetDetail.dish[type].push(obj)
                             }
                         }
+                    },
+                    search(){
+                        const _this = this;
+                        let search_name = this.$refs.search_name.value.trim();
+                        if(search_name !==''){
+                            $.ajax({
+                            method: "POST",
+                            url: "php/backpage/back_reserveProductManger_search.php",
+                            data: {
+                                search_name : search_name
+                            },
+                            dataType: "json",
+                            success: (response) => {
+                                if(response == "無資料"){
+                                     this.APIdata.serve = [];
+                                     this.APIdata.other = [];
+                                    // return;
+                                }else{
+                                    this.APIdata.serve = [];
+                                    this.APIdata.other = [];
+                                    console.log(response);
+                                    // this.product = response ;
+                                    response.forEach(data=>{
+                                        if(data.dishType =='服務'){
+                                            this.APIdata.serve.push(data)
+                                        }else if(data.dishType =='單品'){
+                                            this.APIdata.other.push(data)
+                                            
+                                        }
+                                    })
+                                    
+                                }
+                            },
+                            error: function (exception) {
+                                alert("數據載入失敗: " + exception.status);
+                            }
+                        });
+                        }
+                        else{
+                            _this.getSetPrice();
+                            _this.getOtherDish();
+                        }
+                        
                     }
-                
                 },
 
                 mounted(){

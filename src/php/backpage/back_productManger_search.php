@@ -8,7 +8,7 @@
     $select = " SELECT d.ID, `Type`, d.Name,`Price`, `IMG`, `shopPoint`, `Introduction`, `Condition`, `pushisedDate`, `ProductType`
     FROM Dish d
     join DishsType dt
-    on d.`type` = dt.ID 
+    on d.`Type` = dt.ID 
     where ProductType = '商城冷凍' and d.Name like ?";
 
     $statement = getPDO()->prepare($select);
