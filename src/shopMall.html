@@ -41,14 +41,24 @@ initial-scale=1.0">
                     </template>
                 </ul>
 
+                <!-- ========== 商品搜尋 ========== -->
+                <div class="search">
+                    <div class="search_container_item">
+                        <input type="text" placeholder="請輸入商品名稱..." @keyup="search" ref="search_name"/>
+                    </div>
+                    <div class="search_container_item" @click="search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
                 
                 <!-- ========== 商品排序 ========== -->
-                <select name="" id="">
+                <!-- <select name="" id="">
                     <option value="none" selected disabled hidden>商品排序</option> 
                     <option value="最新">最新</option>
                     <option value="價格：由高到低">價格：由高到低</option>
                     <option value="價格：由低到高">價格：由低到高</option>
-                </select>
+                </select> -->
+                
             </div>
             
             <!-- ========== 商城卡片 ========== -->
@@ -90,7 +100,7 @@ initial-scale=1.0">
             </section>
 
             <!-- ========== 購物車 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="isShow2">
+            <div class="overlay1" :class="{ product_popNone : shopCartsuccess_popup ==''}"  v-if="isShow2" style="display: none;" :style="isShow2 ? 'display:block' : 'display:none'">
                 
                 <article>
                     <div class="check_text">
@@ -101,7 +111,7 @@ initial-scale=1.0">
             </div>
 
             <!-- ========== 收藏 加入成功 & 移除成功 燈箱 ========== -->
-            <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="isShow2">
+            <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="isShow2" style="display: none;" :style="isShow2 ? 'display:block' : 'display:none'">
                 
                 <article>
                     <div class="check_text">
@@ -117,7 +127,7 @@ initial-scale=1.0">
             :class="{ product_popNone : isShow == false}" id="product_pop"
             v-if="isShow"
             @click="product_pop_close()"
-            >
+            style="display: none;" :style="isShow ? 'display:block' : 'display:none'">
                 <div class="container" id="product_pop_container" @click.stop>
                     <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG, popupData.heart, popupData.qty)"></i>
                     <div class="img_product">
@@ -155,6 +165,7 @@ initial-scale=1.0">
 <script src="js/frontpage/login_check.js"></script>
     <script>
         // 導覽列
+        // console.log(ShoppingCartQty);
         $(function () {
 
             $(".slide_ham").on("click", function () {
@@ -423,7 +434,7 @@ initial-scale=1.0">
                                     item.heart = false;
                                     
                                     // 移除 Data
-                                    this.removeCollectList(this.item)
+                                    this.removeCollectList(this.item);
 
 
                                     // delete收藏
@@ -452,9 +463,11 @@ initial-scale=1.0">
                                 // 收藏 & 移除 PopOn 消失
                                 clearInterval(this.success_popup_interval)
                                 this.success_popup_interval = setInterval(() => {
-                                    this.success_popup= ''
+
+                                    this.success_popup= '';
                                     let body = document.querySelector('body');
                                     body.style.overflow = "auto";
+                                    this.isShow2 = false;
                                 }, 1000);
                             }              
                         },
@@ -511,15 +524,6 @@ initial-scale=1.0">
                 },
 
                 // ========= 購物車行為 ========= //
-                
-                // 點擊 container 關掉 popUp
-                product_pop_close(){
-                    this.isShow = false;
-
-                    // overfloat: auto
-                    let body = document.querySelector('body');
-                    body.style.overflow = "auto";
-                },
 
                 // 點擊卡片購物車 icon 後 顯示 popUp
                 shopCar(ID, Name, Price, IMG, qty){
@@ -537,6 +541,15 @@ initial-scale=1.0">
                     this.popupData.Price = Price
                     this.popupData.IMG = IMG
                     this.popupData.qty = 1 // 預設值 1
+                },
+                
+                // 點擊 container 關掉 popUp
+                product_pop_close(){
+                    this.isShow = false;
+
+                    // overfloat: auto
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
                 },
 
                 // 點擊 X 關閉popUp並清空資料
@@ -599,7 +612,11 @@ initial-scale=1.0">
                         this.ShoppingCartList.push(addCartListEl)
                     }
 
+                    // 商品加到 Storage
                     localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
+
+                    // 改變shoppingcar icon QTY
+                    ShoppingCartQty();
 
                     // 控制購物車popUp
                     if(popupData != ""){
@@ -679,13 +696,56 @@ initial-scale=1.0">
                         // 一秒後開啟 scroll
                         let body = document.querySelector('body');
                         body.style.overflow = "auto";
-                        
+                        this.isShow2 = false;
                     }, 1000);
 
                     // 收藏增加 Loaca  lStorage
                     // console.log(this.collect_heart_data_list); 
                     localStorage.setItem("shopCollect", JSON.stringify(this.collect_heart_data_list));
 
+                },
+
+                // 商品名稱關鍵字查詢
+                search(){
+                    let search_name = this.$refs.search_name.value;
+                    console.log(search_name);
+                    if(this.$refs.search_name.value == ""){
+                        this.getCate();
+                    }else{
+                        $.ajax({
+                            method: "POST",
+                            url: "php/frontpage/shopMall_search.php",
+                            data: {
+                                search_name: search_name
+                            },
+                            dataType: "json",
+                            success: (response) => {
+                                if(response == "無資料"){
+                                    this.AjaxMealsInfo = [];
+                                    // return;
+                                }else{
+                                    // console.log(response);
+                                    this.AjaxMealsInfo = response ;
+                                    // 將三張 img 轉陣列並塞回 data
+                                    let xxx = this.AjaxMealsInfo;
+                                    for(let i =0; i < xxx.length; i++){
+
+                                        // 將img存到新陣列
+                                        let img = this.AjaxMealsInfo[i].IMG;
+                                        const imgs = img.split(" ");
+
+                                        // 回傳AjaxMealsInfo
+                                        this.AjaxMealsInfo[i].IMG = imgs;
+                                        // console.log(this.AjaxMealsInfo[i].IMG);
+                                    }
+                                }
+                            },
+                            error: function (exception) {
+                                alert("數據載入失敗: " + exception.status);
+                            }
+                        });
+                    }
+                    
                 },
 
 

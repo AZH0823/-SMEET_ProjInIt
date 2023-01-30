@@ -64,10 +64,10 @@
                                        
                                         <div class="grid_item">
                                             <label class="switch">
-                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click= changeCondtion(item,$event)>
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition == 1" @click= changeCondtion(item,$event)>
                                                 <span class="slider"></span>
-                                                <p class="slider_content" v-if="item.Condition === 1">上架</p>
-                                                <p class="slider_content" v-if="item.Condition === 0">下架</p>
+                                                <p class="slider_content" v-if="item.Condition == 1">上架</p>
+                                                <p class="slider_content" v-if="item.Condition == 0">下架</p>
                                             </label>
                                         </div>
                                     </div>
@@ -84,10 +84,10 @@
                                        
                                         <div class="grid_item">
                                             <label class="switch">
-                                                <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click= changeCondtion(item,$event)>
+                                                <input type="checkbox" class="switch_btn" :checked="item.Condition == 1" @click= changeCondtion(item,$event)>
                                                 <span class="slider"></span>
-                                                <p class="slider_content" v-if="item.Condition === 1">上架</p>
-                                                <p class="slider_content" v-if="item.Condition === 0">下架</p>
+                                                <p class="slider_content" v-if="item.Condition == 1">上架</p>
+                                                <p class="slider_content" v-if="item.Condition == 0">下架</p>
                                             </label>
                                         </div>
                                     </div>
@@ -291,7 +291,7 @@
                           
                             res.forEach(data => {
                                 // 單品 
-                                if(data.SetID === null && data.dishType =="服務"){
+                                if(data.SetID == null && data.dishType =="服務"){
                                     // this.APIdata.other
                                     // console.log(data)
                                     if(this.APIdata.serve == undefined){
@@ -338,7 +338,7 @@
                                         dishName:data_el.disName,
                                         dishType:data_el.dishType,
                                         price:data_el.price,
-                                        Condition:data_el.Condition
+                                        Condition:parseInt(data_el.Condition) 
                                     }
                                     temp.push(obj);
                                 
@@ -378,7 +378,7 @@
                             data: {
                                 MSG:"",
                                 ID:item.id,
-                                Condition:item.Condition
+                                Condition:parseInt(item.Condition)
                             },
                             dataType: "text",
                             success: function (response) {
@@ -402,7 +402,7 @@
                                 MSG:msg,
                                 ID:item.id,
                                 Name:item.dishName,
-                                Condition:item.Condition,
+                                Condition:parseInt(item.Condition),
                                 price:item.price
                             },
                             dataType: "text",
@@ -418,7 +418,7 @@
                                                 if(el.id === item.id){
                                                     el.dishName = item.dishName
                                                     el.price =item.price
-                                                    el.Condition = item.Condition
+                                                    el.Condition = parseInt(item.Condition) 
                                                 }
                                             })
                                         }
@@ -631,7 +631,7 @@
                             // updata  Condition API
                             this.updateOrderDishCondition(dish);
                         }else{
-                            e.target.checked = dish.Condition
+                            e.target.checked = parseInt(dish.Condition); 
                         }
                     },
                     
@@ -652,8 +652,8 @@
                         this.popOnMsg.id = item.id;
                         this.popOnMsg.dishName = item.dishName;
 
-                        this.popOnMsg.price = item.price;
-                        this.popOnMsg.Condition = item.Condition;
+                        this.popOnMsg.price = parseInt(item.price);
+                        this.popOnMsg.Condition = parseInt(item.Condition);
                     },
                     closePopOn(){
                         if(this.popOnSetDetail.isDisplay){
@@ -712,7 +712,7 @@
                         }else{
                             // 不儲存就回到原來參數
                             this.$refs.os_DishName.value =  item.dishName;
-                            this.$refs.os_Condtion.value = item.Condition;
+                            this.$refs.os_Condtion.value = parseInt(item.Condition);
                             this.$refs.os_Price.value = item.price;
                         }                        
                     },
@@ -774,12 +774,12 @@
                                             // :ref="'name_' + dish.id">  品名
                                             // :ref="'condition_' + dish.id"> 上下架
                                             
-                                            el.Condition = this.$refs[`condition_${el.id}`][0].value;
+                                            el.Condition = parseInt(this.$refs[`condition_${el.id}`][0].value);
                                             el.dishName = this.$refs[`name_${el.id}`][0].value;
 
                                             upateDishDetailList.push(el)
                                         }else if(el.isEdit && el.id > this.APIdata.nowPKnum){
-                                            el.Condition = this.$refs[`condition_${el.id}`][0].value;
+                                            el.Condition = parseInt(this.$refs[`condition_${el.id}`][0].value);
                                             el.dishName = this.$refs[`name_${el.id}`][0].value;
 
                                             insertDishDetailList.push(el)
@@ -803,11 +803,11 @@
                                         if(el.isEdit && el.id <= this.APIdata.nowPKnum){
                                             //    :ref="'name_' + dish.id">  品名
                                             //    :ref="'condition_' + dish.id"> 上下架
-                                            this.$refs[`condition_${el.id}`][0].value = el.Condition;
+                                            this.$refs[`condition_${el.id}`][0].value = parseInt(el.Condition);
                                             this.$refs[`name_${el.id}`][0].value = el.dishName;
                                         }else if(el.isEdit && el.id > this.APIdata.nowPKnum){
 
-                                            this.$refs[`condition_${el.id}`][0].value = el.Condition;
+                                            this.$refs[`condition_${el.id}`][0].value = parseInt(el.Condition);
                                             this.$refs[`name_${el.id}`][0].value =  el.dishName;
                                         }
                                     })                                  

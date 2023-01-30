@@ -27,7 +27,24 @@ div.back_productManger {
                             display: flex;
                             justify-content: space-between;
                             margin-bottom: 30px;
-                            
+
+                            .btn_wrap{
+                                display: flex;
+                                justify-content: center;
+                                gap: 20px;
+                                .search{
+                                    display: flex;
+                                    justify-content: flex-end;
+                                    align-items: center;
+                                    .search_container_item{
+                                        display: block;
+                                        margin-right: 10px;
+                                        input{
+                                            padding: 6px;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         
 
@@ -217,7 +234,6 @@ div.back_productManger {
                         width: 500px;
                         height: 100px;
                         outline: none;
-                        resize:none;
                         margin-top: 20px;
                     }
                 }
@@ -227,7 +243,6 @@ div.back_productManger {
                         width: 600px;
                         height: 140px;
                         outline: none;
-                        resize:none;
                         margin-top: 20px;
                     }
                 }

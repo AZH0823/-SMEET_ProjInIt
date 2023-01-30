@@ -7,7 +7,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
-        align-items: center;
+        align-items: baseline;
         position: relative;
         .shop_tab{
             display: flex;
@@ -28,30 +28,40 @@
                     color: #000;
                 }
             }
-            
-            
-            
         }
-        select{
-            width: 230px;
-            height: 35px;
-            padding: 0 10px;
-            letter-spacing: 1px;
-            border: 1px solid #898989;
-            color: #898989;
-            outline: 0;
-            @include pad(){
-                width: 175px;
-                height: 28px;
-                position: absolute;
-                bottom: -70px;
-                right: 0;
-            }
-            @include mobile(){
-                width: 130px;
-                bottom: -67px;
+        .search{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            .search_container_item{
+                display: block;
+                margin-right: 10px;
+                input{
+                    padding: 6px;
+                }
             }
         }
+        
+        // select{
+        //     width: 230px;
+        //     height: 35px;
+        //     padding: 0 10px;
+        //     letter-spacing: 1px;
+        //     border: 1px solid #898989;
+        //     color: #898989;
+        //     outline: 0;
+            // @include pad(){
+            //     width: 175px;
+            //     height: 28px;
+            //     position: absolute;
+            //     bottom: -70px;
+            //     right: 0;
+            // }
+            // @include mobile(){
+            //     width: 130px;
+            //     bottom: -67px;
+            // }
+        // }
     }
 }
 
@@ -312,14 +322,12 @@
         position: fixed;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         top: 0;
         bottom: 0;
         right: 0;
         left: 0;
         margin: auto;
         box-shadow: 0 0 10px rgba(146, 146, 146, 1);
-        // border: 1px solid #000;
         @include mobile(){
             width: 325px;
             height: 440px;
