@@ -768,12 +768,11 @@
           // ==========================收藏===========================
           //愛心點擊後取消收藏(移除陣列資訊)
           cancel_collect(i){
-            // console.log(i);
+            console.log(i);
             if(member_ID){
               // let r = confirm('確定取消收藏');
               // 這個ID是favorite table 的ID
-            
-              let ID = this.collection[i].ID
+              let dish_ID = this.collection[i].DishID
               // console.log(ID);
               // if(r){
                 // 刪除資料庫的收藏
@@ -781,7 +780,8 @@
                       method: "POST",
                       url: "php/frontpage/member/collect_d.php",
                       data: {
-                        ID:ID,
+                        dish_ID:dish_ID,
+                        member_ID:member_ID
                       },
                       dataType: "text",
                       success: (response) => {

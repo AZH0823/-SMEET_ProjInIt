@@ -164,7 +164,46 @@ let login_app = Vue.createApp({
                         // console.log('ttt');
                         login_bg.classList.add('none');
                         body.style.overflow = "auto";
-                        get_Member_ID();
+                        //取得會員ID
+                        $.ajax({            
+                            method: "POST",
+                            url: "php/frontpage/member_id.php",
+                            data:{},            
+                            dataType: "text",
+                            success: function (response) {                           
+                                // console.log(typeof(response));
+                                localStorage.setItem("member_ID", response);
+                                let collect_s_mID = response;
+                                $.ajax({            
+                                    method: "POST",
+                                    url: "php/frontpage/member/collect_s.php",
+                                    data:{
+                                        member_ID:collect_s_mID,
+                                    },            
+                                    dataType: "json",
+                                    success: function (response) {
+                                        if(response == "無資料"){
+                                            return;
+                                        }else{
+                                            // console.log('ggg');
+                                            // console.log(response.length);
+                                            let cart_num = document.getElementById('cart_num');
+                                            let cart_num_ham = document.getElementById('cart_num_ham');
+                                            cart_num.classList.remove('none');
+                                            cart_num.innerHTML = response.length;
+                                            cart_num_ham.classList.remove('none');
+                                            cart_num_ham.innerHTML = response.length;
+                                        }
+                                    },
+                                    error: function(exception) {
+                                        alert("數據載入失敗: " + exception.status);
+                                    }
+                                });
+                            },
+                            error: function(exception) {
+                                alert("數據載入失敗: " + exception.status);
+                            }
+                        });
                         // 手機版登入變登出
                         log_ham.innerHTML = "登出";
                         member_li_1.addEventListener('click',function(){
@@ -180,21 +219,24 @@ let login_app = Vue.createApp({
                             location.href="member.html#faq";
                         })
                         // 首頁的手機板變登出
-                        indexlog_ham.innerHTML = "登出";
-                        // 可以點擊會員中心的連結
-                        member_li_1_index.addEventListener('click',function(){
-                            location.href="member.html#member";
-                        })
-                        member_li_2_index.addEventListener('click',function(){
-                            location.href="member.html#list";
-                        })
-                        member_li_3_index.addEventListener('click',function(){
-                            location.href="member.html#collection";
-                        })
-                        member_li_4_index.addEventListener('click',function(){
-                            location.href="member.html#faq";
-                        })
+                        // indexlog_ham.innerHTML = "登出";
+                        // // 可以點擊會員中心的連結
+                        // member_li_1_index.addEventListener('click',function(){
+                        //     location.href="member.html#member";
+                        // })
+                        // member_li_2_index.addEventListener('click',function(){
+                        //     location.href="member.html#list";
+                        // })
+                        // member_li_3_index.addEventListener('click',function(){
+                        //     location.href="member.html#collection";
+                        // })
+                        // member_li_4_index.addEventListener('click',function(){
+                        //     location.href="member.html#faq";
+                        // })
                         // history.go(0);
+                        
+                        // ==========在select一次收藏===========
+                        
                     } else {
                         account.nextElementSibling.classList.add('appear');
                         pwd.nextElementSibling.nextElementSibling.classList.add('appear');
@@ -232,7 +274,16 @@ let login_app = Vue.createApp({
             let account = document.getElementById('join_account').value;
             let pwd = document.getElementById('join_pwd').value;
             let pwd_again = document.getElementById('join_again').value;
+            let login_news_yes2 = document.getElementById('login_news_yes2');
+            let login_news_yes2_p = document.getElementById('login_news_yes2_p');
             let that = this ;
+            if( login_news_yes2.checked == false){
+                login_news_yes2_p.classList.add('nocheck');
+                return false;
+            }
+            if( login_news_yes2.checked ){
+                login_news_yes2_p.classList.remove('nocheck');
+            }
             if (account == '') {
                 return false;
             }
@@ -346,11 +397,12 @@ slide_ham.addEventListener('click',function(e){
                     location.href="member.html#faq";
                 })
                 // ==========在select一次收藏===========
+                let collect_s_mID = localStorage.getItem("member_ID");
                 $.ajax({            
                     method: "POST",
                     url: "php/frontpage/member/collect_s.php",
                     data:{
-                        member_ID:member_ID,
+                        member_ID:collect_s_mID,
                     },            
                     dataType: "json",
                     success: function (response) {
@@ -397,11 +449,12 @@ user_icon.addEventListener('mouseover',function(){
                 let user_pop = document.querySelector('.user_pop');
                 user_pop.classList.remove('none');
                 // ==========在select一次收藏===========
+                let collect_s_mID = localStorage.getItem("member_ID");
                 $.ajax({            
                     method: "POST",
                     url: "php/frontpage/member/collect_s.php",
                     data:{
-                        member_ID:member_ID,
+                        member_ID:collect_s_mID,
                     },            
                     dataType: "json",
                     success: function (response) {
@@ -453,6 +506,7 @@ userpop_log.addEventListener('click',function(e){
             log_ham.innerHTML = "登入";
             // localStorage.clear();
             location=location;
+            history.go(0);
         },
         error: function(exception) {
             alert("數據載入失敗: " + exception.status);
@@ -482,7 +536,8 @@ log_ham.addEventListener('click',function(e){
                 localStorage.removeItem('member_ID');
                 log_ham.innerHTML = "登入";
                 // localStorage.clear();
-                location=location;
+                // location=location;
+                history.go(0);
             },
             error: function(exception) {
                 alert("數據載入失敗: " + exception.status);
