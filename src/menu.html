@@ -24,10 +24,6 @@
     <!-- banner -->
     @@include('layout/banner.html',{ "title":"MENU",
     "src":"./img/menu_img/menu_headbanner.jpg" })
-    <!-- <div class="banner">
-        <h1>MENU</h1>
-        <img src="./img/menu_img/menu_headbanner.jpg">
-    </div> -->
     <!-- tab -->
     <div class="menu_tap">
       <ul>
@@ -39,16 +35,17 @@
             </div>
           </li>
           <li>
-            <div>
-              <h4>單點加購</h4>
-              <span>A la carte</span>
+            <div class="add_tap">
+              <a class="add_tap_a" href="#add">
+                <h4>單點加購</h4>
+                <span class="add_tap_span">A la carte</span>
+              </a>
             </div>
           </li>
         </div>
       </ul>
     </div>
     <!-- menu -->
-
     <div class="menu">
       <div class="menu_content">
         <div class="part1">
@@ -160,7 +157,7 @@
       </div>
     </div>
     <!-- add -->
-    <div class="add">
+    <div class="add" id="add">
       <div class="add_title">
         <h2 class="font_family_tc font_bold green-1">單點加購</h2>
         <p class="border"></p>
@@ -190,91 +187,91 @@
       </div>
     </div>
 
-    <div class="windows"></div>
     @@include('layout/serve.html') @@include('layout/footer.html')
-  </body>
-  <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
-  <script src="js/header.js"></script>
-  <script src="js/vender/Vue/vue.global.js"></script>
-  <script src="js/frontpage/cart_pop.js"></script>
-  <script src="js/frontpage/login.js"></script>
-  <script src="js/frontpage/login_check.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <script>
-    // 获取弹窗
-    var modal1 = document.getElementById("myModal1");
-    var modal2 = document.getElementById("myModal2");
-    var modal3 = document.getElementById("myModal3");
-    var modal4 = document.getElementById("myModal4");
 
-    var btn1 = document.getElementById("myBtn1");
-    var btn2 = document.getElementById("myBtn2");
-    var btn3 = document.getElementById("myBtn3");
-    var btn4 = document.getElementById("myBtn4");
+    <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/vender/Vue/vue.global.js"></script>
+    <script src="js/frontpage/cart_pop.js"></script>
+    <script src="js/frontpage/login.js"></script>
+    <script src="js/frontpage/login_check.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+      // 获取弹窗
+      var modal1 = document.getElementById("myModal1");
+      var modal2 = document.getElementById("myModal2");
+      var modal3 = document.getElementById("myModal3");
+      var modal4 = document.getElementById("myModal4");
 
-    var span1 = document.querySelector(".close1");
-    var span2 = document.querySelector(".close2");
-    var span3 = document.querySelector(".close3");
-    var span4 = document.querySelector(".close4");
+      var btn1 = document.getElementById("myBtn1");
+      var btn2 = document.getElementById("myBtn2");
+      var btn3 = document.getElementById("myBtn3");
+      var btn4 = document.getElementById("myBtn4");
 
-    btn1.onclick = function () {
-      modal1.style.display = "block";
-    };
-    btn2.onclick = function () {
-      modal2.style.display = "block";
-    };
-    btn3.onclick = function () {
-      modal3.style.display = "block";
-    };
-    btn4.onclick = function () {
-      modal4.style.display = "block";
-    };
+      var span1 = document.querySelector(".close1");
+      var span2 = document.querySelector(".close2");
+      var span3 = document.querySelector(".close3");
+      var span4 = document.querySelector(".close4");
 
-    span1.onclick = function () {
-      modal1.style.display = "none";
-    };
-    span2.onclick = function () {
-      modal2.style.display = "none";
-    };
-    span3.onclick = function () {
-      modal3.style.display = "none";
-    };
-    span4.onclick = function () {
-      modal4.style.display = "none";
-    };
+      btn1.onclick = function () {
+        modal1.style.display = "block";
+      };
+      btn2.onclick = function () {
+        modal2.style.display = "block";
+      };
+      btn3.onclick = function () {
+        modal3.style.display = "block";
+      };
+      btn4.onclick = function () {
+        modal4.style.display = "block";
+      };
 
-    window.onclick = function (event) {
-      if (event.target == modal1) {
+      span1.onclick = function () {
         modal1.style.display = "none";
-      }
-      if (event.target == modal2) {
+      };
+      span2.onclick = function () {
         modal2.style.display = "none";
-      }
-      if (event.target == modal3) {
+      };
+      span3.onclick = function () {
         modal3.style.display = "none";
-      }
-      if (event.target == modal4) {
+      };
+      span4.onclick = function () {
         modal4.style.display = "none";
-      }
-    };
-  </script>
-  <script>
-    $(".owl-carousel").owlCarousel({
-      loop: true,
-      margin: 10,
-      responsive: {
-        0: {
-          items: 1.5,
-          center: true,
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal1) {
+          modal1.style.display = "none";
+        }
+        if (event.target == modal2) {
+          modal2.style.display = "none";
+        }
+        if (event.target == modal3) {
+          modal3.style.display = "none";
+        }
+        if (event.target == modal4) {
+          modal4.style.display = "none";
+        }
+      };
+    </script>
+    <script>
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        responsive: {
+          0: {
+            items: 1.5,
+            center: true,
+          },
+          600: {
+            items: 3.5,
+            center: true,
+          },
+          1000: {
+            items: 5,
+          },
         },
-        600: {
-          items: 3.5,
-          center: true,
-        },
-        1000: {
-          items: 5,
-        },
-      },
-    });
-  </script>
+      });
+    </script>
+  </body>
 </html>

@@ -15,14 +15,6 @@
     @@include('layout/header_01.html') @@include('layout/banner.html',{
     "title":"ABOUT", "src":"./img/about_img/about_headbanner.jpg" })
     <div class="app1">
-      <!-- anchor -->
-      <!-- <div class="anchor">
-        <a href="#about">關於私覓</a>
-        <a href="#serve">專業服務</a>
-        <a href="#contact">聯絡我們</a>
-        <a href="#google-maps">服務據點</a>
-        <a href="#qanda">常見問題</a>
-      </div> -->
       <!-- about -->
       <div class="about" id="about">
         <div class="about_title">
@@ -181,9 +173,9 @@
       <!-- google-maps -->
       <div class="google-maps" id="google-maps">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12965.837849861573!2d139.7175983!3d35.6656871!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb07770ca3dffe3d!2sJINBO%20MINAMI%20AOYAMA!5e0!3m2!1szh-TW!2stw!4v1671393498492!5m2!1szh-TW!2stw"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.467687045302!2d121.54106421405311!3d25.052132843720397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abe6b0446815%3A0xf006dde8c27afcc7!2z57ev6IKyVGliYU1l6ZmE6Kit5Y-w5YyX6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1675051391423!5m2!1szh-TW!2stw"
           width="100%"
-          height="251"
+          height="250"
           style="border: 0"
           allowfullscreen=""
           loading="lazy"
@@ -221,9 +213,8 @@
           </div>
         </div>
       </div>
-
-      @@include('layout/serve.html') @@include('layout/footer.html')
     </div>
+    @@include('layout/serve.html') @@include('layout/footer.html')
 
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
     <script src="js/header.js"></script>
@@ -241,16 +232,20 @@
         },
         created() {
           this.qarender();
+          
         },
         methods: {
-          accordion() {
-            const accordion = document.getElementsByClassName("container");
+          accordion(e) {
+            // const accordion = document.getElementsByClassName("container");
 
-            for (let i = 0; i < accordion.length; i++) {
-              accordion[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-              });
-            }
+            // for (let i = 0; i < accordion.length; i++) {
+            //   accordion[i].addEventListener("click", function () {
+            //     this.classList.toggle("active");
+            //   });
+            // }
+            // console.log(e.target);
+            let target = e.target.closest(".container");
+            target.classList.toggle("active");
           },
           aboutajax() {
             let contact_name = document.getElementById("contact_name");

@@ -1,165 +1,152 @@
 div.back_contactUs {
-    div.backwrapper {
-        display: flex;
-        gap: 7%;
+  div.backwrapper {
+    display: flex;
+    gap: 7%;
 
-        header {
-            display: flex;
-            height: 100vh;
-        }
+    header {
+      display: flex;
+      height: 100vh;
+    }
 
         div.container {
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
             width: 73%;
 
-            main.right_content {
-                margin-bottom: 50px;
-                width: 100%;
+      main.right_content {
+        margin-bottom: 50px;
+        width: 100%;
 
-                section.section1 {
-                    margin-top: 100px;
+        section.section1 {
+          margin-top: 100px;
 
-                    div.back_from {
-                        width: 100%;
+          div.back_from {
+            width: 100%;
 
-                        h4 {
-                            margin-bottom: 30px;
-                        }
-
-                        div.back_from_wrapper {
-                            height: 550px;
-                            overflow-y: scroll;
-                            div.grid_container {
-                                margin: 0 auto;
-                                display: grid;
-                                width: 100%;
-                                text-align: center;
-                                align-items: center;
-                                grid-template: repeat(1, 1fr) / repeat(3, 1fr) 300px 1fr;
-                                border-bottom: 0.5px solid #ccc;
-                                &:first-child {
-                                    background-color: $Camel-3;
-                                }
-                                
-                                // .grid_item:nth-child( n + 1){
-                                //     border-bottom: .5px solid #ccc; // 加底线
-                                // }
-
-                                // Popup點擊hover
-                                .checked:hover{
-                                    cursor: pointer;
-                                    color: #ccc;
-                                }
-
-                                div.grid_item {
-                                    padding: 20px;
-                                }
-                            }
-                        }
-
-                    }
-                
-
-                    // 頁簽
-                    .page {
-                        .page_ul {
-                            position: unset; // 取消原本的属性
-                            display: flex;
-                            justify-content: center;
-
-                            li {
-                                line-height: 30.5px;
-                                margin-left: 12px;
-                                width: 33px;
-                                height: 33px;
-                                border-radius: 50%;
-                                background-color: #F9F4EC;
-                                margin: 39px 0 25px 21px;
-                                border: 1px solid #000;
-
-                                a {
-                                    display: block;
-                                    text-decoration: none;
-                                    text-align: center;
-                                    color: #000;
-                                }
-                            }
-                        }
-                    }
-                }
+            h4 {
+              margin-bottom: 30px;
             }
+
+            div.back_from_wrapper {
+              height: 550px;
+              overflow-y: scroll;
+              div.grid_container {
+                margin: 0 auto;
+                display: grid;
+                width: 100%;
+                text-align: center;
+                align-items: center;
+                grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+                border-bottom: 0.5px solid #ccc;
+                &:first-child {
+                  background-color: $Camel-3;
+                }
+
+                // .grid_item:nth-child( n + 1){
+                //     border-bottom: .5px solid #ccc; // 加底线
+                // }
+
+                // Popup點擊hover
+                .checked:hover {
+                  cursor: pointer;
+                  color: #ccc;
+                }
+
+                div.grid_item {
+                  padding: 20px;
+                }
+
+
+              }
+            }
+          }
         }
-    }
-    div.section_contactus{
-        border: 1px solid #000;      
-        width: 650px;
-        height: 620px;
-        margin: 0 auto;
-        h6{
+      }
+
+      div.modal {
+        z-index: 999;
+        position: fixed; /* 固定定位 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.6); 
+        
+        
+        .modal-content {
+          width: 580px;
+          height: 520px;
+          margin: 20px auto;
+          background-color: #fff;
+          h6 {
             font-size: 16px;
-        }
-        .contactus_top{
+          }
+          .contactus_top {
             height: 45px;
             text-align: center;
-            background-color: #F9F4EC;
-            h6{
-                line-height: 45px;
+            background-color: #f9f4ec;
+            h6 {
+              line-height: 45px;
             }
-        }
-        .contactus_mail{
+          }
+          .contactus_mail {
             width: 95%;
             margin: 0 auto;
             display: flex;
             margin-top: 15px;
-        }
-        .contactus_date{
+          }
+          .contactus_date {
             width: 95%;
             margin: 0 auto;
             display: flex;
             margin-top: 15px;
-        }
-        .contactus_name_phone{
+          }
+          .contactus_name_phone {
             width: 95%;
             margin: 0 auto;
             display: flex;
             margin-top: 15px;
-            h6{
-                margin-right: 35px;
+            h6 {
+              margin-right: 35px;
             }
-        }
-        .contactus_type{
+            p {
+              height: 300px;
+            }
+          }
+          .contactus_type {
             width: 95%;
             margin: 0 auto;
             display: flex;
             margin-top: 15px;
-        }
-        .contactus_content{
+          }
+          .contactus_content {
             width: 95%;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             margin-top: 15px;
-            p{
-                width: 600px;
-                background-color: #F9F4EC;
-                font-size: 12px;
-                padding: 10px;
+            p {
+              height: 220px;
+              background-color: #f9f4ec;
+              font-size: 12px;
+              padding: 10px;
             }
-            textarea{
-                margin-top: 25px;
-                width: 578px;
-                height: 68px;
-                outline: none;
-                resize:none;
+            textarea {
+              margin-top: 25px;
+              height: 400px;
+              height: 80px;
+              outline: none;
+              resize: none;
             }
-            .contactus_content_btn{
-                width: 140px;
-                height: 30px;
-                margin: 50px auto;
+            .contactus_content_btn {
+              width: 120px;
+              height: 30px;
+              margin: 10px auto;
             }
+          }
         }
-        
+      }
     }
+  }
 }
-

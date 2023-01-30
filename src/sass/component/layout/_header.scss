@@ -332,8 +332,8 @@
                             font-family: Noto Serif TC;
                             font-size: 14px;
                             position: absolute;
-                            top: 38px;
-                            right: 56px;
+                            top: 33px;
+                            right: 59px;
                             background-color: #B91646;
                             display: block;
                             line-height: 18px;
@@ -342,8 +342,8 @@
                             color: #fff;
                             text-align: center;
                             @include pad() {
-                                top: 5px;
-                                right: 45px;
+                                top: 3px;
+                                right: 40px;
                             }
                         }
                     }
@@ -777,6 +777,7 @@ body {
 
         .header_user {
             display: flex;
+            align-items: center;
             padding: 0;
 
             @include pad() {
@@ -847,12 +848,7 @@ body {
             }
 
             .slide_cart {
-                display: block;
-                // margin-top: 20%;
-                text-decoration: none;
-                // padding: 20px 15px;
-                margin: 30% 0;
-                padding: 10px;
+                padding: 10px 15px;
                 cursor: pointer;
 
                 .fa-cart-shopping {
@@ -860,8 +856,8 @@ body {
                         font-family: Noto Serif TC;
                         font-size: 14px;
                         position: absolute;
-                        top: 38px;
-                        right: 56px;
+                        top: 44px;
+                        right: 60px;
                         background-color: #B91646;
                         display: block;
                         line-height: 18px;
@@ -869,16 +865,13 @@ body {
                         border-radius: 50%;
                         color: #fff;
                         text-align: center;
+                        @include pad() {
+                            top: 21px;  
+                            right: 37px;
+                        }
                     }
                 }
 
-                @include pad() {
-                    font-size: 15px;
-                    // margin-top: 30px;
-                    padding: 10px 10px;
-                    margin-top: 20%;
-                    line-height: 32px;
-                }
             }
 
             /*----------- 漢堡線 ----------*/
@@ -1088,7 +1081,7 @@ body {
     position: absolute;
     border: .5px solid $green-1;
     padding: 20px 30px 10px 30px;
-    top: 62px;
+    top: 60px;
     right: 46px;
 
     .userpop_li {
