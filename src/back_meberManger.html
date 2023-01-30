@@ -164,7 +164,7 @@
                         // 一頁有幾筆
                         items_per_page : "",
                         // 當前頁面
-                        current_page : ""
+                        current_page : "1"
                     }
                 }
             },
@@ -175,12 +175,12 @@
             methods: {
                 // 取得會員資料 加進data info
                 get_info(){
-                    let page = 1 ;
+                    // let page = 1 ;
                     $.ajax({
                         method: "POST",
                         url: "php/backpage/back_member_s.php",
                         data: {
-                            page:page
+                            // page:page
                         },
                         dataType: "json",
                         success: (response) => {
@@ -189,7 +189,7 @@
                             this.info = response[1] ;
                             this.page.total_items = response[0][0];
                             this.page.items_per_page = response[0][1];
-                            this.page.current_page = page ;
+                            // this.page.current_page = page ;
                             // console.log(this.page);
                         },
                         error: function (exception) {
@@ -224,6 +224,8 @@
                 },
                 // 打開彈窗 
                 open_popup(e){
+                    let p = this.page.current_page ; 
+                    // console.log(p);
                     let member_ID = e.target.parentNode.getAttribute("value");
                     // console.log(member_ID);
                     // 從資料庫找收藏清單
@@ -250,7 +252,9 @@
                         }
                     });
                     // console.log(this.info[member_ID]);
-                    this.info_favo = this.info[member_ID - 1];
+                    // 宣告前面page的總數量
+                    let page_count_item = ( p - 1 ) * 10;
+                    this.info_favo = this.info[member_ID - 1 - page_count_item];
                     this.$refs.member_popup.classList.remove('none');
                     document.querySelector('body').style.overflow = "hidden";
                 },
@@ -327,7 +331,7 @@
                 // 頁碼切換
                 page_click(page = 1){
                     this.page.current_page = page ;
-                    // console.log(page);
+                    // console.log(this.info_favo);
                     // console.log("aaa");
                     $.ajax({
                         method: "POST",
