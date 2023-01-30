@@ -1,7 +1,7 @@
     <div class="fulid_wrapper login none" id="login_bg">
         <div class="container none" id="login">
             <!-- 註冊登入tab -->
-            <div class="login_tab font16 Camel-1" ref="tab">
+            <div class="login_tab font16 Camel-1 " ref="tab">
                 <div class="tab_add " @click="add_tab" ref="tab1">註冊會員</div>
                 <div class="tab_enter tab_line" @click="enter_tab" ref="tab2">會員登入</div>
             </div>
@@ -36,7 +36,7 @@
                 <button type="submit" class="btn_login font18" @click="join_ajax">立即加入</button>
             </div>
             <!-- =========會員登入表單============ -->
-            <div action="" class="login_enter" ref="enter_tab">
+            <div action="" class="login_enter " ref="enter_tab">
                 <input type="text" name="" id="login_account" placeholder="請輸入信箱"@blur="checkEmail" v-model="user_enter.account">
                 <p class="text_no">*請填寫正確的帳號或密碼</p>
                 <div class="login_pwd">
@@ -46,12 +46,12 @@
 
                 </div>
                 <button type="submit" id="login_ajax" class="btn_login font18" @click="login_ajax">會員登入</button>
-                <a class="btn_forget" @click="forget">忘記密碼？</a>
+                <a class="btn_forget" @click="forget_tab">忘記密碼？</a>
             </div>
             <!-- 或 -->
-            <div class="login_or" ref="or">
+            <!-- <div class="login_or " ref="or">
                 <p class="font16 gray">或</p>
-            </div>
+            </div> -->
             <!-- 第三方GOOGLE -->
             <!-- <div
                 id="g_id_onload"
@@ -68,10 +68,10 @@
                 data-shape="rectangular"
                 data-logo_alignment="left"
             ></div> -->
-            <button type="button" class="btn_three font18 " ref="three"> 
-                 <i class="fa-brands fa-line"></i>
-                使用LINE快速登入
-            </button>
+            <!-- <button type="button" class="btn_three font18 " ref="three">  -->
+                 <!-- <i class="fa-brands fa-line"></i> -->
+                <!-- 使用LINE快速登入
+            </button> -->
             <!-- =========註冊成功畫面=============== -->
             <div class="login_success none" ref="join_ok">
                 <div class="yes">
@@ -86,10 +86,10 @@
             <div class="login_forget none" ref="forget">
                 <h6>忘記密碼</h6>
                 <div class="forget" action="">
-                    <input type="text" placeholder="請輸入電子信箱">
-                    <button class="inCart_btn1">傳送驗證碼</button>
-                    <input type="text" placeholder="請輸入驗證碼">
-                    <button class="inCart_btn1">驗證</button>
+                    <input type="text" placeholder="請輸入電子信箱" id="forget_acc">
+                    <button class="inCart_btn1" @click="send_token">傳送驗證碼</button>
+                    <input type="text" placeholder="請輸入驗證碼" id="input_token">
+                    <button class="inCart_btn1" @click="check_token">驗證</button>
                 </div>
 
                 <div class="login_back login_tab font16 Camel-1">
@@ -98,15 +98,36 @@
                 </div>
 
             </div>
+            <!-- ==========重置密碼畫面============= -->
+            <div class="login_forget login_add forget_change_email none" ref="forget_change">
+                <h6>重置密碼</h6>
+                <input type="text" name="" id="update_account" placeholder="請輸入信箱" @blur="checkEmail" >  
+                <p class="update_text_no text_no">*請填寫正確信箱</p>
+                <div class="login_pwd">
+                    <input type="password" name="" id="update_pwd" placeholder="密碼(請輸入8到16位的字母、數字)" @blur="check_pwd" >
+                    <i class="fa-regular fa-eye-slash font12 gray" @click="eye_icon" ></i>
+                    <p class="text_no">*請填寫正確的密碼格式</p>
+                </div>
+                <div class="login_pwd">
+                    <input type="password" name="" id="update_again" placeholder="再次輸入密碼" @blur="check_pwd">
+                    <i class="fa-regular fa-eye-slash font12 gray" @click="eye_icon" ></i>
+                    <p class="text_no">*請填寫正確的密碼格式</p>
+                    <!-- <i class="fa-regular fa-eye"></i> -->
+                </div>
+                <button class="inCart_btn1" @click="update_forget_pwd">更改密碼</button>
+            </div>
+            <!-- =========修改密碼成功畫面=============== -->
+            <div class="login_success none" ref="update_ok">
+                <div class="yes">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h6>修改完成</h6>
+                <h6>請再次登入</h6>
+                <button class="inCart_btn2" @click="add_ok">確定</button>
+            </div>
         </div>
         <!-- 會員註冊{{user_add}} -->
         <!-- 會員登入{{user_enter}} -->
     </div>
 
-    <!-- email -->
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <!-- google api -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script>
-    </script>
+

@@ -19,7 +19,8 @@ let login_app = Vue.createApp({
             user_enter: {
                 account: "",
                 pwd: ""
-            }
+            },
+            Email_token:{}
         }
     },
     computed: {},
@@ -34,9 +35,10 @@ let login_app = Vue.createApp({
             this.$refs.tab1.classList.add('tab_line');
             this.$refs.tab2.classList.remove('tab_line');
             this.$refs.forget.classList.add('none');
-            this.$refs.or.classList.remove('none');
-            this.$refs.three.classList.remove('none');
-
+            // this.$refs.or.classList.remove('none');
+            // this.$refs.three.classList.remove('none');
+            this.$refs.forget_change.classList.add('none');
+            this.$refs.update_ok.classList.add('none');
         },
         //tab切換-會員登入
         enter_tab() {
@@ -47,8 +49,10 @@ let login_app = Vue.createApp({
             this.$refs.tab1.classList.remove('tab_line');
             this.$refs.tab2.classList.add('tab_line');
             this.$refs.forget.classList.add('none');
-            this.$refs.or.classList.remove('none');
-            this.$refs.three.classList.remove('none');
+            // this.$refs.or.classList.remove('none');
+            // this.$refs.three.classList.remove('none');
+            this.$refs.forget_change.classList.add('none');
+            this.$refs.update_ok.classList.add('none');
         },
         //input 驗證格式_密碼
         check_pwd(e) {
@@ -102,14 +106,16 @@ let login_app = Vue.createApp({
             }
         },
         //忘記密碼
-        forget() {
+        forget_tab() {
             this.$refs.join_ok.classList.add('none');
             this.$refs.tab.classList.add('none');
             this.$refs.add_tab.classList.add('none');
             this.$refs.enter_tab.classList.add('none');
-            this.$refs.or.classList.add('none');
-            this.$refs.three.classList.add('none');
+            // this.$refs.or.classList.add('none');
+            // this.$refs.three.classList.add('none');
             this.$refs.forget.classList.remove('none');
+            this.$refs.forget_change.classList.add('none');
+            this.$refs.update_ok.classList.add('none');
         },
 
         //當立即加入按下
@@ -254,9 +260,24 @@ let login_app = Vue.createApp({
             this.$refs.tab.classList.add('none');
             this.$refs.add_tab.classList.add('none');
             this.$refs.enter_tab.classList.add('none');
-            this.$refs.or.classList.add('none');
-            this.$refs.three.classList.add('none');
+            // this.$refs.or.classList.add('none');
+            // this.$refs.three.classList.add('none');
             this.$refs.forget.classList.add('none');
+            this.$refs.forget_change.classList.add('none');
+            this.$refs.update_ok.classList.add('none');
+
+        },
+        //重置密碼成功畫面
+        update_ok(){
+            this.$refs.join_ok.classList.add('none');
+            this.$refs.tab.classList.add('none');
+            this.$refs.add_tab.classList.add('none');
+            this.$refs.enter_tab.classList.add('none');
+            // this.$refs.or.classList.add('none');
+            // this.$refs.three.classList.add('none');
+            this.$refs.forget.classList.add('none');
+            this.$refs.forget_change.classList.add('none');
+            this.$refs.update_ok.classList.remove('none');
         },
         //註冊成功點擊確定關掉popup
         add_ok(){
@@ -264,10 +285,11 @@ let login_app = Vue.createApp({
             let login = document.getElementById('login');
             let body = document.querySelector('body');
             //關掉popup
-            login_bg.classList.add('none');
-            body.style.overflow = "auto";
+            // login_bg.classList.add('none');
+            // body.style.overflow = "auto";
             // 重新登入打開Login
             this.enter_tab();
+            
         },
         //會員註冊ajax
         join_ajax(){
@@ -322,6 +344,158 @@ let login_app = Vue.createApp({
                     }
                 });
             }
+        },
+        // 忘記密碼=====================
+        // 傳送驗證碼
+        send_token(){
+            // 先驗證信箱是否存在
+            // 有存在就update multiLogin 欄位 塞一筆隨機token進去 response回傳token 寄email 給驗證碼
+            // 不存在就跳錯誤訊息
+            let email = document.getElementById('forget_acc').value;
+            let token = "";
+            if(Email == ""){
+                return;
+            }
+            $.ajax({
+                method: "POST",
+                url: "php/frontpage/forget_check_email.php",
+                data: {
+                    Email: email
+                },
+                dataType: "text", 
+                success: (response) => {
+                    if (response == "N") {
+                        //沒有此帳號
+                        alert('沒有此帳號');
+                        return ;
+                    } else {
+                        // 有此帳號
+                        // 回傳token
+                        // 寄email
+                        token = response ; 
+                        // console.log(token);
+                        Email.send({
+                            Host : "smtp.elasticemail.com",
+                            Username : "smeettgd103@gmail.com",
+                            Password : "29703297B074F7EC73E724DC5D0F064FD0EF",
+                            To : email,
+                            From : "SMEET驗證碼<smeettgd103@gmail.com>",
+                            Subject : "SMEET驗證碼",
+                            Body : "<h6>驗證碼:</h6><p>"+token+"</p>"
+                        }).then(
+                            message => alert(message)
+                        );
+                    }
+                },
+                error: function (exception) {
+                    alert("發生錯誤: " + exception.status);
+                }
+            });
+            
+        },
+        check_token(){
+            // 檢查驗證碼 token 
+            // 通過跳重製密碼畫面
+            let that = this;
+            let email = document.getElementById('forget_acc').value;
+            let input_token = document.getElementById('input_token').value;
+            if(email == ""){
+                return ;
+            }
+            if(input_token == ""){
+                return ; 
+            }
+            $.ajax({
+                method: "POST",
+                url: "php/frontpage/forget_check_email.php",
+                data: {
+                    Email: email
+                },
+                dataType: "text", 
+                success: (response) => {
+                    if (response == "N") {
+                        //沒有此帳號
+                        alert('沒有此帳號');
+                        return ;
+                    } else {
+                        // 有此帳號
+                        // 比較token
+                        if(input_token !== response){
+                            alert('請輸入正確的驗證碼');
+                        }else{
+                            // alert('輸入正確');
+                            that.update_pwd_tab();
+                        }
+                    }
+                },
+                error: function (exception) {
+                    alert("發生錯誤: " + exception.status);
+                }
+            });
+
+        },
+        update_forget_pwd(){
+            let change = true ;
+            // 重置密碼(忘記密碼)
+            let email = document.getElementById('forget_acc');
+            let update_account = document.getElementById('update_account');
+            let update_pwd = document.getElementById('update_pwd');
+            let update_again = document.getElementById('update_again');
+            if(email.value !== update_account.value){
+                update_account.nextElementSibling.classList.add('appear');
+                change = false ;
+            };
+            if(update_pwd.value !== update_again.value){
+                update_pwd.nextElementSibling.nextElementSibling.classList.add('appear');
+                update_again.nextElementSibling.nextElementSibling.classList.add('appear');
+                change = false ;
+            }
+            if(update_pwd.value == "" || update_again.value == ""){
+                update_pwd.nextElementSibling.nextElementSibling.classList.add('appear');
+                update_again.nextElementSibling.nextElementSibling.classList.add('appear');
+                change = false ;
+            }
+            if(change){
+                //更改密碼
+                let that = this ;
+                $.ajax({
+                    method: "POST",
+                    url: "php/frontpage/forget_change_pwd.php",
+                    data: {
+                        email:update_account.value,
+                        update_pwd: update_pwd.value
+                    },
+                    dataType: "text",
+                    success: function (response) {
+                        // alert('修改成功,請重新登入');
+                        that.update_ok()
+                        // that.enter_tab();
+                        // 修改完成popup
+                        // that.$refs.updateOK.classList.remove('none');
+                        //       setTimeout(function(){
+                        //           that.$refs.updateOK.classList.add('none');
+                        //       },2000);
+                      },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    }
+                });
+              }else{
+                return false;
+  
+              }
+        },
+        // 重置密碼的tab
+        update_pwd_tab(){
+            this.$refs.join_ok.classList.add('none');
+            this.$refs.tab.classList.add('none');
+            this.$refs.add_tab.classList.add('none');
+            this.$refs.enter_tab.classList.add('none');
+            // this.$refs.or.classList.add('none');
+            // this.$refs.three.classList.add('none');
+            this.$refs.forget.classList.add('none');
+            this.$refs.forget_change.classList.remove('none');
+            this.$refs.update_ok.classList.add('none');
         }
     }
 });
