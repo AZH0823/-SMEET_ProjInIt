@@ -777,6 +777,7 @@ body {
 
         .header_user {
             display: flex;
+            align-items: center;
             padding: 0;
 
             @include pad() {
@@ -847,7 +848,7 @@ body {
             }
 
             .slide_cart {
-                
+                padding: 10px 15px;
                 cursor: pointer;
 
                 .fa-cart-shopping {
@@ -855,8 +856,8 @@ body {
                         font-family: Noto Serif TC;
                         font-size: 14px;
                         position: absolute;
-                        top: 38px;
-                        right: 56px;
+                        top: 44px;
+                        right: 60px;
                         background-color: #B91646;
                         display: block;
                         line-height: 18px;
@@ -865,7 +866,7 @@ body {
                         color: #fff;
                         text-align: center;
                         @include pad() {
-                            top: 21px;
+                            top: 21px;  
                             right: 37px;
                         }
                     }
