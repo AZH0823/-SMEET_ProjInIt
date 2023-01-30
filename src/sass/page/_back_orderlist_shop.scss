@@ -11,6 +11,7 @@ div.back_orderlist_shop {
     div.container {
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
       width: 73%;
 
       main.right_content {
