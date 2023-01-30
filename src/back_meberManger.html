@@ -147,14 +147,12 @@
     
     <script src="js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
-    <script type="module">
+
+    <script type="module" >
         import ThePaginator from "./js/back_page/paginator.js";
 
-        Vue.createApp({}).component("ThePaginator", ThePaginator).mount("#paginator_block");
-    </script>
-    <script>
-        
         let member_back = Vue.createApp({
+            components:{ ThePaginator },
             data() {
                 return {
                     info:[{}],
@@ -327,29 +325,30 @@
                     
                 },
                 // 頁碼切換
-                page_click(){
+                page_click(page = 1){
+                    this.page.current_page = page ;
                     // console.log(page);
                     // console.log("aaa");
-                    // $.ajax({
-                    //     method: "POST",
-                    //     url: "php/backpage/back_member_s.php",
-                    //     data: {
-                    //         page:page
-                    //     },
-                    //     dataType: "json",
-                    //     success: (response) => {
-                    //         // console.log("member");
-                    //         console.log(response);
-                    //         this.info = response[1] ;
-                    //         // this.page.total_items = response[0][0];
-                    //         // this.page.items_per_page = response[0][1];
-                    //         // this.page.current_page = page ;
-                    //         // console.log(this.page);
-                    //     },
-                    //     error: function (exception) {
-                    //         alert("數據載入失敗: " + exception.status);
-                    //     }
-                    // });
+                    $.ajax({
+                        method: "POST",
+                        url: "php/backpage/back_member_s.php",
+                        data: {
+                            page:page
+                        },
+                        dataType: "json",
+                        success: (response) => {
+                            // console.log("member");
+                            // console.log(response);
+                            this.info = response[1] ;
+                            // this.page.total_items = response[0][0];
+                            // this.page.items_per_page = response[0][1];
+                            // this.page.current_page = page ;
+                            // console.log(this.page);
+                        },
+                        error: function (exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
                 }
             }
         }).mount('#member_back');
