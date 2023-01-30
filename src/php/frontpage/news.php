@@ -1,14 +1,58 @@
 <?php
-include("../conectDB/Connection.php");
+    include("../conectDB/Connection.php");
 
-//建立sql語法
-$sql = "select * FROM News";
-$statement = getPDO()->prepare($sql);
-$statement->execute(); //執行上面的
-// $statement = bindValue(1, "abc123@gmail.com");
-// $statement = bindValue(2, "abc123");
+    $getID = @$_POST['ID'];
+   
 
-$data = $statement->fetchAll();//這邊是拿回來的資料
-echo json_encode($data); //更改成json格式
+    //建立sql語法
+    if(!isset($getID)){
+    
+
+        $sql = "select * from News
+        where `Condition` = 1 ";
+        $statement = getPDO()->prepare($sql);
+        // $Searhstatement -> bindValue(':Category',$getID); 
+        $statement->execute(); //執行上面的
+
+        $data = $statement->fetchAll();//這邊是拿回來的資料
+        $arr = array();
+        foreach($data as $newData){
+            $arr[] = array(
+                'Article'=>$newData['Article'],
+                'Category'=>$newData['Category'],
+                'Condition'=>$newData['Condition'],
+                'Date'=>$newData['Date'],
+                'ID'=>$newData['ID'],
+                'IMG'=>$newData['IMG'],
+                'Title'=>$newData['Title'],
+                'TIMG' =>$newData['TIMG']
+            );}
+
+        echo json_encode($arr); //更改成json格式
+
+    }else{
+        $NewsDetail ="select * from News
+        where `ID` = :getID ;";
+
+        $Searhstatement = getPDO()->prepare($NewsDetail);
+        $Searhstatement -> bindValue(':getID',$getID); 
+        $Searhstatement -> execute();
+        $result = $Searhstatement -> fetchAll();
+        $arr = array();
+        foreach($result as $newData){
+            $arr[] = array(
+                'Article'=>$newData['Article'],
+                'Category'=>$newData['Category'],
+                'Condition'=>$newData['Condition'],
+                'Date'=>$newData['Date'],
+                'ID'=>$newData['ID'],
+                'IMG'=>$newData['IMG'],
+                'Title'=>$newData['Title'],
+                'TIMG' =>$newData['TIMG']
+
+            );}
+
+        echo json_encode($arr); 
+    }
 
 ?>

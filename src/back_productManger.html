@@ -8,7 +8,7 @@
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
-    <title>顧客評價</title>
+    <title>商品管理</title>
 </head>
 <body>
     <!-- ============== 缺搜尋BAR ============== -->
@@ -26,8 +26,19 @@
 
                             <div class="title">
                                 <h4 class="h4 green-1">商城商品上架</h4>
-                                <div class="insert_btn font16">
-                                    <p class="font16" @click="openPop()">新增</p>
+                                
+                                <div class="btn_wrap">
+                                    <div class="insert_btn"> 
+                                        <p class="font16" @click="openPop()">新增</p>
+                                    </div>
+                                    <div class="search">
+                                        <div class="search_container_item">
+                                            <input type="text" placeholder="請輸入商品名稱..." @keyup="search" ref="search_name"/>
+                                        </div>
+                                        <div class="search_container_item" @click="search">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -44,7 +55,7 @@
 
                                 <!-- row-2 -->
                                 <div class="grid_container" v-for="item in product" :key="item.ID">
-                                    <div class="grid_item checked">{{ item.ID }}</div>
+                                    <div class="grid_item checked" @click="popOnEdit(item)">{{ item.ID }}</div>
                                     <div class="grid_item">{{ item.Type }}</div>
                                     <div class="grid_item">{{ item.Name }}</div>
                                     <div class="grid_item">{{ item.Price }}</div>
@@ -70,6 +81,7 @@
                             </ul>
                         </div> -->
                     </section><!-- section1 -->
+
                     <div class="product_wrapper fulid_wrapper" v-if="isShow" @click="product_pop_close">
                         <div class="section_products" @click.stop>
                             <div class="product_top">
@@ -103,7 +115,7 @@
                                         <span>請選擇3張圖片：</span>
                                         <div class="pic_item">
                                             <div class="inputwrap">
-                                                <input type="file" id="ProductImage" multiple @change="changeImage($event)">
+                                                <input type="file" id="ProductImage" multiple @change="changeImage($event)" ref="SetIMGInput" accept="image/*">
                                                 <input type="text" id="imageLoader" disabled="" :placeholder="loadedImage ? loadedImage.name : 'Please choose the file'">
                                             </div>
                                             <img id="output" v-if="ImageResult" :src="ImageResult" :alt="popupData.name">
@@ -115,13 +127,40 @@
                                     <h6>白貓宅配 ○</h6>
                                     <h6>超商取貨 ●</h6>
                                 </div> -->
-                                <button class="product_content_btn" @click="doSubmit">儲存</button>
+                                <button class="product_content_btn" @click="doSubmit()">儲存</button>
                 
                             </div>
                         </div>
                     </div>
 
-
+                    <!-- ========== 編輯商品 popup ========== -->
+                    <div @click="closePopOn" class="area" :class="[popOnMsg.isEdit ? 'popAllarea':'']">
+                        <div class="pop sevse_dish" v-if="popOnMsg.isEdit == true" @click.stop style="display: none;" :style="popOnMsg.isEdit ?'display:block':'display: none'">  
+                            <div class="reserve_top"  @click.stop>
+                                <p>更新商城商品資訊</p>
+                            </div>          
+                            <div class="pop_contaniner">
+                                <div class="input">
+                                    <label for="_name">品名:</label><input type="text" id="_name" :value="popOnMsg.Name" ref="os_DishName">
+                                </div>
+                                <div class="input">
+                                    <label :for="popOnMsg.ID">狀態:</label>
+                                    <select :name="popOnMsg.ID" :id="popOnMsg.ID" :value="popOnMsg.Condition" ref="os_Condtion">
+                                        <option value="1">上架</option>
+                                        <option value="0">下架</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="input">
+                                    <label for="_no">編號:</label><input type="text" id="_no" :value="popOnMsg.ID" disabled>
+                                </div>
+                                <div class="input">
+                                    <label for="_price">價格:</label><input id="_price" :value ="popOnMsg.Price"  type="number" ref="os_Price">
+                                </div>
+                                <button class="section_reserve_btn" @click="clickSaveToUpdate(popOnMsg)">儲存</button>
+                            </div>
+                        </div>
+                    </div>
                     <!-- ========== 加入商品成功 & 移除商品成功 燈箱 ========== -->
                     <div class="overlay1" :class="{ product_popNone : success_popup ==''}"  v-if="success_popup !== '' ">
                         
@@ -132,8 +171,6 @@
                             </div>
                         </article>
                     </div>
-                    
-
                 </main>
                 @@include('layout/back_footer.html')
             </div><!-- container -->
@@ -143,17 +180,8 @@
     </div>
     <script src="./js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
-    <script
-        type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><!-- icon_cdn -->
-    <script
-        nomodule="nomodule"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- icon_cdn -->
-        <script src="./js/back_page/back_nav/back_nav.js"></script><!-- 導覽列 -->
+
     <script>
-
-
-
         // Vue
         const app = Vue.createApp({
             data() {
@@ -161,7 +189,6 @@
                     // IMG 判断是否存取
                     loadedImage: null,
                     ImageResult: null,
-                    imgData:[],
 
                     // 照片測試資料
                     imgData2: "./img/shopmall_img/shopmall_product13.jpg ./img/shopmall_img/shopmall_product14.jpg ./img/shopmall_img/shopmall_product15.jpg",
@@ -189,8 +216,17 @@
                     // 控制popUp開關
                     success_popup:'',
 
-                    // 清空原本popUp資料
+                    // 加入成功popup
                     success_popup_interval:null,
+
+                    // 編輯popup
+                    popOnMsg:{
+                        isEdit:false,
+                    },
+                    popOnSetDetail:{
+                        isDisplay:false,
+                        isEdit:false,
+                    }
                 }
             },
             watch: {
@@ -212,8 +248,7 @@
                 
             },
             methods: {
-
-
+                
                 // 取得商品清單
                 getCate(){    
                     $.ajax({            
@@ -251,29 +286,101 @@
                 },
 
 
-                updateOrderDishCondition(dish){
-                    console.log(dish);
-                    // 修改資料庫資料
-                    $.ajax({            
+                // 商品編輯
+                popOnEdit(item){
+                        this.popOnMsg={};
+                        this.popOnMsg.isEdit= true;
+                        
+                        document.querySelector('body').style.overflow = "hidden"
+                        
+                        this.popOnMsg.ID = item.ID;
+                        this.popOnMsg.Name = item.Name;
+                        this.popOnMsg.Price = item.Price;
+                        this.popOnMsg.Condition = parseInt(item.Condition);
+                    },
+
+                // 編輯狀態關閉
+                closePopOn(){
+                    this.popOnMsg.isEdit = false;
+                    document.querySelector('body').style.overflow = "auto";   
+                },
+
+                // 商品Pop 儲存點擊
+                clickSaveToUpdate(item){
+                    //  console.log('beforeValue',item);
+                    if(window.confirm('有想要更新此筆資料嗎?')){
+                        
+                        this.popOnMsg.ID = item.ID;
+                        this.popOnMsg.Name = this.$refs.os_DishName.value;
+                        this.popOnMsg.Price = parseInt(this.$refs.os_Price.value);
+                        this.popOnMsg.Condition = parseInt(this.$refs.os_Condtion.value) ;
+
+                        
+                        // Ajax 更新資料庫
+                        this.updateOrderDishDetial('DishDetailUpdate',this.popOnMsg);
+                    }else{
+                        // 不儲存就回到原來參數
+                        this.$refs.os_DishName.value =  item.Name;
+                        this.$refs.os_Condtion.value = parseInt(item.Condition);
+                        this.$refs.os_Price.value = item.price;
+                    }      
+
+                },
+
+                // 商品更新
+                updateOrderDishDetial(msg,item){
+                    const _this = this;
+                    // console.log(msg, item);
+                    // console.log('msg',msg)
+                    // console.log('item',item)
+                    $.ajax({
                         method: "POST",
-                        url: "./php/backpage/back_productManger_u.php",
-                        data:{
-                            dish_ID : dish.ID,
-                            dish_Condition : dish.Condition
+                        url: "php/backpage/back_productManger_info_u.php",
+                        data: {
+                            MSG: msg,
+                            ID: item.ID,
+                            Name: item.Name,
+                            Condition: parseInt(item.Condition),
+                            price: item.Price
                         },
                         dataType: "text",
-                        success: (response)=> {
-                            console.log(response)
+                        success: function (response) {
+            
+                            if(response ='sucessful'){
+                                
+                                // 改變 Vue 塞回原本API資料內
+                                _this.product.forEach((el)=>{
+                                    if(el.ID === item.ID){
+                                        el.Name = item.Name;
+                                        el.Price =item.Price;
+                                        el.Condition = parseInt(item.Condition);
+                                    }
+                                })
+
+                                // 加入商品成功 popUp
+                                _this.success_popup = '更新商品成功'
+                                let body = document.querySelector('body');
+                                body.style.overflow = "hidden";
+
+                                // PopOn 消失
+                                clearInterval(_this.success_popup_interval)
+                                _this.success_popup_interval = setInterval(() => {
+                                    _this.success_popup= ''
+                                    // overfloat: auto
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "auto";
+                                }, 1000);
+
+                                _this.popOnMsg.isEdit = false;      
+                            }
                         },
-                        error: (exception)=> {
-                            alert("數據載入失敗: " + exception.status);
+                        error: function (exception) {
+                            alert("發生錯誤: " + exception.status);
                         }
                     });
                 },
-                
 
-                // switch update status
-
+                // switch update status  （ 上架 == 1 / 下架 == 0 ）
                 switchToggle(dish, e){
                     if(window.confirm('是否要更商品狀態?')){
                         if(dish.Condition ==1){
@@ -286,9 +393,30 @@
                     }else{
                         // console.log(e.target.checked)
                         // console.log(dish.Condition)
-                        e.target.checked = dish.Condition
+                        e.target.checked = parseInt(dish.Condition);
                     }
                     
+                },
+
+                // switch 更改狀態API
+                updateOrderDishCondition(dish){
+                    console.log(dish);
+                    // 修改資料庫資料
+                    $.ajax({            
+                        method: "POST",
+                        url: "./php/backpage/back_productManger_u.php",
+                        data:{
+                            dish_ID : dish.ID,
+                            dish_Condition : parseInt(dish.Condition)
+                        },
+                        dataType: "text",
+                        success: (response)=> {
+                            console.log(response)
+                        },
+                        error: (exception)=> {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
                 },
 
 
@@ -300,41 +428,77 @@
                     // overfloat: hidden
                     let body = document.querySelector('body');
                     body.style.overflow = "hidden";
-
-                    
                 },
                 
                 // 圖片預覽 & 封裝圖片
                 changeImage(e) {
-                    
-                    let that = this
-                    
-
+                    let that = this;
+                    // let imgLists = [];
                     let files = e.target.files;
                     // console.log(files);
 
-                    // 將圖片封裝到imgData
-                    // for (let i = 0; i < files.length; i++) {
-                        // console.log(files[i]);
-
-                        // that.imgData.push(files[i]);
-                        // console.log(that.imgData);
-                    // }
                     
+                    
+                    // 存取圖片提示
                     that.loadedImage = e.target.files[0]
                     
+                    // 圖片預覽
                     let reader = new FileReader()
                     reader.onload = function (e) {
                         that.ImageResult = e.target.result;
                     }
-                    // 圖片預覽
                     reader.readAsDataURL(e.target.files[0]);
+
+                },
+
+                // insert IMG API
+                insertImg(){ 
+                    let _this = this;
+                    let imgLists = [];
+
+                    // 取的上傳團片的圖聘資料內容
+                    let files = _this.$refs.SetIMGInput.files;
+                    // console.log(files);
+
+                    // 將圖片封裝到imgData
+                    for (let i = 0; i < files.length; i++) {
+                        // console.log(files[i]);
+                        imgLists.push(files[i]);  // imgLists == [{FILE}, {FILE}, {FILE}];
+                        // console.log(imgLists); 
+                    }
+
+                    // 更新上傳圖片
+                    if(files !==undefined && files !== null){
+                        let formData = new FormData();
+                        formData.append('ProductImage',files);
+                        formData.append('ID',parseInt(_this.popupData.ID));
+                        // console.log(formData);
+                        console.log('update SetID: ',formData.getAll('ProductImage'))
+                        $.ajax({            
+                            method: "POST",
+                            url: "php/backpage/back_productManger_i_IMG.php",
+                            data: formData,
+                            // 告訴jQuery不要去處理發送的資料
+                            processData : false, 
+                            // 告訴jQuery不要去設定Content-Type請求頭
+                            contentType : false,   
+                            dataType: "text",
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function(exception) {
+                                alert("發生錯誤: " + exception.status);
+                            }
+                        });  
+                    }
                 },
 
                 doSubmit(){
-                    // FIXME 無法存圖片到物件
-                    // this.createIMG();
-                    this.FormData();
+                    // insert IMG API
+                    this.insertImg();
+
+                    // insert info API
+                    // this.FormData();
                 },
 
                 // createIMG(){
@@ -460,7 +624,7 @@
                         }
                     });
 
-                    清空popupData資料
+                    // 清空popupData資料
                     this.popupData = {
                         Type: '商城主食',
                         Name: "",
@@ -493,6 +657,38 @@
                         IMG: "",
                         pushisedDate: Date.now()
                     }
+                },
+
+                // 會員名稱關鍵字查詢
+                search(){
+                    let search_name = this.$refs.search_name.value;
+                    console.log(search_name);
+                    if(this.$refs.search_name.value == ""){
+                        this.getCate();
+                    }else{
+                        $.ajax({
+                            method: "POST",
+                            url: "php/backpage/back_productManger_search.php",
+                            data: {
+                                search_name:search_name
+                            },
+                            dataType: "json",
+                            success: (response) => {
+                                if(response == "無資料"){
+                                    this.product = [];
+                                    // return;
+                                }else{
+                                    // console.log(response);
+                                    this.product = response ;
+                                    
+                                }
+                            },
+                            error: function (exception) {
+                                alert("數據載入失敗: " + exception.status);
+                            }
+                        });
+                    }
+                    
                 },
                 
                 

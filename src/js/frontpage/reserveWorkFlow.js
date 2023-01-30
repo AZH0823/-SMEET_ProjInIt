@@ -86,64 +86,7 @@ const RootComponent  = {
             },
         }
     },
-    methods:{
-        // 測試自動塞資料,上線會刪除
-        input(){
-            this.inputData.member = {
-                id:4,point:310,isLogin:true
-            };
-            this.inputData.name = '吳健誌';
-            this.inputData.phone = '0921847866';
-            this.inputData.email = 'qoo9986360@gmail.com';
-            this.inputData.addr ='新北勢測試區';
-            this.inputData.note ='我想打我自己';
-         
-            this.inputData.point = 2;
-            this.inputData.cardName ='無哈果';
-            this.inputData.cardDate ='0823';
-            this.inputData.cardCode ='123' ;
-
-            this.inputData.cards[0].str = '4401';
-            this.inputData.cards[1].str = '4567';
-            this.inputData.cards[2].str = '7891';
-            this.inputData.cards[3].str = '0012';
-            this.inputData.detailDishies=[
-                //  套餐Price  =  0
-                //  qty 變數要確認
-                    {id:1,dishName:'奶香牛肝菌野菇濃湯-A',price:0,qty:2,dishType:'湯物'},
-                    {id:2,dishName:'石斑海鮮清湯-A',qty:3,price:0,dishType:'湯物'},
-                    {id:3,dishName:'燻鮭魚番茄佐優格醬-A',price:0,qty:1,dishType:'前菜'},
-                    {id:4,dishName:'深海魚皮野蔬沙拉佐醋醬-A',price:0,qty:2,dishType:'前菜'},
-                    {id:5,dishName:'大間本鮪中腹、秋鮭、貝類、牡丹蝦-A',price:0,qty:0,dishType:'刺身'},
-                    {id:6,dishName:'嫩煎干貝佐松露菲力-A',price:0,qty:3,dishType:'主食'},
-                    {id:7,dishName:'日本小田和牛壽喜燒-A',price:0,qty:4,dishType:'主食'},
-                    {id:8,dishName:'龍蝦佐鮑魚海鮮拼盤-A',price:0,qty:2,dishType:'主食'},
-                    {id:9,dishName:'抹茶布丁搭配綿密金時紅豆-A',price:5,qty:1,dishType:'甜點'},
-                    {id:10,dishName:'栗子羊羹-A',price:0,qty:2,dishType:'甜點'},
-                    {id:11,dishName:'抹茶海鹽奶蓋-A',price:0,qty:3,dishType:'甜點'},
-                    {id:12,dishName:'春手毬和菓子-A',price:0,qty:2,dishType:'飲品'},
-                    {id:13,dishName:'烘焙曼巴咖啡-A',price:0,qty:1,dishType:'飲品'},
-                    {id:14,dishName:'烘焙曼巴咖啡-A',price:0,qty:1,dishType:'飲品'},                                
-                    {id:15,dishName:'高山金萱茶-A',price:0,qty:2,dishType:'飲品'},                                
-                    {id:16,dishName:'檸檬海鹽氣泡飲-A',price:0,qty:3,dishType:'飲品'},
-                    
-                    // 單點明細 
-                    {id:53,dishName:'廣島牡蠣釜飯',price:750,qty:3,dishType:'單品'},
-                    {id:54,dishName:'蘆筍蝦手捲',price:600,qty:4,dishType:'單品'},                                
-                    {id:55,dishName:'大閘蟹握壽司',price:650,qty:2,dishType:'單品'},                                
-                    {id:56,dishName:'和牛蕈菇釜飯',price:700,qty:1,dishType:'單品'}, 
-                    
-                    // 服務 要加上qty === 參加人數
-                    {id:49,title:'廚具',desc:'盤子、餐具、餐巾(必選)',checked:true,price:300,qty:3},
-                    {id:50,title:'炊具',desc:'鍋碗瓢盆(必選)',checked:true,price:300,qty:3},
-                    {id:51,title:'餐盤',desc:'餐盤&拼盤',checked:true,price:400,qty:3},
-                    {id:52,title:'服務人員',desc:'全程服務及售後清潔',checked:false,price:500,qty:3},
-            ]
-  
-            
-        },
-        // 測試自動塞資料,上線會刪除
-        
+    methods:{        
         // GET API
         initAPI(){
             this.getSetdishDetail();

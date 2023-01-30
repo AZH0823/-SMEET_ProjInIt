@@ -31,7 +31,8 @@
       display: flex;
       flex-direction: column;
       text-decoration: none;
-      color: $green-1;
+      color: #898989;
+      display: block;
 
       h4 {
         @media all and (max-width: 375px) {
@@ -40,6 +41,7 @@
       }
       span {
         margin: 0 auto;
+        padding-left: 35%;
       }
       &:hover {
         color: #d1cbb8;
@@ -115,7 +117,10 @@
       border: 1px solid #787878;
       height: 500px;
       display: inline-block;
-      text-decoration: none;
+      // text-decoration: none;
+      a {
+        text-decoration: none;
+      }
 
       &:hover {
         cursor: pointer;
@@ -174,74 +179,70 @@
 
           @extend .font14;
         }
-        .btn_more {
-          margin-left: 20px;
-          display: flex;
-          border:0;
-          background-color: transparent;
-          @extend .font14;
+      }
+      .btn_more {
+        margin-left: 20px;
+        display: flex;
+        border: none;
+        background-color: transparent;
+        @extend .font14;
+        position: relative;
+        cursor: pointer;
+        // height: 5%;
+        // width: 35%;
+        margin-left: 57%;
+
+        p {
           position: relative;
-          text-decoration: none;
-          cursor: pointer;
-          height: 5%;
-          width: 35%;
-          margin-top: 8%;
-          margin-left: 57%;
-          
-  
-          p {
-            position: relative;
-            margin-right: 50px;
-            position: relative;
-            color: $green-1;
-            &::after {
-              display: block;
-              content: "";
-              width: 85px;
-              height: 0.5px;
-              background-color: $green-3;
-  
-              position: absolute;
-              top: 23px;
-              left: 0px;
-  
-              z-index: 1;
-            }
-            &:hover ~ span {
-              background-color: $Camel-3;
-            }
-          }
-  
-          span {
-            border-radius: 50%;
-            height: 30px;
-            @include btnGetor(
-              30px,
-              0px,
-              10px,
-              black,
-              $Camel-3,
-              null,
-              transparent,
-              null,
-              0.5px
-            );
-            border: 0.5px solid $green-3;
+          margin-right: 50px;
+          position: relative;
+          color: $green-1;
+          &::after {
+            display: block;
+            content: "";
+            width: 85px;
+            height: 0.5px;
+            background-color: $green-3;
+
             position: absolute;
-            top: 0px;
-            left: 76px;
-            background-color: #fffbf5;
-            i.fa-arrow-right {
-              font-size: 10px;
-              position: absolute;
-              top: 10px;
-              left: 10px;
-              color: $green-3;
-            }
+            top: 23px;
+            left: 0px;
+
+            z-index: 1;
+          }
+          &:hover ~ span {
+            background-color: $Camel-3;
+          }
+        }
+
+        span {
+          border-radius: 50%;
+          height: 30px;
+          @include btnGetor(
+            30px,
+            0px,
+            10px,
+            black,
+            $Camel-3,
+            null,
+            transparent,
+            null,
+            0.5px
+          );
+          border: 0.5px solid $green-3;
+          position: absolute;
+          top: 0px;
+          left: 76px;
+          background-color: #fffbf5;
+          i.fa-arrow-right {
+            font-size: 10px;
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            color: $green-3;
           }
         }
       }
-
     }
   }
 }
@@ -250,4 +251,8 @@
 
 .active_op {
   display: block;
+}
+
+.tab_point {
+  color: #000;
 }

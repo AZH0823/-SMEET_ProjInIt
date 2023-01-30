@@ -33,14 +33,23 @@
         </div>
         <div class="fulid_wrapper app1">
             <div class="_chef_tab">
+        
+                
+                
 
+
+                <!-- <template v-for="(item, index) in chef_tab" :key="index"
+                    @click="current_tab = item.Type" 
+                    :class="{ on_tab : currentTab === item.Type}"> -->
+                    <!-- <p>{{item}}</p> -->
                 <template v-for="(item, index) in chef_tab" :key="index">
-                    
                     <!------------------------- 廚師長1 ------------------------->
-                    <input id="chef1" type="radio" name="chef" checked="checked" />
-                    <label for="chef1">
+                    <input :id="'chef1_' + index" type="radio" name="chef" :checked="index == 0" />
+                    <label :for="'chef1_' + index" @click="clicklable(item.ID)">
+                        <!-- @click="currentTab = item.ID" -->
+                        <!-- :class="{active: currentTab === index}" -->
                         <!-- 立雁杉廚師長 -->
-                        {{item.LederName}}
+                        {{item.LederName}}&nbsp廚師長
                     </label>
                     <div class="_chef_content">
                         <div class="_chef_line"></div>
@@ -52,8 +61,8 @@
 
                                 </div>
                                 <div class="part1_info">
-                                    <h2 class="font_family_eng green-1 font_bold">01</h2>
-                                    <h4 class="font_family_tc font_bold green-1">立雁杉 廚師長</h4>
+                                    <h2 class="font_family_eng green-1 font_bold">0{{ item.ID }}</h2>
+                                    <h4 class="font_family_tc font_bold green-1">{{item.LederName}}&nbsp廚師長</h4>
                                     <div class="text1">
                                         <h6>
                                             {{item.LederProfile}}
@@ -80,7 +89,7 @@
                                     </div>
                                     <p>
                                         <!-- 立雁山&nbsp廚師長 -->
-                                        {{item2.Name}}{{item2.Job}}
+                                        {{item2.Name}}&nbsp{{item2.Job}}
                                     </p>
                                 </div>
                                 <!-- <div class="_chef_grid_2">
@@ -401,31 +410,72 @@
                         return {
 
                             //----- 廚師長 -----//
-                            current_tab: "chef",
-                            chef_tab: [
-
-                            ]
-
-
-                            ,
-                            chef_data: 'chef1',
-
-                            chef_tab_all: [],
-
+                            chef_tab: [],
+                            
+                            // chef_data: 'chef1',
+                            // chef_tab_all: [],    
 
                             //----- 廚師團隊 -----//
                             chef_bottom: [],
-                            
 
+                            currentTab: 1,
+
+                            // 現有分頁的data
+                            shopMall_tab:[
+                                {
+                                    ID:1,
+                                    name:"厲燕山"
+                                },
+                                {
+                                    ID:2,
+                                    name:"菜雨停"
+                                },
+                                {
+                                    ID:3,
+                                    name:"吳薦痣"
+                                }
+                            ],
+                            
                         };
+                       
+                        
                     },
 
+                    computed: {
+                        // ========= 原本菜單陣列依照curren_tab過濾 ========= //
+                        filtered_list(){
+                            let filtered =  this.chef_tab.filter((post) => {
+
+                            //     console.log(this.current_tab);
+                            //     // console.log(post.Type);
+                            //     // console.log(this.current_tab == post.Type);
+                                
+                                return this.currentTab == post.ID;
+
+                            //     // return  post.title.toLowerCase().includes(this.keyword.toLowerCase());
+                                
+                             });
+                            // return filtered
+                            
+                            // console.log(filtered);
+                            // return '1'
+                            return filtered
+
+                        }
+                    },
+        
                     mounted() {
                         this.chefrender();
 
                     },
 
                     methods: {
+                        
+                        clicklable(lableID){
+                            this.currentTab = lableID
+                            // console.log(lableID);
+                        },
+                       
 
                         chefrender() {
 
@@ -452,15 +502,16 @@
 
                                             _this.chef_tab[2] = element;
                                         };
-                                        // _this.chef_tab.push(element);
                                     });
+                                    // console.log(_this.chef_tab);
                                     _this.$nextTick(function () {
 
                                         let _this = this
-                                        console.log(_this.chef_tab[0]);
+                                        // console.log(_this.chef_tab[0]);
                                         _this.chef_tab[0].team = [];
                                         _this.chef_tab[1].team = [];
                                         _this.chef_tab[2].team = [];
+
                                         $.ajax({
                                             method: "GET",
                                             url: "php/frontpage/chefs.php",
@@ -481,7 +532,6 @@
                                                     }
                                                     // _this.chef_bottom.push(element);
 
-
                                                 });
                                             },
                                             error: function (exception) {
@@ -498,70 +548,10 @@
                                 },
 
                             });
-
                         },
-
-                        // 換至內容
-                        isChecked(e) {
-                            if (e) {
-                                this.chef_data = e.target.value
-                            }
-                        },
-
-
                     },
-
                 });
                 app1.mount(".app1");
-
-
-
-
-
-
-
-            //---------------tab---------------//
-        //   let member = Vue.createApp({
-        //     data(){
-        //       return {
-        //         // tab
-        //         current_tab:"chefs",
-        //         member_tab:[
-
-        //           {
-        //             team_id:"1",
-        //             name:"立雁山",
-        //                 img:"",
-        //                 desc:'',
-        //                 member:[
-        //                     {name:'',job:'',title:'',img:''}
-        //                 ]
-        //           },
-
-        //           {
-        //            team_id:"2",
-        //             name:"菜雨停",
-        //                 img:"",
-        //                 desc:'',
-        //                 member:[
-        //                     {name:'',job:'',title:'',img:''}
-        //                 ]
-        //           },
-
-        //           {
-        //             team_id:"3",
-        //             name:"吳薦痣",
-        //                 img:"",
-        //                 desc:'',
-        //                 member:[
-        //                     {name:'',job:'',title:'',img:''}
-        //                 ]
-        //           }
-
-        //         ]}
-        //     }
-        // }).mount('#chefs');
-
 
             </script>
 

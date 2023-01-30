@@ -23,14 +23,14 @@
                 </div>
                 <div class="login_news">
                     <input type="checkbox" name="login_news" id="login_news_yes1">
-                    <label for="login_news_yes">
+                    <label for="login_news_yes1">
                         <p class="font14">我願意接收私覓的最新消息、優惠相關訊息</p>
                     </label>
                 </div>
                 <div class="login_news">
                     <input type="checkbox" name="login_news" id="login_news_yes2">
-                    <label for="login_news_yes">
-                        <p class="font14">我同意網站服務條款及隱私權政策</p>
+                    <label for="login_news_yes2">
+                        <p class="font14" id="login_news_yes2_p">我同意網站服務條款及隱私權政策</p>
                     </label>
                 </div>
                 <button type="submit" class="btn_login font18" @click="join_ajax">立即加入</button>
@@ -45,7 +45,7 @@
                     <p class="text_no">*請填寫正確的帳號或密碼</p>
 
                 </div>
-                <button type="submit" class="btn_login font18" @click="login_ajax">會員登入</button>
+                <button type="submit" id="login_ajax" class="btn_login font18" @click="login_ajax">會員登入</button>
                 <a class="btn_forget" @click="forget">忘記密碼？</a>
             </div>
             <!-- 或 -->
