@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="./css/style.css" />
+
     <title>QA管理</title>
   </head>
   <body>
@@ -33,88 +35,101 @@
                   </div>
 
                   <!-- row-2 -->
-                  <div class="grid_container" v-for="contact in Contactlist" >
-                    <div class="grid_item checked">
-                        <!-- a10109990@g... -->
-                        {{contact.Email}}
+                  <div class="grid_container" v-for="contact in Contactlist">
+                    <div class="grid_item checked" @click="popon_open(contact)">
+                      <!-- a10109990@g... -->
+                      {{contact.Email}}
                     </div>
                     <div class="grid_item">
-                        <!-- 2022/01/13 -->
-                        {{contact.ReleaseDate}}
+                      <!-- 2022/01/13 -->
+                      {{contact.ReleaseDate}}
                     </div>
                     <div class="grid_item">
-                        <!-- 合作 -->
-                        {{contact.Category}}
+                      <!-- 合作 -->
+                      {{contact.Category}}
                     </div>
                     <div class="grid_item">
-                        <!-- 第一次體驗感覺很有尊榮... -->
-                        {{contact.SuggestContent}}
+                      <!-- 第一次體驗感覺很有尊榮... -->
+                      <!-- {{contact.SuggestContent}} -->
+                      {{subData(contact.SuggestContent)}}
                     </div>
                     <div class="grid_item gray">
-                        <!-- 未回覆 -->
-                        {{contact.Condition}}
+                      <!-- 未回覆 -->
+                      <p v-if="contact.Condition == 0">未讀取</p>
+                      <p v-if="contact.Condition == 1">已讀取</p>
+                      <!-- {{contact.Condition}} -->
                     </div>
                   </div>
-                <!-- wrapper -->
+                </div>
               </div>
-              <!-- back_from -->
-
-              <!-- 頁碼-->
-              <!-- <div class="page">
-                <ul class="page_ul">
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                </ul>
-              </div> -->
             </section>
-            <!-- section1 -->
           </main>
+          <!-- popon start -->
+          <div id="myModal" class="modal" v-if="Popon_date.isEdit" @click="outsideClose" >
+            <!-- 弹窗内容 -->
+            <div class="modal-content" @click.stop>
+              <span class="close"></span>
+              <div class="contactus_top">
+                <h6>訊息回覆</h6>
+              </div>
+              <div class="contactus_mail">
+                <h6>
+                  <!-- 電子信箱 : a1235990@gmail.com -->
+                  電子郵箱:{{Popon_date.Email}}
+                </h6>
+              </div>
+              <div class="contactus_date">
+                <h6>
+                  <!-- 日期：2022/01/13 -->
+                  日期:{{Popon_date.ReleaseDate}}
+                </h6>
+              </div>
+              <div class="contactus_name_phone">
+                <h6>姓名:{{Popon_date.Name}}</h6>
+                <h6>電話:{{Popon_date.Phone}}</h6>
+              </div>
+              <div class="contactus_type">
+                <h6>建議事項:{{Popon_date.Category}}</h6>
+              </div>
+              <div class="contactus_content">
+                <h6>您的建議</h6>
+                <p>
+                  <!-- Hi 私覓您好！<br />我是HoSha主理人Yumi，我們團隊一直非常喜歡貴品牌，希望與貴品牌有合作的機會！我們<br />是於2022年創立的和服品牌-HoSha，主要的販售日本古典文藝相關，很希望能與貴品<br />牌合作到府服務的廚師穿搭及道具租借。期待收到回覆，謝謝🙏🙏<br />HoSha
+                                    官網↓<br />https://www.hosha.com/<br />by Yumi -->
+                  {{Popon_date.SuggestContent}}
+                </p>
+                
+                <button class="contactus_content_btn" 
+                :value="Popon_date.ID"
+                v-if="Popon_date.Condition == 0 "
+                @click="updateContactCondition">儲存</button>
+              </div>
+            </div>
+          </div>
+          <!-- popon end -->
           @@include('layout/back_footer.html')
-        </div>
-        <!-- container -->
-      </div>
-
-      <div class="section_contactus">
-        <div class="contactus_top">
-          <h6>訊息回覆</h6>
-        </div>
-        <div class="contactus_mail">
-          <h6>電子信箱 : a1235990@gmail.com</h6>
-        </div>
-        <div class="contactus_date">
-          <h6>日期：2022/01/13</h6>
-        </div>
-        <div class="contactus_name_phone">
-          <h6>姓名：11342</h6>
-          <h6>電話：0929993124</h6>
-        </div>
-        <div class="contactus_type">
-          <h6>建議事項：合作</h6>
-        </div>
-        <div class="contactus_content">
-          <h6>您的建議</h6>
-          <p>
-            Hi 私覓您好！<br />我是HoSha主理人Yumi，我們團隊一直非常喜歡貴品牌，希望與貴品牌有合作的機會！我們<br />是於2022年創立的和服品牌-HoSha，主要的販售日本古典文藝相關，很希望能與貴品<br />牌合作到府服務的廚師穿搭及道具租借。期待收到回覆，謝謝🙏🙏<br />HoSha
-            官網↓<br />https://www.hosha.com/<br />by Yumi
-          </p>
-          <textarea
-            placeholder="HoSha您好！不好意思，我們暫不考慮貴司合作類別，感謝您的來信 by Eric"
-          ></textarea>
-          <button class="contactus_content_btn">儲存</button>
         </div>
       </div>
     </div>
     <script src="./js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
-    
-
+    <!-- render ajax -->
     <script>
       let app1 = Vue.createApp({
         data() {
           return {
             Contactlist: [],
+            Popon_date: {
+              isEdit: false,
+              ID:"",
+              Email: "",
+              ReleaseDate: "",
+              Name: "",
+              Phone: "",
+              Category: "",
+              SuggestContent: "",
+              Condition: "",
+            },
           };
         },
         created() {
@@ -134,21 +149,19 @@
                 // console.log(response);
                 response.forEach((element) => {
                   // console.log(element);
-                    element.ReleaseDate = element.ReleaseDate.substr(0,10)
-                    if(element.Condition == 1){
-                        element.Condition = "未回覆"
-                    }
-                    else{
-                        element.Condition = "已回覆"
-                    }
-                    if(
-                        element.SuggestContent.length <= 10){
-                        _this.Contactlist.push(element);
-
-                        }else{
-                        element.SuggestContent = element.SuggestContent.substr(0,11) +'...'
-                        _this.Contactlist.push(element);
-                        }   
+                  element.ReleaseDate = element.ReleaseDate.substr(0, 10);
+                  // if (element.Condition == 1) {
+                  //   element.Condition = "已讀取";
+                  // } else {
+                  //   element.Condition = "未讀取";
+                  // }
+                  // if (element.SuggestContent.length <= 10) {
+                  //   _this.Contactlist.push(element);
+                  // } else {                      
+                  //   _this.Contactlist.push(element);
+                  // }
+                  _this.Contactlist.push(element);
+                  // element.SuggestContent.substr(0, 11) + "...";
                 });
               },
               error: function (exception) {
@@ -156,6 +169,70 @@
               },
             });
           },
+          subData(e){
+              // element.SuggestContent.substr(0, 11) + "...";
+              let str = e.substr(0, 11) + "..."
+              console.log();
+              return str;
+          },
+          popon_open(contact) {
+            // console.log(contact);
+            if(!this.Popon_date.isEdit){
+              this.Popon_date={}
+              this.Popon_date.isEdit = true
+              this.Popon_date.ID = contact.ID;
+              this.Popon_date.Email = contact.Email;
+              this.Popon_date.ReleaseDate = contact.ReleaseDate;
+              this.Popon_date.Name = contact.Name;
+              this.Popon_date.Phone = contact.Phone;
+              this.Popon_date.Category = contact.Category;
+              this.Popon_date.SuggestContent = contact.SuggestContent;
+              this.Popon_date.Condition = contact.Condition
+            }else{
+
+            }
+            
+          },
+        
+          outsideClose(){
+            console.log(`close`)
+            this.Popon_date.isEdit = false;
+
+          },
+          updateContactCondition(e) {
+            // console.log(QA);
+            let id = e.target.value;
+            let status = 1;
+            let _this = this
+
+            $.ajax({
+              method: "POST",
+
+              url: "./php/backpage/back_contact_update.php",
+
+              data: {
+                Contact_ID: id,
+                Contact_Condition: status,
+              },
+
+              dataType: "text",
+
+              success: (response) => {
+                console.log(response);
+                _this.outsideClose();
+                _this.reload()
+
+              },
+
+              error: (exception) => {
+                alert("數據載入失敗: " + exception.status);
+              },
+            });
+          },
+          reload() {
+            window.location.assign(window.location.href)
+          }
+
         },
       });
       app1.mount(".container");

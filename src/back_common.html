@@ -37,7 +37,7 @@
                 <div class="back_from_wrapper">
                   <!-- row-1 -->
                   <div class="grid_container">
-                    <div class="grid_item">排序</div>
+                    <div class="grid_item">編號</div>
                     <div class="grid_item">類型</div>
                     <div class="grid_item">標題</div>
                     <div class="grid_item">狀態</div>
@@ -70,7 +70,9 @@
                         </p>
                       </label>
                     </div>
-                    <div class="grid_item checked">查閱</div>
+                    <div class="grid_item checked" @click="popon_open(QA)">
+                      查閱
+                    </div>
                   </div>
                 </div>
                 <!-- wrapper -->
@@ -79,6 +81,43 @@
             </section>
             <!-- section1 -->
           </main>
+          <!-- popon start -->
+          <div
+            id="myModal"
+            class="modal"
+            v-if="Popon_date.isEdit"
+            @click="outsideClose"
+          >
+            <!-- 弹窗内容 -->
+            <div class="modal-content" @click.stop>
+              
+              <div class="QA_back_title">
+                <h6>QA管理</h6>
+              </div>
+              <div class="QA_category">
+                <h6>
+                  <!-- 電子信箱 : a1235990@gmail.com -->
+                  問題類型：{{Popon_date.Category}}
+                </h6>
+              </div>
+              <div class="QA_QuestionContent">
+                <div>
+                  問題:
+                  <h6>{{Popon_date.QuestionContent}}</h6>
+                </div>
+              </div>
+              <div class="QA_AnswerContent">
+                <div>
+                  回覆:
+                  <h6>{{Popon_date.AnswerContent}}</h6>
+                </div>
+              </div>
+              <button class="QA_content_btn" @click="outsideClose" >
+                儲存
+              </button>
+            </div>
+          </div>
+          <!-- popon end -->
           @@include('layout/back_footer.html')
         </div>
         <!-- container -->
@@ -113,33 +152,20 @@
     </div>
     <script src="./js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
-    <!-- 導覽列 -->
-    <script>
-      // const switchBtn = document.querySelectorAll(".switch_btn");
-      // const sliderContent = document.querySelectorAll(".slider_content");
-      // // console.log(switchBtn);
 
-      // for(let i=0; i < switchBtn.length; i++){
-      //     // console.log(i)
-      //     switchBtn[i].addEventListener("click", function(){
-      //         console.log(this.checked); // ture /false
-      //         console.log(i);
-      //         console.log(this)
-
-      //         if (this.checked == true) {
-
-      //             $(this).closest("label").find(".slider_content").text('啟用');
-      //         } else{
-      //             $(this).closest("label").find(".slider_content").text('停權');
-      //         }
-      //     });
-      // }
-    </script>
     <script>
       let app1 = Vue.createApp({
         data() {
           return {
             BackQAList: [],
+            Popon_date: {
+              isEdit: false,
+              ReleaseDate: "",
+              Category: "",
+              QuestionContent: "",
+              AnswerContent: "",
+              Condition: "",
+            },
           };
         },
         created() {
@@ -168,12 +194,12 @@
             });
             console.log(this.BackQAList);
           },
-          
+
           updateQACondition(QA) {
             // console.log(QA);
             $.ajax({
               method: "POST",
-              
+
               url: "./php/backpage/back_common_update.php",
 
               data: {
@@ -206,6 +232,23 @@
               // console.log(dish.Condition)
               e.target.checked = QA.Condition;
             }
+          },
+
+          popon_open(QA) {
+            // console.log(contact);
+            if (!this.Popon_date.isEdit) {
+              this.Popon_date = {};
+              this.Popon_date.isEdit = true;
+              this.Popon_date.Category = QA.Category;
+              this.Popon_date.QuestionContent = QA.QuestionContent;
+              this.Popon_date.AnswerContent = QA.AnswerContent;
+              this.Popon_date.Condition = QA.Condition;
+            } else {
+            }
+          },
+          outsideClose() {
+            console.log(`close`);
+            this.Popon_date.isEdit = false;
           },
         },
       });

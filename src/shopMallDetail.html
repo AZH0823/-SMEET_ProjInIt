@@ -51,7 +51,7 @@ initial-scale=1.0">
                     <!-- 按鈕(加入購物車/立即結帳) -->
                     <div class="btn_add_buy">
                         <button class="inCart_btn2 add" @click="addShoppingCart1(shopMallDetailInfo)">加入購物車</button>
-                        <button class="inCart_btn2 buy" @click="addShoppingCart_check" href="./cartDetail.html">立即結帳</button>
+                        <button class="inCart_btn2 buy" @click="addShoppingCart_check(shopMallDetailInfo)" href="./cartDetail.html">立即結帳</button>
                     </div>
                 </div>
             </div>
@@ -280,7 +280,7 @@ initial-scale=1.0">
                 },
 
                 // 立即結帳前檢查是否登入會員，已登入就跳轉畫面到結賬頁面
-                addShoppingCart_check(){    
+                addShoppingCart_check(shopMallDetailInfo){    
                     $.ajax({            
                         method: "POST",
                         url: "php/frontpage/login_check.php",
@@ -291,11 +291,45 @@ initial-scale=1.0">
                                 //尚未登入->跳出會員登入畫面
                                 login_pop();
                             }else{
-                                //已有登入的話 執行.....
-                                // 會員icon顯示
-                                let user_pop = document.querySelector('.user_pop');
-                                user_pop.classList.remove('none');
                                 
+
+                                const addCartListEl = JSON.parse(JSON.stringify(shopMallDetailInfo)) 
+                                // console.log(addCartListEl.IMG[0]);
+
+                                let obj = addCartListEl
+                                obj.IMG = addCartListEl.IMG[0]
+                                // console.log(obj);
+
+                                if(this.ShoppingCartList.length !==0){
+                                    
+                                    // ID 重複
+                                    let result = false;
+                                    let idx = null;
+
+                                    for(let i = 0; i < this.ShoppingCartList.length;i++){
+
+                                        if(this.ShoppingCartList[i].ID === obj.ID){
+                                            result = true;
+                                            idx = i
+                                        }
+                                    }    
+                                    if(result){
+                                        this.ShoppingCartList[idx].qty += obj.qty
+                                    }else{
+
+                                        this.ShoppingCartList.push(obj)    
+                                    }
+                                
+                                }else{
+                                    this.ShoppingCartList.push(obj)
+                                }
+
+                                // 商品加到 Storage
+                                localStorage.setItem("shoppingData", JSON.stringify(this.ShoppingCartList))
+                                                
+                                // 改變shoppingcar QTY
+                                ShoppingCartQty();
+
                                 // 轉網址到結賬頁面     
                                 this.addlocation();
                             }              

@@ -95,7 +95,7 @@
                         </div> -->
                     </section><!-- section1 -->
 
-                    <div class="section_news_body" v-if="isShow" @click="product_pop_close">
+                    <div class="section_news_body" v-if="isShow" @click="product_pop_close" style="display: none;" :style=" isShow ? 'display: block' : 'display: none' ">
                         <div class="section_news_inner" @click.stop>
                             <div class="news_top">
                                 <p>新增動態</p>
