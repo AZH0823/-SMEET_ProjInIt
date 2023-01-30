@@ -305,7 +305,7 @@
                                 maxlength="4"
                                 class="creditnumber"
                                 @keyup="checkCreditCard($event)"
-                                v-model="orderData.cards[0]">
+                                >
                             <input
                                 type="text"
                                 minlength="1"
@@ -313,7 +313,7 @@
                                 class="creditnumber"
                                 @keydown="inputCreditCard($event)"
                                 @keyup="checkCreditCard($event)"
-                                v-model="orderData.cards[1]">
+                             >
                             <input
                                 type="text"
                                 minlength="1"
@@ -321,15 +321,14 @@
                                 class="creditnumber"
                                 @keydown="inputCreditCard($event)"
                                 @keyup="checkCreditCard($event)"
-                                v-model="orderData.cards[2]">
+                                >
                             <input
                                 type="text"
                                 minlength="1"
                                 maxlength="4"
                                 class="creditnumber"
                                 @keydown="inputCreditCard($event)"
-                                @keyup="checkCreditCard($event)"
-                                v-model="orderData.cards[3]">
+                                @keyup="checkCreditCard($event)">
                         </div>
                         <input type="text" placeholder="持卡人姓名" v-model="orderData.cardName">
                         <div class="creditcard_2">
@@ -339,16 +338,16 @@
 
                     </div>
                     <!-- checkbox -->
-                    <div class="info_check">
-                        <input type="checkbox" name="info_check" id="info_check_yes" v-if="agree">
-                        <label for="info_check">
-                            <p class="font16">我同意接受服務條款 & 隱私權政策。
-                            </p>
-                        </label>
-                    </div>
+                        <div class="info_check">
+                            <input type="checkbox" name="info_check" id="info_check_yes"  :class="''">
+                            <label for="info_check">
+                                <p class="font16">我同意接受服務條款 & 隱私權政策。
+                                </p>
+                            </label>
+                        </div>
                     <div class="cart_product_btn">
                         <!-- 下一步按鈕 -->
-                        <div class="next_btn" @click="sendAPI()">下一步</div>
+                        <div class="next_btn" @click="cartDetailAPI();">下一步</div>
                         <!-- 上一步按鈕 -->
                         <div class="prev_btn btn" @click="changePage(-1,$event);toTop()">返回上一步</div>
                     </div>
@@ -482,7 +481,7 @@
                             // 1. 同會員資料的內容要藉由取得登入後member_ID到資料庫撈會員資訊
                             // 2. 再用陣列轉字串的方式放到這裡
                             // 3. 再寫一個methods放@click到同會員資料的check後填入memberInfo的資料 同意接受服務條款的v-if
-                            agree: true,
+                            // agree: true,
 
                             // selectedOption: '',
                             // input標籤 v-for渲染
@@ -574,21 +573,16 @@
                         'detailTotal':function(){
                             this.orderData.detailTotal = parseInt(this.cartTotal) - parseInt(this.orderData.Points);
                         },
-                            // inputShoppingData: {
-                            //         handler: function(newValue, oldValue) {
-                            //         console.log(newValue,oldValue);
-                            //         },
-                            //         deep: true 
-                            //     }
                     },
                     methods: {
                           //控制流程
                         changePage(val,e) {
-                            if(this.inputShoppingData.length == 0){
+                                if(this.inputShoppingData.length == 0){
                                 this.isShowCart = true;
-                            }else{
-                                this.process.step += val;
-                            }
+                                }else{
+                                    this.process.step += val;
+                                }
+
                         },
 
                         //數量加
@@ -898,10 +892,10 @@
                       
                         
                         //執行順序
-                        async sendAPI(){
-                            await this.cartDetailAPI();
-                            this.changePage();
-                        },
+                        // async sendAPI(){
+                        //     await this.cartDetailAPI();
+                        //     this.changePage(1,$evnet);
+                        // },
 
 
                         //購物車訂單送出
@@ -916,6 +910,7 @@
                           
                             if(check){
                                 // console.log(`ttt`);
+                                const self = this
 
                                 let send_data = true;
 
@@ -936,9 +931,9 @@
                                         case 'phone':
                                             // console.log(key);
                                             if(this.phoneRule(this.orderData.phone)){
-                                                console.log(`手機驗證成功`);
+                                                // console.log(`手機驗證成功`);
                                             }else{
-                                                alert(`驗證未成功`);
+                                                alert(`請輸入手機號碼`);
 
                                                 send_data = false;
                                                
@@ -948,53 +943,58 @@
                                             // console.log(key)
                                             if(value.trim().length !== 0 && this.addrRule(this.orderData.addr)){
                                                 // console.log(key);
-                                                console.log('地址驗證成功');
+                                                // console.log('地址驗證成功');
 
                                              
                                             }else{
-                                                console.log(this.addrRule(this.orderData.addr));
-                                                console.log('驗證失敗');
+                                                alert('請輸入正確的地址');
                                                 send_data = false;
                                                 return;
 
                                             }
                                             break;
-                                        // case 'selectedOption':
-                                        //     console.log(`ttt`);
-                                        //     console.log(key);
-                                        //     console.log(this.options[1].value);
-                                        //     console.log(this.orderData.invoice);
-                                        //     if(this.options[1].value === this.orderData.invoice){
-                                               
-                                        //         if(value.trim().length > 0 && this.invoiceRule(this.orderData.invoice)){
-                                        //             console.log(`電子發票驗證成功`);
-                                        //         }
-                                        //         else{
-                                        //             console.log(`電子發票驗證未成功`);
-                                        //         }
-                                        //     }else{
-
-                                        //     }
-                                        //     break;    
-                                        // case 'invoice':
-                                        //     console.log(key);
-                                        //     if(value.trim().length > 0 && this.invoiceRule(this.orderData.invoice)){
-                                        //         console.log(`電子發票驗證成功`);
-                                        //     }else{
-                                        //         alert(`驗證失敗`);
-                                        //         return;
-                                        //     }
-                                        //     break;
-                                        // case 'uniformRule':
-                                        //     console.log(key);
-                                        //     if(value.trim().length > 0 && this.uniformRule(this.orderData.uniform)){
-                                        //         console.log(`統一發票驗證成功`);
-                                        //     }else{
-                                        //         console.log(`驗證失敗`);
-                                        //     }
-                                        //     break;
+                                        case 'invoice':
+                                       
+                                            if(value.trim().length > 0 && this.orderData.invoice !== 0){
+                                                console.log(`電子發票驗證成功`);
+                                            }else{
+                                                alert(`請輸入正確的電子發票格式`);
+                                                return;
+                                            }
+                                            break;
+                                        
+                                        case 'cardName':
+                                            if(value.trim().length > 0 && this.nameRule(this.inputData.cardName)){
+                                                // console.log('信用卡名稱驗證成功')
+                                                this.inputData.cardName = this.inputData.cardName.trim();
+                                        
+                                            }else{
+                                                // console.log('驗證失敗')
+                                                alert("信用卡姓名輸入英文或中文");
+                                                return;
+                                            }
+                                            break;
+                                        case 'cardDate':
+                                            if(value.trim().length == 4){
+                                                // console.log('信用卡日期驗證成功')
+                                            }else{
+                                                alert(`信用卡有效日期不符合格式，請修正`)
+                                            }
+                                            break;
+                                        case 'cardCode':
+                                            
+                                            if(value.trim().length == 3){
+                                                console.log('信用卡安全碼驗證成功')
+      
+                                            }else{
+                                                // console.log('驗證失敗')
+                                                alert(`信用卡不符合檢核碼格式`);
+                                            }
+                                            break;
+                                            
+                               
                                     }   
-                                    // window.location.href = window.location.href
+                                    
                                 }
                             
 
@@ -1019,6 +1019,8 @@
                                         dataType: "text",
                                         success: function (response) {
                                             that.response = response;
+                                            self.process.step = 3;
+
                                             // console.log();
                                         },
                                         error: function (exception) {
