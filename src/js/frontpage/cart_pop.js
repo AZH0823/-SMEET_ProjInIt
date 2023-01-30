@@ -1,15 +1,16 @@
 // 點擊header購物車icon 重新抓取localstorage渲染購物車popup
+let _THAT = this
 let header_cart = document.querySelector('.slide_cart');
 header_cart.addEventListener('click', function () {
     cart_pop.get_data();
 })
-
 let cart_pop = Vue.createApp({
         data() {
             return {shop_data: [{}]}
         },
         mounted() {
             this.get_data();
+            
         },
         methods: {
             // 按結帳 檢查登入狀況
@@ -69,6 +70,26 @@ let cart_pop = Vue.createApp({
                 this.shop_data.splice(index, 1);
                 // 更新localStorage數量
                 localStorage.setItem("shoppingData", JSON.stringify(this.shop_data));
+
+                const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+
+                // shoppingcar icon QTY 接index
+                // console.log(ShoppingCartQty())
+                this.ShoppingCartQty();
+            },
+            ShoppingCartQty(){
+                let car_num = document.getElementById('car_num');
+                const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                console.log(LSGetItem.length);
+            
+                // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                if(LSGetItem == [] || LSGetItem == ""){
+                    car_num.innerHTML = "";
+                    return ;
+                }else{
+                    car_num.classList.remove('none');
+                    car_num.innerHTML = LSGetItem.length;
+                }
             }
         }
     })
