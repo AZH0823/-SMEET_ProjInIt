@@ -913,9 +913,50 @@
                                 const self = this
 
                                 let send_data = true;
-
+                                //檢核orderData及orderInfo的input的值
                                 for(const [key, value]of Object.entries(this.orderData)) {
+                                    for(const [key, value]of Object.entries(this.orderInfo)) {
                                     // console.log(this.orderData);
+
+                                    switch(key) {
+                                    
+                                    case 'name':
+                                    // console.log(key);
+                                        if(value.trim().length !== 0 && this.nameRule(this.orderData.name)){
+                                           this.orderData.name = this.orderData.name.trim();
+                                        }else{
+                                           send_data = false;
+                                           return;
+                                        }
+                                        break;
+                                    case 'phone':
+                                        // console.log(key);
+                                        if(this.phoneRule(this.orderData.phone)){
+                                            // console.log(`手機驗證成功`);
+                                        }else{
+                                            alert(`請輸入手機號碼`);
+
+                                            send_data = false;
+                                           
+                                        }
+                                        break;
+                                    case 'addr':
+                                        // console.log(key)
+                                        if(value.trim().length !== 0 && this.addrRule(this.orderData.addr)){
+                                            // console.log(key);
+                                            // console.log('地址驗證成功');
+
+                                         
+                                        }else{
+                                            alert('請輸入正確的地址');
+                                            send_data = false;
+                                            return;
+
+                                        }
+                                        break;
+
+
+                                    }
                                     switch(key) {
                                     
                                         case 'name':
@@ -997,7 +1038,7 @@
                                     
                                 }
                             
-
+                                //要再寫我同意接受服務條款 & 隱私權政策的 v-if
 
                                 if(send_data){
                                     $.ajax({
@@ -1037,7 +1078,7 @@
                       
                     }
                 
-                
+                    }
                 
                 });
 
