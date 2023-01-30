@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-image: url(../img/landpage_img/banner.jpg);
+    background-image: url(../img/landpage_img/index_bg.jpg);
     background-size: cover;
     background-position: center;
     width: 100vw;
@@ -50,7 +50,7 @@
             text-decoration: none;
             color: $Camel-3;  
             border: 1px solid $Camel-3;
-            background-color: rgba(255,255,255,0.25);
+            background-color: rgba(176,170,149,0.4);
             &:hover{
                 background-color: $Camel-3;
                 color: #898989;

@@ -529,20 +529,36 @@
                       else if(response == "N"){
                         // console.log("有拿到N");
                         let afterPoint = 500;
+                        // 修改會員點數
                         $.ajax({
                               method: "POST",
                               url: "php/frontpage/member/memberPointUpdate.php",
                               data: {
                                 memberID:member_ID,
-                                afterPoint: afterPoint
+                                point: afterPoint
                               },
                               dataType: "text",
                               success: function (response) {
                                   //修改資料  
-                                console.log('500');
+                                // console.log('500');
                                 that.change_member_info();
                                 that.$refs.add_bonus.classList.add('none');
                                 that.get_point();
+                              },
+                              error: function (exception) {
+                                  alert("發生錯誤: " + exception.status);
+                              }
+                          });
+                        // 修改資料庫once = 1 
+                        $.ajax({
+                              method: "POST",
+                              url: "php/frontpage/member/point_once_update.php",
+                              data: {
+                                member_ID:member_ID
+                              },
+                              dataType: "text",
+                              success: function (response) {
+
                               },
                               error: function (exception) {
                                   alert("發生錯誤: " + exception.status);
