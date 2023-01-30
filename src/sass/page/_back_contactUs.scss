@@ -8,10 +8,11 @@ div.back_contactUs {
       height: 100vh;
     }
 
-    div.container {
-      display: flex;
-      flex-direction: column;
-      width: 73%;
+        div.container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 73%;
 
       main.right_content {
         margin-bottom: 50px;
