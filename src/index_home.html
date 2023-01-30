@@ -444,34 +444,11 @@
         
         //---------------------菜品評價---------------------//
 
-    //   var swiper = new Swiper(".mySwiper", {
-    //     breakpoints: {
-    //         slidesPerGroup: 4,
-    //         720: {
-    //             slidesPerGroup: 4,
-    //         },
-    //         428: {
-    //             slidesPerGroup: 3,
-    //         },
-    //         1: {
-    //             slidesPerGroup: 2,
-    //         }
-    //     },
-    //     slidesPerView: 'auto',
-    //     loop: true,
-    //     loopFillGroupWithBlank: true,
-    //     pagination: {
-    //       el: ".swiper-pagination",
-    //       clickable: true,
-    //     },
-    //   });
+      
       
       //---------------------顧客評價輪播---------------------//
       
-    //   var swiper = new Swiper(".mySwiper2", {
-    //     slidesPerView: 'auto',
-    //     slidesPerGroup: 1,
-    //   });
+      
 
     // -----------------------------------Vue--------------------------------------- //
     
@@ -497,6 +474,7 @@
                 NewsList: [],
             
                 // ----------- Calender ----------- //
+                Calender: [],
 
             };
 
@@ -513,12 +491,18 @@
 
             // ----------- 消息 ----------- //
             this.newsrender();
+            // ----------- calender ----------- //
+            this.calender();
 
         },
 
         mounted(){
             // 主要商品data AJAX 傳入
             this.getCate();
+            var swiper = new Swiper(".mySwiper2", {
+        slidesPerView: 'auto',
+        slidesPerGroup: 1,
+      });
         },
 
         methods:{
@@ -559,6 +543,31 @@
                                 this.AjaxMealsInfo[i].IMG = imgs
                                 // console.log(this.AjaxMealsInfo[i].IMG);
                             }
+
+                            this.$nextTick(()=>{
+                                var swiper = new Swiper(".mySwiper", {
+        breakpoints: {
+            slidesPerGroup: 4,
+            720: {
+                slidesPerGroup: 4,
+            },
+            428: {
+                slidesPerGroup: 3,
+            },
+            1: {
+                slidesPerGroup: 2,
+            }
+        },
+        slidesPerView: 'auto',
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+
+                            })
                             // console.log("123");
                             // console.log(this.AjaxMealsInfo);
                                     
@@ -592,6 +601,28 @@
                                 element.date  = temp
                             }
                             _this.NewsList.push(element);
+                        });
+                    },
+                    error: function (exception) {
+                        alert("發生錯誤: " + exception.status);
+                    },
+                })
+            },
+
+            // ----------- calender ----------- //
+
+            calender() {
+                let _this = this;
+
+                $.ajax({
+                    method: "GET",
+                    url: "php/frontpage/index_calender.php",
+                    data: {},
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response);
+                        response.forEach(element => {
+                            _this.Calender.push(element);
                         });
                     },
                     error: function (exception) {

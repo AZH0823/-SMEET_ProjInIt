@@ -44,14 +44,19 @@
                     </div>
                     <div class="grid_item">
                       <!-- 立雁杉團隊 -->
-                      {{item.LederName}}
+                      <div v-if="current_edit !== item.ID">{{item.LederName}}</div>
+                      <input type="text" name="" id="" v-else>
                     </div>
                     <div class="grid_item">
                       <!-- 人稱，平成末的日式... -->
-                      {{item.LederProfile}}
+                      <div v-if="current_edit !== item.ID">{{item.LederProfile}}</div>
+                      <input type="text" name="" id="" v-else>
                     </div>
-                    <div class="grid_item green-2 checked">
+                    <div class="grid_item green-2 checked" @click="current_edit = item.ID" v-if="current_edit !== item.ID">
                       編輯
+                    </div>
+                    <div class="grid_item green-2 checked"  @click="current_edit = null" v-else>
+                      儲存
                     </div>
                   </div>
 
@@ -118,7 +123,7 @@
               <!-- back_from -->
 
               <!--新增廚師團隊的popon開始-->
-              <div class="chef_popon">
+              <!-- <div class="chef_popon">
                 <div class="chef_popon_top">
                   <p>新增廚師團隊</p>
                   <i class="fa-solid fa-xmark"></i>
@@ -180,22 +185,22 @@
                   </div>
                 </div>
                 <div class="save_btn_chef">儲存</div>
-              </div>
+              </div> -->
               <!--新增廚師團隊的popon結束-->
 
               <!--新增團隊班表的popon開始-->
-              <div class="chef_schedule">
+              <!-- <div class="chef_schedule">
                 <div class="chef_schedule_top">
                   <p>團隊班表</p>
                   <i class="fa-solid fa-xmark"></i>
                 </div>
-                <div class="chef_schedule_flex">
+                <div class="chef_schedule_flex"> -->
                   <!--放日曆的地方-->
-                  <div>日曆</div>
+                  <!-- <div>日曆</div> -->
                   <!--三個團隊的按鈕區-->
-                  <div class="chef_schedule_col">
+                  <!-- <div class="chef_schedule_col"> -->
                     <!--立雁杉的按鈕區-->
-                    <div class="chef_schedule_item">
+                    <!-- <div class="chef_schedule_item">
                       <p class="chef_schedule_item_p">立雁杉團隊</p>
                       <div class="btn_flex">
                         <div class="timeorder_btn">
@@ -211,10 +216,10 @@
                           <p class="period_t">(18:30~21:00)</p>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <!--章煾蘋的按鈕區-->
-                    <div class="chef_schedule_item">
+                    <!-- <div class="chef_schedule_item">
                       <p class="chef_schedule_item_p">章煾蘋團隊</p>
                       <div class="btn_flex">
                         <div class="timeorder_btn">
@@ -230,9 +235,9 @@
                           <p class="period_t">(18:30~21:00)</p>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <!--張聖潔的按鈕區-->
-                    <div class="chef_schedule_item">
+                    <!-- <div class="chef_schedule_item">
                       <p class="chef_schedule_item_p">張聖潔團隊</p>
                       <div class="btn_flex">
                         <div class="timeorder_btn">
@@ -252,7 +257,7 @@
                   </div>
                 </div>
                 <div class="save_btn_schedule">儲存</div>
-              </div>
+              </div> -->
 
               <!--新增團隊班表的popon結束-->
               <!-- 頁碼-->
@@ -288,7 +293,8 @@
         data(){
             return {
               //----------- 廚師團 -----------//
-              chefTeam:[],           
+              chefTeam:[],       
+              current_edit:null    
             }; 
         },
         
