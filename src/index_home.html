@@ -109,7 +109,8 @@
                         <div class="_index_news_right" > 
                             <ul v-for="News in NewsList" :key="index">
                                 <li>
-                                    <a class="_news_table" :href="'newsDetail.html.html?ID='+ News.ID">
+                                    <!-- <p>{{News.ID}}</p> -->
+                                    <a class="_news_table" :href="'newsDetail.html?ID='+ News.ID">
                                         <p class="font16 news_date red">
                                             <!-- 2022.11.08 -->
                                             {{News.date}}
@@ -150,10 +151,10 @@
                                 </li>
                                 <div class="_news_line"></div> -->
                             </ul>
-                            <div class="btn_more">
+                            <a class="btn_more" href="./news.html">
                                 <p>more</p>
                                 <span><i class="fa-sharp fa-solid fa-arrow-right"></i></span>
-                            </div>
+                            </a>
                             
                         </div>
                         

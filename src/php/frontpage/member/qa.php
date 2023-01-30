@@ -6,7 +6,7 @@
 
        //建立SQL語法-取得會員資訊
        $sql = "SELECT ID, Category, QuestionContent, AnswerContent
-                FROM QA";
+                FROM QA WHERE `Condition` = 1" ;
        $statement = getPDO()->prepare($sql);   
        $result = $statement->execute();  
 

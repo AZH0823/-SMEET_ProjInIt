@@ -147,14 +147,12 @@
     
     <script src="js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
-    <script type="module">
-        import ThePaginator from "./js/back_page/ThePaginator_member.js";
 
-        Vue.createApp({}).component("ThePaginator", ThePaginator).mount("#paginator_block");
-    </script>
-    <script>
-        
+    <script type="module" >
+        import ThePaginator from "./js/back_page/paginator.js";
+
         let member_back = Vue.createApp({
+            components:{ ThePaginator },
             data() {
                 return {
                     info:[{}],
@@ -166,7 +164,7 @@
                         // 一頁有幾筆
                         items_per_page : "",
                         // 當前頁面
-                        current_page : ""
+                        current_page : "1"
                     }
                 }
             },
@@ -177,22 +175,22 @@
             methods: {
                 // 取得會員資料 加進data info
                 get_info(){
-                    let page = 1 ;
+                    // let page = 1 ;
                     $.ajax({
                         method: "POST",
                         url: "php/backpage/back_member_s.php",
                         data: {
-                            page:page
+                            // page:page
                         },
                         dataType: "json",
                         success: (response) => {
                             // console.log("member");
-                            console.log(response);
+                            // console.log(response);
                             this.info = response[1] ;
                             this.page.total_items = response[0][0];
                             this.page.items_per_page = response[0][1];
-                            this.page.current_page = page ;
-                            console.log(this.page);
+                            // this.page.current_page = page ;
+                            // console.log(this.page);
                         },
                         error: function (exception) {
                             alert("數據載入失敗: " + exception.status);
@@ -226,6 +224,8 @@
                 },
                 // 打開彈窗 
                 open_popup(e){
+                    let p = this.page.current_page ; 
+                    // console.log(p);
                     let member_ID = e.target.parentNode.getAttribute("value");
                     // console.log(member_ID);
                     // 從資料庫找收藏清單
@@ -252,7 +252,9 @@
                         }
                     });
                     // console.log(this.info[member_ID]);
-                    this.info_favo = this.info[member_ID - 1];
+                    // 宣告前面page的總數量
+                    let page_count_item = ( p - 1 ) * 10;
+                    this.info_favo = this.info[member_ID - 1 - page_count_item];
                     this.$refs.member_popup.classList.remove('none');
                     document.querySelector('body').style.overflow = "hidden";
                 },
@@ -298,7 +300,7 @@
                 // 商品名稱關鍵字查詢
                 search(){
                     let search_name = this.$refs.search_name.value;
-                    console.log(search_name);
+                    // console.log(search_name);
                     if(this.$refs.search_name.value == ""){
                         this.get_info();
                     }else{
@@ -327,29 +329,30 @@
                     
                 },
                 // 頁碼切換
-                page_click(){
-                    // console.log(page);
-                    console.log("aaa");
-                    // $.ajax({
-                    //     method: "POST",
-                    //     url: "php/backpage/back_member_s.php",
-                    //     data: {
-                    //         page:page
-                    //     },
-                    //     dataType: "json",
-                    //     success: (response) => {
-                    //         // console.log("member");
-                    //         console.log(response);
-                    //         this.info = response[1] ;
-                    //         // this.page.total_items = response[0][0];
-                    //         // this.page.items_per_page = response[0][1];
-                    //         // this.page.current_page = page ;
-                    //         // console.log(this.page);
-                    //     },
-                    //     error: function (exception) {
-                    //         alert("數據載入失敗: " + exception.status);
-                    //     }
-                    // });
+                page_click(page = 1){
+                    this.page.current_page = page ;
+                    // console.log(this.info_favo);
+                    // console.log("aaa");
+                    $.ajax({
+                        method: "POST",
+                        url: "php/backpage/back_member_s.php",
+                        data: {
+                            page:page
+                        },
+                        dataType: "json",
+                        success: (response) => {
+                            // console.log("member");
+                            // console.log(response);
+                            this.info = response[1] ;
+                            // this.page.total_items = response[0][0];
+                            // this.page.items_per_page = response[0][1];
+                            // this.page.current_page = page ;
+                            // console.log(this.page);
+                        },
+                        error: function (exception) {
+                            alert("數據載入失敗: " + exception.status);
+                        }
+                    });
                 }
             }
         }).mount('#member_back');

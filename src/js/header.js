@@ -1,71 +1,3 @@
-//slide購物車點擊開關
-$(function () {
-    $(".slide_cart").on("click", function () {
-        // console.log("ttt");
-        $(".cart_container").addClass("-carton")
-        // console.log("sss");
-        setTimeout(function () {
-            $('.cart_bg').removeClass('none');
-        }, 500);
-        $("body").css("overflow", "hidden");
-    })
-    // 點背景關掉popup
-    $('.cart_bg').on('click', function () {
-        $('.cart_bg').addClass('none');
-        $("body").css("overflow", "auto");
-        $(".cart_container").toggleClass("-closeon")
-        $(".cart_container").removeClass("-carton")
-        $(".cart_container").removeClass("-closeon")
-    })
-})
-
-$(function () {
-    $(".icon_x").on("click", function () {
-        // console.log("uuu");
-        $(".cart_container").toggleClass("-closeon")
-        $(".cart_container").removeClass("-carton")
-        $(".cart_container").removeClass("-closeon")
-        // console.log("sss");
-        $('.cart_bg').addClass('none');
-        $("body").css("overflow", "auto");
-
-    })
-})
-
-//index購物車點擊開關
-$(function () {
-    $(".indexslide_cart").on("click", function () {
-        // console.log("ttt");
-        $(".cart_container").addClass("-carton")
-        // console.log("sss");
-        setTimeout(function () {
-            $('.cart_bg').removeClass('none');
-        }, 500);
-        $("body").css("overflow", "hidden");
-    })
-    // 點背景關掉popup
-    $('.cart_bg').on('click', function () {
-        $('.cart_bg').addClass('none');
-        $("body").css("overflow", "auto");
-        $(".cart_container").toggleClass("-closeon")
-        $(".cart_container").removeClass("-carton")
-        $(".cart_container").removeClass("-closeon")
-    })
-})
-
-$(function () {
-    $(".icon_x").on("click", function () {
-        // console.log("uuu");
-        $(".cart_container").toggleClass("-closeon")
-        $(".cart_container").removeClass("-carton")
-        $(".cart_container").removeClass("-closeon")
-        // console.log("sss");
-        $('.cart_bg').addClass('none');
-        $("body").css("overflow", "auto");
-
-    })
-})
-
 // index頁漢堡點擊收合
 let indexham_body = document.querySelector('body');
 // console.log(ham_body);
@@ -104,10 +36,46 @@ $("#indexham_bg").on("click", function () {
     }
 })
 
-// $(".ham_div").click(function () {
-//     $("body").toggleClass(".slideoverflow");
-//     console.log("aaa");
-// });
+//index購物車點擊開關
+$(function () {
+    $(".indexslide_cart").on("click", function () {
+        // console.log("ttt");
+        $(".cart_container").addClass("-carton")
+
+        //點擊購物車把漢堡收起來
+        //$(".indexheader_bar").toggleClass("close_on");
+        //$(".indexuser_ham").toggleClass("close_on");
+        $(".indexheader_bar").removeClass("--on");
+        $(".indexuser_ham").removeClass("--on");
+
+        // console.log("sss");
+        setTimeout(function () {
+            $('.cart_bg').removeClass('none');
+        }, 500);
+        $("body").css("overflow", "hidden");
+    })
+    // 點背景關掉popup
+    $('.cart_bg').on('click', function () {
+        $('.cart_bg').addClass('none');
+        $("body").css("overflow", "auto");
+        $(".cart_container").toggleClass("-closeon")
+        $(".cart_container").removeClass("-carton")
+        $(".cart_container").removeClass("-closeon")
+    })
+})
+
+$(function () {
+    $(".icon_x").on("click", function () {
+        // console.log("uuu");
+        $(".cart_container").toggleClass("-closeon")
+        $(".cart_container").removeClass("-carton")
+        $(".cart_container").removeClass("-closeon")
+        // console.log("sss");
+        $('.cart_bg').addClass('none');
+        $("body").css("overflow", "auto");
+
+    })
+})
 
 // slide頁漢堡點擊收合
 let slideham_body = document.querySelector('body');
@@ -150,6 +118,40 @@ $("#ham_bg").on("click", function () {
         $("body").addClass("slideham_body")
         slideham_body.style.overflow = "hidden";
     }
+})
+
+//slide購物車點擊開關
+$(function () {
+    $(".slide_cart").on("click", function () {
+        // console.log("ttt");
+        $(".cart_container").addClass("-carton")
+        // console.log("sss");
+        setTimeout(function () {
+            $('.cart_bg').removeClass('none');
+        }, 500);
+        $("body").css("overflow", "hidden");
+    })
+    // 點背景關掉popup
+    $('.cart_bg').on('click', function () {
+        $('.cart_bg').addClass('none');
+        $("body").css("overflow", "auto");
+        $(".cart_container").toggleClass("-closeon")
+        $(".cart_container").removeClass("-carton")
+        $(".cart_container").removeClass("-closeon")
+    })
+})
+
+$(function () {
+    $(".icon_x").on("click", function () {
+        // console.log("uuu");
+        $(".cart_container").toggleClass("-closeon")
+        $(".cart_container").removeClass("-carton")
+        $(".cart_container").removeClass("-closeon")
+        // console.log("sss");
+        $('.cart_bg').addClass('none');
+        $("body").css("overflow", "auto");
+
+    })
 })
 
 //漢堡與購物車的開關判斷

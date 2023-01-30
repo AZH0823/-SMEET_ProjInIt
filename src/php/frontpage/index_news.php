@@ -3,7 +3,7 @@
     include("../conectDB/Connection.php");
 
     //建立sql語法
-    $sql = "SELECT `date`, `Article`, `Condition`
+    $sql = "SELECT `ID`, `date`, `Article`, `Condition`
     FROM News
     where `Condition` = 1
     
