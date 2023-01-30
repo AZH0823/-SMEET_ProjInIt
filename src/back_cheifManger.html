@@ -12,7 +12,7 @@
   </head>
   <body>
     <!-- ============== 缺搜尋BAR ============== -->
-    <div class="back_chefstManger fulid_wrapper">
+    <div class="back_chefstManger fulid_wrapper app1" >
       <div class="backwrapper">
         <header>@@include('layout/back_header.html')</header>
 
@@ -21,20 +21,10 @@
             <section class="section1">
               <div class="swiper_img_update">
                 <h4 class="h4 green-1">廚師管理</h4>
-                <h4 class="h4 second">輪播圖</h4>
-                <div class="addImg_block">
-                  <img src="./img/back_page/chefs_addImag.png" alt="" />
-                  <img src="./img/back_page/chefs_addImag.png" alt="" />
-                  <img src="./img/back_page/chefs_addImag.png" alt="" />
-                  <i class="fa-regular fa-square-plus"></i>
-                </div>
+               
               </div>
             </section>
             <section class="section2">
-              <div class="btn_wrap">
-                <div class="insert_btn" style="margin-left: 20px">新增</div>
-                <div class="insert_btn" style="margin-left: 20px">班表</div>
-              </div>
               <!-- form -->
               <div class="back_from">
                 <div class="back_from_wrapper">
@@ -44,26 +34,29 @@
                     <div class="grid_item">團隊名稱</div>
                     <div class="grid_item">簡介</div>
                     <div class="grid_item">資訊</div>
-                    <div class="grid_item">狀態</div>
-                  </div>
+                    </div>
 
                   <!-- row-2 -->
-                  <div class="grid_container">
-                    <div class="grid_item">G00136</div>
-                    <div class="grid_item">立雁杉團隊</div>
-                    <div class="grid_item">人稱，平成末的日式...</div>
-                    <div class="grid_item green-2 checked">查看/編輯</div>
+                  <div class="grid_container" v-for="item in chefTeam" :key="item.ID">
                     <div class="grid_item">
-                      <label class="switch">
-                        <input type="checkbox" class="switch_btn" checked />
-                        <span class="slider"></span>
-                        <p class="slider_content">上架</p>
-                      </label>
+                      <!-- 1 -->
+                      {{item.ID}}
+                    </div>
+                    <div class="grid_item">
+                      <!-- 立雁杉團隊 -->
+                      {{item.LederName}}
+                    </div>
+                    <div class="grid_item">
+                      <!-- 人稱，平成末的日式... -->
+                      {{item.LederProfile}}
+                    </div>
+                    <div class="grid_item green-2 checked">
+                      編輯
                     </div>
                   </div>
 
                   <!-- row-3 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item">G00136</div>
                     <div class="grid_item">立雁杉團隊</div>
                     <div class="grid_item">人稱，平成末的日式...</div>
@@ -75,10 +68,10 @@
                         <p class="slider_content">上架</p>
                       </label>
                     </div>
-                  </div>
+                  </div> -->
 
                   <!-- row-4 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item">G00136</div>
                     <div class="grid_item">立雁杉團隊</div>
                     <div class="grid_item">人稱，平成末的日式...</div>
@@ -90,9 +83,9 @@
                         <p class="slider_content">上架</p>
                       </label>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- row-4 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item">G00136</div>
                     <div class="grid_item">立雁杉團隊</div>
                     <div class="grid_item">人稱，平成末的日式...</div>
@@ -104,9 +97,9 @@
                         <p class="slider_content">上架</p>
                       </label>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- row-4 -->
-                  <div class="grid_container">
+                  <!-- <div class="grid_container">
                     <div class="grid_item">G00136</div>
                     <div class="grid_item">立雁杉團隊</div>
                     <div class="grid_item">人稱，平成末的日式...</div>
@@ -119,7 +112,7 @@
                       </label>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!-- wrapper -->
               </div>
               <!-- back_from -->
@@ -283,27 +276,72 @@
 
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script>
     <!-- JQ -->
-    
-    <!-- 導覽列 -->
+
+    <script src="./js/vender/Vue/vue.global.js"></script>
+    <!-- Vue -->
+
+
     <script>
-      const switchBtn = document.querySelectorAll(".switch_btn");
-      const sliderContent = document.querySelectorAll(".slider_content");
-      // console.log(switchBtn);
 
-      for (let i = 0; i < switchBtn.length; i++) {
-        // console.log(i)
-        switchBtn[i].addEventListener("click", function () {
-          console.log(this.checked); // ture /false
-          console.log(i);
-          console.log(this);
+      let app1 = Vue.createApp({
 
-          if (this.checked == true) {
-            $(this).closest("label").find(".slider_content").text("上架");
-          } else {
-            $(this).closest("label").find(".slider_content").text("下架");
-          }
-        });
-      }
+        data(){
+            return {
+              //----------- 廚師團 -----------//
+              chefTeam:[],           
+            }; 
+        },
+        
+        computed: {
+
+        },
+
+        created(){
+          this.team();
+        },
+
+        mounted(){
+          
+        },
+
+        methods: {
+          
+          team() {
+            let _this = this;
+              
+            $.ajax({
+                    method:"GET",
+                    url:"php/backpage/back_cheifManger.php",
+                    data:{},
+                    dataType:"json",
+                    success: function (response) {
+                            // console.log(response);
+                            response.forEach((element) => {
+                              
+                                element.LederProfile = element.LederProfile.substr(0, 12);
+                                // console.log(_this.chefTeam);
+                                if (element.LederProfile.length <= 10) {
+                                    _this.chefTeam.push(element);
+
+                                } else {
+                                    element.LederProfile = element.LederProfile.substr(0, 11) + '...'
+                                    _this.chefTeam.push(element);
+                                }
+                              
+                            });
+                        },
+                        error: function (exception) {
+                            alert("發生錯誤: " + exception.status);
+                        },
+                  });
+          },
+
+         
+   
+        },
+      });
+      app1.mount(".app1");      
+
     </script>
   </body>
 </html>

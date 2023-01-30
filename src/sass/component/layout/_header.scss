@@ -155,7 +155,7 @@
                         display: block;
                         background-color: $green-1;
                         position: absolute;
-                        top: 40%;
+                        top: 360px;
                         right: -360px;
                         margin: 0 auto;
                         width: 50%;
@@ -177,6 +177,11 @@
 
                     @include mobile() {
                         width: 80%;
+                    }
+
+                    @media all and (max-width: 300px) {
+                        top: 0;
+                        top: 380px;
                     }
 
 
@@ -290,6 +295,7 @@
                 right: 0;
                 // padding-right: 10px 0;
                 display: flex;
+
                 @include pad() {
                     justify-content: flex-end;
                     flex-wrap: wrap;
@@ -848,8 +854,9 @@ body {
                 margin: 30% 0;
                 padding: 10px;
                 cursor: pointer;
-                .fa-cart-shopping{
-                    .carpopmsg_signal{
+
+                .fa-cart-shopping {
+                    .carpopmsg_signal {
                         font-family: Noto Serif TC;
                         font-size: 14px;
                         position: absolute;
