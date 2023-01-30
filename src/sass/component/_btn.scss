@@ -246,10 +246,9 @@
 //  ============= Eric 新增 insert按鈕  12/21 ============= //
 .insert_btn {
     @extend .font12;
-    font-weight: 1000;
-    @include btnGetor(85px, 4.5px, 10px,
-        black, $Camel-3, black, white,
-        #8B8B8B, .5px);
+    @include btnGetor(75px, 4.5px, 10px,
+        #666, $Camel-3, black, white,
+        #ccc, .5px);
 }
 
 //  ============= Eric 新增 insert按鈕  12/21 ============= //
