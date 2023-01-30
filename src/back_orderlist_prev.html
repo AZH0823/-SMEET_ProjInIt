@@ -37,8 +37,8 @@
                             <div class="back_from_wrapper">
                                     <!-- row-1 -->
                                 <div class="grid_container">
-                                    <div class="grid_item" @click="sortOrderID" style="cursor:pointer" title="點擊可依訂單編號排序">訂單編號</div>
-                                    <div class="grid_item" @click="sortDate" style="cursor:pointer" title="點擊可依預約日期排序" >日期</div>
+                                    <div class="grid_item" @click="sortOrderID" style="cursor:pointer" title="點擊可依訂單編號排序">訂單編號<i class="fa-sharp fa-solid fa-sort"></i></div>
+                                    <div class="grid_item" @click="sortDate" style="cursor:pointer" title="點擊可依預約日期排序" >日期<i class="fa-sharp fa-solid fa-sort"></i></div>
                                     <div class="grid_item">會員編號</div>
                                     <div class="grid_item">金額</div>
                                     <div class="grid_item">預約人數</div>
@@ -409,22 +409,21 @@
             // 排序預約日期排序
             sortDate(){
                 if(this.isDateSortMax){
-                    console.log(`由大到小`)
+                    // console.log(`由大到小`)
                     this.apiData.sort((a,b)=>{
                         // console.log(a.ID,b.ID)
                         this.isDateSortMax = false;
-                        // new Date().getTime()
-                        //  - new Date(a).getTime())
-                        return   Date(b.AppointmentDate).getTime() -new Date().getTime(a.AppointmentDate);
+                        
+                        return new Date(b.AppointmentDate).getTime() - new Date(a.AppointmentDate).getTime();
                     });
                     
                 }else{
-                    console.log(`由小到大`)
+                    // console.log(`由小到大`)
                     this.apiData.sort((a,b)=>{
                         // console.log(a.ID,b.ID)
 
                         this.isDateSortMax = true;
-                        return  new Date( a.AppointmentDate).getTime() - new Date().getTime(b.AppointmentDate);
+                        return new Date(a.AppointmentDate).getTime() - new Date(b.AppointmentDate).getTime();
                     });
                     
                 }
