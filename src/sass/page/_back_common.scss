@@ -1,232 +1,295 @@
-    div.back_common {
-        div.backwrapper {
-            display: flex;
-            gap: 7%;
-    
-            header {
-                display: flex;
-                height: 100vh;
-            }
-    
-            .container {
-                display: flex;
-                flex-direction: column;
-                width: 73%;
-    
-                main.right_content {
-                    margin-bottom: 50px;
-                    width: 100%;
-    
-                    .section1 {
-                        margin-top: 100px;
-    
-                        .back_from {
-                            width: 100%;
-                            
-                            .back_fromTitle{
-                                display: flex;
-                                justify-content: space-between;
-                                margin-bottom: 30px; // 🙆🏻 後台統一30px
-    
-                                .search{
-                                    display: flex;
-                                    justify-content: flex-end;
-                                    align-items: center;
-                                    .insert_btn{
-                                        margin-right: 20px;
-                                    }
-                                    .search_container_item{
-                                        margin-right: 10px;
-                                        input{
-                                            padding: 6px;
-                                        }
-                                    }
-                                }
-                            }
-    
-                            .back_from_wrapper {
-                                height: 550px;
-                                overflow-y: scroll; 
-                                .grid_container {
-                                    margin: 0 auto;
-                                    display: grid;
-                                    width: 100%;
-                                    text-align: center;
-                                    align-items: center;
-                                    grid-template: repeat(1, 1fr) / repeat(3, 1fr) 300px 1fr 1fr;
-                                    border-bottom: 0.5px solid #ccc;
-                                    &:first-child {
-                                        background-color: $Camel-3;
-                                    }
-                                    
-                                    // .grid_item:nth-child( n + 1){
-                                    //     border-bottom: .5px solid #ccc; // 加底线
-                                    // }
+div.back_common {
+  div.backwrapper {
+    display: flex;
+    gap: 7%;
 
-                                    // Popup點擊hover
-                                    .checked:hover{
-                                        cursor: pointer;
-                                        color: #ccc;
-                                    }
-
-                                    .grid_item {
-                                        padding: 20px;
-    
-                                        // switch btn
-                                        .switch {
-                                            position: relative;
-                                            display: inline-block;
-                                            width: 50px;
-                                            height: 25.59px; // 同高
-    
-                                            input {
-                                                opacity: 0;
-                                                width: 0;
-                                                height: 0;
-    
-                                                &:checked+.slider {
-                                                    background-color: green;
-                                                }
-    
-                                                &:checked+.slider:before {
-                                                    transform: translateX(26px);
-                                                    transform: translateX(26px);
-                                                    transform: translateX(26px);
-                                                }
-                                            }
-    
-                                            .slider {
-                                                position: absolute;
-                                                cursor: pointer;
-                                                top: 0;
-                                                left: 0;
-                                                right: 0;
-                                                bottom: 0;
-                                                background-color: red;
-                                                transition: .4s;
-                                                transition: .4s;
-                                                border-radius: 34px;
-    
-                                                &:before {
-                                                    position: absolute;
-                                                    content: "";
-                                                    height: 20px;
-                                                    width: 20px;
-                                                    left: 2px;
-                                                    top: 2px;
-                                                    background-color: white;
-                                                    transition: .4s;
-                                                    transition: .4s;
-                                                    border-radius: 50%;
-                                                }
-    
-                                                & p {
-                                                    position: absolute;
-                                                    left: 0px;
-                                                    top: 0px;
-                                                }
-                                            }
-                                            // 上架
-                                            .slider_content{
-                                                position: absolute;
-                                                left: 60px;
-                                                right: 0px;
-                                                width: 50px;
-                                                top: 0px;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-    
-                        // 頁簽
-                        .page {
-                            .page_ul {
-                                position: unset; // 取消原本的属性
-                                display: flex;
-                                justify-content: center;
-    
-                                li {
-                                    line-height: 30.5px;
-                                    margin-left: 12px;
-                                    width: 33px;
-                                    height: 33px;
-                                    border-radius: 50%;
-                                    background-color: #F9F4EC;
-                                    margin: 39px 0 25px 21px;
-                                    border: 1px solid #000;
-    
-                                    a {
-                                        display: block;
-                                        text-decoration: none;
-                                        text-align: center;
-                                        color: #000;
-                                    }
-                                }
-                            }
-                        }
-    
-                    }
-                }
-            }
-    
-        }
-        div.section_common { 
-            border: 1px solid #000;      
-            width: 650px;
-            height: 530px;
-            margin: 0 auto;
-            .common_top{
-                height: 45px;
-                text-align: center;
-                background-color: #F3F3F3;
-                h6{
-                    line-height: 45px;
-                }
-            }
-            .common_type{
-                width: 95%;
-                margin: 0 auto;
-                display: flex;
-                margin-top: 25px;
-            }
-            .common_question{
-                width: 95%;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
-                margin-top: 25px;
-                textarea{
-                    width: 355px;
-                    height: 33px;
-                    outline: none;
-                    resize:none;
-                }
-            }
-            .commmon_answer{
-                width: 95%;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
-                margin-top: 25px;
-                textarea{
-                    width: 600px;
-                    height: 160px;
-                    background-color: #F9F4EC;
-                    outline: none;
-                    resize:none;
-                }
-                p{
-                    font-size: 12px;
-                    text-align: right;
-                    margin-right: 15px;
-                }
-                .common_content_btn{
-                    width: 85px;
-                    height: 27px;
-                    margin: 50px auto;
-                }
-            }
-        }
+    header {
+      display: flex;
+      height: 100vh;
     }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 73%;
+
+      main.right_content {
+        margin-bottom: 50px;
+        width: 100%;
+
+        .section1 {
+          margin-top: 100px;
+
+          .back_from {
+            width: 100%;
+
+            .back_fromTitle {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 30px; // 🙆🏻 後台統一30px
+
+              .search {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                .insert_btn {
+                  margin-right: 20px;
+                }
+                .search_container_item {
+                  margin-right: 10px;
+                  input {
+                    padding: 6px;
+                  }
+                }
+              }
+            }
+
+            .back_from_wrapper {
+              height: 550px;
+              overflow-y: scroll;
+              .grid_container {
+                margin: 0 auto;
+                display: grid;
+                width: 100%;
+                text-align: center;
+                align-items: center;
+                grid-template-columns: 1fr 1fr 3fr 1.5fr 1fr;
+                border-bottom: 0.5px solid #ccc;
+                &:first-child {
+                  background-color: $Camel-3;
+                }
+
+                // .grid_item:nth-child( n + 1){
+                //     border-bottom: .5px solid #ccc; // 加底线
+                // }
+
+                // Popup點擊hover
+                .checked:hover {
+                  cursor: pointer;
+                  color: #ccc;
+                }
+
+                .grid_item {
+                  padding: 20px;
+
+                  // switch btn
+                  .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 50px;
+                    height: 25.59px; // 同高
+
+                    input {
+                      opacity: 0;
+                      width: 0;
+                      height: 0;
+
+                      &:checked + .slider {
+                        background-color: green;
+                      }
+
+                      &:checked + .slider:before {
+                        transform: translateX(26px);
+                        transform: translateX(26px);
+                        transform: translateX(26px);
+                      }
+                    }
+
+                    .slider {
+                      position: absolute;
+                      cursor: pointer;
+                      top: 0;
+                      left: 0;
+                      right: 0;
+                      bottom: 0;
+                      background-color: red;
+                      transition: 0.4s;
+                      transition: 0.4s;
+                      border-radius: 34px;
+
+                      &:before {
+                        position: absolute;
+                        content: "";
+                        height: 20px;
+                        width: 20px;
+                        left: 2px;
+                        top: 2px;
+                        background-color: white;
+                        transition: 0.4s;
+                        transition: 0.4s;
+                        border-radius: 50%;
+                      }
+
+                      & p {
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                      }
+                    }
+                    // 上架
+                    .slider_content {
+                      position: absolute;
+                      left: 60px;
+                      right: 0px;
+                      width: 50px;
+                      top: 0px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          // 頁簽
+          .page {
+            .page_ul {
+              position: unset; // 取消原本的属性
+              display: flex;
+              justify-content: center;
+
+              li {
+                line-height: 30.5px;
+                margin-left: 12px;
+                width: 33px;
+                height: 33px;
+                border-radius: 50%;
+                background-color: #f9f4ec;
+                margin: 39px 0 25px 21px;
+                border: 1px solid #000;
+
+                a {
+                  display: block;
+                  text-decoration: none;
+                  text-align: center;
+                  color: #000;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      div.modal {
+        z-index: 999;
+        position: fixed; /* 固定定位 */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+
+        .modal-content {
+          width: 450px;
+          height: 380px;
+          margin: 115px auto;
+          background-color: #fff;
+          h6 {
+            font-size: 16px;
+          }
+          .QA_back_title {
+            height: 50px;
+            text-align: center;
+            background-color: #f9f4ec;
+            h6 {
+              line-height: 50px;
+            }
+          }
+
+          .QA_category {
+            width: 95%;
+            margin: 0 auto;
+            height: 45px;
+            h6 {
+              line-height: 45px;
+            }
+          }
+          .QA_QuestionContent {
+            width: 95%;
+            margin: 0 auto;
+            height: 110px;
+            h6 {
+                
+                border: 1px solid #000;
+                height: 75px;
+                padding: 5px;
+            }
+          }
+          .QA_AnswerContent {
+            width: 95%;
+            margin: 0 auto;
+            height: 110px;
+            h6 {
+                
+                border: 1px solid #000;
+                height: 75px;
+                padding: 5px;
+            }
+          }
+
+          .QA_content_btn {
+            width: 85px;
+            height: 27px;
+            margin: 15px 183px;
+          }
+        }
+      }
+    }
+  }
+  div.section_common {
+    border: 1px solid #000;
+    width: 650px;
+    height: 530px;
+    margin: 0 auto;
+    .common_top {
+      height: 45px;
+      text-align: center;
+      background-color: #f3f3f3;
+      h6 {
+        line-height: 45px;
+      }
+    }
+    .common_type {
+      width: 95%;
+      margin: 0 auto;
+      display: flex;
+      margin-top: 25px;
+    }
+    .common_question {
+      width: 95%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      margin-top: 25px;
+      textarea {
+        width: 355px;
+        height: 33px;
+        outline: none;
+        resize: none;
+      }
+    }
+    .commmon_answer {
+      width: 95%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      margin-top: 25px;
+      textarea {
+        width: 600px;
+        height: 160px;
+        background-color: #f9f4ec;
+        outline: none;
+        resize: none;
+      }
+      p {
+        font-size: 12px;
+        text-align: right;
+        margin-right: 15px;
+      }
+      .common_content_btn {
+        width: 85px;
+        height: 27px;
+        margin: 50px auto;
+      }
+    }
+  }
+}
