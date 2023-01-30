@@ -5,6 +5,9 @@
     //取得POST過來的值
     $QA_ID = $_POST["QA_ID"]; //PK
     $QA_Condition = $_POST['QA_Condition'] ; //狀態 0:下架, 1:上架,
+    
+    // echo $QA_ID;
+    // echo $QA_Condition;
 
     // 確認ID
     $selectQA = "SELECT * FROM QA WHERE ID = :QAID";
@@ -16,6 +19,7 @@
     $result = $statement -> fetchAll();
 
     if(count($result) !== 0 ){
+        
         // 單筆資料更新
         echo "更新資料".$QA_ID."</br>";
 
@@ -25,7 +29,7 @@
 
         $statement = getPDO()->prepare($updateQA);     
         $statement->bindValue(':Condition', $QA_Condition); 
-        $statement->bindValue(':QAID', $QA_ID); 
+        $statement->bindValue(':QAsID', $QA_ID); 
         $statement->execute();
         $result = $statement -> fetchAll();
 
@@ -35,7 +39,7 @@
         $statement = getPDO()->prepare($checkedQA);     
         $statement->bindValue(':QAID', $QA_ID); 
         $statement->execute();
-        $checkedResult = $statement -> fetch(); // TODO 為啥是fetch?
+        $checkedResult = $statement -> fetch(); 
         
         // 回傳檢查結果
         if($checkedResult["Condition"] == $QA_Condition){
@@ -44,7 +48,8 @@
         }else{
             echo '失敗'."<br>";
         }
-    }else{
+    }
+    else{
         echo "id not exist"."<br>";
     }
 
