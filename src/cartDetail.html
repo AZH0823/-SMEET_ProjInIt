@@ -997,7 +997,7 @@
                                         case 'invoice':
                                        
                                             if(value.trim().length > 0 && this.orderData.invoice !== 0){
-                                                console.log(`電子發票驗證成功`);
+                                                // console.log(`電子發票驗證成功`);
                                             }else{
                                                 alert(`請輸入正確的電子發票格式`);
                                                 return;
@@ -1005,7 +1005,7 @@
                                             break;
                                         
                                         case 'cardName':
-                                            if(value.trim().length > 0 && this.nameRule(this.inputData.cardName)){
+                                            if(value.trim().length > 0 && this.nameRule(this.orderData.cardName)){
                                                 // console.log('信用卡名稱驗證成功')
                                                 this.inputData.cardName = this.inputData.cardName.trim();
                                         
