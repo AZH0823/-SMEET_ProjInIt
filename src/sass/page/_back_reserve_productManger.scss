@@ -26,12 +26,25 @@ div.back_reserve_productManger {
                         margin-bottom: 30px;
                         .insert_btn{
                             color: #898989;
-                            width: 125px;
+                            padding: 8px 6px;
+                            font-size: 16px;
+                            width: 130px;
+                        }
+                        .dishFunction{
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            input{
+                                padding: 8px 6px;
+                                margin-right: 10px;
+                            }
+                            i{
+                            }
                         }
                     }
                     .back_from {
                         width: 100%;
-                      
+                       
                         .save{
                             margin: 15px auto;
                             display: block;
