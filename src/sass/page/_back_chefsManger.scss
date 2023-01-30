@@ -66,7 +66,7 @@ div.back_chefstManger {
               width: 100%;
               text-align: center;
               align-items: center;
-              grid-template: repeat(1, 1fr) / repeat(2, 1fr) 300px 1fr 1fr;
+              grid-template: repeat(1, 1fr) / repeat(1, 1fr) 300px 1fr 1fr;
               border-bottom: 0.5px solid #ccc;
               &:first-child {
                 background-color: $Camel-3;
