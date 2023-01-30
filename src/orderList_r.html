@@ -131,7 +131,7 @@
                 <div class="item_r">小計</div>
                 <div class="item_r">NT$<span id="detail_total">{{reserve_data.Subtotal}}</span></div>
                 <div class="item_r">加購價</div>
-                <div class="item_r">NT$<span id="detail_total">25,000</span></div>
+                <div class="item_r">NT$<span id="detail_total">{{reserve_data.addMoney}}</span></div>
                 <div class="item_r">紅利點數</div>
                 <div class="item_r">-NT$<span id="detail_total">{{reserve_data.point}}</span></div>
                 <div class="item_r">總金額 </div>
@@ -186,14 +186,20 @@
                         },
                         dataType: "json",
                         success: (response) => {
+                            console.log(response[0]);
+                            
+                            
                             //把api取到的所有資訊存到reserve_data
                             this.reserve_data = response[0] ;
                             let c = this.reserve_data.Count;
-                            let p = this.reserve_data.SetPrice
+                            let p = this.reserve_data.SetPrice;
+                            let t = this.reserve_data.TotalPrice;
+                            let b = this.reserve_data.point;
                             // 小計
                             this.reserve_data.Subtotal = c * p;
                             // console.log(response);
-                            
+                            // 加購價 總價-小記+紅利點數
+                            this.reserve_data.addMoney = t - c * p + b;
                             // 把餐點名稱存到dish_data陣列================ 
                             for(let i = 0 ; i < 6 ; i++){
                                 let a$ = response.filter(function(item, index){

@@ -148,7 +148,7 @@
     <script src="js/vender/Vue/vue.global.js"></script>
     <script src="./js/vender/Jquery/jquery-3.6.1.js"></script><!-- JQ -->
     <script type="module">
-        import ThePaginator from "./js/back_page/ThePaginator_member.js";
+        import ThePaginator from "./js/back_page/paginator.js";
 
         Vue.createApp({}).component("ThePaginator", ThePaginator).mount("#paginator_block");
     </script>
@@ -187,12 +187,12 @@
                         dataType: "json",
                         success: (response) => {
                             // console.log("member");
-                            console.log(response);
+                            // console.log(response);
                             this.info = response[1] ;
                             this.page.total_items = response[0][0];
                             this.page.items_per_page = response[0][1];
                             this.page.current_page = page ;
-                            console.log(this.page);
+                            // console.log(this.page);
                         },
                         error: function (exception) {
                             alert("數據載入失敗: " + exception.status);
@@ -298,7 +298,7 @@
                 // 商品名稱關鍵字查詢
                 search(){
                     let search_name = this.$refs.search_name.value;
-                    console.log(search_name);
+                    // console.log(search_name);
                     if(this.$refs.search_name.value == ""){
                         this.get_info();
                     }else{
@@ -329,7 +329,7 @@
                 // 頁碼切換
                 page_click(){
                     // console.log(page);
-                    console.log("aaa");
+                    // console.log("aaa");
                     // $.ajax({
                     //     method: "POST",
                     //     url: "php/backpage/back_member_s.php",
