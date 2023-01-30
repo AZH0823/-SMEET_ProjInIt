@@ -6,13 +6,13 @@
     // 撈全部資料
   if(!isset($getID)){
       $dataListSQL = "SELECT 
-      o.`ID`,`AppointmentDate`,`MemberID`,`TotalPrice`,
+      o.`ID`,`SetID`,`AppointmentDate`,`MemberID`,`TotalPrice`,
       `Count`,`Condition`,`Scheduled`,`point`,
       `Name`,`Phone`,`Email`,`Address`,`notes` ,t.`LederName`
       FROM Orders o
       LEFT JOIN Teams t
       ON o.TeamID = t.ID
-      order by o.ID;  ";
+      ORDER BY AppointmentDate DESC;  ";
 
       $Searhstatement = getPDO()->prepare($dataListSQL);
       $Searhstatement -> execute();
@@ -34,6 +34,7 @@
           'Phone'=> $newData['Phone'],
           'Email'=> $newData['Email'],
           'Address'=> $newData['Address'],
+          'SetID' => $newData['SetID'],
           'notes'=> $newData['notes'],
           'LederName'=> $newData['LederName'],
       );}
