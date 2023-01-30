@@ -364,6 +364,7 @@
                     text-decoration: none;
 
                     @include pad() {
+                        cursor: pointer;
                         padding: 10px 10px;
                         display: block;
                         font-size: 25px;
