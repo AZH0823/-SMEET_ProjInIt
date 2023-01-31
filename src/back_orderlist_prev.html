@@ -191,7 +191,8 @@
         </div>
     </div>
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
-    <script src="js//vender/Vue/vue.global.js"></script>
+    <!-- <script src="js//vender/Vue/vue.global.js"></script> -->
+    <script src="js/vender/Vue/vue.global.prod.js"></script>
     <script>
         
     const app = Vue.createApp({
@@ -229,7 +230,7 @@
                 })
                 .then( data =>{
                     // 將套餐資訊放入APIData (圖片,售價,ID...)
-                    console.log(data)
+                    // console.log(data)
                     _this.apiData.forEach(Order=>{
                         data.forEach(Set=>{
                             if(parseInt(Order.SetID) == parseInt(Set.id)){
@@ -365,6 +366,7 @@
             ClickOrderDetail(item){
                 const data = JSON.parse(JSON.stringify(item));
                 // console.log(data);
+                this.popOnMsg = {}
                 this.popOnMsg.display = true;
                 document.querySelector('body').style.overflow = "hidden"
                 
@@ -429,7 +431,7 @@
                 }
             },
             closePopOnOther(){
-                console.log(`sss`)
+                // console.log(`sss`)
                 this.popOnMsg.display= false;
                 let body = document.querySelector('body');
                 body.style.overflow = "auto";
