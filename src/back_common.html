@@ -137,7 +137,7 @@
               <div class="QA_insert_category">
                 <h6>問題類型：</h6>
                 <select name="" id="QA_Category">
-                  <option value="">私廚預約（預設）</option>
+                  <option value="" disabled>請選擇</option>
                   <option value="預約流程">預約流程</option>
                   <option value="付款問題">付款問題</option>
                   <option value="租借服務">租借服務</option>
@@ -206,6 +206,9 @@
               dataType: "json",
               success: function (response) {
                 // console.log(response);
+                // _this.BackQAList = []
+                // console.log(_this)
+                _this.BackQAList = []
                 response.forEach((element) => {
                   // console.log(element);
                   _this.BackQAList.push(element);
@@ -215,7 +218,7 @@
                 alert("發生錯誤: " + exception.status);
               },
             });
-            console.log(this.BackQAList);
+           
           },
           updateQACondition(QA) {
             // console.log(QA);
@@ -272,11 +275,11 @@
             }
           },
           outsideClose1() {
-            console.log(`close`);
+            // console.log(`close`);
             this.Popon_date.isEdit = false;
           },
           outsideClose2() {
-            console.log(`close`);
+            // console.log(`close`);
             this.showpopon = false;
           },
           QAajax() {
@@ -285,6 +288,16 @@
               document.getElementById("QA_QuestionContent");
             let QA_AnswerContent = document.getElementById("QA_AnswerContent");
             let QA_btn = document.getElementById("QA_btn");
+            let _this = this;
+
+            if(QA_QuestionContent.value.trim() ==''){
+              // console.log(`1sdsadasda`)
+              return 
+            }
+            if(QA_AnswerContent.value.trim() ==''){
+              // console.log(`1sdsadasda`)
+              return alert(`dsdsds`)
+            }
 
             $.ajax({
               method: "POST",
@@ -297,12 +310,17 @@
 
               dataType: "text",
               success: function (response) {
-                console.log(response);
+                // console.log(response);
+                alert("新增成功");
+                _this.showpopon = false;
+                _this.qarender();
+                
               },
               error: function (exception) {
                 alert("傳送成功: " + exception.status);
               },
             });
+            console.log(`成功`)
           },
         },
       });
