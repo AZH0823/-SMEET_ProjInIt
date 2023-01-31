@@ -276,7 +276,7 @@
                         const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) ;
 
                         this.ShoppingCartList = LSGetItem;
-                        console.log('Mall LS:',LSGetItem)
+                        // console.log('Mall LS:',LSGetItem)
                     }
                 },
 
@@ -424,7 +424,7 @@
                         dataType: "json",
                         success: (response)=> {
                             if(response != ""){
-                                console.log(response);
+                                // console.log(response);
 
                                 // 將qty及heart資料帶入，變成新陣列
                                 const adjusted_res = response.map((x) => {
