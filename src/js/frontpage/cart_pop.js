@@ -10,7 +10,6 @@ let cart_pop = Vue.createApp({
         },
         mounted() {
             this.get_data();
-            
         },
         methods: {
             // 按結帳 檢查登入狀況
@@ -71,12 +70,29 @@ let cart_pop = Vue.createApp({
                 // 更新localStorage數量
                 localStorage.setItem("shoppingData", JSON.stringify(this.shop_data));
 
+
+
+                // ==================== 樹鈞的坑 ========================= //
+                // 拿到shopMall & Detail 的 Vue.$data
+                // console.log(vm_shopmall.$data.ShoppingCartList);
+                // console.log(vm_shopmallDetail.$data.ShoppingCartList);
+
+                // 拿到最新Storage
                 const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
 
-                // shoppingcar icon QTY 接index
-                // console.log(ShoppingCartQty())
+                // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+                if (document.location.href.includes('shopMallDetail.html')) {
+                    console.log("shopmallDetail");
+                    vm_shopmallDetail.$data.ShoppingCartList = LSGetItem;
+                }else if(document.location.href.includes('shopMall.html')){
+                    console.log("shopmall");
+                    vm_shopmall.$data.ShoppingCartList = LSGetItem;
+                }
+
+                // 同步qty數量
                 this.ShoppingCartQty();
             },
+            // ==================== 樹鈞的坑 ========================= //
             ShoppingCartQty(){
                 let car_num = document.getElementById('car_num');
                 const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
@@ -90,7 +106,8 @@ let cart_pop = Vue.createApp({
                     car_num.classList.remove('none');
                     car_num.innerHTML = LSGetItem.length;
                 }
-            }
+            },
+            
         }
     })
     .mount('#cart_pop');
