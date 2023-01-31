@@ -623,7 +623,27 @@
                             if(this.inputShoppingData.length == 0){
                             localStorage.removeItem("shoppingData");
                             } 
+
+                            this.ShoppingCartQty();
                         },     
+
+                        ShoppingCartQty(){
+                            
+                            let car_num = document.getElementById('car_num');
+                            
+                            const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                            // console.log(LSGetItem.length);
+                            
+
+                            // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                            if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
+                                car_num.innerHTML = "";
+                                return ;
+                            }else{
+                                car_num.classList.remove('none');
+                                car_num.innerHTML = LSGetItem.length;
+                            }
+                        },
                         
                         //重整畫面
                         reLoad(){

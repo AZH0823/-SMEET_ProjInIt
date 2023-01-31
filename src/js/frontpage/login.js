@@ -734,7 +734,7 @@ log_ham.addEventListener('click',function(e){
         const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
         // console.log(LSGetItem.length);
         // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
-        if(LSGetItem == [] || LSGetItem == ""){
+        if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
             car_num.innerHTML = "";
         }else{
             // 判斷當前頁面，並同步Vue.$data.shoppingCarList
