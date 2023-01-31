@@ -12,6 +12,6 @@
     $result = $statement->execute();   
 
     //抓出全部且依照順序封裝成一個二維陣列
-    $data = $statement1->fetchAll();
+    $data = $statement->fetchAll();
 
 ?>

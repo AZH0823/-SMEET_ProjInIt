@@ -294,18 +294,18 @@
 
         <!-- ======常見問題====== -->
         <section class="question_section member_product_section" v-show="current_tab == 'faq' ">
-          <ul v-for="(item, key) in qa_title">
+          <ul v-for="(item, key) in qa_title" >
             <h5>{{ item }}</h5>
-            <template v-for="(value, key) in qa[key]">
-              <li class="question_section_li" @click="open_QA" :value="value.ID">
-                <div class="question_flex" :value="value.ID">
-                  <i class="fa-solid fa-q" :value="value.ID"></i>
-                  <h6 :value="value.ID">{{ value.QuestionContent }} </h6>
-                  <i class="fa-solid fa-plus" :value="value.ID"></i>
+            <template v-for="(value, index) in qa[key]">
+              <li class="question_section_li" @click="open_QA" >
+                <div class="question_flex" >
+                  <i class="fa-solid fa-q" ></i>
+                  <h6 >{{ value.QuestionContent }} </h6>
+                  <i class="fa-solid fa-plus" ></i>
                 </div>
-                <div class="question_none" :value="value.ID">
-                  <i class="fa-solid fa-a" :value="value.ID"></i>
-                  <h6 :value="value.ID">{{ value.AnswerContent }}</h6>
+                <div class="question_none">
+                  <i class="fa-solid fa-a" ></i>
+                  <h6 >{{ value.AnswerContent }}</h6>
                 </div>
               </li>
             </template>
@@ -911,6 +911,7 @@
                     dataType: "json",
                     success:  (response) => {
                       // this.qa = response;
+                      // console.log(response);
                       let reserve = response.filter(function(item){
                         if(item.Category == "預約流程"){
                           return item;
@@ -929,7 +930,7 @@
                         };
                       });
                       this.qa[2] = rent ;
-                      // console.log(this.qa);
+                      console.log(this.qa);
 
                     },
                     error: function(exception) {
@@ -939,17 +940,17 @@
           },
           // 打開QA
           open_QA(e){
-            let a = e.target.getAttribute("value") - 1;
-            let li = document.querySelectorAll('.question_section_li');
+            let li = e.target.closest("li") ;
+            // let li = document.querySelectorAll('.question_section_li');
             // console.log(li[a].firstChild.lastChild);
-            li[a].firstChild.nextSibling.classList.toggle('active');
-            if(li[a].firstChild.lastChild.classList.contains('fa-plus')){
-              li[a].firstChild.lastChild.classList.remove('fa-plus');
-              li[a].firstChild.lastChild.classList.add('fa-minus');
+            li.firstChild.nextSibling.classList.toggle('active');
+            if(li.firstChild.lastChild.classList.contains('fa-plus')){
+              li.firstChild.lastChild.classList.remove('fa-plus');
+              li.firstChild.lastChild.classList.add('fa-minus');
             }
-            else if(li[a].firstChild.lastChild.classList.contains('fa-minus')){
-              li[a].firstChild.lastChild.classList.add('fa-plus');
-              li[a].firstChild.lastChild.classList.remove('fa-minus');
+            else if(li.firstChild.lastChild.classList.contains('fa-minus')){
+              li.firstChild.lastChild.classList.add('fa-plus');
+              li.firstChild.lastChild.classList.remove('fa-minus');
             }
           },
           // ==========================QA結束===========================
