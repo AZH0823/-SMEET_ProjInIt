@@ -89,12 +89,13 @@ let cart_pop = Vue.createApp({
                     vm_shopmall.$data.ShoppingCartList = LSGetItem;
                 }
 
-                // 同步qty數量
+                // 同步購物車 qty 數量
                 this.ShoppingCartQty();
             },
             // ==================== 樹鈞的坑 ========================= //
             ShoppingCartQty(){
                 let car_num = document.getElementById('car_num');
+                let car_num2 = document.getElementById('car_num2');
                 const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
                 console.log(LSGetItem.length);
             
@@ -103,8 +104,17 @@ let cart_pop = Vue.createApp({
                     car_num.innerHTML = "";
                     return ;
                 }else{
-                    car_num.classList.remove('none');
-                    car_num.innerHTML = LSGetItem.length;
+                    // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+                    if (document.location.href.includes('index_home.html')) {
+                        car_num2.classList.remove('none');
+                        car_num2.innerHTML = LSGetItem.length;
+
+                        car_num.classList.remove('none');
+                        car_num.innerHTML = LSGetItem.length;
+                    }else{
+                        car_num.classList.remove('none');
+                        car_num.innerHTML = LSGetItem.length;
+                    }
                 }
             },
             
