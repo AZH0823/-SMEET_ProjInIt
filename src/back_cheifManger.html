@@ -52,7 +52,7 @@
                     <div class="grid_item">
                       <!-- 人稱，平成末的日式... -->
                       <div v-if="current_edit !== item.ID">{{LederProfileEdit(item.LederProfile)}}</div>
-                      <input type="text" name="" id="" v-else :value="item.LederProfile" font-size="16px">
+                      <textarea type="text" name="" id="" v-else :value="item.LederProfile" font-size="16px" style="width: 308px; height: 118px;"></textarea>
                     </div>
                     <div class="grid_item green-2 checked" @click="current_edit = item.ID" v-if="current_edit !== item.ID">
                       編輯
