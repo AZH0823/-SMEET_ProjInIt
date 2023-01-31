@@ -71,10 +71,10 @@
                                         <div class="grid_item">
                                             <label class="switch">
                                                 <input type="checkbox" class="switch_btn"
-                                                    :checked="News.Condition === 1" @click="switchToggle(News, $event)">
+                                                    :checked="News.Condition == 1" @click="switchToggle(News, $event)">
                                                 <span class="slider"></span>
-                                                <p class="slider_content" v-if="News.Condition === 1">上架</p>
-                                                <p class="slider_content" v-if="News.Condition === 0">下架</p>
+                                                <p class="slider_content" v-if="News.Condition == 1">上架</p>
+                                                <p class="slider_content" v-if="News.Condition == 0">下架</p>
                                             </label>
                                         </div>
                                         <div class="grid_item checked" >查看</div>
@@ -251,7 +251,7 @@
                         url: "./php/backpage/back_news_u.php",
                         data: {
                             News_ID: News.ID,
-                            News_Condition: News.Condition
+                            News_Condition: parseInt(News.Condition) 
                         },
                         dataType: "text",
                         success: (response) => {
@@ -275,7 +275,7 @@
                     } else {
                         // console.log(e.target.checked)
                         // console.log(dish.Condition)
-                        e.target.checked = News.Condition
+                        e.target.checked = parseInt(News.Condition) 
                     }
 
                 },

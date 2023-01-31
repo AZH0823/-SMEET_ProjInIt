@@ -230,7 +230,8 @@
         </div>
         
     </div>
-        <script src="js/vender/Vue/vue.global.js"></script>
+        <!-- <script src="js/vender/Vue/vue.global.js"></script> -->
+        <script src="js/vender/Vue/vue.global.prod.js"></script>
         <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
         <script>
             const app = Vue.createApp({
@@ -450,7 +451,7 @@
                         let files = _this.$refs.SetIMGInput.files[0];
 
                         // 傳過要編輯的套餐菜品
-                        console.log(filterdata)
+                        // console.log(filterdata)
                         if(filterdata.length == 0){
                             filterdata='NoSetDishIsEditData';    
                         }
@@ -792,7 +793,7 @@
                                             el.dishName = this.$refs[`name_${el.id}`][0].value;
 
                                             insertDishDetailList.push(el)
-                                            console.log(`upadate`,el)
+                                            // console.log(`upadate`,el)
                                         }
                                     })                                  
                                 }
@@ -842,7 +843,7 @@
                     },
                     // 點擊套餐編輯按鍵
                     clickSetDishDetail(_dish){        
-                        console.log(_dish)               
+                        // console.log(_dish)               
                         if(!_dish.isEdit && this.popOnSetDetail.isEdit){
                             _dish.isEdit = true;
                         }else{
@@ -939,7 +940,7 @@
                                 }else{
                                     this.APIdata.serve = [];
                                     this.APIdata.other = [];
-                                    console.log(response);
+                                    // console.log(response);
                                     // this.product = response ;
                                     response.forEach(data=>{
                                         if(data.dishType =='服務'){
