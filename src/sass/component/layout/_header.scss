@@ -993,7 +993,7 @@ body {
 #indexforslide {
   opacity: 1;
   transition: opacity 0.5s;
-
+    align-items: flex-start;
   &.hide {
     opacity: 0;
     pointer-events: none;
