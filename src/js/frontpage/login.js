@@ -729,7 +729,7 @@ log_ham.addEventListener('click',function(e){
         // console.log(LSGetItem.length);
         // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
         if(LSGetItem == [] || LSGetItem == ""){
-            return ;
+            car_num.innerHTML = "";
         }else{
             car_num.classList.remove('none');
             car_num.innerHTML = LSGetItem.length;
