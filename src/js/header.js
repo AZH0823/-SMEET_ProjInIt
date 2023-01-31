@@ -17,6 +17,8 @@ $(".indexslide_ham").on("click", function () {
     $("#indexham_bg").toggleClass("indexhide");
     $("#indexham_bg").toggleClass("indexn_none");
 
+
+
 })
 //index頁燈箱點擊收合
 
@@ -47,6 +49,8 @@ $(function () {
         //$(".indexuser_ham").toggleClass("close_on");
         $(".indexheader_bar").removeClass("--on");
         $(".indexuser_ham").removeClass("--on");
+        //index首頁的背景色會移除
+        $("#indexham_bg").removeClass("indexhide");
 
         // console.log("sss");
         setTimeout(function () {
@@ -61,6 +65,8 @@ $(function () {
         $(".cart_container").toggleClass("-closeon")
         $(".cart_container").removeClass("-carton")
         $(".cart_container").removeClass("-closeon")
+
+
     })
 })
 
@@ -96,6 +102,9 @@ $(".slide_ham").on("click", function () {
     $("#ham_bg").toggleClass("hide");
     $("#ham_bg").toggleClass("n_none");
 
+    // $("#indexham_bg").toggleClass("hide");
+    // $("#indexham_bg").toggleClass("n_none");
+
 })
 //slide頁燈箱點擊收合
 //點擊背景時
@@ -126,6 +135,12 @@ $(function () {
         // console.log("ttt");
         $(".cart_container").addClass("-carton")
         // console.log("sss");
+
+        $(".header_bar").removeClass("-on");
+        $(".user_ham").removeClass("-on");
+        //slide的背景色會移除
+        $("#ham_bg").removeClass("hide");
+
         setTimeout(function () {
             $('.cart_bg').removeClass('none');
         }, 500);
