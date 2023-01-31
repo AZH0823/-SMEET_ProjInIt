@@ -102,6 +102,7 @@ let cart_pop = Vue.createApp({
                 // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
                 if(LSGetItem == [] || LSGetItem == ""){
                     car_num.innerHTML = "";
+                    car_num2.innerHTML = "";
                     return ;
                 }else{
                     // 判斷當前頁面，並同步Vue.$data.shoppingCarList
