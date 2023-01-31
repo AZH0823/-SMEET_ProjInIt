@@ -4,7 +4,7 @@
     
     //建立SQL
     $sql = "SELECT `ID`, `LederName`,`LederProfile`
-    FROM TEAMS";
+    FROM Teams";
 
     $statement = getPDO()->prepare($sql);  
 
