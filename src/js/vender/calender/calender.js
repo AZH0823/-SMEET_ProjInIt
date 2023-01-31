@@ -19,7 +19,7 @@ const final = {}
       
       let final_array = []
       dataAPI.forEach((data_el)=>{  
-        console.log(data_el)
+        // console.log(data_el)
         let data = []
         
         let final = {}
@@ -75,7 +75,7 @@ const final = {}
       // final_array[11].borderColor = '#D3D3D3'  
  
 
-      console.log(final_array);
+      // console.log(final_array);
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialDate: new Date(),
