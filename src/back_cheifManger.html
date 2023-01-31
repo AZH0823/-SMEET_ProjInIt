@@ -47,17 +47,18 @@
                     <div class="grid_item">
                       <!-- 立雁杉團隊 -->
                       <div v-if="current_edit !== item.ID">{{item.LederName}}&nbsp廚師長</div>
-                      <input type="text" name="" id="" style="width:100px;margin-left: 50px ;" v-else :value="item.LederName">
+                      <input type="text" name="" id="" style="width:100px;margin-left: 50px ;" v-else v-model="update.name">
                     </div>
                     <div class="grid_item">
                       <!-- 人稱，平成末的日式... -->
                       <div v-if="current_edit !== item.ID">{{LederProfileEdit(item.LederProfile)}}</div>
-                      <textarea type="text" name="" id="" v-else :value="item.LederProfile" font-size="16px" style="width: 308px; height: 118px;"></textarea>
+                  
+                      <textarea type="text" name="" id="" v-else v-model="update.profile" font-size="16px" style="width: 308px; height: 118px;"></textarea>
                     </div>
                     <div class="grid_item green-2 checked" @click="current_edit = item.ID" v-if="current_edit !== item.ID">
                       編輯
                     </div>
-                    <div class="grid_item green-2 checked"  @click="current_edit = null" v-else>
+                    <div class="grid_item green-2 checked" @click="updateTeams(update,item.ID)" @click="current_edit = null" v-else>
                       儲存
                     </div>
                   </div>
@@ -297,7 +298,11 @@
             return {
               //----------- 廚師團 -----------//
               chefTeam:[],       
-              current_edit:null    
+              current_edit:null,
+              update:{
+                name:'',
+                profile:'',
+              }
             }; 
         },
         
@@ -315,7 +320,7 @@
 
         methods: {
           LederProfileEdit(Name){
-            console.log(Name)
+            // console.log(Name)
             // element.LederProfile = element.LederProfile.substr(0, 11) + '...'
             return Name.substr(0, 11) + '...';
           },
@@ -338,6 +343,92 @@
                             alert("發生錯誤: " + exception.status);
                         },
                   });
+          },
+
+          //update
+          updateTeams(update,ID) {
+            console.log(ID);
+            console.log(update.name);
+            console.log(update.profile);
+            const that = this
+            if(window.confirm('你想要儲存資料嗎?')){
+        
+              
+              $.ajax({
+                method: "POST",
+                url: "./php/backpage/updateChefData.php",
+                data: {
+                  Teams_ID : ID,
+                  Teams_LederName : update.name,
+                  Teams_LederProfile : update.profile
+                },
+                dataType: "text",
+                success: (response) => {
+                  console.log(`re:`,response)
+                  if(response =='successfull'){
+                    that.chefTeam .forEach(el=>{
+                      if(parseInt(el.ID) == parseInt(ID)){
+                        el.LederName =that.update.name ;
+                        el.LederProfile = that.update.profile;
+                      }
+                    })
+                    that.current_edit = false
+                    that.update.name=''
+                    that.update.profile=''
+
+                  }
+                  console.log(that.chefTeam)
+                },
+                error: (exception) => {
+                  alert("數據載入失敗: " + exception.status);
+                },
+            });
+            }else{
+              console.log(`沒動作`)
+              this.current_edit = true
+              that.update.name=''
+              that.update.profile=''
+              return 
+            }
+            
+          },
+
+          switchToggle(Teams, e) {
+            if (window.confirm("是否要更新?")) {
+              if (Teams.Condition == 1) {
+                Teams.Condition = 0;
+              } else {
+                Teams.Condition = 1;
+              }
+              this.updateTeamsCondition(Teams);
+            } else {
+              // console.log(e.target.checked)
+              // console.log(dish.Condition)
+              e.target.checked = parseInt(Teams.Condition);
+            }
+          },
+          //insert
+          Teamsajax() {
+            let Teams_LederName =document.getElementById("LederName");
+            let Teams_LederProfile = document.getElementById("LederProfile");
+            let Teams_btn = document.getElementById("Teams_btn");
+
+            $.ajax({
+              method: "POST",
+              url: "php/backpage/insertChefData.php",
+              data: {
+                LederName: Teams_LederName.value,
+                LederProfile: Teams_LederProfile.value,
+              },
+
+              dataType: "text",
+              success: function (response) {
+                console.log(response);
+              },
+              error: function (exception) {
+                alert("傳送成功: " + exception.status);
+              },
+            });
           },
 
 
