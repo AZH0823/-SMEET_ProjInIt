@@ -2,7 +2,7 @@
     include("../conectDB/Connection.php");
     
     //建立SQL
-    $sql = "SELECT `Name`,`Job`,`IMG`, `TeamID` FROM CHEFS";
+    $sql = "SELECT `Name`,`Job`,`IMG`, `TeamID` FROM Chefs";
 
     $statement = getPDO()->prepare($sql);  
 
