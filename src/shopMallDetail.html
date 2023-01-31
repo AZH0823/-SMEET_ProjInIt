@@ -57,7 +57,7 @@
 
 
 
-            <!-- ====================== // TODO 下面需要篩選最新的商品資料 ====================== -->
+            <!-- ====================== // 下面需要篩選最新的商品資料 ====================== -->
             
             <!-- 最後最新商品 -->
             <div class="collect_section new_product">
@@ -473,23 +473,32 @@
                                     
                     // 改變shoppingcar QTY
                     ShoppingCartQty();
-                    
 
-                    // 控制購物車popUp
-                    if(this.ShoppingCartList != ""){
-                        this.shopCartsuccess_popup = '加入購物車成功'
-                        // overfloat: hidden
-                        let body = document.querySelector('body');
-                        body.style.overflow = "hidden";
+                },
+                ShoppingCartQty(){
+                    let car_num = document.getElementById('car_num');
+                    let car_num2 = document.getElementById('car_num2');
+                    const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                    console.log(LSGetItem.length);
+                
+                    // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                    if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
+                        car_num.innerHTML = "";
+                        car_num2.innerHTML = "";
+                        return ;
+                    }else{
+                        // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+                        if (document.location.href.includes('index_home.html')) {
+                            car_num2.classList.remove('none');
+                            car_num2.innerHTML = LSGetItem.length;
+
+                            car_num.classList.remove('none');
+                            car_num.innerHTML = LSGetItem.length;
+                        }else{
+                            car_num.classList.remove('none');
+                            car_num.innerHTML = LSGetItem.length;
+                        }
                     }
-                    // PopOn 消失
-                    clearInterval(this.success_popup_interval)
-                    this.success_popup_interval = setInterval(() => {
-                        this.shopCartsuccess_popup= ''
-                        // overfloat: auto
-                        let body = document.querySelector('body');
-                        body.style.overflow = "auto";
-                    }, 1000);
                 },
 
                 // 詳情商品數量加
