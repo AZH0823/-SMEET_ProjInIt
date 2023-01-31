@@ -237,19 +237,7 @@
                     AjaxMealsInfo: [],
                 };
             },
-            watch: {
-                ShoppingCartList: function(){
-                    let car_num = document.getElementById('car_num');
-
-                    // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
-                    if(this.ShoppingCartList == ""){
-                        return;
-                    }else{
-                        car_num.classList.remove('none');
-                        car_num.innerHTML = this.ShoppingCartList.length;
-                    }
-                },
-            },
+            
 
             computed: {
                 // ========= 原本菜單陣列依照curren_tab過濾 ========= //
@@ -290,7 +278,6 @@
                     if(local_storage){
                         const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) ;
 
-                        console.log('MALL',LSGetItem);
                         this.ShoppingCartList = LSGetItem;
                         console.log('Mall LS:',LSGetItem)
                     }
