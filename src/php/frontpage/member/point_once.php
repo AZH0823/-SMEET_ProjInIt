@@ -23,11 +23,7 @@
     if($a == 1){
         // 有加過點數
         echo "Y";
-    }else{
-        $sql = "UPDATE Member SET Once = 1 WHERE ID = ? ";
-        $statement = getPDO()->prepare($sql);   
-        $statement->bindValue(1, $member_ID);  
-        $result = $statement->execute();   
+    }else{  
         echo "N";
     }
 ?>

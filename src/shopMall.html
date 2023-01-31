@@ -51,6 +51,7 @@ initial-scale=1.0">
                     </div>
                 </div>
                 
+                
                 <!-- ========== 商品排序 ========== -->
                 <!-- <select name="" id="">
                     <option value="none" selected disabled hidden>商品排序</option> 
@@ -233,57 +234,8 @@ initial-scale=1.0">
                         }
                     ],
 
-                    // ========= 商品清單 ========= //
-                    // 商品清單測試資料
-                    MealsInfo: [
-                        // {
-                        //     category:'tab1',
-                        //     id: "1",
-                        //     img1: "./img/shopmall_img/shopmall_product01.jpg",
-                        //     img2: "./img/shopmall_img/shopmall_product01.jpg",
-                        //     img3: "./img/shopmall_img/shopmall_product01.jpg",
-                        //     heart: false,
-                        //     name: "黑鮪刺身",
-                        //     price: "700",
-                        //     collectTime: new Date(),
-                        //     qty:3,
-                        //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
-                        //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
-                        // },
-                        
-                        // {
-                        //     category:'tab2',
-                        //     id: "4",
-                        //     img1: "./img/shopmall_img/shopmall_product04.jpg",
-                        //     img2: "./img/shopmall_img/shopmall_product04.jpg",
-                        //     img3: "./img/shopmall_img/shopmall_product04.jpg",
-                        //     heart: false,
-                        //     name: "極品生魚片",
-                        //     price: "700",
-                        //     collectTime: new Date(),
-                        //     qty:7,
-                        //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
-                        //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
-                        // },
-                        
-                        // {
-                        //     category:'tab3',
-                        //     id: "7",
-                        //     img1: "./img/shopmall_img/shopmall_product07.jpg",
-                        //     img2: "./img/shopmall_img/shopmall_product07.jpg",
-                        //     img3: "./img/shopmall_img/shopmall_product07.jpg",
-                        //     heart: false,
-                        //     name: "手沖牛肉湯",
-                        //     price: "700",
-                        //     collectTime: new Date(),
-                        //     qty:17,
-                        //     shopPoint: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鰤魚、油漬刺蔥與番茄製造出更有層次的風味。",
-                        //     Introduction: "一道擁有日式美學的油醋刺身，以柴魚高湯的土佐醋來製作成土佐醋凍片，將酸感降低，搭配油脂豐富的鮪魚、油漬刺蔥與番茄製造出更有層次的風味。私覓主廚精選屏東當季黑鮪魚，除了將日式的優點融入料理更帶入了台灣在地的生鮮水產，邀請您一起享用。"
-                        // },
-                        
-                    ],
 
-                    // ========= AJAX傳入資料 ========= //
+                    // ========= AJAX傳入 所有商品資料 ========= //
                     AjaxMealsInfo: [],
                 };
             },
@@ -752,7 +704,7 @@ initial-scale=1.0">
             },
         });
 
-        const vm = app.mount("#app");
+        const vm_shopmall = app.mount("#app");
 
         
 

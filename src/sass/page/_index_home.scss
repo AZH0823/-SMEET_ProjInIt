@@ -349,9 +349,6 @@
             @include pad() {
                 padding: 0;
             }
-            @include mobile() {
-                padding: 0;
-            }
         }
         #calendar {
             margin: 0 auto;
@@ -585,6 +582,8 @@
 
             ._index_line {
                 margin: 0 100px 0 0;
+                background-color: $green-1;
+                padding: 1px 20%;
             }
         }
 

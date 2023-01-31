@@ -741,6 +741,7 @@
 
         .content{
             position: relative;
+            
             background: white;
             height: 0;
             font-size: 20px;
@@ -769,7 +770,7 @@
             line-height: 70px;
             background-color: $Camel-3;
             border-bottom: 1px solid #000;
-
+            cursor: pointer;
             .fa-a{
                 line-height: 70px;
             }

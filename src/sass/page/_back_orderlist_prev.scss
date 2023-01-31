@@ -19,10 +19,11 @@ div.back_orderlist_prev {
         div.container {
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
             width: 73%;
 
             main.right_content {
-                margin-bottom: 50px;
+                margin-bottom: 150px;
                 width: 100%;
 
                 section.section1 {
@@ -81,6 +82,9 @@ div.back_orderlist_prev {
                                     padding: 20px;
                                     .selectInput{
                                         cursor: pointer;
+                                    }
+                                    .fa-solid.fa-sort{
+                                        margin-left: 3px;
                                     }
                                 }
                                 

@@ -2,15 +2,6 @@
     
     include('../conectDB/Connection.php');
 
-    // ----------------------------------------------
-    // if($_COOKIE['set']==''){
-    //     setcookie('set', 10, time()+60);
-        // header("location:back_meberManger.html");
-    // }
-    // if($_POST['numpage']!=''){
-    //     setcookie('set', $_POST['numpage'], time()+60);
-    //     header("location:back_meberManger.html");
-    // }
     //---------------------------------------------------
     //建立SQL
     $select = 'SELECT ID, Email, Name, Phone, BirthDate, Sex, Address, multiLogin, point

@@ -25,11 +25,11 @@
 
         // 更新資料
         $updateQA = "UPDATE QA SET `Condition`
-        = :Condition WHERE ID = :QAsID";
+        = :Condition WHERE ID = :QAID";
 
         $statement = getPDO()->prepare($updateQA);     
         $statement->bindValue(':Condition', $QA_Condition); 
-        $statement->bindValue(':QAsID', $QA_ID); 
+        $statement->bindValue(':QAID', $QA_ID); 
         $statement->execute();
         $result = $statement -> fetchAll();
 

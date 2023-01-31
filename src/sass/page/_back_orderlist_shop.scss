@@ -11,6 +11,7 @@ div.back_orderlist_shop {
     div.container {
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
       width: 73%;
 
       main.right_content {
@@ -295,6 +296,6 @@ div.back_orderlist_shop {
 }
 
 .edit.checked {
-  color: red;
+  color: #b91646;
   cursor: pointer;
 }

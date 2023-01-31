@@ -11,6 +11,7 @@ div.back_chefstManger {
     .container {
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
       width: 73%;
       // 表格
       main.right_content {
@@ -57,9 +58,9 @@ div.back_chefstManger {
           }
 
           .back_from_wrapper {
-            height: 350px;
+            height: 550px;
             overflow-y: scroll;
-            margin-bottom: 15px;
+            margin-bottom: 150px;
             .grid_container {
               margin: 0 auto;
               display: grid;
@@ -70,6 +71,9 @@ div.back_chefstManger {
               border-bottom: 0.5px solid #ccc;
               &:first-child {
                 background-color: $Camel-3;
+              }
+              input{
+                font-size: 16px;
               }
               // .grid_item:nth-child(n + 1) {
               //   border-bottom: 0.5px solid #ccc; // 加底线

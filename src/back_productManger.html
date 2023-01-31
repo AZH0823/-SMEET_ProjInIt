@@ -82,7 +82,7 @@
                         </div> -->
                     </section><!-- section1 -->
 
-                    <div class="product_wrapper fulid_wrapper" v-if="isShow" @click="product_pop_close">
+                    <div class="product_wrapper fulid_wrapper" v-if="isShow" @click="product_pop_close" :key="popupData.ID">
                         <div class="section_products" @click.stop>
                             <div class="product_top">
                                 <p>新增商品</p>
@@ -115,7 +115,7 @@
                                         <span>請選擇3張圖片：</span>
                                         <div class="pic_item">
                                             <div class="inputwrap">
-                                                <input type="file" id="ProductImage" multiple @change="changeImage($event)" ref="SetIMGInput" accept="image/*">
+                                                <input type="file" id="ProductImage" multiple @change="changeImage($event)" accept="image/*" ref="ProductImage">
                                                 <input type="text" id="imageLoader" disabled="" :placeholder="loadedImage ? loadedImage.name : 'Please choose the file'">
                                             </div>
                                             <img id="output" v-if="ImageResult" :src="ImageResult" :alt="popupData.name">
@@ -198,7 +198,6 @@
 
                     // popUp的資料, insert 到資料庫
                     popupData: {
-                        // ID: '', 資料庫設定是autoID
                         Type: '商城主食',
                         Name: "",
                         Price: "",
@@ -437,8 +436,6 @@
                     let files = e.target.files;
                     // console.log(files);
 
-                    
-                    
                     // 存取圖片提示
                     that.loadedImage = e.target.files[0]
                     
@@ -452,87 +449,93 @@
                 },
 
                 // insert IMG API
-                insertImg(){ 
-                    let _this = this;
-                    let imgLists = [];
-
+                insertImg(response){ 
+                    console.log(response);
+                    const ID = response;
                     // 取的上傳團片的圖聘資料內容
-                    let files = _this.$refs.SetIMGInput.files;
-                    // console.log(files);
+                    const files = this.$refs.ProductImage.files;
+                    
 
-                    // 將圖片封裝到imgData
-                    for (let i = 0; i < files.length; i++) {
-                        // console.log(files[i]);
-                        imgLists.push(files[i]);  // imgLists == [{FILE}, {FILE}, {FILE}];
-                        // console.log(imgLists); 
-                    }
+                    // // 將圖片封裝到imgData
+                    // for (let i = 0; i < files.length; i++) {
+                    //     // console.log(files[i]);
+                    //     imgLists.push(files[i]);  // imgLists == [{FILE}, {FILE}, {FILE}];
+                    //     // console.log(imgLists); 
+                    // }
 
                     // 更新上傳圖片
                     if(files !==undefined && files !== null){
-                        let formData = new FormData();
-                        formData.append('ProductImage',files);
-                        formData.append('ID',parseInt(_this.popupData.ID));
-                        // console.log(formData);
-                        console.log('update SetID: ',formData.getAll('ProductImage'))
+                        let formData =  new FormData();
+
+                        // for (let i = 0; i < imgLists.length; i++) {
+                        //     formData.append('ProductImage' + i, imgLists[i]);
+                        // }
+                        // console.log(files[0]);
+                        
+                        
+                        
+                        
+                        formData.append('ProductImage1', files[0]);
+                        formData.append('ProductImage2', files[1]);
+                        formData.append('ProductImage3', files[2]);
+                        formData.append('ID', ID);
+
+                        console.log(formData);
                         $.ajax({            
                             method: "POST",
                             url: "php/backpage/back_productManger_i_IMG.php",
-                            data: formData,
+                            data: 
+                                formData,
                             // 告訴jQuery不要去處理發送的資料
                             processData : false, 
                             // 告訴jQuery不要去設定Content-Type請求頭
                             contentType : false,   
                             dataType: "text",
-                            success: function (response) {
+                            success: (response) => {
+
+
+
                                 console.log(response);
+
+
+
+
+                                // 加入商品成功 popUp
+                                this.success_popup = '新增商品成功'
+                                let body = document.querySelector('body');
+                                body.style.overflow = "hidden";
+
+                                // PopOn 消失
+                                clearInterval(this.success_popup_interval)
+                                this.success_popup_interval = setInterval(() => {
+                                    this.success_popup= ''
+                                    // overfloat: auto
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "auto";
+                                }, 1000);
                             },
                             error: function(exception) {
                                 alert("發生錯誤: " + exception.status);
                             }
-                        });  
+                            
+                        }); 
+
+                        // 清空popupData資料
+                        this.popupData = {
+                            Type: '商城主食',
+                            Name: "",
+                            Price: "",
+                            ShopPoint: "",
+                            Introduction: "",
+                            IMG: "",
+                        }
+                        // 關閉popUp
+                        this.isShow = false; 
                     }
                 },
 
-                doSubmit(){
-                    // insert IMG API
-                    this.insertImg();
-
-                    // insert info API
-                    // this.FormData();
-                },
-
-                // createIMG(){
-
-                    // TODO 
-                    // 判斷資料格式是否正確
-                    // if (this.imgData.length < 2 && this.imgData.length > 3) {
-                    //     alert("請上傳正確[照片數量]");
-                    //     return false;
-                    // }
-
-                    // let formData = new FormData();
-                    // formData.append("dish_IMG", this.imgData);
-                    // console.log(formData);
-                    
-
-                //     $.ajax({            
-                //         method: "POST",
-                //         url: "php/backpage/back_productManger_i_IMG.php",
-                //         data:{
-                //             dish_IMG,
-                //         },            
-
-                //         dataType: "text",
-                //         success: (response)=> {
-                //             console.log("圖片上傳成功")
-                //         },
-                //         error: function(exception) {
-                //             alert("數據載入失敗: " + exception.status);
-                //         }
-                //     });
-                // },
                 // 新增商品資訊
-                FormData(){
+                doSubmit(){
                     // 判斷資料格式是否正確
                     // if (this.popupData.Name == '') {
                     //     alert("請填寫[商品名稱]");
@@ -578,7 +581,7 @@
                     const dish_Type = this.popupData.Type;
                     const dish_Name = this.popupData.Name;
                     const dish_Price = this.popupData.Price;
-                    const dish_IMG = this.imgData2; // 照片測試資料
+                    // const dish_IMG = this.imgData2; // 照片測試資料
                     const dish_ShopPoint = this.popupData.ShopPoint;
                     const dish_Introduction = this.popupData.Introduction; 
 
@@ -596,45 +599,24 @@
                             dish_Type,
                             dish_Name,
                             dish_Price,
-                            dish_IMG, // 照片測試資料
+                            // dish_IMG, // 照片測試資料
                             dish_Name,
                             dish_ShopPoint,
                             dish_Introduction
                         },            
                         dataType: "text",
                         success: (response)=> {
-
+                            // console.log(response);
+                            // response.ID
+                            this.insertImg(response);
                             
-                            // 加入商品成功 popUp
-                            this.success_popup = '新增商品成功'
-                            let body = document.querySelector('body');
-                            body.style.overflow = "hidden";
-
-                            // PopOn 消失
-                            clearInterval(this.success_popup_interval)
-                            this.success_popup_interval = setInterval(() => {
-                                this.success_popup= ''
-                                // overfloat: auto
-                                let body = document.querySelector('body');
-                                body.style.overflow = "auto";
-                            }, 1000);
                         },
                         error: function(exception) {
                             alert("數據載入失敗: " + exception.status);
                         }
                     });
 
-                    // 清空popupData資料
-                    this.popupData = {
-                        Type: '商城主食',
-                        Name: "",
-                        Price: "",
-                        ShopPoint: "",
-                        Introduction: "",
-                        IMG: "",
-                    },
-                    // 關閉popUp
-                    this.isShow = false;
+                    
                 },
 
 
@@ -661,10 +643,10 @@
 
                 // 會員名稱關鍵字查詢
                 search(){
-                    let search_name = this.$refs.search_name.value;
-                    console.log(search_name);
+                    let search_name = this.$refs.search_name.value.trim();
+                    // console.log(search_name);
                     if(this.$refs.search_name.value == ""){
-                        this.getCate();
+                        return;
                     }else{
                         $.ajax({
                             method: "POST",

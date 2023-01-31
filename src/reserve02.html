@@ -301,8 +301,10 @@
                             <div class="user_bonus grid_confirm">
                                 <label for="bonus" class="user_bonus">
                                     <h6>使用會員紅利點數折抵訂單金額</h6>
-                                    <div class="bonus_input"><input type="text" id="bonus" v-model.number="this.inputData.point" @blur="checkMemberPoint">元</div>
-                                </label>
+                                        <div class="bonus_input"><input type="text" id="bonus" v-model.number="this.inputData.point" @blur="checkMemberPoint">元</div>
+                                        
+                                    </label>
+                                    <p class="member_nowpoint all_bonus font16 gray">目前累計會員紅利點數{{APIData_in.member.point}}點(元)</p>
                             </div>
                             <h6 class="blockTitle">6.付款資訊<span>已選擇支付方式(VISA、Master、JCB)</span></h6>
                             <div class="user_pay">

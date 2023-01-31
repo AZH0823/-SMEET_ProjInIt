@@ -11,11 +11,12 @@ div.back_news {
         .container {
             display: flex;
             flex-direction: column;
+            justify-content: space-around;
             width: 73%;
 
             // 表格
             main.right_content {
-                margin-bottom: 50px;
+                margin-bottom: 150px;
                 width: 100%;
 
                 .section1 {

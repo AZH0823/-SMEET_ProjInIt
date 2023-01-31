@@ -1,9 +1,9 @@
 // 點擊header購物車icon 重新抓取localstorage渲染購物車popup
+let _THAT = this
 let header_cart = document.querySelector('.slide_cart');
 header_cart.addEventListener('click', function () {
     cart_pop.get_data();
 })
-
 let cart_pop = Vue.createApp({
         data() {
             return {shop_data: [{}]}
@@ -69,7 +69,45 @@ let cart_pop = Vue.createApp({
                 this.shop_data.splice(index, 1);
                 // 更新localStorage數量
                 localStorage.setItem("shoppingData", JSON.stringify(this.shop_data));
-            }
+
+
+
+                // ==================== 樹鈞的坑 ========================= //
+                // 拿到shopMall & Detail 的 Vue.$data
+                // console.log(vm_shopmall.$data.ShoppingCartList);
+                // console.log(vm_shopmallDetail.$data.ShoppingCartList);
+
+                // 拿到最新Storage
+                const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+
+                // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+                if (document.location.href.includes('shopMallDetail.html')) {
+                    console.log("shopmallDetail");
+                    vm_shopmallDetail.$data.ShoppingCartList = LSGetItem;
+                }else if(document.location.href.includes('shopMall.html')){
+                    console.log("shopmall");
+                    vm_shopmall.$data.ShoppingCartList = LSGetItem;
+                }
+
+                // 同步qty數量
+                this.ShoppingCartQty();
+            },
+            // ==================== 樹鈞的坑 ========================= //
+            ShoppingCartQty(){
+                let car_num = document.getElementById('car_num');
+                const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                console.log(LSGetItem.length);
+            
+                // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                if(LSGetItem == [] || LSGetItem == ""){
+                    car_num.innerHTML = "";
+                    return ;
+                }else{
+                    car_num.classList.remove('none');
+                    car_num.innerHTML = LSGetItem.length;
+                }
+            },
+            
         }
     })
     .mount('#cart_pop');
