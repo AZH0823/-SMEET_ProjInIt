@@ -12,7 +12,7 @@
 
     // $sql = "INSERT INTO Contact (ReleaseDate,Name, Phone, Email, Category, SuggestContent, Condition)value (now(),'{$Name}','{$Phone}','{$Mail}','{$Category}','{$SuggestContent}',1)";
 
-    $sql = "INSERT INTO `smeet`.`Contact` (  `ReleaseDate`,`Name`, `Phone`, `Email`, `Category`, `SuggestContent`, `Condition`)
+    $sql = "INSERT INTO Contact ( `ReleaseDate`,`Name`, `Phone`, `Email`, `Category`, `SuggestContent`, `Condition`)
     VALUES
     (NOW(), '{$Name}', '{$Phone}', '{$Mail}', '{$Category}' , '{$SuggestContent}', 0)";
 

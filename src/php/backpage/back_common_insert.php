@@ -11,7 +11,7 @@
 
     // $sql = "INSERT INTO Contact (ReleaseDate,Name, Phone, Email, Category, SuggestContent, Condition)value (now(),'{$Name}','{$Phone}','{$Mail}','{$Category}','{$SuggestContent}',1)";
 
-    $sql = "INSERT INTO `smeet`.`QA` (  `ReleaseDate`,`Category`, `QuestionContent`, `AnswerContent`, `Condition`, `ModifyTime`)
+    $sql = "INSERT INTO QA (  `ReleaseDate`,`Category`, `QuestionContent`, `AnswerContent`, `Condition`, `ModifyTime`)
     VALUES
     (DATE(NOW()), '{$Category}', '{$QuestionContent}', '{$AnswerContent}', 0 , NOW())";
 

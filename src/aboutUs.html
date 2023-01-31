@@ -234,7 +234,6 @@
         },
         created() {
           this.qarender();
-          
         },
         methods: {
           accordion(e) {
@@ -257,6 +256,19 @@
             let contact_text = document.getElementById("contact_text");
             let btn = document.getElementById("contact_btn");
 
+            if (contact_name.value.trim() == "") {
+              return alert("請輸入資料");
+            }
+            if (contact_phone.value.trim() == "") {
+              return alert("請輸入資料");
+            }
+            if (contact_mail.value.trim() == "") {
+              return alert("請輸入資料");
+            }
+            if (contact_text.value.trim() == "") {
+              return alert("請輸入資料");
+            }
+
             $.ajax({
               method: "POST",
               url: "php/frontpage/aboutus_contact.php",
@@ -270,7 +282,8 @@
 
               dataType: "text",
               success: function (response) {
-                console.log(response);
+                // console.log(response);
+                alert("傳送成功");
               },
               error: function (exception) {
                 alert("傳送成功: " + exception.status);
