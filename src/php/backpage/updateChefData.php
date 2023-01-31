@@ -2,13 +2,13 @@
     include ('../conectDB/Connection.php');
 
     // echo 'Y'
-    $Msg = $_POST["Msg"];
-    $ID = $_POST["ID"];
+    $Lna = $_POST["Lna"];
+    $Lpr = $_POST["Lpr"];
 
     if($Msg == "update"){
         $State = $_POST["State"];
 
-        $mallStateSQL = "UPDATE TEAMS 
+        $mallStateSQL = "UPDATE Teams 
         SET State = :State
         WHERE ID = :ID ";
 
@@ -28,8 +28,6 @@
         SET LederName = :LederName,
             LederProfile = :LederProfile,
             WHERE ID = :ID";
-    
-        
     
         $updateChefDatastatement = getPDO()->prepare($updateChefData);
         $updateChefDatastatement->bindValue(':LederName', $LederName);
