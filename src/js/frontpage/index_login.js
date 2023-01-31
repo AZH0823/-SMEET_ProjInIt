@@ -9,8 +9,12 @@ indexslide_user.addEventListener('click',function(e){
     e.preventDefault();
     login_check();
 })
+
+let timeoutId;
 // hover
 indexslide_user.addEventListener('mouseover',function(){
+    // 清除上一次的 timeout
+    clearTimeout(timeoutId);
     //hover 不跳彈窗
     $.ajax({            
         method: "POST",
@@ -20,7 +24,7 @@ indexslide_user.addEventListener('mouseover',function(){
         success: function (response) {
             if(response == ""){
                 //尚未登入->跳出會員登入畫面
-                // login_pop();
+                login_pop();
             }else{
                 //已有登入的話 執行.....
                 // 會員icon顯示
@@ -57,8 +61,11 @@ indexslide_user.addEventListener('mouseover',function(){
         }
     });
 })
-indexslide_user.addEventListener('mouseleave',function(){
-    user_pop_index.classList.add('none');
+user_pop_index.addEventListener('mouseleave',function(){
+    // 延遲一段時間後執行 mouseleave 事件
+    timeoutId = setTimeout(function() {
+        user_pop_index.classList.add('none');
+    }, 300);
 })
 
 // 網頁版登出
