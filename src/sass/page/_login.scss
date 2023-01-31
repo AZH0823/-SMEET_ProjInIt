@@ -126,6 +126,9 @@
         // 登入表單
         .login_enter {
             margin-top: 50px;
+            .login_pwd{
+                margin-top: 20px
+            }
         }
 
         // 全部按鈕
@@ -137,7 +140,7 @@
             color: #fff;
             line-height: 45px;
             cursor: pointer;
-            margin: 15px 0;
+            margin: 30px 0;
 
             @include mobile() {
                 line-height: 30px;
@@ -146,10 +149,6 @@
             }
         }
 
-        // 立即加入按鈕
-        .btn_login {
-            margin-top: 25px;
-        }
 
         // 用LINE快速登入 按鈕
         .btn_three {

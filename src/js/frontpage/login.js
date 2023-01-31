@@ -148,6 +148,7 @@ let login_app = Vue.createApp({
             let login_bg = document.getElementById('login_bg');
             let login = document.getElementById('login');
             let body = document.querySelector('body');
+            let login_ok_popup = document.getElementById('login_ok_popup');
             account.nextElementSibling.classList.remove('appear');
             pwd.nextElementSibling.nextElementSibling.classList.remove('appear');
             if (account.value == '') {
@@ -170,6 +171,10 @@ let login_app = Vue.createApp({
                         // console.log('ttt');
                         login_bg.classList.add('none');
                         body.style.overflow = "auto";
+                        login_ok_popup.classList.remove('none');
+                        setTimeout(function(){
+                            login_ok_popup.classList.add('none');
+                        },2000);
                         //取得會員ID
                         $.ajax({            
                             method: "POST",
@@ -353,7 +358,7 @@ let login_app = Vue.createApp({
             // 不存在就跳錯誤訊息
             let email = document.getElementById('forget_acc').value;
             let token = "";
-            if(Email == ""){
+            if(email == ""){
                 return;
             }
             $.ajax({

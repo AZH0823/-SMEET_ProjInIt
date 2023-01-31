@@ -7,7 +7,7 @@
             </div>
             <!-- 表單 -->
             <!-- ==========註冊表單============= -->
-            <div action="" class="login_add none" ref="add_tab">
+            <div class="login_add none" ref="add_tab">
                 <input type="text" name="" id="join_account" placeholder="請輸入信箱" @blur="checkEmail" v-model="user_add.account" >  
                 <p class="text_no">*請填寫正確信箱</p>
                 <div class="login_pwd">
@@ -36,7 +36,7 @@
                 <button type="submit" class="btn_login font18" @click="join_ajax">立即加入</button>
             </div>
             <!-- =========會員登入表單============ -->
-            <div action="" class="login_enter " ref="enter_tab">
+            <div class="login_enter " ref="enter_tab">
                 <input type="text" name="" id="login_account" placeholder="請輸入信箱"@blur="checkEmail" v-model="user_enter.account">
                 <p class="text_no">*請填寫正確的帳號或密碼</p>
                 <div class="login_pwd">
@@ -85,7 +85,7 @@
             <!-- ==========忘記密碼畫面============= -->
             <div class="login_forget none" ref="forget">
                 <h6>忘記密碼</h6>
-                <div class="forget" action="">
+                <div class="forget">
                     <input type="text" placeholder="請輸入電子信箱" id="forget_acc">
                     <button class="inCart_btn1" @click="send_token">傳送驗證碼</button>
                     <input type="text" placeholder="請輸入驗證碼" id="input_token">
@@ -128,6 +128,17 @@
         </div>
         <!-- 會員註冊{{user_add}} -->
         <!-- 會員登入{{user_enter}} -->
+        
     </div>
 
 
+<!-- 登入成功popup -->
+<div class="logout_pop logout_pop_index none" id="login_ok_popup">
+
+    <article>
+        <div class="check_text">
+            <i class="fa-solid fa-circle-check"></i>
+            <h6>登入成功</h6>
+        </div>
+    </article>
+</div>
