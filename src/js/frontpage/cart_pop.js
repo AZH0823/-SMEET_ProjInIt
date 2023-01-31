@@ -101,9 +101,13 @@ let cart_pop = Vue.createApp({
             
                 // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
                 if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
-                    car_num.innerHTML = "";
-                    car_num2.innerHTML = "";
-                    return ;
+                    
+                    // 判斷當前頁面,清空對應qty
+                    if (document.location.href.includes('index_home.html')) {
+                        car_num2.innerHTML = "";
+                    }else{
+                        car_num.innerHTML = "";
+                    }
                 }else{
                     // 判斷當前頁面，並同步Vue.$data.shoppingCarList
                     if (document.location.href.includes('index_home.html')) {
