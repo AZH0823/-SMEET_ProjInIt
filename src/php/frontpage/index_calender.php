@@ -7,7 +7,8 @@
     //取團隊、訂單日期，若當天滿3組則顯示灰色，未滿3則顯示可選擇
 
 
-    $sql = "SELECT `AppointmentDate`, `TeamID` FROM Orders";
+    $sql = "SELECT `AppointmentDate`, `TeamID` FROM Orders
+    ORDER BY AppointmentDate;";
 
     $statement = getPDO()->prepare($sql);
 
