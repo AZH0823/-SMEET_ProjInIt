@@ -458,7 +458,12 @@
                 
                 if(this.popOnMsg.isEdit){
                     // 編輯訂單資訊
-                    if(window.confirm('確定修改訂單資訊嗎?')){
+                    if(window.confirm('確定修改訂單資訊嗎?') && 
+                            nowPopValue.Name.trim() !=='' && 
+                            nowPopValue.Phone.trim() !=='' &&
+                            nowPopValue.Email.trim() !=='' &&
+                            nowPopValue.Address.trim() !==''
+                            ){
                         // console.log(`cc`)
                         // console.log(nowPopValue.Phone)
                         this.popOnMsg.Name = nowPopValue.Name;
@@ -486,11 +491,11 @@
                         })
 
                     }else{
-                        
+                        alert('資料不得為空白')
                     }
                 }else{
                         alert('沒有資料有修改過')
-                    }
+                }
                 
             }
            

@@ -152,7 +152,7 @@
             </div>
             <div class="pop sevse_dish" v-if="popOnMsg.isEdit == true" @click.stop style="display: none;" :style="popOnMsg.isEdit ?'display:block':'display: none'">  
                 <div class="reserve_top"  @click.stop>
-                    <p>新增私廚單品或服務</p>
+                    <p>編輯私廚單品或服務</p>
                 </div>          
                 <div class="pop_contaniner">
                     <div class="input">
@@ -596,7 +596,9 @@
                                     }
                                     // console.log("整理好的物件",temp)
                                     alert(`${item.dishName}資料更新成功`)
-
+                                    setTimeout(()=>{
+                                        _this.popOnInsertMsg.isAdd = false;
+                                    },800)
                                 }
                             },
                             error: function (exception) {
@@ -647,7 +649,10 @@
                     
                     // 新增單品及服務
                     popOnInsert(){
-                        this.popOnInsertMsg={};
+                        // this.popOnInsertMsg={};
+                        this.popOnInsertMsg.dishName=""
+                        this.popOnInsertMsg.price = 300
+            
                         this.popOnInsertMsg.isAdd = true;
                         
                         document.querySelector('body').style.overflow = "hidden"
@@ -708,23 +713,35 @@
                     // 單品或服務Pop 儲存點擊
                     clickSaveToUpdate(item){
                         //  console.log('beforeValue',item);
-                        if(window.confirm('有想要更新此筆資料嗎?')){
-                            
-                            this.popOnMsg.id = item.id;
 
-                            this.popOnMsg.dishName = this.$refs.os_DishName.value;
-                            this.popOnMsg.price = parseInt(this.$refs.os_Price.value);
-                            this.popOnMsg.Condition = parseInt(this.$refs.os_Condtion.value) ;
+                        if(this.$refs.os_DishName.value.trim() !== '' &&
+                            this.$refs.os_Price.value.trim() !== '' &&
+                            this.$refs.os_Condtion.value.trim() !== ''){
+                                if(window.confirm('有想要更新此筆資料嗎?')){
 
+                           
                             
-                            // Ajax 更新資料庫
-                            this.updateOrderDishDetial('DishDetailUpdate',this.popOnMsg);
+                                this.popOnMsg.id = item.id;
+
+                                this.popOnMsg.dishName = this.$refs.os_DishName.value;
+                                this.popOnMsg.price = parseInt(this.$refs.os_Price.value);
+                                this.popOnMsg.Condition = parseInt(this.$refs.os_Condtion.value) ;
+
+
+                                // Ajax 更新資料庫
+                                this.updateOrderDishDetial('DishDetailUpdate',this.popOnMsg);
+                                } else{
+                           
+                                    // 不儲存就回到原來參數
+                                    
+                                    this.$refs.os_DishName.value =  item.dishName;
+                                    this.$refs.os_Condtion.value = parseInt(item.Condition);
+                                    this.$refs.os_Price.value = item.price;
+                                } 
                         }else{
-                            // 不儲存就回到原來參數
-                            this.$refs.os_DishName.value =  item.dishName;
-                            this.$refs.os_Condtion.value = parseInt(item.Condition);
-                            this.$refs.os_Price.value = item.price;
-                        }                        
+                            alert('資料不得為空值')
+                        }
+                                             
                     },
 
                     // 編輯套餐資訊
@@ -764,49 +781,65 @@
                             // ref="setName"
                            // ref="setPrice"
                             // ref="setIMG"
-                            if(window.confirm(`要儲存套餐新設定嗎?`)){
+                            if(window.confirm(`要儲存套餐新設定嗎?`) && 
+                                this.$refs.setName.value.trim() !=='' && 
+                                this.$refs.setPrice.value.trim() !=='' ){
+                                
                                 this.$refs.editSet.innerHTML =`編輯菜單`; 
                                 this.popOnSetDetail.isEdit =false;
 
                                 // 套資訊
                                 this.popOnSetDetail.setName = this.$refs.setName.value;
                                 this.popOnSetDetail.price = this.$refs.setPrice.value;
-                                
-                                // 圖片先掠過
-                                // this.popOnSetDetail = this.$refs.setIMG.value
 
                                 // 單品資訊有要更改資套餐菜品
                                 let upateDishDetailList = []
                                 let insertDishDetailList = []
+                                let vaild = true 
                                 for(const key in this.popOnSetDetail.dish){
                                     this.popOnSetDetail.dish[key].forEach((el)=>{
                                         if(el.isEdit && el.id <= this.APIdata.nowPKnum){
                                             // :ref="'name_' + dish.id">  品名
                                             // :ref="'condition_' + dish.id"> 上下架
-                                            
                                             el.Condition = parseInt(this.$refs[`condition_${el.id}`][0].value);
+                                            if(this.$refs[`name_${el.id}`][0].value.trim() ==''){
+                                                vaild = false
+                                            }
                                             el.dishName = this.$refs[`name_${el.id}`][0].value;
 
+                                            // 要更新的菜單
                                             upateDishDetailList.push(el)
                                         }else if(el.isEdit && el.id > this.APIdata.nowPKnum){
                                             el.Condition = parseInt(this.$refs[`condition_${el.id}`][0].value);
+                                            if(this.$refs[`name_${el.id}`][0].value.trim() ==''){
+                                                vaild = false
+                                            }
                                             el.dishName = this.$refs[`name_${el.id}`][0].value;
 
+                                            // 要更新的菜單 新增菜單
                                             insertDishDetailList.push(el)
                                             // console.log(`upadate`,el)
                                         }
                                     })                                  
                                 }
-                                // 新增菜品
-                                this.insertNewSetDatail(insertDishDetailList);
-                                // 編輯菜品
-                                this.updateSetDatail(upateDishDetailList);
+                                if(!vaild){
+                                    alert('新增及更新套餐菜品名不得為空值')
+                                }else{
+                                    // 新增菜品
+                                    this.insertNewSetDatail(insertDishDetailList);
+                                    // 編輯菜品
+                                    this.updateSetDatail(upateDishDetailList);     
+                                }
+                               
                                 
                             }else{
+                                if( this.$refs.setName.value.trim() ==='' ||
+                                this.$refs.setPrice.value.trim() ==='') alert('資料不得為空值')
                                 // 帶回之前的值
                                 this.$refs.setName.value = this.popOnSetDetail.setName;
                                 this.$refs.setPrice.value =  this.popOnSetDetail.price;
 
+                                
                                 // 帶回之前菜品的值
                                 for(const key in this.popOnSetDetail.dish){
                                     this.popOnSetDetail.dish[key].forEach((el)=>{
@@ -957,8 +990,7 @@
                                 alert("數據載入失敗: " + exception.status);
                             }
                         });
-                        }
-                        else{
+                        }else{
                             _this.getSetPrice();
                             _this.getOtherDish();
                         }
