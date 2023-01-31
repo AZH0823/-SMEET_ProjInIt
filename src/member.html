@@ -140,7 +140,7 @@
         <section class="order_list_section member_product_section" v-show="current_tab == 'list' ">
           <div class="order_list_title font14 gray">
             <!-- <p class="list1">類別</p> -->
-            <p class="list2">訂單日期</p>
+            <p class="list2">預約日期</p>
             <p class="list3">訂單編號</p>
             <p class="list4">訂單金額</p>
             <p class="list5">訂單狀態</p>
@@ -324,12 +324,22 @@
         </div>
       </main>
       <!-- 修改完成popup -->
-      
+      <!-- 移除收藏成功popup -->
+<div class="logout_pop logout_pop_index none" id="collect_delete_popup">
+
+  <article>
+      <div class="check_text">
+          <i class="fa-solid fa-circle-check"></i>
+          <h6>移除成功</h6>
+      </div>
+  </article>
+</div>
       @@include('layout/footer.html')
     </div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="js/vender/Jquery/jquery-3.6.1.js"></script>
     <script src="js/header.js"></script> 
-    <script src="js/vender/Vue/vue.global.js"></script>
+    <script src="js/vender/Vue/vue.global.prod.js"></script>
     <script src="js/frontpage/cart_pop.js"></script>
     <script src="js/frontpage/login.js"></script>
     <script src="js/frontpage/login_check.js"></script>
@@ -784,7 +794,7 @@
           // ==========================收藏===========================
           //愛心點擊後取消收藏(移除陣列資訊)
           cancel_collect(i){
-            console.log(i);
+            // console.log(i);
             if(member_ID){
               // let r = confirm('確定取消收藏');
               // 這個ID是favorite table 的ID
@@ -806,6 +816,10 @@
                         },500);
                         // console.log('aa')
                         this.collect_num();
+                        document.getElementById('collect_delete_popup').classList.remove('none');
+                        setTimeout(function(){
+                            document.getElementById('collect_delete_popup').classList.add('none');
+                        },1500);
                       },
                       error: function (exception) {
                         alert("發生錯誤: " + exception.status);
@@ -869,6 +883,8 @@
                     dataType: "json",
                     success:  (response) => {
                         if(response == "無資料"){
+                          document.getElementById('member_msg').classList.add('none');
+                          this.$refs.no_list_collect.classList.remove('none');
                             return;
                         }else{
                           let member_msg = document.getElementById('member_msg');

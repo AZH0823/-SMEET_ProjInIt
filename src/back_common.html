@@ -25,7 +25,13 @@
                 <div class="back_fromTitle">
                   <h4 class="h4 green-1">Q＆A常見問題管理</h4>
                   <div class="search">
-                    <div class="insert_btn" style="color: #898989">新增</div>
+                    <div
+                      class="insert_btn"
+                      style="color: #898989"
+                      @click="popon_show"
+                    >
+                      新增
+                    </div>
                     <div class="search_container_item">
                       <input type="text" placeholder="動態查詢..." />
                     </div>
@@ -58,14 +64,14 @@
                         <input
                           type="checkbox"
                           class="switch_btn"
-                          :checked="QA.Condition === 1"
+                          :checked="QA.Condition == 1"
                           @click="switchToggle(QA, $event)"
                         />
                         <span class="slider"></span>
-                        <p class="slider_content" v-if="QA.Condition === 1">
+                        <p class="slider_content" v-if="QA.Condition == 1">
                           上架
                         </p>
-                        <p class="slider_content" v-if="QA.Condition === 0">
+                        <p class="slider_content" v-if="QA.Condition == 0">
                           下架
                         </p>
                       </label>
@@ -81,16 +87,15 @@
             </section>
             <!-- section1 -->
           </main>
-          <!-- popon start -->
+          <!-- popon1 start -->
           <div
             id="myModal"
             class="modal"
             v-if="Popon_date.isEdit"
-            @click="outsideClose"
+            @click="outsideClose1"
           >
             <!-- 弹窗内容 -->
             <div class="modal-content" @click.stop>
-              
               <div class="QA_back_title">
                 <h6>QA管理</h6>
               </div>
@@ -112,42 +117,59 @@
                   <h6>{{Popon_date.AnswerContent}}</h6>
                 </div>
               </div>
-              <button class="QA_content_btn" @click="outsideClose" >
+              <button class="QA_content_btn" @click="outsideClose1">
                 儲存
               </button>
             </div>
           </div>
-          <!-- popon end -->
+          <!-- popon1 end -->
+          <!-- popon2 start -->
+          <div
+            id="myModal"
+            class="modal"
+            v-if="showpopon"
+            @click="outsideClose2"
+          >
+            <div class="modal-content" @click.stop>
+              <div class="QA_insert_title">
+                <h6>新增問答</h6>
+              </div>
+              <div class="QA_insert_category">
+                <h6>問題類型：</h6>
+                <select name="" id="QA_Category">
+                  <option value="">私廚預約（預設）</option>
+                  <option value="預約流程">預約流程</option>
+                  <option value="付款問題">付款問題</option>
+                  <option value="租借服務">租借服務</option>
+                </select>
+              </div>
+              <div class="QA_insert_QuestionContent">
+                <h6>問題：</h6>
+                <textarea
+                  id="QA_QuestionContent"
+                ></textarea>
+              </div>
+              <div class="QA_insert_AnswerContent">
+                <h6>回覆：</h6>
+                <textarea
+                  id="QA_AnswerContent"
+                  
+                ></textarea>
+                
+                <button
+                  class="QA_insert_btn"
+                  id="QA_btn"
+                  @click="QAajax()"
+                >
+                  儲存
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- popon2 end -->
           @@include('layout/back_footer.html')
         </div>
         <!-- container -->
-      </div>
-      <div class="section_common">
-        <div class="common_top">
-          <h6>新增問答</h6>
-        </div>
-        <div class="common_type">
-          <h6>問題類型：</h6>
-          <select name="" id="">
-            <option value="">私廚預約（預設）</option>
-            <option value="">商城購物</option>
-            <option value="">租借服務</option>
-            <option value="">配送問題</option>
-            <option value="">下單與付款</option>
-          </select>
-        </div>
-        <div class="common_question">
-          <h6>問題：</h6>
-          <textarea
-            placeholder="請問有最低用餐人數嗎？                     (6/25)"
-          ></textarea>
-        </div>
-        <div class="commmon_answer">
-          <h6>回覆：</h6>
-          <textarea>沒有！一個人也可以享有專屬私廚服務唷！</textarea>
-          <p>(0/300)</p>
-          <button class="common_content_btn">儲存</button>
-        </div>
       </div>
     </div>
     <script src="./js/vender/Vue/vue.global.js"></script>
@@ -164,8 +186,9 @@
               Category: "",
               QuestionContent: "",
               AnswerContent: "",
-              Condition: "",
+              Condition: 0,
             },
+            showpopon: false,
           };
         },
         created() {
@@ -194,7 +217,6 @@
             });
             console.log(this.BackQAList);
           },
-
           updateQACondition(QA) {
             // console.log(QA);
             $.ajax({
@@ -204,7 +226,7 @@
 
               data: {
                 QA_ID: QA.ID,
-                QA_Condition: QA.Condition,
+                QA_Condition: parseInt(QA.Condition),
               },
 
               dataType: "text",
@@ -218,7 +240,6 @@
               },
             });
           },
-
           switchToggle(QA, e) {
             if (window.confirm("是否要更商品狀態?")) {
               if (QA.Condition == 1) {
@@ -230,10 +251,9 @@
             } else {
               // console.log(e.target.checked)
               // console.log(dish.Condition)
-              e.target.checked = QA.Condition;
+              e.target.checked = parseInt(QA.Condition);
             }
           },
-
           popon_open(QA) {
             // console.log(contact);
             if (!this.Popon_date.isEdit) {
@@ -242,17 +262,52 @@
               this.Popon_date.Category = QA.Category;
               this.Popon_date.QuestionContent = QA.QuestionContent;
               this.Popon_date.AnswerContent = QA.AnswerContent;
-              this.Popon_date.Condition = QA.Condition;
+              this.Popon_date.Condition = parseInt(QA.Condition);
             } else {
             }
           },
-          outsideClose() {
+          popon_show() {
+            if (!this.Popon_date.isEdit) {
+              this.showpopon = true;
+            }
+          },
+          outsideClose1() {
             console.log(`close`);
             this.Popon_date.isEdit = false;
           },
+          outsideClose2() {
+            console.log(`close`);
+            this.showpopon = false;
+          },
+          QAajax() {
+            let QA_Category = document.getElementById("QA_Category");
+            let QA_QuestionContent =
+              document.getElementById("QA_QuestionContent");
+            let QA_AnswerContent = document.getElementById("QA_AnswerContent");
+            let QA_btn = document.getElementById("QA_btn");
+
+            $.ajax({
+              method: "POST",
+              url: "php/backpage/back_common_insert.php",
+              data: {
+                Category: QA_Category.value,
+                QuestionContent: QA_QuestionContent.value,
+                AnswerContent: QA_AnswerContent.value,
+              },
+
+              dataType: "text",
+              success: function (response) {
+                console.log(response);
+              },
+              error: function (exception) {
+                alert("傳送成功: " + exception.status);
+              },
+            });
+          },
         },
       });
-      app1.mount(".container");
+
+      app1.mount(".back_common");
     </script>
   </body>
 </html>

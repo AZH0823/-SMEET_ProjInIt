@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
         @@include('layout/meta.html', { "title": "私覓SMEET", })
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="icon" href="./img/index_img/logo2-03 1.ico" type="image/x-icon"/>
+        <link rel="stylesheet" href="css/style.css">  
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     </head>
@@ -25,12 +24,12 @@
                             接觸瞬間完美保存食材原汁原味<br>
                             征服您的味蕾<br>
                         </p>
-                        <div class="btn_view">
+                        <a class="btn_view" href="./menu.html">
                             <p>查看菜單</p>
                             <span>
                                 <p>view</p>
                             </span>
-                        </div>
+                        </a>
                     </div>
                     <div class="index_menu_right" data-aos="fade-right" data-aos-duration="2000">
                         <img src="./img/index_img/index_hotmenu.jpg" alt="">
@@ -85,14 +84,14 @@
                     <div class="_line_box">
                         <div class="_index_line"></div>
                     </div>
-                    <div id='calendar'></div>
+                    <div id='calendar' class="calendar"></div>
                 </div>
-                <div class="btn_view">
+                <a class="btn_view" href="./reserve01.html">
                     <p>立即預約</p>
                     <span>
                         <p>view</p>
                     </span>
-                </div>
+                </a>
             </div>
             <!--------------------------- 最新動態 --------------------------->
             <div class="_index_news fulid_wrapper">
@@ -417,6 +416,7 @@
     <script src="js/index_header.js"></script>
     <script src="js/vender/Vue/vue.global.js"></script>
     <script src="js/frontpage/cart_pop.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="js/frontpage/login.js"></script>
     <script src="js/frontpage/login_check.js"></script>
     <script src="js/frontpage/index_login.js"></script>
@@ -653,6 +653,6 @@
     //     }
     //   });
 </script> 
-
+</script>
 </body>
 </html>
