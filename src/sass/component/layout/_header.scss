@@ -173,7 +173,7 @@
 
           @include mobile() {
             width: 80%;
-            margin: 0 auto;
+            margin: -8px auto;
           }
 
           @media all and (max-width: 300px) {
