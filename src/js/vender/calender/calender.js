@@ -83,6 +83,14 @@ const final = {}
         businessHours: true,
         dayMaxEvents: true, 
         events:final_array,
+          moreLinkContent:function(args){
+            let count_element = document.createElement('span');
+            count_element.setAttribute('style', 'font-size: 12px;');
+            count_element.innerHTML = '顯示更多';
+          return {
+              domNodes:[count_element],
+          }
+        }
       
       });
       
