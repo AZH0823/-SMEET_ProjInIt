@@ -61,10 +61,10 @@
                                     <div class="grid_item">{{ item.Price }}</div>
                                     <div class="grid_item">
                                         <label class="switch">
-                                            <input type="checkbox" class="switch_btn" :checked="item.Condition === 1" @click="switchToggle(item, $event)">
+                                            <input type="checkbox" class="switch_btn" :checked="item.Condition == 1" @click="switchToggle(item, $event)">
                                             <span class="slider"></span>
-                                            <p class="slider_content" v-if="item.Condition === 1">上架</p>
-                                            <p class="slider_content" v-if="item.Condition === 0">下架</p>
+                                            <p class="slider_content" v-if="item.Condition == 1">上架</p>
+                                            <p class="slider_content" v-if="item.Condition == 0">下架</p>
                                         </label>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                                     <h6>白貓宅配 ○</h6>
                                     <h6>超商取貨 ●</h6>
                                 </div> -->
-                                <button class="product_content_btn" @click="doSubmit()">儲存</button>
+                                <button class="product_content_btn" @click="doSubmit(popupData)">儲存</button>
                 
                             </div>
                         </div>
@@ -190,8 +190,7 @@
                     loadedImage: null,
                     ImageResult: null,
 
-                    // 照片測試資料
-                    imgData2: "./img/shopmall_img/shopmall_product13.jpg ./img/shopmall_img/shopmall_product14.jpg ./img/shopmall_img/shopmall_product15.jpg",
+                    imgData2: "./img/shopmall_img/shopmall_dessert01_1.jpg ./img/shopmall_img/shopmall_dessert01_2.jpg ./img/shopmall_img/shopmall_dessert01_3.jpg",
 
                     // Ajax的產品資料
                     product: [],
@@ -204,7 +203,8 @@
                         ShopPoint: "",
                         Introduction: "",
                         IMG: null,
-                        pushisedDate: Date.now()
+                        pushisedDate: Date.now(),
+                        Condition: 1
                     },
 
                     // ========= popUp ========= // 
@@ -321,7 +321,7 @@
                         // 不儲存就回到原來參數
                         this.$refs.os_DishName.value =  item.Name;
                         this.$refs.os_Condtion.value = parseInt(item.Condition);
-                        this.$refs.os_Price.value = item.price;
+                        this.$refs.os_Price.value = item.Price;
                     }      
 
                 },
@@ -493,12 +493,7 @@
                             dataType: "text",
                             success: (response) => {
 
-
-
                                 console.log(response);
-
-
-
 
                                 // 加入商品成功 popUp
                                 this.success_popup = '新增商品成功'
@@ -535,7 +530,7 @@
                 },
 
                 // 新增商品資訊
-                doSubmit(){
+                doSubmit(popupData){
                     // 判斷資料格式是否正確
                     // if (this.popupData.Name == '') {
                     //     alert("請填寫[商品名稱]");
@@ -581,9 +576,10 @@
                     const dish_Type = this.popupData.Type;
                     const dish_Name = this.popupData.Name;
                     const dish_Price = this.popupData.Price;
-                    // const dish_IMG = this.imgData2; // 照片測試資料
+                    const dish_IMG = this.imgData2;
                     const dish_ShopPoint = this.popupData.ShopPoint;
                     const dish_Introduction = this.popupData.Introduction; 
+                    const dish_Condition = this.popupData.Condition; 
 
                     // console.log(dish_Type); 
                     // console.log(dish_Name);
@@ -592,6 +588,7 @@
                     // console.log(dish_ShopPoint);
                     // console.log(dish_Introduction);
 
+
                     $.ajax({            
                         method: "POST",
                         url: "php/backpage/back_productManger_i.php",
@@ -599,23 +596,52 @@
                             dish_Type,
                             dish_Name,
                             dish_Price,
-                            // dish_IMG, // 照片測試資料
-                            dish_Name,
+                            dish_IMG, // 照片測試資料
                             dish_ShopPoint,
-                            dish_Introduction
+                            dish_Introduction,
+                            dish_Condition
                         },            
-                        dataType: "text",
+                        dataType: "json",
                         success: (response)=> {
-                            // console.log(response);
-                            // response.ID
-                            this.insertImg(response);
-                            
+                                
+                                
+                                // 改變 Vue 塞回原本API資料內
+                                this.product.push(response[0]);
+                                
+                                // callback img insert
+                                // this.insertImg(response);
+                                
+                                // 加入商品成功 popUp
+                                this.success_popup = '新增商品成功'
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "hidden";
+
+                                // PopOn 消失
+                                clearInterval(this.success_popup_interval)
+                                this.success_popup_interval = setInterval(() => {
+                                    this.success_popup= ''
+                                    // overfloat: auto
+                                    let body = document.querySelector('body');
+                                    body.style.overflow = "auto";
+                                }, 1000);
+
                         },
                         error: function(exception) {
                             alert("數據載入失敗: " + exception.status);
                         }
                     });
 
+                    // 清空popupData資料
+                    this.popupData = {
+                            Type: '商城主食',
+                            Name: "",
+                            Price: "",
+                            ShopPoint: "",
+                            Introduction: "",
+                            IMG: "",
+                        }
+                    // 關閉popUp
+                    this.isShow = false; 
                     
                 },
 
@@ -638,6 +664,7 @@
                         Introduction: "",
                         IMG: "",
                         pushisedDate: Date.now()
+                        
                     }
                 },
 

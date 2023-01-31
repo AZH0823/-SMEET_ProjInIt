@@ -37,7 +37,7 @@ div.back_contactUs {
                 width: 100%;
                 text-align: center;
                 align-items: center;
-                grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+                grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
                 border-bottom: 0.5px solid #ccc;
                 &:first-child {
                   background-color: $Camel-3;
@@ -76,8 +76,8 @@ div.back_contactUs {
         
         .modal-content {
           width: 580px;
-          height: 520px;
-          margin: 20px auto;
+          height: 400px;
+          margin: 100px auto;
           background-color: #fff;
           h6 {
             font-size: 16px;
@@ -127,22 +127,15 @@ div.back_contactUs {
             flex-direction: column;
             margin-top: 15px;
             p {
-              height: 220px;
+              height: 120px;
               background-color: #f9f4ec;
               font-size: 12px;
               padding: 10px;
             }
-            textarea {
-              margin-top: 25px;
-              height: 400px;
-              height: 80px;
-              outline: none;
-              resize: none;
-            }
             .contactus_content_btn {
-              width: 120px;
-              height: 30px;
-              margin: 10px auto;
+              width: 80px;
+              height: 20px;
+              margin: 5px auto;
             }
           }
         }
