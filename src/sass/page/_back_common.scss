@@ -54,7 +54,7 @@
                                     width: 100%;
                                     text-align: center;
                                     align-items: center;
-                                    grid-template: repeat(1, 1fr) / repeat(3, 1fr) 300px 1fr 1fr;
+                                    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
                                     border-bottom: 0.5px solid #ccc;
                                     &:first-child {
                                         background-color: $Camel-3;
@@ -267,7 +267,11 @@
               resize: none;
             }
           }
-
+          .QA_content_btn{
+            width: 50px;
+            height: 25px;
+            margin: 20px 190px;
+          }
           .QA_insert_btn {
             width: 50px;
             height: 25px;
