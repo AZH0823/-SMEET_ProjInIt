@@ -44,13 +44,13 @@
                     </div>
                     <div class="grid_item">
                       <!-- 立雁杉團隊 -->
-                      <div v-if="current_edit !== item.ID">{{item.LederName}}</div>
-                      <input type="text" name="" id="" v-else>
+                      <div v-if="current_edit !== item.ID">{{item.LederName}}&nbsp廚師長</div>
+                      <input type="text" name="" id="" v-else :value="item.LederName">
                     </div>
                     <div class="grid_item">
                       <!-- 人稱，平成末的日式... -->
-                      <div v-if="current_edit !== item.ID">{{item.LederProfile}}</div>
-                      <input type="text" name="" id="" v-else>
+                      <div v-if="current_edit !== item.ID">{{LederProfileEdit(item.LederProfile)}}</div>
+                      <input type="text" name="" id="" v-else :value="item.LederProfile" font-size="16px">
                     </div>
                     <div class="grid_item green-2 checked" @click="current_edit = item.ID" v-if="current_edit !== item.ID">
                       編輯
@@ -299,7 +299,7 @@
         },
         
         computed: {
-
+     
         },
 
         created(){
@@ -311,7 +311,11 @@
         },
 
         methods: {
-          
+          LederProfileEdit(Name){
+            console.log(Name)
+            // element.LederProfile = element.LederProfile.substr(0, 11) + '...'
+            return Name.substr(0, 11) + '...';
+          },
           team() {
             let _this = this;
               
@@ -324,15 +328,10 @@
                             // console.log(response);
                             response.forEach((element) => {
                               
-                                element.LederProfile = element.LederProfile.substr(0, 12);
-                                // console.log(_this.chefTeam);
-                                if (element.LederProfile.length <= 10) {
+                             
+                                    // element.LederProfile = element.LederProfile.substr(0, 11) + '...'
                                     _this.chefTeam.push(element);
-
-                                } else {
-                                    element.LederProfile = element.LederProfile.substr(0, 11) + '...'
-                                    _this.chefTeam.push(element);
-                                }
+                              
                               
                             });
                         },
@@ -341,6 +340,142 @@
                         },
                   });
           },
+
+
+          //取得一筆資料
+          getMallOneData(id){
+              const that = this; 
+              // console.log(id);
+              fetch(`php/backpage/getAllMallOrderData.php?ID=${id}`)
+              .then(response => {
+                // console.log(response.json());
+                return  response.json()
+              })
+              .then( datalist => {
+                that.shopDetail = [];
+                datalist.forEach(data=>{
+                  this.shopDetail.push(data);
+                })
+                that.$nextTick(function(){
+                  that.shopDetail = {...that.shopDetail}
+                });
+              
+              }).catch(err=>{
+                    console.log(err)
+                })
+            },
+
+            //送出編輯order訂單的API
+            updateMallData(popOnOpen){
+              // console.log(popOnOpen.ID,popOnOpen.Phone,popOnOpen.Email,popOnOpen.Address,popOnOpen.Name);
+              const that = this;
+              $.ajax({
+                  method:"POST",
+                  url: "php/backpage/updateMallData.php",
+                  data : {
+                    ID:popOnOpen.ID,
+                    Phone:popOnOpen.Phone,
+                    Email:popOnOpen.Email,
+                    Address:popOnOpen.Address,
+                    Name:popOnOpen.Name
+                  },
+                  dataType:"text",
+                  success:function(response){
+                    if(response == 'Y'){
+        
+                    }else{
+                      console.log(`其他錯誤`);
+                    }
+                  },
+                  error: function(exception){
+                    alert("發生錯誤:" +exception.status);
+                  }
+
+              });
+
+            },
+
+            updataStateAPI(id,State){
+              // console.log(id,State);
+              $.ajax({
+                method:"POST",
+                url:"php/backpage/updateMallData.php",
+                data : {
+                  Msg:'update',
+                  ID:id,
+                  State:State
+                },
+                dataType:"text",
+                success:function(response){
+                  if(response == 'Y'){
+
+                  }else{
+                    console.log(`其他錯誤`);
+                  } 
+                },
+                error: function(exception){
+                    alert("發生錯誤:" +exception.status);
+                  }
+              })
+            },
+
+            updataStatus(item,e){
+              if(!confirm("是否更換訂單狀態?")){
+                // console.log(e.target.value);
+                e.target.value = item.State
+              }else{
+                item.State = e.target.value
+                this.updataStateAPI(item.ID,item.State)
+                // console.log(item.ID);
+              }
+            },
+
+            //新資料更新回舊資料
+            storageBtn(){
+              const newOrderValue = {
+                Name:this.$refs.orderName.value,
+                Phone:this.$refs.orderPhone.value,
+                Email:this.$refs.orderEmail.value,
+                Address:this.$refs.orderAddress.value,
+              }
+
+              if(this.popOnOpen.isEdit){
+                if(window.confirm('確定修改訂單資訊嗎?')){
+
+                  // console.log(newOrderValue.Name);
+                  this.popOnOpen.Name = newOrderValue.Name;
+                  this.popOnOpen.Phone = newOrderValue.Phone;
+                  this.popOnOpen.Email = newOrderValue.Email;
+                  this.popOnOpen.Address = newOrderValue.Address;
+
+                  this.popOnOpen.isEdit = false;
+                  //將編輯後的this.popOnOpen資料帶去updateMallData
+                  this.updateMallData(this.popOnOpen);
+                
+                  //更新API資料是指在外一層的data
+                  const newID = this.popOnOpen.ID;
+                  // console.log(newID);
+
+                  this.apiData.forEach((data)=>{
+                    //data指向所有在vue中data的值
+                    // console.log(data);
+                      if(newID == data.ID){
+                        data.Name = newOrderValue.Name;
+                        data.Phone = newOrderValue.Phone;
+                        data.Email = newOrderValue.Email;
+                        data.Address = newOrderValue.Address;
+                      }
+
+
+                  })
+
+                }else{
+
+                }
+              }else{
+                alert(`資料未修改`)
+              }
+            },
 
          
    

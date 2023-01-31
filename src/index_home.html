@@ -500,10 +500,10 @@
             // 主要商品data AJAX 傳入
             this.getCate();
             var swiper = new Swiper(".mySwiper2", {
-        slidesPerView: 'auto',
-        slidesPerGroup: 1,
-      });
-        },
+                slidesPerView: 'auto',
+                slidesPerGroup: 1,
+                });
+            },
 
         methods:{
 
@@ -546,26 +546,26 @@
 
                             this.$nextTick(()=>{
                                 var swiper = new Swiper(".mySwiper", {
-        breakpoints: {
-            slidesPerGroup: 4,
-            720: {
-                slidesPerGroup: 4,
-            },
-            428: {
-                slidesPerGroup: 3,
-            },
-            1: {
-                slidesPerGroup: 2,
-            }
-        },
-        slidesPerView: 'auto',
-        loop: true,
-        loopFillGroupWithBlank: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
+                                    breakpoints: {
+                                        slidesPerGroup: 4,
+                                        720: {
+                                            slidesPerGroup: 4,
+                                        },
+                                        428: {
+                                            slidesPerGroup: 3,
+                                        },
+                                        1: {
+                                            slidesPerGroup: 2,
+                                        }
+                                    },
+                                    slidesPerView: 'auto',
+                                    loop: true,
+                                    loopFillGroupWithBlank: true,
+                                    pagination: {
+                                    el: ".swiper-pagination",
+                                    clickable: true,
+                                    },
+                                });
 
                             })
                             // console.log("123");
