@@ -730,16 +730,28 @@ log_ham.addEventListener('click',function(e){
 // window.addEventListener('DOMContentLoaded', (event) => {
     function ShoppingCartQty(index){
         let car_num = document.getElementById('car_num');
+        
         const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
         // console.log(LSGetItem.length);
         // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
         if(LSGetItem == [] || LSGetItem == ""){
             car_num.innerHTML = "";
         }else{
-            car_num.classList.remove('none');
-            car_num.innerHTML = LSGetItem.length;
+            // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+            if (document.location.href.includes('index_home.html')) {
+                let car_num2 = document.getElementById('car_num2');
+                car_num2.classList.remove('none');
+                car_num2.innerHTML = LSGetItem.length;
+
+                car_num.classList.remove('none');
+                car_num.innerHTML = LSGetItem.length;
+            }else{
+                car_num.classList.remove('none');
+                car_num.innerHTML = LSGetItem.length;
+            }
         }
     };
+    // 同步購物車 qty 數量
     ShoppingCartQty();
 // });
 

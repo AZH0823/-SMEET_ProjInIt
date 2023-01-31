@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, 
-initial-scale=1.0">
+        @@include('layout/meta.html', { "title": "私覓SMEET-線上商城", })
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <title>私覓SMEET-e.購物商城</title>
         <link rel="stylesheet" href="./css/style.css"/>
@@ -287,12 +284,14 @@ initial-scale=1.0">
 
                 // shoppingData 的 Storage不是空值就拿購物車資料，空值就不拿購物車資料
                 getCartLocalStorage(){
-                    const local_storage = localStorage.getItem("shoppingData")
+                    const local_storage = localStorage.getItem("shoppingData");
 
                     if(local_storage){
-                        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) ;
 
-                        this.ShoppingCartList = LSGetItem
+                        console.log('MALL',LSGetItem);
+                        this.ShoppingCartList = LSGetItem;
+                        console.log('Mall LS:',LSGetItem)
                     }
                 },
 
