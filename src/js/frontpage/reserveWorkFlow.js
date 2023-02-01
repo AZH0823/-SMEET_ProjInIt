@@ -89,11 +89,11 @@ const RootComponent  = {
     methods:{        
         // GET API
         initAPI(){
-            this.getSetdishDetail();
+            this.getTeam();
+            this.getSetPrice();
             this.getOtherDish();
             this.getServier();
-            this.getSetPrice();
-            this.getTeam();
+            this.getSetdishDetail();
         },
         // 取得會員點數
         getMemberPoint(_id){
@@ -177,7 +177,7 @@ const RootComponent  = {
                             id:data_el.id,
                             dishName:data_el.disName,
                             dishType:data_el.dishType,
-                            price:data_el.price,
+                            price:parseInt(data_el.price),
                             qty:0
                         }
                         this.APIData_in.otherDish.push(obj);
@@ -574,7 +574,7 @@ const RootComponent  = {
                 }
             }
             // 算出總金額給
-            totalPrice = parseInt((this.APIData_in.sets[setID].price) * this.inputData.peoCount);
+            totalPrice = parseInt(this.APIData_in.sets[setID].price) * parseInt(this.inputData.peoCount);
             // 撈出使用者單點項目細節
             this.APIData_in.otherDish.forEach(dish => {
                 if(dish.qty > 0){
@@ -719,12 +719,12 @@ const RootComponent  = {
         // orderview 總金額計算
         totalPrice(){
             // 訂單人數
-            const count = this.inputData.peoCount;
+            const count = parseInt(this.inputData.peoCount) || 5;
             
             // 套餐金額
-            let setPrice = {...this.APIData_in.sets.find(el=>el.id===this.inputData.sets)}.price;
+            let setPrice = parseInt({...this.APIData_in.sets.find(el=>el.id===this.inputData.sets)}.price) || 3000;
             let setTotal = parseInt(count) * parseInt(setPrice);
-            
+           
             // 單點金額
             let otherDish = 0;
             
@@ -752,7 +752,7 @@ const RootComponent  = {
                         return parseInt(serve.price);
                     }else return 0
                 }).reduce((a,b)=>a+b,0)
-                otherServies = otherServies * parseInt(count);
+                otherServies = parseInt(otherServies) * parseInt(count);
             }
            
             return `${(parseInt(setTotal) + parseInt(otherDish) + parseInt(otherServies) - parseInt(point)).toLocaleString()}`;
