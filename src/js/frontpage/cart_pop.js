@@ -104,8 +104,10 @@ let cart_pop = Vue.createApp({
                     
                     // 判斷當前頁面,清空對應qty
                     if (document.location.href.includes('index_home.html')) {
+                        car_num2.classList.add('none');
                         car_num2.innerHTML = "";
-                    }else{
+
+                        car_num.classList.add('none');
                         car_num.innerHTML = "";
                     }
                 }else{
