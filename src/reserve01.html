@@ -97,7 +97,7 @@
                             </select>
                             <span class="warning_title" v-if="vaildTeam">＊欄位尚未填寫</span>
                         </div>
-                        <button class="next_btn" @click="vaildDataLists($event)">下一步</button>
+                        <button class="next_btn" @click="vaildDataLists($event)" v-if="data.chefScheduled.length !== 0">下一步</button>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                         // 預定時間
                         oderTime:[
                             {id:1,txt:'午餐',time:'11:00-14:00'},
-                            {id:2,txt:'下午茶',time:'11:00-14:00'},
+                            {id:2,txt:'下午茶',time:'14:30-16:00'},
                             {id:3,txt:'晚餐',time:'18:00-21:00'},
                         ] , 
                         historylist:[],

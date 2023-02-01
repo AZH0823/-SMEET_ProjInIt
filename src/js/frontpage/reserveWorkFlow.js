@@ -49,7 +49,7 @@ const RootComponent  = {
                 // 訂餐時間
                 orderTime:[
                     {id:1,txt:'午餐',time:'11:00-14:00'},
-                    {id:2,txt:'下午茶',time:'11:00-14:00'},
+                    {id:2,txt:'下午茶',time:'14:30-16:00'},
                     {id:3,txt:'晚餐',time:'18:00-21:00'},
                 ], 
                 
@@ -300,9 +300,13 @@ const RootComponent  = {
         // WorkFlow 流程邏輯
         changeStep(val,e){                    
             let vaildStep = false;//若有False 將不進入下一個流程
-
-            // step 1 檢查套餐及套及數量
-            if(this.workFlow.step === 1){
+            if(this.workFlow.step == 1 && e.target.className.includes('prev_btn btn')){
+                // 返回上一頁
+                // console.log(`返回上一頁`)
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.location.href="reserve01.html";
+            }else if(this.workFlow.step === 1){
+                // step 1 檢查套餐及套及數量
                 // 使用者點選餐點
                 let setID = this.inputData.sets - 1;
                 // 訂餐人數
