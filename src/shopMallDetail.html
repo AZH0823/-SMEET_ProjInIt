@@ -57,7 +57,7 @@
 
 
 
-            <!-- ====================== // TODO 下面需要篩選最新的商品資料 ====================== -->
+            <!-- ====================== // 下面需要篩選最新的商品資料 ====================== -->
             
             <!-- 最後最新商品 -->
             <div class="collect_section new_product">
@@ -119,8 +119,14 @@
             </div>
 
             <!-- cart 燈箱 -->
-            <div class="wrapper product_pop" id="product_pop" v-if="isShow" style="display: none;" :style="isShow? 'display:block' : 'display:none'">
-                <div class="container" :data-id="this.popupData.id">
+            <div class="product_pop" 
+            id="product_pop" 
+            v-if="isShow" 
+            style="display: none;" 
+            :style="isShow? 'display:block' : 'display:none'"
+            @click="product_pop_close()"
+            >
+                <div class="container" :data-id="this.popupData.id" @click.stop>
                     <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG, popupData.qty)"></i>
                     <div class="img_product">
                         <img :src="popupData.IMG[0]" alt="">
@@ -255,8 +261,12 @@
                 // 最新商品data AJAX 傳入
                 this.getLatestProduct();
 
+                // 同步購物車QTY
+                // this.ShopCartQty();
+
                 // 進商品詳情頁就抓購物車資料
-                this.getCartLocalStorage()
+                this.getCartLocalStorage();
+                
             },
 
             methods: {
@@ -275,6 +285,46 @@
                     }
                     
                 },
+                
+                // ShopCartQty(){
+                //     let car_num = document.getElementById('car_num');
+                //     let car_num2 = document.getElementById('car_num2');
+
+                //     const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                //     // console.log(LSGetItem.length);
+                //     // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                //     if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
+                //         // 判斷當前頁面,清空對應qty
+                //         if (document.location.href.includes('index_home.html')) {
+                //             car_num2.classList.add('none');
+                //             car_num2.innerHTML ="";
+
+                //             car_num.classList.add('none');
+                //             car_num.innerHTML = "";
+                //         }else{
+                //             car_num.classList.add('none');
+                //             car_num.innerHTML = "";
+                //         }
+                //     }else{
+                //         // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+                //         if (document.location.href.includes('index_home.html')) {
+                //             let car_num2 = document.getElementById('car_num2');
+                //             car_num2.classList.remove('none');
+                //             car_num2.innerHTML = LSGetItem.length;
+
+                //             car_num.classList.remove('none');
+                //             car_num.innerHTML = LSGetItem.length;
+
+                //         }else if(document.location.href.includes('shopMall.html')){
+                //             car_num.classList.remove('none');
+                //             car_num.innerHTML = LSGetItem.length;
+                            
+                //         }else if(document.location.href.includes('shopMallDetail.html')){
+                //             car_num.classList.remove('none');
+                //             car_num.innerHTML = LSGetItem.length;
+                //         }
+                //     }
+                // },
 
                 // 立即結帳前檢查是否登入會員，已登入就跳轉畫面到結賬頁面
                 addShoppingCart_check(shopMallDetailInfo){    
@@ -473,23 +523,32 @@
                                     
                     // 改變shoppingcar QTY
                     ShoppingCartQty();
-                    
 
-                    // 控制購物車popUp
-                    if(this.ShoppingCartList != ""){
-                        this.shopCartsuccess_popup = '加入購物車成功'
-                        // overfloat: hidden
-                        let body = document.querySelector('body');
-                        body.style.overflow = "hidden";
+                },
+                ShoppingCartQty(){
+                    let car_num = document.getElementById('car_num');
+                    let car_num2 = document.getElementById('car_num2');
+                    const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                    console.log(LSGetItem.length);
+                
+                    // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                    if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
+                        car_num.innerHTML = "";
+                        car_num2.innerHTML = "";
+                        return ;
+                    }else{
+                        // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+                        if (document.location.href.includes('index_home.html')) {
+                            car_num2.classList.remove('none');
+                            car_num2.innerHTML = LSGetItem.length;
+
+                            car_num.classList.remove('none');
+                            car_num.innerHTML = LSGetItem.length;
+                        }else{
+                            car_num.classList.remove('none');
+                            car_num.innerHTML = LSGetItem.length;
+                        }
                     }
-                    // PopOn 消失
-                    clearInterval(this.success_popup_interval)
-                    this.success_popup_interval = setInterval(() => {
-                        this.shopCartsuccess_popup= ''
-                        // overfloat: auto
-                        let body = document.querySelector('body');
-                        body.style.overflow = "auto";
-                    }, 1000);
                 },
 
                 // 詳情商品數量加
@@ -673,6 +732,15 @@
                     this.popupData.IMG = IMG;
                     this.popupData.qty = 1;
 
+                },
+
+                // 點擊 container 關掉 popUp
+                product_pop_close(){
+                    this.isShow = false;
+
+                    // overfloat: auto
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
                 },
 
                 // 點擊卡片 X 關閉popUp並清空資料

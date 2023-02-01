@@ -13,8 +13,8 @@ indexslide_user.addEventListener('click',function(e){
 let timeoutId;
 // hover
 indexslide_user.addEventListener('mouseover',function(){
-    // 清除上一次的 timeout
-    clearTimeout(timeoutId);
+    // // 清除上一次的 timeout
+    // clearTimeout(timeoutId);
     //hover 不跳彈窗
     $.ajax({            
         method: "POST",
@@ -24,7 +24,7 @@ indexslide_user.addEventListener('mouseover',function(){
         success: function (response) {
             if(response == ""){
                 //尚未登入->跳出會員登入畫面
-                login_pop();
+                // login_pop();
             }else{
                 //已有登入的話 執行.....
                 // 會員icon顯示
