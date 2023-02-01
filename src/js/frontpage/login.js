@@ -120,7 +120,7 @@ let login_app = Vue.createApp({
 
         //當立即加入按下
         member_add() {
-            console.log(users);
+            // console.log(users);
             //把會員帳號密碼 資料寫到陣列
             this.user_add.id = new Date().getTime();
             this.users.push(this.user_add);
@@ -741,6 +741,9 @@ log_ham.addEventListener('click',function(e){
                 car_num2.classList.add('none');
                 car_num2.innerHTML ="";
 
+                car_num.classList.add('none');
+                car_num.innerHTML = "";
+            }else{
                 car_num.classList.add('none');
                 car_num.innerHTML = "";
             }

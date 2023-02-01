@@ -82,10 +82,10 @@ let cart_pop = Vue.createApp({
 
                 // 判斷當前頁面，並同步Vue.$data.shoppingCarList
                 if (document.location.href.includes('shopMallDetail.html')) {
-                    console.log("shopmallDetail");
+                    // console.log("shopmallDetail");
                     vm_shopmallDetail.$data.ShoppingCartList = LSGetItem;
                 }else if(document.location.href.includes('shopMall.html')){
-                    console.log("shopmall");
+                    // console.log("shopmall");
                     vm_shopmall.$data.ShoppingCartList = LSGetItem;
                 }
 
@@ -107,6 +107,9 @@ let cart_pop = Vue.createApp({
                         car_num2.classList.add('none');
                         car_num2.innerHTML = "";
 
+                        car_num.classList.add('none');
+                        car_num.innerHTML = "";
+                    }else{
                         car_num.classList.add('none');
                         car_num.innerHTML = "";
                     }

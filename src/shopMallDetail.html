@@ -262,7 +262,7 @@
                 this.getLatestProduct();
 
                 // 同步購物車QTY
-                this.ShopCartQty();
+                // this.ShopCartQty();
 
                 // 進商品詳情頁就抓購物車資料
                 this.getCartLocalStorage();
@@ -286,45 +286,45 @@
                     
                 },
                 
-                ShopCartQty(){
-                    let car_num = document.getElementById('car_num');
-                    let car_num2 = document.getElementById('car_num2');
+                // ShopCartQty(){
+                //     let car_num = document.getElementById('car_num');
+                //     let car_num2 = document.getElementById('car_num2');
 
-                    const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
-                    // console.log(LSGetItem.length);
-                    // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
-                    if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
-                        // 判斷當前頁面,清空對應qty
-                        if (document.location.href.includes('index_home.html')) {
-                            car_num2.classList.add('none');
-                            car_num2.innerHTML ="";
+                //     const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+                //     // console.log(LSGetItem.length);
+                //     // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+                //     if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
+                //         // 判斷當前頁面,清空對應qty
+                //         if (document.location.href.includes('index_home.html')) {
+                //             car_num2.classList.add('none');
+                //             car_num2.innerHTML ="";
 
-                            car_num.classList.add('none');
-                            car_num.innerHTML = "";
-                        }else{
-                            car_num.classList.add('none');
-                            car_num.innerHTML = "";
-                        }
-                    }else{
-                        // 判斷當前頁面，並同步Vue.$data.shoppingCarList
-                        if (document.location.href.includes('index_home.html')) {
-                            let car_num2 = document.getElementById('car_num2');
-                            car_num2.classList.remove('none');
-                            car_num2.innerHTML = LSGetItem.length;
+                //             car_num.classList.add('none');
+                //             car_num.innerHTML = "";
+                //         }else{
+                //             car_num.classList.add('none');
+                //             car_num.innerHTML = "";
+                //         }
+                //     }else{
+                //         // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+                //         if (document.location.href.includes('index_home.html')) {
+                //             let car_num2 = document.getElementById('car_num2');
+                //             car_num2.classList.remove('none');
+                //             car_num2.innerHTML = LSGetItem.length;
 
-                            car_num.classList.remove('none');
-                            car_num.innerHTML = LSGetItem.length;
+                //             car_num.classList.remove('none');
+                //             car_num.innerHTML = LSGetItem.length;
 
-                        }else if(document.location.href.includes('shopMall.html')){
-                            car_num.classList.remove('none');
-                            car_num.innerHTML = LSGetItem.length;
+                //         }else if(document.location.href.includes('shopMall.html')){
+                //             car_num.classList.remove('none');
+                //             car_num.innerHTML = LSGetItem.length;
                             
-                        }else if(document.location.href.includes('shopMallDetail.html')){
-                            car_num.classList.remove('none');
-                            car_num.innerHTML = LSGetItem.length;
-                        }
-                    }
-                },
+                //         }else if(document.location.href.includes('shopMallDetail.html')){
+                //             car_num.classList.remove('none');
+                //             car_num.innerHTML = LSGetItem.length;
+                //         }
+                //     }
+                // },
 
                 // 立即結帳前檢查是否登入會員，已登入就跳轉畫面到結賬頁面
                 addShoppingCart_check(shopMallDetailInfo){    
