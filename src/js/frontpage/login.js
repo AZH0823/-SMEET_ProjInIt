@@ -24,7 +24,18 @@ let login_app = Vue.createApp({
         }
     },
     computed: {},
-    mounted() {},
+    mounted() {
+        // 判斷是否登入了 登入的話會員icon顏色會改變
+        if(member_ID){
+            // 會員icon變色
+            document.querySelector('.slide_user').classList.remove('black');
+            document.querySelector('.slide_user').classList.add('green-3');
+        }else{
+            // 會員icon變色
+            document.querySelector('.slide_user').classList.add('black');
+            document.querySelector('.slide_user').classList.remove('green-3');
+        }
+    },
     methods: {
         //tab切換-註冊會員
         add_tab() {
@@ -175,6 +186,9 @@ let login_app = Vue.createApp({
                         setTimeout(function(){
                             login_ok_popup.classList.add('none');
                         },2000);
+                        // 會員icon變色
+                        document.querySelector('.slide_user').classList.remove('black');
+                        document.querySelector('.slide_user').classList.add('green-3');
                         //取得會員ID
                         $.ajax({            
                             method: "POST",
@@ -681,6 +695,10 @@ userpop_log.addEventListener('click',function(e){
             setTimeout(function(){
                 document.querySelector('.logout_pop').classList.add('none');
             },2000);
+            // 會員icon顏色變回灰色
+            document.querySelector('.slide_user').classList.add('black');
+            document.querySelector('.slide_user').classList.remove('green-3');
+            // 移除localstorage的member_ID
             localStorage.removeItem('member_ID');
             log_ham.innerHTML = "登入";
             // localStorage.clear();
