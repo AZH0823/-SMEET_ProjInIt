@@ -678,7 +678,10 @@ user_icon.addEventListener('mouseover',function(){
 })
 
 user_icon.addEventListener('mouseleave',function(){
-    user_pop.classList.add('none');
+    // 延遲一段時間後執行 mouseleave 事件
+    timeoutId = setTimeout(function() {
+        user_pop.classList.add('none');
+    }, 300);
 })
 
 
