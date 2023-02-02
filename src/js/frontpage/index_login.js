@@ -1,3 +1,4 @@
+
 // 網頁版 會員icon
 let indexslide_user = document.querySelector('.indexslide_user');
 // 網頁版 會員中心hover
@@ -9,6 +10,16 @@ indexslide_user.addEventListener('click',function(e){
     e.preventDefault();
     login_check();
 })
+// 判斷是否登入了 登入的話會員icon顏色會改變
+if(member_ID){
+    // 會員icon變色
+    indexslide_user.classList.remove('Camel-3');
+    indexslide_user.classList.add('red');
+}else{
+    // 會員icon變色
+    indexslide_user.classList.add('Camel-3');
+    indexslide_user.classList.remove('red');
+}
 
 let timeoutId;
 // hover
@@ -81,6 +92,9 @@ userpop_log_index.addEventListener('click',function(e){
         data:{},            
         dataType: "text",
         success: function (response) {
+            // 會員icon變色
+            indexslide_user.classList.add('Camel-3');
+            indexslide_user.classList.remove('red');
             // alert("登出成功"); 
             document.querySelector('.logout_pop_index').classList.remove('none');
             setTimeout(function(){
@@ -112,6 +126,9 @@ indexlog_ham.addEventListener('click',function(e){
             data:{},            
             dataType: "text",
             success: function (response) {
+                // 會員icon變色
+                indexslide_user.classList.add('Camel-3');
+                indexslide_user.classList.remove('red');
                 // alert("登出成功"); 
                 document.querySelector('.logout_pop_index').classList.remove('none');
                 setTimeout(function(){
@@ -245,6 +262,9 @@ login_ajax.addEventListener('click',function(){
                 // console.log('ttt');
                 login_bg.classList.add('none');
                 body.style.overflow = "auto";
+                // 會員icon變色
+                indexslide_user.classList.remove('Camel-3');
+                indexslide_user.classList.add('red');
                 //取得會員ID
                 $.ajax({            
                     method: "POST",
