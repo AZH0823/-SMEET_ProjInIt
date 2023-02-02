@@ -1,3 +1,5 @@
+
+
 //取得會員id
 let member_ID = localStorage.getItem("member_ID");
 let login_app = Vue.createApp({
@@ -24,7 +26,9 @@ let login_app = Vue.createApp({
         }
     },
     computed: {},
-    mounted() {},
+    mounted() {
+        
+    },
     methods: {
         //tab切換-註冊會員
         add_tab() {
@@ -501,7 +505,8 @@ let login_app = Vue.createApp({
             this.$refs.forget.classList.add('none');
             this.$refs.forget_change.classList.remove('none');
             this.$refs.update_ok.classList.add('none');
-        }
+        },
+        
     }
 });
 login_app.mount("#login");
@@ -726,48 +731,47 @@ log_ham.addEventListener('click',function(e){
     
 });
 
+
 // 購物車有商品就會渲染紅色 QTY
 // window.addEventListener('DOMContentLoaded', (event) => {
-    function ShoppingCartQty(index){
-        let car_num = document.getElementById('car_num');
-        let car_num2 = document.getElementById('car_num2');
+function ShoppingCartQty(index){
+    let car_num = document.getElementById('car_num');
+    let car_num2 = document.getElementById('car_num2');
 
-        const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
-        // console.log(LSGetItem.length);
-        // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
-        if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
-            // 判斷當前頁面,清空對應qty
-            if (document.location.href.includes('index_home.html')) {
-                car_num2.classList.add('none');
-                car_num2.innerHTML ="";
+    const LSGetItem = JSON.parse(localStorage.getItem("shoppingData")) 
+    // console.log(LSGetItem.length);
+    // 如果 this.ShoppingCartList 有商品，就渲染購物車 icon
+    if(LSGetItem == [] || LSGetItem == "" || LSGetItem == null){
+        // 判斷當前頁面,清空對應qty
+        if (document.location.href.includes('index_home.html')) {
+            car_num2.classList.add('none');
+            car_num2.innerHTML ="";
 
-                car_num.classList.add('none');
-                car_num.innerHTML = "";
-            }else{
-                car_num.classList.add('none');
-                car_num.innerHTML = "";
-            }
+            car_num.classList.add('none');
+            car_num.innerHTML = "";
         }else{
-            // 判斷當前頁面，並同步Vue.$data.shoppingCarList
-            if (document.location.href.includes('index_home.html')) {
-                let car_num2 = document.getElementById('car_num2');
-                car_num2.classList.remove('none');
-                car_num2.innerHTML = LSGetItem.length;
-
-                car_num.classList.remove('none');
-                car_num.innerHTML = LSGetItem.length;
-
-            }else if(document.location.href.includes('shopMall.html')){
-                car_num.classList.remove('none');
-                car_num.innerHTML = LSGetItem.length;
-                
-            }else if(document.location.href.includes('shopMallDetail.html')){
-                car_num.classList.remove('none');
-                car_num.innerHTML = LSGetItem.length;
-            }
+            car_num.classList.add('none');
+            car_num.innerHTML = "";
         }
-    };
-    // 同步購物車 qty 數量
-    ShoppingCartQty();
+    }else{
+        // 判斷當前頁面，並同步Vue.$data.shoppingCarList
+        if (document.location.href.includes('index_home.html')) {
+            let car_num2 = document.getElementById('car_num2');
+            car_num2.classList.remove('none');
+            car_num2.innerHTML = LSGetItem.length;
+
+            car_num.classList.remove('none');
+            car_num.innerHTML = LSGetItem.length;
+
+        }else{
+            car_num.classList.remove('none');
+            car_num.innerHTML = LSGetItem.length;
+            
+        }
+    }
+}
+// 同步購物車 qty 數量
+ShoppingCartQty();    
+    
 // });
 

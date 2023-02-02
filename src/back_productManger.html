@@ -51,11 +51,12 @@
                                     <div class="grid_item">品名</div>
                                     <div class="grid_item">售價</div>
                                     <div class="grid_item">狀態</div>
+                                    <div class="grid_item">編輯</div>
                                 </div>
 
                                 <!-- row-2 -->
                                 <div class="grid_container" v-for="item in product" :key="item.ID">
-                                    <div class="grid_item checked" @click="popOnEdit(item)">{{ item.ID }}</div>
+                                    <div class="grid_item">{{ item.ID }}</div>
                                     <div class="grid_item">{{ item.Type }}</div>
                                     <div class="grid_item">{{ item.Name }}</div>
                                     <div class="grid_item">{{ item.Price }}</div>
@@ -67,6 +68,7 @@
                                             <p class="slider_content" v-if="item.Condition == 0">下架</p>
                                         </label>
                                     </div>
+                                    <div class="grid_item checked"  @click="popOnEdit(item)"><i class="fa-solid fa-pen-to-square"></i></div>
                                 </div>
                             </div><!-- wrapper -->
                         </div><!-- back_from -->
@@ -100,7 +102,7 @@
                                     </select></h6>
                                 </div>
                                 <div class="product_price">
-                                    <h6>建議售價：<input placeholder="$700" v-model.number="popupData.Price" required ref="Price"></h6>
+                                    <h6>建議售價：<input type="number" placeholder="$700" v-model.number="popupData.Price" required ref="Price"></h6>
                                 </div>
                                 <div class="product_shopkp">
                                     <h6>重點敘述：</h6>
@@ -228,11 +230,6 @@
                         isEdit:false,
                     }
                 }
-            },
-            watch: {
-                // "popupData.ShopPoint": function(){
-                //     console.log(this.popupData.ShopPoint);
-                // }
             },
             computed: {
                 
@@ -455,27 +452,10 @@
                     const ID = response;
                     // 取的上傳團片的圖聘資料內容
                     const files = this.$refs.ProductImage.files;
-                    
-
-                    // // 將圖片封裝到imgData
-                    // for (let i = 0; i < files.length; i++) {
-                    //     // console.log(files[i]);
-                    //     imgLists.push(files[i]);  // imgLists == [{FILE}, {FILE}, {FILE}];
-                    //     // console.log(imgLists); 
-                    // }
 
                     // 更新上傳圖片
                     if(files !==undefined && files !== null){
                         let formData =  new FormData();
-
-                        // for (let i = 0; i < imgLists.length; i++) {
-                        //     formData.append('ProductImage' + i, imgLists[i]);
-                        // }
-                        // console.log(files[0]);
-                        
-                        
-                        
-                        
                         formData.append('ProductImage1', files[0]);
                         formData.append('ProductImage2', files[1]);
                         formData.append('ProductImage3', files[2]);
@@ -533,31 +513,32 @@
                 // 新增商品資訊
                 doSubmit(popupData){
                     // 判斷資料格式是否正確
-                    // if (this.popupData.Name == '') {
-                    //     alert("請填寫[商品名稱]");
-                    //     return false;
-                    // }
-                    // if (this.popupData.Price == '') {
-                    //     alert("請填寫[商品售價]");
-                    //     return false;
-                    // }
+                    if (this.popupData.Name == '') {
+                        alert("請填寫[商品名稱]");
+                        return false;
+                    }
+                    if (this.popupData.Price == '') {
+                        alert("請填寫[商品售價]");
+                        return false;
+                    }
 
-                    // FIXME 如何判斷正確格式
-                    // else if(this.popupData.Price !== typeof(Number)){
-                    //     alert("請填寫[商品售價]正確格式");
-                    //     return false;
-                    // }
+                    if(this.popupData.Price == ''){
+                        alert("請填寫[商品售價]正確格式");
+                        return false;
+                    }
 
-
-                    // if (this.popupData.ShopPoint == '') {
-                    //     alert("請填寫[商品重點敘述]");
-                    //     return false;
-                    // }    
-                    // if (this.popupData.Introduction == '') {
-                    //     alert("請填寫[商品詳細敘述]");
-                    //     return false;
-                    // }    
-                    
+                    if (this.popupData.ShopPoint == '') {
+                        alert("請填寫[商品重點敘述]");
+                        return false;
+                    }    
+                    if (this.popupData.Introduction == '') {
+                        alert("請填寫[商品詳細敘述]");
+                        return false;
+                    }    
+                    if (!this.$refs.ProductImage.files) {
+                        alert("請選擇[商品照片]");
+                        return false;
+                    }
 
                     // 處理 dish_Type 資料格式
                     if(this.popupData.Type == "商城主食" ){
@@ -585,7 +566,7 @@
                     // console.log(dish_Type); 
                     // console.log(dish_Name);
                     // console.log(dish_Price);
-                    // console.log(dish_IMG); // 照片測試資料
+                    // console.log(dish_IMG); 
                     // console.log(dish_ShopPoint);
                     // console.log(dish_Introduction);
 
@@ -597,7 +578,7 @@
                             dish_Type,
                             dish_Name,
                             dish_Price,
-                            dish_IMG, // 照片測試資料
+                            dish_IMG, 
                             dish_ShopPoint,
                             dish_Introduction,
                             dish_Condition
@@ -609,8 +590,16 @@
                                 // 改變 Vue 塞回原本API資料內
                                 this.product.push(response[0]);
                                 
-                                // callback img insert
-                                // this.insertImg(response);
+                                // 處理 dish_Type 資料格式
+                                if(this.product.Type == 8 ){
+                                    this.product.Type = "商城主食"
+                                }
+                                else if(this.product.Type == 9 ){
+                                    this.product.Type = "商城湯品"
+                                }
+                                else if(this.product.Type == 10 ){
+                                    this.product.Type = "商城甜品"
+                                };
                                 
                                 // 加入商品成功 popUp
                                 this.success_popup = '新增商品成功'
@@ -674,7 +663,7 @@
                     let search_name = this.$refs.search_name.value.trim();
                     // console.log(search_name);
                     if(this.$refs.search_name.value == ""){
-                        return;
+                        this.getCate();
                     }else{
                         $.ajax({
                             method: "POST",
