@@ -119,8 +119,14 @@
             </div>
 
             <!-- cart 燈箱 -->
-            <div class="wrapper product_pop" id="product_pop" v-if="isShow" style="display: none;" :style="isShow? 'display:block' : 'display:none'">
-                <div class="container" :data-id="this.popupData.id">
+            <div class="product_pop" 
+            id="product_pop" 
+            v-if="isShow" 
+            style="display: none;" 
+            :style="isShow? 'display:block' : 'display:none'"
+            @click="product_pop_close()"
+            >
+                <div class="container" :data-id="this.popupData.id" @click.stop>
                     <i class="fa-solid fa-xmark" id="close_popUp" @click="popUp_xClose(popupData.ID, popupData.Name, popupData.Price, popupData.IMG, popupData.qty)"></i>
                     <div class="img_product">
                         <img :src="popupData.IMG[0]" alt="">
@@ -255,8 +261,12 @@
                 // 最新商品data AJAX 傳入
                 this.getLatestProduct();
 
+                // 同步購物車QTY
+                // this.ShopCartQty();
+
                 // 進商品詳情頁就抓購物車資料
-                this.getCartLocalStorage()
+                this.getCartLocalStorage();
+                
             },
 
             methods: {
@@ -275,6 +285,7 @@
                     }
                     
                 },
+                
 
                 // 立即結帳前檢查是否登入會員，已登入就跳轉畫面到結賬頁面
                 addShoppingCart_check(shopMallDetailInfo){    
@@ -682,6 +693,15 @@
                     this.popupData.IMG = IMG;
                     this.popupData.qty = 1;
 
+                },
+
+                // 點擊 container 關掉 popUp
+                product_pop_close(){
+                    this.isShow = false;
+
+                    // overfloat: auto
+                    let body = document.querySelector('body');
+                    body.style.overflow = "auto";
                 },
 
                 // 點擊卡片 X 關閉popUp並清空資料

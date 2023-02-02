@@ -253,12 +253,14 @@
                     return filtered
                 }
             },
-        
 
             mounted() {
                 
                 // 主要商品data AJAX 傳入
                 this.getCate();
+
+                // 同步購物車QTY
+                // this.ShopCartQty();
 
                 // 進商品詳情頁就抓購物車資料
                 this.getCartLocalStorage();
@@ -279,6 +281,7 @@
                         // console.log('Mall LS:',LSGetItem)
                     }
                 },
+
 
                 // ========= AJAX ========= //
                 

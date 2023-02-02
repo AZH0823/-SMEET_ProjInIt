@@ -49,7 +49,7 @@ const RootComponent  = {
                 // 訂餐時間
                 orderTime:[
                     {id:1,txt:'午餐',time:'11:00-14:00'},
-                    {id:2,txt:'下午茶',time:'11:00-14:00'},
+                    {id:2,txt:'下午茶',time:'14:30-16:00'},
                     {id:3,txt:'晚餐',time:'18:00-21:00'},
                 ], 
                 
@@ -89,11 +89,11 @@ const RootComponent  = {
     methods:{        
         // GET API
         initAPI(){
-            this.getSetdishDetail();
+            this.getTeam();
+            this.getSetPrice();
             this.getOtherDish();
             this.getServier();
-            this.getSetPrice();
-            this.getTeam();
+            this.getSetdishDetail();
         },
         // 取得會員點數
         getMemberPoint(_id){
@@ -177,7 +177,7 @@ const RootComponent  = {
                             id:data_el.id,
                             dishName:data_el.disName,
                             dishType:data_el.dishType,
-                            price:data_el.price,
+                            price:parseInt(data_el.price),
                             qty:0
                         }
                         this.APIData_in.otherDish.push(obj);
@@ -300,9 +300,13 @@ const RootComponent  = {
         // WorkFlow 流程邏輯
         changeStep(val,e){                    
             let vaildStep = false;//若有False 將不進入下一個流程
-
-            // step 1 檢查套餐及套及數量
-            if(this.workFlow.step === 1){
+            if(this.workFlow.step == 1 && e.target.className.includes('prev_btn btn')){
+                // 返回上一頁
+                // console.log(`返回上一頁`)
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.location.href="reserve01.html";
+            }else if(this.workFlow.step === 1){
+                // step 1 檢查套餐及套及數量
                 // 使用者點選餐點
                 let setID = this.inputData.sets - 1;
                 // 訂餐人數
@@ -574,7 +578,7 @@ const RootComponent  = {
                 }
             }
             // 算出總金額給
-            totalPrice = parseInt((this.APIData_in.sets[setID].price) * this.inputData.peoCount);
+            totalPrice = parseInt(this.APIData_in.sets[setID].price) * parseInt(this.inputData.peoCount);
             // 撈出使用者單點項目細節
             this.APIData_in.otherDish.forEach(dish => {
                 if(dish.qty > 0){
@@ -719,12 +723,12 @@ const RootComponent  = {
         // orderview 總金額計算
         totalPrice(){
             // 訂單人數
-            const count = this.inputData.peoCount;
+            const count = parseInt(this.inputData.peoCount) || 5;
             
             // 套餐金額
-            let setPrice = {...this.APIData_in.sets.find(el=>el.id===this.inputData.sets)}.price;
+            let setPrice = parseInt({...this.APIData_in.sets.find(el=>el.id===this.inputData.sets)}.price) || 3000;
             let setTotal = parseInt(count) * parseInt(setPrice);
-            
+           
             // 單點金額
             let otherDish = 0;
             
@@ -752,7 +756,7 @@ const RootComponent  = {
                         return parseInt(serve.price);
                     }else return 0
                 }).reduce((a,b)=>a+b,0)
-                otherServies = otherServies * parseInt(count);
+                otherServies = parseInt(otherServies) * parseInt(count);
             }
            
             return `${(parseInt(setTotal) + parseInt(otherDish) + parseInt(otherServies) - parseInt(point)).toLocaleString()}`;

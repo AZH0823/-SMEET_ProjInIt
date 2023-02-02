@@ -103,7 +103,8 @@
                             </div>
                             <!-- 結帳按鈕 -->
                             <button class="next_btn btn" @click="changeStep(1,$event)" ref="comfirm">下一步</button>
-                            <button class="prev_btn btn" @click="changeStep(-1,$event)" v-if="this.workFlow.step !=1">返回上一步</button>
+                            <button class="prev_btn btn" @click="changeStep(-1,$event)" >返回上一步</button>
+                            <!-- v-if="this.workFlow.step !=1" -->
                         </section>
                         <!-- 選擇套餐 -->
                         <section class="step_flow step1" :class="{'nowpage': workFlow.step === 1}" id="set">
