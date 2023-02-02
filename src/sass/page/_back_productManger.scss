@@ -58,7 +58,7 @@ div.back_productManger {
                                 width: 100%;
                                 text-align: center;
                                 align-items: center;
-                                grid-template: repeat(1, 1fr) / minmax(110px, 120px) minmax(max-content, 100px) minmax(max-content, 1fr) minmax(max-content, 100px) 1fr;
+                                grid-template: repeat(1, 1fr) / minmax(110px, 120px) minmax(max-content, 100px) minmax(max-content, 1fr) minmax(max-content, 100px) 1fr 1fr;
                                 border-bottom: 0.5px solid #ccc;
 
                                 &:first-child {
@@ -73,6 +73,9 @@ div.back_productManger {
 
                                 .grid_item {
                                     padding: 20px;
+                                    @media screen and (max-width:960px){
+                                        padding: 20px 10px;
+                                    }
 
                                     // switch btn
                                     .switch {
