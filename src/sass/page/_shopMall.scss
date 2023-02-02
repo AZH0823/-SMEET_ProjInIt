@@ -9,9 +9,17 @@
         margin-bottom: 20px;
         align-items: baseline;
         position: relative;
+        @media screen and (max-width:655px){
+            flex-direction: column;
+        }
         .shop_tab{
             display: flex;
             cursor: pointer;
+            margin-top: 100px;
+            @media screen and (max-width:655px){
+                order: 1;
+                margin-top: 20px;
+            }
             .shop_tabItem{
                 a{
                     display: block;
@@ -33,6 +41,10 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            @media screen and (max-width:655px){
+                order: 0;
+                margin-top: 100px;
+            }
             .search_container_item{
                 display: block;
                 margin-right: 10px;
@@ -41,27 +53,6 @@
                 }
             }
         }
-        
-        // select{
-        //     width: 230px;
-        //     height: 35px;
-        //     padding: 0 10px;
-        //     letter-spacing: 1px;
-        //     border: 1px solid #898989;
-        //     color: #898989;
-        //     outline: 0;
-            // @include pad(){
-            //     width: 175px;
-            //     height: 28px;
-            //     position: absolute;
-            //     bottom: -70px;
-            //     right: 0;
-            // }
-            // @include mobile(){
-            //     width: 130px;
-            //     bottom: -67px;
-            // }
-        // }
     }
 }
 
