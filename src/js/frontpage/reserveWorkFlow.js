@@ -88,12 +88,13 @@ const RootComponent  = {
     },
     methods:{        
         // GET API
-        initAPI(){
-            this.getTeam();
-            this.getSetPrice();
-            this.getOtherDish();
-            this.getServier();
-            this.getSetdishDetail();
+        async initAPI(){
+            await this.getTeam();            
+            await this.getSetPrice();           
+            await this.getOtherDish();
+            await this.getServier();
+            await this.getSetdishDetail();
+            
         },
         // 取得會員點數
         getMemberPoint(_id){
@@ -203,7 +204,7 @@ const RootComponent  = {
                     }else servie.checked = false;
                     
                     this.APIData_in.servies.push(servie);
-                })      
+                })  
             }).catch(err=>{
                 console.log(err);
             })
